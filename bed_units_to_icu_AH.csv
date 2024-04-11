@@ -1,0 +1,299 @@
+,bed_units,icu_type,"ed, ward or icu?",hospital
+0,10E EUH,,ward,e
+1,11 ECLH,,ward,m
+2,11 ICU ECLH,cticu,icu,m
+3,11E EUH,,ward,m
+4,1F ICU EJCH,,icu,j
+5,1W SJH,,ward,s
+6,1WA UNIT A WW,,other,
+7,1WB UNIT B WW,,other,
+8,21 ECLH,,ward,m
+9,21 ICU ECLH,msicu,icu,m
+10,22 ECLH,,ward,m
+11,22 Observation ECLH,,obs,m
+12,2B CIU EUH,,ward,e
+13,2D-E ICU EUH,neuro,icu,e
+14,2D-W ICU EUH,neuro,icu,e
+15,2E ICU SJH,msicu,icu,s
+16,2G EUH,,ward,e
+17,2G ICU EUH,neuro,icu,e
+18,2G-N CCU EUH,ccu,icu,e
+19,2G-S ICU EUH,neuro,icu,e
+20,2NMB EJCH,,ward,j
+21,2S SJH,,ward,s
+22,2SW ICU SJH,cticu,icu,s
+23,2W ICU SJH,ccu,icu,s
+24,2WC LTAC WW,,other,
+25,2WME EJCH,,other,j
+26,31 ECLH,,ward,m
+27,31 ICU ECLH,neuro,icu,m
+28,32 ECLH,,ward,m
+29,34 ECLH,,ward,m
+30,34N Antepartum ECLH,,other,m
+31,34S Mother/Baby ECLH,,other,m
+32,3D EUH,,ward,e
+33,3E SJH,,ward,s
+34,3EME EJCH,,other,j
+35,3G CCU EUH,ccu,icu,e
+36,3G EUH,,ward,e
+37,3NME EJCH,,other,j
+38,3NOP EJCH,,other,j
+39,3R CRM EUH,,other,e
+40,3S ICU EJCH,msicu,icu,j
+41,3S SJH,,ward,s
+42,3SW SJH,,ward,s
+43,3W SJH,,ward,s
+44,3WME EJCH,,other,j
+45,41 CCU ECLH,ccu,icu,m
+46,41 ECLH,,ward,m
+47,42 ECLH,,ward,m
+48,4A ICU EUH,cticu BEFORE 1/18/2018; micu ON OR AFTER 1/18/2018,icu,e
+49,4B-N EUH,,ward,e
+50,4B-S EUH,,ward,e
+51,4E SJH,,ward,s
+52,4ESU EJCH,,ward,j
+53,4G CCU EUH,ccu,icu,e
+54,4G EUH,,ward,e
+55,4NOP EJCH,,other,j
+56,4NSU EJCH,,other,j
+57,4R CRM EUH,,other,e
+58,4S SJH,,ward,s
+59,4W SJH,,ward,s
+60,4WSU EJCH,,other,j
+61,51S ECLH,,ward,m
+62,52 ECLH,,ward,m
+63,54 ECLH,,ward,m
+64,5A ICU EUH,cticu BEFORE 1/18/2018; micu ON OR AFTER 1/18/2018,icu,e
+65,5B-N EUH,,ward,e
+66,5B-S EUH,,ward,e
+67,5D EUH,,ward,e
+68,5E ICU EUH,sicu BEFORE 1/18/2018; cticu ON OR AFTER 1/18/2018,,e
+69,5E SJH,,ward,s
+70,5G EUH,,ward,e
+71,5G ICU EUH,micu,icu,e
+72,5T-N ICU EUH,micu,icu,e
+73,5T-S ICU EUH,sicu BEFORE 1/18/2018,icu,e
+74,5W SJH,,ward,s
+75,61S ECLH,,ward,m
+76,62 ECLH,,ward,m
+77,6A EUH,,ward,e
+78,6B-N Rollins N EUH,,ward,e
+79,6B-S Rollins S EUH,,ward,e
+80,6E,,ward,e
+81,6E EUH,,ward,e
+82,6E SJH,,ward,s
+83,6G EUH,,ward,e
+84,6G ICU EUH,micu,icu,e
+85,6T-N EUH,,ward,e
+86,6T-S EUH,,ward,e
+87,6W SJH,,ward,s
+88,71 ECLH,,ward,m
+89,71 ICU ECLH,micu,icu,m
+90,72 ECLH,,ward,m
+91,7E EUH,,ward,e
+92,7E SJH,,ward,s
+93,7G CIU,,ward,e
+94,7G EUH,,ward,e
+95,7T-N EUH,,ward,e
+96,7T-S EUH,,ward,e
+97,7W SJH,,ward,s
+98,8E EUH,,ward,e
+99,8T-N EUH,,ward,e
+100,8T-S EUH,,ward,e
+101,9E EUH,,ward,e
+102,9T-N EUH,,ward,e
+103,9T-S EUH,,ward,e
+104,A6,,,
+105,AM Admit EUH,,other,e
+106,AM Admit NL,,other,
+107,ARU SJH,,,s
+108,Arrhythmia Cntr ECLH,,other,m
+109,Breast Ctr EUH,,other,e
+110,Breast Ctr SJH,,other,s
+111,Breast Imaging Center EJCH,,other,m
+112,CARDIOVASCULAR UNIT EUH,,w,e
+113,CHFT ECLH,,,m
+114,CHFT EUH,,,w
+115,CIU ECLH,,,m
+116,COA ECLH,,,m
+117,COA EJCH,,,j
+118,COA EUH,,,e
+119,CRD Bldg A 2nd Fl,,other,j
+120,CRD Hrt Vascular Ctr EJCH,,other,j
+121,CRD MOT 6 Flr,,other,j
+122,Cardiac MRI ECLH,,other,m
+123,Cardiac Rehab SJH,,other,s
+124,Cardiology DOB 4 SJH,,other,s
+125,Cardiology DOB1 SJH,,other,s
+126,Cath Lab Bldg A Tunl,,other,
+127,Cath Lab ECLH,,other,m
+128,Cath Lab EJCH,,other,m
+129,Cath Lab EUH,,other,e
+130,Cath Lab SJH,,other,s
+131,Cell Separator EUH,,other,e
+132,DOB3 GF ARR SJH,,other,s
+133,Dialysis 4T EUH,,other,e
+134,Dialysis ECLH,,other,m
+135,Dialysis EUH,,other,e
+136,Dialysis SJH,,other,s
+137,E8,,,
+138,EC Nursery ECLH,,,m
+139,ECT WW,,,
+140,ED ARR SJH,,ed,s
+141,ED CDU ECLH,,ed,m
+142,ED CDU EUH,,ed,e
+143,ED CDU SJH,,ed,s
+144,ED ECLH,,ed,m
+145,ED EUH,,ed,e
+146,ED SJH,,ed,s
+147,EP,,other,
+148,EP ECLH,,other,m
+149,EP EUH,,other,e
+150,EP SJH,,other,s
+151,ER CDU EJCH,,ed,j
+152,ER EJCH,,ed,j
+153,EUH Transplant at SJH,,ward,s
+154,Echo ECLH,,other,m
+155,Echo EJCH,,other,j
+156,Echo EUH,,other,e
+157,Echo East Cobb SJH,,other,s
+158,Echo SJH,,other,s
+159,Endoscopy ECLH,,other,m
+160,Endoscopy SJH,,other,s
+161,Endoscopy Unit EUH,,other,e
+162,G3,,,
+163,G6,,,
+164,HFC SJH,,other,s
+165,HG EUH,,ward,e
+166,Head & Neck MDC ECLH,,other,m
+167,Hemapheresis ECLH,,other,m
+168,Hospice ECLH,,ward,m
+169,Hospice EUH,,ward,e
+170,Infus Nephrology MOT ECLH,,other,m
+171,Infus Rheumatology Bldg A ECLH,,other,m
+172,Infus Transplant Bldg B ECLH,,other,m
+173,Infusion Center ECLH,,other,m
+174,Infusion Center EUH,,other,e
+175,Int Nursery EJCH,,ob,j
+176,L&D Pre-Registration ECLH,,other,m
+177,L1 ECLH,,other,m
+178,LD EJCH,,other,j
+179,LDPR EJCH,,other,j
+180,LL ICU EJCH,,,j
+181,LONG TERM ACUTE CARE ECLH,,other,m
+182,Lab ECLH,,other,m
+183,Lab EJCH,,other,j
+184,Lab EUH,,other,e
+185,Labor Delivery ECLH,,other,m
+186,MRI ECLH,,other,m
+187,Main Registration ARR SJH,,other,s
+188,Main Registration Arrival EJCH,,other,j
+189,Main Registration CRM EUH,,other,e
+190,Main Registration ECLH,,other,m
+191,Main Registration EUH,,other,e
+192,Main Registration LTAC WW,,other,
+193,Main Registration NL,,other,
+194,Main Registration Psych WW,,other,
+195,Main Registration Tower EUH,,other,e
+196,Main Registration WW,,other,
+197,Monitors SJH,,other,s
+198,NICU ECLH,other,icu,m
+199,NICU EJCH,,icu,j
+200,NIMC ECLH,,,m
+201,NL2 NL,,,
+202,NL3,,,
+203,NL3 NL,,,
+204,NL4,,,
+205,NL4 NL,,,
+206,NLIC,,,
+207,NLICU NL,,,
+208,NLKE,,,
+209,NLOR,,,
+210,Neuro CC Intermediate EUH,,ward,e
+211,Not Recorded,,,
+212,Nuclear Card ECLH,,other,m
+213,Nursery ECLH,,other,m
+214,Nursery EJCH,,other,j
+215,OP Dept EUH,,other,e
+216,OP Dept NL,,other,
+217,OP Research EUH,,other,e
+218,OP Surg Cntr ECLH,,other,m
+219,OP Transplant EUH,,other,e
+220,OPD Dept SJH,,other,s
+221,OPD EJCH,,other,j
+222,OR ECLH,,or,m
+223,OR EUH,,or,e
+224,OR NL,,or,
+225,OSP REG ARR SJH,,other,s
+226,OT ECLH,,other,m
+227,OT EUH,,other,e
+228,Oncology SJH,,ward,s
+229,Outpt Specimens EJCH,,other,j
+230,PACU,,other,
+231,PACU EJCH,,other,j
+232,PACU ICU EUH,,other,e
+233,PACU II ECLH,msicu,icu,m
+234,PACU IP ECLH,,other,m
+235,PACU NL,,other,
+236,PACU OP ECLH,,other,m
+237,PAT EUH,,,e
+238,PAT NL,,,
+239,PAT SJH,,,s
+240,PET Ctr ECLH,,,m
+241,POHA Observation EUH,,,e
+242,PRE ECLH,,,m
+243,PT EUH,,,e
+244,Pain Ctr EJCH,,other,j
+245,Peachtree ICU ECLH,msicu,icu,m
+246,Perinatal ECLH,,other,m
+247,Pharmacy EJCH,,other,j
+248,Preadmit Test ECLH,,other,m
+249,Pulm Funct Lab ECLH,,other,m
+250,Pulmonary Rehab SJH,,other,s
+251,RAD,,,
+252,RAD PPCA ECLH,,other,m
+253,RAD PPCA EUH,,other,e
+254,RAD ROCU EJCH,,other,j
+255,REGM,,other,
+256,Rad Bld A EUH,,other,e
+257,Rad Buford ECLH,,other,m
+258,Rad EP EUH,,other,e
+259,Rad EP12 EUH,,other,e
+260,Rad MOT ECLH,,other,m
+261,Rad Smyrna ECLH,,other,m
+262,Rad WCI EUH,,other,e
+263,Radiation Oncology ECLH,,other,m
+264,Radiation Oncology EUH,,other,e
+265,Radiology Centerpointe SJH,,other,s
+266,Radiology ECLH,,other,m
+267,Radiology EJCH,,other,j
+268,Radiology EUH,,other,e
+269,Radiology Forsyth EJCH,,other,j
+270,Radiology NL,,other,
+271,Radiology OPIC Main SJH,,other,s
+272,Radiology SJH,,other,s
+273,Radiology Sports Imaging EUH,,other,e
+274,Radiology Tower EUH,,other,e
+275,Radiology WW,,other,
+276,Resp Care EJCH,,ward,j
+277,Resp Care EUH,,ward,e
+278,Resp Care SJH,,ward,s
+279,Rheumatology Bldg A ECLH,,other,m
+280,SARR,,,
+281,SP & Auditory EUH,,other,e
+282,SURG 1FL SJH,,other,s
+283,SURG GF SJH,,other,s
+284,Smyrna Nursing Unit,,,
+285,Surgery EJCH,,other,m
+286,Surgery Pre Post,,other,
+287,Surgical Services ARR ECLH,,other,m
+288,Surgical Services ARR EUH,,other,e
+289,Surgical Services ARR NL,,other,
+290,TR,,,
+291,URODYNAMICS EUH,,,e
+292,Urodynamics ECLH,,,m
+293,Vascular Lab DOB4 SJH,,other,s
+294,Vascular Lab SJH,,other,s
+295,WALK,,,
+296,Wound Care ECLH,,other,m
+297,Wound Care EJCH,,other,j
