@@ -1,0 +1,879 @@
+﻿med_class,super_table_col_name,med_name,medication_id,med_name,med_name_generic,therapeutic_class,pharmacy_class,pharmacy_subclass,count_14,count_15,count_16,count_17,count_18,count_19,count_20,total
+analgesics,NULL,"FENTANYL 5000 MCG/NS 250 ML PREMIX""""",600596,"FENTANYL 5000 MCG/NS 250 ML PREMIX""""",NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,30419,36663,40438,38522,50501,1419,0,197962
+analgesics,NULL,"MORPHINE SULFATE (PF) 4 MG/ML IV SOLN""""",116365,"MORPHINE SULFATE (PF) 4 MG/ML IV SOLN""""",Morphine Sulfate,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,23991,26381,27363,25736,29441,1702,0,134614
+analgesics,NULL,"MORPHINE SULFATE (PF) 2 MG/ML IV SOLN""""",119120,"MORPHINE SULFATE (PF) 2 MG/ML IV SOLN""""",Morphine Sulfate,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,21212,20423,21150,27030,25173,1135,249,116372
+analgesics,NULL,"PROPOFOL 10 MG/ML IV EMUL 50 OR 100 ML""""",40811150,"PROPOFOL 10 MG/ML IV EMUL 50 OR 100 ML""""",Propofol,Analgesics & Anesthetics,General Anesthetics,Anesthetics - Misc.,0,0,14673,22365,25354,27882,12591,102865
+analgesics,NULL,"MORPHINE SULFATE PCA 5 MG/ML IV SOLN""""",77006,"MORPHINE SULFATE PCA 5 MG/ML IV SOLN""""",Morphine Sulfate,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,15294,14233,13854,10613,10255,9184,2583,76016
+analgesics,NULL,"FENTANYL 5000 MCG/100 ML PREMIX""""",600900,"FENTANYL 5000 MCG/100 ML PREMIX""""",NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,0,0,0,0,44802,13959,58761
+analgesics,NULL,DEXMEDETOMIDINE INFUSION,400134,DEXMEDETOMIDINE INFUSION,NULL,NULL,NULL,NULL,1958,4491,6984,8294,12119,14948,8851,57645
+analgesics,NULL,"PROPOFOL 10 MG/ML IV EMUL""""",11150,"PROPOFOL 10 MG/ML IV EMUL""""",Propofol,Analgesics & Anesthetics,General Anesthetics,Anesthetics - Misc.,14009,17229,6098,0,0,0,0,37336
+analgesics,NULL,"MORPHINE SULFATE (PF) 10 MG/ML IV SOLN""""",116374,"MORPHINE SULFATE (PF) 10 MG/ML IV SOLN""""",Morphine Sulfate,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,1,2844,10061,8489,7395,377,0,29167
+analgesics,NULL,"FENTANYL 2500 MCG/50 ML PREMIX""""",600898,"FENTANYL 2500 MCG/50 ML PREMIX""""",NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,0,0,0,0,0,12052,12052
+analgesics,NULL,FENTANYL DRIP SYRINGE,600895,FENTANYL DRIP SYRINGE,fentanyl,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,0,0,0,0,6371,0,6371
+analgesics,NULL,KETAMINE TITRATED INFUSION- SEDATION,400176,KETAMINE TITRATED INFUSION- SEDATION,NULL,NULL,NULL,NULL,68,85,827,1438,1063,1155,798,5434
+analgesics,NULL,"MORPHINE INFUSION 1 MG/ML""""",400193,"MORPHINE INFUSION 1 MG/ML""""",NULL,NULL,NULL,NULL,437,500,598,352,338,302,235,2762
+analgesics,NULL,"ACETAMINOPHEN 10 MG/ML IV SOLN""""",106374,"ACETAMINOPHEN 10 MG/ML IV SOLN""""",Acetaminophen,Analgesics & Anesthetics,Analgesics-Nonnarcotic,Analgesics Other,2115,0,0,0,0,0,0,2115
+analgesics,NULL,"FENTANYL CITRATE PF PCA 30 MCG/ML IV SOLN 30 ML""""",600776,"FENTANYL CITRATE PF PCA 30 MCG/ML IV SOLN 30 ML""""",NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,2,191,198,484,16,0,891
+analgesics,NULL,"PROPOFOL 200 MG/20ML IV EMUL""""",130905,"PROPOFOL 200 MG/20ML IV EMUL""""",Propofol,Analgesics & Anesthetics,General Anesthetics,Anesthetics - Misc.,0,0,48,121,137,162,56,524
+analgesics,NULL,KETAMINE CONTINUOUS INFUSION,900269,KETAMINE CONTINUOUS INFUSION,NULL,NULL,NULL,NULL,0,0,0,34,307,97,78,516
+analgesics,NULL,"INDOMETHACIN 0.05 MG/0.1 ML (NICU) SYRINGE""""",600258,"INDOMETHACIN 0.05 MG/0.1 ML (NICU) SYRINGE""""",NULL,Analgesics & Anesthetics,Anti-Rheumatic,Nonsteroidal Anti-inflammatory Agents (NSAIDs),0,0,30,113,134,188,44,509
+analgesics,NULL,"FENTANYL IV BOLUS FROM BAG 20 MCG/ML""""",600553,"FENTANYL IV BOLUS FROM BAG 20 MCG/ML""""",NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,18,60,81,153,153,7,0,472
+analgesics,NULL,"MORPHINE PF DRIP (NICU) 0.05 AND 0.1 MG/ML""""",900144,"MORPHINE PF DRIP (NICU) 0.05 AND 0.1 MG/ML""""",NULL,NULL,NULL,NULL,0,20,111,20,190,74,24,439
+analgesics,NULL,"MORPHINE PF DRIP (NICU) 0.4 MG/ML""""",900107,"MORPHINE PF DRIP (NICU) 0.4 MG/ML""""",NULL,NULL,NULL,NULL,0,13,141,22,75,79,99,429
+analgesics,NULL,"FENTANYL CITRATE PF PCA 50 MCG/ML IV SOLN 50 ML""""",600897,"FENTANYL CITRATE PF PCA 50 MCG/ML IV SOLN 50 ML""""",fentanyl,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,0,0,0,0,305,77,382
+analgesics,NULL,"FENTANYL IV BOLUS FROM BAG 50 MCG/ML""""",600899,"FENTANYL IV BOLUS FROM BAG 50 MCG/ML""""",NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,0,0,0,0,163,119,282
+analgesics,NULL,FENTANYL DRIP (NICU),900108,FENTANYL DRIP (NICU),NULL,NULL,NULL,NULL,0,75,0,0,2,3,0,80
+analgesics,NULL,"FENTANYL CITRATE (PF) 50 MCG/ML IJ SOLN""""",4083037,"FENTANYL CITRATE (PF) 50 MCG/ML IJ SOLN""""","Fentanyl Citrate Preservative Free (PF) Inj 100 MCG/2ML""""",Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,0,13,23,21,8,0,65
+analgesics,NULL,HYDROMORPHONE INFUSION,400163,HYDROMORPHONE INFUSION,NULL,NULL,NULL,NULL,0,41,0,0,0,0,0,41
+analgesics,NULL,"KETOROLAC TROMETHAMINE 30 MG/ML IJ SOLN""""",22473,"KETOROLAC TROMETHAMINE 30 MG/ML IJ SOLN""""",Ketorolac Tromethamine,Analgesics & Anesthetics,Anti-Rheumatic,Nonsteroidal Anti-inflammatory Agents (NSAIDs),0,0,1,10,0,0,0,11
+analgesics,NULL,FENTANYL IV BOLUS FROM SYRINGE,600896,FENTANYL IV BOLUS FROM SYRINGE,NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,0,0,0,0,8,0,8
+analgesics,NULL,MORPHINE IV BOLUS FROM BAG,600591,MORPHINE IV BOLUS FROM BAG,NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,0,1,1,3,0,2,7
+analgesics,NULL,PROPOFOL IV BOLUS FROM BOTTLE,600634,PROPOFOL IV BOLUS FROM BOTTLE,NULL,Analgesics & Anesthetics,General Anesthetics,Anesthetics - Misc.,2,1,0,0,0,0,0,3
+analgesics,NULL,"FENTANYL CITRATE 0.05 MG/ML IJ SOLN""""",3037,"FENTANYL CITRATE 0.05 MG/ML IJ SOLN""""",fentaNYL Citrate,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,1,2,0,0,0,0,0,3
+analgesics,NULL,"IBUPROFEN LYSINE 10 MG/ML IV SOLN""""",76780,"IBUPROFEN LYSINE 10 MG/ML IV SOLN""""",Ibuprofen Lysine,Analgesics & Anesthetics,Anti-Rheumatic,Nonsteroidal Anti-inflammatory Agents (NSAIDs),0,0,0,0,0,3,0,3
+analgesics,NULL,"IBUPROFEN 5 MG/ML NS (NICU) IV SYRINGE""""",600455,"IBUPROFEN 5 MG/ML NS (NICU) IV SYRINGE""""",NULL,Analgesics & Anesthetics,Anti-Rheumatic,Nonsteroidal Anti-inflammatory Agents (NSAIDs),0,0,0,0,0,3,0,3
+analgesics,NULL,"MORPHINE 250MG/NS 250ML INFUSION ADVANTAGE""""",600006,"MORPHINE 250MG/NS 250ML INFUSION ADVANTAGE""""",NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,1,0,0,0,0,0,0,1
+analgesics,NULL,"MORPHINE SULFATE 25 MG/ML IV SOLN""""",27392,"MORPHINE SULFATE 25 MG/ML IV SOLN""""",Morphine Sulfate,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,1,0,0,0,0,0,0,1
+analgesics,NULL,PEDIATRIC FENTANYL IV BOLUS FROM BAG,600678,PEDIATRIC FENTANYL IV BOLUS FROM BAG,NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,1,0,0,0,0,0,1
+analgesics,NULL,"KETAMINE HCL 50 MG/ML IJ SOLN""""",4238,"KETAMINE HCL 50 MG/ML IJ SOLN""""",Ketamine HCl,Analgesics & Anesthetics,General Anesthetics,Anesthetics - Misc.,0,0,0,1,0,0,0,1
+analgesics,NULL,"FENTANYL 200MCG + 0.1% BUPIVACAINE/100ML NS EPIDURAL""""",600403,"FENTANYL 200MCG + 0.1% BUPIVACAINE/100ML NS EPIDURAL""""",NULL,Analgesics & Anesthetics,Analgesics-Narcotic,Opioid Agonists,0,0,0,1,0,0,0,1
+analgesics,NULL,"KETOROLAC TROMETHAMINE 15 MG/ML IJ SOLN""""",22472,"KETOROLAC TROMETHAMINE 15 MG/ML IJ SOLN""""",Ketorolac Tromethamine,Analgesics & Anesthetics,Anti-Rheumatic,Nonsteroidal Anti-inflammatory Agents (NSAIDs),0,0,0,0,1,0,0,1
+anticoagulants,NULL,"HEPARIN (PORCINE) 50 UNIT/ML 500 ML IV SOLN""""",15848,"HEPARIN (PORCINE) 50 UNIT/ML 500 ML IV SOLN""""",Heparin (Porcine) in NaCl,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,21852,26447,26274,29835,8884,0,113292
+anticoagulants,NULL,"HEPARIN (PORCINE) 50 UNIT/ML 500 ML IV SOLN""""",140422,"HEPARIN (PORCINE) 50 UNIT/ML 500 ML IV SOLN""""",Heparin (Porcine) in NaCl,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,0,0,0,0,21964,14920,36884
+anticoagulants,NULL,"HEPARIN (PORCINE) IN D5W 50-5 UNIT/ML-% IV SOLN""""",15845,"HEPARIN (PORCINE) IN D5W 50-5 UNIT/ML-% IV SOLN""""",Heparin Sod (Porcine) in D5W,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,24256,4364,0,0,0,0,0,28620
+anticoagulants,NULL,"HEPARIN LOCK FLUSH 10 UNIT/ML IV SOLN""""",37994,"HEPARIN LOCK FLUSH 10 UNIT/ML IV SOLN""""",Heparin Lock Flush,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,8084,58,0,0,0,0,11,8153
+anticoagulants,NULL,ARGATROBAN INFUSION,400088,ARGATROBAN INFUSION,NULL,NULL,NULL,NULL,438,640,268,668,567,601,344,3526
+anticoagulants,NULL,"HEPARIN IN NS 50-0.45 UNIT/ML-% IJ SOLN""""",600015848,"HEPARIN IN NS 50-0.45 UNIT/ML-% IJ SOLN""""","Heparin Sod (Porcine) in NaCl IV Soln 25000 Unit/500ML-0.45%""""",Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,0,0,55,811,939,329,2134
+anticoagulants,NULL,ALTEPLASE 100 MG IV SOLR,9002,ALTEPLASE 100 MG IV SOLR,Alteplase,Hematological Agents,Misc. Hematological,Thrombolytic Enzymes,114,105,132,144,184,232,135,1046
+anticoagulants,NULL,"TIROFIBAN HCL IN NACL 12.5-0.9 MG/250ML-% IV SOLN""""",132822,"TIROFIBAN HCL IN NACL 12.5-0.9 MG/250ML-% IV SOLN""""",Tirofiban HCl in NaCl,Hematological Agents,Misc. Hematological,Platelet Aggregation Inhibitors,0,0,47,237,217,270,106,877
+anticoagulants,NULL,"TIROFIBAN HCL IN NACL 25-0.9 MG/500ML-% IV SOLN""""",23050,"TIROFIBAN HCL IN NACL 25-0.9 MG/500ML-% IV SOLN""""",Tirofiban HCl in NaCl,Hematological Agents,Misc. Hematological,Platelet Aggregation Inhibitors,112,330,262,0,0,0,0,704
+anticoagulants,NULL,"HEPARIN 25000 UNITS/500 ML NS INFUSION""""",900026,"HEPARIN 25000 UNITS/500 ML NS INFUSION""""",NULL,NULL,NULL,NULL,91,80,55,53,23,1,0,303
+anticoagulants,NULL,"ARGATROBAN IN SODIUM CHLORIDE 250-0.9 MG/250ML-% IV SOLN""""",127492,"ARGATROBAN IN SODIUM CHLORIDE 250-0.9 MG/250ML-% IV SOLN""""",Argatroban in Sodium Chloride,Hematological Agents,Anticoagulants,Thrombin Inhibitors,0,0,6,13,0,0,0,19
+anticoagulants,NULL,"HEPARIN (PORCINE) IN NACL 1000-0.9 UT/500ML-% IV SOLN""""",143153,"HEPARIN (PORCINE) IN NACL 1000-0.9 UT/500ML-% IV SOLN""""",Heparin (Porcine) in NaCl,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,0,0,0,0,2,11,13
+anticoagulants,NULL,"HEPARIN (PORCINE) LOCK FLUSH 100 UNIT/ML IV SOLN""""",17362,"HEPARIN (PORCINE) LOCK FLUSH 100 UNIT/ML IV SOLN""""",Heparin Lock Flush,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,9,0,0,0,0,0,9
+anticoagulants,NULL,"HEPARIN SODIUM (PORCINE) 1000 UNIT/ML IJ SOLN""""",10176,"HEPARIN SODIUM (PORCINE) 1000 UNIT/ML IJ SOLN""""",Heparin Sodium (Porcine),Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,3,4,2,0,0,0,9
+anticoagulants,NULL,"HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN""""",10181,"HEPARIN SODIUM (PORCINE) 5000 UNIT/ML IJ SOLN""""",Heparin Sodium (Porcine),Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,1,0,0,1,0,1,0,3
+anticoagulants,NULL,"HEPARIN FLUSH 1 UNIT/ML 0.45% NS (NICU) 6ML""""",600328,"HEPARIN FLUSH 1 UNIT/ML 0.45% NS (NICU) 6ML""""",NULL,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,0,0,3,0,0,0,3
+anticoagulants,NULL,"ARGATROBAN 250 MG/250ML IV SOLN""""",600752,"ARGATROBAN 250 MG/250ML IV SOLN""""",                                                    5ML,Hematological Agents,Anticoagulants,Thrombin Inhibitors,0,0,2,0,0,0,0,2
+anticoagulants,NULL,"HEPARIN 10000 UNITS/500 ML NS IC IR""""",900158,"HEPARIN 10000 UNITS/500 ML NS IC IR""""",NULL,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,0,0,1,1,0,0,2
+anticoagulants,NULL,"HEPARIN LOCK FLUSH 100 UNIT/ML IV SOLN""""",28393,"HEPARIN LOCK FLUSH 100 UNIT/ML IV SOLN""""",Heparin Lock Flush,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,0,0,1,0,0,0,1
+anticoagulants,NULL,"ARGATROBAN 250 MG/2.5ML IV SOLN""""",28947,"ARGATROBAN 250 MG/2.5ML IV SOLN""""",Argatroban,Hematological Agents,Anticoagulants,Thrombin Inhibitors,0,0,0,0,1,0,0,1
+anti-infective,penicillins,"PIPERACIL-TAZO 4.5 G/100 ML D5W MB PLUS""""",600035,"PIPERACIL-TAZO 4.5 G/100 ML D5W MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,35150,32855,26619,5501,0,27,3711,103863
+anti-infective,glycopeptide,"VANCOMYCIN HCL IN DEXTROSE 1000 MG/200ML IV SOLN""""",92895,"VANCOMYCIN HCL IN DEXTROSE 1000 MG/200ML IV SOLN""""",Vancomycin HCl-Dextrose,Anti-Infective Agents,Misc. Antiinfectives,Glycopeptides,11652,12596,14781,15965,16379,14003,2139,87515
+anti-infective,metronidazole,"METRONIDAZOLE IN NACL 5-0.79 MG/ML-% IV SOLN""""",5018,"METRONIDAZOLE IN NACL 5-0.79 MG/ML-% IV SOLN""""",metroNIDAZOLE in NaCl,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,8977,11889,1277,0,4698,32641,12052,71534
+anti-infective,penicillins,"PIPERACIL-TAZO 4.5 G/NS 100ML MB PLUS""""",600365,"PIPERACIL-TAZO 4.5 G/NS 100ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,514,315,2389,1989,9758,38876,10890,64731
+anti-infective,glycopeptide,VANCOMYCIN IV >1.5 G IN NS OR D5W,900067,VANCOMYCIN IV >1.5 G IN NS OR D5W,NULL,NULL,NULL,NULL,10382,10633,4880,8808,12649,12976,3234,63562
+anti-infective,glycopeptide,VANCOMYCIN IV >1 G - < 1.5 G IN D5W,900066,VANCOMYCIN IV >1 G - < 1.5 G IN D5W,NULL,NULL,NULL,NULL,6520,7946,8952,9892,10552,9705,3414,56981
+anti-infective,cephalosporins,"CEFAZOLIN 1GM/D5W 50ML MB PLUS""""",600020,"CEFAZOLIN 1GM/D5W 50ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 1st Generation,11555,14265,14663,13547,8,2,2,54042
+anti-infective,cephalosporins,"CEFAZOLIN 2 G/D5W 100 ML IVPB""""",600789,"CEFAZOLIN 2 G/D5W 100 ML IVPB""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 1st Generation,0,0,399,268,16499,24764,10254,52184
+anti-infective,lincosamides,"CLINDAMYCIN PHOSPHATE IN D5W 900 MG/50ML IV SOLN""""",9627,"CLINDAMYCIN PHOSPHATE IN D5W 900 MG/50ML IV SOLN""""",Clindamycin Phosphate in D5W,Anti-Infective Agents,Misc. Antiinfectives,Lincosamides,10059,8206,7803,7818,5674,5148,1494,46202
+anti-infective,cephalosporins,"CEFEPIME 2 G/D5W 50 ML MB PLUS""""",600251,"CEFEPIME 2 G/D5W 50 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 4th Generation,6045,10944,14108,13124,52,32,0,44305
+anti-infective,metronidazole,"METRONIDAZOLE IN NACL 500-0.79 MG/100ML-% IV SOLN""""",10593,"METRONIDAZOLE IN NACL 500-0.79 MG/100ML-% IV SOLN""""",metroNIDAZOLE in NaCl,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,0,0,13289,15397,14936,0,0,43622
+anti-infective,cephalosporins,"CEFTRIAXONE 1 G/D5W 100 ML MB PLUS""""",600014,"CEFTRIAXONE 1 G/D5W 100 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,8999,10215,10199,10899,0,3,0,40315
+anti-infective,cephalosporins,"CEFEPIME 2 G/100 ML NS MB PLUS""""",600881,"CEFEPIME 2 G/100 ML NS MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 4th Generation,0,0,0,3646,2267,27855,5604,39372
+anti-infective,cephalosporins,CEFAZOLIN IVPB > 1 G,410006,CEFAZOLIN IVPB > 1 G,NULL,NULL,NULL,NULL,6856,8911,9081,9634,2148,1565,465,38660
+anti-infective,penicillins,"PIPERACIL-TAZ 3.375 G/D5W 50ML MB PLUS""""",600034,"PIPERACIL-TAZ 3.375 G/D5W 50ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,8725,7529,8928,12169,554,0,0,37905
+anti-infective,penicillins,"AMPICILLIN 2 G/NS 100ML MB PLUS""""",600008,"AMPICILLIN 2 G/NS 100ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Aminopenicillins,4220,5183,4821,5938,6516,8534,2671,37883
+anti-infective,lincosamides,"CLINDAMYCIN PHOSPHATE IN D5W 600 MG/50ML IV SOLN""""",9626,"CLINDAMYCIN PHOSPHATE IN D5W 600 MG/50ML IV SOLN""""",Clindamycin Phosphate in D5W,Anti-Infective Agents,Misc. Antiinfectives,Lincosamides,5061,5502,5237,6498,5435,5677,1996,35406
+anti-infective,fluoroquinolones,"CIPROFLOXACIN IN D5W 400 MG/200ML IV SOLN""""",91238,"CIPROFLOXACIN IN D5W 400 MG/200ML IV SOLN""""",Ciprofloxacin in D5W,Anti-Infective Agents,Fluoroquinolones,Fluoroquinolones,5229,4885,4998,6236,5352,3885,1635,32220
+anti-infective,glycopeptide,VANCOMYCIN 1.5 G IN NS 250 ML PREMIX,600889,VANCOMYCIN 1.5 G IN NS 250 ML PREMIX,NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,0,0,0,1180,12500,12554,2094,28328
+anti-infective,penicillins,"AMPICILLIN-SULB 3 G/NS 100ML MB PLUS""""",600016,"AMPICILLIN-SULB 3 G/NS 100ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,3466,5849,6348,7632,7,0,0,23302
+anti-infective,macrolide antibiotics,"AZITHROMYCIN 500MG/D5W 250ML MB PLUS""""",600031,"AZITHROMYCIN 500MG/D5W 250ML MB PLUS""""",NULL,Anti-Infective Agents,Macrolide Antibiotics,Azithromycin,2160,2257,2664,3941,3776,4641,2577,22016
+anti-infective,penicillins,"PIPERACIL-TAZO 4.5 G/NS 50 ML MB PLUS""""",600856,"PIPERACIL-TAZO 4.5 G/NS 50 ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,0,0,0,351,21540,0,0,21891
+anti-infective,cephalosporins,CEFAZOLIN 1G IN 50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION,139272,CEFAZOLIN 1G IN 50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION,ceFAZolin Sodium-Dextrose,Anti-Infective Agents,Cephalosporins,Cephalosporins - 1st Generation,0,0,0,0,7601,9545,4636,21782
+anti-infective,penicillins,"PIPERACIL-TAZO 2.25 G/D5W 50ML MB PLUS""""",600033,"PIPERACIL-TAZO 2.25 G/D5W 50ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,4662,4204,5435,6729,272,0,0,21302
+anti-infective,penicillins,"AMPICILLIN 1 G/NS 100ML MB PLUS""""",600007,"AMPICILLIN 1 G/NS 100ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Aminopenicillins,2811,2862,3077,3458,3157,2865,649,18879
+anti-infective,penicillins,"AMPICILLIN-SULB 3 G/D5W 100ML MB PLUS""""",600885,"AMPICILLIN-SULB 3 G/D5W 100ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,0,0,0,1641,11688,2804,634,16767
+anti-infective,fluoroquinolones,"LEVOFLOXACIN IN D5W 750 MG/150ML IV SOLN""""",107149,"LEVOFLOXACIN IN D5W 750 MG/150ML IV SOLN""""",levoFLOXacin in D5W,Anti-Infective Agents,Fluoroquinolones,Fluoroquinolones,3654,2634,2487,2613,2815,1845,512,16560
+anti-infective,penicillins,"PIPERACIL-TAZO 4.5 G/50 ML D5W MB PLUS""""",600855,"PIPERACIL-TAZO 4.5 G/50 ML D5W MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,0,0,0,15382,10,0,30,15422
+anti-infective,glycopeptide,VANCOMYCIN IV < 1 G,900065,VANCOMYCIN IV < 1 G,NULL,NULL,NULL,NULL,1981,2416,3017,3584,3697,8,43,14746
+anti-infective,cephalosporins,"CEFTRIAXONE 2 G/D5W 100 ML MB PLUS""""",600043,"CEFTRIAXONE 2 G/D5W 100 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,2767,3826,3584,4267,19,11,0,14474
+anti-infective,cephalosporins,"CEFEPIME 1 G/D5W 50 ML MB PLUS""""",600039,"CEFEPIME 1 G/D5W 50 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 4th Generation,1403,3251,3674,3503,1547,0,0,13378
+anti-infective,glycopeptide,VANCOMYCIN IV  >= 2 G IN D5W,900068,VANCOMYCIN IV  >= 2 G IN D5W,NULL,NULL,NULL,NULL,3006,3614,3957,2083,5,0,8,12673
+anti-infective,antiviral,ACYCLOVIR IVPB PATIENT 35 - 70 KG,400070,ACYCLOVIR IVPB PATIENT 35 - 70 KG,NULL,NULL,NULL,NULL,1169,2016,1614,1961,2138,1643,863,11404
+anti-infective,carbapenems,"MEROPENEM 1 G/NS 100 ML MB PLUS""""",600040,"MEROPENEM 1 G/NS 100 ML MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Carbapenems,2309,1965,0,0,2974,2921,543,10712
+anti-infective,carbapenems,MEROPENEM IVPB,400048,MEROPENEM IVPB,NULL,NULL,NULL,NULL,523,1086,2659,4117,637,1196,383,10601
+anti-infective,glycopeptide,"VANCOMYCIN IV 1375-1500 MG/D5W 500 ML""""",900203,"VANCOMYCIN IV 1375-1500 MG/D5W 500 ML""""",NULL,NULL,NULL,NULL,229,1387,8189,174,0,0,0,9979
+anti-infective,cephalosporins,"CEFEPIME 1 G/100 ML NS MB PLUS""""",600880,"CEFEPIME 1 G/100 ML NS MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 4th Generation,0,0,0,1142,1755,5043,1005,8945
+anti-infective,glycopeptide,VANCOMYCIN 1.5 G IN D5W 500 ML PREMIX,600845,VANCOMYCIN 1.5 G IN D5W 500 ML PREMIX,NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,0,0,0,8892,3,0,0,8895
+anti-infective,antifungals,ANIDULAFUNGIN IVPB,900568,ANIDULAFUNGIN IVPB,NULL,NULL,NULL,NULL,728,989,1274,1370,1477,1603,702,8143
+anti-infective,antifungals,"FLUCONAZOLE IN SODIUM CHLORIDE 400-0.9 MG/200ML-% IV SOLN""""",10050,"FLUCONAZOLE IN SODIUM CHLORIDE 400-0.9 MG/200ML-% IV SOLN""""",Fluconazole in Sodium Chloride,Anti-Infective Agents,Antifungals,Imidazole-Related Antifungals,1340,1375,1229,745,945,1835,470,7939
+anti-infective,penicillins,"PIPERACILLIN-TAZOBACTAM IN DEX 4-0.5 GM/100ML IV SOLN FROZEN""""",107150,"PIPERACILLIN-TAZOBACTAM IN DEX 4-0.5 GM/100ML IV SOLN FROZEN""""",Piperacillin-Tazobactam in Dex,Anti-Infective Agents,Penicillins,Penicillin Combinations,0,0,0,4568,3317,0,0,7885
+anti-infective,aminoglycosides,GENTAMICIN STANDARD DOSING IVPB,400285,GENTAMICIN STANDARD DOSING IVPB,NULL,NULL,NULL,NULL,1509,1676,1335,1450,1062,413,102,7547
+anti-infective,cephalosporins,CEFAZOLIN 1G IN 50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION,9444,CEFAZOLIN 1G IN 50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION,CeFAZolin in D5W,Anti-Infective Agents,Cephalosporins,Cephalosporins - 1st Generation,0,0,0,2910,4151,0,0,7061
+anti-infective,penicillins,"AMPICILLIN-SULB 1.5 G/NS 50ML MB PLUS""""",600015,"AMPICILLIN-SULB 1.5 G/NS 50ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,1349,1448,1677,2282,0,0,0,6756
+anti-infective,cephalosporins,CEFEPIME IVPB,400104,CEFEPIME IVPB,NULL,NULL,NULL,NULL,410,1757,3046,1304,131,35,0,6683
+anti-infective,lipopeptide,DAPTOMYCIN IVPB,900020,DAPTOMYCIN IVPB,NULL,NULL,NULL,NULL,284,600,781,1408,973,1881,598,6525
+anti-infective,penicillins,"PIPERACIL-TAZO 4.5 G/NS 70 ML IVPB""""",600990,"PIPERACIL-TAZO 4.5 G/NS 70 ML IVPB""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,0,0,0,2199,4215,0,0,6414
+anti-infective,glycopeptide,"VANCOMYCIN 750MG/D5W 250ML MB PLUS""""",601048,"VANCOMYCIN 750MG/D5W 250ML MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,0,0,0,0,948,4043,1208,6199
+anti-infective,tetracyclines,DOXYCYCLINE IVPB,400143,DOXYCYCLINE IVPB,NULL,NULL,NULL,NULL,1013,1214,1113,1632,1113,103,0,6188
+anti-infective,glycopeptide,VANCOMYCIN IV > 1.5 G IN NS,900561,VANCOMYCIN IV > 1.5 G IN NS,NULL,NULL,NULL,NULL,1123,1147,757,929,424,1039,710,6129
+anti-infective,antifungals,"FLUCONAZOLE IN SODIUM CHLORIDE 200-0.9 MG/100ML-% IV SOLN""""",10049,"FLUCONAZOLE IN SODIUM CHLORIDE 200-0.9 MG/100ML-% IV SOLN""""",Fluconazole in Sodium Chloride,Anti-Infective Agents,Antifungals,Imidazole-Related Antifungals,907,1094,791,938,1040,752,183,5705
+anti-infective,cephalosporins,"CEFOXITIN 2 G/D5W 100ML MB PLUS""""",600027,"CEFOXITIN 2 G/D5W 100ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 2nd Generation,773,1105,814,1137,335,696,375,5235
+anti-infective,cephalosporins,CEFTRIAXONE IVPB,400107,CEFTRIAXONE IVPB,NULL,NULL,NULL,NULL,20,3,1740,3087,123,19,0,4992
+anti-infective,penicillins,PENICILLIN G POTASSIUM IV INFUSION,900050,PENICILLIN G POTASSIUM IV INFUSION,NULL,NULL,NULL,NULL,603,982,598,662,854,1008,222,4929
+anti-infective,antiviral,ACYCLOVIR IVPB PATIENT 70-100 KG,400069,ACYCLOVIR IVPB PATIENT 70-100 KG,NULL,NULL,NULL,NULL,576,822,694,855,887,708,253,4795
+anti-infective,cephalosporins,"CEFOXITIN 1 G/D5W 100 ML MB PLUS""""",600023,"CEFOXITIN 1 G/D5W 100 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 2nd Generation,1465,1224,976,958,86,34,11,4754
+anti-infective,sulphonamides,SULFAMETHOXAZOLE-TRIMETHOPRIM IVPB 240-320 MG,900063,SULFAMETHOXAZOLE-TRIMETHOPRIM IVPB 240-320 MG,NULL,NULL,NULL,NULL,709,801,818,766,827,579,122,4622
+anti-infective,oxazolidinones,"LINEZOLID 600 MG/300ML IV SOLN""""",130884,"LINEZOLID 600 MG/300ML IV SOLN""""",Linezolid,Anti-Infective Agents,Misc. Antiinfectives,Oxazolidinones,0,0,870,1163,890,1068,487,4478
+anti-infective,cephalosporins,CEFAZOLIN SODIUM-DEXTROSE 2-3 GM-% IV SOLR,112830,CEFAZOLIN SODIUM-DEXTROSE 2-3 GM-% IV SOLR,ceFAZolin Sodium-Dextrose,Anti-Infective Agents,Cephalosporins,Cephalosporins - 1st Generation,0,0,0,2239,2235,0,0,4474
+anti-infective,aminoglycosides,"GENTAMICIN 2MG/ML NS (NICU) IV SYRINGE""""",600290,"GENTAMICIN 2MG/ML NS (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Aminoglycosides,Aminoglycosides,14,13,232,1471,1178,927,364,4199
+anti-infective,penicillins,NAFCILLIN IV 6 G CONTINUOUS INFUSION,900047,NAFCILLIN IV 6 G CONTINUOUS INFUSION,NULL,NULL,NULL,NULL,836,767,647,469,636,541,264,4160
+anti-infective,tetracyclines,"DOXYCYCLINE 100MG/NS 100ML MB PLUS""""",600021,"DOXYCYCLINE 100MG/NS 100ML MB PLUS""""",NULL,Anti-Infective Agents,Tetracyclines,Tetracyclines,206,139,176,257,1015,1681,506,3980
+anti-infective,aminoglycosides,TOBRAMYCIN IVPB,400047,TOBRAMYCIN IVPB,NULL,NULL,NULL,NULL,447,661,599,788,632,543,203,3873
+anti-infective,glycopeptide,VANCOMYCIN IV >1 G - < 1.5 G IN NS,900560,VANCOMYCIN IV >1 G - < 1.5 G IN NS,NULL,NULL,NULL,NULL,364,369,594,454,327,1262,449,3819
+anti-infective,antifungals,AMPHOTERICIN B LIPID (ABELCET) IVPB,900113,AMPHOTERICIN B LIPID (ABELCET) IVPB,NULL,NULL,NULL,NULL,373,452,545,607,628,608,397,3610
+anti-infective,sulphonamides,SULFAMETHOXAZOLE-TRIMETHOPRIM IVPB >320 MG,900064,SULFAMETHOXAZOLE-TRIMETHOPRIM IVPB >320 MG,NULL,NULL,NULL,NULL,483,419,519,563,727,621,261,3593
+anti-infective,fluoroquinolones,"LEVOFLOXACIN IN D5W 500 MG/100ML IV SOLN""""",107148,"LEVOFLOXACIN IN D5W 500 MG/100ML IV SOLN""""",levoFLOXacin in D5W,Anti-Infective Agents,Fluoroquinolones,Fluoroquinolones,673,534,457,719,651,386,136,3556
+anti-infective,aminoglycosides,GENTAMICIN ODA IVPB,400041,GENTAMICIN ODA IVPB,NULL,NULL,NULL,NULL,239,358,279,407,568,1067,538,3456
+anti-infective,glycopeptide,"VANCOMYCIN HCL 1500 MG/300ML IV SOLN""""",143158,"VANCOMYCIN HCL 1500 MG/300ML IV SOLN""""",Vancomycin HCl,Anti-Infective Agents,Misc. Antiinfectives,Glycopeptides,0,0,0,0,0,0,3353,3353
+anti-infective,monobactams,"AZTREONAM 2 G/100ML D5W MB PLUS""""",600246,"AZTREONAM 2 G/100ML D5W MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,29,71,76,1066,844,868,290,3244
+anti-infective,glycopeptide,VANCOMYCIN IV <= 1 G IN NS,900559,VANCOMYCIN IV <= 1 G IN NS,NULL,NULL,NULL,NULL,284,429,663,594,382,654,188,3194
+anti-infective,glycopeptide,"VANCOMYCIN HCL 1000 MG/200ML IV SOLN""""",143157,"VANCOMYCIN HCL 1000 MG/200ML IV SOLN""""",Vancomycin HCl,Anti-Infective Agents,Misc. Antiinfectives,Glycopeptides,0,0,0,0,0,0,2966,2966
+anti-infective,glycopeptide,"VANCOMYCIN 500MG/100 ML D5W MB PLUS""""",600022,"VANCOMYCIN 500MG/100 ML D5W MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,199,438,406,420,562,708,135,2868
+anti-infective,penicillins,PENICILLIN G IVPB (>3 MILLION UNITS),400049,PENICILLIN G IVPB (>3 MILLION UNITS),NULL,NULL,NULL,NULL,301,319,135,468,659,944,29,2855
+anti-infective,oxazolidinones,"LINEZOLID 2 MG/ML IV SOLN""""",28226,"LINEZOLID 2 MG/ML IV SOLN""""",Linezolid,Anti-Infective Agents,Misc. Antiinfectives,Oxazolidinones,943,1240,408,0,0,0,0,2591
+anti-infective,antiviral,ACYCLOVIR IVPB PATIENT < 35 KG,400071,ACYCLOVIR IVPB PATIENT < 35 KG,NULL,NULL,NULL,NULL,346,629,450,355,266,386,80,2512
+anti-infective,glycopeptide,"VANCOMYCIN 5MG/ML D5W (NICU)""""",600292,"VANCOMYCIN 5MG/ML D5W (NICU)""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,6,9,200,877,619,593,161,2465
+anti-infective,cephalosporins,CEFAZOLIN IVPB <= 1 G,400010,CEFAZOLIN IVPB <= 1 G,NULL,NULL,NULL,NULL,148,199,640,932,266,225,26,2436
+anti-infective,glycopeptide,"VANCOMYCIN HCL 2000 MG/400ML IV SOLN""""",144270,"VANCOMYCIN HCL 2000 MG/400ML IV SOLN""""",Vancomycin HCl,Anti-Infective Agents,Misc. Antiinfectives,Glycopeptides,0,0,0,0,0,0,2432,2432
+anti-infective,carbapenems,"ERTAPENEM 1 G/NS 100ML MB PLUS""""",601011,"ERTAPENEM 1 G/NS 100ML MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Carbapenems,0,0,0,0,872,1181,292,2345
+anti-infective,penicillins,"NAFCILLIN 2GM/D5W 100ML MB PLUS""""",600012,"NAFCILLIN 2GM/D5W 100ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillinase-Resistant Penicillins,375,615,209,107,460,358,152,2276
+anti-infective,carbapenems,"ERTAPENEM 1 G/NS 50ML MB PLUS""""",600038,"ERTAPENEM 1 G/NS 50ML MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Carbapenems,382,325,417,686,0,0,206,2016
+anti-infective,cephalosporins,"CEFEPIME HCL 1 GM/50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION""""",93837,"CEFEPIME HCL 1 GM/50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION""""",Cefepime HCl,Anti-Infective Agents,Cephalosporins,Cephalosporins - 4th Generation,0,0,0,116,1852,0,0,1968
+anti-infective,glycopeptide,"VANCOMYCIN IV 1500 MG/NS 500 ML""""",900204,"VANCOMYCIN IV 1500 MG/NS 500 ML""""",NULL,NULL,NULL,NULL,0,199,956,727,44,18,0,1944
+anti-infective,cephalosporins,"CEFTAZIDIME 2 G/D5W 100ML MB PLUS""""",600010,"CEFTAZIDIME 2 G/D5W 100ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,112,167,156,491,0,466,336,1728
+anti-infective,macrolide antibiotics,AZITHROMYCIN IVPB,900010,AZITHROMYCIN IVPB,NULL,NULL,NULL,NULL,73,67,124,111,1143,69,81,1668
+anti-infective,cephalosporins,"CEFUROXIME 1.5 G/D5W 100ML MB PLUS""""",600019,"CEFUROXIME 1.5 G/D5W 100ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 2nd Generation,156,221,302,398,70,346,142,1635
+anti-infective,antifungals,"FLUCONAZOLE 2MG/ML NS IVPB""""",600439,"FLUCONAZOLE 2MG/ML NS IVPB""""",NULL,Anti-Infective Agents,Antifungals,Imidazole-Related Antifungals,4,549,448,323,90,34,10,1458
+anti-infective,carbapenems,"MEROPENEM 500 MG/NS 100ML MB PLUS     """"",601007,"MEROPENEM 500 MG/NS 100ML MB PLUS     """"",NULL,Anti-Infective Agents,Misc. Antiinfectives,Carbapenems,0,0,0,0,598,706,94,1398
+anti-infective,carbapenems,ERTAPENEM IVPB,900024,ERTAPENEM IVPB,NULL,NULL,NULL,NULL,76,77,61,412,228,371,144,1369
+anti-infective,metronidazole,METRONIDAZOLE CUSTOM IVPB < OR > 500 MG IV MIXTURE,900271,METRONIDAZOLE CUSTOM IVPB < OR > 500 MG IV MIXTURE,NULL,NULL,NULL,NULL,0,0,0,826,497,33,0,1356
+anti-infective,monobactams,"AZTREONAM 1 G/100ML D5W MB PLUS""""",600245,"AZTREONAM 1 G/100ML D5W MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,35,28,28,763,282,166,53,1355
+anti-infective,penicillins,"PIPERACIL-TAZ 3.375 G/NS 50ML MB PLUS""""",600364,"PIPERACIL-TAZ 3.375 G/NS 50ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,133,45,593,522,42,0,0,1335
+anti-infective,penicillins,"AMPICILLIN-SULB 1.5 G/D5W 100ML MB PLUS""""",601009,"AMPICILLIN-SULB 1.5 G/D5W 100ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,0,0,0,0,1049,268,0,1317
+anti-infective,antiviral,GANCICLOVIR IVPB,400155,GANCICLOVIR IVPB,NULL,NULL,NULL,NULL,229,314,195,130,160,263,21,1312
+anti-infective,aminoglycoside,AMIKACIN IVPB,400080,AMIKACIN IVPB,NULL,NULL,NULL,NULL,144,243,190,233,341,149,9,1309
+anti-infective,cephalosporins,"CEFTAZIDIME 40MG/ML NS (NICU) IV SYRINGE""""",600305,"CEFTAZIDIME 40MG/ML NS (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,0,0,63,265,530,237,168,1263
+anti-infective,penicillins,"NAFCILLIN 1 G/D5W 100 ML MB PLUS""""",600011,"NAFCILLIN 1 G/D5W 100 ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillinase-Resistant Penicillins,400,231,234,98,162,136,0,1261
+anti-infective,cephalosporins,CEFAZOLIN 2 OR 3 G IVPB FOR PPX - NO PRINT,900243,CEFAZOLIN 2 OR 3 G IVPB FOR PPX - NO PRINT,NULL,NULL,NULL,NULL,0,0,0,3,481,705,67,1256
+anti-infective,penicillins,AMPICILLIN-SULBACTAM IN NS > 1.5 G IVPB,400006,AMPICILLIN-SULBACTAM IN NS > 1.5 G IVPB,NULL,NULL,NULL,NULL,8,8,133,62,960,3,0,1174
+anti-infective,penicillins,"PIPERACIL-TAZ 2.25 G/NS 50 ML MB PLUS""""",600692,"PIPERACIL-TAZ 2.25 G/NS 50 ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,101,115,467,385,12,0,0,1080
+anti-infective,antifungals,VORICONAZOLE IVPB PATIENT < 100 KG,400233,VORICONAZOLE IVPB PATIENT < 100 KG,NULL,NULL,NULL,NULL,142,121,183,174,170,111,169,1070
+anti-infective,aminoglycosides,"GENTAMICIN IN SALINE 0.8-0.9 MG/ML-% IV SOLN""""",15906,"GENTAMICIN IN SALINE 0.8-0.9 MG/ML-% IV SOLN""""",Gentamicin in Saline,Anti-Infective Agents,Aminoglycosides,Aminoglycosides,295,147,160,187,85,161,14,1049
+anti-infective,penicillins,AMPICILLIN IV 6 G CONTINUOUS INFUSION,900197,AMPICILLIN IV 6 G CONTINUOUS INFUSION,NULL,NULL,NULL,NULL,190,150,126,103,138,158,138,1003
+anti-infective,sulphonamides,SULFAMETHOXAZOLE-TRIMETHOPRIM IVPB 100-239 MG,900062,SULFAMETHOXAZOLE-TRIMETHOPRIM IVPB 100-239 MG,NULL,NULL,NULL,NULL,126,140,163,157,100,279,31,996
+anti-infective,nonribosomal peptides,POLYMYXIN B SULFATE IV INFUSION,900053,POLYMYXIN B SULFATE IV INFUSION,NULL,NULL,NULL,NULL,198,87,122,98,197,128,71,901
+anti-infective,penicillins,"AMPICILLIN 1 G/50 ML NS MB PLUS""""",601074,"AMPICILLIN 1 G/50 ML NS MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Aminopenicillins,0,0,0,0,0,0,891,891
+anti-infective,penicillins,"AMPICILLIN 2 G/100ML D5W MB PLUS""""",600886,"AMPICILLIN 2 G/100ML D5W MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Aminopenicillins,0,0,0,0,0,0,872,872
+anti-infective,cephalosporins,CEFAZOLIN PEDIATRIC IVPB,400057,CEFAZOLIN PEDIATRIC IVPB,NULL,NULL,NULL,NULL,17,212,154,95,118,247,24,867
+anti-infective,lincosamides,CLINDAMYCIN IVPB,900017,CLINDAMYCIN IVPB,NULL,NULL,NULL,NULL,135,166,251,181,78,50,3,864
+anti-infective,cephalosporins,CEFTAZIDIME-AVIBACTAM IVPB,900245,CEFTAZIDIME-AVIBACTAM IVPB,NULL,NULL,NULL,NULL,0,0,0,228,303,297,35,863
+anti-infective,glycopeptide,"VANCOMYCIN 1.5 G/D5W 250 ML (CT SURGERY)""""",900128,"VANCOMYCIN 1.5 G/D5W 250 ML (CT SURGERY)""""",NULL,NULL,NULL,NULL,74,112,138,47,213,200,9,793
+anti-infective,antifungals,VORICONAZOLE IVPB PATIENT >= 100 KG,400234,VORICONAZOLE IVPB PATIENT >= 100 KG,NULL,NULL,NULL,NULL,18,96,151,22,74,277,138,776
+anti-infective,cephalosporins,"CEFTAZIDIME (FORTAZ) 2 G/50 ML D5W IV DUPLEX""""",110129,"CEFTAZIDIME (FORTAZ) 2 G/50 ML D5W IV DUPLEX""""",cefTAZidime and Dextrose,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,0,0,0,147,557,0,0,704
+anti-infective,glycopeptide,VANCOMYCIN PEDIATRIC IV,400028,VANCOMYCIN PEDIATRIC IV,NULL,NULL,NULL,NULL,107,83,85,137,222,47,10,691
+anti-infective,cephalosporins,CEFEPIME PEDIATRIC IVPB,900569,CEFEPIME PEDIATRIC IVPB,NULL,NULL,NULL,NULL,0,34,131,135,234,128,18,680
+anti-infective,antimycobacterial agents,RIFAMPIN IVPB,400216,RIFAMPIN IVPB,NULL,NULL,NULL,NULL,150,113,25,68,167,142,14,679
+anti-infective,glycopeptide,"VANCOMYCIN 750MG/NS 250ML MB PLUS""""",601049,"VANCOMYCIN 750MG/NS 250ML MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,0,0,0,0,48,342,232,622
+anti-infective,cephalosporins,CEFOTAXIME IVPB > 1 G,200003,CEFOTAXIME IVPB > 1 G,NULL,NULL,NULL,NULL,259,238,106,7,0,0,0,610
+anti-infective,antiviral,REMDESIVIR IVPB- EMERGENCY USE,900373,REMDESIVIR IVPB- EMERGENCY USE,NULL,NULL,NULL,NULL,0,0,0,0,0,0,604,604
+anti-infective,fluoroquinolones,PEDIATRIC CIPROFLOXACIN IVPB,400113,PEDIATRIC CIPROFLOXACIN IVPB,NULL,NULL,NULL,NULL,323,176,76,0,0,0,0,575
+anti-infective,cephalosporins,CEFTAZIDIME PEDIATRIC IVPB,900570,CEFTAZIDIME PEDIATRIC IVPB,NULL,NULL,NULL,NULL,3,191,222,119,21,8,0,564
+anti-infective,cephalosporins,CEFTOLOZANE-TAZOBACTAM IVPB,900577,CEFTOLOZANE-TAZOBACTAM IVPB,NULL,NULL,NULL,NULL,0,0,0,173,151,229,10,563
+anti-infective,macrolide antibiotics,ERYTHROMYCIN CUSTOM IV < 500 MG,900082,ERYTHROMYCIN CUSTOM IV < 500 MG,NULL,NULL,NULL,NULL,42,172,244,81,0,0,0,539
+anti-infective,penicillins,"PENICILLIN G POT 50000 UNIT/ML NS (NICU) IV SYRINGE""""",600282,"PENICILLIN G POT 50000 UNIT/ML NS (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Penicillins,Natural Penicillins,0,0,0,93,169,140,120,522
+anti-infective,penicillins,AMPICILLIN IV CUSTOM < 1 G,900006,AMPICILLIN IV CUSTOM < 1 G,NULL,NULL,NULL,NULL,25,68,264,85,61,0,0,503
+anti-infective,antifungals,AMPHOTERICIN B IVPB,400084,AMPHOTERICIN B IVPB,NULL,NULL,NULL,NULL,123,84,38,170,36,22,11,484
+anti-infective,penicillins,NAFCILLIN IVPB CUSTOM <1 G,900045,NAFCILLIN IVPB CUSTOM <1 G,NULL,NULL,NULL,NULL,8,0,392,45,0,0,0,445
+anti-infective,carbapenems,"MEROPENEM 20MG/ML NS (NICU)""""",600309,"MEROPENEM 20MG/ML NS (NICU)""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Carbapenems,0,0,1,148,141,148,0,438
+anti-infective,monobactams,AZTREONAM 2G IN 50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION,9189,AZTREONAM 2G IN 50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION,Aztreonam-Dextrose,Anti-Infective Agents,Misc. Antiinfectives,Monobactams,0,0,0,36,391,0,0,427
+anti-infective,tetracyclines,TIGECYCLINE IVPB,400224,TIGECYCLINE IVPB,NULL,NULL,NULL,NULL,1,0,148,3,190,78,6,426
+anti-infective,glycopeptide,"VANCOMYCIN 1000 MG/250 ML NS MBPLUS-OR""""",600363,"VANCOMYCIN 1000 MG/250 ML NS MBPLUS-OR""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,61,260,50,48,1,0,0,420
+anti-infective,penicillins,"PIPERACILLIN-TAZOBACTAM ZOSYN 20MG/ML (NICU) IV SYRINGE""""",600308,"PIPERACILLIN-TAZOBACTAM ZOSYN 20MG/ML (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,0,0,20,169,95,101,35,420
+anti-infective,antiviral,ZIDOVUDINE INFUSION,400235,ZIDOVUDINE INFUSION,NULL,NULL,NULL,NULL,117,91,22,68,59,50,9,416
+anti-infective,penicillins,PENICILLIN IVPB (<=3 MILLION UNITS),400050,PENICILLIN IVPB (<=3 MILLION UNITS),NULL,NULL,NULL,NULL,42,38,78,103,12,113,22,408
+anti-infective,cephalosporins,CEFTAZIDIME AND DEXTROSE 2-5 GM-%(50ML) IV SOLR,141425,CEFTAZIDIME AND DEXTROSE 2-5 GM-%(50ML) IV SOLR,cefTAZidime and Dextrose,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,0,0,0,0,14,389,0,403
+anti-infective,antiviral,"ACYCLOVIR 7MG/ML NS (NICU) IV SYRINGE""""",600344,"ACYCLOVIR 7MG/ML NS (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Antiviral,Herpes Agents,0,1,2,96,203,79,21,402
+anti-infective,cephalosporins,"CEFOTAXIME 1 G/D5W 100 ML MB PLUS""""",600032,"CEFOTAXIME 1 G/D5W 100 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,189,112,95,3,0,0,0,399
+anti-infective,penicillins,AMPICILLIN IV CUSTOM >= 1 G,900007,AMPICILLIN IV CUSTOM >= 1 G,NULL,NULL,NULL,NULL,0,16,0,17,344,4,0,381
+anti-infective,monobactams,AZTREONAM IVPB,400093,AZTREONAM IVPB,NULL,NULL,NULL,NULL,0,2,187,183,1,0,0,373
+anti-infective,macrolide antibiotics,"ERYTHROMYCIN 500 MG/100ML IVPB""""",600026,"ERYTHROMYCIN 500 MG/100ML IVPB""""",NULL,Anti-Infective Agents,Macrolide Antibiotics,Erythromycins,34,252,29,52,0,0,0,367
+anti-infective,cephalosporins,"CEFTAROLINE FOSAMIL 600MG/NS 250 ML MB PLUS""""",600745,"CEFTAROLINE FOSAMIL 600MG/NS 250 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 5th Generation,0,140,65,34,9,28,68,344
+anti-infective,cephalosporins,"CEFTAZIDIME 1G/D5W 100 ML MB PLUS""""",600009,"CEFTAZIDIME 1G/D5W 100 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,12,34,8,34,98,145,9,340
+anti-infective,antifungals,"FLUCONAZOLE 2MG/ML NS (NICU)""""",600284,"FLUCONAZOLE 2MG/ML NS (NICU)""""",NULL,Anti-Infective Agents,Antifungals,Imidazole-Related Antifungals,2,2,15,92,88,108,24,331
+anti-infective,metronidazole,"METRONIDAZOLE 5MG/ML NS (NICU)""""",600310,"METRONIDAZOLE 5MG/ML NS (NICU)""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,0,0,0,82,118,72,56,328
+anti-infective,monobactams,AZTREONAM 1G IN 50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION,9188,AZTREONAM 1G IN 50ML DEXTROSE (ISO-OSMOTIC) PREMIXED SOLUTION,Aztreonam-Dextrose,Anti-Infective Agents,Misc. Antiinfectives,Monobactams,0,0,0,67,256,0,0,323
+anti-infective,antiviral,"ZIDOVUDINE 4MG/ML D5W (NICU)""""",600302,"ZIDOVUDINE 4MG/ML D5W (NICU)""""",NULL,Anti-Infective Agents,Antiviral,Antiretrovirals,0,0,9,122,61,70,6,268
+anti-infective,penicillins,AMPICILLIN-SULBACTAM IN NS 1.5 G IVPB,400005,AMPICILLIN-SULBACTAM IN NS 1.5 G IVPB,NULL,NULL,NULL,NULL,0,0,0,96,147,0,0,243
+anti-infective,tetracyclines,"DOXYCYCLINE 100MG/D5W 100ML MB PLUS""""",601073,"DOXYCYCLINE 100MG/D5W 100ML MB PLUS""""",NULL,Anti-Infective Agents,Tetracyclines,Tetracyclines,0,0,0,0,0,0,239,239
+anti-infective,fluoroquinolones,"MOXIFLOXACIN HCL IN NACL 400 MG/250ML IV SOLN""""",31906,"MOXIFLOXACIN HCL IN NACL 400 MG/250ML IV SOLN""""",Moxifloxacin HCl in NaCl,Anti-Infective Agents,Fluoroquinolones,Fluoroquinolones,95,51,8,61,0,10,2,227
+anti-infective,fluoroquinolones,"CIPROFLOXACIN IN D5W 200 MG/100ML IV SOLN""""",107157,"CIPROFLOXACIN IN D5W 200 MG/100ML IV SOLN""""",Ciprofloxacin in D5W,Anti-Infective Agents,Fluoroquinolones,Fluoroquinolones,39,34,22,47,66,10,3,221
+anti-infective,lincosamides,CLINDAMYCIN PEDIATRIC IVPB,400059,CLINDAMYCIN PEDIATRIC IVPB,NULL,NULL,NULL,NULL,3,33,68,37,20,47,6,214
+anti-infective,penicillins,"NAFCILLIN 20MG/ML NS (NICU)""""",600274,"NAFCILLIN 20MG/ML NS (NICU)""""",NULL,Anti-Infective Agents,Penicillins,Penicillinase-Resistant Penicillins,0,0,0,108,75,29,0,212
+anti-infective,cephalosporins,"CEFAZOLIN 1GM/NS 50ML MB PLUS-OR ONLY""""",600362,"CEFAZOLIN 1GM/NS 50ML MB PLUS-OR ONLY""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 1st Generation,84,83,24,0,5,6,0,202
+anti-infective,antiviral,STUDY REMDESIVIR (GS-5734) IN NS 100 ML IVPB,900372,STUDY REMDESIVIR (GS-5734) IN NS 100 ML IVPB,NULL,NULL,NULL,NULL,0,0,0,0,0,0,202,202
+anti-infective,lipopeptide,DAPTOMYCIN IVPB 501 - 700 MG,900308,DAPTOMYCIN IVPB 501 - 700 MG,NULL,NULL,NULL,NULL,0,0,0,0,198,0,0,198
+anti-infective,antiviral,ZIDOVUDINE LOADING IVPB,900213,ZIDOVUDINE LOADING IVPB,NULL,NULL,NULL,NULL,5,58,15,30,26,37,13,184
+anti-infective,fluoroquinolones,"LEVOFLOXACIN IN D5W 250 MG/50ML IV SOLN""""",107147,"LEVOFLOXACIN IN D5W 250 MG/50ML IV SOLN""""",levoFLOXacin in D5W,Anti-Infective Agents,Fluoroquinolones,Fluoroquinolones,53,10,31,30,26,20,10,180
+anti-infective,penicillins,NAFCILLIN IVPB PREFERS IN NS,400196,NAFCILLIN IVPB PREFERS IN NS,NULL,NULL,NULL,NULL,0,99,0,59,17,0,0,175
+anti-infective,antiviral,ACYCLOVIR IVPB PATIENT > 100 KG,400282,ACYCLOVIR IVPB PATIENT > 100 KG,NULL,NULL,NULL,NULL,7,19,30,36,6,46,1,145
+anti-infective,carbapenems,"IMIPENEM-CILAST 500MG/NS 100ML MB PLUS""""",600013,"IMIPENEM-CILAST 500MG/NS 100ML MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Carbapenems,1,0,0,0,141,0,0,142
+anti-infective,penicillins,"AMPICILLIN-SULBACTAM 30 MG/ML PED IVPB""""",600719,"AMPICILLIN-SULBACTAM 30 MG/ML PED IVPB""""",NULL,NULL,NULL,NULL,0,5,0,12,90,32,2,141
+anti-infective,metronidazole,"METRONIDAZOLE 5MG/ML NS (PED)""""",600781,"METRONIDAZOLE 5MG/ML NS (PED)""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,0,0,0,0,60,62,18,140
+anti-infective,penicillins,AMPICILLIN SODIUM 500 MG IJ SOLR,474,AMPICILLIN SODIUM 500 MG IJ SOLR,Ampicillin Sodium,Anti-Infective Agents,Penicillins,Aminopenicillins,33,44,33,17,0,0,0,127
+anti-infective,cephalosporins,"CEFAZOLIN 20MG/ML NS (NICU)""""",600261,"CEFAZOLIN 20MG/ML NS (NICU)""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 1st Generation,0,0,0,19,102,4,0,125
+anti-infective,metronidazole,"METRONIDAZOLE CUSTOM IVPB < OR > 500 MG 5MG/ML""""",600679,"METRONIDAZOLE CUSTOM IVPB < OR > 500 MG 5MG/ML""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,0,9,114,1,0,0,0,124
+anti-infective,penicillins,PENICILLIN G SODIUM IV INFUSION,900202,PENICILLIN G SODIUM IV INFUSION,NULL,NULL,NULL,NULL,17,6,9,36,4,6,43,121
+anti-infective,lipopeptide,DAPTOMYCIN IVPB 351 - 500 MG,900307,DAPTOMYCIN IVPB 351 - 500 MG,NULL,NULL,NULL,NULL,0,0,0,0,119,0,0,119
+anti-infective,antiviral,STUDY REMDESIVIR (GS-5734) OR PLACEBO IN NS 100 ML IVPB,900364,STUDY REMDESIVIR (GS-5734) OR PLACEBO IN NS 100 ML IVPB,NULL,NULL,NULL,NULL,0,0,0,0,0,0,115,115
+anti-infective,sulphonamides,SULFAMETHOXAZOLE-TRIMETHOPRIM IVPB < 100 MG,900061,SULFAMETHOXAZOLE-TRIMETHOPRIM IVPB < 100 MG,NULL,NULL,NULL,NULL,21,8,27,10,35,13,0,114
+anti-infective,glycopeptide,"VANCOMYCIN 1000 MG/250 ML D5W MB PLUS""""",600017,"VANCOMYCIN 1000 MG/250 ML D5W MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,1,0,2,62,28,13,0,106
+anti-infective,cephalosporins,"CEFEPIME 40 MG/ML NS (NICU) IV SYRINGE""""",600860,"CEFEPIME 40 MG/ML NS (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,0,0,0,25,26,6,46,103
+anti-infective,cephalosporins,CEFTAZIDIME CUSTOM DOSE IV,400013,CEFTAZIDIME CUSTOM DOSE IV,NULL,NULL,NULL,NULL,0,13,0,33,6,21,28,101
+anti-infective,cephalosporins,CEFTRIAXONE PEDIATRIC IVPB,400054,CEFTRIAXONE PEDIATRIC IVPB,NULL,NULL,NULL,NULL,0,1,3,1,46,29,10,90
+anti-infective,antifungals,AMPHOTERICIN B LIPOSOME (AMBISOME) IVPB,400085,AMPHOTERICIN B LIPOSOME (AMBISOME) IVPB,NULL,NULL,NULL,NULL,0,20,1,2,62,1,0,86
+anti-infective,siderophores,CEFIDEROCOL IVPB,900378,CEFIDEROCOL IVPB,NULL,NULL,NULL,NULL,0,0,0,0,0,0,86,86
+anti-infective,glycopeptide,"VANCOMYCIN 500MG/NS 100ML MB PLUS""""",601047,"VANCOMYCIN 500MG/NS 100ML MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Agents - Misc.,0,0,0,0,9,49,15,73
+anti-infective,lincosamides,"CLINDAMYCIN 6MG/ML NS (NICU)""""",600267,"CLINDAMYCIN 6MG/ML NS (NICU)""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Lincosamides,0,0,0,18,20,0,29,67
+anti-infective,aminoglycosides,"GENTAMICIN IN SALINE 1-0.9 MG/ML-% IV SOLN""""",15908,"GENTAMICIN IN SALINE 1-0.9 MG/ML-% IV SOLN""""",Gentamicin in Saline,Anti-Infective Agents,Aminoglycosides,Aminoglycosides,0,0,0,0,34,9,20,63
+anti-infective,fluoroquinolones,"LEVOFLOXACIN 5 MG/ML D5W IV SYRINGE (NICU)""""",600810,"LEVOFLOXACIN 5 MG/ML D5W IV SYRINGE (NICU)""""",NULL,Anti-Infective Agents,Fluoroquinolones,Fluoroquinolones,0,0,7,0,30,20,0,57
+anti-infective,lincosamides,"CLINDAMYCIN 900MG/50ML D5W""""",600330,"CLINDAMYCIN 900MG/50ML D5W""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Lincosamides,0,9,7,14,7,0,12,49
+anti-infective,cephalosporins,"CEFOXITIN 40MG/ML NS (NICU)""""",600257,"CEFOXITIN 40MG/ML NS (NICU)""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 2nd Generation,0,0,0,0,45,0,0,45
+anti-infective,cephalosporins,"CEFUROXIME 0.75 G/D5W 100 ML MB PLUS""""",600018,"CEFUROXIME 0.75 G/D5W 100 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 2nd Generation,27,0,15,0,0,0,0,42
+anti-infective,aminoglycosides,STREPTOMYCIN IVPB,900134,STREPTOMYCIN IVPB,NULL,NULL,NULL,NULL,40,1,0,0,0,0,0,41
+anti-infective,penicillins,PIPERACIL-TAZ PEDIATRIC IVPB,900566,PIPERACIL-TAZ PEDIATRIC IVPB,NULL,NULL,NULL,NULL,15,0,1,0,20,4,0,40
+anti-infective,fluoroquinolones,LEVOFLOXACIN IN NS IVPB,900155,LEVOFLOXACIN IN NS IVPB,NULL,NULL,NULL,NULL,0,11,4,0,5,18,0,38
+anti-infective,oxazolidinones,"LINEZOLID 2 MG/ML (NICU) IV SYRINGE""""",600481,"LINEZOLID 2 MG/ML (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Oxazolidinones,0,0,0,0,0,35,0,35
+anti-infective,cephalosporins,"CEFTAROLINE FOSAMIL 400MG/NS 250 ML MB PLUS""""",600686,"CEFTAROLINE FOSAMIL 400MG/NS 250 ML MB PLUS""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 5th Generation,0,0,22,12,0,0,0,34
+anti-infective,cephalosporins,CEFOXITIN > 2 G IVPB,900233,CEFOXITIN > 2 G IVPB,NULL,NULL,NULL,NULL,0,0,0,7,0,27,0,34
+anti-infective,fluoroquinolones,"PEDIATRIC LEVOFLOXACIN 5 MG/ML D5W IVPB""""",600883,"PEDIATRIC LEVOFLOXACIN 5 MG/ML D5W IVPB""""",NULL,Anti-Infective Agents,Fluoroquinolones,Fluoroquinolones,0,0,0,25,8,0,0,33
+anti-infective,carbapenems,MEROPENEM-VABORBACTAM IVPB,900317,MEROPENEM-VABORBACTAM IVPB,NULL,NULL,NULL,NULL,0,0,0,0,33,0,0,33
+anti-infective,fluoroquinolones,"MOXIFLOXACIN HCL 400 MG/250ML IV SOLN""""",128685,"MOXIFLOXACIN HCL 400 MG/250ML IV SOLN""""",Moxifloxacin HCl,Anti-Infective Agents,Fluoroquinolones,Fluoroquinolones,0,0,0,0,18,13,0,31
+anti-infective,cephalosporins,"CEFTRIAXONE SODIUM IN DEXTROSE 20 MG/ML IV SOLN""""",9492,"CEFTRIAXONE SODIUM IN DEXTROSE 20 MG/ML IV SOLN""""",cefTRIAXone Sodium in Dextrose,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,7,7,4,5,0,3,3,29
+anti-infective,carbapenems,MEROPENEM PEDIATRIC IVPB,900565,MEROPENEM PEDIATRIC IVPB,NULL,NULL,NULL,NULL,2,3,1,9,8,0,6,29
+anti-infective,cephalosporins,"CEFTAZIDIME SODIUM IN DEXTROSE 1 GM/50ML IV SOLN""""",12950,"CEFTAZIDIME SODIUM IN DEXTROSE 1 GM/50ML IV SOLN""""",cefTAZidime Sodium in Dextrose,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,0,0,0,0,29,0,0,29
+anti-infective,sulphonamides,"SULFAMETHOXAZOLE-TMP 0.64MG/ML D5W (NICU) IV SYRINGE""""",600329,"SULFAMETHOXAZOLE-TMP 0.64MG/ML D5W (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Anti-infective Misc. - Combinations,0,0,0,14,0,0,14,28
+anti-infective,antimycobacterial agents,ISONIAZID IVPB,900035,ISONIAZID IVPB,NULL,NULL,NULL,NULL,21,1,4,1,0,0,0,27
+anti-infective,cephalosporins,"CEFOTAXIME 50MG/ML NS (NICU) IV SYRINGE""""",600280,"CEFOTAXIME 50MG/ML NS (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,1,5,19,0,0,0,0,25
+anti-infective,aminoglycosides,TOBRAMYCIN PEDIATRIC IVPB,900571,TOBRAMYCIN PEDIATRIC IVPB,NULL,Anti-Infective Agents,Aminoglycosides,Aminoglycosides,0,0,2,9,0,10,0,21
+anti-infective,cephalosporins,CEFUROXIME IVPB,400109,CEFUROXIME IVPB,NULL,NULL,NULL,NULL,0,0,0,18,1,0,0,19
+anti-infective,carbapenems,ERTAPENEM IVPB FOR DESENSITIZATION,400147,ERTAPENEM IVPB FOR DESENSITIZATION,NULL,NULL,NULL,NULL,0,0,0,0,19,0,0,19
+anti-infective,penicillins,PIPERACILLIN-TAZ 1-1000 MG IVPB,900161,PIPERACILLIN-TAZ 1-1000 MG IVPB,NULL,NULL,NULL,NULL,16,0,0,0,0,0,0,16
+anti-infective,penicillins,PIPERACILLIN-TAZ 4.5 G IVPB IN D5W,900285,PIPERACILLIN-TAZ 4.5 G IVPB IN D5W,NULL,NULL,NULL,NULL,0,0,0,6,2,8,0,16
+anti-infective,lipopeptide,"DAPTOMYCIN 500MG/NS 50ML MB PLUS""""",600543,"DAPTOMYCIN 500MG/NS 50ML MB PLUS""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Cyclic Lipopeptides,0,0,0,14,0,0,0,14
+anti-infective,antifungals,AMPHOTERICIN B IV SYRINGE (NICU),900005,AMPHOTERICIN B IV SYRINGE (NICU),NULL,NULL,NULL,NULL,0,0,0,0,0,14,0,14
+anti-infective,antiviral,"GANCICLOVIR 5 MG/ML NS (NICU) IV SYRINGE""""",600925,"GANCICLOVIR 5 MG/ML NS (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Antiviral,CMV Agents,0,0,0,0,0,14,0,14
+anti-infective,antifungals,MICAFUNGIN SODIUM IVPB,900044,MICAFUNGIN SODIUM IVPB,NULL,NULL,NULL,NULL,8,5,0,0,0,0,0,13
+anti-infective,antimycobacterial agents,"RIFAMPIN 3MG/ML D5W (NICU)""""",600286,"RIFAMPIN 3MG/ML D5W (NICU)""""",NULL,Anti-Infective Agents,Antimycobacterial Agents,Antimycobacterial Agents,0,0,0,0,0,13,0,13
+anti-infective,lincosamides,"CLINDAMYCIN 600MG/50ML D5W""""",600320,"CLINDAMYCIN 600MG/50ML D5W""""",NULL,Anti-Infective Agents,Misc. Antiinfectives,Lincosamides,3,4,4,0,0,0,0,11
+anti-infective,penicillins,"OXACILLIN 40MG/ML NS (NICU) IV SYRINGE""""",600276,"OXACILLIN 40MG/ML NS (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Penicillins,Penicillinase-Resistant Penicillins,0,0,0,0,11,0,0,11
+anti-infective,aminoglycosides,"GENTAMICIN IN SALINE 1.6-0.9 MG/ML-% IV SOLN""""",15911,"GENTAMICIN IN SALINE 1.6-0.9 MG/ML-% IV SOLN""""",Gentamicin in Saline,Anti-Infective Agents,Aminoglycosides,Aminoglycosides,0,0,0,0,0,0,11,11
+anti-infective,penicillins,NAFCILLIN IVPB CUSTOM >1 G,900046,NAFCILLIN IVPB CUSTOM >1 G,NULL,NULL,NULL,NULL,1,0,6,0,0,0,0,7
+anti-infective,aminoglycosides,AMIKACIN IVPB HIGH DOSE,900210,AMIKACIN IVPB HIGH DOSE,NULL,NULL,NULL,NULL,0,4,0,0,2,0,1,7
+anti-infective,antiviral,REMDESIVIR IVPB- EXPANDED ACCESS,900375,REMDESIVIR IVPB- EXPANDED ACCESS,NULL,NULL,NULL,NULL,0,0,0,0,0,0,6,6
+anti-infective,antiviral,"ACYCLOVIR SODIUM 50 MG/ML IV SOLN""""",23128,"ACYCLOVIR SODIUM 50 MG/ML IV SOLN""""",Acyclovir Sodium,Anti-Infective Agents,Antiviral,Herpes Agents,0,3,0,0,2,0,0,5
+anti-infective,cephalosporins,"CEFOXITIN 1 G/NS 100 ML MB PLUS-OR ONLY""""",600367,"CEFOXITIN 1 G/NS 100 ML MB PLUS-OR ONLY""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 2nd Generation,2,2,0,0,0,0,0,4
+anti-infective,glycopeptide,VANCOMYCIN PULSE DOSING,600530,VANCOMYCIN PULSE DOSING,NULL,Anti-Infective Agents,NULL,NULL,0,0,2,0,0,2,0,4
+anti-infective,cephalosporins,"CEFTRIAXONE 40MG/ML NS (NICU)""""",600254,"CEFTRIAXONE 40MG/ML NS (NICU)""""",NULL,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,0,0,0,2,1,0,1,4
+anti-infective,penicillins,AMPICILLIN 2 G IV,400002,AMPICILLIN 2 G IV,NULL,NULL,NULL,NULL,0,0,0,2,1,1,0,4
+anti-infective,penicillins,"PIPERACILLIN-TAZOBACTAM IN DEX 3-0.375 GM/50ML IV SOLN""""",34524,"PIPERACILLIN-TAZOBACTAM IN DEX 3-0.375 GM/50ML IV SOLN""""",Piperacillin-Tazobactam in Dex,Anti-Infective Agents,Penicillins,Penicillin Combinations,3,0,0,0,0,0,0,3
+anti-infective,penicillins,"PIPERACILLIN-TAZOBACTAM IN DEX 2-0.25 GM/50ML IV SOLN""""",34523,"PIPERACILLIN-TAZOBACTAM IN DEX 2-0.25 GM/50ML IV SOLN""""",Piperacillin-Tazobactam in Dex,Anti-Infective Agents,Penicillins,Penicillin Combinations,3,0,0,0,0,0,0,3
+anti-infective,cephalosporins,"CEFOTAXIME SODIUM IN D5W 2 GM/50ML IV SOLN""""",9457,"CEFOTAXIME SODIUM IN D5W 2 GM/50ML IV SOLN""""",Cefotaxime Sodium in D5W,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,0,3,0,0,0,0,0,3
+anti-infective,cephalosporins,"CEFOTAXIME SODIUM IN D5W 1 GM/50ML IV SOLN""""",9456,"CEFOTAXIME SODIUM IN D5W 1 GM/50ML IV SOLN""""",Cefotaxime Sodium in D5W,Anti-Infective Agents,Cephalosporins,Cephalosporins - 3rd Generation,0,2,0,1,0,0,0,3
+anti-infective,cephalosporins,"CEFAZOLIN IN D5W 2 GM/100ML IV SOLN""""",132858,"CEFAZOLIN IN D5W 2 GM/100ML IV SOLN""""",CeFAZolin in D5W,Anti-Infective Agents,Cephalosporins,Cephalosporins - 1st Generation,0,0,1,0,2,0,0,3
+anti-infective,cephalosporins,"CEFEPIME 40 MG/ML NS (NICU) - DO NOT USE""""",400270,"CEFEPIME 40 MG/ML NS (NICU) - DO NOT USE""""",NULL,NULL,NULL,NULL,0,0,0,3,0,0,0,3
+anti-infective,antifungals,"AMPHOTERICIN B LIPOSOME (AMBISOME) 0.5 MG/ML (NICU)""""",110093,"AMPHOTERICIN B LIPOSOME (AMBISOME) 0.5 MG/ML (NICU)""""",NULL,Anti-Infective Agents,Antifungals,Antifungals,0,0,0,0,0,3,0,3
+anti-infective,cephalosporins,CEFTAZIDIME 2 G IV,400012,CEFTAZIDIME 2 G IV,NULL,NULL,NULL,NULL,0,0,0,0,0,3,0,3
+anti-infective,antiviral,CIDOFOVIR IVPB,400112,CIDOFOVIR IVPB,NULL,NULL,NULL,NULL,2,0,0,0,0,0,0,2
+anti-infective,penicillins,"OXACILLIN 2 G/D5W 100ML MB PLUS""""",600041,"OXACILLIN 2 G/D5W 100ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillinase-Resistant Penicillins,1,1,0,0,0,0,0,2
+anti-infective,penicillins,AMPICILLIN CUSTOM DOSE IV,400004,AMPICILLIN CUSTOM DOSE IV,NULL,NULL,NULL,NULL,0,2,0,0,0,0,0,2
+anti-infective,glycopeptide,VANCOMYCIN IV 1.5 G IN D5W 500 ML,900242,VANCOMYCIN IV 1.5 G IN D5W 500 ML,NULL,NULL,NULL,NULL,0,0,2,0,0,0,0,2
+anti-infective,penicillins,"AMPICILLIN-SULBACTAM 30MG/ML NS (NICU) IV SYRINGE""""",600281,"AMPICILLIN-SULBACTAM 30MG/ML NS (NICU) IV SYRINGE""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,0,0,0,2,0,0,0,2
+anti-infective,penicillins,"PENICILLIN G 2 MU/NS 50ML-OR ONLY""""",600368,"PENICILLIN G 2 MU/NS 50ML-OR ONLY""""",NULL,Anti-Infective Agents,Penicillins,Natural Penicillins,1,0,0,0,0,0,0,1
+anti-infective,cephalosporins,"CEFOXITIN SODIUM IN DEXTROSE 1-2 GM/50ML IV SOLN""""",103327,"CEFOXITIN SODIUM IN DEXTROSE 1-2 GM/50ML IV SOLN""""",CefOXitin Sodium in Dextrose,Anti-Infective Agents,Cephalosporins,Cephalosporins - 2nd Generation,1,0,0,0,0,0,0,1
+anti-infective,penicillins,OXACILLIN IVPB CUSTOM,400284,OXACILLIN IVPB CUSTOM,NULL,NULL,NULL,NULL,1,0,0,0,0,0,0,1
+anti-infective,cephalosporins,CEFTAZIDIME 1 G IV,400011,CEFTAZIDIME 1 G IV,NULL,NULL,NULL,NULL,0,1,0,0,0,0,0,1
+anti-infective,glycopeptide,"VANCOMYCIN HCL IN DEXTROSE 750-5 MG/150ML-% IV SOLN""""",107276,"VANCOMYCIN HCL IN DEXTROSE 750-5 MG/150ML-% IV SOLN""""",Vancomycin HCl-Dextrose,Anti-Infective Agents,Misc. Antiinfectives,Glycopeptides,0,1,0,0,0,0,0,1
+anti-infective,penicillins,"PIPERACIL-TAZO 4.5GM/50 ML D5W MB PLUS""""",600510,"PIPERACIL-TAZO 4.5GM/50 ML D5W MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillin Combinations,0,0,1,0,0,0,0,1
+anti-infective,cephalosporins,CEFTOLOZANE-TAZOBACTAM 1.5 (1-0.5) G IV SOLR,126371,CEFTOLOZANE-TAZOBACTAM 1.5 (1-0.5) G IV SOLR,Ceftolozane-Tazobactam,Anti-Infective Agents,Cephalosporins,Cephalosporin Combinations,0,0,0,1,0,0,0,1
+anti-infective,penicillins,"OXACILLIN 1 G/D5W 100 ML MB PLUS""""",600042,"OXACILLIN 1 G/D5W 100 ML MB PLUS""""",NULL,Anti-Infective Agents,Penicillins,Penicillinase-Resistant Penicillins,0,0,0,1,0,0,0,1
+anti-infective,penicillins,AMPICILLIN 1 G IV,200002,AMPICILLIN 1 G IV,NULL,NULL,NULL,NULL,0,0,0,1,0,0,0,1
+anti-infective,antiviral,"PERAMIVIR 200 MG/20ML IV SOLN""""",126226,"PERAMIVIR 200 MG/20ML IV SOLN""""",Peramivir,Anti-Infective Agents,Antiviral,Influenza Agents,0,0,0,0,1,0,0,1
+anti-infective,antifungals,"FLUCONAZOLE IN SODIUM CHLORIDE 100-0.9 MG/50ML-% IV SOLN""""",101426,"FLUCONAZOLE IN SODIUM CHLORIDE 100-0.9 MG/50ML-% IV SOLN""""",Fluconazole in Sodium Chloride,Anti-Infective Agents,Antifungals,Imidazole-Related Antifungals,0,0,0,0,1,0,0,1
+anti-infective,lipopeptide,"DAPTOMYCIN IVPB </= 350 MG""""",900306,"DAPTOMYCIN IVPB </= 350 MG""""",NULL,NULL,NULL,NULL,0,0,0,0,1,0,0,1
+anti-infective,glycopeptide,"VANCOMYCIN HCL IN DEXTROSE 1.5-5 GM/500ML-% IV SOLN""""",134788,"VANCOMYCIN HCL IN DEXTROSE 1.5-5 GM/500ML-% IV SOLN""""",Vancomycin HCl-Dextrose,Anti-Infective Agents,Misc. Antiinfectives,Glycopeptides,0,0,0,0,1,0,0,1
+anti-infective,glycopeptide,"VANCOMYCIN HCL IN DEXTROSE 1.75-5 GM/500ML-% IV SOLN""""",134811,"VANCOMYCIN HCL IN DEXTROSE 1.75-5 GM/500ML-% IV SOLN""""",Vancomycin HCl-Dextrose,Anti-Infective Agents,Misc. Antiinfectives,Glycopeptides,0,0,0,0,0,1,0,1
+cardiac,NULL,NICARDIPINE INFUSION,400053,NICARDIPINE INFUSION,NULL,NULL,NULL,NULL,4835,6544,8020,10716,10751,11721,5568,58155
+cardiac,NULL,"LABETALOL HCL 5 MG/ML IV SOLN""""",10372,"LABETALOL HCL 5 MG/ML IV SOLN""""",Labetalol HCl,Cardiovascular Agents,Beta Blockers,Alpha-Beta Blockers,5597,8521,9106,9095,9716,9900,5549,57484
+cardiac,NULL,"METOPROLOL TARTRATE 5 MG/5ML IV SOLN""""",92079,"METOPROLOL TARTRATE 5 MG/5ML IV SOLN""""",Metoprolol Tartrate,Cardiovascular Agents,Beta Blockers,Beta Blockers Cardio-Selective,6930,8280,6956,5538,6370,5405,2553,42032
+cardiac,NULL,"NITROGLYCERIN IN D5W 200-5 MCG/ML-% IV SOLN""""",15859,"NITROGLYCERIN IN D5W 200-5 MCG/ML-% IV SOLN""""",Nitroglycerin in D5W,Cardiovascular Agents,Antianginal Agents,Nitrates,2500,3194,3572,4867,6421,7153,2298,30005
+cardiac,NULL,"AMIODARONE HCL IN DEXTROSE 360-4.14 MG/200ML-% IV SOLN""""",108620,"AMIODARONE HCL IN DEXTROSE 360-4.14 MG/200ML-% IV SOLN""""",Amiodarone HCl in Dextrose,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type III,1247,2353,2960,3631,3732,4196,1987,20106
+cardiac,NULL,"ESMOLOL HCL-SODIUM CHLORIDE 2500 MG/250ML IV SOLN""""",29805,"ESMOLOL HCL-SODIUM CHLORIDE 2500 MG/250ML IV SOLN""""",Esmolol HCl-Sodium Chloride,Cardiovascular Agents,Beta Blockers,Beta Blockers Cardio-Selective,1245,1438,982,1252,1677,1841,461,8896
+cardiac,NULL,DILTIAZEM IV INFUSION,200006,DILTIAZEM IV INFUSION,NULL,NULL,NULL,NULL,782,659,746,832,1151,1226,397,5793
+cardiac,NULL,AMIODARONE IV BOLUS 300 MG,200000,AMIODARONE IV BOLUS 300 MG,NULL,NULL,NULL,NULL,303,408,521,646,841,917,89,3725
+cardiac,NULL,"DILTIAZEM HCL 50 MG/10ML IV SOLN""""",97254,"DILTIAZEM HCL 50 MG/10ML IV SOLN""""",dilTIAZem HCl,Cardiovascular Agents,Calcium Blockers,Calcium Channel Blockers,443,452,414,446,327,492,197,2771
+cardiac,NULL,"LABETALOL 1 MG/ML INFUSION""""",400177,"LABETALOL 1 MG/ML INFUSION""""",NULL,NULL,NULL,NULL,655,605,253,258,312,148,104,2335
+cardiac,NULL,DIPYRIDAMOLE INFUSION (2A-STRESS),900133,DIPYRIDAMOLE INFUSION (2A-STRESS),NULL,NULL,NULL,NULL,1367,5,0,0,0,0,0,1372
+cardiac,NULL,"VERAPAMIL HCL 2.5 MG/ML IV SOLN""""",8527,"VERAPAMIL HCL 2.5 MG/ML IV SOLN""""",Verapamil HCl,Cardiovascular Agents,Calcium Blockers,Calcium Channel Blockers,297,324,240,214,11,16,14,1116
+cardiac,NULL,"AMIODARONE HCL 150 MG/3ML IV SOLN""""",93084,"AMIODARONE HCL 150 MG/3ML IV SOLN""""",Amiodarone HCl,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type III,75,132,106,122,167,146,71,819
+cardiac,NULL,"NITROPRUSSIDE 50 MG/250ML INFUSION""""",900048,"NITROPRUSSIDE 50 MG/250ML INFUSION""""",NULL,NULL,NULL,NULL,358,211,81,21,2,0,0,673
+cardiac,NULL,AMIODARONE IV INFUSION,200001,AMIODARONE IV INFUSION,NULL,NULL,NULL,NULL,357,0,0,0,181,0,0,538
+cardiac,NULL,"PROPRANOLOL HCL 1 MG/ML IV SOLN""""",29335,"PROPRANOLOL HCL 1 MG/ML IV SOLN""""",Propranolol HCl,Cardiovascular Agents,Beta Blockers,Beta Blockers Non-Selective,95,31,64,70,100,77,44,481
+cardiac,NULL,"ESMOLOL HCL-SODIUM CHLORIDE 2000 MG/100ML IV SOLN""""",35639,"ESMOLOL HCL-SODIUM CHLORIDE 2000 MG/100ML IV SOLN""""",Esmolol HCl-Sodium Chloride,Cardiovascular Agents,Beta Blockers,Beta Blockers Cardio-Selective,23,15,3,107,87,79,81,395
+cardiac,NULL,"NITROPRUSSIDE SODIUM-NACL 50-0.9 MG/100ML-% IV SOLN""""",135444,"NITROPRUSSIDE SODIUM-NACL 50-0.9 MG/100ML-% IV SOLN""""",Nitroprusside Sodium-NaCl,Cardiovascular Agents,Antihypertensive,Vasodilators,0,0,0,108,159,83,45,395
+cardiac,NULL,MILRINONE DRIP (NICU),600429,MILRINONE DRIP (NICU),NULL,NULL,NULL,NULL,44,57,28,116,42,66,34,387
+cardiac,NULL,"AMIODARONE HCL IN DEXTROSE 150-4.21 MG/100ML-% IV SOLN""""",108619,"AMIODARONE HCL IN DEXTROSE 150-4.21 MG/100ML-% IV SOLN""""",Amiodarone HCl in Dextrose,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type III,0,2,0,1,0,0,296,299
+cardiac,NULL,ISOPROTERENOL INFUSION,400174,ISOPROTERENOL INFUSION,NULL,NULL,NULL,NULL,69,67,36,11,40,41,31,295
+cardiac,NULL,"DILTIAZEM HCL 25 MG/5ML IV SOLN""""",97252,"DILTIAZEM HCL 25 MG/5ML IV SOLN""""",dilTIAZem HCl,Cardiovascular Agents,Calcium Blockers,Calcium Channel Blockers,0,10,0,5,173,15,4,207
+cardiac,NULL,"NICARDIPINE HCL 2.5 MG/ML IV SOLN""""",12370,"NICARDIPINE HCL 2.5 MG/ML IV SOLN""""",niCARdipine HCl,Cardiovascular Agents,Calcium Blockers,Calcium Channel Blockers,37,17,10,23,36,16,0,139
+cardiac,NULL,STUDY-ANGIOTENSIN II (LJ501-EAP) INFUSION,900281,STUDY-ANGIOTENSIN II (LJ501-EAP) INFUSION,NULL,NULL,NULL,NULL,0,0,0,41,38,0,0,79
+cardiac,NULL,"ESMOLOL HCL 10 MG/ML IV SOLN""""",9957,"ESMOLOL HCL 10 MG/ML IV SOLN""""",Esmolol HCl,Cardiovascular Agents,Beta Blockers,Beta Blockers Cardio-Selective,32,22,22,0,0,0,0,76
+cardiac,NULL,"NITROGLYCERIN 5 MG/ML IV SOLN""""",5599,"NITROGLYCERIN 5 MG/ML IV SOLN""""",Nitroglycerin,Cardiovascular Agents,Antianginal Agents,Nitrates,5,7,5,12,10,21,6,66
+cardiac,NULL,"HYDRALAZINE 1MG/ML NS (NICU)""""",600331,"HYDRALAZINE 1MG/ML NS (NICU)""""",NULL,Cardiovascular Agents,Antihypertensive,Vasodilators,0,0,0,20,8,15,0,43
+cardiac,NULL,"MILRINONE LACTATE 10 MG/10ML IV SOLN""""",121718,"MILRINONE LACTATE 10 MG/10ML IV SOLN""""",Milrinone Lactate,Cardiovascular Agents,Cardiotonics,Phosphodiesterase Inhibitors,18,12,1,4,3,3,1,42
+cardiac,NULL,"ESMOLOL HCL 100 MG/10ML IV SOLN""""",82085,"ESMOLOL HCL 100 MG/10ML IV SOLN""""",Esmolol HCl,Cardiovascular Agents,Beta Blockers,Beta Blockers Cardio-Selective,0,1,0,12,9,12,3,37
+cardiac,NULL,EPOPROSTENOL IV INFUSION,400146,EPOPROSTENOL IV INFUSION,NULL,NULL,NULL,NULL,5,2,0,17,0,1,0,25
+cardiac,NULL,"DIGOXIN 25 MCG/ML (NICU) IV SYRINGE""""",600992,"DIGOXIN 25 MCG/ML (NICU) IV SYRINGE""""",NULL,Cardiovascular Agents,Cardiotonics,Cardiac Glycosides,0,0,0,22,0,0,0,22
+cardiac,NULL,"ESMOLOL DRIP (NICU) 5 MG/ML IV SYRINGE""""",600427,"ESMOLOL DRIP (NICU) 5 MG/ML IV SYRINGE""""",NULL,NULL,NULL,NULL,0,0,1,0,12,0,0,13
+cardiac,NULL,"METOPROLOL TARTRATE 1 MG/ML IV SOLN""""",5007,"METOPROLOL TARTRATE 1 MG/ML IV SOLN""""",Metoprolol Tartrate,Cardiovascular Agents,Beta Blockers,Beta Blockers Cardio-Selective,3,0,4,0,0,0,0,7
+cardiac,NULL,"NITROGLYCERIN IN D5W 100-5 MCG/ML-% IV SOLN""""",15858,"NITROGLYCERIN IN D5W 100-5 MCG/ML-% IV SOLN""""",Nitroglycerin in D5W,Cardiovascular Agents,Antianginal Agents,Nitrates,2,2,0,2,0,0,0,6
+cardiac,NULL,"HYDRALAZINE HCL 20 MG/ML IJ SOLN""""",3697,"HYDRALAZINE HCL 20 MG/ML IJ SOLN""""",hydrALAZINE HCl,Cardiovascular Agents,Antihypertensive,Vasodilators,0,0,1,2,1,0,0,4
+cardiac,NULL,"NITROGLYCERIN 200 MCG/ML D5W 5 ML IV SYRINGE ANGIO""""",600811,"NITROGLYCERIN 200 MCG/ML D5W 5 ML IV SYRINGE ANGIO""""",NULL,Cardiovascular Agents,Antianginal Agents,Nitrates,0,0,0,0,0,1,3,4
+cardiac,NULL,"NITROPRUSSIDE SODIUM 25 MG/ML IV SOLN""""",18908,"NITROPRUSSIDE SODIUM 25 MG/ML IV SOLN""""",Nitroprusside Sodium,Cardiovascular Agents,Antihypertensive,Vasodilators,2,0,0,0,0,0,0,2
+cardiac,NULL,"MILRINONE IN DEXTROSE 200-5 MCG/ML-% IV SOLN""""",32950,"MILRINONE IN DEXTROSE 200-5 MCG/ML-% IV SOLN""""",Milrinone Lactate in Dextrose,Cardiovascular Agents,Cardiotonics,Phosphodiesterase Inhibitors,2,0,0,0,0,0,0,2
+cardiac,NULL,SILDENAFIL CITRATE DRIP (NICU) IV SYRINGE,900323,SILDENAFIL CITRATE DRIP (NICU) IV SYRINGE,NULL,NULL,NULL,NULL,0,0,0,0,0,2,0,2
+cardiac,NULL,"AMIODARONE 2 MG/ML D5W (NICU) IV SYRINGE""""",600928,"AMIODARONE 2 MG/ML D5W (NICU) IV SYRINGE""""",Amiodarone HCl,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type III,0,0,0,0,0,2,0,2
+cardiac,NULL,"AMIODARONE HCL IN DEXTROSE 150-5 MG/100ML-% IV SOLN""""",132994,"AMIODARONE HCL IN DEXTROSE 150-5 MG/100ML-% IV SOLN""""",Amiodarone HCl in Dextrose,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type III,0,0,0,1,0,0,0,1
+cardiac,NULL,"DILTIAZEM HCL 125 MG/25ML IV SOLN""""",97253,"DILTIAZEM HCL 125 MG/25ML IV SOLN""""",dilTIAZem HCl,Cardiovascular Agents,Calcium Blockers,Calcium Channel Blockers,0,0,0,0,1,0,0,1
+cardiac,NULL,"DIGOXIN 0.25 MG/ML IJ SOLN""""",2442,"DIGOXIN 0.25 MG/ML IJ SOLN""""",Digoxin,Cardiovascular Agents,Cardiotonics,Cardiac Glycosides,0,0,0,0,1,0,0,1
+cardiac,NULL,"NITROGLYCERIN 1 MG/ML IV SOLN""""",123121,"NITROGLYCERIN 1 MG/ML IV SOLN""""",Nitroglycerin,Cardiovascular Agents,Antianginal Agents,Nitrates,0,0,0,0,0,0,1,1
+contrast,NULL,"IOHEXOL 350 MG/ML IV SOLN""""",10323,"IOHEXOL 350 MG/ML IV SOLN""""",Iohexol,Miscellaneous Products,Diagnostic Products,Radiographic Contrast Media,15279,15316,17226,19038,19958,21197,9846,117860
+contrast,NULL,"IOHEXOL 300 MG/ML IJ SOLN""""",10322,"IOHEXOL 300 MG/ML IJ SOLN""""",Iohexol,Miscellaneous Products,Diagnostic Products,Radiographic Contrast Media,0,1,2,6,0,0,1,10
+contrast,NULL,"IODIXANOL 270 MG/ML IV SOLN""""",17594,"IODIXANOL 270 MG/ML IV SOLN""""",Iodixanol,Miscellaneous Products,Diagnostic Products,Radiographic Contrast Media,0,0,1,0,1,0,0,2
+crystalloid,NULL,NORMAL SALINE FLUSH 0.9 % IV SOLN,116540,NORMAL SALINE FLUSH 0.9 % IV SOLN,Sodium Chloride Flush,Nutritional Products,Minerals & Electrolytes,Sodium,62092,154546,199284,239506,289013,302037,120089,1366567
+crystalloid,NULL,SODIUM CHLORIDE 0.9 % IV SOLN,27838,SODIUM CHLORIDE 0.9 % IV SOLN,Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Sodium,156600,164993,164861,175542,144780,118447,45803,971026
+crystalloid,NULL,LACTATED RINGERS IV SOLN,4318,LACTATED RINGERS IV SOLN,Lactated Ringers,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,34004,35541,40702,43496,57421,61154,29546,301864
+crystalloid,NULL,LACTATED RINGERS IV BOLUS ML,400296,LACTATED RINGERS IV BOLUS ML,Lactated Ringer's Solution,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,8461,10655,13361,19450,39067,54404,30259,175657
+crystalloid,NULL,DEXTROSE 50 % IV SOLN,2365,DEXTROSE 50 % IV SOLN,Dextrose,Nutritional Products,Nutrients,Carbohydrates,17095,18537,21427,26544,33982,37500,18215,173300
+crystalloid,NULL,SODIUM CHLORIDE 0.9 % IV BOLUS,400291,SODIUM CHLORIDE 0.9 % IV BOLUS,Sodium Chloride IV SOLN,Nutritional Products,Minerals & Electrolytes,Sodium,22263,20757,19483,21473,31077,29714,9648,154415
+crystalloid,NULL,DEXTROSE 5 % IV SOLN,2364,DEXTROSE 5 % IV SOLN,Dextrose,Nutritional Products,Nutrients,Carbohydrates,18493,16646,15917,19075,22317,20722,8791,121961
+crystalloid,NULL,DEXTROSE-NACL 5-0.45 % IV SOLN,15861,DEXTROSE-NACL 5-0.45 % IV SOLN,Dextrose-Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,16472,14873,16325,21050,13089,11638,4097,97544
+crystalloid,NULL,DEXTROSE-NACL 5-0.9 % IV SOLN,15882,DEXTROSE-NACL 5-0.9 % IV SOLN,Dextrose-Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,7035,5422,7199,8733,7927,7719,2867,46902
+crystalloid,NULL,DEXTROSE IN LACTATED RINGERS 5 % IV SOLN,9788,DEXTROSE IN LACTATED RINGERS 5 % IV SOLN,Dextrose in Lactated Ringers,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,1923,1516,1750,2705,8200,10471,5219,31784
+crystalloid,NULL,DEXTROSE 10 % IV SOLN,2357,DEXTROSE 10 % IV SOLN,Dextrose,Nutritional Products,Nutrients,Carbohydrates,2219,2702,3436,3997,5773,6395,3216,27738
+crystalloid,NULL,"SODIUM CHLORIDE 4 MEQ/ML IV SOLN""""",7322,"SODIUM CHLORIDE 4 MEQ/ML IV SOLN""""",Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Sodium,2491,3305,3776,3917,2397,4195,2278,22359
+crystalloid,NULL,PLASMA-LYTE A IV SOLN,6331,PLASMA-LYTE A IV SOLN,Electrolyte-A,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,0,1615,4053,3151,2865,4407,1983,18074
+crystalloid,NULL,PLASMA-LYTE A IV BOLUS,600722,PLASMA-LYTE A IV BOLUS,Electrolyte-A Solution,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,0,32,2550,3602,3488,4528,2199,16399
+crystalloid,NULL,SODIUM CHLORIDE 0.45 % IV SOLN,7318,SODIUM CHLORIDE 0.45 % IV SOLN,Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Sodium,3047,2840,2232,2887,2380,1578,653,15617
+crystalloid,NULL,SODIUM CHLORIDE 3 % IV SOLN,7321,SODIUM CHLORIDE 3 % IV SOLN,Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Sodium,703,1107,1326,1265,2033,2860,1504,10798
+crystalloid,NULL,NICU VARIABLE DEXTROSE INFUSION,400262,NICU VARIABLE DEXTROSE INFUSION,NULL,NULL,NULL,NULL,1020,1650,1956,1916,1564,1800,751,10657
+crystalloid,NULL,SODIUM BICARBONATE DRIP,410037,SODIUM BICARBONATE DRIP,NULL,NULL,NULL,NULL,1850,1739,2016,1975,187,172,6,7945
+crystalloid,NULL,"LACTATED RINGERS IV BOLUS ML/KG""""",600858,"LACTATED RINGERS IV BOLUS ML/KG""""",Lactated Ringer's Solution,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,0,0,0,2020,2184,2616,1019,7839
+crystalloid,NULL,BANANA BAG WITH MVI IVF- PHARMACY COMPOUNDED,900152,BANANA BAG WITH MVI IVF- PHARMACY COMPOUNDED,NULL,NULL,NULL,NULL,1628,1653,1945,2,0,0,0,5228
+crystalloid,NULL,DEXTROSE 5 % FLUSH-AMPHO PANEL,600779,DEXTROSE 5 % FLUSH-AMPHO PANEL,Dextrose 5%,Nutritional Products,Nutrients,Carbohydrates,0,0,16,1244,1278,1181,720,4439
+crystalloid,NULL,DEXTROSE 5 % IV BOLUS,400293,DEXTROSE 5 % IV BOLUS,DEXTROSE 5 %,Nutritional Products,Nutrients,Carbohydrates,145,192,462,676,1050,995,466,3986
+crystalloid,NULL,"SODIUM BICARBONATE-DEXTROSE 150 MEQ/L IV SOLN""""",140418,"SODIUM BICARBONATE-DEXTROSE 150 MEQ/L IV SOLN""""",Sodium Bicarbonate-Dextrose,Nutritional Products,Minerals & Electrolytes,Bicarbonates,0,0,0,0,678,1970,855,3503
+crystalloid,NULL,DEXTROSE 10% (NICU) IV BOLUS,600457,DEXTROSE 10% (NICU) IV BOLUS,Dextrose 10,Nutritional Products,Nutrients,Carbohydrates,240,262,320,367,317,359,195,2060
+crystalloid,NULL,MANNITOL 20 % IV SOLN,4749,MANNITOL 20 % IV SOLN,Mannitol,Cardiovascular Agents,Diuretics,Osmotic Diuretics,192,336,237,253,347,440,223,2028
+crystalloid,NULL,"D10 1/2NS""""",900156,"D10 1/2NS""""",NULL,NULL,NULL,NULL,482,383,260,817,75,0,0,2017
+crystalloid,NULL,DEXTROSE 5 % AND 0.45 % NACL IV BOLUS,400295,DEXTROSE 5 % AND 0.45 % NACL IV BOLUS,DEXTROSE 5 % AND 0.45 % NACL,Nutritional Products,Nutrients,Carbohydrates,152,215,388,382,375,317,127,1956
+crystalloid,NULL,DEXTROSE-NACL 5-0.2 % IV SOLN,15863,DEXTROSE-NACL 5-0.2 % IV SOLN,Dextrose-Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,213,97,144,152,521,408,159,1694
+crystalloid,NULL,DEXTROSE-NACL 10-0.2 % IV SOLN,15865,DEXTROSE-NACL 10-0.2 % IV SOLN,Dextrose-Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,373,221,276,114,170,242,17,1413
+crystalloid,NULL,"SODIUM CHLORIDE 2.5 MEQ/ML IJ SOLN""""",7320,"SODIUM CHLORIDE 2.5 MEQ/ML IJ SOLN""""",Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Sodium,0,0,0,0,1172,0,0,1172
+crystalloid,NULL,SODIUM BICARBONATE 4.2 % IV SOLN,7306,SODIUM BICARBONATE 4.2 % IV SOLN,Sodium Bicarbonate,Nutritional Products,Minerals & Electrolytes,Bicarbonates,152,154,194,202,135,207,57,1101
+crystalloid,NULL,DEXTROSE 5 % AND 0.9 % NACL IV BOLUS,400294,DEXTROSE 5 % AND 0.9 % NACL IV BOLUS,DEXTROSE 5 % AND 0.9 % NACL IV,Nutritional Products,Nutrients,Carbohydrates,91,132,93,162,159,161,103,901
+crystalloid,NULL,SODIUM BICARBONATE 150 MEQ IN D5W 1000 ML PREMIX,600606,SODIUM BICARBONATE 150 MEQ IN D5W 1000 ML PREMIX,NULL,Nutritional Products,Minerals & Electrolytes,Bicarbonates,0,0,0,0,890,3,0,893
+crystalloid,NULL,DEXTROSE 5 % IN LACTATED RINGERS IV BOLUS,400297,DEXTROSE 5 % IN LACTATED RINGERS IV BOLUS,DEXTROSE 5 % IN LACTATED RINGERS,Nutritional Products,Nutrients,Carbohydrates,33,21,24,71,166,280,162,757
+crystalloid,NULL,SODIUM CHLORIDE 0.45 % IV BOLUS,400292,SODIUM CHLORIDE 0.45 % IV BOLUS,ODIUM CHLORIDE 0.45 % IV,Nutritional Products,Minerals & Electrolytes,Sodium,113,119,136,91,112,75,58,704
+crystalloid,NULL,DEXTROSE-NACL 5-0.225 % IV SOLN,17858,DEXTROSE-NACL 5-0.225 % IV SOLN,Dextrose-Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,0,0,0,386,314,0,0,700
+crystalloid,NULL,DEXTROSE 20 % IV SOLN,2359,DEXTROSE 20 % IV SOLN,Dextrose,Nutritional Products,Nutrients,Carbohydrates,22,30,32,119,59,70,81,413
+crystalloid,NULL,SODIUM CHLORIDE 5 % IV SOLN,7323,SODIUM CHLORIDE 5 % IV SOLN,Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Sodium,0,0,0,131,173,0,0,304
+crystalloid,NULL,BANANA BAG IVF BUILDER,900151,BANANA BAG IVF BUILDER,NULL,NULL,NULL,NULL,71,38,0,0,0,0,0,109
+crystalloid,NULL,SODIUM CHLORIDE 0.9 % IJ SOLN,7319,SODIUM CHLORIDE 0.9 % IJ SOLN,Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Sodium,0,0,0,22,36,45,0,103
+crystalloid,NULL,"DEXTROSE 8.5%/0.45% NACL""""",900234,"DEXTROSE 8.5%/0.45% NACL""""",NULL,NULL,NULL,NULL,0,74,8,2,0,0,0,84
+crystalloid,NULL,MANNITOL 25 % IV SOLN,4750,MANNITOL 25 % IV SOLN,Mannitol,Cardiovascular Agents,Diuretics,Osmotic Diuretics,41,8,7,7,3,1,2,69
+crystalloid,NULL,DEXTROSE 30% 1000 ML,900593,DEXTROSE 30% 1000 ML,NULL,NULL,NULL,NULL,0,0,0,18,0,35,0,53
+crystalloid,NULL,"DEXTROSE 250 MG/ML IV SOLN""""",2361,"DEXTROSE 250 MG/ML IV SOLN""""",Dextrose,Nutritional Products,Nutrients,Carbohydrates,6,3,6,8,9,6,4,42
+crystalloid,NULL,SODIUM CHLORIDE (PF) 0.9 % IJ SOLN,144962,SODIUM CHLORIDE (PF) 0.9 % IJ SOLN,Sodium Chloride,Nutritional Products,Minerals & Electrolytes,Sodium,0,0,0,0,0,7,16,23
+crystalloid,NULL,DEXTROSE 30% 750 ML,900216,DEXTROSE 30% 750 ML,NULL,NULL,NULL,NULL,1,0,0,10,0,0,0,11
+crystalloid,NULL,D5W 500 ML + KCL + MAGNESIUM,900019,D5W 500 ML + KCL + MAGNESIUM,NULL,NULL,NULL,NULL,9,1,0,0,0,0,0,10
+crystalloid,NULL,SODIUM TETRADECYL SULFATE 3 % IV SOLN,41793,SODIUM TETRADECYL SULFATE 3 % IV SOLN,Sodium Tetradecyl Sulfate,Miscellaneous Products,Assorted Classes,Sclerosing Agents,0,0,3,0,0,0,3,6
+crystalloid,NULL,D5W + 0.45% NACL 1000 ML + ADDITIVES,410012,D5W + 0.45% NACL 1000 ML + ADDITIVES,NULL,NULL,NULL,NULL,0,0,0,0,4,0,0,4
+crystalloid,NULL,DEXTROSE 5% IV FLUID- FOR PHARMACY ADMIXTURE DURING CRITICAL SHORTAGE,900283,DEXTROSE 5% IV FLUID- FOR PHARMACY ADMIXTURE DURING CRITICAL SHORTAGE,NULL,NULL,NULL,NULL,0,0,0,3,0,0,0,3
+crystalloid,NULL,DEXTROSE 5% FLUSH 2 ML IV SYRINGE (NICU),600456,DEXTROSE 5% FLUSH 2 ML IV SYRINGE (NICU),NULL,Nutritional Products,Nutrients,Carbohydrates,0,0,0,0,0,3,0,3
+crystalloid,NULL,BUFFERED 3 % SALINE 1000 ML,900532,BUFFERED 3 % SALINE 1000 ML,NULL,NULL,NULL,NULL,0,0,2,0,0,0,0,2
+crystalloid,NULL,PLASMA-LYTE 148 IV SOLN,6330,PLASMA-LYTE 148 IV SOLN,Electrolyte-148,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,0,0,0,2,0,0,0,2
+crystalloid,NULL,SODIUM BICARBONATE 7.5 % IV SOLN,7308,SODIUM BICARBONATE 7.5 % IV SOLN,Sodium Bicarbonate,Nutritional Products,Minerals & Electrolytes,Bicarbonates,0,0,0,1,0,0,0,1
+hypnotics,NULL,"MIDAZOLAM 50MG/NS 50ML PREMIX""""",600037,"MIDAZOLAM 50MG/NS 50ML PREMIX""""",NULL,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,10659,10093,10942,7602,10968,11339,2528,64131
+hypnotics,NULL,LORAZEPAM INFUSION,400185,LORAZEPAM INFUSION,NULL,NULL,NULL,NULL,4097,6422,6331,3811,2855,1899,713,26128
+hypnotics,NULL,MIDAZOLAM INFUSION ADULT > 50 ML,400190,MIDAZOLAM INFUSION ADULT > 50 ML,NULL,NULL,NULL,NULL,489,907,1737,1690,2354,4398,451,12026
+hypnotics,NULL,"MIDAZOLAM HCL-SODIUM CHLORIDE 50-0.8 MG/50ML-% IV SOLN""""",147993,"MIDAZOLAM HCL-SODIUM CHLORIDE 50-0.8 MG/50ML-% IV SOLN""""",Midazolam HCl-Sodium Chloride,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,0,0,0,0,0,0,1408,1408
+hypnotics,NULL,"MIDAZOLAM INFUSION 2 MG/ML- DOUBLE CONCENTRATED""""",900331,"MIDAZOLAM INFUSION 2 MG/ML- DOUBLE CONCENTRATED""""",NULL,NULL,NULL,NULL,0,0,0,0,0,119,1161,1280
+hypnotics,NULL,"MIDAZOLAM HCL-SODIUM CHLORIDE 100-0.8 MG/100ML-% IV SOLN""""",147994,"MIDAZOLAM HCL-SODIUM CHLORIDE 100-0.8 MG/100ML-% IV SOLN""""",Midazolam HCl-Sodium Chloride,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,0,0,0,0,0,0,437,437
+hypnotics,NULL,"MIDAZOLAM 1MG/ML IV BOLUS FROM BAG""""",600593,"MIDAZOLAM 1MG/ML IV BOLUS FROM BAG""""",NULL,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,21,32,27,28,44,65,23,240
+hypnotics,NULL,"MIDAZOLAM 50MG/NS 50ML PREMIX PED-DO NOT USE""""",600238,"MIDAZOLAM 50MG/NS 50ML PREMIX PED-DO NOT USE""""",NULL,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,117,0,0,0,0,0,0,117
+hypnotics,NULL,LORAZEPAM IV BOLUS FROM BAG,600592,LORAZEPAM IV BOLUS FROM BAG,NULL,Central Nervous System Drugs,Antianxiety Agents,Benzodiazepines,4,4,3,16,34,46,2,109
+hypnotics,NULL,MIDAZOLAM DRIP (NICU),900106,MIDAZOLAM DRIP (NICU),NULL,NULL,NULL,NULL,0,36,0,6,3,46,2,93
+hypnotics,NULL,"MIDAZOLAM HCL 50 MG/10ML IJ SOLN""""",93523,"MIDAZOLAM HCL 50 MG/10ML IJ SOLN""""",Midazolam HCl,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,0,85,0,1,1,0,1,88
+hypnotics,NULL,"LORAZEPAM 2 MG/ML IJ SOLN""""",10467,"LORAZEPAM 2 MG/ML IJ SOLN""""",LORazepam,Central Nervous System Drugs,Antianxiety Agents,Benzodiazepines,0,0,0,3,2,0,0,5
+hypnotics,NULL,"MIDAZOLAM HCL 2 MG/2ML IJ SOLN""""",40872,"MIDAZOLAM HCL 2 MG/2ML IJ SOLN""""",Midazolam HCl,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,0,0,0,1,0,1,0,2
+hypnotics,NULL,"MIDAZOLAM HCL 5 MG/ML IJ SOLN""""",10608,"MIDAZOLAM HCL 5 MG/ML IJ SOLN""""",Midazolam HCl,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,0,0,0,0,0,1,1,2
+other,NULL,"INSULIN DRIP 100 UNITS/100 ML NS-GLUCOMMANDER""""",900257,"INSULIN DRIP 100 UNITS/100 ML NS-GLUCOMMANDER""""",NULL,NULL,NULL,NULL,0,0,6678,25396,26531,25768,11011,95384
+other,NULL,"FAMOTIDINE 20 MG/2ML IV SOLN""""",123468,"FAMOTIDINE 20 MG/2ML IV SOLN""""",Famotidine,Gastrointestinal Agents,Ulcer Drugs,H-2 Antagonists,5142,15597,15634,12974,12603,8089,2274,72313
+other,NULL,"KCL 40 MEQ/500 ML""""",900055,"KCL 40 MEQ/500 ML""""",NULL,NULL,NULL,NULL,7563,7713,9404,11371,8468,10219,4178,58916
+other,NULL,OXYTOCIN 30 UNITS IN 500ML NS,900127,OXYTOCIN 30 UNITS IN 500ML NS,NULL,Endocrine & Metabolic Drugs,Oxytocics,Oxytocics,6799,10321,9328,10170,10967,7639,0,55224
+other,NULL,"MAGNESIUM SULFATE 4 GM/100ML IV SOLN""""",129088,"MAGNESIUM SULFATE 4 GM/100ML IV SOLN""""",Magnesium Sulfate,Nutritional Products,Minerals & Electrolytes,Magnesium,0,0,0,0,13486,25054,11927,50467
+other,NULL,"KCL IN DEXTROSE-NACL 20-5-0.45 MEQ/L-%-% IV SOLN""""",102459,"KCL IN DEXTROSE-NACL 20-5-0.45 MEQ/L-%-% IV SOLN""""",KCl in Dextrose-NaCl,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,5143,5026,5146,5387,7462,5426,1810,35400
+other,NULL,INSULIN DRIP - DKA,400024,INSULIN DRIP - DKA,NULL,NULL,NULL,NULL,4971,5435,5979,6634,6320,3996,1339,34674
+other,NULL,ALBUMIN HUMAN 25 % IV SOLN,8981,ALBUMIN HUMAN 25 % IV SOLN,Albumin Human,Hematological Agents,Misc. Hematological,Plasma Proteins,3713,4314,3728,4143,6568,7209,3261,32936
+other,NULL,LEVETIRACETAM <1500 MG IN 250ML IVPB,400180,LEVETIRACETAM <1500 MG IN 250ML IVPB,NULL,NULL,NULL,NULL,0,8615,12576,9671,6,1,0,30869
+other,NULL,TPN NEONATAL GRADY 2-IN-1,40820001001,TPN NEONATAL GRADY 2-IN-1,NULL,NULL,NULL,NULL,3629,4240,4909,5244,5339,4616,1468,29445
+other,NULL,MAGNESIUM SULFATE 2 G IN 50ML D5W PREMIX,600397,MAGNESIUM SULFATE 2 G IN 50ML D5W PREMIX,NULL,Nutritional Products,Minerals & Electrolytes,Magnesium,5978,6288,5111,6989,4774,0,0,29140
+other,NULL,TPN ADULT GRADY CENTRAL,40820001000,TPN ADULT GRADY CENTRAL,NULL,NULL,NULL,NULL,3543,4818,4582,3228,4911,5094,1850,28026
+other,NULL,FUROSEMIDE (LASIX) IVPB >= 100 MG,900232,FUROSEMIDE (LASIX) IVPB >= 100 MG,NULL,NULL,NULL,NULL,0,428,3535,4914,7546,7647,3884,27954
+other,NULL,"PARICALCITOL 2 MCG/ML IV SOLN""""",31688,"PARICALCITOL 2 MCG/ML IV SOLN""""",Paricalcitol,Endocrine & Metabolic Drugs,Misc. Endocrine,Metabolic Modifiers,1174,188,4866,5416,6245,5932,4050,27871
+other,NULL,LEVETIRACETAM >=1500 MG IN 250ML IVPB,600454,LEVETIRACETAM >=1500 MG IN 250ML IVPB,NULL,NULL,NULL,NULL,12584,6814,3623,3456,9,5,7,26498
+other,NULL,"INSULIN DRIP-NON DKA FOR BG TARGET 110-180 MG/DL""""",900183,"INSULIN DRIP-NON DKA FOR BG TARGET 110-180 MG/DL""""",NULL,NULL,NULL,NULL,8102,10806,3909,26,15,0,0,22858
+other,NULL,"LEVETIRACETAM IN NACL 1000 MG/100ML IV SOLN""""",112304,"LEVETIRACETAM IN NACL 1000 MG/100ML IV SOLN""""",levETIRAcetam in NaCl,Neuromuscular Drugs,Anticonvulsant,Anticonvulsants - Misc.,0,0,0,3040,6470,8163,4886,22559
+other,NULL,"POTASSIUM CHLORIDE 20 MEQ/100ML IV SOLN""""",11076,"POTASSIUM CHLORIDE 20 MEQ/100ML IV SOLN""""",Potassium Chloride,Nutritional Products,Minerals & Electrolytes,Potassium,2743,3145,3012,2750,3688,3495,1450,20283
+other,NULL,THIAMINE IVPB,400221,THIAMINE IVPB,NULL,NULL,NULL,NULL,554,1505,1752,2718,4971,4858,2721,19079
+other,NULL,"NA FERRIC GLUC CPLX IN SUCROSE 12.5 MG/ML IV SOLN""""",24932,"NA FERRIC GLUC CPLX IN SUCROSE 12.5 MG/ML IV SOLN""""",Na Ferric Gluc Cplx in Sucrose,Hematological Agents,Hematopoietic Agents,Iron,1042,2503,3665,3688,2062,1365,2998,17323
+other,NULL,FAT EMULSION PLANT BASED 20 % IV EMUL,10014,FAT EMULSION PLANT BASED 20 % IV EMUL,Fat Emulsion Plant Based,Nutritional Products,Nutrients,Lipids,2143,2306,2837,2917,3201,2649,738,16791
+other,NULL,MAGNESIUM SULFATE 4 G IN 50ML D5W PREMIX,600398,MAGNESIUM SULFATE 4 G IN 50ML D5W PREMIX,NULL,Nutritional Products,Minerals & Electrolytes,Magnesium,3890,3645,2779,4033,2035,0,0,16382
+other,NULL,"GADOBENATE DIMEGLUMINE 529 MG/ML IV SOLN""""",41137,"GADOBENATE DIMEGLUMINE 529 MG/ML IV SOLN""""",Gadobenate Dimeglumine,Miscellaneous Products,Diagnostic Products,Miscellaneous Contrast Media,3003,2825,2524,3664,3436,448,41,15941
+other,NULL,"OXYTOCIN-SODIUM CHLORIDE 30-0.9 UT/500ML-% IV SOLN""""",134827,"OXYTOCIN-SODIUM CHLORIDE 30-0.9 UT/500ML-% IV SOLN""""",Oxytocin-Sodium Chloride,Endocrine & Metabolic Drugs,Oxytocics,Oxytocics,0,0,0,0,0,5287,9097,14384
+other,NULL,MAGNESIUM SULFATE IN NS/D5W 250,900028,MAGNESIUM SULFATE IN NS/D5W 250," 500 OR 1000 ML""""",2/10/2014 6:00,NULL,NULL,NULL,1753,2426,3349,4263,1419,39,13249
+other,NULL,CALCIUM GLUCONATE IVPB,400061,CALCIUM GLUCONATE IVPB,NULL,NULL,NULL,NULL,1450,1466,1691,2383,2500,2400,1086,12976
+other,NULL,PANTOPRAZOLE INFUSION,400203,PANTOPRAZOLE INFUSION,NULL,NULL,NULL,NULL,2829,2683,1921,1953,1484,965,238,12073
+other,NULL,"POTASSIUM CHLORIDE 10 MEQ/100ML IV SOLN""""",11074,"POTASSIUM CHLORIDE 10 MEQ/100ML IV SOLN""""",Potassium Chloride,Nutritional Products,Minerals & Electrolytes,Potassium,1417,1811,1142,979,2943,2643,883,11818
+other,NULL,LACOSAMIDE IVPB,900166,LACOSAMIDE IVPB,NULL,NULL,NULL,NULL,288,1057,1625,1287,1919,3348,1633,11157
+other,NULL,"KCL IN DEXTROSE-NACL 10-5-0.45 MEQ/L-%-% IV SOLN""""",102456,"KCL IN DEXTROSE-NACL 10-5-0.45 MEQ/L-%-% IV SOLN""""",KCl in Dextrose-NaCl,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,216,1096,1726,2384,2887,2007,837,11153
+other,NULL,ALBUMIN HUMAN 5 % IV SOLN,8982,ALBUMIN HUMAN 5 % IV SOLN,Albumin Human,Hematological Agents,Misc. Hematological,Plasma Proteins,424,657,912,1839,3576,2652,1066,11126
+other,NULL,SODIUM PHOSPHATE IVPB,400060,SODIUM PHOSPHATE IVPB,NULL,NULL,NULL,NULL,353,1525,1805,1942,2148,1730,713,10216
+other,NULL,PHENYTOIN IVPB,900135,PHENYTOIN IVPB,NULL,NULL,NULL,NULL,1170,3412,4067,1470,0,0,0,10119
+other,NULL,"INSULIN DRIP 100 UNITS/100 ML NS-GLUCOMMANDER DKA""""",900303,"INSULIN DRIP 100 UNITS/100 ML NS-GLUCOMMANDER DKA""""",NULL,NULL,NULL,NULL,0,0,0,0,878,6360,2877,10115
+other,NULL,"KCL IN NACL 20-0.9 MEQ/L-% IV SOLN""""",102430,"KCL IN NACL 20-0.9 MEQ/L-% IV SOLN""""",Potassium Chloride in NaCl,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,1324,1364,1127,1379,2344,2047,375,9960
+other,NULL,TPN SYRINGE,600445,TPN SYRINGE,NULL,Nutritional Products,NULL,NULL,827,1175,1533,1830,1809,1874,573,9621
+other,NULL,VALPROATE SODIUM IVPB,400228,VALPROATE SODIUM IVPB,NULL,NULL,NULL,NULL,826,1092,819,995,1892,2445,1276,9345
+other,NULL,"KPHOS 30 MMOL/500 ML OR 1000 ML""""",900056,"KPHOS 30 MMOL/500 ML OR 1000 ML""""",NULL,NULL,NULL,NULL,1186,1602,1290,1271,1260,1934,784,9327
+other,NULL,SODIUM BICARBONATE 8.4 % IV SOLN,7309,SODIUM BICARBONATE 8.4 % IV SOLN,Sodium Bicarbonate,Nutritional Products,Minerals & Electrolytes,Bicarbonates,1099,1282,1426,1407,1577,1439,696,8926
+other,NULL,"KCL IN DEXTROSE-NACL 20-5-0.9 MEQ/L-%-% IV SOLN""""",102452,"KCL IN DEXTROSE-NACL 20-5-0.9 MEQ/L-%-% IV SOLN""""",KCl in Dextrose-NaCl,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,1138,932,1355,1422,1877,1572,536,8832
+other,NULL,"KPHOS 12-21 MMOL/250 500 OR 1000 ML IV""""",400052,"KPHOS 12-21 MMOL/250 500 OR 1000 ML IV""""",NULL,NULL,NULL,NULL,531,502,862,1246,1757,2544,1378,8820
+other,NULL,ROCURONIUM INFUSION,400217,ROCURONIUM INFUSION,NULL,NULL,NULL,NULL,1710,2008,1386,808,1024,931,117,7984
+other,NULL,TPN ADULT GRADY PERIPHERAL,40820001002,TPN ADULT GRADY PERIPHERAL,NULL,NULL,NULL,NULL,1066,1101,1016,1199,1353,1613,503,7851
+other,NULL,"INSULIN DRIP-NON DKA FOR BG TARGET 140-180 MG/DL""""",900255,"INSULIN DRIP-NON DKA FOR BG TARGET 140-180 MG/DL""""",NULL,NULL,NULL,NULL,0,0,6984,263,247,0,0,7494
+other,NULL,MAGNESIUM SULFATE 3 G IVPB,900167,MAGNESIUM SULFATE 3 G IVPB,NULL,NULL,NULL,NULL,2355,1960,1500,1521,6,0,1,7343
+other,NULL,MAGNESIUM SULFATE 50 G IN 600ML LR PREMIX,600399,MAGNESIUM SULFATE 50 G IN 600ML LR PREMIX,NULL,Nutritional Products,Minerals & Electrolytes,Magnesium,598,656,637,950,1504,1851,904,7100
+other,NULL,OXYTOCIN 20 UNITS IN 1000ML D5LR PREMIX,600401,OXYTOCIN 20 UNITS IN 1000ML D5LR PREMIX,NULL,Endocrine & Metabolic Drugs,Oxytocics,Oxytocics,2602,2631,1209,0,0,0,0,6442
+other,NULL,"CALCITRIOL 1 MCG/ML IV SOLN""""",9348,"CALCITRIOL 1 MCG/ML IV SOLN""""",Calcitriol,Endocrine & Metabolic Drugs,Misc. Endocrine,Metabolic Modifiers,2208,4070,0,0,0,0,0,6278
+other,NULL,CALCIUM GLUCONATE 10 % IV SOLN,1312,CALCIUM GLUCONATE 10 % IV SOLN,Calcium Gluconate,Nutritional Products,Minerals & Electrolytes,Calcium,820,831,1023,1085,1076,972,439,6246
+other,NULL,"LEVETIRACETAM IN NACL 1500 MG/100ML IV SOLN""""",112305,"LEVETIRACETAM IN NACL 1500 MG/100ML IV SOLN""""",levETIRAcetam in NaCl,Neuromuscular Drugs,Anticonvulsant,Anticonvulsants - Misc.,0,0,0,459,2801,2375,497,6132
+other,NULL,IV INFUSION BUILDER,200005,IV INFUSION BUILDER,NULL,NULL,NULL,NULL,2493,1632,595,389,486,321,89,6005
+other,NULL,"CAFFEINE CITRATE 10MG/ML D5W (NICU) IV SYRINGE""""",600326,"CAFFEINE CITRATE 10MG/ML D5W (NICU) IV SYRINGE""""",NULL,Central Nervous System Drugs,Stimulants,Analeptics,10,124,396,1584,1750,1668,465,5997
+other,NULL,"FLUMAZENIL 0.5 MG/5ML IV SOLN""""",39744,"FLUMAZENIL 0.5 MG/5ML IV SOLN""""",Flumazenil,Miscellaneous Products,Antidotes,Benzodiazepine Antagonists,546,650,741,807,1264,1279,608,5895
+other,NULL,"KCL IN NACL 40-0.9 MEQ/L-% IV SOLN""""",102431,"KCL IN NACL 40-0.9 MEQ/L-% IV SOLN""""",Potassium Chloride in NaCl,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,578,623,516,975,1999,723,250,5664
+other,NULL,PHYTONADIONE IVPB,400207,PHYTONADIONE IVPB,NULL,NULL,NULL,NULL,523,799,1019,721,898,652,387,4999
+other,NULL,"ROCURONIUM BROMIDE 100 MG/10ML IV SOLN""""",95812,"ROCURONIUM BROMIDE 100 MG/10ML IV SOLN""""",Rocuronium Bromide,Neuromuscular Drugs,Neuromuscular Blockers,Nondepolarizing Muscle Relaxants,365,635,753,792,833,924,491,4793
+other,NULL,OXYTOCIN 20 UNITS IN 1000ML NS PREMIX ,601021,OXYTOCIN 20 UNITS IN 1000ML NS PREMIX ,NULL,Endocrine & Metabolic Drugs,Oxytocics,Oxytocics,0,0,0,0,1423,2054,916,4393
+other,NULL,OCTREOTIDE IV INFUSION,400065,OCTREOTIDE IV INFUSION,NULL,NULL,NULL,NULL,766,726,605,598,589,647,246,4177
+other,NULL,CISATRACURIUM INFUSION,400114,CISATRACURIUM INFUSION,NULL,NULL,NULL,NULL,0,0,453,659,1076,1073,762,4023
+other,NULL,"GADOTERIDOL 279.3 MG/ML IV SOLN""""",10100,"GADOTERIDOL 279.3 MG/ML IV SOLN""""",Gadoteridol,Miscellaneous Products,Diagnostic Products,Miscellaneous Contrast Media,0,0,0,0,330,2434,1136,3900
+other,NULL,PANTOPRAZOLE IV IN NS BOLUS,400038,PANTOPRAZOLE IV IN NS BOLUS,NULL,NULL,NULL,NULL,908,831,646,557,490,300,20,3752
+other,NULL,OXYTOCIN 20 UNITS IN 1000ML LR PREMIX,600808,OXYTOCIN 20 UNITS IN 1000ML LR PREMIX,NULL,Endocrine & Metabolic Drugs,Oxytocics,Oxytocics,0,0,966,2048,560,0,0,3574
+other,NULL,"REGADENOSON 0.4 MG/5ML IV SOLN""""",91408,"REGADENOSON 0.4 MG/5ML IV SOLN""""",Regadenoson,Miscellaneous Products,Diagnostic Products,Diagnostic Drugs,575,325,522,501,732,736,120,3511
+other,NULL,"ADENOSINE (DIAGNOSTIC) 3 MG/ML IV SOLN""""",15330,"ADENOSINE (DIAGNOSTIC) 3 MG/ML IV SOLN""""",Adenosine (Diagnostic),Miscellaneous Products,Diagnostic Products,Diagnostic Drugs,17,1047,998,891,389,48,8,3398
+other,NULL,"SODIUM ACETATE 2 MEQ/ML IV SOLN""""",7301,"SODIUM ACETATE 2 MEQ/ML IV SOLN""""",Sodium Acetate,Nutritional Products,Minerals & Electrolytes,Bicarbonates,0,0,0,121,13,1598,1536,3268
+other,NULL,"MILRINONE LACTATE IN DEXTROSE 20-5 MG/100ML-% IV SOLN""""",135585,"MILRINONE LACTATE IN DEXTROSE 20-5 MG/100ML-% IV SOLN""""",Milrinone Lactate in Dextrose,Cardiovascular Agents,Cardiotonics,Phosphodiesterase Inhibitors,0,0,0,599,1138,917,497,3151
+other,NULL,OXYTOCIN 30 UNITS IN 500ML D5W PREMIX,600400,OXYTOCIN 30 UNITS IN 500ML D5W PREMIX,NULL,Endocrine & Metabolic Drugs,Oxytocics,Oxytocics,3115,0,0,0,0,0,0,3115
+other,NULL,"KCL 20 MEQ/250 ML - PERIPHERAL LINE""""",900054,"KCL 20 MEQ/250 ML - PERIPHERAL LINE""""",NULL,NULL,NULL,NULL,1283,909,201,396,233,6,0,3028
+other,NULL,METOCLOPRAMIDE IVPB 20 MG,900043,METOCLOPRAMIDE IVPB 20 MG,NULL,NULL,NULL,NULL,0,0,135,665,891,1019,226,2936
+other,NULL,IRON SUCROSE INFUSION,400173,IRON SUCROSE INFUSION,NULL,NULL,NULL,NULL,94,28,107,360,868,926,526,2909
+other,NULL,MAGNESIUM SULFATE 1 G IVPB,400043,MAGNESIUM SULFATE 1 G IVPB,NULL,NULL,NULL,NULL,885,724,608,670,8,0,0,2895
+other,NULL,"FAMOTIDINE 10 MG/ML IV SOLN""""",10009,"FAMOTIDINE 10 MG/ML IV SOLN""""",Famotidine,Gastrointestinal Agents,Ulcer Drugs,H-2 Antagonists,2756,0,0,0,0,0,0,2756
+other,NULL,"MILRINONE IN DEXTROSE 20 MG/100ML IV SOLN""""",121716,"MILRINONE IN DEXTROSE 20 MG/100ML IV SOLN""""",Milrinone Lactate in Dextrose,Cardiovascular Agents,Cardiotonics,Phosphodiesterase Inhibitors,590,689,816,277,0,0,0,2372
+other,NULL,PAL FLUID 100ML,600030,PAL FLUID 100ML,NULL,NULL,NULL,NULL,450,504,683,689,0,0,0,2326
+other,NULL,"VINCRISTINE/DOXORUBICIN/ETOPOSIDE INFUSION""""",410040,"VINCRISTINE/DOXORUBICIN/ETOPOSIDE INFUSION""""",NULL,NULL,NULL,NULL,464,151,459,801,288,0,0,2163
+other,NULL,PHENYTOIN IVPB LOADING DOSE,400206,PHENYTOIN IVPB LOADING DOSE,NULL,NULL,NULL,NULL,354,605,756,430,0,0,0,2145
+other,NULL,FOSPHENYTOIN IVPB (LOADING DOSE),400023,FOSPHENYTOIN IVPB (LOADING DOSE),NULL,NULL,NULL,NULL,414,0,0,286,694,505,180,2079
+other,NULL,CYCLOPHOSPHAMIDE CHEMO INFUSION,410009,CYCLOPHOSPHAMIDE CHEMO INFUSION,NULL,NULL,NULL,NULL,419,256,182,458,339,324,83,2061
+other,NULL,UVC FLUID 100ML,600028,UVC FLUID 100ML,NULL,NULL,NULL,NULL,268,527,445,774,0,0,0,2014
+other,NULL,FUROSEMIDE 100 MG IV CONTINUOUS INFUSION,400030,FUROSEMIDE 100 MG IV CONTINUOUS INFUSION,NULL,NULL,NULL,NULL,356,411,279,217,302,225,160,1950
+other,NULL,VANILLA NEONATAL TPN INFUSION,900069,VANILLA NEONATAL TPN INFUSION,NULL,NULL,NULL,NULL,326,256,397,259,305,298,100,1941
+other,NULL,UVC FLUID 250 ML,600995,UVC FLUID 250 ML,NULL,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,0,0,36,723,751,353,1863
+other,NULL,"KCL 20 MEQ/500 ML +/- MAGNESIUM""""",900231,"KCL 20 MEQ/500 ML +/- MAGNESIUM""""",NULL,NULL,NULL,NULL,0,249,727,867,3,0,0,1846
+other,NULL,"ETOMIDATE 2 MG/ML IV SOLN""""",20472,"ETOMIDATE 2 MG/ML IV SOLN""""",Etomidate,Analgesics & Anesthetics,General Anesthetics,Anesthetics - Misc.,385,395,255,249,229,131,77,1721
+other,NULL,"INSULIN DRIP FOR BG TARGET 110-140 MG/DL""""",900184,"INSULIN DRIP FOR BG TARGET 110-140 MG/DL""""",NULL,NULL,NULL,NULL,594,1103,0,0,0,0,0,1697
+other,NULL,"BUMETANIDE 10 MG/100 ML IV INFUSION""""",900137,"BUMETANIDE 10 MG/100 ML IV INFUSION""""",NULL,NULL,NULL,NULL,137,189,281,165,369,373,117,1631
+other,NULL,PROMETHAZINE IVPB,900582,PROMETHAZINE IVPB,NULL,NULL,NULL,NULL,0,0,0,196,389,736,298,1619
+other,NULL,SODIUM ACETATE IVPB - ICU PATIENTS ONLY,600818,SODIUM ACETATE IVPB - ICU PATIENTS ONLY,NULL,Nutritional Products,Minerals & Electrolytes,Bicarbonates,0,0,2,44,1098,427,0,1571
+other,NULL,CYTARABINE INFUSION,410010,CYTARABINE INFUSION,NULL,NULL,NULL,NULL,214,332,222,291,251,192,56,1558
+other,NULL,PAL FLUID 60 ML,600997,PAL FLUID 60 ML,NULL,NULL,NULL,NULL,0,0,0,8,611,627,229,1475
+other,NULL,MESNA INFUSION,410026,MESNA INFUSION,NULL,NULL,NULL,NULL,180,128,117,192,428,345,0,1390
+other,NULL,SODIUM FERRIC GLUCONATE INFUSION,400021,SODIUM FERRIC GLUCONATE INFUSION,NULL,NULL,NULL,NULL,28,312,220,250,227,260,85,1382
+other,NULL,TPN ADULT GRADY CENTRAL - CYCLIC,4082000100,TPN ADULT GRADY CENTRAL - CYCLIC,NULL,NULL,NULL,NULL,0,0,0,129,642,598,9,1378
+other,NULL,CALCIUM CHLORIDE 10 % IV SOLN,1306,CALCIUM CHLORIDE 10 % IV SOLN,Calcium Chloride,Nutritional Products,Minerals & Electrolytes,Calcium,84,148,330,317,278,193,18,1368
+other,NULL,SHINE STUDY DRUG IN SODIUM CHLORIDE 0.9% 100 ML-BLUE,600579,SHINE STUDY DRUG IN SODIUM CHLORIDE 0.9% 100 ML-BLUE,NULL,NULL,NULL,NULL,222,281,352,384,122,0,0,1361
+other,NULL,"LEVETIRACETAM IN NACL 500 MG/100ML IV SOLN""""",112303,"LEVETIRACETAM IN NACL 500 MG/100ML IV SOLN""""",levETIRAcetam in NaCl,Neuromuscular Drugs,Anticonvulsant,Anticonvulsants - Misc.,0,99,6,1214,0,2,0,1321
+other,NULL,UAC FLUID 100ML,600029,UAC FLUID 100ML,NULL,NULL,NULL,NULL,304,335,339,306,0,0,0,1284
+other,NULL,CALCIUM CHLORIDE IVPB-CENTRAL LINE,400100,CALCIUM CHLORIDE IVPB-CENTRAL LINE,NULL,NULL,NULL,NULL,78,173,124,147,444,274,33,1273
+other,NULL,LEVOTHYROXINE IVPB-FOR LIFE LINK,400183,LEVOTHYROXINE IVPB-FOR LIFE LINK,NULL,NULL,NULL,NULL,78,98,129,328,284,195,130,1242
+other,NULL,DESMOPRESSIN IVPB,400133,DESMOPRESSIN IVPB,NULL,NULL,NULL,NULL,147,178,193,207,196,210,106,1237
+other,NULL,VECURONIUM INFUSION,400229,VECURONIUM INFUSION,NULL,NULL,NULL,NULL,195,135,294,188,235,138,46,1231
+other,NULL,"KCL 40 MEQ/1000 ML + MAGNESIUM""""",900058,"KCL 40 MEQ/1000 ML + MAGNESIUM""""",NULL,NULL,NULL,NULL,183,650,160,196,15,16,0,1220
+other,NULL,"UAC: TROPHAMINE 3.5%+HEPARIN 2 UNITS/ML (NICU)""""",900154,"UAC: TROPHAMINE 3.5%+HEPARIN 2 UNITS/ML (NICU)""""",NULL,NULL,NULL,NULL,188,128,267,215,145,197,77,1217
+other,NULL,FOSCARNET IVPB,400153,FOSCARNET IVPB,NULL,NULL,NULL,NULL,288,187,199,184,145,205,0,1208
+other,NULL,ETOPOSIDE INFUSION,410019,ETOPOSIDE INFUSION,NULL,NULL,NULL,NULL,230,137,201,146,271,143,56,1184
+other,NULL,"IMMUNE GLOBULIN (HUMAN) 10 GM/100ML IJ SOLN""""",106116,"IMMUNE GLOBULIN (HUMAN) 10 GM/100ML IJ SOLN""""",Immune Globulin (Human),Biological,Antisera,Immune Serums,50,198,136,286,254,162,74,1160
+other,NULL,"LEUCOVORIN 50 MG/50 ML NS IVPB MB PLUS""""",600560,"LEUCOVORIN 50 MG/50 ML NS IVPB MB PLUS""""",NULL,Antineoplastic Agents,Antineoplastics,"Chemotherapy Rescue/Antidote Agents""""",247,211,137,470,0,0,0,1065
+other,NULL,SODIUM ACETATE INFUSION,900140,SODIUM ACETATE INFUSION,NULL,NULL,NULL,NULL,68,194,58,434,215,42,0,1011
+other,NULL,"DEXMEDETOMIDINE HCL IN NACL 400 MCG/100ML IV SOLN""""",119604,"DEXMEDETOMIDINE HCL IN NACL 400 MCG/100ML IV SOLN""""",Dexmedetomidine HCl in NaCl,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,954,0,0,0,0,0,0,954
+other,NULL,"DEXMEDETOMIDINE HCL IN NACL 200 MCG/50ML IV SOLN""""",119603,"DEXMEDETOMIDINE HCL IN NACL 200 MCG/50ML IV SOLN""""",Dexmedetomidine HCl in NaCl,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,944,4,3,0,0,0,0,951
+other,NULL,"KCL IN DEXTROSE-NACL 40-5-0.9 MEQ/L-%-% IV SOLN""""",102453,"KCL IN DEXTROSE-NACL 40-5-0.9 MEQ/L-%-% IV SOLN""""",KCl in Dextrose-NaCl,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,64,103,25,206,439,81,10,928
+other,NULL,"KCL IN DEXTROSE-NACL 40-5-0.45 MEQ/L-%-% IV SOLN""""",102464,"KCL IN DEXTROSE-NACL 40-5-0.45 MEQ/L-%-% IV SOLN""""",KCl in Dextrose-NaCl,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,215,94,75,143,290,93,16,926
+other,NULL,"KCL 30 MEQ/500 ML +/- MAGNESIUM""""",900230,"KCL 30 MEQ/500 ML +/- MAGNESIUM""""",NULL,NULL,NULL,NULL,0,80,256,586,0,0,0,922
+other,NULL,ASCORBIC ACID (VITAMIN C SEPSIS ADJUNCT) IVPB,900272,ASCORBIC ACID (VITAMIN C SEPSIS ADJUNCT) IVPB,NULL,NULL,NULL,NULL,0,0,0,182,510,221,5,918
+other,NULL,ACETYLCYSTEINE IV INFUSION-APAP OVERDOSE,400066,ACETYLCYSTEINE IV INFUSION-APAP OVERDOSE,NULL,NULL,NULL,NULL,71,85,76,185,192,161,91,861
+other,NULL,"LEVOCARNITINE 200 MG/ML IV SOLN""""",20954,"LEVOCARNITINE 200 MG/ML IV SOLN""""",levOCARNitine,Endocrine & Metabolic Drugs,Misc. Endocrine,Metabolic Modifiers,1,68,472,125,54,118,3,841
+other,NULL,ROCURONIUM PED INFUSION,600720,ROCURONIUM PED INFUSION,NULL,NULL,NULL,NULL,6,121,90,100,474,26,3,820
+other,NULL,"POTASSIUM CHLORIDE IN NACL 20-0.45 MEQ/L-% IV SOLN""""",36046,"POTASSIUM CHLORIDE IN NACL 20-0.45 MEQ/L-% IV SOLN""""",Potassium Chloride in NaCl,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,124,137,64,151,176,123,32,807
+other,NULL,"IRON SUCROSE 20 MG/ML IV SOLN""""",29132,"IRON SUCROSE 20 MG/ML IV SOLN""""",Iron Sucrose,Hematological Agents,Hematopoietic Agents,Iron,788,0,2,3,4,0,0,797
+other,NULL,FOLIC ACID IVPB,900583,FOLIC ACID IVPB,NULL,NULL,NULL,NULL,0,0,0,132,344,258,32,766
+other,NULL,"VICTAS STUDY DRUG1 (VITAMINC/PLACEBO) IN D5W""""",900597,"VICTAS STUDY DRUG1 (VITAMINC/PLACEBO) IN D5W""""",NULL,NULL,NULL,NULL,0,0,0,0,266,486,0,752
+other,NULL,CISPLATIN INFUSION,400115,CISPLATIN INFUSION,NULL,NULL,NULL,NULL,57,53,141,120,207,108,35,721
+other,NULL,UAC FLUID 60 ML,600996,UAC FLUID 60 ML,NULL,Hematological Agents,Anticoagulants,Heparins And Heparinoid-Like Agents,0,0,0,2,290,308,107,707
+other,NULL,"ADENOSINE 6 MG/2ML IV SOLN""""",38703,"ADENOSINE 6 MG/2ML IV SOLN""""",Adenosine,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics - Misc.,124,123,135,101,83,86,38,690
+other,NULL,DOXORUBICIN INFUSION,410018,DOXORUBICIN INFUSION,NULL,NULL,NULL,NULL,233,124,58,63,81,93,18,670
+other,NULL,"ROCURONIUM BROMIDE 50 MG/5ML IV SOLN""""",95811,"ROCURONIUM BROMIDE 50 MG/5ML IV SOLN""""",Rocuronium Bromide,Neuromuscular Drugs,Neuromuscular Blockers,Nondepolarizing Muscle Relaxants,253,256,97,8,6,23,16,659
+other,NULL,RITUXIMAB RAPID INFUSION,900192,RITUXIMAB RAPID INFUSION,NULL,NULL,NULL,NULL,56,47,63,151,132,173,33,655
+other,NULL,"VITAMIN C BURN RESUSCITATION (ASCORBIC ACID) 25 G/1000 ML LACTATED RINGERS""""",900178,"VITAMIN C BURN RESUSCITATION (ASCORBIC ACID) 25 G/1000 ML LACTATED RINGERS""""",NULL,NULL,NULL,NULL,96,67,101,66,145,105,64,644
+other,NULL,"TRANEXAMIC ACID 1000 MG/10ML IV SOLN""""",130900,"TRANEXAMIC ACID 1000 MG/10ML IV SOLN""""",Tranexamic Acid,Hematological Agents,Hemostatics,Hemostatics - Systemic,0,0,32,110,171,178,143,634
+other,NULL,VANILLA TPN SYRINGE,600503,VANILLA TPN SYRINGE,NULL,NULL,NULL,NULL,91,60,137,89,108,117,26,628
+other,NULL,CHLOROTHIAZIDE IVPB,400110,CHLOROTHIAZIDE IVPB,NULL,NULL,NULL,NULL,43,152,172,233,9,0,0,609
+other,NULL,METHOTREXATE INFUSION,410027,METHOTREXATE INFUSION,NULL,NULL,NULL,NULL,148,59,45,128,79,96,11,566
+other,NULL,IRON DEXTRAN INFUSION,400171,IRON DEXTRAN INFUSION,NULL,NULL,NULL,NULL,23,29,56,87,70,170,131,566
+other,NULL,BIVALIRUDIN TITRATED INFUSION 500 ML,400095,BIVALIRUDIN TITRATED INFUSION 500 ML,NULL,NULL,NULL,NULL,1,67,0,28,84,14,372,566
+other,NULL,ANGIOTENSIN II ACETATE NS INFUSION,900300,ANGIOTENSIN II ACETATE NS INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,135,322,100,557
+other,NULL,NALOXONE INFUSION,400197,NALOXONE INFUSION,NULL,NULL,NULL,NULL,142,92,106,58,82,53,8,541
+other,NULL,MAGNESIUM SULFATE 6G IN NS/D5W 250,900294,MAGNESIUM SULFATE 6G IN NS/D5W 250," 500 OR 1000 ML""""",7/5/2018 5:00,NULL,NULL,NULL,0,0,0,0,539,0,539
+other,NULL,"KCL IN DEXTROSE-NACL 20-5-0.2 MEQ/L-%-% IV SOLN""""",102458,"KCL IN DEXTROSE-NACL 20-5-0.2 MEQ/L-%-% IV SOLN""""",KCl in Dextrose-NaCl,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,52,83,78,55,166,77,5,516
+other,NULL,GLUTAMINE 2.5% IV SOLUTION 1000 ML,600483,GLUTAMINE 2.5% IV SOLUTION 1000 ML,NULL,Nutritional Products,Nutrients,Proteins,514,0,0,0,0,0,0,514
+other,NULL,DOXORUBICIN WITH ETOPOSIDE WITH VINCRISTINE INFUSION,400242,DOXORUBICIN WITH ETOPOSIDE WITH VINCRISTINE INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,60,382,71,513
+other,NULL,AMINOCAPROIC ACID INFUSION,400081,AMINOCAPROIC ACID INFUSION,NULL,NULL,NULL,NULL,79,54,69,81,123,71,29,506
+other,NULL,"PROTAMINE SULFATE 10 MG/ML IV SOLN""""",6677,"PROTAMINE SULFATE 10 MG/ML IV SOLN""""",Protamine Sulfate,Hematological Agents,Misc. Hematological,Protamine,45,75,65,62,111,101,30,489
+other,NULL,PHENOBARBITAL (LUMINAL) IVPB < 1000 MG,115618,PHENOBARBITAL (LUMINAL) IVPB < 1000 MG,NULL,NULL,NULL,NULL,56,142,48,98,17,100,18,479
+other,NULL,ZOLEDRONIC ACID IVPB,410041,ZOLEDRONIC ACID IVPB,NULL,NULL,NULL,NULL,18,54,80,100,96,104,16,468
+other,NULL,"CALCIUM GLUCONATE 40MG/ML SW (NICU)""""",600322,"CALCIUM GLUCONATE 40MG/ML SW (NICU)""""",NULL,Nutritional Products,Minerals & Electrolytes,Calcium,2,0,54,90,150,104,44,444
+other,NULL,RITUXIMAB STANDARD INFUSION,410036,RITUXIMAB STANDARD INFUSION,NULL,NULL,NULL,NULL,58,77,26,63,94,89,29,436
+other,NULL,ACETYLCYSTEINE IV INFUSION - CONTINUATION,400068,ACETYLCYSTEINE IV INFUSION - CONTINUATION,NULL,NULL,NULL,NULL,37,28,20,59,102,146,32,424
+other,NULL,CALCIUM CHLORIDE IVPB - PERIPHERAL LINE,900150,CALCIUM CHLORIDE IVPB - PERIPHERAL LINE,NULL,NULL,NULL,NULL,4,1,22,15,279,81,7,409
+other,NULL,IFOSFAMIDE INFUSION,410022,IFOSFAMIDE INFUSION,NULL,NULL,NULL,NULL,0,0,16,75,168,142,0,401
+other,NULL,DECITABINE CHEMO INFUSION,400130,DECITABINE CHEMO INFUSION,NULL,NULL,NULL,NULL,43,20,51,33,63,135,47,392
+other,NULL,"FACTOR VIII RECOMB (KOGENATE FS) 2000 UNITS/500 ML INFUSION""""",900070,"FACTOR VIII RECOMB (KOGENATE FS) 2000 UNITS/500 ML INFUSION""""",NULL,NULL,NULL,NULL,10,2,30,133,18,130,63,386
+other,NULL,AMINOCAPROIC ACID IV BOLUS,400082,AMINOCAPROIC ACID IV BOLUS,NULL,NULL,NULL,NULL,21,19,47,56,117,74,24,358
+other,NULL,OXYTOCIN IN LR,400008,OXYTOCIN IN LR,NULL,NULL,NULL,NULL,165,119,56,2,5,0,0,347
+other,NULL,PENTAMIDINE ISETHIONATE IVPB,900051,PENTAMIDINE ISETHIONATE IVPB,NULL,NULL,NULL,NULL,62,50,69,41,76,44,5,347
+other,NULL,CARBOPLATIN INFUSION (BY AUC),410003,CARBOPLATIN INFUSION (BY AUC),NULL,NULL,NULL,NULL,67,36,41,35,52,51,36,318
+other,NULL,"PHENYTOIN 1000 MG/100 ML NS PACKET""""",600452,"PHENYTOIN 1000 MG/100 ML NS PACKET""""",NULL,NULL,NULL,NULL,84,196,37,0,0,0,0,317
+other,NULL,"FAT EMUL FISH OIL/PLANT BASED 20 % IV EMUL""""",132810,"FAT EMUL FISH OIL/PLANT BASED 20 % IV EMUL""""","Fat Emul Fish Oil/Plant Based""""",Nutritional Products,Nutrients,Lipids,0,0,0,0,0,230,75,305
+other,NULL,"UAC: SOD. ACETATE 7.7 MEQ/100 ML+HEPARIN 2 UNITS/ML""""",900579,"UAC: SOD. ACETATE 7.7 MEQ/100 ML+HEPARIN 2 UNITS/ML""""",NULL,NULL,NULL,NULL,0,0,0,8,122,131,42,303
+other,NULL,"LIDOCAINE IN D5W 4-5 MG/ML-% IV SOLN""""",14868,"LIDOCAINE IN D5W 4-5 MG/ML-% IV SOLN""""",Lidocaine in D5W,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type I-B,13,19,34,46,23,129,30,294
+other,NULL,SHINE STUDY DRUG IN SODIUM CHLORIDE 0.9% 100 ML-ORANGE,600648,SHINE STUDY DRUG IN SODIUM CHLORIDE 0.9% 100 ML-ORANGE,NULL,NULL,NULL,NULL,55,100,46,59,34,0,0,294
+other,NULL,TRANEXAMIC ACID IV INFUSION-TRAUMA USE ONLY,110097,TRANEXAMIC ACID IV INFUSION-TRAUMA USE ONLY,NULL,NULL,NULL,NULL,16,34,55,39,63,71,14,292
+other,NULL,PROTHROMBIN COMPLEX CONC HUMAN (KCENTRA) INFUSION,900539,PROTHROMBIN COMPLEX CONC HUMAN (KCENTRA) INFUSION,NULL,NULL,NULL,NULL,52,66,119,46,0,0,0,283
+other,NULL,CONJUGATED ESTROGEN IVPB,900018,CONJUGATED ESTROGEN IVPB,NULL,NULL,NULL,NULL,110,38,29,66,22,16,0,281
+other,NULL,MINOCYCLINE IVPB,900321,MINOCYCLINE IVPB,NULL,NULL,NULL,NULL,0,0,0,0,54,64,157,275
+other,NULL,"METHYLENE BLUE 50 MG/10ML IV SOLN""""",132815,"METHYLENE BLUE 50 MG/10ML IV SOLN""""",Methylene Blue (Antidote),Miscellaneous Products,Antidotes,Antidotes and Specific Antagonists,0,0,0,43,90,98,36,267
+other,NULL,"IMMUNE GLOBULIN (HUMAN) 20 GM/200ML IJ SOLN""""",106117,"IMMUNE GLOBULIN (HUMAN) 20 GM/200ML IJ SOLN""""",Immune Globulin (Human),Biological,Antisera,Immune Serums,0,0,0,4,0,64,199,267
+other,NULL,VINCRISTINE CHEMO INFUSION,400231,VINCRISTINE CHEMO INFUSION,NULL,NULL,NULL,NULL,57,36,19,50,55,35,12,264
+other,NULL,ARSENIC TRIOXIDE IVPB,900168,ARSENIC TRIOXIDE IVPB,NULL,NULL,NULL,NULL,118,0,0,145,0,0,0,263
+other,NULL,ISAVUCONAZONIUM SULFATE IVPB,900261,ISAVUCONAZONIUM SULFATE IVPB,NULL,NULL,NULL,NULL,0,0,8,25,138,82,10,263
+other,NULL,"IFOSFAMIDE/MESNA CHEMO INFUSION""""",400166,"IFOSFAMIDE/MESNA CHEMO INFUSION""""",NULL,NULL,NULL,NULL,95,43,69,13,10,14,13,257
+other,NULL,FOMEPIZOLE IVPB,400152,FOMEPIZOLE IVPB,NULL,NULL,NULL,NULL,34,19,34,32,28,52,38,237
+other,NULL,"LEVETIRACETAM 5 MG/ML NS (NICU)""""",600335,"LEVETIRACETAM 5 MG/ML NS (NICU)""""",NULL,Neuromuscular Drugs,Anticonvulsant,Anticonvulsants - Misc.,0,0,0,89,51,38,45,223
+other,NULL,PACLITAXEL CHEMO INFUSION,410033,PACLITAXEL CHEMO INFUSION,NULL,NULL,NULL,NULL,28,19,26,30,27,47,45,222
+other,NULL,MAGNESIUM SULFATE 2 G IVPB,400044,MAGNESIUM SULFATE 2 G IVPB,NULL,NULL,NULL,NULL,20,0,5,26,56,95,14,216
+other,NULL,ONDANSETRON IVPB,400200,ONDANSETRON IVPB,NULL,NULL,NULL,NULL,14,16,27,35,31,55,33,211
+other,NULL,PAMIDRONATE IVPB,900049,PAMIDRONATE IVPB,NULL,NULL,NULL,NULL,70,46,18,21,24,20,9,208
+other,NULL,ALPROSTADIL DRIP (NICU),600509,ALPROSTADIL DRIP (NICU),NULL,NULL,NULL,NULL,25,6,13,36,56,60,12,208
+other,NULL,RASBURICASE IV INFUSION,900034,RASBURICASE IV INFUSION,NULL,NULL,NULL,NULL,28,27,22,32,29,44,21,203
+other,NULL,CISPLATIN WITH CYCLOPHOSPHAMIDE WITH ETOPOSIDE INFUSION,400241,CISPLATIN WITH CYCLOPHOSPHAMIDE WITH ETOPOSIDE INFUSION,NULL,NULL,NULL,NULL,49,30,73,0,23,0,0,175
+other,NULL,"CHLOROTHIAZIDE 28 MG/ML SW IV SYRINGE (NICU)""""",600256,"CHLOROTHIAZIDE 28 MG/ML SW IV SYRINGE (NICU)""""",NULL,Cardiovascular Agents,Diuretics,Thiazides and Thiazide-Like Diuretics,0,0,2,32,0,60,64,158
+other,NULL,DANTROLENE IVPB,400129,DANTROLENE IVPB,NULL,NULL,NULL,NULL,14,23,51,5,44,9,6,152
+other,NULL,FOSAPREPITANT IVPB,900189,FOSAPREPITANT IVPB,NULL,NULL,NULL,NULL,21,13,18,30,32,28,7,149
+other,NULL,"LIDOCAINE HCL (CARDIAC) 20 MG/ML IV SOLN""""",4459,"LIDOCAINE HCL (CARDIAC) 20 MG/ML IV SOLN""""",Lidocaine HCl (Cardiac),Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type I-B,19,21,26,34,32,12,0,144
+other,NULL,MYCOPHENOLATE IN D5W IVPB,900172,MYCOPHENOLATE IN D5W IVPB,NULL,NULL,NULL,NULL,0,32,0,0,106,6,0,144
+other,NULL,"FOSPHENYTOIN 25 MG PE/ML NS (NICU)""""",600289,"FOSPHENYTOIN 25 MG PE/ML NS (NICU)""""",NULL,Neuromuscular Drugs,Anticonvulsant,Hydantoins,0,0,0,31,1,50,61,143
+other,NULL,DEXTROSE VARIABLE CONC INFUSION (PEDIATRIC),200014,DEXTROSE VARIABLE CONC INFUSION (PEDIATRIC),NULL,NULL,NULL,NULL,78,17,37,0,0,0,0,132
+other,NULL,CEFTAROLINE FOSAMIL (TEFLARO) IVPB,900187,CEFTAROLINE FOSAMIL (TEFLARO) IVPB,NULL,NULL,NULL,NULL,0,44,71,17,0,0,0,132
+other,NULL,IDARUBICIN CHEMO INFUSION,400165,IDARUBICIN CHEMO INFUSION,NULL,NULL,NULL,NULL,5,36,20,15,34,21,0,131
+other,NULL,LEVOCARNITINE IVPB,400181,LEVOCARNITINE IVPB,NULL,NULL,NULL,NULL,0,0,0,0,62,2,65,129
+other,NULL,"RANITIDINE 0.5MG/ML NS (NICU)""""",600303,"RANITIDINE 0.5MG/ML NS (NICU)""""",NULL,Gastrointestinal Agents,Ulcer Drugs,H-2 Antagonists,0,0,18,33,70,4,0,125
+other,NULL,PEDIATRIC MAGNESIUM SULFATE IVPB,900584,PEDIATRIC MAGNESIUM SULFATE IVPB,NULL,NULL,NULL,NULL,0,0,0,0,66,51,4,121
+other,NULL,"NEOSTIGMINE METHYLSULFATE 10 MG/10ML IV SOLN""""",120650,"NEOSTIGMINE METHYLSULFATE 10 MG/10ML IV SOLN""""",Neostigmine Methylsulfate,Neuromuscular Drugs,Antimyasthenic Agents,"Antimyasthenic/Cholinergic Agents""""",0,0,19,44,35,14,4,116
+other,NULL,METHYLENE BLUE IVPB,900032,METHYLENE BLUE IVPB,NULL,NULL,NULL,NULL,0,0,54,0,57,0,4,115
+other,NULL,"PEDIATRIC REGULAR INSULIN DRIP 100 UNITS/100ML NS""""",900200,"PEDIATRIC REGULAR INSULIN DRIP 100 UNITS/100ML NS""""",NULL,NULL,NULL,NULL,50,43,0,0,14,0,0,107
+other,NULL,FLUDARABINE INFUSION,410020,FLUDARABINE INFUSION,NULL,NULL,NULL,NULL,14,20,17,10,41,0,0,102
+other,NULL,"ZOLEDRONIC ACID 4 MG/100ML IV SOLN""""",110604,"ZOLEDRONIC ACID 4 MG/100ML IV SOLN""""",Zoledronic Acid,Endocrine & Metabolic Drugs,Misc. Endocrine,Bone Density Regulators,0,0,0,0,0,27,75,102
+other,NULL,TPN PEDIATRIC 5-50 KG GRADY,40820001003,TPN PEDIATRIC 5-50 KG GRADY,NULL,NULL,NULL,NULL,51,36,0,0,0,12,0,99
+other,NULL,"TRANEXAMIC ACID 100 MG/ML IV SOLN""""",11573,"TRANEXAMIC ACID 100 MG/ML IV SOLN""""",Tranexamic Acid,Hematological Agents,Hemostatics,Hemostatics - Systemic,18,70,9,0,0,0,0,97
+other,NULL,"5-FU 2-DAY PORTABLE PUMP (5 ML/HR) 270ML""""",900119,"5-FU 2-DAY PORTABLE PUMP (5 ML/HR) 270ML""""",NULL,NULL,NULL,NULL,5,15,19,7,16,30,4,96
+other,NULL,"MAGNESIUM SULFATE 25 G/1000 ML NS- FOR NEUROLOGY SERVICE""""",900136,"MAGNESIUM SULFATE 25 G/1000 ML NS- FOR NEUROLOGY SERVICE""""",NULL,NULL,NULL,NULL,50,29,7,0,2,0,4,92
+other,NULL,"TROMETHAMINE 30 MEQ/100ML IV SOLN""""",11608,"TROMETHAMINE 30 MEQ/100ML IV SOLN""""",Tromethamine,Nutritional Products,Minerals & Electrolytes,Bicarbonates,6,27,59,0,0,0,0,92
+other,NULL,"CALCIUM CHLORIDE IV INFUSION 5G/500ML""""",900594,"CALCIUM CHLORIDE IV INFUSION 5G/500ML""""",NULL,NULL,NULL,NULL,0,0,0,6,30,54,0,90
+other,NULL,GEMCITABINE INFUSION,410021,GEMCITABINE INFUSION,NULL,NULL,NULL,NULL,13,6,15,7,19,18,10,88
+other,NULL,COLISTIMETHATE IVPB,900205,COLISTIMETHATE IVPB,NULL,NULL,NULL,NULL,23,1,0,12,6,0,44,86
+other,NULL,VECURONIUM DRIP (NICU),900252,VECURONIUM DRIP (NICU),NULL,Cardiovascular Agents,Pressors,Anaphylaxis Therapy Agents,0,0,32,3,25,9,16,85
+other,NULL,DEXTRAN 40 IN D5W 10 % IV SOLN,9759,DEXTRAN 40 IN D5W 10 % IV SOLN,Dextran 40 in D5W,Hematological Agents,Misc. Hematological,Plasma Expanders,69,7,6,1,0,0,0,83
+other,NULL,OXALIPLATIN INFUSION,410032,OXALIPLATIN INFUSION,NULL,NULL,NULL,NULL,5,13,14,6,9,27,9,83
+other,NULL,ALBUMIN 5 % IV CONTINUOUS INFUSION SYRINGE (NICU),601028,ALBUMIN 5 % IV CONTINUOUS INFUSION SYRINGE (NICU),NULL,Hematological Agents,Misc. Hematological,Plasma Proteins,0,0,0,0,74,9,0,83
+other,NULL,DOXORUBICIN LIPOSOMAL INFUSION,410017,DOXORUBICIN LIPOSOMAL INFUSION,NULL,NULL,NULL,NULL,10,10,4,17,13,26,2,82
+other,NULL,"FOSPHENYTOIN 1000 MGPE/50 ML NS IVPB""""",600497,"FOSPHENYTOIN 1000 MGPE/50 ML NS IVPB""""",NULL,Neuromuscular Drugs,Anticonvulsant,Hydantoins,77,0,0,0,0,0,0,77
+other,NULL,"IBUTILIDE FUMARATE 1 MG/10ML IV SOLN""""",101445,"IBUTILIDE FUMARATE 1 MG/10ML IV SOLN""""",Ibutilide Fumarate,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type III,10,3,5,11,17,24,5,75
+other,NULL,ACETYLCYSTEINE (ACETADOTE) IV INFUSION- NON-APAP LIVER FAILURE,900305,ACETYLCYSTEINE (ACETADOTE) IV INFUSION- NON-APAP LIVER FAILURE,NULL,NULL,NULL,NULL,0,0,0,0,3,44,21,68
+other,NULL,FACTOR IX RECOMB (BENEFIX) INFUSION,900078,FACTOR IX RECOMB (BENEFIX) INFUSION,NULL,NULL,NULL,NULL,0,0,65,0,0,0,0,65
+other,NULL,"KCL 1 MEQ/3.5ML SW (NICU) IV SYRINGE""""",600347,"KCL 1 MEQ/3.5ML SW (NICU) IV SYRINGE""""",NULL,Nutritional Products,Minerals & Electrolytes,Potassium,0,0,3,10,12,22,18,65
+other,NULL,"VALPROATE SODIUM 100 MG/ML IV SOLN""""",20887,"VALPROATE SODIUM 100 MG/ML IV SOLN""""",Valproate Sodium,Neuromuscular Drugs,Anticonvulsant,Valproic Acid,48,15,0,1,0,0,0,64
+other,NULL,LEUCOVORIN INFUSION,410025,LEUCOVORIN INFUSION,NULL,NULL,NULL,NULL,7,8,6,9,10,21,2,63
+other,NULL,"5-FU 4-DAY PORTABLE PUMP (2 ML/HR) 270ML""""",900117,"5-FU 4-DAY PORTABLE PUMP (2 ML/HR) 270ML""""",NULL,NULL,NULL,NULL,0,2,0,26,12,14,5,59
+other,NULL,FEIBA INFUSION,900530,FEIBA INFUSION,NULL,NULL,NULL,NULL,0,0,3,0,31,17,7,58
+other,NULL,ZZ EXTEMPORANEOUS TEMPLATE,800000,ZZ EXTEMPORANEOUS TEMPLATE,NULL,NULL,NULL,NULL,12,19,11,0,4,6,3,55
+other,NULL,"ADENOSINE 12 MG/4ML IV SOLN""""",39477,"ADENOSINE 12 MG/4ML IV SOLN""""",Adenosine,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics - Misc.,52,0,0,0,0,0,0,52
+other,NULL,COPPER CHLORIDE IVPB,900263,COPPER CHLORIDE IVPB,NULL,NULL,NULL,NULL,0,0,5,21,0,21,5,52
+other,NULL,"STUDY RIVIPANSEL/PLACEBO 30 MG/ML IV SOLUTION""""",600797,"STUDY RIVIPANSEL/PLACEBO 30 MG/ML IV SOLUTION""""",NULL,NULL,NULL,NULL,0,0,11,33,4,4,0,52
+other,NULL,CLADRIBINE CHEMO INFUSION,400116,CLADRIBINE CHEMO INFUSION,NULL,NULL,NULL,NULL,22,18,0,0,0,10,0,50
+other,NULL,"CONIVAPTAN HCL IN DEXTROSE 20-5 MG/100ML-% IV SOLN""""",96988,"CONIVAPTAN HCL IN DEXTROSE 20-5 MG/100ML-% IV SOLN""""",Conivaptan HCl in Dextrose,Endocrine & Metabolic Drugs,Misc. Endocrine,Vasopressin Receptor Antagonists,11,0,10,8,18,3,0,50
+other,NULL,"CETUXIMAB 100 MG/50ML IV SOLN""""",37989,"CETUXIMAB 100 MG/50ML IV SOLN""""",Cetuximab,Antineoplastic Agents,Antineoplastics,Antineoplastic - Antibodies,13,4,0,12,18,2,0,49
+other,NULL,GLUCAGON INFUSION,900174,GLUCAGON INFUSION,NULL,NULL,NULL,NULL,3,1,3,4,37,1,0,49
+other,NULL,BLEOMYCIN CHEMO INFUSION,400096,BLEOMYCIN CHEMO INFUSION,NULL,NULL,NULL,NULL,4,8,10,11,4,8,3,48
+other,NULL,DEXTRAN 40 IN SALINE 10-0.9 % IV SOLN,23876,DEXTRAN 40 IN SALINE 10-0.9 % IV SOLN,Dextran 40 in Saline,Hematological Agents,Misc. Hematological,Plasma Expanders,44,0,0,3,1,0,0,48
+other,NULL,IMMUNE GLOBULIN 10% IV SYRINGE (NICU),600545,IMMUNE GLOBULIN 10% IV SYRINGE (NICU),NULL,Biological,Antisera,NULL,0,0,0,7,21,17,3,48
+other,NULL,TPN ADULT GRADY PERIPHERAL - CYCLIC,4082000102,TPN ADULT GRADY PERIPHERAL - CYCLIC,NULL,NULL,NULL,NULL,0,0,0,0,39,2,5,46
+other,NULL,SODIUM BICARBONATE IN LACTATED RINGERS,900554,SODIUM BICARBONATE IN LACTATED RINGERS,NULL,NULL,NULL,NULL,30,12,1,0,1,0,0,44
+other,NULL,"SILDENAFIL CITRATE 10 MG/12.5ML IV SOLN""""",101323,"SILDENAFIL CITRATE 10 MG/12.5ML IV SOLN""""",Sildenafil Citrate,Cardiovascular Agents,Cardiovascular,Pulmonary Hypertension - Phosphodiesterase Inhibitors,0,0,0,39,5,0,0,44
+other,NULL,CANGRELOR (KENGREAL) IV INFUSION,900326,CANGRELOR (KENGREAL) IV INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,0,43,0,43
+other,NULL,CARFILZOMIB INFUSION,900555,CARFILZOMIB INFUSION,NULL,NULL,NULL,NULL,0,14,16,6,0,6,0,42
+other,NULL,"ABCIXIMAB 2 MG/ML IV SOLN""""",14369,"ABCIXIMAB 2 MG/ML IV SOLN""""",Abciximab,Hematological Agents,Misc. Hematological,Platelet Aggregation Inhibitors,11,13,4,8,5,0,0,41
+other,NULL,"METHOTREXATE SODIUM (PF) 1 GM/40ML IJ SOLN""""",115826,"METHOTREXATE SODIUM (PF) 1 GM/40ML IJ SOLN""""",Methotrexate Sodium,Antineoplastic Agents,Antineoplastics,Antimetabolites,0,0,1,14,15,11,0,41
+other,NULL,PROCAINAMIDE IV INFUSION,400063,PROCAINAMIDE IV INFUSION,NULL,NULL,NULL,NULL,7,1,2,0,2,20,8,40
+other,NULL,ATRACURIUM INFUSION,900009,ATRACURIUM INFUSION,NULL,NULL,NULL,NULL,16,10,13,0,0,0,0,39
+other,NULL,CROTALIDAE POLYV (CROFAB) IVPB,900008,CROTALIDAE POLYV (CROFAB) IVPB,NULL,NULL,NULL,NULL,4,8,8,4,0,13,0,37
+other,NULL,"ANTIHEMOPHILIC FACTOR-VWF (ALPHANATE/VWF) INFUSION""""",900228,"ANTIHEMOPHILIC FACTOR-VWF (ALPHANATE/VWF) INFUSION""""",NULL,NULL,NULL,NULL,0,37,0,0,0,0,0,37
+other,NULL,"LYMPHOCYTE,ANTI-THYMO (ATGAM) INFUSION",900181,"LYMPHOCYTE,ANTI-THYMO (ATGAM) INFUSION",NULL,NULL,NULL,NULL,0,8,9,9,0,10,0,36
+other,NULL,"CAFFEINE CITRATE 500 MG/ NS 1000 ML""""",900157,"CAFFEINE CITRATE 500 MG/ NS 1000 ML""""",NULL,NULL,NULL,NULL,1,5,10,6,11,0,2,35
+other,NULL,DARATUMUMAB (DARZALEX) CHEMO INFUSION,900267,DARATUMUMAB (DARZALEX) CHEMO INFUSION,NULL,NULL,NULL,NULL,0,0,4,15,11,5,0,35
+other,NULL,COAGULATION FACTOR IX RECOMB (IXINITY) IV INFUSION,900366,COAGULATION FACTOR IX RECOMB (IXINITY) IV INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,0,0,34,34
+other,NULL,"PANTOPRAZOLE 0.8 MG/ML NS IV SYRINGE (NICU)""""",600809,"PANTOPRAZOLE 0.8 MG/ML NS IV SYRINGE (NICU)""""",NULL,Gastrointestinal Agents,Ulcer Drugs,Proton Pump Inhibitors,0,0,1,3,0,2,27,33
+other,NULL,CYCLOSPORINE IVPB,400124,CYCLOSPORINE IVPB,NULL,NULL,NULL,NULL,0,0,1,0,23,9,0,33
+other,NULL,PENTOBARBITAL IVPB,400204,PENTOBARBITAL IVPB,NULL,NULL,NULL,NULL,8,24,0,0,0,0,0,32
+other,NULL,"GADOXETATE DISODIUM 0.25 MOL/L IV SOLN""""",93574,"GADOXETATE DISODIUM 0.25 MOL/L IV SOLN""""",Gadoxetate Disodium,Miscellaneous Products,Diagnostic Products,Miscellaneous Contrast Media,0,0,4,12,11,4,1,32
+other,NULL,"FUROSEMIDE PEDIATRIC CONTONUOUS INFUSION 1 MG/ML""""",900254,"FUROSEMIDE PEDIATRIC CONTONUOUS INFUSION 1 MG/ML""""",NULL,NULL,NULL,NULL,0,0,0,0,20,8,4,32
+other,NULL,QUINIDINE GLUCONATE IV INFUSION,900212,QUINIDINE GLUCONATE IV INFUSION,NULL,NULL,NULL,NULL,0,6,0,18,6,0,0,30
+other,NULL,DACARBAZINE INFUSION,410013,DACARBAZINE INFUSION,NULL,NULL,NULL,NULL,5,2,8,3,4,4,2,28
+other,NULL,"FUROSEMIDE 10 MG/ML IJ SOLN""""",3291,"FUROSEMIDE 10 MG/ML IJ SOLN""""",Furosemide,Cardiovascular Agents,Diuretics,Loop Diuretics,0,8,10,10,0,0,0,28
+other,NULL,OCTREOTIDE DRIP (NICU) IV SYRINGE,601029,OCTREOTIDE DRIP (NICU) IV SYRINGE,NULL,NULL,NULL,NULL,0,0,0,0,28,0,0,28
+other,NULL,"CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN""""",119123,"CISATRACURIUM BESYLATE 20 MG/10ML IV SOLN""""",Cisatracurium Besylate,Neuromuscular Drugs,Neuromuscular Blockers,Nondepolarizing Muscle Relaxants,0,0,1,5,8,7,6,27
+other,NULL,VINBLASTINE CHEMO INFUSION,400230,VINBLASTINE CHEMO INFUSION,NULL,NULL,NULL,NULL,3,2,8,3,4,4,2,26
+other,NULL,PROTAMINE SULFATE IVPB,400213,PROTAMINE SULFATE IVPB,NULL,NULL,NULL,NULL,0,4,4,2,2,6,7,25
+other,NULL,ALBUMIN 5 % IV SYRINGE (NICU),600762,ALBUMIN 5 % IV SYRINGE (NICU),NULL,Hematological Agents,Misc. Hematological,Plasma Proteins,0,0,0,0,7,18,0,25
+other,NULL,BENDAMUSTINE INFUSION,410042,BENDAMUSTINE INFUSION,NULL,NULL,NULL,NULL,4,4,8,4,4,0,0,24
+other,NULL,INFLIXIMAB IVPB,400169,INFLIXIMAB IVPB,NULL,NULL,NULL,NULL,4,1,5,1,7,5,0,23
+other,NULL,STUDY ESETT DRUG IN NS 100 ML,600775,STUDY ESETT DRUG IN NS 100 ML,NULL,NULL,NULL,NULL,0,1,6,16,0,0,0,23
+other,NULL,"NALOXONE HCL 0.4 MG/ML IJ SOLN""""",5373,"NALOXONE HCL 0.4 MG/ML IJ SOLN""""",Naloxone HCl,Miscellaneous Products,Antidotes,Opioid Antagonists,15,2,3,2,0,0,0,22
+other,NULL,"LEVETIRACETAM 500 MG/5ML IV SOLN""""",77195,"LEVETIRACETAM 500 MG/5ML IV SOLN""""",levETIRAcetam,Neuromuscular Drugs,Anticonvulsant,Anticonvulsants - Misc.,5,2,1,13,0,0,0,21
+other,NULL,BEVACIZUMAB INFUSION,410002,BEVACIZUMAB INFUSION,NULL,NULL,NULL,NULL,1,3,5,0,8,0,4,21
+other,NULL,"HIGH CONCENTRATION INSULIN DRIP BB/CCB""""",900334,"HIGH CONCENTRATION INSULIN DRIP BB/CCB""""",NULL,NULL,NULL,NULL,0,0,0,0,0,21,0,21
+other,NULL,DACTINOMYCIN CHEMO INFUSION,400128,DACTINOMYCIN CHEMO INFUSION,NULL,NULL,NULL,NULL,19,1,0,0,0,0,0,20
+other,NULL,PERAMIVIR IVPB,900253,PERAMIVIR IVPB,NULL,NULL,NULL,NULL,0,0,5,4,10,1,0,20
+other,NULL,VINORELBINE CHEMO INFUSION,400232,VINORELBINE CHEMO INFUSION,NULL,NULL,NULL,NULL,10,0,0,4,5,0,0,19
+other,NULL,"MAGNESIUM SULFATE 60 MG/ML NS (NICU)""""",600332,"MAGNESIUM SULFATE 60 MG/ML NS (NICU)""""",NULL,Nutritional Products,Minerals & Electrolytes,Magnesium,0,0,0,13,2,0,4,19
+other,NULL,BIVALIRUDIN CONTINUOUS INFUSION,900270,BIVALIRUDIN CONTINUOUS INFUSION,NULL,NULL,NULL,NULL,0,0,0,7,0,3,9,19
+other,NULL,TRASTUZUMAB INFUSION,410039,TRASTUZUMAB INFUSION,NULL,NULL,NULL,NULL,4,0,0,8,2,4,0,18
+other,NULL,ALCOHOL 98 % IV SOLN,257,ALCOHOL 98 % IV SOLN,Alcohol,Nutritional Products,Nutrients,Carbohydrates,0,2,2,11,3,0,0,18
+other,NULL,ALBUMIN 25 % IV SYRINGE (NICU),600763,ALBUMIN 25 % IV SYRINGE (NICU),NULL,Hematological Agents,Misc. Hematological,Plasma Proteins,0,0,0,0,15,3,0,18
+other,NULL,"STUDY BAF312/PLACEBO IV SYRINGE""""",900328,"STUDY BAF312/PLACEBO IV SYRINGE""""",NULL,NULL,NULL,NULL,0,0,0,0,0,18,0,18
+other,NULL,HETASTARCH-NACL 6-0.9 % IV SOLN,25174,HETASTARCH-NACL 6-0.9 % IV SOLN,Hetastarch-NaCl,Hematological Agents,Misc. Hematological,Plasma Expanders,2,0,1,5,7,2,0,17
+other,NULL,"BIVALIRUDIN INFUSION (FOR 2A CATH/STRESS)""""",900132,"BIVALIRUDIN INFUSION (FOR 2A CATH/STRESS)""""",NULL,NULL,NULL,NULL,3,5,0,4,2,3,0,17
+other,NULL,ANTIHEMOPHILIC FACTOR (RECOMB) 500 UNITS IV KIT,32960,ANTIHEMOPHILIC FACTOR (RECOMB) 500 UNITS IV KIT,Antihemophilic Factor (Recomb),Hematological Agents,Misc. Hematological,Antihemophilic Products,5,2,4,2,1,3,0,17
+other,NULL,"INSULIN REGULAR 0.2UNIT/ML NS (NICU)""""",600301,"INSULIN REGULAR 0.2UNIT/ML NS (NICU)""""",NULL,Endocrine & Metabolic Drugs,Antidiabetic,Insulin,0,0,0,11,4,2,0,17
+other,NULL,"DIPYRIDAMOLE 5 MG/ML IV SOLN""""",9891,"DIPYRIDAMOLE 5 MG/ML IV SOLN""""",Dipyridamole,Miscellaneous Products,Diagnostic Products,Diagnostic Drugs,5,11,0,0,0,0,0,16
+other,NULL,"SODIUM ACETATE 4 MEQ/ML IV SOLN""""",7302,"SODIUM ACETATE 4 MEQ/ML IV SOLN""""",Sodium Acetate,Nutritional Products,Minerals & Electrolytes,Bicarbonates,12,0,3,1,0,0,0,16
+other,NULL,STUDY ALLOPREGNANOLONE 200MG IN SW 120ML INFUSION,900226,STUDY ALLOPREGNANOLONE 200MG IN SW 120ML INFUSION,NULL,NULL,NULL,NULL,0,16,0,0,0,0,0,16
+other,NULL,PEMETREXED INFUSION,410035,PEMETREXED INFUSION,NULL,NULL,NULL,NULL,0,0,2,0,0,12,2,16
+other,NULL,"STUDY RIVIPANSEL 30 MG/ML IV SOLUTION""""",600834,"STUDY RIVIPANSEL 30 MG/ML IV SOLUTION""""",NULL,NULL,NULL,NULL,0,0,0,16,0,0,0,16
+other,NULL,"DEXMEDETOMIDINE HCL 200 MCG/2ML IV SOLN""""",121934,"DEXMEDETOMIDINE HCL 200 MCG/2ML IV SOLN""""",Dexmedetomidine HCl,Central Nervous System Drugs,Hypnotics,Non-Barbiturate Hypnotics,1,1,0,3,3,6,1,15
+other,NULL,IRINOTECAN INFUSION,410024,IRINOTECAN INFUSION,NULL,NULL,NULL,NULL,0,2,0,0,10,3,0,15
+other,NULL,ALTEPLASE 50 MG IV SOLR,9003,ALTEPLASE 50 MG IV SOLR,Alteplase,Hematological Agents,Misc. Hematological,Thrombolytic Enzymes,0,1,0,1,9,2,2,15
+other,NULL,TRANEXAMIC ACID IV INFUSION,900340,TRANEXAMIC ACID IV INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,0,8,7,15
+other,NULL,"AMINOCAPROIC ACID 250 MG/ML IV SOLN""""",403,"AMINOCAPROIC ACID 250 MG/ML IV SOLN""""",Aminocaproic Acid,Hematological Agents,Hemostatics,Hemostatics - Systemic,4,0,4,1,5,0,0,14
+other,NULL,"TROMETHAMINE 0.3 MEQ/ML BOLUS FROM BOTTLE""""",600716,"TROMETHAMINE 0.3 MEQ/ML BOLUS FROM BOTTLE""""",NULL,Nutritional Products,Minerals & Electrolytes,Bicarbonates,3,10,1,0,0,0,0,14
+other,NULL,ABCIXIMAB INFUSION,400039,ABCIXIMAB INFUSION,NULL,NULL,NULL,NULL,0,8,3,0,3,0,0,14
+other,NULL,"ECULIZUMAB 5MG/ML INFUSION""""",900574,"ECULIZUMAB 5MG/ML INFUSION""""",NULL,NULL,NULL,NULL,0,0,1,2,0,0,11,14
+other,NULL,"LEVOTHYROXINE 20 MCG/ML (NICU) IV SYRINGE""""",600345,"LEVOTHYROXINE 20 MCG/ML (NICU) IV SYRINGE""""",NULL,Endocrine & Metabolic Drugs,Thyroid,Thyroid Hormones,0,0,0,0,10,4,0,14
+other,NULL,"STUDY MST-188/PLACEBO MAINTENANCE (>=55.1 KG)""""",900225,"STUDY MST-188/PLACEBO MAINTENANCE (>=55.1 KG)""""",NULL,NULL,NULL,NULL,0,11,2,0,0,0,0,13
+other,NULL,"VALPROATE SODIUM 500 MG/5ML IV SOLN""""",103727,"VALPROATE SODIUM 500 MG/5ML IV SOLN""""",Valproate Sodium,Neuromuscular Drugs,Anticonvulsant,Valproic Acid,0,3,6,0,1,3,0,13
+other,NULL,ALEMTUZUMAB CHEMO INFUSION,400072,ALEMTUZUMAB CHEMO INFUSION,NULL,NULL,NULL,NULL,0,0,0,7,0,6,0,13
+other,NULL,COAGULATION FACTOR IX (RECOMB) 1000 UNITS IV KIT,132828,COAGULATION FACTOR IX (RECOMB) 1000 UNITS IV KIT,Coagulation Factor IX (Recomb),Hematological Agents,Misc. Hematological,Antihemophilic Products,0,0,0,3,8,0,2,13
+other,NULL,"STUDY LENZILUMAB/ PLACEBO INFUSION""""",900379,"STUDY LENZILUMAB/ PLACEBO INFUSION""""",NULL,NULL,NULL,NULL,0,0,0,0,0,0,13,13
+other,NULL,"FLUOROURACIL 1 GM/20ML IV SOLN""""",82204,"FLUOROURACIL 1 GM/20ML IV SOLN""""",Fluorouracil,Antineoplastic Agents,Antineoplastics,Antimetabolites,4,3,5,0,0,0,0,12
+other,NULL,ANTITHYMOCYTE GLOBULIN (EQUINE) IVPB,400086,ANTITHYMOCYTE GLOBULIN (EQUINE) IVPB,NULL,NULL,NULL,NULL,12,0,0,0,0,0,0,12
+other,NULL,"AMINOPHYLLINE 25 MG/ML IV SOLN""""",407,"AMINOPHYLLINE 25 MG/ML IV SOLN""""",Aminophylline,Respiratory Agents,Antiasthmatic,Xanthines,1,1,0,2,4,4,0,12
+other,NULL,FAT EMULSION 20 % (NICU),600741,FAT EMULSION 20 % (NICU),NULL,Nutritional Products,Nutrients,Lipids,0,12,0,0,0,0,0,12
+other,NULL,BRENTUXIMAB IVPB,900194,BRENTUXIMAB IVPB,NULL,NULL,NULL,NULL,0,0,1,2,7,0,2,12
+other,NULL,"IDARUCIZUMAB 2.5 GM/50ML IV SOLN""""",129598,"IDARUCIZUMAB 2.5 GM/50ML IV SOLN""""",idaruCIZUmab,Miscellaneous Products,Antidotes,Antidotes and Specific Antagonists,0,0,1,5,1,5,0,12
+other,NULL,DEFEROXAMINE INFUSION,400131,DEFEROXAMINE INFUSION,NULL,NULL,NULL,NULL,0,0,0,1,0,11,0,12
+other,NULL,"NELARABINE 5 MG/ML IV SOLN""""",70267,"NELARABINE 5 MG/ML IV SOLN""""",Nelarabine,Antineoplastic Agents,Antineoplastics,Antimetabolites,0,0,0,0,12,0,0,12
+other,NULL,ANTITHYMOCYTE GLOBULIN (RABBIT) INFUSION,400087,ANTITHYMOCYTE GLOBULIN (RABBIT) INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,12,0,0,12
+other,NULL,"CALCIUM CHLORIDE 20 MG/ML NS (NICU) IV SYRINGE""""",601069,"CALCIUM CHLORIDE 20 MG/ML NS (NICU) IV SYRINGE""""",NULL,NULL,NULL,NULL,0,0,0,0,0,0,12,12
+other,NULL,CALCIUM CHLORIDE 10 G IN 1000ML INFUSION,900265,CALCIUM CHLORIDE 10 G IN 1000ML INFUSION,NULL,NULL,NULL,NULL,0,0,6,5,0,0,0,11
+other,NULL,"STUDY GLIBENCLAMIDE (BIIB093) OR PLACEBO 5.67 MCG/ML INFUSION""""",900336,"STUDY GLIBENCLAMIDE (BIIB093) OR PLACEBO 5.67 MCG/ML INFUSION""""",NULL,NULL,NULL,NULL,0,0,0,0,0,0,11,11
+other,NULL,"INVESTIGATIONAL HEMOPURE HBOC-201 1 UNIT/250 ML""""",600791,"INVESTIGATIONAL HEMOPURE HBOC-201 1 UNIT/250 ML""""",NULL,NULL,NULL,NULL,0,0,10,0,0,0,0,10
+other,NULL,SODIUM CHLORIDE 0.9% STUDY IV,600476,SODIUM CHLORIDE 0.9% STUDY IV,Sodium Chloride,NULL,NULL,NULL,0,0,0,8,2,0,0,10
+other,NULL,"FLUOROURACIL 5 GM/100ML IV SOLN""""",98249,"FLUOROURACIL 5 GM/100ML IV SOLN""""",Fluorouracil,Antineoplastic Agents,Antineoplastics,Antimetabolites,0,0,0,3,1,4,2,10
+other,NULL,"OXYTOCIN 10 UNITS/250 ML NS-ANESTHESIA ONLY""""",900330,"OXYTOCIN 10 UNITS/250 ML NS-ANESTHESIA ONLY""""",NULL,NULL,NULL,NULL,0,0,0,0,0,2,8,10
+other,NULL,"IMMUNE GLOBULIN (HUMAN) 10 GM/100ML- MD""""",600926,"IMMUNE GLOBULIN (HUMAN) 10 GM/100ML- MD""""",Immune Globulin (Human),Biological,Antisera,Immune Serums,0,0,0,0,0,6,4,10
+other,NULL,"ATRACURIUM BESYLATE 100 MG/10ML IV SOLN""""",119119,"ATRACURIUM BESYLATE 100 MG/10ML IV SOLN""""",Atracurium Besylate,Neuromuscular Drugs,Neuromuscular Blockers,Nondepolarizing Muscle Relaxants,7,1,0,0,0,0,0,8
+other,NULL,"THIAMINE HCL 100 MG/ML IJ SOLN""""",7876,"THIAMINE HCL 100 MG/ML IJ SOLN""""",Thiamine HCl,Nutritional Products,Vitamins,Water Soluble Vitamins,0,3,0,4,0,1,0,8
+other,NULL,"INSULIN NOVOLIN REGULAR 100 UNIT/ML IJ SOLN""""",10289,"INSULIN NOVOLIN REGULAR 100 UNIT/ML IJ SOLN""""",Insulin Regular Human,Endocrine & Metabolic Drugs,Antidiabetic,Insulin,0,0,0,4,0,1,3,8
+other,NULL,PANITUMUMAB CHEMO INFUSION,400202,PANITUMUMAB CHEMO INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,8,0,0,8
+other,NULL,DOCETAXEL INFUSION,410016,DOCETAXEL INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,2,6,0,8
+other,NULL,TOPOTECAN INFUSION,410038,TOPOTECAN INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,0,8,0,8
+other,NULL,"STUDY MST-188/PLACEBO LOADING (55.1-80 KG)""""",900220,"STUDY MST-188/PLACEBO LOADING (55.1-80 KG)""""",NULL,NULL,NULL,NULL,0,6,1,0,0,0,0,7
+other,NULL,IRON DEXTRAN IVPB (TEST DOSE),400172,IRON DEXTRAN IVPB (TEST DOSE),NULL,NULL,NULL,NULL,0,0,3,1,2,0,1,7
+other,NULL,"GADOBUTROL 1 MMOL/ML IV SOLN""""",107784,"GADOBUTROL 1 MMOL/ML IV SOLN""""",Gadobutrol,Miscellaneous Products,Diagnostic Products,Miscellaneous Contrast Media,0,0,5,0,2,0,0,7
+other,NULL,PERTUZUMAB INFUSION,420029,PERTUZUMAB INFUSION,NULL,NULL,NULL,NULL,0,0,0,6,1,0,0,7
+other,NULL,"5-FU 5-DAY PORTABLE PUMP (2 ML/HR) 270ML""""",900118,"5-FU 5-DAY PORTABLE PUMP (2 ML/HR) 270ML""""",NULL,NULL,NULL,NULL,0,0,0,7,0,0,0,7
+other,NULL,"BACTRIM DESENSITIZATION 3.2 MG/500 ML D5W""""",600348,"BACTRIM DESENSITIZATION 3.2 MG/500 ML D5W""""",NULL,NULL,NULL,NULL,0,0,0,0,1,2,4,7
+other,NULL,PHENOBARBITAL (LUMINAL) IVPB >= 1000 MG,900337,PHENOBARBITAL (LUMINAL) IVPB >= 1000 MG,NULL,NULL,NULL,NULL,0,0,0,0,0,2,5,7
+other,NULL,IV FLUID SYRINGE (NICU),600504,IV FLUID SYRINGE (NICU),NULL,NULL,NULL,NULL,1,4,1,0,0,0,0,6
+other,NULL,BUFFERED 3% SALINE 500 ML,900531,BUFFERED 3% SALINE 500 ML,NULL,NULL,NULL,NULL,3,0,3,0,0,0,0,6
+other,NULL,NIVOLUMAB CHEMO INFUSION,900229,NIVOLUMAB CHEMO INFUSION,NULL,Antineoplastic Agents,Antineoplastics,NULL,0,0,1,3,2,0,0,6
+other,NULL,PANTOPRAZOLE SODIUM 40 MG IV SOLR,26226,PANTOPRAZOLE SODIUM 40 MG IV SOLR,Pantoprazole Sodium,Gastrointestinal Agents,Ulcer Drugs,Proton Pump Inhibitors,0,0,1,5,0,0,0,6
+other,NULL,"MAGNESIUM SULFATE 2 GM/50ML IV SOLN""""",129087,"MAGNESIUM SULFATE 2 GM/50ML IV SOLN""""",Magnesium Sulfate,Nutritional Products,Minerals & Electrolytes,Magnesium,0,0,2,4,0,0,0,6
+other,NULL,STUDY NIVOLUMAB IN NS 180 ML,600844,STUDY NIVOLUMAB IN NS 180 ML,NULL,NULL,NULL,NULL,0,0,0,6,0,0,0,6
+other,NULL,"COPPER CHLORIDE 0.4 MG/ML IV SOLN""""",1900,"COPPER CHLORIDE 0.4 MG/ML IV SOLN""""",Cupric Chloride,Nutritional Products,Minerals & Electrolytes,Trace Minerals,0,0,0,6,0,0,0,6
+other,NULL,"BACTRIM DESENSITIZATION 0.032 MG/500ML D5W""""",900199,"BACTRIM DESENSITIZATION 0.032 MG/500ML D5W""""",NULL,NULL,NULL,NULL,0,0,0,0,1,2,3,6
+other,NULL,"BACTRIM DESENSITIZATION 160 MG/500ML D5W""""",900198,"BACTRIM DESENSITIZATION 160 MG/500ML D5W""""",NULL,NULL,NULL,NULL,0,0,0,0,1,2,3,6
+other,NULL,INFLIXIMAB-ABDA (RENFLEXIS) IVPB,900598,INFLIXIMAB-ABDA (RENFLEXIS) IVPB,NULL,NULL,NULL,NULL,0,0,0,0,0,6,0,6
+other,NULL,PEGASPARGASE INFUSION,900193,PEGASPARGASE INFUSION,NULL,NULL,NULL,NULL,0,0,1,4,0,0,0,5
+other,NULL,"METOCLOPRAMIDE HCL 5 MG/ML IJ SOLN""""",5002,"METOCLOPRAMIDE HCL 5 MG/ML IJ SOLN""""",Metoclopramide HCl,Gastrointestinal Agents,Misc. Gi,Gastrointestinal Stimulants,0,0,0,5,0,0,0,5
+other,NULL,NORMOSOL-R PH 7.4 IV SOLN IV BOLUS,600857,NORMOSOL-R PH 7.4 IV SOLN IV BOLUS,Electrolyte-R (PH 7.4) Solution,Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,0,0,0,5,0,0,0,5
+other,NULL,"BACTRIM DESENSITIZATION FULL DOSE 160 MG/250 ML D5W""""",600353,"BACTRIM DESENSITIZATION FULL DOSE 160 MG/250 ML D5W""""",NULL,NULL,NULL,NULL,0,0,0,0,1,2,2,5
+other,NULL,"PEDIATRIC KCL 5 MEQ/NS OR D5W 50ML IVPB""""",900292,"PEDIATRIC KCL 5 MEQ/NS OR D5W 50ML IVPB""""",NULL,NULL,NULL,NULL,0,0,0,0,0,3,2,5
+other,NULL,TOCILIZUMAB IVPB FOR COVID-19 ONLY,900365,TOCILIZUMAB IVPB FOR COVID-19 ONLY,NULL,NULL,NULL,NULL,0,0,0,0,0,0,5,5
+other,NULL,"ONDANSETRON HCL 4 MG/2ML IJ SOLN""""",94096,"ONDANSETRON HCL 4 MG/2ML IJ SOLN""""",Ondansetron HCl,Gastrointestinal Agents,Antiemetics,5-HT3 Receptor Antagonists,1,0,0,3,0,0,0,4
+other,NULL,DEXMEDETOMIDINE IV BOLUS,400135,DEXMEDETOMIDINE IV BOLUS,NULL,NULL,NULL,NULL,0,4,0,0,0,0,0,4
+other,NULL,DEXRAZOXANE INFUSION,400136,DEXRAZOXANE INFUSION,NULL,NULL,NULL,NULL,0,0,4,0,0,0,0,4
+other,NULL,"MAGNESIUM SULFATE 4 GM/50ML IV SOLN""""",129091,"MAGNESIUM SULFATE 4 GM/50ML IV SOLN""""",Magnesium Sulfate,Nutritional Products,Minerals & Electrolytes,Magnesium,0,0,1,2,1,0,0,4
+other,NULL,"FAMOTIDINE 2MG/ML NS (NICU)""""",600260,"FAMOTIDINE 2MG/ML NS (NICU)""""",NULL,Gastrointestinal Agents,Ulcer Drugs,H-2 Antagonists,0,0,0,2,0,0,2,4
+other,NULL,SODIUM THIOSULFATE 25 % IV SOLN,7364,SODIUM THIOSULFATE 25 % IV SOLN,Sodium Thiosulfate,Miscellaneous Products,Antidotes,Antidotes and Specific Antagonists,0,0,0,4,0,0,0,4
+other,NULL,PEMBROLIZUMAB CHEMO INFUSION,900260,PEMBROLIZUMAB CHEMO INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,2,0,2,4
+other,NULL,RITUXIMAB-ABBS STANDARD INFUSION,900359,RITUXIMAB-ABBS STANDARD INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,0,0,4,4
+other,NULL,"VINCRISTINE SULFATE 1 MG/ML IV SOLN""""",8597,"VINCRISTINE SULFATE 1 MG/ML IV SOLN""""",vinCRIStine Sulfate,Antineoplastic Agents,Antineoplastics,Mitotic Inhibitors,2,1,0,0,0,0,0,3
+other,NULL,"MAGNESIUM SULFATE 80 MG/ML IJ SOLN""""",4721,"MAGNESIUM SULFATE 80 MG/ML IJ SOLN""""",Magnesium Sulfate,Nutritional Products,Minerals & Electrolytes,Magnesium,3,0,0,0,0,0,0,3
+other,NULL,D5LR + OXYTOCIN (OR+KCL) IV INFUSION,900023,D5LR + OXYTOCIN (OR+KCL) IV INFUSION,NULL,NULL,NULL,NULL,2,1,0,0,0,0,0,3
+other,NULL,"HALOPERIDOL LACTATE 5 MG/ML IJ SOLN""""",3584,"HALOPERIDOL LACTATE 5 MG/ML IJ SOLN""""",Haloperidol Lactate,Central Nervous System Drugs,Antipsychotics,Butyrophenones,2,0,0,1,0,0,0,3
+other,NULL,ANTIHEMOPHILIC FACTOR-VWF 500-1200 UNITS IV SOLR,70405,ANTIHEMOPHILIC FACTOR-VWF 500-1200 UNITS IV SOLR,Antihemophilic Factor-VWF,Hematological Agents,Misc. Hematological,Antihemophilic Products,0,3,0,0,0,0,0,3
+other,NULL,"LACOSAMIDE 200 MG/20ML IV SOLN""""",96972,"LACOSAMIDE 200 MG/20ML IV SOLN""""",Lacosamide,Neuromuscular Drugs,Anticonvulsant,Anticonvulsants - Misc.,0,3,0,0,0,0,0,3
+other,NULL,FACTOR VIII+VWF (HUMATE P) INFUSION,900076,FACTOR VIII+VWF (HUMATE P) INFUSION,NULL,NULL,NULL,NULL,0,3,0,0,0,0,0,3
+other,NULL,"CUPRIC SULFATE 0.4 MG/ML IV SOLN""""",1986,"CUPRIC SULFATE 0.4 MG/ML IV SOLN""""",Cupric Sulfate,Nutritional Products,Minerals & Electrolytes,Trace Minerals,0,0,3,0,0,0,0,3
+other,NULL,"DESMOPRESSIN 0.25MCG/0.5ML NS SYRINGE""""",600369,"DESMOPRESSIN 0.25MCG/0.5ML NS SYRINGE""""",NULL,Endocrine & Metabolic Drugs,Misc. Endocrine,Posterior Pituitary Hormones,0,0,3,0,0,0,0,3
+other,NULL,"PHENOBARBITAL 10 MG/ML IN NS 2 ML (NICU) SYRINGE""""",600828,"PHENOBARBITAL 10 MG/ML IN NS 2 ML (NICU) SYRINGE""""",NULL,Central Nervous System Drugs,Hypnotics,Barbiturate Hypnotics,0,0,3,0,0,0,0,3
+other,NULL,MITOMYCIN IVPB,900112,MITOMYCIN IVPB,NULL,NULL,NULL,NULL,0,0,0,1,0,0,2,3
+other,NULL,"KPHOS 0.05 MM/ML D5W (NICU) IV SYRINGE""""",600714,"KPHOS 0.05 MM/ML D5W (NICU) IV SYRINGE""""",NULL,Nutritional Products,Minerals & Electrolytes,Phosphate,0,0,0,0,0,1,2,3
+other,NULL,WILATE (VW:FACTOR VIII) CONTINUOUS INFUSION,900345,WILATE (VW:FACTOR VIII) CONTINUOUS INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,0,3,0,3
+other,NULL,STUDY-IRON SUCROSE IV SYRINGE (NICU),900325,STUDY-IRON SUCROSE IV SYRINGE (NICU),NULL,NULL,NULL,NULL,0,0,0,0,0,3,0,3
+other,NULL,CROTALIDAE IMMUNE FAB (EQUINE)(ANAVIP) IVPB,900361,CROTALIDAE IMMUNE FAB (EQUINE)(ANAVIP) IVPB,NULL,NULL,NULL,NULL,0,0,0,0,0,0,3,3
+other,NULL,STUDY DAPTOMYCIN IVPB,110095,STUDY DAPTOMYCIN IVPB,NULL,NULL,NULL,NULL,2,0,0,0,0,0,0,2
+other,NULL,"DIPHENHYDRAMINE HCL 50 MG/ML IJ SOLN""""",2508,"DIPHENHYDRAMINE HCL 50 MG/ML IJ SOLN""""",diphenhydrAMINE HCl,Respiratory Agents,Antihistamines,Antihistamines - Ethanolamines,1,0,0,1,0,0,0,2
+other,NULL,ADENOSINE > 18 MG INFUSION,900540,ADENOSINE > 18 MG INFUSION,NULL,NULL,NULL,NULL,2,0,0,0,0,0,0,2
+other,NULL,PROTHROMBIN COMPLEX CONC HUMAN 500 UNITS IV KIT,120319,PROTHROMBIN COMPLEX CONC HUMAN 500 UNITS IV KIT,Prothrombin Complex Conc Human,Hematological Agents,Misc. Hematological,Antihemophilic Products,1,1,0,0,0,0,0,2
+other,NULL,ALTEPLASE INFUSION (IR ONLY),600535,ALTEPLASE INFUSION (IR ONLY),NULL,NULL,NULL,NULL,1,1,0,0,0,0,0,2
+other,NULL,"STUDY SERELAXIN/ PLACEBO INFUSION""""",900208,"STUDY SERELAXIN/ PLACEBO INFUSION""""",NULL,NULL,NULL,NULL,2,0,0,0,0,0,0,2
+other,NULL,"PROCAINAMIDE HCL 100 MG/ML IJ SOLN""""",6562,"PROCAINAMIDE HCL 100 MG/ML IJ SOLN""""",Procainamide HCl,Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type I-A,0,1,0,0,0,1,0,2
+other,NULL,INSULIN DRIP (NICU) IV SYRINGE,110520,INSULIN DRIP (NICU) IV SYRINGE,NULL,NULL,NULL,NULL,0,2,0,0,0,0,0,2
+other,NULL,"STUDY BMS-936559/PLACEBO INFUSION 90 ML""""",900249,"STUDY BMS-936559/PLACEBO INFUSION 90 ML""""",NULL,NULL,NULL,NULL,0,0,2,0,0,0,0,2
+other,NULL,COAGULATION FACTOR IX (RECOMB) 1000 UNITS IV SOLR,19814,COAGULATION FACTOR IX (RECOMB) 1000 UNITS IV SOLR,Coagulation Factor IX (Recomb),Hematological Agents,Misc. Hematological,Antihemophilic Products,0,0,2,0,0,0,0,2
+other,NULL,ATEZOLIZUMAB (TECENTRIQ) 1200 MG CHEMO INFUSION,900262,ATEZOLIZUMAB (TECENTRIQ) 1200 MG CHEMO INFUSION,NULL,NULL,NULL,NULL,0,0,0,2,0,0,0,2
+other,NULL,"IMMUNE GLOBULIN (HUMAN) 5 GM/50ML IJ SOLN""""",106115,"IMMUNE GLOBULIN (HUMAN) 5 GM/50ML IJ SOLN""""",Immune Globulin (Human),Biological,Antisera,Immune Serums,0,0,0,2,0,0,0,2
+other,NULL,FAT EMULSION PLANT BASED 30 % IV EMUL,13393,FAT EMULSION PLANT BASED 30 % IV EMUL,Fat Emulsion Plant Based,Nutritional Products,Nutrients,Lipids,0,0,0,2,0,0,0,2
+other,NULL,FLUORESCEIN SODIUM 25 % IV SOLN,135587,FLUORESCEIN SODIUM 25 % IV SOLN,Fluorescein Sodium,Topical Products,Ophthalmic,Ophthalmics - Misc.,0,0,0,1,0,1,0,2
+other,NULL,C1 ESTERASE INHIBITOR HUMAN (BERINERT) INFUSION,900301,C1 ESTERASE INHIBITOR HUMAN (BERINERT) INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,2,0,0,2
+other,NULL,IPILIMUMAB INFUSION,900185,IPILIMUMAB INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,2,0,0,2
+other,NULL,"ERIBULIN MESYLATE 1 MG/2ML IV SOLN""""",105737,"ERIBULIN MESYLATE 1 MG/2ML IV SOLN""""",eriBULin Mesylate,Antineoplastic Agents,Antineoplastics,Mitotic Inhibitors,0,0,0,0,0,2,0,2
+other,NULL,"PROCAINAMIDE IV CHALLENGE- EP LAB/BRUGADA SYNDROME""""",900580,"PROCAINAMIDE IV CHALLENGE- EP LAB/BRUGADA SYNDROME""""",NULL,NULL,NULL,NULL,0,0,0,0,0,2,0,2
+other,NULL,"LIDOCAINE HCL (CARDIAC) PF 100 MG/5ML IV SOSY""""",143140,"LIDOCAINE HCL (CARDIAC) PF 100 MG/5ML IV SOSY""""",Lidocaine HCl (Cardiac),Cardiovascular Agents,Antiarrhythmic,Antiarrhythmics Type I-B,0,0,0,0,0,2,0,2
+other,NULL,CALCIUM GLUCONATE 3 GM IN SODIUM CHLORIDE 250 ML,600608,CALCIUM GLUCONATE 3 GM IN SODIUM CHLORIDE 250 ML,NULL,Nutritional Products,Minerals & Electrolytes,Calcium,0,0,0,0,0,2,0,2
+other,NULL,"CYCLOSPORINE 50 MG/ML IV SOLN""""",9705,"CYCLOSPORINE 50 MG/ML IV SOLN""""",cycloSPORINE,Miscellaneous Products,Assorted Classes,Immunosuppressive Agents,0,0,0,0,0,2,0,2
+other,NULL,"OXYTOCIN 10 UNIT/ML IJ SOLN""""",5944,"OXYTOCIN 10 UNIT/ML IJ SOLN""""",Oxytocin,Endocrine & Metabolic Drugs,Oxytocics,Oxytocics,0,0,0,0,0,2,0,2
+other,NULL,"SODIUM PHOSPHATE 0.05 MM/ML D5W (NICU) IV SYRINGE""""",600715,"SODIUM PHOSPHATE 0.05 MM/ML D5W (NICU) IV SYRINGE""""",NULL,Nutritional Products,Minerals & Electrolytes,Phosphate,0,0,0,0,0,0,2,2
+other,NULL,NAB-PACLITAXEL INFUSION,900121,NAB-PACLITAXEL INFUSION,NULL,NULL,NULL,NULL,0,0,0,0,0,0,2,2
+other,NULL,IMIPENEM-CILASTATIN IVPB CUSTOM > 500 MG,900027,IMIPENEM-CILASTATIN IVPB CUSTOM > 500 MG,NULL,NULL,NULL,NULL,1,0,0,0,0,0,0,1
+other,NULL,"OCTREOTIDE ACETATE 100 MCG/ML IJ SOLN""""",91279,"OCTREOTIDE ACETATE 100 MCG/ML IJ SOLN""""",Octreotide Acetate,Endocrine & Metabolic Drugs,Misc. Endocrine,Somatostatic Agents,1,0,0,0,0,0,0,1
+other,NULL,METHYLDOPATE IVPB,900031,METHYLDOPATE IVPB,NULL,NULL,NULL,NULL,1,0,0,0,0,0,0,1
+other,NULL,"ALPROSTADIL 500 MCG/ML IJ SOLN""""",9001,"ALPROSTADIL 500 MCG/ML IJ SOLN""""",Alprostadil,Miscellaneous Products,Assorted Classes,Prostaglandins,1,0,0,0,0,0,0,1
+other,NULL,TPN ADULT,200010,TPN ADULT,NULL,NULL,NULL,NULL,1,0,0,0,0,0,0,1
+other,NULL,AMINOPHYLLINE INFUSION,400083,AMINOPHYLLINE INFUSION,NULL,NULL,NULL,NULL,1,0,0,0,0,0,0,1
+other,NULL,LIDOCAINE IN DEXTROSE 5-7.5 % IV SOLN,27396,LIDOCAINE IN DEXTROSE 5-7.5 % IV SOLN,Lidocaine in Dextrose,Analgesics & Anesthetics,Local Anesthetics-Parenteral,Local Anesthetics - Amides,0,1,0,0,0,0,0,1
+other,NULL,"PHENYTOIN 100 MG/50 ML NS PACKET-8BNS USE ONLY""""",600451,"PHENYTOIN 100 MG/50 ML NS PACKET-8BNS USE ONLY""""",NULL,Neuromuscular Drugs,Anticonvulsant,Hydantoins,0,1,0,0,0,0,0,1
+other,NULL,"EPOETIN ALFA 10000 UNIT/ML IJ SOLN""""",9938,"EPOETIN ALFA 10000 UNIT/ML IJ SOLN""""",Epoetin Alfa,Hematological Agents,Hematopoietic Agents,Hematopoietic Growth Factors,0,1,0,0,0,0,0,1
+other,NULL,"CAFFEINE CITRATE 60 MG/3ML IV SOLN""""",77412,"CAFFEINE CITRATE 60 MG/3ML IV SOLN""""",Caffeine Citrate,Central Nervous System Drugs,Stimulants,Analeptics,0,0,1,0,0,0,0,1
+other,NULL,"PROMETHAZINE HCL 25 MG/ML IJ SOLN""""",6618,"PROMETHAZINE HCL 25 MG/ML IJ SOLN""""",Promethazine HCl,Respiratory Agents,Antihistamines,Antihistamines - Phenothiazines,0,0,0,1,0,0,0,1
+other,NULL,"SUCCINYLCHOLINE CHLORIDE 20 MG/ML IJ SOLN""""",7536,"SUCCINYLCHOLINE CHLORIDE 20 MG/ML IJ SOLN""""",Succinylcholine Chloride,Neuromuscular Drugs,Neuromuscular Blockers,Depolarizing Muscle Relaxants,0,0,0,1,0,0,0,1
+other,NULL,NORMOSOL-R PH 7.4 IV SOLN,28605,NORMOSOL-R PH 7.4 IV SOLN,Electrolyte-R (PH 7.4),Nutritional Products,Minerals & Electrolytes,Electrolyte Mixtures,0,0,0,1,0,0,0,1
+other,NULL,"COSYNTROPIN 1 MCG/1 ML (NICU) IV SYRINGE""""",600285,"COSYNTROPIN 1 MCG/1 ML (NICU) IV SYRINGE""""",NULL,Miscellaneous Products,Diagnostic Products,Diagnostic Drugs,0,0,0,1,0,0,0,1
+other,NULL,"PEMBROLIZUMAB 100 MG/4ML IV SOLN""""",126697,"PEMBROLIZUMAB 100 MG/4ML IV SOLN""""",Pembrolizumab,Antineoplastic Agents,Antineoplastics,Antineoplastic - Antibodies,0,0,0,0,1,0,0,1
+other,NULL,DIPHENHYDRAMINE IVPB,400138,DIPHENHYDRAMINE IVPB,NULL,NULL,NULL,NULL,0,0,0,0,1,0,0,1
+other,NULL,CISATRACURIUM IV BOLUS FROM BAG,600800,CISATRACURIUM IV BOLUS FROM BAG,NULL,Neuromuscular Drugs,Neuromuscular Blockers,Nondepolarizing Muscle Relaxants,0,0,0,0,1,0,0,1
+other,NULL,FLUORESCEIN SODIUM 10 % IV SOLN,135586,FLUORESCEIN SODIUM 10 % IV SOLN,Fluorescein Sodium,Topical Products,Ophthalmic,Ophthalmics - Misc.,0,0,0,0,0,1,0,1
+other,NULL,"DOXORUBICIN HCL 2 MG/ML IV SOLN""""",2616,"DOXORUBICIN HCL 2 MG/ML IV SOLN""""",DOXOrubicin HCl,Antineoplastic Agents,Antineoplastics,Antineoplastic Antibiotics,0,0,0,0,0,1,0,1
+other,NULL,"STUDY-METHYLENE BLUE (PROVAYBLUE) 5 MG/ML IN DEXTROSE 5% 50ML""""",900329,"STUDY-METHYLENE BLUE (PROVAYBLUE) 5 MG/ML IN DEXTROSE 5% 50ML""""",NULL,NULL,NULL,NULL,0,0,0,0,0,0,1,1
+other,NULL,TOCILIZUMAB IVPB,900143,TOCILIZUMAB IVPB,NULL,NULL,NULL,NULL,0,0,0,0,0,0,1,1
+other,NULL,"EPOETIN ALFA-EPBX 2000 UNIT/ML IJ SOLN""""",140052,"EPOETIN ALFA-EPBX 2000 UNIT/ML IJ SOLN""""",Epoetin Alfa-epbx,Hematological Agents,Hematopoietic Agents,Hematopoietic Growth Factors,0,0,0,0,0,0,1,1
+steroid,NULL,DEXAMETHASONE IVPB,400055,DEXAMETHASONE IVPB,NULL,NULL,NULL,NULL,852,1067,1044,841,504,351,100,4759
+steroid,NULL,METHYLPREDNISOLONE IVPB,410029,METHYLPREDNISOLONE IVPB,NULL,NULL,NULL,NULL,647,616,533,459,461,461,300,3477
+steroid,NULL,"HYDROCORTISONE SOD SUCC 1MG/ML NS (NICU)""""",600269,"HYDROCORTISONE SOD SUCC 1MG/ML NS (NICU)""""",NULL,Endocrine & Metabolic Drugs,Corticosteroids,Glucocorticosteroids,0,0,130,773,641,881,153,2578
+steroid,NULL,"DEXAMETHASONE 0.4MG/ML INJ (NICU)""""",600324,"DEXAMETHASONE 0.4MG/ML INJ (NICU)""""",NULL,Endocrine & Metabolic Drugs,Corticosteroids,Glucocorticosteroids,0,0,0,29,3,49,10,91
+steroid,NULL,HYDROCORTISONE IVPB,400162,HYDROCORTISONE IVPB,NULL,NULL,NULL,NULL,12,10,4,24,8,0,0,58
+steroid,NULL,"METHYLPREDNISOLONE 2.5MG/ML NS (NICU)""""",600264,"METHYLPREDNISOLONE 2.5MG/ML NS (NICU)""""",NULL,Endocrine & Metabolic Drugs,Corticosteroids,Glucocorticosteroids,0,0,0,7,0,0,0,7
+steroid,NULL,METHYLPREDNISOLONE CONTINUOUS INFUSION,400032,METHYLPREDNISOLONE CONTINUOUS INFUSION,NULL,NULL,NULL,NULL,5,0,0,0,0,0,0,5
+steroid,NULL,METHYLPREDNISOLONE SODIUM SUCC 125 MG IJ SOLR,10578,METHYLPREDNISOLONE SODIUM SUCC 125 MG IJ SOLR,methylPREDNISolone Sodium Succ,Endocrine & Metabolic Drugs,Corticosteroids,Glucocorticosteroids,0,0,0,3,0,0,1,4
+steroid,NULL,METHYLPREDNISOLONE IN NS 100ML,900033,METHYLPREDNISOLONE IN NS 100ML,NULL,NULL,NULL,NULL,1,0,0,0,0,0,0,1
+steroid,NULL,"DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN""""",2332,"DEXAMETHASONE SODIUM PHOSPHATE 4 MG/ML IJ SOLN""""",Dexamethasone Sodium Phosphate,Endocrine & Metabolic Drugs,Corticosteroids,Glucocorticosteroids,0,0,0,1,0,0,0,1
+vasopressor,norepinephrine,NOREPINEPHRINE INFUSION DOUBLE CONCENTRATE,400036,NOREPINEPHRINE INFUSION DOUBLE CONCENTRATE,NULL,NULL,NULL,NULL,15501,21041,21819,29481,24605,7913,3255,123615
+vasopressor,norepinephrine,"NOREPINEPHRINE-SODIUM CHLORIDE 8-0.9 MG/250ML-% IV SOLN""""",133797,"NOREPINEPHRINE-SODIUM CHLORIDE 8-0.9 MG/250ML-% IV SOLN""""",Norepinephrine-Sodium Chloride,Cardiovascular Agents,Pressors,Vasopressors,0,0,0,0,14451,41385,22119,77955
+vasopressor,vasopressin,VASOPRESSIN INFUSION,400033,VASOPRESSIN INFUSION,NULL,NULL,NULL,NULL,2517,3559,3237,4528,3374,1909,2476,21600
+vasopressor,epinephrine,EPINEPHRINE IV INFUSION STANDARD AND DOUBLE CONC,200007,EPINEPHRINE IV INFUSION STANDARD AND DOUBLE CONC,NULL,NULL,NULL,NULL,1616,2184,3146,4186,4310,4718,898,21058
+vasopressor,phenylephrine,PHENYLEPHRINE IV INFUSION,400064,PHENYLEPHRINE IV INFUSION,NULL,NULL,NULL,NULL,2176,2519,3154,2433,2981,2441,1238,16942
+vasopressor,dobutamine,"DOBUTAMINE IN D5W 2 MG/ML IV SOLN""""",18315,"DOBUTAMINE IN D5W 2 MG/ML IV SOLN""""",DOBUTamine in D5W,Cardiovascular Agents,Pressors,Vasopressors,1659,1637,1422,1725,1886,1809,881,11019
+vasopressor,dopamine,DOPAMINE DRIP (NICU) IV SYRINGE,600319,DOPAMINE DRIP (NICU) IV SYRINGE,NULL,Cardiovascular Agents,Pressors,Vasopressors,789,1288,1119,1328,1255,1327,265,7371
+vasopressor,vasopressin,"VASOPRESSIN 20 UNITS/100 ML NS PREMIX""""",601035,"VASOPRESSIN 20 UNITS/100 ML NS PREMIX""""",Vasopressin,Endocrine & Metabolic Drugs,Misc. Endocrine,Posterior Pituitary Hormones,0,0,0,0,1735,3084,0,4819
+vasopressor,dopamine,"DOPAMINE IN D5W 1.6-5 MG/ML-% IV SOLN""""",14845,"DOPAMINE IN D5W 1.6-5 MG/ML-% IV SOLN""""",DOPamine in D5W,Cardiovascular Agents,Pressors,Vasopressors,611,720,651,376,444,405,131,3338
+vasopressor,epinephrine,"EPINEPHRINE HCL-NACL 8-0.9 MG/250ML-% IV SOLN""""",139956,"EPINEPHRINE HCL-NACL 8-0.9 MG/250ML-% IV SOLN""""",EPINEPHrine HCl-NaCl,Cardiovascular Agents,Pressors,Vasopressors,0,0,0,0,0,0,1212,1212
+vasopressor,vasopressin,VASOPRESSIN INFUSION - FOR DIABETES INSIPIDUS,600671,VASOPRESSIN INFUSION - FOR DIABETES INSIPIDUS,NULL,NULL,NULL,NULL,39,102,129,180,251,149,134,984
+vasopressor,epinephrine,EPINEPHRINE DRIP (NICU),600317,EPINEPHRINE DRIP (NICU),NULL,Cardiovascular Agents,Pressors,Anaphylaxis Therapy Agents,0,64,50,81,195,245,37,672
+vasopressor,epinephrine,EPINEPHRINE ADULT IV INFUSION STANDARD CONC,900380,EPINEPHRINE ADULT IV INFUSION STANDARD CONC,NULL,NULL,NULL,NULL,0,0,0,0,0,0,602,602
+vasopressor,dobutamine,DOBUTAMINE INFUSION VARIABLE CONCENTRATION,900177,DOBUTAMINE INFUSION VARIABLE CONCENTRATION,NULL,NULL,NULL,NULL,67,170,143,128,32,0,42,582
+vasopressor,norepinephrine,"NOREPINEPHRINE (LEVOPHED) INFUSION 16 MG/500 ML""""",900314,"NOREPINEPHRINE (LEVOPHED) INFUSION 16 MG/500 ML""""",NULL,NULL,NULL,NULL,0,0,0,0,8,62,490,560
+vasopressor,norepinephrine,PEDIATRIC NOREPINEPHRINE DOUBLE INFUSION,900563,PEDIATRIC NOREPINEPHRINE DOUBLE INFUSION,NULL,NULL,NULL,NULL,5,156,57,97,206,0,0,521
+vasopressor,vasopressin,"VASOPRESSIN 20 UNITS/100 ML NS FOR DIABETES INSIPIDUS PREMIX""""",601036,"VASOPRESSIN 20 UNITS/100 ML NS FOR DIABETES INSIPIDUS PREMIX""""",Vasopressin,Endocrine & Metabolic Drugs,Misc. Endocrine,Posterior Pituitary Hormones,0,0,0,0,123,270,0,393
+vasopressor,dobutamine,"DOBUTAMINE HCL 250 MG/20ML IV SOLN""""",77318,"DOBUTAMINE HCL 250 MG/20ML IV SOLN""""",DOBUTamine HCl,Cardiovascular Agents,Pressors,Vasopressors,42,44,28,44,35,22,8,223
+vasopressor,epinephrine,"NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN""""",10734,"NOREPINEPHRINE BITARTRATE 1 MG/ML IJ SOLN""""",Norepinephrine Bitartrate,Cardiovascular Agents,Pressors,Vasopressors,86,71,0,0,0,0,0,157
+vasopressor,epinephrine,EPINEPHRINE PEDIATRIC INFUSION DOUBLE CONCENTRATE,900564,EPINEPHRINE PEDIATRIC INFUSION DOUBLE CONCENTRATE,NULL,NULL,NULL,NULL,3,4,6,0,102,34,0,149
+vasopressor,vasopressin,"VASOPRESSIN 20 UNIT/ML IV SOLN""""",126084,"VASOPRESSIN 20 UNIT/ML IV SOLN""""",Vasopressin,Endocrine & Metabolic Drugs,Misc. Endocrine,Posterior Pituitary Hormones,0,5,17,21,47,14,9,113
+vasopressor,norepinephrine,"NOREPINEPHRINE BITARTRATE 1 MG/ML IV SOLN""""",127226,"NOREPINEPHRINE BITARTRATE 1 MG/ML IV SOLN""""",Norepinephrine Bitartrate,Cardiovascular Agents,Pressors,Vasopressors,0,17,27,32,22,1,2,101
+vasopressor,vasopressin,"VASOPRESSIN PEDIATRIC DRIP (10 UNITS/100 ML)""""",900567,"VASOPRESSIN PEDIATRIC DRIP (10 UNITS/100 ML)""""",NULL,NULL,NULL,NULL,1,3,0,8,2,41,12,67
+vasopressor,dopamine,"DOPAMINE 800 MG/250 ML INFUSION""""",900142,"DOPAMINE 800 MG/250 ML INFUSION""""",NULL,NULL,NULL,NULL,0,39,1,0,0,0,0,40
+vasopressor,dobutamine,DOBUTAMINE INFUSION (CARDIAC FN LAB),900129,DOBUTAMINE INFUSION (CARDIAC FN LAB),NULL,NULL,NULL,NULL,8,8,19,0,0,0,0,35
+vasopressor,vasopressin,VASOPRESSIN DRIP (NICU),600864,VASOPRESSIN DRIP (NICU),NULL,NULL,NULL,NULL,0,0,0,0,7,9,17,33
+vasopressor,dopamine,DOPAMINE PEDIATRIC INFUSION,900562,DOPAMINE PEDIATRIC INFUSION,NULL,NULL,NULL,NULL,2,0,0,19,4,1,0,26
+vasopressor,norepinephrine,NOREPINEPHRINE DRIP (NICU) IV SYRINGE,900227,NOREPINEPHRINE DRIP (NICU) IV SYRINGE,NULL,NULL,NULL,NULL,0,9,0,0,0,0,4,13
+vasopressor,phenylephrine,"PHENYLEPHRINE HCL 10 MG/ML IJ SOLN""""",6242,"PHENYLEPHRINE HCL 10 MG/ML IJ SOLN""""",Phenylephrine HCl (Pressors),Cardiovascular Agents,Pressors,Vasopressors,0,0,1,0,0,1,0,2
+vasopressor,dopamine,"DOPAMINE HCL 80 MG/ML IV SOLN""""",2596,"DOPAMINE HCL 80 MG/ML IV SOLN""""",DOPamine HCl,Cardiovascular Agents,Pressors,Vasopressors,1,0,0,0,0,0,0,1
+vasopressor,phenylephrine,"PHENYLEPHRINE 10 MG/20 ML NS INJ SYRINGE - UROLOGY""""",600546,"PHENYLEPHRINE 10 MG/20 ML NS INJ SYRINGE - UROLOGY""""",NULL,Cardiovascular Agents,Pressors,Vasopressors,0,0,0,1,0,0,0,1
+other,other,"EPHEDRINE SULFATE 50 MG/ML IV SOLN""""",131923,"EPHEDRINE SULFATE 50 MG/ML IV SOLN""""",ePHEDrine Sulfate (Pressors),Cardiovascular Agents,Pressors,Vasopressors,0,0,0,0,0,1,0,1
+vasopressor,phenylephrine,"PHENYLEPHRINE HCL 50 MG/5 ML IV SOLN""""",125724,"PHENYLEPHRINE HCL 50 MG/5 ML IV SOLN""""",Phenylephrine HCl (Pressors),Cardiovascular Agents,Pressors,Vasopressors,0,0,0,0,0,1,0,1
+vasopressor,epinephrine,"EPINEPHRINE HCL-DEXTROSE 8-5 MG/250ML-% IV SOLN""""",139961,"EPINEPHRINE HCL-DEXTROSE 8-5 MG/250ML-% IV SOLN""""",EPINEPHrine HCl-Dextrose,Cardiovascular Agents,Pressors,Vasopressors,0,0,0,0,0,0,1,1
+,,,,,,,,,,,,,,,,"8,182,216.00"
+,,,,,,,,,,,,,,,,8222563
+,,,,,,,,,,,,,,,,"-40,347.00"
