@@ -11,6 +11,8 @@ import time
 import glob
 import sys
 import numpy as np
+import dask.dataframe as dd
+import pandas as pd
 
 ############################## File Paths ##############################
 #### data path is the parent directory for all the flat files; you'll specify each file location below
@@ -29,7 +31,7 @@ groupings_path = "/labs/kamaleswaranlab/MODS/EliteDataHacks/sepy/0.grouping"
 # CSJ PC output_path = "XXXX"
 # OD  output_path = "C:/Users/DataSci/OneDrive - Emory University/CJ_Sepsis/5.quality_check/"
 # CLUSTER 
-output_path = "/labs/kamaleswaranlab/MODS/Yearly_Pickles/HolderSuperTables/"
+output_path = "/labs/kamaleswaranlab/MODS/Yearly_Pickles/"
 
 ########################################################################
 
@@ -279,17 +281,17 @@ path_dictionary2021 = {
     'path_grouping_file_labs':glob.glob(groupings_path + '/gr_grouping_labs*.csv')[0],
     'path_bed_labels':glob.glob(groupings_path + '/gr_bed_labels*.csv')[0],
     # Data Files
-    'path_infusion_med_file': glob.glob(data_path + '/2. Fluids & Meds/Infusion Medications/infusion_meds_2021_*.txt')[0],
-    'path_lab_file': glob.glob(data_path + '/3. Labs & Cultures/Labs/lab_2021*.txt')[0],  
-    'path_vitals_file': glob.glob(data_path + '/4. Patient Assessments/Vitals/vitals_2021*.txt')[0],
-    'path_vent_file': glob.glob(data_path + '/6. Vent/vent_data_2021*.txt')[0],
-    'path_demographics_file': glob.glob(data_path + '/1. Administrative Attributes/Demographics/demographics_2021*.txt')[0],
-    'path_gcs_file':glob.glob(data_path + '/4. Patient Assessments/GCS/gcs_2021*.txt')[0],
+    'path_infusion_med_file': glob.glob(data_path + '/2. Fluids & Meds/Infusion Medications/infusion_meds_2021_09062023.txt')[0],
+    'path_lab_file': glob.glob(data_path + '/3. Labs & Cultures/Labs/labs_2021_09062023.txt')[0],  
+    'path_vitals_file': glob.glob(data_path + '/4. Patient Assessments/Vitals/vitals_2021_09062023.txt')[0],
+    'path_vent_file': glob.glob(data_path + '/6. Vent/vent_2021_09062023.txt')[0],
+    'path_demographics_file': glob.glob(data_path + '/1. Administrative Attributes/Demographics/demographics_2014-2022*.txt')[0],
+    'path_gcs_file':glob.glob(data_path + '/4. Patient Assessments/GCS/gcs_2014-2022*.txt')[0],
     'path_encounters_file': glob.glob(data_path + '/1. Administrative Attributes/Encounters/encounter_2021_09062023.txt')[0],
-    'path_cultures_file': glob.glob(data_path + '/3. Labs & Cultures/Cultures/cultures_2021*.txt')[0],
+    'path_cultures_file': glob.glob(data_path + '/3. Labs & Cultures/Cultures/cultures_2021_09062023.txt')[0],
     'path_bed_locations_file': glob.glob(data_path + '/1. Administrative Attributes/Bed Locations/bed_location_2021_09062023.txt')[0],
-    'path_procedures_file': glob.glob(data_path + '/5. ICD Codes/OR Procedures/or_procedures_2021*.txt')[0],
-    'path_diagnosis_file' : glob.glob(data_path + '/5. ICD Codes/Diagnosis/diagnoses_2021*.txt')[0]
+    'path_procedures_file': glob.glob(data_path + '/5. ICD Codes/OR Procedures/or_2021_09062023.txt')[0],
+    'path_diagnosis_file' : glob.glob(data_path + '/5. ICD Codes/Diagnosis/diagnosis_2021_09062023.txt')[0]
     }
 
 
@@ -320,7 +322,7 @@ path_dictionary2022 = {
     'path_gcs_file':glob.glob(data_path + '/4. Patient Assessments/GCS/gcs_2022*.txt')[0],
     'path_encounters_file': glob.glob(data_path + '/1. Administrative Attributes/Encounters/encounter_2022*.txt')[0],
     'path_cultures_file': glob.glob(data_path + '/3. Labs & Cultures/Cultures/cultures_2022*.txt')[0],
-    'path_bed_locations_file': glob.glob(data_path + '/1. Administrative Attributes/Bed Locations/bed_location_2022*.txt')[0],
+    'path_bed_locations_file': glob.glob(data_path + '/1. Administrative Attributes/Bed Locations/2021-2022 Decomp Files Rishi/bed_location_2022*.txt')[0],
     'path_procedures_file': glob.glob(data_path + '/5. ICD Codes/OR Procedures/or_procedures_2022*.txt')[0],
     'path_diagnosis_file' : glob.glob(data_path + '/5. ICD Codes/Diagnosis/diagnoses_2022*.txt')[0]
     }
@@ -362,12 +364,12 @@ def import_data_frames(yearly_instance):
                                                       'med_action_time',
                                                       'med_start','med_stop'])
     
-    yearly_instance.import_labs(drop_cols = ['study_id','har','mrn'],
-                                group_cols = ['physionet','import','super_table_col_name', 'component_id'],
-                                date_cols = ['collection_time','lab_result_time'],
-                                index_col = ['csn'],
-                                numeric_cols = None)
-    
+    #yearly_instance.import_labs(drop_cols = ['study_id','har','mrn'],
+    #                            group_cols = ['physionet','import','super_table_col_name', 'component_id'],
+    #                            date_cols = ['collection_time','lab_result_time'],
+    #                            index_col = ['csn'],
+    #                            numeric_cols = None)
+    yearly_instance.df_labs = pd.read_pickle('/labs/kamaleswaranlab/MODS/Encounter_Pickles/gr/grady_2022_labs_reindexed.pkl')
     yearly_instance.import_vitals(drop_cols = ['study_id','har','mrn'],
                                   numeric_cols = yearly_instance.vital_col_names,
                                   index_col = ['csn'],
