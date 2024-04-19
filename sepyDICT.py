@@ -1,21 +1,81 @@
-# -*- coding: utf-8 -*-
-"""
-Elite Data Hacks
-@author: Christopher S. Josef, MD
-@email: csjosef@krvmail.com
-"""
-
-#import fill_variable as fv
 from sepyAGG import labAGG
 import time
 import pandas as pd
 import numpy as np
 
 from functools import reduce
+from comorbidipy import comorbidity
 
-#libs that can probably be removed
-#import itertools
-#import os
+def agg_fn_wrapper(var_name, bounds):
+    df = bounds.loc[bounds['Location in SuperTable'] == var_name]
+    upperbound = df['Physical Upper bound'].values[0]
+    lowerbound = df['Physical lower bound'].values[0]
+    
+    if isinstance(upperbound, str):
+        upperbound = float("nan")
+    
+    def agg_fn(array):
+        if not np.isnan(array).any():
+            return float("nan")
+        else:
+            values = np.copy(array[~np.isnan(array)])
+            if ~np.isnan(lowerbound):
+                values = np.delete(values, values < lowerbound)
+            if ~np.isnan(upperbound):
+                values = np.delete(values, values > upperbound)
+            if len(values) > 0:
+                return np.mean(values)
+            else:
+                return float("nan")
+    return agg_fn
+
+def agg_fn_wrapper_min(var_name, bounds):
+    df = bounds.loc[bounds['Location in SuperTable'] == var_name]
+    upperbound = df['Physical Upper bound'].values[0]
+    lowerbound = df['Physical lower bound'].values[0]
+    
+    if isinstance(upperbound, str):
+        upperbound = float("nan")
+    
+    def agg_fn(array):
+        if not np.isnan(array).any():
+            return float("nan")
+        else:
+            values = np.copy(array[~np.isnan(array)])
+            if ~np.isnan(lowerbound):
+                values = np.delete(values, values < lowerbound)
+            if ~np.isnan(upperbound):
+                values = np.delete(values, values > upperbound)
+            if len(values) > 0:
+                return np.min(values)
+            else:
+                return float("nan")
+    return agg_fn
+
+def agg_fn_wrapper_max(var_name, bounds):
+    df = bounds.loc[bounds['Location in SuperTable'] == var_name]
+    upperbound = df['Physical Upper bound'].values[0]
+    lowerbound = df['Physical lower bound'].values[0]
+    
+    if isinstance(upperbound, str):
+        upperbound = float("nan")
+    
+    def agg_fn(array):
+        if not np.isnan(array).any():
+            return float("nan")
+        else:
+            values = np.copy(array[~np.isnan(array)])
+            if ~np.isnan(lowerbound):
+                values = np.delete(values, values < lowerbound)
+            if ~np.isnan(upperbound):
+                values = np.delete(values, values > upperbound)
+            if len(values) > 0:
+                return np.max(values)
+            else:
+                return float("nan")
+    return agg_fn
+
+
 
 class sepyDICT:
     ########################################################################################################
@@ -58,7 +118,9 @@ class sepyDICT:
             'd_dimer', 'hemoglobin_a1c', 'parathyroid_level', 'thyroid_stimulating_hormone_(tsh)',
             
             #Inflammation           
-            'crp_high_sens', 'procalcitonin', 'erythrocyte_sedimentation_rate_(esr)'                       
+            'crp_high_sens', 'procalcitonin', 'erythrocyte_sedimentation_rate_(esr)',
+                               
+            'lymphocyte', 'neutrophils'
             ]
     
     v_string_lab_col_names = [
@@ -125,13 +187,32 @@ class sepyDICT:
                     'SOFA_resp', 'SOFA_resp_24h_max',
                     'hourly_total', 'hourly_total_24h_max',
                     'delta_24h', 'delta_24h_24h_max']
+    
+    fluids_med_names = [
+    'Sodium Chloride 0.9% intravenous solution',
+    'Lactated Ringers Injection intravenous solution',
+    'Sodium Chloride 0.45% intravenous solution',
+    'Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution',
+    'potassium chloride-sodium chloride',
+    'Dextrose 5% in Lactated Ringers intravenous solution',
+    'Dextrose 20% in Water intravenous solution',
+    'Dextrose 5% in Water with KCl 20 mEq/l intravenous solution',
+    'Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution',
+    'dextran, low molecular weight',
+    'sodium chloride, hypertonic, ophthalmic',
+    'Electrolyte (Plasma-Lyte) intravenous solution'
+    ]
+    
+    fluids_med_names_generic = [
+        'Albumin 5%'
+    ]
      
     ########################################################################################################
     ####################                  Instance Variables                             ###################
     ########################################################################################################
 
     # The following function accepts a list of patient mrns and creates a dictionary
-    def __init__(self, imported, csn):
+    def __init__(self, imported, csn, bed_to_unit_mapping, bounds, dialysis_year):
         
         print(f'SepyDICT- Creating sepyDICT instance for {csn}')
         filter_date_start_time = time.time()
@@ -143,6 +224,16 @@ class sepyDICT:
             self.pat_id = imported.df_encounters.loc[csn,['pat_id']].iloc[0].item()
         except: 
             self.pat_id = imported.df_encounters.loc[csn,['pat_id']].iloc[0]
+        
+        self.bed_to_unit_mapping = bed_to_unit_mapping
+        self.bounds = bounds
+        self.dialysis_year = dialysis_year
+        
+        labs = labAGG.keys()
+        for l in labs:
+            if len(bounds.loc[bounds['Location in SuperTable'] == l]) > 0:
+                labAGG[l] = agg_fn_wrapper(l, bounds)
+        self.labAGG = labAGG
         
         #get filtered dfs for each patient encounter
         self.try_except(imported, self.pat_id, 'demographics')
@@ -159,6 +250,7 @@ class sepyDICT:
         self.try_except(imported, csn, 'beds')
         self.try_except(imported, csn, 'procedures')
         self.try_except(imported, csn, 'diagnosis')
+        self.try_except(imported, csn, 'infusion_meds')
         #self.try_except(imported, csn, 'ahrq_ICD9')
         #self.try_except(imported, csn, 'elix_ICD9')
         #self.try_except(imported, csn, 'quan_deyo_ICD9')
@@ -175,9 +267,10 @@ class sepyDICT:
         self.run_SEP2()
         print('SepyDICT- Now calcuating Sepsis-3')
         self.run_SEP3()
+        self.create_infection_sepsis_time()
         print('SepyDICT- Now writing dictionary')
         self.write_dict()
-        print(f'SepyDICT- Selecting data and writing this dict by CSN took {time.time() - filter_date_start_time}(s).')
+        #print(f'SepyDICT- Selecting data and writing this dict by CSN took {time.time() - filter_date_start_time}(s).')
 
     def try_except(self, 
                    imported, 
@@ -190,7 +283,10 @@ class sepyDICT:
         try:
             #print(getattr(imported, df_name).loc[[str(csn)],:])
             if name == 'demographics': 
-                setattr(self, filt_df_name, getattr(imported, df_name).loc[[str(csn)],:])
+                if getattr(imported, df_name).index.dtype == 'O':
+                    setattr(self, filt_df_name, getattr(imported, df_name).loc[[str(csn)],:])
+                else:
+                    setattr(self, filt_df_name, getattr(imported, df_name).loc[[csn],:])
             else:
                 setattr(self, filt_df_name, getattr(imported, df_name).loc[[csn],:])
             #print(f'The {name} file was imported')
@@ -287,14 +383,20 @@ class sepyDICT:
             #drop the multi index and keep only collection time
             df.index = df.index.get_level_values('collection_time')
             #create new index with super table time index
-            self.labs_staging = df.reindex(self.super_table_time_index)
+            self.labs_staging = pd.DataFrame(index = self.super_table_time_index, columns = df.columns)
             
         else:
             df = df.reset_index('collection_time')
-            self.labs_staging = df.resample('60min',
-                                            on = "collection_time",
-                                            origin = self.event_times ['start_index']).agg(labAGG) \
-                                            .reindex(self.super_table_time_index)
+            new = pd.DataFrame([])
+            for key, value in self.labAGG.items():
+                col1 = df[[key, 'collection_time']].resample('60min', on = "collection_time",  origin = self.event_times ['start_index']).apply(value)
+                
+                
+                #col1 = col1.drop(columns=['collection_time'])
+                #print(col1.columns)
+                new = pd.concat((new, col1), axis = 1)
+            self.labs_staging = new.reindex(self.super_table_time_index)
+            #self.labs_staging.columns = [x[0] for x in self.labs_staging.columns]
         
     def bin_vitals(self):
        df = self.vitals_PerCSN 
@@ -304,27 +406,46 @@ class sepyDICT:
             #df.index = df.index.get_level_values('recorded_time')
             
             #create new index with super table time index
-            self.vitals_staging = df.reindex(self.super_table_time_index)
+            self.vitals_staging = pd.DataFrame(index = self.super_table_time_index, columns = df.columns)
             
        else:
-            self.vitals_staging = df.resample('60min',
-                                              on = 'recorded_time',
-                                              origin = self.event_times ['start_index']).mean() \
-                                              .reindex(self.super_table_time_index)
+            new = pd.DataFrame([])
+            for key in self.v_vital_col_names:
+                if len(self.bounds.loc[self.bounds['Location in SuperTable'] == key]) > 0:
+                    agg_fn = agg_fn_wrapper(key, self.bounds)
+                else:
+                    agg_fn = "mean"
+                col1 = df[[key, 'recorded_time']].resample('60min', on = "recorded_time",  \
+                                                           origin = self.event_times ['start_index']).apply(agg_fn)
+                #col1 = col1.drop(columns=['recorded_time'])
+                new = pd.concat((new, col1), axis = 1)
+            self.vitals_staging = new.reindex(self.super_table_time_index)
                                         
     def bin_gcs(self):
         df = self.gcs_PerCSN
  
         if df.empty:
             df = df.drop(columns=['recorded_time'])
-            self.gcs_staging = df.reindex(self.super_table_time_index)
+            self.gcs_staging = pd.DataFrame(index = self.super_table_time_index, columns = df.columns)
         
         else:
-            df = df.resample('60min',
-                             on = 'recorded_time',
-                             origin = self.event_times ['start_index']).min()
-            df = df.drop(columns=['recorded_time'])
-            self.gcs_staging = df.reindex(self.super_table_time_index)           
+            new = pd.DataFrame([])
+            for key in self.v_gcs_col_names:
+                if len(self.bounds.loc[self.bounds['Location in SuperTable'] == key]) > 0:
+                    agg_fn = agg_fn_wrapper_min(key, self.bounds)
+                else:
+                    agg_fn = "min"
+                col1 = df[[key, 'recorded_time']].resample('60min', on = "recorded_time",  \
+                                                           origin = self.event_times ['start_index']).apply(agg_fn)
+                #col1 = col1.drop(columns=['recorded_time'])
+                new = pd.concat((new, col1), axis = 1)
+            self.gcs_staging = new.reindex(self.super_table_time_index)
+
+            #df = df.resample('60min',
+            #                 on = 'recorded_time',
+            #                 origin = self.event_times ['start_index']).apply("min")
+            #df = df.drop(columns=['recorded_time'])
+            #self.gcs_staging = df.reindex(self.super_table_time_index)           
         
     def bin_vent(self):
         df = self.vent_PerCSN
@@ -357,7 +478,7 @@ class sepyDICT:
 
                 df = df[['recorded_time','vent_status','fio2']].resample('60min',
                                             on = 'recorded_time',
-                                            origin = self.event_times ['start_index']).first() \
+                                            origin = self.event_times ['start_index']).apply("first") \
                                             .reindex(self.super_table_time_index)
                                             
                 df[['vent_status','fio2']] =df[['vent_status','fio2']].ffill(limit=6)                                    
@@ -375,7 +496,7 @@ class sepyDICT:
                 df['vent_status'] = np.where(df.notnull().any(axis=1),1,0)
                 df = df[['recorded_time','vent_status','fio2']].resample('60min',
                                             on = 'recorded_time',
-                                            origin = self.event_times ['start_index']).first() \
+                                            origin = self.event_times ['start_index']).apply("first") \
                                                         .reindex(self.super_table_time_index)
                 df[['vent_status','fio2']] =df[['vent_status','fio2']].ffill(limit=6)
                 #NOT NEEDED now that I am calculating vent_plus rows 
@@ -418,7 +539,10 @@ class sepyDICT:
                 vent_tuples = zip(vent_start, vent_stop )
 
                 for pair in set(vent_tuples):
-                    index = index.append( pd.date_range(pair[0], pair[1], freq='H'))  
+                    if pair[0] < pair[1]:
+                        index = index.append( pd.date_range(pair[0], pair[1], freq='H'))
+                    else: #In case of a mistake in start and stop recording
+                        index = index.append( pd.date_range(pair[1], pair[0], freq='H'))  
                 
                 vent_status = pd.DataFrame(data=([1.0]*len(index)), columns =['vent_status'], index=index)
                 #sets column to 1 if vent was on    
@@ -437,23 +561,57 @@ class sepyDICT:
         df = self.vasopressor_meds_PerCSN
         vas_cols = self.v_vasopressor_names + self.v_vasopressor_units + ['med_order_time']
         df =df[vas_cols]
+        vas_keys = self.v_vasopressor_names + self.v_vasopressor_units
+        if df.empty:
+            #drop unecessary cols
+            df = df.drop(columns=['med_order_time'])
+            
+            #if no vasopressers then attach index to empty df
+            self.vasopressor_meds_staging = pd.DataFrame(index = self.super_table_time_index, columns = df.columns)
+        
+        else:
+            new = pd.DataFrame([])
+            for key in vas_keys:
+                if len(self.bounds.loc[self.bounds['Location in SuperTable'] == key]) > 0:
+                    agg_fn = agg_fn_wrapper_max(key, self.bounds)
+                else:
+                    agg_fn = "max"
+                col1 = df[[key, 'med_order_time']].resample('60min', on = "med_order_time",  \
+                                                           origin = self.event_times ['start_index']).apply(agg_fn)
+                #col1 = col1.drop(columns=['med_order_time'])
+
+                new = pd.concat((new, col1), axis = 1)
+            self.vasopressor_meds_staging = new.reindex(self.super_table_time_index)
+
+            #df = df.resample('60min',
+            #                 on = 'med_order_time',
+            #                 origin = self.event_times ['start_index']).apply("max")
+            #drop unecessary cols
+            #df = df.drop(columns=['med_order_time'])
+            
+            #self.vasopressor_meds_staging = df.reindex(self.super_table_time_index)
+            
+    def bin_fluids(self):
+        df = self.infusion_meds_PerCSN
+        vas_cols = self.v_vasopressor_names + self.v_vasopressor_units + ['med_order_time']
+        df =df[vas_cols]
         
         if df.empty:
             #drop unecessary cols
             df = df.drop(columns=['med_order_time'])
             
             #if no vasopressers then attach index to empty df
-            self.vasopressor_meds_staging = df.reindex(self.super_table_time_index)  
+            self.infusion_meds_staging = pd.DataFrame(index = self.super_table_time_index, columns = df.columns)  
         
         else:
             df = df.resample('60min',
                              on = 'med_order_time',
-                             origin = self.event_times ['start_index']).max()
+                             origin = self.event_times ['start_index']).apply("max")
             #drop unecessary cols
             df = df.drop(columns=['med_order_time'])
             
-            self.vasopressor_meds_staging = df.reindex(self.super_table_time_index)
-            
+            self.infusion_meds_staging = df.reindex(self.super_table_time_index)
+          
 ########################################################################################################        
 
     def make_super_table(self):
@@ -490,7 +648,7 @@ class sepyDICT:
                                       columns = bed_category_names,
                                       index = index)
             #adds all beds to single df
-            bed_status = bed_status.append(single_bed)  
+            bed_status = pd.concat([bed_status, single_bed])  
         bed_status = bed_status[~bed_status.index.duplicated(keep='first')]
         
         #this is bed status re_indexed with super_table index; gets merged in later
@@ -675,6 +833,11 @@ class sepyDICT:
             else:
                 df.iloc[0, df.columns.get_loc(weight_col)] = (89+75)/2
                 df.iloc[0, df.columns.get_loc(height_col)] = (175.3+161.5)/2
+         
+        #Check for non-sensical values, replace with nan
+        df[weight_col] = np.where(df[weight_col] > 450, np.nan, df[weight_col])
+        df[weight_col] = np.where(df[weight_col] < 25, np.nan, df[weight_col])
+        df[height_col] = np.where(df[height_col] < 0, np.nan, df[height_col])
 
         #Backfill to admission
         df[weight_col].loc[:df[height_col].first_valid_index()].fillna(method='bfill', inplace=True)
@@ -687,7 +850,29 @@ class sepyDICT:
 ########################################################################################################
 #### Determines best MAP to use
 ########################################################################################################
-
+    def calc_best_map(self, row):
+        if row[['sbp_line','dbp_line']].notnull().all() and (row['sbp_line'] - row['dbp_line']) > 15:
+            best_map = (1/3)*row['sbp_line'] + (2/3)*row['dbp_line']
+        elif row[['sbp_cuff','dbp_cuff']].notnull().all() and (row['sbp_cuff'] - row['dbp_cuff']) > 15 :
+            best_map = (1/3)*row['sbp_cuff'] + (2/3)*row['dbp_cuff']
+        else:
+            best_map = float("NaN")
+        
+        #If best_MAP is not Nan
+        if np.isnan(best_map) and (best_map < 30 or best_map > 150):
+            best_map = float("NaN")       
+        return(best_map)
+    
+    def calc_pulse_pressure(self, row):
+        if row[['sbp_line','dbp_line']].notnull().all() and (row['sbp_line'] - row['dbp_line']) > 15:
+            pulse_pressure = row['sbp_line'] - row['dbp_line']
+        elif row[['sbp_cuff','dbp_cuff']].notnull().all() and (row['sbp_cuff'] - row['dbp_cuff']) > 15 :
+            pulse_pressure = row['sbp_cuff'] - row['dbp_cuff']
+        else:
+            pulse_pressure = float("NaN")
+        return(pulse_pressure)
+        
+    
     def best_map_by_row(self, row):
         """
         Accepts- A patient_dictionary and a row from super_table
@@ -727,7 +912,19 @@ class sepyDICT:
         """
         
         #picks or calculates the best map
-        self.super_table['best_map'] = (self.super_table[v_bp_cols].apply(self.best_map_by_row,axis=1))
+        self.super_table['best_map'] = (self.super_table[v_bp_cols].apply(self.calc_best_map,axis=1))
+        
+    def pulse_pressure(self, 
+                 v_bp_cols=['sbp_line', 'dbp_line', 'map_line',
+                          'sbp_cuff', 'dbp_cuff', 'map_cuff']):
+        """
+        Accepts- A patient_dictionary and list of blood pressure columns
+        Does- Runs the pulsepressure function for each window (i.e. row) of super_table
+        Returns- An updated super_table with pp now included 
+        """
+        
+        #picks or calculates the pp
+        self.super_table['pulse_pressure'] = (self.super_table[v_bp_cols].apply(self.calc_pulse_pressure,axis=1))
 
 ########################################################################################################
 #### Calculates P:F & S:F Ratio
@@ -753,6 +950,17 @@ class sepyDICT:
         df[fio2]= df.apply(fio2_row, axis=1)
         
 ########################################################################################################
+    def calc_nl(self, 
+                    neutrophils = 'neutrophils', 
+                    lymphocytes = 'lymphocyte'):
+            """
+            Accepts- Patient dictionary
+            Does- 1) Calculates N:N ratio 
+            """
+            df = self.super_table
+
+            df['n_to_l'] = df[neutrophils]/df[lymphocytes]
+            return 
 
     # Calculates pf ratio using SpO2 and PaO2 these P:F ratios are saved as new column     
     def calc_pf(self, 
@@ -765,9 +973,6 @@ class sepyDICT:
         Returns- two new columns to super_table with P:F ratios
         """
         df = self.super_table
-        
-        #if df['fio2'].max() > 1:
-        #    df['fio2'] = df['fio2']/100
             
         df['pf_sp'] = df[spo2]/df[fio2]
         df['pf_pa'] = df[pao2]/df[fio2]
@@ -826,8 +1031,10 @@ class sepyDICT:
             
         numerical_cols = v_all_lab_col_names + v_vital_col_names + v_gcs_col_names
 
-        #Fwdfill to discharge       
-        self.super_table[numerical_cols]=self.super_table[numerical_cols].ffill(limit=24)
+        #Fwdfill to discharge    
+        for col in numerical_cols:
+            self.super_table[col] = self.super_table[col].ffill()
+        #self.super_table[numerical_cols]=self.super_table[numerical_cols].ffill(limit=24)
         #self.super_table[numerical_cols]=self.super_table[numerical_cols].bfill(limit=24)
    
     def fill_pressor_values(self,
@@ -873,69 +1080,351 @@ class sepyDICT:
         #select worse pf_pa when on vent
         self.flags['worst_pf_pa'] = df[df['vent_status']>0]['pf_pa'].min()
         if df[df['vent_status']>0]['pf_pa'].size:
-            self.flags['worst_pf_pa_time'] = df[df['vent_status']>0]['pf_pa'].idxmin(axis=1, skipna=True)
+            self.flags['worst_pf_pa_time'] = df[df['vent_status']>0]['pf_pa'].idxmin( skipna=True)
         else: 
             self.flags['worst_pf_pa_time'] = pd.NaT
         #select worse pf_sp when on vent
         self.flags['worst_pf_sp'] = df[df['vent_status']>0]['pf_sp'].min() 
         if df[df['vent_status']>0]['pf_sp'].size:
-            self.flags['worst_pf_sp_time'] = df[df['vent_status']>0]['pf_sp'].idxmin(axis=1, skipna=True)
+            self.flags['worst_pf_sp_time'] = df[df['vent_status']>0]['pf_sp'].idxmin( skipna=True)
         else: 
             self.flags['worst_pf_sp_time'] =  pd.NaT                     
 #######################################################################################################   
+
+#Indicator variables for on pressors or on dobutamine
+    def flag_variables_pressors(self):
+        v_vasopressor_names_wo_dobutamine = self.v_vasopressor_names.copy()
+        v_vasopressor_names_wo_dobutamine.remove('dobutamine')
+
+        on_pressors = (~self.super_table[v_vasopressor_names_wo_dobutamine].isna()).any()
+        on_dobutamine = (~self.super_table[['dobutamine']].isna()).any()
+
+        self.super_table['on_pressors'] = on_pressors
+        self.super_table['on_dobutamine'] = on_dobutamine
+    
+        
+    #Function to create elapsed variables
+    def create_elapsed_time(self, row, start, end):
+
+        if row - start > pd.Timedelta('0 days') and row - end <= pd.Timedelta('0 days'):
+            return (row-start).days*24 + np.ceil((row-start).seconds/3600)
+        elif row - start <= pd.Timedelta('0 days'):
+            return 0
+        elif row - end > pd.Timedelta('0 days'):
+            return (end - start).days * 24 + np.ceil((end-start).seconds/3600)
+    
+    #Functions that create the elapsed ICU times
+    def create_elapsed_icu(self):
+        start = self.event_times['first_icu_start']
+        end = self.event_times['first_icu_end']
+        
+        if start is None and end is None:
+            self.super_table['elapsed_icu'] = [0]*len(self.super_table)
+        elif start is None and end is not None:
+            print(str(self.csn) + 'probably has an error in icu start and end times')
+        elif start is not None and end is None:
+            end = self.super_table.index[-1]
+            self.super_table['elapsed_icu'] = self.super_table.index
+            self.super_table['elapsed_icu'] = self.super_table['elapsed_icu'].apply(self.create_elapsed_time, start = start, 
+                                                                                  end = end)
+        else:
+            self.super_table['elapsed_icu'] = self.super_table.index
+            self.super_table['elapsed_icu'] = self.super_table['elapsed_icu'].apply(self.create_elapsed_time, start = start, 
+                                                                                  end = end)
+    
+    #Functions that create the hospital times
+    def create_elapsed_hosp(self):
+        start = self.super_table.index[0]#self.df['event_times']['hospital_admission_date_time']
+        end = self.super_table.index[-1]#self.df['event_times']['hospital_discharge_date_time']
+        
+        self.super_table['elapsed_hosp'] = self.super_table.index
+        self.super_table['elapsed_hosp'] = self.super_table['elapsed_hosp'].apply(self.create_elapsed_time, start = start, 
+                                                                                end = end)
+    
+    #Function to create infection, sepsis indicator variables:
+    def create_infection_sepsis_time(self):
+        times = self.sep3_time
+        
+        t_infection_idx = times['t_suspicion'].first_valid_index()
+        if t_infection_idx is not None:
+            t_infection = times['t_suspicion'].loc[t_infection_idx]
+            self.super_table['infection'] = np.int32(self.super_table.index > t_infection)
+        else:
+            self.super_table['infection'] = [0]*len(self.super_table)
+        
+        t_sepsis3_idx = times['t_sepsis3'].first_valid_index()
+        if t_sepsis3_idx is not None:
+            t_sepsis3 = times['t_sepsis3'].loc[t_sepsis3_idx]
+            self.super_table['sepsis'] = np.int32(self.super_table.index > t_sepsis3)
+        else:
+            self.super_table['sepsis'] = [0]*len(self.super_table)
+            
+    def create_on_vent(self):
+        df = self.vent_PerCSN
+        self.super_table['on_vent_old'] = self.vent_status
+        self.super_table['vent_fio2_old'] = self.vent_fio2
+
+        if df.empty:
+            # No vent times were found so return empty table with 
+            # all flags remain set at zero
+            df = pd.DataFrame(columns=['vent_status','fio2'], index=self.super_table_time_index)
+            # vent_status and fio2 will get joined to super table later
+            vent_status = df.vent_status.values
+            vent_fio2 = df.fio2.values
+             
+        else:
+            #check to see there is a start & stop time
+            vent_start = df[df.vent_start_time.notna()].vent_start_time.values
+            vent_stop =  df[df.vent_stop_time.notna()].vent_stop_time.values
+            
+            #If no vent start time then examin vent_plus rows
+            if len(vent_start) == 0:
+                # identify rows that are real vent vals (i.e. no fio2 alone)
+                check_mech_vent_vars = ['vent_tidal_rate_set', 'peep']
+                df['vent_status'] = np.where(df[check_mech_vent_vars].notnull().any(axis=1),1,0)
+                
+                #check if there are any "real" vent rows; if so 
+                if df['vent_status'].sum()>0:
+                    vent_start  =  df[df['vent_status']>0].recorded_time.iloc[0:1]
+                else:
+                    vent_start = []
+                    
+             #If there is a vent start, but no stop; add 6hrs to start time  
+            if len(vent_start) != 0 and len(vent_stop) == 0:
+                #flag identifies the presence of vent rows, and start time
+                check_mech_vent_vars = ['vent_tidal_rate_set', 'peep']
+                df['vent_status'] = np.where(df[check_mech_vent_vars].notnull().any(axis=1),1,0)
+                
+                #check if there are any "real" vent rows; if so 
+                if df['vent_status'].sum()>0:
+                    vent_stop  =  df[df['vent_status']>0].recorded_time.iloc[-1:]
+            
+            agg_fn = agg_fn_wrapper('fio2', self.bounds)
+            if len(vent_start) == 0: #No valid mechanical ventilation values
+                # vent_status and fio2 will get joined to super table later
+                vent_fio2 = df[['recorded_time','fio2']].resample('60min',
+                                             on = 'recorded_time',
+                                             origin = self.event_times ['start_index']).apply(agg_fn) \
+                                             .reindex(self.super_table_time_index)
+                df_dummy = pd.DataFrame(columns=['vent_status'], index=self.super_table_time_index)
+                # vent_status and fio2 will get joined to super table later
+                vent_status = df_dummy.vent_status.values
+            else:
+            
+                index = pd.Index([])
+                vent_tuples = zip(vent_start, vent_stop )
+    
+                for pair in set(vent_tuples):
+                    if pair[0] < pair[1]:
+                        index = index.append( pd.date_range(pair[0], pair[1], freq='H'))
+                    else: #In case of a mistake in start and stop recording
+                        index = index.append( pd.date_range(pair[1], pair[0], freq='H'))  
+                
+                vent_status = pd.DataFrame(data=([1.0]*len(index)), columns =['vent_status'], index=index)
+                
+                #sets column to 1 if vent was on    
+                vent_status = vent_status.resample('60min',
+                                                   origin = self.event_times ['start_index']).mean() \
+                                                   .reindex(self.super_table_time_index)
+                            
+                vent_fio2 = df[['recorded_time','fio2']].resample('60min',
+                                             on = 'recorded_time',
+                                             origin = self.event_times ['start_index']).apply(agg_fn) \
+                                             .reindex(self.super_table_time_index)
+                
+        self.super_table['on_vent'] = vent_status
+        self.super_table['vent_fio2'] = vent_fio2
+        
+            
+    def calculate_anion_gap(self):
+        self.super_table['anion_gap'] = self.super_table['sodium'] - (self.super_table['chloride'] + self.super_table['bicarb_(hco3)'])
+
+    def static_cci_to_supertable(self):
+        #Get static features
+        age = self.static_features['age']
+        gender = self.static_features['gender']
+        race = self.static_features['race']
+        ethnicity = self.static_features['ethnicity']
+
+        df = pd.DataFrame()
+        df['code'] = self.diagnosis_PerCSN['dx_code_icd9'].values
+        df['age'] = [age]*len(df)
+        df['id'] = self.diagnosis_PerCSN.index
+
+        if all(df['code'] == '--'):
+            cci9 = None
+        else:
+            df_out = comorbidity(df,  
+                                 id="id",
+                                 code="code",
+                                 age="age",
+                                 score="charlson",
+                                 icd="icd9",
+                                 variant="quan",
+                                 assign0=True)
+            cci9 = df_out['comorbidity_score'].values[0]
+
+        df = pd.DataFrame()
+        df['code'] = self.diagnosis_PerCSN['dx_code_icd10'].values
+        df['age'] = [age]*len(df)
+        df['id'] = self.diagnosis_PerCSN.index
+
+        if all(df['code'] == '--'):
+            cci10 = None
+        else:
+            df_out = comorbidity(df,  
+                                 id="id",
+                                 code="code",
+                                 age="age",
+                                 score="charlson",
+                                 icd="icd10",
+                                 variant="shmi",
+                                 weighting="shmi",
+                                 assign0=True)
+            cci10 = df_out['comorbidity_score'].values[0]
+
+
+        self.super_table['age'] = [age]*len(self.super_table)
+        self.super_table['gender'] = [gender]*len(self.super_table)
+        self.super_table['race'] = [race]*len(self.super_table)
+        self.super_table['ethnicity'] = [ethnicity]*len(self.super_table)
+
+        self.super_table['cci9'] = [cci9]*len(self.super_table)
+        self.super_table['cci10'] = [cci10]*len(self.super_table)
+        
+    
+    def create_bed_unit(self):
+        bedDf = self.beds_PerCSN
+        bed_start = bedDf['bed_location_start'].values
+        bed_end = bedDf['bed_location_end'].values
+        bed_unit = bedDf['bed_unit'].values
+
+        self.super_table['bed_unit'] = [0]*len(self.super_table)
+
+        for i in range(len(bedDf)):
+            start = bed_start[i]
+            end = bed_end[i]
+            unit = bed_unit[i]
+            idx = np.bitwise_and(self.super_table.index >= start ,  self.super_table.index <= end)
+            self.super_table.loc[idx, 'bed_unit'] = unit
+            
+        def map_bed_unit(bed_code, bed_mapping, var_type):
+            unit = bed_mapping.loc[bed_mapping['bed_unit'] == bed_code][var_type].values
+            if len(unit) > 0:
+                return unit[0]
+            else:
+                return float("nan")
+            
+        self.super_table['bed_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'unit_type'])
+        self.super_table['icu_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'icu_type'])
+        self.super_table['hospital'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'hospital'])
+
+    def on_dialysis(self):
+        dd = self.dialysis_year.loc[self.dialysis_year['Encounter Encounter Number'] == self.csn]
+        self.super_table['on_dialysis'] = [0]*len(self.super_table)
+        for time in dd['Service Timestamp']:
+            time = pd.to_datetime(time)
+            self.super_table.loc[(self.super_table.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
+
+    def create_fluids_columns(self):
+        infusionDf = self.infusion_meds_PerCSN
+        med_names = self.infusion_meds_PerCSN.loc[self.infusion_meds_PerCSN['med_name'].isin(self.fluids_med_names)]
+        med_names_generic = self.infusion_meds_PerCSN.loc[self.infusion_meds_PerCSN['med_name_generic'].isin(self.fluids_med_names_generic)]
+        
+        for med in self.fluids_med_names:
+            self.super_table[med] = [0]*len(self.super_table)
+            self.super_table[med + '_dose'] = [float("nan")]*len(self.super_table)
+            df = infusionDf.loc[infusionDf['med_name'] == med]
+            for j in range(len(df)):
+                row = df.iloc[j]
+                med_start = row['med_start']
+                med_dose = row['med_action_dose']
+                self.super_table.loc[(abs(self.super_table.index - med_start) < pd.Timedelta('60 min')) & (self.super_table.index - med_start > pd.Timedelta('0 seconds')), med] = 1
+                self.super_table.loc[(abs(self.super_table.index - med_start) < pd.Timedelta('60 min')) & (self.super_table.index - med_start > pd.Timedelta('0 seconds')), med + '_dose'] = med_dose
+        
+        for med in self.fluids_med_names_generic:
+            self.super_table[med] = [0]*len(self.super_table)
+            self.super_table[med + '_dose'] = [float("nan")]*len(self.super_table)
+            df = infusionDf.loc[infusionDf['med_name_generic'] == med]
+            for j in range(len(df)):
+                row = df.iloc[j]
+                med_start = row['med_start']
+                med_dose = row['med_action_dose']
+                self.super_table.loc[(abs(self.super_table.index - med_start) < pd.Timedelta('60 min')) & (self.super_table.index - med_start > pd.Timedelta('0 seconds')), med] = 1
+                self.super_table.loc[(abs(self.super_table.index - med_start) < pd.Timedelta('60 min')) & (self.super_table.index - med_start > pd.Timedelta('0 seconds')), med + '_dose'] = med_dose
+        
+
     def make_dict_elements(self, imported):
         print("INSIDE MAKE_DICT_ELEMENTS")
         #start_dict_time = time.time()
         self.flag_dict ()
-        #print('flag complete')
+        print('flag complete')
         self.static_features_dict()
-        #print('static complete')
+        print('static complete')
         self.event_times_dict()
-        #print('event complete')
+        print('event complete')
         self.cultures_df()
-        #print('cultures complete')
+        print('cultures complete')
         self.antibiotics_df()
-        #print('abx complete')
+        print('abx complete')
         self.build_super_table_index()
-        #print('super table index complete')
+        print('super table index complete')
         self.assign_bed_location()
-        #print('the beds have been binned')
+        print('the beds have been binned')
         self.bin_labs()
-        #print('labs complete')
+        print('labs complete')
         self.bin_vitals()
-        #print('vitals complete')        
+        print('vitals complete')        
         self.bin_gcs()
-        #print('gcs complete')
+        print('gcs complete')
         self.bin_vent()
-        #print('vent complete')
+        print('vent complete')
         self.bin_vasopressors()
-        #print('vasopressors complete')
+        print('vasopressors complete')
         self.make_super_table()
-        #print('super table')
+        print(self.super_table.columns)
         self.calc_t_susp()
-        #print('t susp complete')
+        print('t susp complete')
         self.fill_height_weight()
-        #print('filling height weight complete')
+        print('filling height weight complete')
         self.best_map()
-        #print('best map selected')
+        self.pulse_pressure()
+        self.calculate_anion_gap()
+        print('best map selected')
         self.calc_all_pressors()
-        #print('vasopressor mg/kg/min calculated')
-        self.fill_values()
+        print('vasopressor mg/kg/min calculated')
+        #self.fill_values()
         #print('most values filled fwd/bwd')
-        self.fill_pressor_values()
+        #self.fill_pressor_values()
         #print('pressor values filled fwd/bwd')
         self.fio2_decimal()
-        #print('fio2 converted to decimal where appropriate')
+        print('fio2 converted to decimal where appropriate')
         self.calc_pf()
-        #print('all p:f and s:f ratios calculated')
+        self.calc_nl()
+        print('all p:f and s:f ratios calculated')
         self.comorbid_dict(imported)
-        #print('the comorbid dictionary is updated')
+        print('the comorbid dictionary is updated')
         self.calc_icu_stay()
-        #print('the first icu stay has been calculated')
+        print('the first icu stay has been calculated')
         self.calc_worst_pf()
-        #print('the worst pf has been calc'd and saved')
+        print('the worst pf has been calcd and saved')
+        self.flag_variables_pressors()
+        self.create_elapsed_icu()
+        self.create_elapsed_hosp()
         
-        #print(f'It took {time.time()-start_dict_time}(s) to process the whole dictionary.')
+        self.create_on_vent()
+        print("Created on vent")
+
+        self.static_cci_to_supertable()
+        print('static cci to super table complete')
+        
+        self.create_bed_unit()
+        print("Bed Unit created")
+        self.on_dialysis()
+        print("On dialysis created") 
+        self.create_fluids_columns()
+        print("Fluids columns created")
+
 
     def write_dict(self):
         encounter_dict = {}
@@ -1356,8 +1845,8 @@ class sepyDICT:
                     #print("This SOFA Score was appended: {}".format(potential_sofa_times[0]))
         
         #this adds Tsofa and Tsusp and picks the min; it's the most basic Tsep calculator
-        sep3_time_df['t_suspicion'] = suspicion_times.tolist() 
-        sep3_time_df['t_SOFA'] = sofa_times
+        sep3_time_df['t_suspicion'] = pd.to_datetime(suspicion_times.tolist())
+        sep3_time_df['t_SOFA'] = pd.to_datetime(sofa_times)
         sep3_time_df['t_sepsis3'] = sep3_time_df.min(axis=1, skipna =False)
         
         #This adds all the Tsofas that did not become part of a Tsepsis tuple; probably unecessary 
@@ -1421,7 +1910,7 @@ class sepyDICT:
                 #print("These are potential SOFA Times: {}".format(potential_sofa_times))
 
                 if not potential_sofa_times_mod:
-                    sofa_times_mod.append(float("NaN"))
+                    sofa_times_mod.append(pd.to_datetime(float("NaN")))
                     #print ("A NaN was appended")
                 else:
                     sofa_times_mod.append(potential_sofa_times_mod[0])
@@ -1592,11 +2081,10 @@ class sepyDICT:
                 else:
                     sirs_times.append(potential_sirs_times[0])
                     #print("This SIRS Score was appended: {}".format(potential_sirs_times[0]))
-            
-        sep2_time_df['t_suspicion'] = suspicion_times.tolist() 
-        sep2_time_df['t_SIRS'] = sirs_times
-        sep2_time_df['t_sepsis2'] = sep2_time_df.min(axis=1, skipna =False)
         
+        sep2_time_df['t_suspicion'] = pd.to_datetime(suspicion_times.tolist())
+        sep2_time_df['t_SIRS'] = pd.to_datetime(sirs_times)
+        sep2_time_df['t_sepsis2'] = sep2_time_df.min(axis=1, skipna =True)
         all_sirs_times = self.sirs_scores[self.sirs_scores['delta_24h'] >= 2].reset_index()
         sep2_time_df = all_sirs_times['index'].to_frame().merge(sep2_time_df, how='outer', left_on='index',right_on='t_SIRS')        
         sep2_time_df = sep2_time_df.iloc[sep2_time_df['t_suspicion'].fillna(sep2_time_df['index']).argsort()].reset_index(drop=True).drop(columns=['t_SIRS']).rename(columns={'index':'t_SIRS'})

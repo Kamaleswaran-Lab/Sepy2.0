@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Wed Mar 29 23:33:04 2023
+
+@author: mehak
+"""
+
+# -*- coding: utf-8 -*-
+"""
 @author: Elite Data Hacks
 """
 import sys
@@ -9,26 +16,17 @@ import sepyDICT as sd
 import pickle
 import time
 from pathlib import Path
- 
-############################## File Paths ##############################
-#### List of patient encounters (i.e. CSNs); now handled in BASH
-# csn_list_file_name = '/home/cjosef/EliteDataHacks/pt_lists/ian_csn_year.psv'
-# CSJ-PC csn_list_file_name = Path("C:/Users/DataSci/OneDrive - Emory University/CJ_Sepsis/1.pt_list/em_get_csn_list/em_pt_list_14_20.psv")
 
-#### Location of pickles with yearly data; now handled in BASH
-# pickle_path = '/home/cjosef/EliteDataHacks/pickles/'
-# CSJ-PC pickle_path = Path('C:/Users/DataSci/OneDrive - Emory University/CJ_Sepsis/5.quality_check/')
+bed_unit_csv_fname = Path('/labs/kamaleswaranlab/MODS/EliteDataHacks/sepy/new_sepy_mehak/bed_units_to_icu_AH.csv')
+variable_bounds_csv_fname = Path('/labs/kamaleswaranlab/MODS/EliteDataHacks/sepy/new_sepy_mehak/Variable_Chart.xlsx')
+dialysis_info_csv_fname = Path('/labs/kamaleswaranlab/MODS/EliteDataHacks/sepy/new_sepy_mehak/PEACH_HD_CRRT(1).csv')
 
-#### Where the encounter dictionaries should be written; now handled in BASH
-# output_path = '/home/cjosef/EliteDataHacks/IanFiles/'
-# CSJ-PC output_path = Path('C:/Users/DataSci/OneDrive - Emory University/CJ_Sepsis/5.quality_check/')
-
-def process_csn(csn, pickle_write_path):
+def process_csn(csn, pickle_write_path, bed_to_unit_mapping, bounds, dialysis_year):
     
     file_name = pickle_write_path / (str(csn) + '.pickle')
     
     #instantiate class for single encounter
-    instance = sd.sepyDICT(yearly_instance, csn)
+    instance = sd.sepyDICT(yearly_instance, csn, bed_to_unit_mapping, bounds, dialysis_year )
     #create encounter dictionary
     inst_dict = instance.encounter_dict
         
@@ -146,7 +144,7 @@ if __name__ == '__main__':
     vent_start = 0
     
     # reads the list of csns
-    csn_df = pd.read_csv(csn_list_file_name, sep='|', header=0).iloc[1:200]
+    csn_df = pd.read_csv(csn_list_file_name, sep='|', header=0)
 
     #  only keep csns that meet specified year
     csn_df = csn_df[(csn_df.in_pt == in_pt) & (csn_df.adult == adult)]
@@ -180,9 +178,11 @@ if __name__ == '__main__':
     try:
         # reads the IMPORT class instance (i.e.  1 year of patient data)
         pickle_load_time = time.perf_counter() #time to load pickle
-        with open(pickle_name, 'rb') as handle:
-            yearly_instance = pickle.load(handle)
-            print(f'MkDct-Pickle from year {bash_year} was loaded in {time.perf_counter()-pickle_load_time}s.')
+        #with open(pickle_name, 'rb') as handle:
+        #    yearly_instance = pickle.load(handle)
+
+        yearly_instance = pd.read_pickle(pickle_name)
+        print(f'MkDct-Pickle from year {bash_year} was loaded in {time.perf_counter()-pickle_load_time}s.')
 
         print("-----------LOADED YEARLY PICKLE FILE!!!!---------------")
  
@@ -194,6 +194,21 @@ if __name__ == '__main__':
         # make empty list to handle csn's with errors
         error_list = []
         start_csn_creation = time.perf_counter() #times calc's by year
+        
+        ############ LOAD FILES FOR EXTRA PROCESSING ####
+        
+        bed_to_unit_mapping = pd.read_csv(bed_unit_csv_fname)
+        bed_to_unit_mapping.drop(columns = ['Unnamed: 0'], inplace = True)
+        bed_to_unit_mapping.columns = ['bed_unit', 'icu_type', 'unit_type', 'hospital']
+        
+        bounds = pd.read_excel(
+             variable_bounds_csv_fname,
+             engine='openpyxl',
+        )
+        
+        dialysis = pd.read_csv(dialysis_info_csv_fname)
+        dialysis_year = dialysis.loc[dialysis['Encounter Encounter Number'].isin(csn_df['csn'].values)]
+
             
         #################################################
         ############ Make Dicts by CSN
@@ -204,7 +219,7 @@ if __name__ == '__main__':
             count +=1 
             try:
                 print(f'MkDct- The current pt csn is: {csn}, which is {count} of {chunk_size} for year {bash_year}')
-                instance = process_csn(csn, pickle_write_path)
+                instance = process_csn(csn, pickle_write_path, bed_to_unit_mapping, bounds, dialysis_year)
                 print("MkDct- Instance created")
                 try:
                     sofa_summary(csn, instance)
