@@ -5,10 +5,6 @@ Created on Wed Mar 29 23:33:04 2023
 @author: mehak
 """
 
-# -*- coding: utf-8 -*-
-"""
-@author: Elite Data Hacks
-"""
 import sys
 import pandas as pd
 import numpy as np
