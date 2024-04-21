@@ -10,18 +10,11 @@ import pickle
 import time
 from pathlib import Path
 
-############################## File Paths ##############################
-#### List of patient encounters (i.e. CSNs); now handled in BASH
-# csn_list_file_name = '/home/cjosef/EliteDataHacks/pt_lists/ian_csn_year.psv'
-# CSJ-PC csn_list_file_name = Path('C:/Users/DataSci/OneDrive - Emory University/SepsisLabeling/1.pt_list/ian_csn_year.psv')
 
-#### Location of pickles with yearly data; now handled in BASH
-# pickle_path = '/home/cjosef/EliteDataHacks/pickles/'
-# CSJ-PCpickle_path = Path('C:/Users/DataSci/OneDrive - Emory University/SepsisLabeling/5.quality_check/')
+bed_unit_csv_fname = Path('./groupings/gr_bed_labels(05721).csv')
+variable_bounds_csv_fname = Path('./Variable_Chart_Grady.xlsx')
+dialysis_info_csv_fname = None #Path('/labs/kamaleswaranlab/MODS/EliteDataHacks/sepy/new_sepy_mehak/PEACH_HD_CRRT(1).csv')
 
-#### Where the encounter dictionaries should be written; now handled in BASH
-# output_path = '/home/cjosef/EliteDataHacks/IanFiles/'
-# CSJ-PCoutput_path = Path('C:/Users/DataSci/OneDrive - Emory University/SepsisLabeling/5.quality_check/')
 
 def process_csn(csn, pickle_write_path):
     
