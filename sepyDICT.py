@@ -593,8 +593,8 @@ class sepyDICT:
             
     def bin_fluids(self):
         df = self.infusion_meds_PerCSN
-        vas_cols = self.v_vasopressor_names + self.v_vasopressor_units + ['med_order_time']
-        df =df[vas_cols]
+        cols = self.fluid_med_names + ['med_order_time']
+        df =df[cols]
         
         if df.empty:
             #drop unecessary cols
@@ -1096,11 +1096,11 @@ class sepyDICT:
         v_vasopressor_names_wo_dobutamine = self.v_vasopressor_names.copy()
         v_vasopressor_names_wo_dobutamine.remove('dobutamine')
 
-        on_pressors = (~self.super_table[v_vasopressor_names_wo_dobutamine].isna()).any()
-        on_dobutamine = (~self.super_table[['dobutamine']].isna()).any()
-
-        self.super_table['on_pressors'] = on_pressors
-        self.super_table['on_dobutamine'] = on_dobutamine
+        on_pressors = (self.super_table[v_vasopressor_names_wo_dobutamine].notna()).any(axis = 1)
+        on_dobutamine = (self.super_table['dobutamine'] > 0) 
+        
+        self.super_table['on_pressors'] = on_pressors.astype('bool')
+        self.super_table['on_dobutamine'] = on_dobutamine.astype('bool')
     
         
     #Function to create elapsed variables
@@ -1315,9 +1315,9 @@ class sepyDICT:
             else:
                 return float("nan")
             
-        self.super_table['bed_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'unit_type'])
-        self.super_table['icu_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'icu_type'])
-        self.super_table['hospital'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'hospital'])
+        #self.super_table['bed_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'unit_type'])
+        #self.super_table['icu_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'icu_type'])
+        #self.super_table['hospital'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'hospital'])
 
     def on_dialysis(self):
         dd = self.dialysis_year.loc[self.dialysis_year['Encounter Encounter Number'] == self.csn]
@@ -1325,7 +1325,16 @@ class sepyDICT:
         for time in dd['Service Timestamp']:
             time = pd.to_datetime(time)
             self.super_table.loc[(self.super_table.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
+    
+    def dialysis_history(self):
+        dialysis_history = self.diagnosis_PerCSN.loc[(self.diagnosis_PerCSN.dx_code_icd9 == '585.6') | (supertablediagnosis_PerCSN.dx_code_icd10 == 'N18.6')]
+        if len(dialysis_history) == 0:
+            self.super_table['history_of_dialysis'] = [0]*len(self.super_table)
+        else:
+            self.super_table['history_of_dialysis'] = [1]*len(self.super_table)
+    
 
+        
     def create_fluids_columns(self):
         infusionDf = self.infusion_meds_PerCSN
         med_names = self.infusion_meds_PerCSN.loc[self.infusion_meds_PerCSN['med_name'].isin(self.fluids_med_names)]
@@ -1418,12 +1427,16 @@ class sepyDICT:
         self.static_cci_to_supertable()
         print('static cci to super table complete')
         
-        self.create_bed_unit()
+        self.create_bed_unit() #For Grady - last three commented out 
         print("Bed Unit created")
-        self.on_dialysis()
-        print("On dialysis created") 
+        #self.on_dialysis() #For Grady - no dialysis data
+        #print("On dialysis created") 
         self.create_fluids_columns()
         print("Fluids columns created")
+
+        self.dialysis_history()
+        print("Dialysis history created")
+
 
 
     def write_dict(self):
