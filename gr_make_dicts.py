@@ -190,13 +190,20 @@ if __name__ == '__main__':
         #################################################
         ############ Make Dicts by CSN
         #################################################
+        bounds = pd.read_excel(
+                variable_bounds_csv_fname,
+                engine='openpyxl',
+            )
+
+        bed_to_unit_mapping = None
+        dialysis_year = None
 
         count = 0
         for csn in process_list:
             count +=1 
             try:
                 print(f'MkDct- The current pt csn is: {csn}, which is {count} of {chunk_size} for year {bash_year}')
-                instance = process_csn(csn, pickle_write_path)
+                instance = process_csn(csn, pickle_write_path, bed_to_unit_mapping, bounds, dialysis_year)
                 print("MkDct- Instance created")
                 try:
                     sofa_summary(csn, instance)
