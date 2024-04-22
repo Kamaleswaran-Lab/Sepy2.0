@@ -15,13 +15,12 @@ bed_unit_csv_fname = Path('./groupings/gr_bed_labels(05721).csv')
 variable_bounds_csv_fname = Path('./Variable_Chart_Grady.xlsx')
 dialysis_info_csv_fname = None #Path('/labs/kamaleswaranlab/MODS/EliteDataHacks/sepy/new_sepy_mehak/PEACH_HD_CRRT(1).csv')
 
-
-def process_csn(csn, pickle_write_path):
+def process_csn(csn, pickle_write_path, bed_to_unit_mapping, bounds, dialysis_year):
     
     file_name = pickle_write_path / (str(csn) + '.pickle')
     
     #instantiate class for single encounter
-    instance = sd.sepyDICT(yearly_instance, csn)
+    instance = sd.sepyDICT(yearly_instance, csn, bed_to_unit_mapping, bounds, dialysis_year )
     #create encounter dictionary
     inst_dict = instance.encounter_dict
         
@@ -34,6 +33,7 @@ def process_csn(csn, pickle_write_path):
     
     #return dictionary for summary report functions
     return(instance)
+
 
 def sofa_summary(csn, instance):
     sofa_scores = instance.encounter_dict['sofa_scores'].reset_index().rename(columns = {'index':'time_stamp'})
