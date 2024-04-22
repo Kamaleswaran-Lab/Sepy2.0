@@ -174,9 +174,10 @@ if __name__ == '__main__':
     try:
         # reads the IMPORT class instance (i.e.  1 year of patient data)
         pickle_load_time = time.perf_counter() #time to load pickle
-        with open(pickle_name, 'rb') as handle:
-            yearly_instance = pickle.load(handle)
-            print(f'MkDct-Pickle from year {bash_year} was loaded in {time.perf_counter()-pickle_load_time}s.')
+        #with open(pickle_name, 'rb') as handle:
+        #    yearly_instance = pickle.load(handle)
+        yearly_instance = pd.read_pickle(pickle_name)
+        print(f'MkDct-Pickle from year {bash_year} was loaded in {time.perf_counter()-pickle_load_time}s.')
         
         # if success, make a dir for this year's encounters
         pickle_write_path = output_path / str(bash_year)
