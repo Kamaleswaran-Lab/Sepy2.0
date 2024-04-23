@@ -1327,7 +1327,7 @@ class sepyDICT:
             self.super_table.loc[(self.super_table.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
     
     def dialysis_history(self):
-        dialysis_history = self.diagnosis_PerCSN.loc[(self.diagnosis_PerCSN.dx_code_icd9 == '585.6') | (supertablediagnosis_PerCSN.dx_code_icd10 == 'N18.6')]
+        dialysis_history = self.diagnosis_PerCSN.loc[(self.diagnosis_PerCSN.dx_code_icd9 == '585.6') | (self.diagnosis_PerCSN.dx_code_icd10 == 'N18.6')]
         if len(dialysis_history) == 0:
             self.super_table['history_of_dialysis'] = [0]*len(self.super_table)
         else:
