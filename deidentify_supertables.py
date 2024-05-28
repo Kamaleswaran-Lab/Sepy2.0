@@ -6,8 +6,7 @@ from multiprocessing import Pool
 
 #Columns to drop
 cols = ['on_vent_old', 'vent_fio2_old', 
- 'bed_unit', 
- 'race', 'ethnicity']
+ 'bed_unit']
 
 path_to_supertable = Path('/labs/collab/K-lab-MODS/MODS-PHI/Encounter_Pickles/emHolder_OutlierCorrected')
 path_to_deid_supertable = Path('/labs/collab/K-lab-MODS/MODS-PHI/Encounter_Pickles/deid_supertables/')
