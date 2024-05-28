@@ -1,0 +1,25 @@
+/labs/kamaleswaranlab/anaconda3/rapids/bin:/labs/kamaleswaranlab/tesseract-custom/bin:/usr/lib64/mpich/bin:/labs/kamaleswaranlab/tesseract-custom/bin:/home/maror24/anaconda3/condabin:/labs/kamaleswaranlab/tesseract-custom/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/maror24/.local/bin:/home/maror24/bin:/home/maror24/.local/bin:/home/maror24/bin:/usr/local/cuda/bin:/opt/spark/bin
+CJSEPSIS_BEDLOCATION_2017.dsv deidentified
+CJSEPSIS_CPT_2017.dsv deidentified
+CJSEPSIS_CULTURES.dsv deidentified
+CSN does not exist in CJSEPSIS_DEMOGRAPHICS_2017.dsv
+CJSEPSIS_DEMOGRAPHICS_2017.dsv deidentified
+Demographic columns dropped
+CJSEPSIS_DIAGNOSIS_2017.dsv deidentified
+Pat ID matching list saved
+CSN matching list saved
+CJSEPSIS_ENCOUNTER_2017.dsv deidentified
+CJSEPSIS_GCS_2017.dsv deidentified
+CJSEPSIS_ICDPROCEDURES_2017.dsv deidentified
+CJSEPSIS_LABS_2017.dsv deidentified
+PAT_ID does not exist in CJSEPSIS_NONINFUSEDMEDS_2017.dsv
+CJSEPSIS_NONINFUSEDMEDS_2017.dsv deidentified
+CJSEPSIS_SENSITIVITIES_2017.dsv deidentified
+CJSEPSIS_VENT_2017.dsv deidentified
+CJSEPSIS_VITALS_2017.dsv deidentified
+CJSEPSIS_INFUSIONMEDS_2017.dsv deidentified
+CJSEPSIS_ORPROCEDURES_2017.dsv deidentified
+CSN does not exist in CJSEPSIS_INFUSIONMEDS_v2_2017.dsv
+CJSEPSIS_INFUSIONMEDS_v2_2017.dsv deidentified
+PAT_ID does not exist in CJSEPSIS_NONINFUSEDMEDS_v2_2017.dsv
+CJSEPSIS_NONINFUSEDMEDS_v2_2017.dsv deidentified

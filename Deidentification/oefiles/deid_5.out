@@ -1,0 +1,28 @@
+/labs/kamaleswaranlab/anaconda3/rapids/bin:/labs/kamaleswaranlab/tesseract-custom/bin:/usr/lib64/mpich/bin:/labs/kamaleswaranlab/tesseract-custom/bin:/home/maror24/anaconda3/condabin:/labs/kamaleswaranlab/tesseract-custom/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/maror24/.local/bin:/home/maror24/bin:/home/maror24/.local/bin:/home/maror24/bin:/usr/local/cuda/bin:/opt/spark/bin
+CJSEPSIS_DIAGNOSIS_2020.dsv deidentified
+Pat ID matching list saved
+CSN matching list saved
+CJSEPSIS_ENCOUNTER_2020.dsv deidentified
+CJSEPSIS_GCS_2020.dsv deidentified
+CJSEPSIS_ICDPROCEDURES_2020.dsv deidentified
+CJSEPSIS_LABS_2020.dsv deidentified
+PAT_ID does not exist in CJSEPSIS_NONINFUSEDMEDS_2020.dsv
+CJSEPSIS_NONINFUSEDMEDS_2020.dsv deidentified
+CJSEPSIS_ORPROCEDURES_2020.dsv deidentified
+CJSEPSIS_SENSITIVITIES_2020.dsv deidentified
+CJSEPSIS_VENT_2020.dsv deidentified
+CJSEPSIS_BEDLOCATION_2020.dsv deidentified
+CJSEPSIS_CULTURES_2020.dsv deidentified
+CSN does not exist in CJSEPSIS_DEMOGRAPHICS_2020.dsv
+CJSEPSIS_DEMOGRAPHICS_2020.dsv deidentified
+Demographic columns dropped
+CJSEPSIS_INFUSIONMEDS_2020.dsv deidentified
+PAT_ID does not exist in CJSEPSIS_CPT_2020_ORIGINAL.dsv
+CSN does not exist in CJSEPSIS_CPT_2020_ORIGINAL.dsv
+CJSEPSIS_CPT_2020_ORIGINAL.dsv deidentified
+CJSEPSIS_CPT_2020.dsv deidentified
+CJSEPSIS_VITALS_2020.dsv deidentified
+CSN does not exist in CJSEPSIS_INFUSIONMEDS_v2_2020.dsv
+CJSEPSIS_INFUSIONMEDS_v2_2020.dsv deidentified
+PAT_ID does not exist in CJSEPSIS_NONINFUSEDMEDS_v2_2020.dsv
+CJSEPSIS_NONINFUSEDMEDS_v2_2020.dsv deidentified

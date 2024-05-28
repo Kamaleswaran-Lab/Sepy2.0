@@ -1,3 +1,6 @@
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
 from sepyAGG import labAGG
 import time
 import pandas as pd
