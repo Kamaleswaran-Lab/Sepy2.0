@@ -19,27 +19,51 @@ if __name__ == "__main__":
     args = parser.parse_args()
     year = YEARS[args.index]
 
-    path_to_data = Path('/labs/collab/K-lab-MODS/MODS-PHI/Emory_Data/')
-    path_to_deid_data = Path('/labs/kamaleswaranlab/MODS/Data/deid/')
+    path_to_data = Path('/labs/collab/K-lab-MODS/MODS-PHI/Grady_Data/')
+    path_to_deid_data = Path('/labs/kamaleswaranlab/MODS/Data/deid_grady/')
 
-    path_to_data = path_to_data / str(year)
     path_to_deid_data = path_to_deid_data / str(year)
     path_to_deid_data.mkdir(parents = True, exist_ok = True)
 
-    files = path_to_data.glob('*.dsv')
+    files = list(path_to_data.glob(f'*/*/*_{year}_*.txt'))
+    
     for file in files:
-        df = pd.read_csv(file, sep = '|')
-        if 'ENCOUNTER' in file.name:
+        print(file)
+        if 'clinical_notes' in file.name:
+            print(file.name + ' skipped')
+            continue
+        df = pd.read_csv(file, sep = '|', error_bad_lines = False)
+        
+        if 'encounter' in file.name:
             matching_list = pd.DataFrame( columns= ['pat_id', 'pat_id_deid'])
             matching_list['pat_id'] = df['pat_id'].unique()
             matching_list['pat_id_deid'] = matching_list['pat_id'].apply(lambda x: hash_value(x, hash_key))
-            matching_list.to_csv(path_to_data / 'matching_list_patid.csv', index = False)
+            matching_list.to_csv(path_to_data / f'matching_list_patid_{year}.csv', index = False)
             print("Pat ID matching list saved")   
+            
             matching_list = pd.DataFrame( columns= ['csn', 'csn_deid'])
             matching_list['csn'] = df['csn'].unique()
             matching_list['csn_deid'] = matching_list['csn'].apply(lambda x: hash_value(x, hash_key))
-            matching_list.to_csv(path_to_data / 'matching_list_csn.csv', index = False)
+            matching_list.to_csv(path_to_data / f'matching_list_csn_{year}.csv', index = False)
             print("CSN matching list saved")
+
+            matching_list = pd.DataFrame( columns= ['har', 'har_deid'])
+            matching_list['har'] = df['har'].unique()
+            matching_list['har_deid'] = matching_list['har'].apply(lambda x: hash_value(x, hash_key))
+            matching_list.to_csv(path_to_data / f'matching_list_csn_{year}.csv', index = False)
+            print("HAR matching list saved")
+
+            matching_list = pd.DataFrame( columns= ['mrn', 'mrn_deid'])
+            matching_list['mrn'] = df['mrn'].unique()
+            matching_list['mrn_deid'] = matching_list['mrn'].apply(lambda x: hash_value(x, hash_key))
+            matching_list.to_csv(path_to_data / f'matching_list_csn_{year}.csv', index = False)
+            print("MRN matching list saved")
+
+            try:
+                df.drop(columns=['zip_code'], inplace = True)
+            except KeyError:
+                df.drop(columns = ['ZIP_CODE'], inplace = True)
+            print("Zip code column dropped")
 
         # Deidentify identifier columns
         for column in identifier_columns:
@@ -51,7 +75,7 @@ if __name__ == "__main__":
                     df[column] = df[column].apply(lambda x: hash_value(x, hash_key))
             except KeyError:
                 print(column + ' does not exist in ' + file.name)
-         
+        
         print(file.name + " deidentified")
         if 'DEMOGRAPHICS' in file.name:
             #Drop Columns
