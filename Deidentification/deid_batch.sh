@@ -29,4 +29,4 @@ export LC_TIME=$LANG
 export LC_ALL=$LANG
 
 echo $PATH
-python deidentification.py --index $SLURM_ARRAY_TASK_ID
+python deidentification_grady.py --index $SLURM_ARRAY_TASK_ID
