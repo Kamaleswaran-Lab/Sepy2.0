@@ -6,7 +6,7 @@
 #SBATCH -t 24:0:0
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --array=0-7
+#SBATCH --array=0-8
 #SBATCH --mem 72G
 
 #SBATCH -o ./deid_%a.out
@@ -29,4 +29,4 @@ export LC_TIME=$LANG
 export LC_ALL=$LANG
 
 echo $PATH
-python deidentification.py --index $SLURM_ARRAY_TASK_ID
+python deidentification_grady.py --index $SLURM_ARRAY_TASK_ID
