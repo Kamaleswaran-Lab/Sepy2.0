@@ -1880,7 +1880,7 @@ class sepyDICT:
                        look_forward = 12):
         
         # Initialize empty list to hold SOFA times in loops below 
-       #t_SOFA_list = []
+        #t_SOFA_list = []
         
         # Initialize empty df to hold suspicion and sofa times
         sep3_time_df_mod = pd.DataFrame(columns = ['t_suspicion','t_SOFA_mod'])
