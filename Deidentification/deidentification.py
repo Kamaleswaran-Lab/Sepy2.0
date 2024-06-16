@@ -25,10 +25,10 @@ if __name__ == "__main__":
     path_to_data = path_to_data / str(year)
     path_to_deid_data = path_to_deid_data / str(year)
     path_to_deid_data.mkdir(parents = True, exist_ok = True)
-
-    files = path_to_data.glob('*.dsv')
+    
+    files = path_to_data.glob('*.csv')
     for file in files:
-        df = pd.read_csv(file, sep = '|')
+        df = pd.read_csv(file)
         if 'ENCOUNTER' in file.name:
             try:
                 matching_list = pd.DataFrame( columns= ['pat_id', 'pat_id_deid'])
