@@ -30,16 +30,28 @@ if __name__ == "__main__":
     for file in files:
         df = pd.read_csv(file, sep = '|')
         if 'ENCOUNTER' in file.name:
-            matching_list = pd.DataFrame( columns= ['pat_id', 'pat_id_deid'])
-            matching_list['pat_id'] = df['pat_id'].unique()
-            matching_list['pat_id_deid'] = matching_list['pat_id'].apply(lambda x: hash_value(x, hash_key))
-            matching_list.to_csv(path_to_data / 'matching_list_patid.csv', index = False)
-            print("Pat ID matching list saved")   
-            matching_list = pd.DataFrame( columns= ['csn', 'csn_deid'])
-            matching_list['csn'] = df['csn'].unique()
-            matching_list['csn_deid'] = matching_list['csn'].apply(lambda x: hash_value(x, hash_key))
-            matching_list.to_csv(path_to_data / 'matching_list_csn.csv', index = False)
-            print("CSN matching list saved")
+            try:
+                matching_list = pd.DataFrame( columns= ['pat_id', 'pat_id_deid'])
+                matching_list['pat_id'] = df['pat_id'].unique()
+                matching_list['pat_id_deid'] = matching_list['pat_id'].apply(lambda x: hash_value(x, hash_key))
+                matching_list.to_csv(path_to_data / 'matching_list_patid.csv', index = False)
+                print("Pat ID matching list saved")   
+                matching_list = pd.DataFrame( columns= ['csn', 'csn_deid'])
+                matching_list['csn'] = df['csn'].unique()
+                matching_list['csn_deid'] = matching_list['csn'].apply(lambda x: hash_value(x, hash_key))
+                matching_list.to_csv(path_to_data / 'matching_list_csn.csv', index = False)
+                print("CSN matching list saved")
+            except KeyError:
+                matching_list = pd.DataFrame( columns= ['pat_id', 'pat_id_deid'])
+                matching_list['pat_id'] = df['PAT_ID'].unique()
+                matching_list['pat_id_deid'] = matching_list['pat_id'].apply(lambda x: hash_value(x, hash_key))
+                matching_list.to_csv(path_to_data / 'matching_list_patid.csv', index = False)
+                print("Pat ID matching list saved")   
+                matching_list = pd.DataFrame( columns= ['csn', 'csn_deid'])
+                matching_list['csn'] = df['CSN'].unique()
+                matching_list['csn_deid'] = matching_list['csn'].apply(lambda x: hash_value(x, hash_key))
+                matching_list.to_csv(path_to_data / 'matching_list_csn.csv', index = False)
+                print("CSN matching list saved")
 
         # Deidentify identifier columns
         for column in identifier_columns:
