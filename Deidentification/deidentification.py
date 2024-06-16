@@ -18,7 +18,7 @@ if __name__ == "__main__":
     parser.add_argument('--index', type = int, required = True)
     args = parser.parse_args()
     year = YEARS[args.index]
-
+    print(year)
     path_to_data = Path('/labs/collab/K-lab-MODS/MODS-PHI/Emory_Data/')
     path_to_deid_data = Path('/labs/kamaleswaranlab/MODS/Data/deid/')
 
@@ -26,8 +26,9 @@ if __name__ == "__main__":
     path_to_deid_data = path_to_deid_data / str(year)
     path_to_deid_data.mkdir(parents = True, exist_ok = True)
 
-    files = path_to_data.glob('*.dsv')
+    files = path_to_data.glob('*.csv')
     for file in files:
+        print(file)
         df = pd.read_csv(file, sep = '|')
         if 'ENCOUNTER' in file.name:
             matching_list = pd.DataFrame( columns= ['pat_id', 'pat_id_deid'])
@@ -63,6 +64,7 @@ if __name__ == "__main__":
             print("Demographic columns dropped")
 
         df.to_csv(path_to_deid_data / file.name, index = False, sep = '|')
+        print(path_to_deid_data / file.name)
         del df 
 
     
