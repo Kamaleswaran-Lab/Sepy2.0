@@ -28,8 +28,7 @@ if __name__ == "__main__":
 
     files = path_to_data.glob('*.csv')
     for file in files:
-        print(file)
-        df = pd.read_csv(file, sep = '|')
+        df = pd.read_csv(file)
         if 'ENCOUNTER' in file.name:
             try:
                 matching_list = pd.DataFrame( columns= ['pat_id', 'pat_id_deid'])

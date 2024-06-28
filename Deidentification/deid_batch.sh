@@ -1,16 +1,16 @@
 #!/bin/bash
 
-#SBATCH -J deid
+#SBATCH -J deide
 #SBATCH -p batch,overflow
 #SBATCH -G 0
 #SBATCH -t 24:0:0
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --array=0-8
+##SBATCH --array=0-8
 #SBATCH --mem 72G
 
-#SBATCH -o ./deid_%a.out
-#SBATCH -e ./deid_%a.err
+#SBATCH -o ./oefiles/deid_2022.out
+#SBATCH -e ./oefiles/deid_2022.err
 
 source /home/maror24/anaconda3/bin/deactivate
 source /home/maror24/anaconda3/bin/activate rapids
@@ -29,4 +29,4 @@ export LC_TIME=$LANG
 export LC_ALL=$LANG
 
 echo $PATH
-python deidentification_grady.py --index $SLURM_ARRAY_TASK_ID
+python deidentification.py --index 8

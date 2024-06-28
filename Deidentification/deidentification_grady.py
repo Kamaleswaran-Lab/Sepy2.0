@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     path_to_data = Path('/labs/collab/K-lab-MODS/MODS-PHI/Grady_Data/')
     path_to_deid_data = Path('/labs/kamaleswaranlab/MODS/Data/deid_grady/')
-
+    path_to_lists = Path('/labs/collab/K-lab-MODS/MODS-PHI/Grady_Data/1. Administrative Attributes')
     path_to_deid_data = path_to_deid_data / str(year)
     path_to_deid_data.mkdir(parents = True, exist_ok = True)
 
@@ -38,25 +38,25 @@ if __name__ == "__main__":
             matching_list = pd.DataFrame( columns= ['pat_id', 'pat_id_deid'])
             matching_list['pat_id'] = df['pat_id'].unique()
             matching_list['pat_id_deid'] = matching_list['pat_id'].apply(lambda x: hash_value(x, hash_key))
-            matching_list.to_csv(path_to_data / f'matching_list_patid_{year}.csv', index = False)
+            matching_list.to_csv(path_to_lists / f'matching_list_patid_{year}.csv', index = False)
             print("Pat ID matching list saved")   
             
             matching_list = pd.DataFrame( columns= ['csn', 'csn_deid'])
             matching_list['csn'] = df['csn'].unique()
             matching_list['csn_deid'] = matching_list['csn'].apply(lambda x: hash_value(x, hash_key))
-            matching_list.to_csv(path_to_data / f'matching_list_csn_{year}.csv', index = False)
+            matching_list.to_csv(path_to_lists / f'matching_list_csn_{year}.csv', index = False)
             print("CSN matching list saved")
 
             matching_list = pd.DataFrame( columns= ['har', 'har_deid'])
             matching_list['har'] = df['har'].unique()
             matching_list['har_deid'] = matching_list['har'].apply(lambda x: hash_value(x, hash_key))
-            matching_list.to_csv(path_to_data / f'matching_list_csn_{year}.csv', index = False)
+            matching_list.to_csv(path_to_lists / f'matching_list_csn_{year}.csv', index = False)
             print("HAR matching list saved")
 
             matching_list = pd.DataFrame( columns= ['mrn', 'mrn_deid'])
             matching_list['mrn'] = df['mrn'].unique()
             matching_list['mrn_deid'] = matching_list['mrn'].apply(lambda x: hash_value(x, hash_key))
-            matching_list.to_csv(path_to_data / f'matching_list_csn_{year}.csv', index = False)
+            matching_list.to_csv(path_to_lists / f'matching_list_csn_{year}.csv', index = False)
             print("MRN matching list saved")
 
             try:

@@ -12,7 +12,7 @@ files = list(path_to_pickles.glob(f'*{year}_csvs/*.csv'))
 #and return the dataframe
 def read_csv(file):
     df = pd.read_csv(file)
-    df['encounter'] = file.split('/')[-1].split('.')[0]
+    df['encounter'] = str(file).split('/')[-1].split('.')[0]
     df['row_counter'] = range(len(df))
     return df
 
