@@ -9,7 +9,7 @@
 #SBATCH --array=0-10
 
 # This is the list of years to process; each core will take a fraction of each year
-YEARS=(2014)
+YEARS=(2015)
 
 ### These are variables passed into the Python Script ###
 # Total num of cores assigned to job (i.e. 16)
