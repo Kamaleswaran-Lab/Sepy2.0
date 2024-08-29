@@ -196,7 +196,7 @@ if __name__ == '__main__':
                 engine='openpyxl',
             )
 
-        bed_to_unit_mapping = None
+        bed_to_unit_mapping = pd.read_csv(bed_unit_csv_fname)
         dialysis_year = None
 
         count = 0
