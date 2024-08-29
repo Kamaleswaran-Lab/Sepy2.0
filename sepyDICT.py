@@ -1317,11 +1317,16 @@ class sepyDICT:
                 return unit[0]
             else:
                 return float("nan")
+        
+        try:
+            self.super_table['bed_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'unit_type'])
+            self.super_table['icu_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'icu_type'])
+            #self.super_table['hospital'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'hospital'])
+        except:
+            self.super_table['bed_type'] = [float("nan")]*len(self.super_table)
+            self.super_table['icu_type'] = [float("nan")]*len(self.super_table)
+            #self.super_table['hospital'] = [float("nan")]*len(self.super_table)
             
-        #self.super_table['bed_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'unit_type'])
-        #self.super_table['icu_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'icu_type'])
-        #self.super_table['hospital'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'hospital'])
-
     def on_dialysis(self):
         dd = self.dialysis_year.loc[self.dialysis_year['Encounter Encounter Number'] == self.csn]
         self.super_table['on_dialysis'] = [0]*len(self.super_table)
