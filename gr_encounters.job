@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #!/bin/bash
 #SBATCH --job-name=tomatogr
 #SBATCH --nodes=1 
