@@ -1254,7 +1254,7 @@ class sepyDICT:
         df['age'] = [age]*len(df)
         df['id'] = self.diagnosis_PerCSN.index
 
-        if all(df['code'] == '--'):
+        if all(df['code'] == '--') or pd.isnull(df['code']).all():
             cci9 = None
         else:
             df_out = comorbidity(df,  
@@ -1272,7 +1272,7 @@ class sepyDICT:
         df['age'] = [age]*len(df)
         df['id'] = self.diagnosis_PerCSN.index
 
-        if all(df['code'] == '--'):
+        if all(df['code'] == '--') or pd.isnull(df['code']).all():
             cci10 = None
         else:
             df_out = comorbidity(df,  
@@ -1431,7 +1431,6 @@ class sepyDICT:
         
         self.create_on_vent()
         print("Created on vent")
-
         self.static_cci_to_supertable()
         print('static cci to super table complete')
         
