@@ -204,6 +204,7 @@ if __name__ == '__main__':
             count +=1 
             try:
                 print(f'MkDct- The current pt csn is: {csn}, which is {count} of {chunk_size} for year {bash_year}')
+                
                 instance = process_csn(csn, pickle_write_path, bed_to_unit_mapping, bounds, dialysis_year)
                 print("MkDct- Instance created")
                 try:
@@ -243,6 +244,7 @@ if __name__ == '__main__':
                 print(e)
                 error_list.append([csn, e.args[0]])
                 print(f'MkDct- The following csn had an error: {csn}')
+            
         
         #################################################
         ############ Export Sepsis Summary
@@ -297,7 +299,7 @@ if __name__ == '__main__':
         #################################################
         
         print(f'MkDct- Time to create write encounter pickles for {bash_year} was {time.perf_counter()-start_csn_creation} (s)')
-
+        
             
     except Exception as e: 
         print(e)
