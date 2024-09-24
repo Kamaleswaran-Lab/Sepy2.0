@@ -1,0 +1,13 @@
+
+Currently processing year: 2014
+DeprecationWarning: 'source deactivate' is deprecated. Use 'conda deactivate'.
+
+EnvironmentNameNotFound: Could not find conda environment: nemo
+You can list all discoverable environments with `conda info --envs`.
+
+
+Python 2.7.5
+Traceback (most recent call last):
+  File "add_dialysis_history_script.py", line 10, in <module>
+    import pandas as pd
+ImportError: No module named pandas

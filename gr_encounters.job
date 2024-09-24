@@ -9,17 +9,17 @@
 #SBATCH --array=0-10
 
 # This is the list of years to process; each core will take a fraction of each year
-YEARS=(2018)
+YEARS=(2022)
 
 ### These are variables passed into the Python Script ###
 # Total num of cores assigned to job (i.e. 16)
 NUM_OF_PROCESSES=$SLURM_ARRAY_TASK_COUNT
 
 # list of csn and the associated year
-CSN_LIST=/labs/collab/K-lab-MODS/EliteDataHacks/pt_lists/grady_comprehensive_pt_list.psv
+CSN_LIST=/labs/collab/K-lab-MODS/EliteDataHacks/pt_lists/pt_list_grady_2022.psv
 
 # path for yearly pickles
-PICKLE_PATH=/labs/collab/K-lab-MODS/Yearly_Pickles/HolderSuperTables/
+PICKLE_PATH=/labs/collab/K-lab-MODS/Yearly_Pickles/
 
 # place to write encounter pickles
 OUTPUT_PATH=/labs/collab/K-lab-MODS/MODS-PHI/Encounter_Pickles/grHolder/
