@@ -5,8 +5,8 @@
 #SBATCH --mem=32G
 #SBATCH --output=./out/gr_onion_%a.out
 #SBATCH --error=./out/gr_onion_%a.err
-#SBATCH --array=0-4
-Y1=(2016 2017 2018 2019 2020)
+#SBATCH --array=0-1
+Y1=(2021 2022)
 
 source /home/maror24/anaconda3/bin/deactivate
 source /home/maror24/anaconda3/bin/activate rapids

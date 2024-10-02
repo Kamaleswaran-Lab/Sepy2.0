@@ -3,6 +3,16 @@
 Created on Mon Aug 28 15:36:24 2023
 
 @author: mehak
+
+TODO: This was done in a hurry, needs to be cleaned up.
+
+This script is meant to be run AFTER the script that creates the super tables. 
+It adds a column to the super tables that indicates whether the patient has a history of dialysis. Also corrects the 
+column names of the super tables to remove the time columns. 
+TODO: Add this code directly to the script that creates the super tables.
+
+BUT, it is useful to have a layer that runs on top of the super tables to add additional information. ??
+Computationaly cheaper than creating all the supertables again. 
 """
 
 import concurrent.futures
