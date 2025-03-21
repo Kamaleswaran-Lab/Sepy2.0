@@ -1,0 +1,2075 @@
+﻿physionet,import,super_table_col_name,component_id,component,loinc_code
+Yes,Yes,glucose,123041940,Poct Glucose(Meter),41653-7
+Yes,Yes,hematocrit,123041178,Hematocrit-Blood,4544-3
+Yes,Yes,hemoglobin,123041192,Hemoglobin-Blood,718-7
+No,No,mcv,123042131,MCV,787-2
+No,No,rbc_count,123042123,RBC Count-Blood,789-8
+No,No,rdw,123042134,RDW,788-0
+No,No,mchc,123042129,MCHC,786-4
+Yes,Yes,white_blood_cell_count,123042650,WBC Count-Blood,6690-2
+No,No,platelet_mpv,123041903,Platelet MPV,32623-1
+Yes,Yes,platelets,123041901,Platelet Count-Blood,777-3
+No,Yes,sodium,123042342,Sodium-Serum,2951-2
+No,Yes,albumin,123040112,"Albumin,Bcg-Serum",61151-7
+Yes,Yes,calcium,123040392,"Calcium,Total Serum",17861-6
+No,Yes,calcium_adjusted,123040387,"Calcium,Albumin Adjusted",46099-8
+Yes,Yes,potassium,123042008,Potassium-Serum,2823-3
+Yes,Yes,creatinine,123040740,Creatinine-Serum,2160-0
+Yes,Yes,glucose,123041111,"Glucose,Casual-Serum",2345-7
+Yes,Yes,chloride,123040527,Chloride-Serum,2075-0
+Yes,Yes,bicarb_(hco3),123040667,Co2 Content-Serum,2028-9
+Yes,Yes,blood_urea_nitrogen_(bun),123042579,Urea Nitrogen-Serum,3094-0
+No,Yes,anion_gap,123040202,Anion Gap,33037-3
+No,Yes,osmolarity,123041741,"Osmo,Calculated",18182-6
+No,Yes,gfr,123040954,Glomerular Filtration Rate Calc,33914-3
+No,No,(grouping)_comments,243,Man Diff Done,NULL
+Yes,Yes,bilirubin_total,123040344,"Bilirubin,Total-Serum",1975-2
+Yes,Yes,bilirubin_direct,123040341,"Bilirubin,Direct-Serum",1968-7
+No,Yes,protein,123042063,"Protein,Total-Serum",2885-2
+No,Yes,alanine_aminotransferase_(alt),123042301,ALT (SGPT),1742-6
+Yes,Yes,aspartate_aminotransferase_(ast),123042300,AST (SGOT),1920-8
+Yes,Yes,alkaline_phosphatase,173,Alkaline Phosphatase,6768-6
+No,No,(grouping)_urine,123041844,"Ph, Quant-Urine",2756-5
+No,No,(grouping)_urine,123040688,Color-Urine,5778-6
+No,No,(grouping)_urine,123042353,Specific Gravity-Urine,2965-2
+No,No,(grouping)_urine,123042588,"Urobilinogen,Qualitative-Urine",20405-7
+No,No,(grouping)_urine,123041114,"Glucose,Qualitative-Urine",2349-9
+No,No,(grouping)_urine,123041663,"Nitrite,Bacterial-Urine",5802-4
+No,No,(grouping)_urine,123041416,"Ketones,Qualitative-Urine",2514-8
+No,No,(grouping)_urine,123041463,Leukocyte Esterase-Urine,5799-2
+No,No,(grouping)_urine,123040342,"Bilirubin,Qualitative-Urine",1977-8
+No,No,(grouping)_urine,123040569,Clarity-Urine,32167-9
+No,No,(grouping)_urine,123041184,"Hemoglobin,Qualitative-Urine",5794-3
+No,No,(grouping)_urine,123042060,"Protein,Qualitative-Urine",5804-0
+No,No,(grouping)_urine,123042654,WBC-Urine,5821-4
+No,No,(grouping)_urine,123042166,RBC-Urine,798-9
+Yes,Yes,magnesium,123041521,Magnesium-Serum,19123-9
+No,No,diff,123041658,% Neutrophils - Blood,26511-6
+No,No,diff,123041655,# Neut (Seg+Band+Meta)-Blood,NULL
+No,No,diff,123041657,# Neutrophils-Blood,30451-9
+No,No,diff,123041497,% Lymphoctyes-Blood,26478-8
+No,No,diff,123041501,# Lymphocytes-Blood,26474-7
+No,No,diff,123041602,% Monocytes-Blood,26485-3
+No,No,diff,324,"ANC, Preliminary-Blood",NULL
+No,No,diff,123049343,MCH,0
+No,No,diff,123949222,% Neutrophils-Auto,0
+No,No,diff,123049224,% Lymphocytes-Auto,0
+No,No,diff,123049226,% Monocytes-Auto,0
+No,No,diff,123049228,% Eosinophils-Auto,0
+No,No,diff,123049230,% Basophils-Auto,0
+No,No,diff,123049227,# Monocytes-Auto,0
+No,No,diff,123049234,# Neutrophils-Auto,0
+No,No,diff,123049236,# Lymphocytes-Auto,0
+No,No,diff,123049229,# Eosinophils-Auto,0
+No,No,diff,123049233,NRBC-Auto,0
+No,No,diff,123040932,% Eosinophil-Blood,26450-7
+No,No,diff,123040933,# Eosinophils-Blood,26449-9
+No,No,diff,123040320,% Basophil-Blood,30180-4
+No,No,diff,123040321,# Basophils-Blood,26444-0
+No,No,diff,123049329,# Basophils-Auto,0
+No,No,diff,123041601,# Monocytes-Blood,26484-6
+Yes,Yes,phosphorus,123041869,"Phosphorus,Inorg-Serum",2777-1
+No,Yes,prothrombin_time_(pt),123042067,Prothrombin Time,5902-2
+No,Yes,inr,123041365,INR,6301-6
+Yes,Yes,troponin,123042530,Troponin-I,49563-0
+No,No,diff,123049341,# NRBC-Auto,0
+No,No,(grouping)_urine,123042377,Squamous Epithelial Cell-Urine,12258-0
+Yes,Yes,ph,123041850,Ph-Arterial,2744-1
+Yes,Yes,partial_pressure_of_carbon_dioxide_(paco2),123041812,Pco2-Arterial,2019-8
+No,Yes,partial_pressure_of_oxygen_(pao2),421,PO2-ARTERIAL,NULL
+Yes,Yes,base_excess,123040310,Base Excess-Arterial,1925-7
+No,No,(grouping)_aterial_blood_gas,123041774,Oxyhemoglobin-Art,2714-4
+No,Yes,carboxy_hgb,123040415,Carboxyhemoglobin-Art,2030-5
+No,Yes,met_hgb,123041562,Methemoglobin-Art,2615-3
+Yes,Yes,hemoglobin,123041188,"Hemoglobin,Total-Art",30313-1
+No,No,(grouping)_comments,123042696,(Meter) Comments,NULL
+No,No,(grouping)_comments,123041900,Platelet Comments,NULL
+No,No,(grouping)_nutrition,123043045,Ascorbic Acid,1904-2
+Yes,Yes,lactic_acid,123041429,Lactic Acid-Serum,2524-7
+Yes,Yes,partial_prothrombin_time_(ptt),123042758,aPTT,14979-9
+No,No,(grouping)_immune_test,123050000, HIV-1/2 Antibody Screen,NULL
+No,No,(grouping)_toxicology,123040969,Ethanol-Serum,5643-2
+No,No,(grouping)_toxicology,123040671,Cocaine Metabolites,3397-7
+No,No,(grouping)_toxicology,123040326,Benzodiazepines,14316-4
+No,No,(grouping)_toxicology,123041728,Opiates,19295-5
+No,No,(grouping)_toxicology,123040298,Barbiturates,19270-8
+No,No,(grouping)_urine,123040292,Bacteria-Urine,50221-1
+No,No,(grouping)_urine,123040502,Cellular Casts-Urine,53289-5
+No,No,(grouping)_toxicology,123000089,Amphetamine-Urine,19343-3
+No,No,(grouping)_comments,123042121,RBC Comment,NULL
+No,No,(grouping)_toxicology,123000092,Methadone-Urine,19550-3
+No,No,(grouping)_toxicology,123040408,Cannabinoid (Thc),18282-4
+No,No,diff,123042900,% Neutrophils- Man,NULL
+No,No,diff,123042902,% Lymphocytes-Man,NULL
+No,No,diff,123042904,% Monocytes-Man,NULL
+No,No,diff,123049206,% Eosinophils-Man,NULL
+No,No,diff,123042901,# Neutrophils - Man,NULL
+No,No,diff,123042903,# Lymphocytes-Man,NULL
+No,No,diff,123042906,# Monocytes-Man,NULL
+No,No,diff,123049208,% Basophils-Man,NULL
+No,No,diff,123048207,# Eosinophils-Man,NULL
+No,No,diff,123042907,# Basophils- Man,NULL
+No,No,(grouping)_venous_blood_gas,123041874,Ph-Venous,2746-6
+No,No,morph,123049278,PLT-Morphology,NULL
+No,Yes,b-type_natriuretic_peptide_(bnp),123040372,B-Type Natriuretic Peptide,30934-4
+No,No,(grouping)_toxicology,123000014,Fentanyl,11235-9
+No,No,morph,123049245,Shift (Polychromasia),NULL
+No,No,(grouping)_comments,123049280,Scan Performed,0
+No,No,(grouping)_venous_blood_gas,123041818,Pco2-Venous,2021-4
+No,No,(grouping)_venous_blood_gas,123040316,Base Excess-Venous,1927-3
+No,No,(grouping)_venous_blood_gas,123041929,Po2-Venous,2705-2
+No,No,other,123041200,Heparin Anti-XA Assay,NULL
+No,No,(grouping)_urine,123041312,Hyaline Casts-Urine,5796-8
+No,No,diff,123040295,% Band-Blood,26508-2
+No,No,diff,123040297,# Bands-Blood,26507-4
+No,No,(grouping)_pregnancy,123042014,"Pregnancy Test,Hcg-Urine",2106-3
+No,Yes,lipase,123041477,Lipase-Serum,3040-3
+No,No,morph,123049282,Giant Platelet,0
+No,Yes,thyroid_stimulating_hormone_(tsh),123042537,Tsh-Serum,3016-3
+No,Yes,hemoglobin_a1c,123041218,Hgb A1C %,4548-4
+No,No,(grouping)_creatinine_phosphokinase_(cpk),123040733,"Cpk,Total-Serum",2157-6
+No,No,morph,123042150,"RBC,Nucleated/100 WBC",58413-6
+No,No,diff,1230492156,NRBC-Man,0
+No,No,(grouping)_venous_blood_gas,123041778,Oxyhemoglobin-Ven,2716-9
+No,Yes,carboxy_hgb,123040418,Carboxyhemoglobin-Ven,2032-1
+No,Yes,met_hgb,123041565,Methemoglobin-Ven,2617-9
+Yes,Yes,hemoglobin,123041191,"Hemoglobin,Total-Ven",30350-3
+No,Yes,lactate_dehydrogenase,123041444,"Ldh,Total-Serum",14804-9
+No,No,(grouping)_urine,123040741,Creatinine-Urine,2161-8
+No,No,diff,123042187,Retic %-Blood,17849-1
+No,No,diff,123042188,"Retic,Immature Fraction-Blood",33516-6
+No,No,diff,123042189,Retic-Absolute,14196-0
+No,No,(grouping)_blood_differential,123049342,# NRBC-Man,0
+No,Yes,partial_pressure_of_oxygen_(pao2),123041971,POCT PO2 - Arterial,2703-7
+Yes,Yes,ph,123041963,POCT pH-Arterial,2744-1
+Yes,Yes,partial_pressure_of_carbon_dioxide_(paco2),123041955,POCT PCO2-Arterial,2019-8
+Yes,Yes,bicarb_(hco3),123041942,POCT HCO3 (Meter)-Arterial,1960-4
+Yes,Yes,base_excess,123041931,POCT Base Excess-Arterial,1925-7
+No,No,(grouping)_aterial_blood_gas,123041984,POCT TCO2(Meter)-Arterial,41647-9
+Yes,Yes,saturation_of_oxygen_(sao2),123041976,POCT SO2 (Meter)-Arterial,51733-4
+No,No,morph,123049261,RBC Morphology,0
+No,No,diff,123049328,# Basophils - Auto,0
+No,No,(grouping)_nutrition,123042516,Triglyceride-Serum,2571-8
+No,Yes,sodium,123041980,POCT Sodium (Meter),39792-7
+Yes,Yes,potassium,123041975,POCT Potassium (Meter),39790-1
+Yes,Yes,hematocrit,123041946,POCT Hematocrit (Meter),42908-4
+Yes,Yes,hemoglobin,123041947,POCT Hemoglobin (Meter),30352-9
+No,No,(grouping)_pregnancy,123041158,"Hcg,Quant-Serum",19080-1
+No,Yes,calcium_ionized,123041936,"POCT Calcium,Ionized (Meter)",41644-6
+No,No,(grouping)_nutrition,123042622,Vitamin B12-Serum,2132-9
+No,No,(grouping)_immune_test,123042232,RPR (Qual)-Serum,20507-0
+No,No,(grouping)_immune_test,123041156,HBV Surface Antigen,5196-1
+Yes,Yes,fibrinogen,123041010,Fibrinogen-Clauss,3255-7
+Yes,Yes,glucose,123042794,POCT GLUCOSE,NULL
+No,No,morph,123049243,Microcytes,0
+No,No,(grouping)_nutrition,123040534,"Cholesterol,Total-Serum",2093-3
+No,No,(grouping)_nutrition,123040530,"Cholesterol,Hdl Measured",2085-9
+No,No,(grouping)_nutrition,123040532,"Cholesterol,Non-Hdl Calculated",43396-1
+No,No,(grouping)_nutrition,123040531,"Cholesterol,Ldl-Calculated",13457-7
+No,No,(grouping)_immune_test,123041160,HCV Ab (2nd Generation),13955-0
+No,No,diff,123049212,% Myelocyte-Man,0
+No,No,morph,123049256,Target Cells,0
+No,No,(grouping)_nutrition,123041031,Folate-Serum,2284-8
+No,No,diff,123049210,% Metamyelocyte-Man,0
+No,No,diff,123041554,% Metamyelocyte-Blood,28541-1
+No,No,diff,123049240,# Metamyelocytes- Man,0
+No,No,diff,123041555,# Metamyelocytes-Blood,30433-7
+No,No,morph,123049237,Hypochromasia,NULL
+No,No,diff,123049335,# Myelocyte-Man,0
+No,Yes,d_dimer,123040827,D-Dimer,48058-2
+No,No,diff,123049238,Macrocytes,0
+No,No,(grouping)_urine,123042343,Sodium-Urine,2955-3
+No,No,(grouping)_nutrition,123041003,Ferritin-Serum,2276-4
+no,No,(grouping)_drug_level,123040083,Acetaminophen,3298-7
+No,No,diff,123049217,# Variant Lymphocytes- Man,0
+No,No,diff,123049287,Platelet Clumps,0
+no,No,(grouping)_drug_level,123042261,Salicylate,4024-6
+No,Yes,crp_high_sens,364,CRP-HIGH SENSITIVITY,30522-7
+No,No,(grouping)_creatinine_phosphokinase_(cpk),123040732,"Cpk Mb,Mass",13969-1
+No,No,(grouping)_urine,123040373,Budding Yeast-Urine,50240-1
+No,No,(grouping)_creatinine_phosphokinase_(cpk),123040564,Ckmb Relative Index,12189-7
+No,No,diff,123049330,% Variant Lymphocytes-Man,0
+No,No,(grouping)_nutrition,123041394,"Iron,Total",2498-4
+No,No,(grouping)_nutrition,123042575,Unsat. Iron Bind Capacity,2501-5
+No,No,(grouping)_urine,123042661,White Blood Cell Clump-Urine,67848-2
+No,No,morph,123041498,"% Lymphocyte, Atypical-Blood",13046-8
+No,No,morph,123042760,"# Lymphocytes,Atypical",26477-0
+No,No,(grouping)_urine,123040385,Calcium Oxalate Crystals-Ur,33234-6
+No,No,(grouping)_urine,123042064,"Protein,Total-Urine",2888-6
+No,No,(grouping)_comments,123040850,Differential Comments,58445-8
+No,No,other,123040331,Betahydroxybutyrate-Serum,6873-4
+No,Yes,parathyroid_level,123041793,"Parathyroid Hormone,Intact",2731-8
+No,No,(grouping)_urine,123041745,"Osmolality,Urine",2695-5
+No,No,diff,123049260,RBC Fragments,0
+No,No,(grouping)_nutrition,123040014,"% Saturation,Iron",2502-3
+No,No,(grouping)_immune_test,123041155,HBV Surface Antibody,10900-9
+No,No,(grouping)_nutrition,123041391,"Iron Binding Capacity,Calc",2500-7
+No,No,(grouping)_toxicology,123041854,Phencyclidine (Pcp),3936-2
+no,No,(grouping)_drug_level,486,VANCOMYCIN TROUGH,NULL
+No,Yes,ammonia,123040148,Ammonia-Whole Blood,1839-0
+No,No,(grouping)_immune_test,123041147,HBV Core Antibody,13952-7
+No,Yes,osmolarity,123041744,"Osmolality,Total",2692-2
+No,No,morph,123049253,Sickle Cells,0
+No,No,(grouping)_hormone,123041038,Free Thyroxine(Ft4),3024-7
+No,Yes,procalcitonin,123042682,Procalcitonin-Serum,NULL
+No,No,(grouping)_urine,123042578,"Urea Nitrogen,Urine",3095-7
+No,No,diff,123041630,% Myelocyte - Blood,26498-6
+No,No,diff,123041632,# Myelocytes-Blood,30446-9
+No,No,(grouping)_comments,331,Delta Check Comment,NULL
+No,No,(grouping)_immune_test,123041281,HIV-1/2 AB/ AG Screen,31201-7
+No,No,other,123042582,Uric Acid-Serum,3084-1
+No,Yes,calcium_ionized,123040390,"Calcium,Ionized-Wb,Plasma",1994-3
+No,No,morph,123049250,Elliptocytes,0
+No,No,(grouping)_urine,123041129,Granular Casts-Urine,5793-5
+No,No,morph,123049275,Toxic Vacuolation,0
+No,No,other,123043373,"Sed Rate,Capillary Photometry",0
+No,No,(grouping)_nutrition,123041152,"Vitamin D, 25- Hydroxy, Total",0
+no,No,(grouping)_drug_level,484,VANCOMYCIN RANDOM,NULL
+No,No,morph,123049265,Spiculated Cells,0
+No,Yes,haptoglobin,123041141,Haptoglobin-Serum,4542-7
+No,No,morph,123049274,Toxic Granulation,0
+No,No,(grouping)_urine,123042009,Potassium-Urine,2828-2
+no,No,(grouping)_drug_level,123041861,Phenytoin,3968-5
+No,No,morph,123049257,Tear Drop Cells,0
+No,No,(grouping)_pediatric,123041965,POCT pH-Micro,2745-8
+No,No,(grouping)_pediatric,123041973,POCT PO2-Micro,2704-5
+No,No,(grouping)_pediatric,123041957,POCT PCO2-Micro,2020-6
+No,No,(grouping)_pediatric,123041933,POCT Base Excess-Micro,1926-5
+No,No,(grouping)_pediatric,123041944,POCT HCO3 (Meter)-Micro,1961-2
+No,No,(grouping)_pediatric,123041982,POCT TCO2 (Meter)-Micro,51781-3
+No,No,(grouping)_pediatric,123041978,POCT SO2 (Meter)-Micro,51732-6
+No,Yes,covid,123040570,SARS-CoV-2 ,0
+No,No,(grouping)_urine,123040528,Chloride-Urine,21194-6
+No,Yes,prealbumin,123042011,Prealbumin-Serum,14338-8
+No,No,morph,123049254,Spherocytes,0
+No,No,morph,123049285,Platelet Estimate,0
+No,No,(grouping)_comments,123041935,POCT Body Temp,8310-5
+No,No,(grouping)_immune_test,123040442,CD3+ %,8124-0
+No,No,(grouping)_immune_test,123040444,CD3+ CD4+ %,8123-2
+No,No,diff,123040002,Total Lymphocytes,26474-7
+No,No,(grouping)_immune_test,123040441,CD3+ #,8122-4
+No,No,(grouping)_immune_test,123040443,CD3+ CD4+ #,24467-3
+No,No,(grouping)_urine,123000097,Propoxyphene-Urine,19429-0
+No,No,(grouping)_hormone,123040713,Cortisol-Serum,2143-6
+No,No,(grouping)_venous_blood_gas,123042910,"POCT, LACTATE-VENOUS",0
+No,No,(grouping)_comments,823041660,Newborn Screen Comment,49544-0
+No,Yes,sodium,123042344,Sodium-Wb Plasma,2947-0
+Yes,Yes,potassium,123042010,"Potassium-Wb,Plasma",6298-4
+Yes,Yes,glucose,123041118,Glucose-Wb Plasma,2339-0
+No,No,(grouping)_urine,123042498,Transitional Epi Cell-Urine,8249-5
+no,No,(grouping)_drug_level,123042596,Valproic Acid,4086-5
+No,No,(grouping)_venous_blood_gas,123041974,POCT PO2-Venous,2705-2
+No,No,(grouping)_venous_blood_gas,123041966,POCT pH-Venous,2746-6
+No,No,(grouping)_venous_blood_gas,123041958,POCT PCO2-Venous,2021-4
+No,No,(grouping)_urine,123040153,Amorphous Crystals-Urine,53329-9
+No,No,(grouping)_immune_test,123040449,CD3+ CD8+ %,8101-8
+No,No,(grouping)_immune_test,123040445,CD4+/CD8+ Ratio,54218-3
+No,No,(grouping)_immune_test,123040448,CD3+ CD8+ #,14135-8
+No,No,(grouping)_venous_blood_gas,123041934,POCT Base Excess-Venous,1927-3
+No,No,(grouping)_venous_blood_gas,123041945,POCT HCO3 (Meter)-Venous,14627-4
+No,No,(grouping)_venous_blood_gas,123041983,POCT TCO2 (Meter)-Venous,48391-7
+No,No,(grouping)_venous_blood_gas,123041979,POCT SO2 (Meter)-Venous,51731-8
+No,Yes,thrombin_time,123042454,Thrombin Time,3243-3
+Yes,Yes,creatinine,123000070,POCT Creatinine,38483-4
+No,No,(grouping)_aterial_blood_gas,123041967,"POCT PO2,Temp Corrected-Art.",19255-9
+No,No,(grouping)_hormone,123042517,Triiodothyronine(T3)-Serum,3053-6
+No,No,(grouping)_aterial_blood_gas,123041959,"POCT pH,Temp Corrected-Art.",33254-4
+No,No,(grouping)_aterial_blood_gas,123041951,"POCT PCO2,Temp Corrected-Art.",32771-8
+No,No,(grouping)_comments,123060001,VIRAL LOAD COMMENT,NULL
+No,No,(grouping)_comments,123040244,"Appearance,Centrifuged-Fluid",0
+No,Yes,erythrocyte_sedimentation_rate_(esr),123042273,"Sed Rate,Westergren",4537-7
+No,No,other,823042998,ACT - Celite,NULL
+No,Yes,inr,123041366,INR (Meter),46418-0
+No,Yes,prothrombin_time_(pt),123042068,Prothrombin Time (Meter),46417-2
+No,No,morph,123049270,Dimorphic RBC,0
+No,No,(grouping)_comments,286,General Categorization,NULL
+No,No,(grouping)_immune_test,123042508,Treponemal IgG-Serum,47238-1
+No,No,(grouping)_immune_test,367,HIV RNA COPIES*K/ML,20447-9
+No,No,(grouping)_immune_test,368,HIV LOG10 COPIES/ML,29541-0
+No,No,(grouping)_pregnancy,123041852,"Ph-Cord Blood,Arterial",28646-8
+No,No,(grouping)_pregnancy,123041814,"Pco2-Cord Blood,Arterial",28644-3
+No,No,(grouping)_pregnancy,123040312,"Base Excess-Cord Bld,Arterial",28638-5
+No,No,(grouping)_pregnancy,123041251,"Hgb,Total-Cord Bld,Arterial",30354-5
+No,No,(grouping)_pregnancy,123041925,"Po2-Cord Blood,Arterial",28648-4
+No,No,(grouping)_pregnancy,123041775,Oxyhemoglobin-Cord Arterial,30370-1
+No,No,morph,123049273,Smudge Cells,0
+No,No,morph,123049266,RBC- Precipitated Hemoglobin,0
+No,No,(grouping)_immune_test,123041165,HCV Log10 IU/ML,38180-6
+No,No,(grouping)_urine,123000096,Methaqualone-Urine,3786-1
+Yes,Yes,ph,123041871,Ph-Plasma,2753-2
+No,No,(grouping)_comments,298,Specimen Adequacy,NULL
+No,No,(grouping)_fluid_csf,123041574,RBC Count-CSF Fluid,0
+No,No,(grouping)_fluid_csf,123041611,"Specimen Type,CSF",0
+No,No,(grouping)_fluid_csf,123041614,CSF TUBE NUMBER,0
+No,No,(grouping)_fluid_csf,123041615,"Appearance,Uncentrifuged-CSF",0
+No,No,(grouping)_fluid_csf,123041662,WBC Count-CSF,0
+Yes,Yes,fio2,123041938,POCT FIO2,19993-5
+No,No,(grouping)_comments,359,Diagnosis,NULL
+No,No,other,123041060,Gamma Glutamyl Trans(Ggt)Serum,2324-2
+No,No,(grouping)_urine,497,"PROTEIN,QUALI-URINE, UPE",NULL
+No,No,(grouping)_immune_test,123040184,ANA Screen Result,47383-5
+No,No,(grouping)_urine,123042580,Uric Acid Crystals-Urine,5817-2
+No,No,(grouping)_urine,123041621,Mucous-Urine,8247-9
+No,No,other,123041059,Gamma Globulin-Spe,2874-6
+No,No,morph,123049276,Dohle Bodies,0
+No,No,(grouping)_comments,123041801,Path review requested,NULL
+No,No,(grouping)_comments,1230141154,ICD CODE,0
+No,No,(grouping)_urine,123042689,Albumin- Urine,14957-5
+No,Yes,amylase,123040179,"Amylase,Total-Serum",1798-8
+No,Yes,transferrin,123042497,Transferrin,3034-6
+No,No,(grouping)_immune_test,123041166,HCV RNA-Pcr IU*K/ML,11011-4
+No,No,(grouping)_comments,123040690,Comments,NULL
+No,No,(grouping)_immune_test,123041423,L.Pneumophilia Grp 1 Ag-Urine,41499-5
+No,No,diff,123049221,# Unidentified Cells- Man,0
+No,No,other,123000123,P2Y12 Response,NULL
+Yes,Yes,glucose,123041939,POCT Glucose (Meter),32016-8
+No,No,diff,123049334,% Unidentified Cell-Man,0
+No,No,other,123042808,CITRATED KAOLIN ANGLE - UNIT OF DEGREES,0
+No,No,diff,123049284,Hypogranular Platelets,0
+No,No,other,123042811,CITRATED FUNCTIONAL FIBRINOGEN MAXIMUM AMPLITUDE,0
+No,No,other,123042812,ESTIMATED FUNTIONAL FIBRINOGEN LEVEL,0
+No,No,other,123042813,CITRATED RAPID TEG MAXIMUM AMPLITUDE,0
+No,No,other,123042809,CITRATED KAOLIN MAXIMUM AMPLITUDE,0
+No,No,other,123042816,CITRATED KAOLIN HEPARINASE,0
+No,No,morph,123049255,Stomatocytes,0
+No,No,diff,123042566,% Unidentified Cells,44097-4
+No,No,other,123042815,CITRATED KAOLIN R-TIME,0
+No,No,(grouping)_immune_test,123040749,Cryptococcal Ag-Blood,31790-9
+No,No,(grouping)_immune_test,123041202,HCV RNA- Pcr IU*K/ML,0
+No,No,other,123042814,CITRATED KAOLIN K-TIME ,0
+No,No,(grouping)_fluid_csf,123042126,RBC Count,0
+No,No,(grouping)_immune_test,123041148,HBV Core IgM Antibody,24113-3
+No,No,(grouping)_immune_test,123042245,Rubella Status,22496-4
+No,No,(grouping)_immune_test,123042230,Rpr Titer-Serum,31147-2
+No,No,(grouping)_immune_test,123040693,Complement C4-Serum,4498-2
+No,No,diff,123042908,% Promyelocyte-Man,0
+No,No,(grouping)_urine,123041577,Albumin/Creatinine Index,14959-1
+No,No,(grouping)_immune_test,123040691,Complement C3-Serum,4485-9
+No,No,(grouping)_fluid_body,123041557,WBC Count-Body Fluid,0
+No,No,(grouping)_fluid_csf,123041590,% Lymphs-CSF,0
+No,No,diff,123049241,# Promyelocytes- Man,0
+No,No,(grouping)_toxicology,123041478,Lithium,3719-2
+No,No,(grouping)_urine,123042486,Total Volume-Urine,3167-4
+No,No,(grouping)_urine,159,"URINE COLLECTION,DURATION",13362-9
+No,No,(grouping)_fluid_csf,362,"Specimen Type, Fluid",0
+No,No,(grouping)_fluid_csf,844,"Appearance,Uncentrifuged-Fluid",0
+No,No,(grouping)_fluid_body,123041443,"Ldh,Total-Fluid",0
+Yes,Yes,troponin,123000071,Troponin (cTnI),0
+No,No,(grouping)_nutrition,823042232,VITAMIN B1 (THIAMINE),0
+No,No,(grouping)_nutrition,823042629,"Vitamin D,25-Hydroxy",1989-3
+No,No,(grouping)_fluid_body,123041093,Glucose Fluid,0
+No,No,(grouping)_immune_test,123043058,HIV-1 AB ,0
+No,No,(grouping)_immune_test,123043059,HIV-2 AB ,0
+No,No,(grouping)_immune_test,123043060,HIV 1/2 Confirmation,0
+No,No,(grouping)_immune_test,305,DS-DNA ANTIBODY,5130-0
+No,No,diff,123041591,% Monocytes-CSF,0
+No,No,(grouping)_fluid_body,123041628,Specimen Type-Body Fluid,0
+No,No,(grouping)_fluid_body,123041637,RBC Count-Body Fluid,0
+No,No,(grouping)_immune_test,123042604,Varicella Zoster IgG,19162-7
+No,No,(grouping)_oncology,123042049,Prostate Specific Ag-Serum,35741-8
+No,No,(grouping)_urine,123042373,Sperm-Urine,8248-7
+No,No,(grouping)_fluid_body,123041634,"Appearance,Uncentrifuged-Body Fluid",0
+No,No,diff,123041581,% Neutrophils/Bands,0
+No,No,other,823041051,"G6Pd,RBC Quant",32546-4
+No,No,diff,123049213,# MYELOCYTE-MAN,0
+No,No,(grouping)_fluid_body,123041642,% Lymphs-Body Fluid,0
+No,No,(grouping)_nutrition,823042627,"Vitamin D,25-Hydroxy,D2",2236-8
+No,No,(grouping)_nutrition,823042628,"Vitamin D,25-Hydroxy,D3",1990-1
+No,No,(grouping)_fluid_csf,320,WBC Count-Fluid,0
+No,No,(grouping)_immune_test,123042488,"Toxo IgG Antibody,Eia",40677-7
+No,No,(grouping)_fluid_body,123041640,% Neuts-Body Fluid,0
+No,No,(grouping)_comments,123041021,FNA Cell Blocks,NULL
+No,No,(grouping)_fluid_body,123040178,"Amylase,Total-Fluid",0
+No,No,(grouping)_hormone,323,T UPTAKE-SERUM,3050-2
+No,No,(grouping)_hormone,123042463,"Thyroxine,Total(T4)",3026-2
+no,No,(grouping)_drug_level,123040852,Digoxin,10535-3
+No,No,diff,123042046,% Promyelocyte-Blood,26524-9
+No,No,diff,123042047,# Promyelocytes-Blood,26523-1
+No,No,(grouping)_hormone,123042429,"T4,Corrected(Calculated)",NULL
+No,No,(grouping)_comments,123041024,FNA Smears,NULL
+No,No,(grouping)_comments,123041025,FNA PASSES,NULL
+No,No,(grouping)_urine,123042526,Triple Phosphate Crystals-Ur,5814-9
+No,No,(grouping)_immune_test,123041280,HIV-1/2 Ab Rapid Screen,49580-4
+No,No,(grouping)_fluid_body,123041653,% Macrophages-Body Fluid,0
+No,No,other,12304200,HGB Phenotype,0
+No,No,(grouping)_immune_test,123041144,"Hav Antibody,Total",13951-9
+No,No,(grouping)_fluid_body,123041604,% Monocytes,0
+No,No,(grouping)_immune_test,123041145,Hav IgM Antibody,22314-9
+No,No,morph,123049252,Schistocytes,0
+No,No,(grouping)_nutrition,823041572,Methylmalonic Acid,13964-2
+No,No,(grouping)_immune_test,123041151,HAV IgG Antibody,0
+Yes,Yes,fio2,123041014,Fio2,19993-5
+No,No,(grouping)_immune_test,123042205,Rheumatoid Factor-Serum,11572-5
+No,No,(grouping)_comments,297,Other Findings,NULL
+No,No,(grouping)_fluid_body,123041508,% Lymphs-Fluid,0
+No,No,(grouping)_pediatric,123041961,"POCT pH,Temp Corrected-Micro",39485-8
+No,No,(grouping)_pediatric,123041953,"POCT PCO2,Temp Corrected-Micro",40620-7
+No,No,(grouping)_pediatric,123041969,"POCT PO2,Temp Corrected-Micro",19256-7
+No,No,(grouping)_fluid_body,123041647,% Monocytes-Body Fluid,0
+No,No,(grouping)_fluid_body,123040113,"Albumin,Fluid",0
+No,No,other,123041250,HGB A2 Quant,0
+No,No,(grouping)_fluid_csf,123042543,CSF Tube #,0
+No,No,(grouping)_oncology,123040419,Carcinoembryonic Ag (Cea),2039-6
+No,No,(grouping)_fluid_body,123041995,% Polys-Fluid,0
+No,No,(grouping)_urine,123042514,Trichomonas-Urine,5813-1
+No,No,(grouping)_fluid_body,123041571,WBC Count-Fluid,0
+No,No,(grouping)_fluid_body,123041670,RBC Count-Synovial Fluid,0
+No,No,(grouping)_fluid_body,123041688,Crystals-Synovial Fluid,0
+No,No,other,333,"HGB Phenotype,HPLC",NULL
+No,No,other,123041231,"Hgb F Quantitation,HPLC",42246-9
+No,No,(grouping)_fluid_body,123041572,% Neutrophils/Bands-Syn Fluid,0
+No,No,(grouping)_fluid_body,123041690,"Appearance,Uncentrifuged-Synovial Fluid",0
+No,No,other,123041219,"Hgb A2 Quantitation,Hplc",42245-1
+No,No,(grouping)_comments,823040690,COMMENTS,NULL
+No,No,(grouping)_immune_test,823041263,HIV Genotyping,34700-5
+No,No,(grouping)_immune_test,813,QUEST HLA B-5701,NULL
+No,No,(grouping)_urine,123041315,Hyphae Yeast-Urine,41865-7
+No,No,other,123041263,Hgb A Quant,0
+No,No,(grouping)_fluid_body,123042515,Triglyceride-Fluid,0
+No,No,(grouping)_fluid_body,123041671,% Lymphs-Synovial Fluid,0
+No,No,other,123041261,Heparin Induced Thrombocytopenia (Hit),NULL
+No,No,other,123040080,"Absorbance-IGG,HIT",NULL
+No,No,(grouping)_fluid_body,123041660,% Mesothelial Cells-Body Fluid,0
+No,No,(grouping)_immune_test,123042378,SSA (Ro) Ab Units,17792-3
+No,No,(grouping)_stool,123041709,Occult Blood-Stool,14563-1
+No,No,(grouping)_nutrition,823041030,"Folate,Red Blood Cell",2283-0
+No,No,(grouping)_immune_test,123040662,"Cmv IgG Antibody,Eia",22244-8
+No,No,morph,123049249,Echinocytes,0
+No,No,(grouping)_venous_blood_gas,123041970,"POCT PO2,Temp Corrected-Ven.",19258-3
+No,No,(grouping)_venous_blood_gas,123041962,"POCT pH,Temp Corrected-Venous",39486-6
+No,No,(grouping)_immune_test,123042380,SSB(La) Ab Units,17791-5
+No,No,(grouping)_venous_blood_gas,123041954,"POCT PCO2,Temp Corrected-Ven.",40619-9
+No,No,other,350,SILICA CLOTTING TIME RATIO,NULL
+No,No,other,123042095,aPTT-Mix,NULL
+No,No,other,123040883,DRVVT Ratio,50410-0
+No,No,(grouping)_immune_test,351,ANTICARDIO IGM,8067-1
+No,No,(grouping)_immune_test,353,ANTICARDIO IGG,8065-5
+No,No,(grouping)_immune_test,823042717,"ANA SCREEN, IFA-QUEST",0
+no,No,(grouping)_drug_level,823000024,Levetiracetam/Keppra,30471-7
+No,No,(grouping)_immune_test,354,B2 Glycoprot IGG,16135-6
+No,No,(grouping)_immune_test,355,B2 GLYCOPROTEIN IGM,16136-4
+No,No,(grouping)_immune_test,123042327,Smith(Sm) Ab Units,43182-5
+No,Yes,c_diff,123042799,C. Diff PCR,0
+No,No,morph,123042346,"Solubility,Hgb (Sickledex)",6864-3
+No,No,(grouping)_immune_test,123041490,Lupus Anticoagulant Evaluation,3281-3
+no,No,(grouping)_drug_level,123041857,Phenobarbital,3948-7
+no,No,(grouping)_drug_level,481,TOBRAMYCIN RANDOM,NULL
+No,No,diff,123049216,% VARIANT LYMPHOCYTES - MAN,0
+No,No,(grouping)_fluid_body,123041674,% Monocytes-Synovial Fluid,0
+No,No,other,823040413,Carbohydrate Ag 19-9,24108-3
+no,No,(grouping)_drug_level,123040411,Carbamazepine,3432-2
+No,No,(grouping)_immune_test,123042270,Scl-70 Antibody Units,26975-3
+No,No,(grouping)_immune_test,123042223,RNP Antibody Units,29374-6
+No,No,(grouping)_immune_test,123041407,Jo-1 Ab Units,11565-9
+No,No,(grouping)_stool,123041806,"FECAL OCCULT BLOOD, FIT",0
+No,No,(grouping)_immune_test,823042560,B2 Glycoprotein 1 (IgM) Antibodies,0
+No,No,(grouping)_urine,123040739,Creatinine-24Hr Urine,2162-6
+No,No,(grouping)_comments,1230000000,Diagnosis,0
+No,No,(grouping)_oncology,123040124,Alpha Fetoprotein-Serum,53962-7
+No,No,other,123041265,Hgb S Quant,0
+No,No,(grouping)_immune_test,123041170,HBV DNA IU/ML,NULL
+No,No,(grouping)_immune_test,123041171,HBV DNA  LOG10 IU/ML,NULL
+No,No,(grouping)_immune_test,123040211,Anticentromere Ab Units,8068-9
+No,No,(grouping)_immune_test,823042555,Cardiolipin AB IGG,0
+No,No,(grouping)_immune_test,823042556,Cardiolipin AB IGM,0
+No,No,(grouping)_immune_test,823042559,Cardiolipin AB IGA,0
+No,No,(grouping)_immune_test,823042561,B2 Glycoprotein 1 (IgG) Antibodies,0
+No,No,(grouping)_immune_test,823042600,B2 Glycoprotein 1 (IgA) Antibodies,0
+No,No,(grouping)_immune_test,823042566,Lupus Anticoagulant,0
+No,No,(grouping)_immune_test,123041136,"H.Pylori IgG Antibody,EIA",17859-0
+No,No,other,823042567,DRVVT Mix Interpretation,0
+No,No,(grouping)_immune_test,123040224,Antihistone Ab Units,30359-4
+No,No,other,123041249,Hgb F Quant,0
+No,No,(grouping)_fluid_body,123041689,Specimen Type-Synovial Fluid,0
+No,No,(grouping)_immune_test,823042645,"Vzv DNA-Pcr,Quali",21598-8
+No,No,(grouping)_immune_test,820,VARICELLA SOURCE,NULL
+no,No,(grouping)_drug_level,480,GENTAMICIN TROUGH,NULL
+No,No,(grouping)_urine,123042053,"Protein,24Hr Urine",2889-4
+No,No,other,823042184,Renin Activity-Plasma,2915-7
+No,No,(grouping)_fluid_body,123041520,% Macrophages-Fluid,0
+No,No,(grouping)_blood_differential,123041610,% Macrophages-CSF,0
+No,No,(grouping)_urine,123042648,WBC Casts-Urine,5820-6
+No,No,other,823040200,Angio-1 Convert Enzyme-Serum,2742-5
+No,No,(grouping)_comments,123000125,AKI RISK SCORE,0
+No,No,(grouping)_nutrition,823042685,Zinc-Plasma,5763-8
+No,No,(grouping)_immune_test,123041269,HIV-1 Western Blot Interp,13499-9
+No,No,(grouping)_immune_test,123041270,HIV-1(Wb)-Gp120/160,14126-7
+No,No,(grouping)_immune_test,123041272,HIV-1(Wb)-P18,12859-5
+No,No,(grouping)_immune_test,123041273,HIV-1(Wb)-P24,9664-4
+No,No,(grouping)_immune_test,123041274,HIV-1(Wb)-P31,9666-9
+No,No,(grouping)_immune_test,123041275,HIV-1(Wb)-P41,31072-2
+No,No,(grouping)_immune_test,123041276,HIV-1(Wb)-P51,9667-7
+No,No,(grouping)_immune_test,123041277,HIV-1(Wb)-P55,9668-5
+No,No,(grouping)_immune_test,123041278,HIV-1(Wb)-P65,12856-1
+No,No,other,123041570,Methotrexate-Serum,14836-1
+No,No,(grouping)_hormone,123042440,Testosterone (ng/dL),2986-8
+No,No,other,823000088,"KAPPA, FREE-SERUM",48378-4
+No,No,(grouping)_immune_test,8230420137,QUANTIFERON,NULL
+No,No,(grouping)_immune_test,8230420138,NIL,NULL
+No,No,(grouping)_immune_test,8230420139,MITOGEN - NIL,NULL
+No,No,(grouping)_immune_test,8230420140,TB AG - NIL,NULL
+No,No,(grouping)_nutrition,823042623,Vitamin C-Serum,1903-4
+No,No,other,823000408,"LAMBDA, FREE - SERUM -QUEST",33944-0
+No,No,other,823000409,KAPPA/ LAMBDA RATIO -QUEST,48378-4
+No,No,other,123040680,Collagen/EPI,24471-5
+No,No,other,123040679,Collagen/ADP,24472-3
+No,No,other,123041245,"Hgb S%,HPLC",44923-1
+No,No,(grouping)_immune_test,823042338,Smooth Muscle Antibody,14252-1
+No,No,(grouping)_immune_test,823040807,Neutrophil Cytoplasmic Ab,17357-5
+No,No,other,823041290,Homocysteine-Blood,13965-9
+No,No,(grouping)_immune_test,472,ANCA COMMENT,NULL
+No,No,(grouping)_comments,3040681,COLLECTION DATE 1,41394-8
+No,No,(grouping)_urine,123041635,"Myoglobin,Qualitative-Urine",2640-1
+No,No,(grouping)_nutrition,823042626,"Vitamin D,1,25-Dihydroxy",1649-3
+No,No,(grouping)_nutrition,823042624,"Vitamin D,1,25-Dihydroxy,D2",62291-0
+No,No,(grouping)_nutrition,823042625,"Vitamin D,1,25-Dihydroxy,D3",NULL
+No,No,(grouping)_comments,123041912,COLLECTION DATE,0
+No,No,(grouping)_fluid_body,123040738,"Creatinine,Fluid",0
+No,No,other,123040529,"Cholesterol, Ldl Measured",2089-1
+No,No,(grouping)_immune_test,823042805,"HIV-1 DNA, QUAL. PCR",0
+no,No,(grouping)_drug_level,487,AMIKACIN RANDOM,NULL
+No,No,(grouping)_fluid_body,123041673,% Macrophages-Synovial Fluid,0
+No,No,(grouping)_immune_test,823041153,HBV E Antibody,13953-5
+No,No,(grouping)_urine,123040735,Creatinine Clearance,2164-2
+No,No,(grouping)_comments,123040432,CBC Panel Comment,NULL
+No,No,other,823040119,Aldosterone-Serum,1763-2
+No,No,other,123041356,Infect Mono Screen,22296-8
+No,No,other,123042040,Prolactin-Serum,2842-3
+No,No,(grouping)_immune_test,823042664,ANCA Screen,0
+No,No,(grouping)_immune_test,123041285,"Cmv DNA-Pcr,Quant-Blood",NULL
+No,No,(grouping)_comments,375,Pathologist Review,NULL
+No,No,(grouping)_immune_test,123041527,"Malaria,Wright Stain",681-7
+No,No,(grouping)_immune_test,823042490,Toxoplasma Ab IgM-CSF,0
+No,No,(grouping)_immune_test,123041525,"Malaria,Thick Smear Giemsa",637-9
+No,No,(grouping)_immune_test,123042055,"Protein,Monoclonal 1-Serum",33358-3
+No,No,(grouping)_immune_test,123041526,"Malaria,Thin Smear-Giemsa",33271-8
+No,No,other,823042228,PTH - RP,0
+No,No,(grouping)_blood_differential,123049277,Hypersegmented Neuts,0
+No,No,(grouping)_urine,160,DATE BEGAN-URINE,19088-4
+No,No,(grouping)_urine,161,TIME BEGIN-URINE,19089-2
+No,Yes,mtp,123000899,Massive Transfusion Protocol,0
+no,No,(grouping)_drug_level,823041862,"Phenytoin,Free-Serum",3969-3
+No,No,(grouping)_urine,162,DATE ENDED-URINE,19086-8
+No,No,(grouping)_immune_test,823042562,PTT-LA Screen,0
+No,No,other,823042563,DRVVT Screen,0
+No,No,(grouping)_immune_test,823000105,Cyclic Citrullinated Peptide (Ccp) Ab (IgG),33935-8
+No,No,(grouping)_immune_test,123041344,Immunoglobulin IgG-Serum,2465-3
+No,No,(grouping)_immune_test,823041592,Mitochondrial Antibody,17284-1
+No,No,(grouping)_urine,163,TIME ENDED-URINE,19087-6
+No,No,(grouping)_immune_test,823042786,HERPES SIMPLEX VIRUS CULTURE,0
+No,No,(grouping)_immune_test,823000441,HSV-1 IGG-QUEST,NULL
+No,No,(grouping)_immune_test,823041307,HSV-2 IGG-QUEST,5209-2
+No,No,other,123042051,Protein C Activity,27818-4
+No,No,(grouping)_immune_test,123041169,HCV Genotyping,NULL
+No,No,other,123042052,Protein S Activity,27822-6
+No,No,(grouping)_fluid_body,123041865,Ph-Misc.Fluid,0
+No,No,other,123040232,Antithrombin Activity,27811-9
+No,No,(grouping)_toxicology,823040086,"ACETONE,VOL SCRN-QUEST",9425-0
+No,No,(grouping)_toxicology,823040705,Copper-Serum,5631-7
+No,No,(grouping)_toxicology,823040967,"ETHANOL,VOL SCRN-QUEST",5640-8
+No,No,(grouping)_toxicology,823040968,"ETHANOL,VOL SCRN (%)-QUEST",5640-8
+No,No,(grouping)_toxicology,823041401,"ISOPROPANOL,VOL SCRN-QUEST",5669-7
+No,No,(grouping)_toxicology,823041560,"METHANOL,VOL SCRN-QUEST",9334-4
+No,No,(grouping)_comments,823042363,"SPECIMEN TYPE, VOLATILE SCREEN-QUEST",31208-2
+No,No,(grouping)_comments,470,NBS REPORT,0
+no,No,(grouping)_drug_level,479,GENTAMICIN PEAK,NULL
+No,No,(grouping)_oncology,123040404,Cancer Antigen 125-Serum,10334-1
+no,No,(grouping)_drug_level,478,GENTAMICIN RANDOM,NULL
+No,No,(grouping)_immune_test,823042489,Toxoplasma Antibody-CSF,0
+No,No,diff,123049247,Acanthocytes,0
+No,No,(grouping)_immune_test,823041154,Hepatitis BE Antigen,13954-3
+No,No,diff,123041313,% Hyperseg Neutrophils,30450-1
+No,No,(grouping)_immune_test,123041216,"Hgb A,HPLC",42244-4
+No,No,(grouping)_fluid_body,123040343,"Bilirubin,Total-Fluid",0
+No,No,other,123040507,Ceruloplasmin-Serum,2064-4
+No,No,(grouping)_immune_test,823000073,"Treponemal Ab,Fluorescent",5393-4
+No,No,diff,123042153,"RBC,Polychromasia/Shift Cells",10378-8
+No,No,(grouping)_immune_test,823042694,Cytomegalovirus Antibody(IgM),5126-8
+No,No,(grouping)_fluid_csf,123041586,% Lymphs-Variant CSF,0
+No,No,(grouping)_urine,1230120258,"Urea Nitrogen, 24Hr- Urine",0
+No,No,other,360,Factor VIII Activity,3209-4
+No,No,other,823040730,"C-Peptide,Random",1986-9
+No,No,other,823040090,Acth-Plasma,2141-0
+No,No,other,8230420259,VIRAL RESPIRATORY CULTURE SCREEN-QUEST,0
+No,No,not_reviewed_(<500),123049248,Basophilic Stippling,0
+No,No,not_reviewed_(<500),123049258,Oval Macrocytes,0
+No,No,not_reviewed_(<500),823042769,VALUE OF LAST VIRAL LOAD,0
+No,No,not_reviewed_(<500),823042311,DATE VIRAL LOAD COLLECTED,0
+No,No,not_reviewed_(<500),823042312,RALTEGRAVIR RESISTANCE,0
+No,No,not_reviewed_(<500),123041659,"Path Review Cmt,Body Fluid",0
+No,No,not_reviewed_(<500),123041592,% Eosinophils-CSF,0
+No,No,not_reviewed_(<500),123040746,Cryoglobulin-Serum,5117-7
+No,No,not_reviewed_(<500),823042313,ELVITEGRAVIR RESISTANCE,0
+No,No,not_reviewed_(<500),823042314,DOLUTEGRAVIR RESISTANCE,0
+No,No,not_reviewed_(<500),123042954,Total Nucleated Count,0
+No,No,not_reviewed_(<500),123040247,"Appearance, Uncentrifuged",0
+No,No,not_reviewed_(<500),123041371,Insulin-Serum,20448-7
+No,No,not_reviewed_(<500),123042946,Specimen Volume,0
+No,No,not_reviewed_(<500),670,NUMBER OF MARKERS,NULL
+No,No,not_reviewed_(<500),123042135,RBC With Hgb F,4633-4
+No,No,not_reviewed_(<500),823042580,HEXAGONAL PHASE CONFIRMATION-QUEST,0
+No,No,not_reviewed_(<500),823040655,"Clozapine,Total",12375-2
+No,No,not_reviewed_(<500),823041670,Norclozapine,10992-6
+No,No,not_reviewed_(<500),669,GATING STRATEGY,NULL
+No,No,not_reviewed_(<500),664,CLL CLINICAL INFORMATION,NULL
+No,No,not_reviewed_(<500),123042952,% Neutrophils,0
+No,No,not_reviewed_(<500),823043061,"QUANTIFERON(R)-TB GOLD PLUS, 4T, INCUBATED - QUEST",0
+No,No,not_reviewed_(<500),665,CLL SPECIMEN TYPE,NULL
+No,No,not_reviewed_(<500),666,VIABILITY,NULL
+No,No,not_reviewed_(<500),667,CLL INTERPRETATION,NULL
+No,No,not_reviewed_(<500),668,SAMPLE DESCRIPTION,NULL
+No,No,not_reviewed_(<500),123040951,Total Diff Cells,0
+No,No,not_reviewed_(<500),823043062,NIL - QUEST,0
+No,No,not_reviewed_(<500),823043063,MITOGEN-NIL - QUEST,0
+No,No,not_reviewed_(<500),823043064,TB1-NIL - QUEST,0
+No,No,not_reviewed_(<500),823043065,TB2-NIL - QUEST,0
+No,No,not_reviewed_(<500),958,Markers,NULL
+No,No,not_reviewed_(<500),246,CMV DNA LOG10 IU/ML,0
+No,No,not_reviewed_(<500),123041306,CMV DNA IU/ ML,0
+No,No,not_reviewed_(<500),123042147,Macrocytes,738-5
+No,No,not_reviewed_(<500),123042960,% Lymphs,0
+No,No,not_reviewed_(<500),123041524,"Malaria,Specimen Type",66746-9
+No,No,not_reviewed_(<500),123042959,% Alveolar Macrophages,0
+No,No,not_reviewed_(<500),823000011,"Metanephrine, Free",29141-9
+No,No,not_reviewed_(<500),123041558,"Comments, Body Fluid",0
+No,No,not_reviewed_(<500),823000410,Normetanephrine.Free,2669-0
+No,No,not_reviewed_(<500),823000411,"METANEPHRINES, TOTAL-QUEST",29142-7
+No,No,not_reviewed_(<500),123049333,% Plasma Cells-Man,0
+No,No,not_reviewed_(<500),823042601,aPTT - LA Time,0
+No,No,not_reviewed_(<500),823042602,DRVVT Screen,0
+No,No,not_reviewed_(<500),823042718,ANA PATTERN-QUEST,0
+No,No,not_reviewed_(<500),823042719,ANA TITER-QUEST,0
+No,No,not_reviewed_(<500),123040752,"Crystals,Fluid",0
+No,No,not_reviewed_(<500),904,Specimen Source,NULL
+No,No,not_reviewed_(<500),123041650,% Eosinophils-Body Fluid,0
+No,No,not_reviewed_(<500),823000012,"Parvovirus B19 PCR,Qualitative",9571-1
+No,No,not_reviewed_(<500),123049244,# Plasma Cells- Man,0
+No,No,not_reviewed_(<500),1230141155,Blood Smear- Pathologist Review,0
+No,No,not_reviewed_(<500),123049242,# Blasts- Man,0
+No,No,not_reviewed_(<500),123040125,Alpha-1 Antitrypsin,1825-9
+No,No,not_reviewed_(<500),123049331,% Blasts-Man,0
+No,No,not_reviewed_(<500),123041926,"Po2-Cord Blood,Venous",28649-2
+No,No,not_reviewed_(<500),123040313,"Base Excess-Cord Blood,Venous",28639-3
+No,No,not_reviewed_(<500),123041252,"Hgb,Total-Cord Blood,Venous",30353-7
+No,No,not_reviewed_(<500),123041815,"Pco2-Cord Blood,Venous",28645-0
+No,No,not_reviewed_(<500),123041853,"Ph-Cord Blood,Venous",28647-6
+No,No,not_reviewed_(<500),123041550,% Mesothelial Cells-Fluid,0
+No,No,not_reviewed_(<500),123041704,"O2% Sat-Cord Blood,Venous",28643-5
+No,No,not_reviewed_(<500),823000076,Thyroid Peroxidase Antibody,8099-4
+No,No,not_reviewed_(<500),337,HGB PHEN- HPLC,0
+No,No,not_reviewed_(<500),123041341,Immunoglobulin Iga-Serum,2458-8
+No,No,not_reviewed_(<500),823041433,Lamotrigine/Lamictal,6948-4
+No,No,not_reviewed_(<500),823040987,Factor V (Leiden) Mutation Analysis,21667-1
+No,No,not_reviewed_(<500),465,FACTOR V MUTATION INTERPRETATION,NULL
+No,No,not_reviewed_(<500),123042159,Spherocytes,802-9
+No,No,not_reviewed_(<500),823042577,THROMBIN CLOTTING TIME-QUEST,0
+No,No,not_reviewed_(<500),823040972,Ethylene Glycol,NULL
+No,No,not_reviewed_(<500),823040951,Erythropoietin-Serum,15061-5
+No,No,not_reviewed_(<500),823042308,"Signature Of Director,Referral",NULL
+No,No,not_reviewed_(<500),123040393,"Calcium,Total-Urine",17862-4
+No,No,not_reviewed_(<500),823041346,Immunoglobulin IgE - Serum,19113-0
+No,No,not_reviewed_(<500),123042156,"Rbc,Schistocytes",800-3
+No,No,not_reviewed_(<500),823041628,Mycoplasma IgM,5256-3
+No,No,not_reviewed_(<500),123041644,"% Lymphs,Variant-Body Fluid",0
+No,No,not_reviewed_(<500),823000398,MYCOPLASMA IGG-QUEST,5255-5
+No,No,not_reviewed_(<500),823043017,HIV-1 GENOTYPE,0
+No,No,not_reviewed_(<500),123042007,Potassium-Plasma,2823-3
+No,No,not_reviewed_(<500),123042753,Path Review Cmt,0
+No,No,not_reviewed_(<500),823000439,"EBV NUCLEAR ANTIBODY, EIA-QUEST",NULL
+No,No,not_reviewed_(<500),823040943,EPSTEIN-BARR VIRUS CAPSID IGG-QUEST,5157-3
+No,No,not_reviewed_(<500),823040944,EPSTEIN-BARR VIRUS CAPSID IGM-QUEST,5159-9
+No,No,not_reviewed_(<500),823042615,VIRAL ANTIBODY INTERP-QUEST,NULL
+No,No,not_reviewed_(<500),123041032,Follicle Stimulating Hormone,15067-2
+No,No,not_reviewed_(<500),123041702,Specimen Type,0
+No,No,not_reviewed_(<500),823042578,DRVVT CONFIRMATION-QUEST,0
+No,No,not_reviewed_(<500),347,Order Solubility,0
+No,No,not_reviewed_(<500),123041066,Gc Scrn-Amplified Probe,43305-2
+No,No,not_reviewed_(<500),123041654,"% Cells,Other-Body Fluid",0
+No,No,not_reviewed_(<500),123040249,"APTT,Hepzymed",NULL
+No,No,not_reviewed_(<500),123049267,Rouleaux,0
+No,No,not_reviewed_(<500),123041505,"% Lymphs,Reactive",0
+No,No,not_reviewed_(<500),823040117,ALDOLASE-SERUM-QUEST,1761-6
+No,No,not_reviewed_(<500),123042148,"RBC,Microcytes",741-9
+No,No,not_reviewed_(<500),823042541,T-Transglutaminase Iga,31017-7
+No,No,not_reviewed_(<500),823042542,T-Transglutaminase IGG,32998-7
+No,No,not_reviewed_(<500),622,CHROMOSOME ANALYSIS: HEM. MALIGNANCY,0
+No,No,not_reviewed_(<500),823041479,L-K Microsomal Ab,11566-7
+No,No,not_reviewed_(<500),123049262,HGB SC Crystals,0
+No,No,not_reviewed_(<500),823042399,SOURCE-QUEST,0
+No,No,not_reviewed_(<500),823042400,"P.JIROVECII DNA,QL PCR-QUEST",0
+No,No,not_reviewed_(<500),823047144,"ALDOSTERONE, SERUM",0
+No,No,not_reviewed_(<500),123049251,Howell- Jolly Bodies,0
+No,No,not_reviewed_(<500),123040077,ABO Group,883-9
+No,No,not_reviewed_(<500),123042199,Rh(D) Type,10331-7
+No,No,not_reviewed_(<500),823040079,Antibody Screen,890-4
+No,No,not_reviewed_(<500),123041345,Immunoglobulin IgM-Serum,2472-9
+No,No,not_reviewed_(<500),123042780,Platelet Count-Citrated Blood,777-3
+No,No,not_reviewed_(<500),823041512,Lysozyme-Serum,2589-0
+No,No,not_reviewed_(<500),823040306,Bartonella Quintana IgM,32578-7
+No,No,not_reviewed_(<500),823040674,Coccidioides Antibody,5095-5
+No,No,not_reviewed_(<500),8230420220,INDEX VALUE-QUEST,0
+No,No,not_reviewed_(<500),8230420221,"ASPERGILLUS ANTIGEN,EIA,SERUM-QUEST",0
+No,No,not_reviewed_(<500),123049220,% UNIDENTIFIED CELLS - MAN,0
+No,No,not_reviewed_(<500),123041264,Hgb C Quant,0
+No,No,not_reviewed_(<500),123041268,"HIV-1 DNA-Pcr, Qualitative",30245-5
+No,No,not_reviewed_(<500),123042354,Specimen Adequacy,19764-0
+No,No,not_reviewed_(<500),8230420196,INFLUENZA - B ANTIBODY,NULL
+No,No,not_reviewed_(<500),123042056,"Protein,Monoclonal 1-Urine",42483-8
+No,No,not_reviewed_(<500),123042160,"Rbc,Spiculated Cells",NULL
+No,No,not_reviewed_(<500),823000385,BARTONELLA HENSELAE IGG,32575-3
+No,No,not_reviewed_(<500),823040302,Bartonella Henselae IgM,32576-1
+No,No,not_reviewed_(<500),823040304,Bartonella Quintana IgG,32577-9
+No,No,not_reviewed_(<500),823040329,BETA-2 MICROGLOBULIN-QUEST,1952-1
+No,No,not_reviewed_(<500),823041053,GAD-65 AUTOANTIBODY-QUEST,13926-1
+No,No,not_reviewed_(<500),8230420197,INFLUENZA - A ANTIBODY,NULL
+No,No,not_reviewed_(<500),469,TOXOPLASMA ANTIBODY (IGM)-QUEST,NULL
+No,No,not_reviewed_(<500),887,"TACROLIMUS, HIGHLY SENSITIVE-QUEST",NULL
+No,No,not_reviewed_(<500),123041487,Luteinizing Hormone-Serum,10501-5
+No,No,not_reviewed_(<500),823041490,LYME DISEASE SCREEN-QUEST,20449-5
+No,No,not_reviewed_(<500),823000119,Tpmt Genotype,36922-3
+No,No,not_reviewed_(<500),823041124,Glomerular Basement Membrane (Gbm) Ab,29997-4
+No,No,not_reviewed_(<500),823042491,TOXOPLASMA ANTIBODY (IGG)-QUEST,5388-4
+No,No,not_reviewed_(<500),123042183,Renal Epithelial Cells-Urine,12248-1
+No,No,not_reviewed_(<500),823042605,Varicella Zoster IgM,5404-9
+No,No,not_reviewed_(<500),823042636,Vonwillebrand Factor Ag,27816-8
+No,No,not_reviewed_(<500),823000144,Ristocetin Cofactor Activity,6014-5
+No,No,not_reviewed_(<500),823041798,Parvovirus IgM,5274-6
+No,No,not_reviewed_(<500),332,SITE OF PUNCTURE-BM,NULL
+No,No,not_reviewed_(<500),123040082,Accession Number-Bm,NULL
+No,No,not_reviewed_(<500),123040935,% Eosinophils-Fluid,0
+No,No,not_reviewed_(<500),123040250,APTT+Normal Plasma,NULL
+No,No,not_reviewed_(<500),823000401,PARVOVIRUS IGG-QUEST,5273-8
+No,No,not_reviewed_(<500),123040251,Aptt-Control,NULL
+No,No,not_reviewed_(<500),123040253,"APTT-Control,60 Min",NULL
+No,No,not_reviewed_(<500),123040257,"APTT-Patient,60 Min",NULL
+No,No,not_reviewed_(<500),123042086,PT+Normal Plasma,NULL
+No,No,not_reviewed_(<500),123042087,PT-Control,NULL
+No,No,not_reviewed_(<500),123042089,"PT-Control,60 Min",NULL
+No,No,not_reviewed_(<500),123042162,"RBC,Target Cells",10381-2
+No,No,not_reviewed_(<500),823042457,"THYROGLOBULIN ANTIBODY, QUANT-QUEST",8098-6
+No,No,not_reviewed_(<500),123042018,"Preparation Type,Bm",NULL
+No,No,not_reviewed_(<500),123042091,"PT-Mix,60 Min",NULL
+No,No,not_reviewed_(<500),123042093,"PT-Patient,60 Min",NULL
+No,No,not_reviewed_(<500),123042141,"RBC,Elliptocytes",11274-8
+No,No,not_reviewed_(<500),823042621,Vitamin A-Serum,2923-1
+No,No,not_reviewed_(<500),123040255,"APTT-MIX, 60 MIN",NULL
+No,No,not_reviewed_(<500),123041595,Mixing Study Evaluation,50008-2
+No,No,not_reviewed_(<500),288,Other Findings,NULL
+No,No,not_reviewed_(<500),123040364,BM Diagnosis,NULL
+No,No,not_reviewed_(<500),123042120,RBC Casts-Urine,5807-3
+No,No,not_reviewed_(<500),800,IGG SUBCLASS 1 -QUEST,NULL
+No,No,not_reviewed_(<500),123040231,Anti-Streptolysin O,5370-2
+No,No,not_reviewed_(<500),123041564,"Comments, CSF",0
+No,No,not_reviewed_(<500),123042683,SARS CoV-2 Antibody IgG,0
+No,No,not_reviewed_(<500),823042531,"OLIGOCLONAL BANDS, CSF-QUEST",0
+No,No,not_reviewed_(<500),287,Interpretation,NULL
+No,No,not_reviewed_(<500),801,IGG SUBCLASS 2 -QUEST,NULL
+No,No,not_reviewed_(<500),802,IGG SUBCLASS 3 -QUEST,NULL
+No,No,not_reviewed_(<500),803,IGG SUBCLASS 4 -QUEST,NULL
+No,No,not_reviewed_(<500),886,IMMUNOGLOBULIN G - SERUM,NULL
+No,No,not_reviewed_(<500),123040500,"% Cells,Other",0
+No,No,not_reviewed_(<500),123040433,CBC Specimen Number,NULL
+No,No,not_reviewed_(<500),123040943,% Epithelial Cells,0
+No,No,not_reviewed_(<500),823042666,C-ANCA TITER,0
+No,No,not_reviewed_(<500),123042163,"RBC,Tear Drop Cells",7791-7
+No,No,not_reviewed_(<500),893,ADAMTS-13 ACTIVITY-QUEST,NULL
+No,No,not_reviewed_(<500),123042757,"Appearance,Centrifuged-CSF",0
+No,No,not_reviewed_(<500),823042486,"Total Volume, Urine",NULL
+No,No,not_reviewed_(<500),123041222,"Hgb C%,HPLC",44920-7
+No,No,not_reviewed_(<500),123049268,RBC Agglutinate,0
+No,No,not_reviewed_(<500),123040559,Citrate Agar Electrophoresis,13515-2
+No,No,not_reviewed_(<500),823042397,"FECAL FAT,QUALITATIVE-QUEST",0
+No,No,not_reviewed_(<500),123041652,% Basophils-Body Fluid,0
+No,No,not_reviewed_(<500),823042229,TSI ( THYROID STIMULATING IMMUNOGLOBULIN)-QUEST,0
+No,No,not_reviewed_(<500),123041294,"ORDER HGB PHENOTYPE, HPLC",0
+No,No,not_reviewed_(<500),123042339,"Sodium,24Hr Urine",2956-1
+No,No,not_reviewed_(<500),123041676,% Synovial Cells-Synovial Fluid,0
+No,No,not_reviewed_(<500),823040980,Factor II (Prothrombin) Mutation Analysis,NULL
+No,No,not_reviewed_(<500),464,FACTOR II MUTATION INTERPRETATION,NULL
+No,No,not_reviewed_(<500),123042800,QUANTIFERON,0
+No,No,not_reviewed_(<500),123042820,NIL,0
+No,No,not_reviewed_(<500),123042821,MITOGEN - NIL,0
+No,No,not_reviewed_(<500),123042822,TB1 - NIL,0
+No,No,not_reviewed_(<500),123042823,TB2 - NIL,0
+No,No,not_reviewed_(<500),123041427,Lactic Acid-Fluid,0
+No,No,not_reviewed_(<500),123042581,"Uric Acid,Urine",3086-6
+No,No,not_reviewed_(<500),123040748,Cryptococcal Ag Titer-Blood,40768-4
+No,No,not_reviewed_(<500),123041228,"Hgb Elect,Alkaline",NULL
+No,No,not_reviewed_(<500),823041288,HLA-B27 ANTIGEN-QUEST,26028-1
+No,No,not_reviewed_(<500),823042398,Strep Anti D-Nase B,5133-4
+No,No,not_reviewed_(<500),748,Reviewer,NULL
+No,No,not_reviewed_(<500),823040696,"Complement Total,Ch50",4532-8
+No,No,not_reviewed_(<500),123041706,Occult Blood 2,14564-9
+No,No,not_reviewed_(<500),823042347,Igf-1 (Somatomedin-C),2484-4
+No,No,not_reviewed_(<500),123041677,% Eosinophils-Synovial Fluid,0
+No,No,not_reviewed_(<500),823040383,Calcitonin-Serum,1992-7
+No,No,not_reviewed_(<500),823041376,Interpretation,NULL
+No,No,not_reviewed_(<500),823040988,Factor Vii Activity,3198-9
+No,No,not_reviewed_(<500),823041390,Intrinsic Factor Antibody,31444-3
+No,No,not_reviewed_(<500),123042965,Macrophages Comments,0
+No,No,not_reviewed_(<500),823040356,Blastomyces Antibody,5058-3
+No,No,not_reviewed_(<500),123041343,"Immunoglobulin IgG,CSF",0
+No,No,not_reviewed_(<500),123041606,% Basophils-CSF,0
+No,No,not_reviewed_(<500),123041522,Magnesium-Urine,19124-7
+No,No,not_reviewed_(<500),823041172,Helicobacter Pylori Iga,16125-7
+No,No,not_reviewed_(<500),123040495,"Cells Counted,Bm",38257-2
+No,No,not_reviewed_(<500),123040682,Collection Date 2,61100-4
+No,No,not_reviewed_(<500),823040986,Factor V Activity,3193-0
+No,No,not_reviewed_(<500),123041499,% Lymphocyte-Bm,11108-8
+No,No,not_reviewed_(<500),823042548,INTERPRETATION - NMO IGG-QUEST,0
+No,No,not_reviewed_(<500),123041832,SPECIMEN SOURCE,0
+No,No,not_reviewed_(<500),823042317,"HHV 8 DNA, QL PCR-QUEST",0
+No,No,not_reviewed_(<500),823042549,TECHNICAL RESULTS-QUEST,0
+No,No,not_reviewed_(<500),823042550,COMMENTS - NMO-QUEST,0
+No,No,not_reviewed_(<500),823042551,METHODS - NMO-QUEST,0
+No,No,not_reviewed_(<500),823042552,REFERENCES - NMO-QUEST,0
+No,No,not_reviewed_(<500),123041294,"Order HGB Phenotype, HPLC",0
+No,No,not_reviewed_(<500),823040266,Aspergillus Flavus,23820-4
+No,No,not_reviewed_(<500),823040269,Aspergillus Niger,10894-4
+No,No,not_reviewed_(<500),823042227,PROINSULIN-QUEST,0
+No,No,not_reviewed_(<500),823042692,Asp.Fumigatus,23821-2
+No,No,not_reviewed_(<500),8230420150,UFH SRA RESULT-QUEST,NULL
+No,No,not_reviewed_(<500),8230420151,UFH LOW DOSE 0.1 IU/ ML-QUEST,NULL
+No,No,not_reviewed_(<500),8230420152,UFH LOW DOSE 0.5 IU/ ML-QUEST,NULL
+No,No,not_reviewed_(<500),8230420153,UFH HIGH DOSE 100 IU/ ML-QUEST,NULL
+No,No,not_reviewed_(<500),1230426,BAL Comment,0
+No,No,not_reviewed_(<500),861,"SPECIMEN SOURCE, ENTEROVIRUS-QUEST",X31208-2
+No,No,not_reviewed_(<500),862,"ENTEROVIRUS RNA, RT-PCR-QUEST",X29591-5
+No,No,not_reviewed_(<500),823042667,P-ANCA TITER,0
+No,No,not_reviewed_(<500),823041258,Histoplasma Antibodies,5218-3
+No,No,not_reviewed_(<500),123042961,% Eosinophils,0
+No,No,not_reviewed_(<500),823040989,Factor Viii Activity,3209-4
+No,No,not_reviewed_(<500),1230141156,Path Smear Review- Fluid,0
+No,No,not_reviewed_(<500),123042275,% Seg Neutrophil-BM,11128-6
+No,No,not_reviewed_(<500),155,"Z-Score, Male",NULL
+No,No,not_reviewed_(<500),123041870,"Phosphorus,Inorg-Urine",2778-9
+No,No,not_reviewed_(<500),823000021,HLA B-5701 Typing,50956-2
+No,No,not_reviewed_(<500),156,"Z-Score, Female",NULL
+No,No,not_reviewed_(<500),123040294,"% Band,BM",11103-9
+No,No,not_reviewed_(<500),123041873,Ph-Urine,5803-2
+No,No,not_reviewed_(<500),123042155,"RBC,Schistocyte Count",800-3
+No,No,not_reviewed_(<500),123042436,Temperature-Urine,NULL
+No,No,not_reviewed_(<500),123041553,"% Metamyelocyte,BM",11111-2
+No,No,not_reviewed_(<500),823043149,Interleukin 6,0
+No,No,not_reviewed_(<500),123041523,"Malaria,Parasite Count",NULL
+No,No,not_reviewed_(<500),123041631,% Myelocyte-BM,11114-6
+No,No,not_reviewed_(<500),123041792,Parasitized Rbc,NULL
+No,No,not_reviewed_(<500),823042620,Vitamin E-Serum,11038-7
+No,No,not_reviewed_(<500),823042630,Vitamin E-Alpha Tocopherol,1823-4
+No,No,not_reviewed_(<500),123041707,Occult Blood 3,14565-6
+No,No,not_reviewed_(<500),123041739,% Polychrom Erythroblast-BM,11119-5
+No,No,not_reviewed_(<500),823042405,CLINICAL INFORMATION:,0
+No,No,not_reviewed_(<500),823041062,Gastrin-Serum,2333-3
+No,No,not_reviewed_(<500),123040323,% Basophils,0
+No,No,not_reviewed_(<500),123041514,M:E Ratio-Bm,11138-5
+No,No,not_reviewed_(<500),123042647,Waxy Casts-Urine,5819-8
+No,No,not_reviewed_(<500),823042406,SPECIMEN TYPE:,0
+No,No,not_reviewed_(<500),823042407,VIABILITY:,0
+No,No,not_reviewed_(<500),823042408,INTERPRETATION:,0
+No,No,not_reviewed_(<500),823042409,SAMPLE DESCRIPTION:,0
+No,No,not_reviewed_(<500),823042410,GATING STRATEGY:,0
+No,No,not_reviewed_(<500),823042411,MARKERS:,0
+No,No,not_reviewed_(<500),823042412,NUMBER OF MARKERS:,0
+No,No,not_reviewed_(<500),823042336,SMOOTH MUSCLE AB TITER-QUEST,5358-7
+No,No,not_reviewed_(<500),123040683,Collection Date 3,61099-8
+No,No,not_reviewed_(<500),123041889,% Plasma Cell-Bm,11118-7
+No,No,not_reviewed_(<500),909,"METANEPHRINES, TOTAL URINE -QUEST",NULL
+No,No,not_reviewed_(<500),823041359,Influenza A/B Antibody Profile,5229-0
+No,No,not_reviewed_(<500),823041994,METANEPHRINE - 24HR URINE-QUEST,NULL
+No,No,not_reviewed_(<500),685,LYME DISEASE AB (IGG) WB,NULL
+No,No,not_reviewed_(<500),686,LYME DISEASE AB (IGM) WB,NULL
+No,No,not_reviewed_(<500),823040040,23 Kd (IgM) Band,9598-4
+No,No,not_reviewed_(<500),823040050,39 Kd (IgM) Band,9599-2
+No,No,not_reviewed_(<500),823040054,41 Kd (IgM) Band,9587-7
+No,No,not_reviewed_(<500),823040035,18 Kd (IgG) Band,9588-5
+No,No,not_reviewed_(<500),823040039,23 Kd (IgG) Band,9589-3
+No,No,not_reviewed_(<500),823040042,28 Kd (IgG) Band,9590-1
+No,No,not_reviewed_(<500),823040045,30 Kd (IgG) Band,9591-9
+No,No,not_reviewed_(<500),823040049,39 Kd (IgG) Band,9592-7
+No,No,not_reviewed_(<500),823040053,41 Kd (IgG) Band,9593-5
+No,No,not_reviewed_(<500),823040055,45 Kd (IgG) Band,9594-3
+No,No,not_reviewed_(<500),823040057,58 Kd (IgG) Band,9595-0
+No,No,not_reviewed_(<500),823040059,66 Kd (IgG) Band,9596-8
+No,No,not_reviewed_(<500),823040061,93 Kd (IgG) Band,9597-6
+No,No,not_reviewed_(<500),823042223,10-HYDROXYCARBAZEPINE,0
+No,No,not_reviewed_(<500),581,SPECIMEN SOURCE,NULL
+No,No,not_reviewed_(<500),823040087,Acetylcholine Receptor Ab,20427-1
+No,No,not_reviewed_(<500),123040317,% Baso Erythroblast-Bm,NULL
+No,No,not_reviewed_(<500),823040851,Digitoxin-Serum,3559-2
+No,No,not_reviewed_(<500),823041634,Myeloperoxidase Ab,6969-0
+No,No,not_reviewed_(<500),823042669,ATYPICAL P-ANCA TITER,0
+No,No,not_reviewed_(<500),123042761,HEPARIN INDUCED THROMBOCYTOPENIA(HIT),0
+No,No,not_reviewed_(<500),123042762,HIT (UNITS/ML),0
+No,No,not_reviewed_(<500),123042045,"% Promyelocyte,BM",11120-3
+No,No,not_reviewed_(<500),823000106,Proteinase-3 (Pr3) Ab,6968-2
+No,No,not_reviewed_(<500),123041005,Fetal Fibronectin,20404-0
+No,No,not_reviewed_(<500),823050010,Thromboplastin Time,NULL
+No,No,not_reviewed_(<500),366,"APPEARANCE,UNCENTRIFUGED-CSF",0
+No,No,not_reviewed_(<500),123042146,"RBC,Hypochromic",728-6
+No,No,not_reviewed_(<500),123049269,Blister,0
+No,No,not_reviewed_(<500),123041669,"Path Review Cmt,CSF",0
+No,No,not_reviewed_(<500),123040498,"Cells,Other-Body Fluid",0
+No,No,not_reviewed_(<500),123040928,% Eos Segmented-Bm,NULL
+No,No,not_reviewed_(<500),744,"C1 ESTERASE INHIBITOR, PROTEIN",NULL
+No,No,not_reviewed_(<500),123042607,Vdrl Titer-CSF,31146-4
+No,No,not_reviewed_(<500),823042233,WEST NILE VIRUS AB (IGG) SERUM,0
+No,No,not_reviewed_(<500),823042234,WEST NILE VIRUS AB (IGM) SERUM,0
+No,No,not_reviewed_(<500),349,APCR Evaluation,48591-2
+No,No,not_reviewed_(<500),123040235,APCR Ratio,13590-5
+No,No,not_reviewed_(<500),123042584,Urinalysis Comment,NULL
+No,No,not_reviewed_(<500),823041132,Human Growth Hormone,2963-7
+No,No,not_reviewed_(<500),823000388,SOURCE OF STONE-QUEST,0
+No,No,not_reviewed_(<500),823000389,CALCULI WEIGHT-QUEST,0
+No,No,not_reviewed_(<500),823040396,CALCULI URINARY ANALYSIS-QUEST,0
+No,No,not_reviewed_(<500),123041112,"Glucose,Fasting-Plasma",1558-6
+No,No,not_reviewed_(<500),823042708,"LEAD, BLOOD-QUEST",0
+No,No,not_reviewed_(<500),123041617,% Cells Other-CSF,0
+No,No,not_reviewed_(<500),823040182,Amylase-Serum,1798-8
+No,No,not_reviewed_(<500),123040984,Factor IX Activity,3187-2
+No,No,not_reviewed_(<500),123041986,%Orthochromatoph.Erythroblast-BM,11116-1
+No,No,not_reviewed_(<500),823040395,CALCULI NIDUS-QUEST,0
+No,No,not_reviewed_(<500),823042244,Rubella Antibody (IgM),5335-5
+No,No,not_reviewed_(<500),123041117,Glucose-CSF,0
+No,No,not_reviewed_(<500),123042062,"Protein,Total-CSF",0
+No,No,not_reviewed_(<500),823040173,"Amylase,Pancreatic Total",1805-1
+No,No,not_reviewed_(<500),823040177,"Amylase,Salivary Total",1809-3
+No,No,not_reviewed_(<500),823042214,"HIV AG/ AB, 4TH GEN",0
+No,No,not_reviewed_(<500),823040233,Antithrombin Antigen,1868-9
+No,No,not_reviewed_(<100),123040926,% Eos Metamyelocyte-Bm,NULL
+No,No,not_reviewed_(<100),823040008,% Intestinal Isoenzymes,15014-4
+No,No,not_reviewed_(<100),823042323,PANCREATIC ELASTASE - 1,0
+No,No,not_reviewed_(<100),814,BONE ISOENZYMES,NULL
+No,No,not_reviewed_(<100),823040009,% Liver Isoenzymes (L1),15015-1
+No,No,not_reviewed_(<100),823041264,HIV LOG10 COPIES/ML,29541-0
+No,No,not_reviewed_(<100),823041266,HIV RNA Copies*K/Ml,20447-9
+No,No,not_reviewed_(<100),823042482,Topiramate/Topamax,17713-9
+No,No,not_reviewed_(<100),823042493,Toxoplasma Antibody(IgG),0
+No,No,not_reviewed_(<100),823041370,Insulin Auto-Antibody,8072-1
+No,No,not_reviewed_(<100),888,"Total Volume, Urine",NULL
+No,No,not_reviewed_(<100),123041448,Lead-Blood,5671-3
+No,No,not_reviewed_(<100),823042630,Alpha Tocopherol,0
+No,No,not_reviewed_(<100),823042690,Alk Phosphatase ,6768-6
+No,No,not_reviewed_(<100),823042579,DRVVT 1:1 MIX,0
+No,No,not_reviewed_(<100),823042620,Beta - Gamma Tocopherol,0
+No,No,not_reviewed_(<100),823041151,HBV DNA,29615-2
+No,No,not_reviewed_(<100),823042415,Strongyloides IgG,6632-4
+No,No,not_reviewed_(<100),823040011,% Macrohepatic Isoenzymes (L2),35707-9
+No,No,not_reviewed_(<100),823040201,Angio-1 Converting Enzyme (Ace)-CSF,0
+No,No,not_reviewed_(<100),8230420208,PL 7 AUTOANTIBODIES,0
+No,No,not_reviewed_(<100),123041095,"Glucose,1Hr (50Gm)",1504-0
+No,No,not_reviewed_(<100),8230420205,JO-1 ANTIBODY,0
+No,No,not_reviewed_(<100),8230420207,KU AUTOANTIBODIES,0
+No,No,not_reviewed_(<100),8230420209,PL 12 AUTOANTIBODIES,0
+No,No,not_reviewed_(<100),8230420210,MI 2 AUTOANTIBODIES,0
+No,No,not_reviewed_(<100),8230420211,EJ AUTOANTIBODIES,0
+No,No,not_reviewed_(<100),8230420212,OJ AUTOANTIBODIES,0
+No,No,not_reviewed_(<100),8230420213,SRP AUTOANTIBODIES,0
+No,No,not_reviewed_(<100),123042447,Theophylline,4049-3
+No,No,not_reviewed_(<100),123042583,Uric Acid-Synovial Fluid,0
+No,No,not_reviewed_(<100),823041342,Immunoglobulin IgD - Serum,2460-4
+No,No,not_reviewed_(<100),482,TOBRAMYCIN PEAK,NULL
+No,No,not_reviewed_(<100),618,PRIOR RESULT: BCR ABL1,NULL
+No,No,not_reviewed_(<100),619,BCR-ABL1/ABL%,NULL
+No,No,not_reviewed_(<100),620,BCR-ABL1/ABL1 % (IS),NULL
+No,No,not_reviewed_(<100),621,INTERPRETATION: BCR-ABL1,NULL
+No,No,not_reviewed_(<100),901,CHROMOSOME ANALYSIS: BLOOD,NULL
+No,No,not_reviewed_(<100),123042057,"Protein,Monoclonal 2-Serum",33358-3
+No,No,not_reviewed_(<100),823040330,Beta-2 Transferrin-Fluid,0
+No,No,not_reviewed_(<100),823000427,RMSF ANITIBODY IGG,NULL
+No,No,not_reviewed_(<100),823042513,NORMETANEPHRINE 24HR URINE-QUEST,0
+No,No,not_reviewed_(<100),366,"Appearence,Uncentrifuged-CSF",0
+No,No,not_reviewed_(<100),823042221,Rmsf Antibody IgM,33000-1
+No,No,not_reviewed_(<100),123040533,"Cholesterol,Total-Fluid",0
+No,No,not_reviewed_(<100),823040684,"Collection Period, Stool",0
+No,No,not_reviewed_(<100),823042487,Total Weight-Stool,0
+No,No,not_reviewed_(<100),823043112,ACTIVATED PROTEIN RESISTANCE,0
+No,No,not_reviewed_(<100),123040386,Calcium Phosphate Crystals-Ur,33235-3
+No,No,not_reviewed_(<100),123042149,"RBC,Microspherocytess",48069-9
+No,No,not_reviewed_(<100),823042396,"Stool Fat,Quantitative",0
+No,No,not_reviewed_(<100),577,JAK2 V617F MUTATION,NULL
+No,No,not_reviewed_(<100),578,JAK2 - SOURCE,NULL
+No,No,not_reviewed_(<100),580,Reviewer,NULL
+No,No,not_reviewed_(<100),823042458,"THYROGLOBULIN, QUANT",NULL
+No,No,not_reviewed_(<100),123040925,% Eos Band-BM,50373-0
+No,No,not_reviewed_(<100),823040336,"Bile Acids, Total",14628-2
+No,No,not_reviewed_(<100),823042297,"CREATININE, RANDOM URINE-QUEST",0
+No,No,not_reviewed_(<100),823042298,METANEPHRINE-QUEST,0
+No,No,not_reviewed_(<100),823042299,NORMETANEPHRINE-QUEST,0
+No,No,not_reviewed_(<100),823042300,"METANEPHRINES, TOTAL-QUEST",0
+No,No,not_reviewed_(<100),740,P210 BCR-ABL1,NULL
+No,No,not_reviewed_(<100),483,TOBRAMYCIN TROUGH,NULL
+No,No,not_reviewed_(<100),657,"CHROMOSOMAL MICROARRAY, POSTNATAL",NULL
+No,No,not_reviewed_(<100),823000394,HBV DNA CONCENTRATION,NULL
+No,No,not_reviewed_(<100),739,P190 BCR-ABL1,NULL
+No,No,not_reviewed_(<100),123040357,% Blasts - Blood,26446-5
+No,No,not_reviewed_(<100),123041672,"% Lymphs,Variant-Synovial Fluid",0
+No,No,not_reviewed_(<100),123049214,% BLASTS - MAN,0
+No,No,not_reviewed_(<100),823042198,"FISH, MYELOMA, RISK ASSESSMENT PANEL",0
+No,No,not_reviewed_(<100),823042199,"FISH, MYELOMA, 17P-, REA 14Q32",0
+No,No,not_reviewed_(<100),823040216,Arginine Vasopressin(Adh),3126-0
+No,No,not_reviewed_(<100),823042569,LIPOPROTEIN (A)-QUEST,0
+No,No,not_reviewed_(<100),823040770,"CYCLOSPORINE A TROUGH, Blood",3520-4
+No,No,not_reviewed_(<100),123049218,% PLASMOCYTES- MAN,0
+No,No,not_reviewed_(<100),823041311,Htlv I/Ii Antibody,22362-8
+No,No,not_reviewed_(<100),823042231,Source,0
+No,No,not_reviewed_(<100),123040115,"Albumin,Immuno-Serum",2862-1
+No,No,not_reviewed_(<100),823042709,LEAD (B) COLLECTION SAMPLE-QUEST,0
+No,No,not_reviewed_(<100),123040955,Estradiol-Serum,2243-4
+No,No,not_reviewed_(<100),823041169,Hdv Delta Antibody,13248-0
+No,No,not_reviewed_(<100),179,FRUCTOSAMINE -QUEST,NULL
+No,No,not_reviewed_(<100),123040927,% Eos Myelocyte-Bm,NULL
+No,No,not_reviewed_(<100),123041600,% Monocyte-BM,11112-0
+No,No,not_reviewed_(<100),823000387,Brucella Species IgG,13210-0
+No,No,not_reviewed_(<100),823040371,Brucella Species IgM,5070-8
+No,No,not_reviewed_(<100),823041381,"Interpretation,RAST",NULL
+No,No,not_reviewed_(<100),123049283,Platelet Satellitism,0
+No,No,not_reviewed_(<100),721,JAK2 SOURCE,NULL
+No,No,not_reviewed_(<100),722,JAK2 EXON 12 MUTATION,NULL
+No,No,not_reviewed_(<100),723,JAK2 EXON 13 MUTATION,NULL
+No,No,not_reviewed_(<100),724,JAK2 REFLEX REVIEWER,NULL
+No,No,not_reviewed_(<100),123041559,Other Cell Description,0
+No,No,not_reviewed_(<100),123042035,% Proerythroblast-Bm,26033-1
+No,No,not_reviewed_(<100),823040915,Ehrlichia IgG,47405-6
+No,No,not_reviewed_(<100),823040916,Ehrlichia IgM,48850-2
+No,No,not_reviewed_(<100),823041375,Interp.Ehrlichia Chaffeensis,NULL
+No,No,not_reviewed_(<100),123042161,"RBC,Stomatocytess",10380-4
+No,No,not_reviewed_(<100),747,TRYPTASE,NULL
+No,No,not_reviewed_(<100),823040013,% Placental Isoenzymes,15016-9
+No,No,not_reviewed_(<100),823040121,Alk Phosphatase Isoenz.Interp.,49243-9
+No,No,not_reviewed_(<100),823040979,Factor Ii Activity,3289-6
+No,No,not_reviewed_(<100),334,"Hgb Phenotype,Elect",13514-5
+No,No,not_reviewed_(<100),823040268,Aspergillus Fumigatus IGE,6025-1
+No,No,not_reviewed_(<100),823040575,"Class, Aspergillus Fumigatus IGE",15549-9
+No,No,not_reviewed_(<100),823041785,Pancreatic Islet Antibody,5265-4
+No,No,not_reviewed_(<100),823042307,"ASPERGILLUS AG, EIA, BAL-QUEST",0
+No,No,not_reviewed_(<100),823042309,INDEX VALUE-QUEST,0
+No,No,not_reviewed_(<100),823040939,Epinephrine-Plasma,2230-1
+No,No,not_reviewed_(<100),823042230,"TOXOPLASMA DNA, QL PCR",0
+No,No,not_reviewed_(<100),823043082,BICTEGRAVIR RESISTANCE,0
+No,No,not_reviewed_(<100),823040421,"Carnitine,Esters",19074-4
+No,No,not_reviewed_(<100),823040422,"Carnitine,Free",14286-9
+No,No,not_reviewed_(<100),823040423,"Carnitine,Total",14288-5
+No,No,not_reviewed_(<100),823040431,"Catecholamines,Total-Plasma",2056-0
+No,No,not_reviewed_(<100),823040768,Cyanide-Blood,5634-1
+No,No,not_reviewed_(<100),823040873,Dopamine-Plasma,2216-0
+No,No,not_reviewed_(<100),823040990,Factor X Activity,3218-5
+No,No,not_reviewed_(<100),823041673,Catecholamines-Plasma,2666-6
+No,No,not_reviewed_(<100),823042112,"Q Fever IgM,Phase Ii",7832-9
+No,No,not_reviewed_(<100),8230420047,"MARKERS, LEUKEMIA",NULL
+No,No,not_reviewed_(<100),894,ADAMTS-13 INHIBITOR,NULL
+No,No,not_reviewed_(<100),123042005,"Potassium,24Hr-Urine",2829-0
+No,No,not_reviewed_(<100),823042768,SPECIMEN SOURCE - EBV-QUEST,0
+No,No,not_reviewed_(<100),123040511,% Choroid/ Ependymal Cells,0
+No,No,not_reviewed_(<100),823041052,Gabapentin/Neurontin-Serum,9738-6
+No,No,not_reviewed_(<100),823042107,"Q Fever IgG,Phase I",7829-5
+No,No,not_reviewed_(<100),823042108,"Q Fever IgG,Phase Ii",7830-3
+No,No,not_reviewed_(<100),823042111,"Q Fever IgM,Phase I",7831-1
+No,No,not_reviewed_(<100),750,SEROTYPE 1-QUEST,NULL
+No,No,not_reviewed_(<100),751,SEROTYPE 3-QUEST,NULL
+No,No,not_reviewed_(<100),752,SEROTYPE 4-QUEST,NULL
+No,No,not_reviewed_(<100),753,SEROTYPE 5-QUEST,NULL
+No,No,not_reviewed_(<100),754,SEROTYPE 8-QUEST,NULL
+No,No,not_reviewed_(<100),755,SEROTYPE 9-QUEST,NULL
+No,No,not_reviewed_(<100),756,SEROTYPE 12-QUEST,NULL
+No,No,not_reviewed_(<100),757,SEROTYPE 14-QUEST,NULL
+No,No,not_reviewed_(<100),758,SEROTYPE 19-QUEST,NULL
+No,No,not_reviewed_(<100),759,SEROTYPE 23-QUEST,NULL
+No,No,not_reviewed_(<100),760,SEROTYPE 26-QUEST,NULL
+No,No,not_reviewed_(<100),761,SEROTYPE 51-QUEST,NULL
+No,No,not_reviewed_(<100),762,SEROTYPE 56-QUEST,NULL
+No,No,not_reviewed_(<100),972,SEROTYPE 68-QUEST,NULL
+No,No,not_reviewed_(<100),123040339,"Bilirubin,Direct-Fluid",0
+No,No,not_reviewed_(<100),823040267,Aspergillus Fumigatus,23821-2
+No,No,not_reviewed_(<100),823041581,Micropolyspora Faeni,6818-9
+No,No,not_reviewed_(<100),823041875,Pigeon Serum,6733-0
+No,No,not_reviewed_(<100),823042259,S.Viridis,15209-0
+No,No,not_reviewed_(<100),823042426,T.Candidus,21560-8
+No,No,not_reviewed_(<100),823042427,T.Vulgaris,6821-3
+No,No,not_reviewed_(<100),743,"C1 INHIBITOR, FUNCTIONAL",NULL
+No,No,not_reviewed_(<100),123041551,"% Mesothelial,Reactive-Fluid",0
+No,No,not_reviewed_(<100),123040015,% Unclassified Cells,NULL
+No,No,not_reviewed_(<100),123041687,Path Review CMT-Synovial Fluid,0
+No,No,not_reviewed_(<100),823041796,Parietal Cell Antibody Sreen,14241-4
+No,No,not_reviewed_(<100),489,AMIKACIN TROUGH,NULL
+No,No,not_reviewed_(<100),123041426,"Lactic Acid,CSF",0
+No,No,not_reviewed_(<100),123042152,"RBC,Oval Macrocytes",10376-2
+No,No,not_reviewed_(<100),823040923,Entamoeba Histolytica Ab,9522-4
+No,No,not_reviewed_(<100),823042997,NORMETANEPHRINES - 24HR URINE,NULL
+No,No,not_reviewed_(<100),806,TOTAL VOLUME -QUEST,NULL
+No,No,not_reviewed_(<100),823040711,"Cortisol,Free-24Hr Urine",2147-7
+No,No,not_reviewed_(<100),823042306,HAV AB SER QL EIA -QUEST,0
+No,No,not_reviewed_(<100),123041286,SPECIMEN TYPE,NULL
+No,No,not_reviewed_(<100),823042699,"Creatinine,Ref-24Hr Urine",2162-6
+No,No,not_reviewed_(<100),823042707,COMMENT-QUEST,0
+No,No,not_reviewed_(<100),823042806,ESTERIFIED/ FREE RATIO,0
+No,No,not_reviewed_(<100),823040717,Coxsackie A10 Titer,22213-3
+No,No,not_reviewed_(<100),823040718,Coxsackie A16 Titer,22215-8
+No,No,not_reviewed_(<100),823040719,Coxsackie A2 Titer,22216-6
+No,No,not_reviewed_(<100),823040720,Coxsackie A4 Titer,22218-2
+No,No,not_reviewed_(<100),823040721,Coxsackie A7 Titer,22220-8
+No,No,not_reviewed_(<100),823040722,Coxsackie A9 Titer,22222-4
+No,No,not_reviewed_(<100),823042650,"EBV DNA, QN PCR - QUEST",0
+No,No,not_reviewed_(<100),824,HIV RNA COPIES*K/ML,NULL
+No,No,not_reviewed_(<100),825,HIV LOG10 COPIES,NULL
+No,No,not_reviewed_(<100),823042284,INHIBIN B-QUEST,0
+No,No,not_reviewed_(<100),123040753,Crystals-Urine,5782-8
+No,No,not_reviewed_(<100),123042042,% Prolymphocytes,30465-9
+No,No,not_reviewed_(<100),8230420115,TBII,0
+No,No,not_reviewed_(<100),123041629,"% Myeloblast,Bm",11113-8
+No,No,not_reviewed_(<100),823040723,Coxsackie-B Antibody Profile,22226-5
+No,No,not_reviewed_(<100),823040724,Coxsackie B2 Titer,22228-1
+No,No,not_reviewed_(<100),823040725,Coxsackie B3 Titer,22230-7
+No,No,not_reviewed_(<100),823040726,Coxsackie B4 Titer,22232-3
+No,No,not_reviewed_(<100),823040727,Coxsackie B5 Titer,22234-9
+No,No,not_reviewed_(<100),823040728,Coxsackie B6 Titer,22236-4
+No,No,not_reviewed_(<100),823042286,INHIBIN A-QUEST,0
+No,No,not_reviewed_(<100),823042574,Sodium - Feces,0
+No,No,not_reviewed_(<100),123040180,"Amylase,Total-Urine",1799-6
+No,No,not_reviewed_(<100),123040394,Calcium-24Hr Urine,6874-2
+No,No,not_reviewed_(<100),123041567,"Other Cell Description, CSF",0
+No,No,not_reviewed_(<100),123042142,"RBC,Fine Basophilic Stippling",45380-3
+No,No,not_reviewed_(<100),823040429,Catecholamines(Nor+Epi)-24Hr U,2058-6
+No,No,not_reviewed_(<100),823040872,Dopamine-24Hr Urine,2218-6
+No,No,not_reviewed_(<100),823040938,Epinephrine-24Hr Urine,2232-7
+No,No,not_reviewed_(<100),823041672,Norepinephrine-24Hr Urine,2668-2
+No,No,not_reviewed_(<100),823041784,Pancreatic Islet Ab Titer,13927-9
+No,No,not_reviewed_(<100),823042280,CHROMOGRANIN A-QUEST,0
+No,No,not_reviewed_(<100),823043124,ANA TITRE SERUM - QUEST,0
+No,No,not_reviewed_(<100),823043125,ANA PATTERN SERUM - QUEST,0
+No,No,not_reviewed_(<100),8230420089,HIV 1 ANTIBODY,NULL
+No,No,not_reviewed_(<100),8230420090,HIV 2 ANTIBODY,NULL
+No,No,not_reviewed_(<100),123041442,"Ldh,CSF",0
+No,No,not_reviewed_(<100),8230420261,"VIRAL ID, RESPIRATORY CULTURE",0
+No,No,not_reviewed_(<100),123041678,% Basophils-Synovial Fluid,0
+No,No,not_reviewed_(<100),123042058,"Protein,Monoclonal 2-Urine",42483-8
+No,No,not_reviewed_(<100),123042651,WBC Count-CSF,0
+No,No,not_reviewed_(<100),823042537,CALCULI URINARY ANALYSIS II-QUEST,0
+No,No,not_reviewed_(<100),823042575,Potassium - Feces,0
+No,No,not_reviewed_(<100),823042576,Chloride - Feces,0
+No,No,not_reviewed_(<100),1230000001,Interpretation,0
+No,No,not_reviewed_(<100),687,Interpretation,NULL
+No,No,not_reviewed_(<100),689,PNH COMMENTS,NULL
+No,No,not_reviewed_(<100),690,PNH SPECIMEN TYPE,NULL
+No,No,not_reviewed_(<100),691,PNH CLINICAL INFORMATION,NULL
+No,No,not_reviewed_(<100),692,PNH VIABILITY (%),NULL
+No,No,not_reviewed_(<100),693,PNH POPULATION (S) GATED,NULL
+No,No,not_reviewed_(<100),694,PNH ABNORMAL CELLS DETECTED,NULL
+No,No,not_reviewed_(<100),695,PNH % ABNORMAL,NULL
+No,No,not_reviewed_(<100),696,PNH FLOW DIFFERENTIAL (%),NULL
+No,No,not_reviewed_(<100),697,PNH RBCS,NULL
+No,No,not_reviewed_(<100),698,PNH GRANULOCYTES,NULL
+No,No,not_reviewed_(<100),699,PNH MONOCYTES,NULL
+No,No,not_reviewed_(<100),700,PNH NUMBER OF MARKERS,NULL
+No,No,not_reviewed_(<100),701,Method,NULL
+No,No,not_reviewed_(<100),123041743,"Osmolality,Fluid",0
+No,No,not_reviewed_(<100),123049271,Auer Rods,0
+No,No,not_reviewed_(<100),823040847,Dhea-So4-Serum,2191-5
+No,No,not_reviewed_(<100),823040097,Adenovirus Antibody,5041-9
+No,No,not_reviewed_(<100),823041979,"FISH, MDS/ MYELOID PANEL",0
+No,No,not_reviewed_(<100),823046546,"PARTIAL THROMBOPLASTIN TIME, ACTIVATED-QUEST",0
+No,No,not_reviewed_(<100),123040944,Epithelial Cells Comment,0
+No,No,not_reviewed_(<100),123041164,HCV Genotyping,32286-7
+No,No,not_reviewed_(<100),123042191,% Reticulum Cell-BM,50726-9
+No,No,not_reviewed_(<100),123042741,Gram Stain,664-3
+No,No,not_reviewed_(<100),123040906,Cell Description-Bm,NULL
+No,No,not_reviewed_(<100),823042564,"PHOSPHOLIPASE A2 RECEPTOR ELISA,S",0
+No,No,not_reviewed_(<100),823042581,"PHOSPHOLIPASE A2 RECEPTOR IFA,S",0
+No,No,not_reviewed_(<100),823042633,Vma-24Hr Urine,3122-9
+No,No,not_reviewed_(<100),488,AMIKACIN PEAK,NULL
+No,No,not_reviewed_(<100),123041115,"Glucose,Quantitative-Urine",2350-7
+No,No,not_reviewed_(<100),823040739,CREATININE-24HR URINE,NULL
+No,No,not_reviewed_(<100),823042036,"Progesterone,17Oh-Serum",1668-3
+No,No,not_reviewed_(<100),823042289,Serotonin/5Hiaa-24Hr Urine,1695-6
+No,No,not_reviewed_(<100),8230420159,NUMBER OF FETUSES,NULL
+No,No,not_reviewed_(<100),823000392,GLIADIN IGA UNITS,20495-8
+No,No,not_reviewed_(<100),823041092,Gliadin IgG Units,20496-6
+No,No,not_reviewed_(<100),823041140,Haloperidol-Serum,3669-9
+No,No,not_reviewed_(<100),823042050,Prostatic Acid Phos-Serum,0
+No,No,not_reviewed_(<100),123040319,% Baso Segmented-Bm,NULL
+No,No,not_reviewed_(<100),823041838,Perinuclear Ab Titer,14278-6
+No,No,not_reviewed_(<100),823042237,INTERPRETATION - QNATAL,0
+No,No,not_reviewed_(<100),823042355,ADVANCED MATERNAL AGE,0
+No,No,not_reviewed_(<100),823042357,ABNORMAL MSS,0
+No,No,not_reviewed_(<100),823042358,ABNORMAL US,0
+No,No,not_reviewed_(<100),823042359,PERSONAL/ FAMILY HISTORY,0
+No,No,not_reviewed_(<100),823040260,"Arsenic,Inorganic-24Hr Urine",53838-9
+No,No,not_reviewed_(<100),823041590,Mitochondrial Ab Titer,5247-2
+No,No,not_reviewed_(<100),823041893,Plasminogen Activity,5970-9
+No,No,not_reviewed_(<100),823042238,TRISOMY 21 (T21),0
+No,No,not_reviewed_(<100),823042239,TRISOMY 18 (T18),0
+No,No,not_reviewed_(<100),823042240,TRISOMY 13 (T13),0
+No,No,not_reviewed_(<100),823042241,Y CHROMOSOME,0
+No,No,not_reviewed_(<100),823042242,Y CHR. INTERPRETATION,0
+No,No,not_reviewed_(<100),823042245,SEX CHROMOSOME,0
+No,No,not_reviewed_(<100),823042248,SEX CHR. INTERPRETATION,0
+No,No,not_reviewed_(<100),823042249,MICRODELETION,0
+No,No,not_reviewed_(<100),823042250,MICRODELETION INTERPRETATION,0
+No,No,not_reviewed_(<100),823042251,GESTATIONAL AGE (IN WEEKS),0
+No,No,not_reviewed_(<100),823042252,GESTATIONAL AGE (IN DAYS),0
+No,No,not_reviewed_(<100),823042253,FETAL FRACTION,0
+No,No,not_reviewed_(<100),823042254,LABORATOTY COMMENTS,0
+No,No,not_reviewed_(<100),823042255,LIMITATIONS - QNATAL,0
+No,No,not_reviewed_(<100),823042256,SPECIFICATIONS,0
+No,No,not_reviewed_(<100),823042257,METHODOLOGY - QNATAL,0
+No,No,not_reviewed_(<100),823042414,"HEPATITIS C VIRAL RNA$GENOTYPE, LIPA(R)",0
+No,No,not_reviewed_(<100),123041116,"Glucose,Random-Plasma",2345-7
+No,No,not_reviewed_(<100),526,"L. PNEUMOPHILA, GROUP 2-6,8",NULL
+No,No,not_reviewed_(<100),123040510,% Synovial lining cells,0
+No,No,not_reviewed_(<100),823000102,Legionella Pneumophila Total Ab,7948-3
+No,No,not_reviewed_(<100),823041622,Mumps IgG Ab,25418-5
+No,No,not_reviewed_(<100),823042236,"FISH, MYELOMA, IGH PANEL",0
+No,No,not_reviewed_(<100),485,VANCOMYCIN PEAK,NULL
+No,No,not_reviewed_(<100),660,"FISH, B-CELL CLL",NULL
+No,No,not_reviewed_(<100),123042154,Rouleaux,7797-4
+No,No,not_reviewed_(<100),823040715,Cotinine-Urine,10366-3
+No,No,not_reviewed_(<100),823040820,"Date Of Birth,Patient",21112-8
+No,No,not_reviewed_(<100),823040992,Factor Xii Activity,3232-6
+No,No,not_reviewed_(<100),823041662,Nicotine-Urine,3854-7
+No,No,not_reviewed_(<100),823041805,Patient Weight,29463-7
+No,No,not_reviewed_(<100),823042606,Vasoactive Intestinal Polypeptide (Vip),3125-2
+No,No,not_reviewed_(<100),555,INTERPRETATION,X49246-2
+No,No,not_reviewed_(<100),562,ESTIMATED DATE OF DELIVERY,NULL
+No,No,not_reviewed_(<100),563,EDD DETERMINED BY,NULL
+No,No,not_reviewed_(<100),565,Ethnic Origin,NULL
+No,No,not_reviewed_(<100),566,INSULIN DEPENDENT DIABETIC,NULL
+No,No,not_reviewed_(<100),567,REPEAT SPECIMEN,NULL
+No,No,not_reviewed_(<100),123042136,"RBC,Acanthocytes",7789-1
+No,No,not_reviewed_(<100),823040126,Alpha-1 Antitrypsin Phenotype,32769-2
+No,No,not_reviewed_(<100),823040995,"Family Hx,Neurotube Def/Downs",NULL
+No,No,not_reviewed_(<100),823041447,Lead-24 Hr Urine,5677-0
+No,No,not_reviewed_(<100),823041623,Mumps IgM Ab,6479-0
+No,No,not_reviewed_(<100),823041694,Number Of Fetuses,11878-6
+No,No,not_reviewed_(<100),123041199,Hemosiderin-Urine,4644-1
+No,No,not_reviewed_(<100),123042341,"Sodium,Fluid",0
+No,No,not_reviewed_(<100),823040107,"AFP, Maternal Serum",1834-1
+No,No,not_reviewed_(<100),823040903,Echinococcus Antibody,47308-2
+No,No,not_reviewed_(<100),823041492,"Lyme Antibodies,Total",0
+No,No,not_reviewed_(<100),561,CALCULATED GESTATIONAL AGE,NULL
+No,No,not_reviewed_(<100),123042139,"RBC,Double Cell Population",10379-6
+No,No,not_reviewed_(<100),823040406,CANCER ANTIGEN 27-29-QUEST,17842-6
+No,No,not_reviewed_(<100),823041546,Mercury-24 Hr Urine,6693-6
+No,No,not_reviewed_(<100),823042637,"MSH6, IHC WITHOUT INTERPRETATION",0
+No,No,not_reviewed_(<100),823042641,"PD-L1, IHC WITH INTERPRETATION",0
+No,No,not_reviewed_(<100),123042157,"RBC,Sickle Cells",801-1
+No,No,not_reviewed_(<100),823040130,Alternaria Alternata IGE,6020-2
+No,No,not_reviewed_(<100),823040565,Cladosporium Herbarum Ige,6075-6
+No,No,not_reviewed_(<100),823040573,"Class,Alternaria Alternata",15530-9
+No,No,not_reviewed_(<100),823040586,"Class,Cladosporium Herbarum",15642-2
+No,No,not_reviewed_(<100),823040808,Cytoplasmic Ab Titer,14277-8
+No,No,not_reviewed_(<100),823042268,Schistosoma IgG,33317-9
+No,No,not_reviewed_(<100),8230420088,HIV 1/2 EIA AB SCREEN,NULL
+No,No,not_reviewed_(<100),560,MSS COMMENT,NULL
+No,No,not_reviewed_(<100),123042158,"RBC,Siderocyte-Like",NULL
+No,No,not_reviewed_(<100),823040619,"Class,Penicillium Notatum",15924-4
+No,No,not_reviewed_(<100),823040991,Factor Xi Activity,3226-8
+No,No,not_reviewed_(<100),823041829,Pennicillium Notatum GE,6212-5
+No,No,not_reviewed_(<100),823042104,Pyruvic Acid-Plasma,2905-8
+No,No,not_reviewed_(<100),823042461,Thyroxine Binding Globulin,3021-3
+No,No,not_reviewed_(<100),823042532,"Viscosity, Serum",0
+No,No,not_reviewed_(<100),123041442,"LDH,CSF",0
+No,No,not_reviewed_(<100),123042145,"RBC,Howell-Jolly Bodies",7793-3
+No,No,not_reviewed_(<100),823041336,Immune Complex(C1Q),0
+No,No,not_reviewed_(<100),823042318,EPINEPHRINE,0
+No,No,not_reviewed_(<100),823042322,"CREATININE, RANDOM URINE",0
+No,No,not_reviewed_(<100),823042614,HCV NS5A SUBTYPE-QUEST,0
+No,No,not_reviewed_(<100),582,KRAS BLOCK/SPECIMEN ID,NULL
+No,No,not_reviewed_(<100),123049272,Pelger-Huet Cells,0
+No,No,not_reviewed_(<100),823040328,Bermuda Grass Ige,6041-8
+No,No,not_reviewed_(<100),823040352,Birch IGE,15283-5
+No,No,not_reviewed_(<100),823040405,Cancer Antigen 15-3,6875-9
+No,No,not_reviewed_(<100),823040427,Cat Epithelium/Dander IGE,6833-8
+No,No,not_reviewed_(<100),823040512,Chlamydia Pneumonia Ab Profile,0
+No,No,not_reviewed_(<100),823040579,"Class, Birch IGE",15579-6
+No,No,not_reviewed_(<100),823040582,"Class,Cat Epithelium/Dander",15609-1
+No,No,not_reviewed_(<100),823040589,"Class,Cockroach",15647-1
+No,No,not_reviewed_(<100),823040596,"Class,D.Farinae Mite",15680-2
+No,No,not_reviewed_(<100),823040597,"Class,D.Pteronyssinus",15682-8
+No,No,not_reviewed_(<100),823040598,"Class,Dog Dander",15685-1
+No,No,not_reviewed_(<100),823040612,"Class,Mountain Cedar",15615-8
+No,No,not_reviewed_(<100),823040617,"Class,Pecan",15774-3
+No,No,not_reviewed_(<100),823040676,Cockroach IGE,6078-0
+No,No,not_reviewed_(<100),823040810,D.FARINAE MITE,6095-4
+No,No,not_reviewed_(<100),823040811,D. PTERONYSSINUS,6096-2
+No,No,not_reviewed_(<100),823040867,Dog Dander Ige,6098-8
+No,No,not_reviewed_(<100),823041531,Maple (Box Elder) IGE,7155-5
+No,No,not_reviewed_(<100),823041610,Mountain Cedar IGE,6178-8
+No,No,not_reviewed_(<100),823041794,Parietal Cell Ab Titer,5271-2
+No,No,not_reviewed_(<100),823041821,Pecan (Hickory) IGE,6209-1
+No,No,not_reviewed_(<100),823042302,Sheep Sorrel IGE,6244-8
+No,No,not_reviewed_(<100),823042304,Short Ragweed IGE,6085-5
+No,No,not_reviewed_(<100),823042319,NOREPINEPHRINE,0
+No,No,not_reviewed_(<100),823042320,"CALCULATED TOTAL, (E+NE)",0
+No,No,not_reviewed_(<100),823042321,DOPAMINE,0
+No,No,not_reviewed_(<100),823042435,INTERPRETATION SUMMARY - BRCA,0
+No,No,not_reviewed_(<100),823042436,BRCA 1 SEQUENCING,0
+No,No,not_reviewed_(<100),823042438,BRCA 1 SEQUENCING INTERPRETATION,0
+No,No,not_reviewed_(<100),823042439,BRCA 1 DEL/ DUP,0
+No,No,not_reviewed_(<100),823042440,BRCA 1 DEL/ DUP INTERPRETATION,0
+No,No,not_reviewed_(<100),823042441,BRCA2 SEQUENCING,0
+No,No,not_reviewed_(<100),823042442,BRCA 2 SEQUENCING INTERPRETATION,0
+No,No,not_reviewed_(<100),823042443,BRCA 2 DEL/ DUP,0
+No,No,not_reviewed_(<100),823042444,BRCA 2 DEL/ DUP INTERPRETATION,0
+No,No,not_reviewed_(<100),823042447,COMPREHENSIVE INTERPRETATION,0
+No,No,not_reviewed_(<100),823042448,ADDITIONA INFORMATION,0
+No,No,not_reviewed_(<100),823042650,"EBV DNA, QUANTITATIVE PCR-QUEST",0
+No,No,not_reviewed_(<100),823042663,White Oak IGE,6189-5
+No,No,not_reviewed_(<100),823042985,C. PNEUMONIAE AB (IGG)-QUEST,0
+No,No,not_reviewed_(<100),823042986,C. PNEUMONIAE AB (IGA)-QUEST,0
+No,No,not_reviewed_(<100),823042988,INTERPRETATION-QUEST,0
+No,No,not_reviewed_(<100),823042989,C. PSITTACI AB (IGG)-QUEST,0
+No,No,not_reviewed_(<100),823042990,C. PSITTACI AB (IGA)-QUEST,0
+No,No,not_reviewed_(<100),823042991,C. PSITTACI AB (IGM)-QUEST,0
+No,No,not_reviewed_(<100),823042992,INTERPRETATION-QUEST,0
+No,No,not_reviewed_(<100),8230420098,HBV GENOTYPE,0
+No,No,not_reviewed_(<100),506,"Class, Bahia Grass",NULL
+No,No,not_reviewed_(<100),713,"FISH, AML M3, PML/ RARA",NULL
+No,No,not_reviewed_(<100),902,REDUCING SUSTANCES - STOOL,0
+No,No,not_reviewed_(<100),82304300,C.TRACHOMATIS L1 AB (IGA) - QUEST,0
+No,No,not_reviewed_(<100),123040114,"Albumin,Immunologic-CSF",0
+No,No,not_reviewed_(<100),123040367,Bone Marrow Diff Comment,NULL
+No,No,not_reviewed_(<100),123041618,"WBC Count,NRBC Corrected-CSF",0
+No,No,not_reviewed_(<100),123042006,"Potassium,Fluid",0
+No,No,not_reviewed_(<100),823040293,Bahia Grass IGE,6034-3
+No,No,not_reviewed_(<100),823040571,"Class, Sheep Sorrel",16016-8
+No,No,not_reviewed_(<100),823040578,"Class,Bermuda Grass",15738-8
+No,No,not_reviewed_(<100),823040599,"Class,Elm",15697-6
+No,No,not_reviewed_(<100),823040610,"Class,Maple(Box Elder)",15585-3
+No,No,not_reviewed_(<100),823040614,"Class,Nettle",15872-5
+No,No,not_reviewed_(<100),823040621,"Class,Pigweed",15937-6
+No,No,not_reviewed_(<100),823040625,"Class,Short Ragweed",15975-6
+No,No,not_reviewed_(<100),823040629,"Class,Timothy Grass",16054-9
+No,No,not_reviewed_(<100),823040634,"Class,White Oak",15875-8
+No,No,not_reviewed_(<100),823040657,"Cmv DNA-Pcr,Quali",0
+No,No,not_reviewed_(<100),823040917,Elm IGE,6109-3
+No,No,not_reviewed_(<100),823041517,Macroamylase,15358-5
+No,No,not_reviewed_(<100),823041652,Nettle IGE,6186-1
+No,No,not_reviewed_(<100),823041877,Pigweed IGE,6233-1
+No,No,not_reviewed_(<100),823042475,Timothy Grass IGE,6265-3
+No,No,not_reviewed_(<100),823042711,COMMENT,0
+No,No,not_reviewed_(<100),823042993,C.TRACHOMATIS D-K AB(IGG)-QUEST,0
+No,No,not_reviewed_(<100),823042994,C.TRACHOMATIS D-K AB(IGA)-QUEST,0
+No,No,not_reviewed_(<100),823042995,C.TRACHOMATIS D-K AB(IGM)-QUEST,0
+No,No,not_reviewed_(<100),823042996,INTERPRETATION-QUEST,0
+No,No,not_reviewed_(<100),823042999,C.TRACHOMATIS L1 AB (IGG)-QUEST,0
+No,No,not_reviewed_(<100),823043001,C.TRACHOMATIS L1 AB (IGM)-QUEST,0
+No,No,not_reviewed_(<100),823043002,INTERPRETATION-QUEST,0
+No,No,not_reviewed_(<100),8230420218,INFLIXIMAB DRUG CONC. AND ANTI-INFLIXIMAB AB,0
+No,No,not_reviewed_(<100),763,CHROMOSOME ANALYSIS: AMNIOTIC FLUID,NULL
+No,No,not_reviewed_(<100),123041201,"Variant Hgb, Quant",0
+No,No,not_reviewed_(<100),823040118,Aldosterone-Urine,1765-7
+No,No,not_reviewed_(<100),823040998,Fatty Acids-Blood,12215-0
+No,No,not_reviewed_(<100),823041724,Olanzapine/Zyprexa,12389-3
+No,No,not_reviewed_(<100),8230420015,BRAF MUTATTION,NULL
+No,No,not_reviewed_(<100),8230420222,"INTERPRETATION,ACYLCARNITINE",0
+No,No,not_reviewed_(<100),8230420223,"ACETYLCARNITINE, C2",0
+No,No,not_reviewed_(<100),8230420224,"PROPIONYLCARNITINE, C3",0
+No,No,not_reviewed_(<100),8230420225,"ISO-/BUTYRLCARNITINE, C4",0
+No,No,not_reviewed_(<100),8230420226,"METHYLMALONYLCARN, C4DC",0
+No,No,not_reviewed_(<100),8230420227,"OH-BUTYRLCARNITINE, C4OH",0
+No,No,not_reviewed_(<100),8230420228,ISOVALERYL-2/-METHYLBUT C5,0
+No,No,not_reviewed_(<100),8230420229,"TIGLYL/METHYLCROTONYL, C5:1",0
+No,No,not_reviewed_(<100),8230420230,"GLUTARYLCARNITINE, C5DC",0
+No,No,not_reviewed_(<100),8230420231,"OH-ISOVALERYLCARNITIN, C5OH",0
+No,No,not_reviewed_(<100),8230420232,"HEXANOYLCARNITINE, C6",0
+No,No,not_reviewed_(<100),8230420233,"ADIPOYLCARNITINE, C6DC",0
+No,No,not_reviewed_(<100),8230420234,"OH-HEXANOYLCARNITINE, C6OH",0
+No,No,not_reviewed_(<100),8230420235,"OCTANOYLCARNITINE, C8",0
+No,No,not_reviewed_(<100),8230420236,"OCTENOYLCARNITINE, C8:1",0
+No,No,not_reviewed_(<100),8230420237,"SUBERYLCARNITINE, C8DC",0
+No,No,not_reviewed_(<100),8230420238,"DECANOYLCARNITINE, C10",0
+No,No,not_reviewed_(<100),8230420239,"DECENOYLCARNITINE, C10:1",0
+No,No,not_reviewed_(<100),8230420240,"DODECANOYLCARNITINE, C12",0
+No,No,not_reviewed_(<100),8230420241,"DODECENOYLCARNITINE,C12:1",0
+No,No,not_reviewed_(<100),8230420242,"OH DODECANOYLCARN, C12OH",0
+No,No,not_reviewed_(<100),8230420243,"TETRADECANOYLCARNITINE, C14",0
+No,No,not_reviewed_(<100),8230420244,"TETRADECENOYLCARN, C14:1",0
+No,No,not_reviewed_(<100),8230420245,"TETRADECADIENOYLCARN, C14:2",0
+No,No,not_reviewed_(<100),8230420246,"OH-TETRADECANOYLCARN, C14OH",0
+No,No,not_reviewed_(<100),8230420247,OH-TETRADECENOYL; C14:1-OH,0
+No,No,not_reviewed_(<100),8230420248,"HEXADECANOYLCARNITINE, C16",0
+No,No,not_reviewed_(<100),8230420249,"HEXADECENOYLCARN, C16:1",0
+No,No,not_reviewed_(<100),8230420250,"OH-HEXADECANOYLCARN, C16OH",0
+No,No,not_reviewed_(<100),8230420251,"OH-HEXADECENOYL, C16:1-OH",0
+No,No,not_reviewed_(<100),8230420252,"STEAROYLCARNITINE, C18",0
+No,No,not_reviewed_(<100),8230420253,"OLEOYLCARNITINE, C18:1",0
+No,No,not_reviewed_(<100),8230420254,"LINOLEOYLCARNITINE, C18:2",0
+No,No,not_reviewed_(<100),8230420255,"OH-OLEOYLCARN, C18:1-OH",0
+No,No,not_reviewed_(<100),8230420256,"OH-LINOLEOYLCARN, C18:2-OH",0
+No,No,not_reviewed_(<100),651,"INHIBIN A, DIMERIC",NULL
+No,No,not_reviewed_(<100),123040318,% Baso Myelocyte-Bm,NULL
+No,No,not_reviewed_(<100),823000416,"AMITRIPTYINE, TOTAL",NULL
+No,No,not_reviewed_(<100),823040147,Amitriptyline-Serum,3335-7
+No,No,not_reviewed_(<100),823040335,"B-hCG,Referral",21198-7
+No,No,not_reviewed_(<100),823041037,"Estriol,Free-Serum",2250-9
+No,No,not_reviewed_(<100),823041679,Nortriptyline-Serum,3872-9
+No,No,not_reviewed_(<100),823041961,CLINICAL INDICATION,NULL
+No,No,not_reviewed_(<100),823043133,JO-1 antibody,0
+No,No,not_reviewed_(<100),823043134,PL-7 antibody,0
+No,No,not_reviewed_(<100),823043135,PL-12 antibody,0
+No,No,not_reviewed_(<100),823043136,EJ antibody,0
+No,No,not_reviewed_(<100),823043137,OJ antibody,0
+No,No,not_reviewed_(<100),823043138,SRP antibody,0
+No,No,not_reviewed_(<100),823043139,MI-2 alpha antibody,0
+No,No,not_reviewed_(<100),823043140,MI-2 beta antibody,0
+No,No,not_reviewed_(<100),823043141,MDA-5 antibody,0
+No,No,not_reviewed_(<100),823043142,TIF-1Y antibody,0
+No,No,not_reviewed_(<100),823043143,NXP-2 antibody,0
+No,No,not_reviewed_(<100),8230420129,GANGLIOSIDE GQ1B AB IGG,NULL
+No,No,not_reviewed_(<100),475,MTHFR MUTATION INTERPRETATION,NULL
+No,No,not_reviewed_(<100),523,PORPHYRINS INTERPRETATION,NULL
+No,No,not_reviewed_(<100),556,Risk for ONTD,NULL
+No,No,not_reviewed_(<100),889,INTERPRETATION - PORPHOBILINOGEN,NULL
+No,No,not_reviewed_(<100),915,"CREATININE, URINE - ALDOSTERONE",NULL
+No,No,not_reviewed_(<100),916,"TOTAL VOLUME, URINE - ALDOSTERONE",NULL
+No,No,not_reviewed_(<100),123040207,Antibody ID 1,888-8
+No,No,not_reviewed_(<100),123041099,"Glucose,1Hr-Plasma",20438-8
+No,No,not_reviewed_(<100),123042164,"RBC,W/ Precipitated Hgb",NULL
+No,No,not_reviewed_(<100),823000384,Specimen Source,0
+No,No,not_reviewed_(<100),823040102,Afp Mom,20450-3
+No,No,not_reviewed_(<100),823040333,B-Hcg Mom,23841-0
+No,No,not_reviewed_(<100),823040707,Coproporphyrin III,2137-8
+No,No,not_reviewed_(<100),823040708,Coproporphyrin I,11212-8
+No,No,not_reviewed_(<100),823040875,Down Syndrome Age Related Risk,49090-4
+No,No,not_reviewed_(<100),823040877,Down Syndrome Screening Risk,43995-0
+No,No,not_reviewed_(<100),823040956,Estriol Mom,21264-7
+No,No,not_reviewed_(<100),823041207,Heptacarboxylporphyrin-24Hr Ur,24462-4
+No,No,not_reviewed_(<100),823041211,Hexacarboxylporphyrin-Urine,38164-0
+No,No,not_reviewed_(<100),823041362,Inhibin-A Mom,36904-1
+No,No,not_reviewed_(<100),823041617,Mthfr Mutation Analysis,21709-1
+No,No,not_reviewed_(<100),823041831,Pentacarboxylporphyrin-Urine,38161-6
+No,No,not_reviewed_(<100),823041963,BLOCK / SPECIMEN ID,NULL
+No,No,not_reviewed_(<100),823041996,Porphobilinogen-24Hr Urine,2810-0
+No,No,not_reviewed_(<100),823041998,"Porphyrins-24Hr Urine,Total",10885-2
+No,No,not_reviewed_(<100),823042246,Rubeola(Measles)IgG,5244-9
+No,No,not_reviewed_(<100),823042353,"CLASS, MOUSE URINE PROTEINS (E72) IGE",0
+No,No,not_reviewed_(<100),823042354,MOUSE URINE PROTEINS (E72) IGE,0
+No,No,not_reviewed_(<100),823042367,"FISH, AML, AML1/ ETO TRANSLOCATION 8,21",0
+No,No,not_reviewed_(<100),823042529,Trisomy 18 Screening Risk,43994-3
+No,No,not_reviewed_(<100),823042589,Uroporphyrin III,3113-8
+No,No,not_reviewed_(<100),823042590,Uroporphyrin I,11228-4
+No,No,not_reviewed_(<100),823043144,"EBV DNA, QN PCR - QUEST",0
+No,No,not_reviewed_(<100),8230420041,"CLINICAL INFORMATION, LEUKEMIA",NULL
+No,No,not_reviewed_(<100),8230420149,"LUNG CANCER (NSCLC) ROS1, FISH",0
+No,No,not_reviewed_(<100),624,Specimen Block/ Number,0
+No,No,not_reviewed_(<100),625,EGFR Mutation,0
+No,No,not_reviewed_(<100),626,Mutation Type,0
+No,No,not_reviewed_(<100),768,Result Reviewed By,0
+No,No,not_reviewed_(<100),772,"REVIEWER, MTHFR",NULL
+No,No,not_reviewed_(<100),123041679,"% Cells,Other-Synovial Fluid",0
+No,No,not_reviewed_(<100),823041152,"HBV DNA-Pcr,Qualitative",29610-3
+No,No,not_reviewed_(<100),823043147,FMR1 METHYLATION ANALYSIS,0
+No,No,not_reviewed_(<100),8230420099,POLYMERASE MUTATIONS,0
+No,No,not_reviewed_(<100),8230420100,PRECORE MUTATION,0
+No,No,not_reviewed_(<100),8230420101,BCP MUTATIONS,0
+No,No,not_reviewed_(<100),910,"NUCLEOTIDASE, 5' - SERUM -QUEST",NULL
+No,No,not_reviewed_(<100),123040384,Calcium Carbonate Crystals-Ur,0
+No,No,not_reviewed_(<100),123040526,"Chloride,Fluid",0
+No,No,not_reviewed_(<100),123042138,"RBC,Coarse Basophilic Stippling",45381-1
+No,No,not_reviewed_(<100),123049259,RBC- Parasites,0
+No,No,not_reviewed_(<100),823040704,Copper-24Hr Urine,5633-3
+No,No,not_reviewed_(<100),823040904,Echovirus 11 Titer,7865-9
+No,No,not_reviewed_(<100),823040906,Echovirus 30 Titer,16802-1
+No,No,not_reviewed_(<100),823040907,Echovirus 4 Titer,22277-8
+No,No,not_reviewed_(<100),823040908,Echovirus 7 Titer,22279-4
+No,No,not_reviewed_(<100),823040909,Echovirus 9 Titer,22281-0
+No,No,not_reviewed_(<100),823041157,"HBV DNA-Pcr,Quantitative",11258-1
+No,No,not_reviewed_(<100),823041788,Parainfluenza Ab Profile,22437-8
+No,No,not_reviewed_(<100),823043052,"LEGIONELLA PNEUMOPHILA AB (IGG), IFA",0
+No,No,not_reviewed_(<100),8230420001,"FISH, AML M4, CBFB/ MYH11, INVERSION 16",0
+No,No,not_reviewed_(<100),8230420037,TCRG RESULT,NULL
+No,No,not_reviewed_(<100),688,PNH FLOW CYTOMETRY REVIEWED BY,NULL
+No,No,not_reviewed_(<100),123040929,"Eosinophils, Smear",0
+No,No,not_reviewed_(<100),123041232,Hgb Fetal Stain Comment,4633-4
+No,No,not_reviewed_(<100),123041486,Lupus Anticoagulant Evaluation,3281-3
+No,No,not_reviewed_(<100),123042137,"RBC,Agglutination",50670-9
+No,No,not_reviewed_(<100),823040098,Adrenal Antibody Screen,0
+No,No,not_reviewed_(<100),823040099,Adrenal Antibody Titer,0
+No,No,not_reviewed_(<100),823040398,California Equine IgG,29815-8
+No,No,not_reviewed_(<100),823040399,California Equine IgM,29816-6
+No,No,not_reviewed_(<100),823040400,California Equine Interp.,49142-3
+No,No,not_reviewed_(<100),823040549,Chymotrypsin-Stool,0
+No,No,not_reviewed_(<100),823040654,Clonazepam/Klonopin-Serum,0
+No,No,not_reviewed_(<100),823040897,Eastern Equine IgG,10896-9
+No,No,not_reviewed_(<100),823040898,Eastern Equine IgM,10898-5
+No,No,not_reviewed_(<100),823041789,Parainfluenza-2 Ab,22438-6
+No,No,not_reviewed_(<100),823041790, ,22439-4
+No,No,not_reviewed_(<100),823041912,"Plt Agg,Adp",5992-3
+No,No,not_reviewed_(<100),823042377,PLT AB: GP IIB/ IIIA,0
+No,No,not_reviewed_(<100),823042378,PLT AB: GP IA/ IIA,0
+No,No,not_reviewed_(<100),823042379,PLT AB: GP IB/ IX,0
+No,No,not_reviewed_(<100),823042380,INTERPRETATION - PLT AB,0
+No,No,not_reviewed_(<100),823042381,PLT AB: HLA CLASS I,0
+No,No,not_reviewed_(<100),823042382,St. Louis Equine Interp.,21031-0
+No,No,not_reviewed_(<100),823042383,St.Louis Equine IgG,10906-6
+No,No,not_reviewed_(<100),823042384,St.Louis Equine IgM,10907-4
+No,No,not_reviewed_(<100),823042416,HCV NS3 SUBTYPE-QUEST,0
+No,No,not_reviewed_(<100),823042420,SIMEPREVIR RESISTANCE-QUEST,0
+No,No,not_reviewed_(<100),823042568,Grazoprevir Resistance,0
+No,No,not_reviewed_(<100),823042656,Western Equine IgG,6957-5
+No,No,not_reviewed_(<100),823042657,Western Equine IgM,6958-3
+No,No,not_reviewed_(<100),823042658,Western Equine Interpretation,49082-1
+No,No,not_reviewed_(<100),823042804,PARITAPREVIR RESISTANCE-QUEST,0
+No,No,not_reviewed_(<100),123040368,Broad Casts-Urine,0
+No,No,not_reviewed_(<100),123041104,"Glucose,2Hr-Plasma",20436-2
+No,No,not_reviewed_(<100),123041107,"Glucose,3Hr-Plasma",20437-0
+No,No,not_reviewed_(<100),123042687,Antibody Screen Peg,890-4
+No,No,not_reviewed_(<100),123043004,RHIG DOSE RECOMMENDED ,NULL
+No,No,not_reviewed_(<100),823000428,RMSF IGG TITER,0
+No,No,not_reviewed_(<100),823040132,Aluminum-Serum,5574-9
+No,No,not_reviewed_(<100),823040145,Amiodarone/Cordarone,3330-8
+No,No,not_reviewed_(<100),823040844,Amiodarone/Cordarone-Serum,6774-4
+No,No,not_reviewed_(<100),823041474,Lidocaine-Serum,0
+No,No,not_reviewed_(<100),823042247,Rubeola(Measles)IgM,5245-6
+No,No,not_reviewed_(<100),823042520,"PROTEIN, TOTAL, CSF",0
+No,No,not_reviewed_(<100),823042521,PREALBUMIN,0
+No,No,not_reviewed_(<100),823042522,ALBUMIN,0
+No,No,not_reviewed_(<100),823042523,ALPHA-1-GLOBULIN,0
+No,No,not_reviewed_(<100),823042524,ALPHA-2-GLOBULIN,0
+No,No,not_reviewed_(<100),823042525,BETA GLOBULIN,0
+No,No,not_reviewed_(<100),823042526,GAMMA GLOBULIN,0
+No,No,not_reviewed_(<100),823042639,"MLH1, IHC W/O INTERP",0
+No,No,not_reviewed_(<100),8230423467,INTERPRETATION - PROTEIN,0
+No,No,not_reviewed_(<100),123041017,Fluorochrome Stain,676-7
+No,No,not_reviewed_(<100),123042140,"RBC,Eccentrocytes",NULL
+No,No,not_reviewed_(<100),123042653,"WBC Count,NRBC Corrected-Fluid",0
+No,No,not_reviewed_(<100),823040379,Caffeine,3422-3
+No,No,not_reviewed_(<100),823041324,Igf Binding Protein-3,2483-6
+No,No,not_reviewed_(<100),823042617,DACLATASVIR RESISTANCE-QUEST,0
+No,No,not_reviewed_(<100),823042618,LEDIPASVIR RESISTANCE-QUEST,0
+No,No,not_reviewed_(<100),823042619,OMBITASVIR RESISTANCE-QUEST,0
+No,No,not_reviewed_(<100),823042622,ELBASVIR RESISTANCE-QUEST,0
+No,No,not_reviewed_(<100),823042631,VELPATASVIR RESISTANCE-QUEST,0
+No,No,not_reviewed_(<100),823042638,"PMS2, IHC W/O INTERP",0
+No,No,not_reviewed_(<100),823042640,"MSH2, IHC W/O INTERP",0
+No,No,not_reviewed_(<100),8230420009,"FISH, CML/ ALL, BCR/ ABL TRANSLOCATION 9,22",NULL
+No,No,not_reviewed_(<100),957,NORTRIPTYLINE,0
+No,No,not_reviewed_(<100),123040122,Alk Phosphatase-Fluid,0
+No,No,not_reviewed_(<100),123041686,NRBC-CSF,0
+No,No,not_reviewed_(<100),123042059,"Protein,Monoclonal 3-Serum",0
+No,No,not_reviewed_(<100),123042143,"RBC,Hgb Cc Crystals",48707-4
+No,No,not_reviewed_(<100),123042144,"RBC,Hgb Sc Crystals",NULL
+No,No,not_reviewed_(<100),123042619,"Viscosity,Serum",3128-6
+No,No,not_reviewed_(<100),823040199,Androstenedione,1854-9
+No,No,not_reviewed_(<100),823041458,Leptospiral Antibody,23196-9
+No,No,not_reviewed_(<100),823042186,Resp.Syncytial Virus Ab,22466-7
+No,No,not_reviewed_(<100),823042261,FIBROSIS SCORE,0
+No,No,not_reviewed_(<100),823042262,FIBROSIS STAGE,0
+No,No,not_reviewed_(<100),823042264,FIBROSIS INTERPRETATION,0
+No,No,not_reviewed_(<100),823042265,Necroinflammat Activity Score,0
+No,No,not_reviewed_(<100),823042266,NECROINFLAMMAT ACT GRADE,0
+No,No,not_reviewed_(<100),823042269,NECROINFLAMMAT ACT INTERP,0
+No,No,not_reviewed_(<100),823042270,REFERENCE ID,0
+No,No,not_reviewed_(<100),823042272,FOOTNOTE,0
+No,No,not_reviewed_(<100),823042273,TOTAL BILIRUBIN - LIVER FIBROSIS,0
+No,No,not_reviewed_(<100),823042274,GGT - LIVER FIBROSIS,0
+No,No,not_reviewed_(<100),823042275,ALT - LIVER FIBROSIS,0
+No,No,not_reviewed_(<100),823042276,ALPHA 2 MACROGLOBULIN,0
+No,No,not_reviewed_(<100),823042277,HAPTOGLOBIN,0
+No,No,not_reviewed_(<100),823042278,APOLIPOPROTEIN A1,0
+No,No,not_reviewed_(<100),823042365,CYSTATIN C,0
+No,No,not_reviewed_(<100),671,MARKERS,NULL
+No,No,not_reviewed_(<100),719,"RISK OF ONTD, AFP",0
+No,No,not_reviewed_(<100),771,"AFP MOM, MATERNAL SERUM",0
+No,No,not_reviewed_(<100),123040745,Cryocrit-Serum,15174-6
+No,No,not_reviewed_(<100),123040776,Cystine Crystals-Urine,0
+No,No,not_reviewed_(<100),123049286,Dwarf Megakaryocytes,0
+No,No,not_reviewed_(<100),823042037,PROGESTERONE-SERUM-QUEST,2839-9
+No,No,not_reviewed_(<100),823042340,"T3, FREE-QUEST",0
+No,No,not_reviewed_(<100),8230420038,T-CELL PATHOLOGIST INTERPRETATION,NULL
+No,No,not_reviewed_(<100),8230420108,"ABL MUTATION, CELL-BASED",0
+No,No,not_reviewed_(<100),8230420110,ABL POSSIBLE MUTATIONS,0
+No,No,not_reviewed_(<100),812,EBV DNA SOURCE,0
+No,No,not_reviewed_(<100),123041888,"% Plasma Cell,Abn-Bm",11117-9
+No,No,not_reviewed_(<100),123042577,"Urea Nitrogen,Fluid",0
+No,No,not_reviewed_(<100),823000435,CHLAMYDIA TRACHOMATIS INTERP.,0
+No,No,not_reviewed_(<100),823040301,Bartonella Henselae IgG Titer,6954-2
+No,No,not_reviewed_(<100),823040519,Chlamydia Trachomatis Iga,0
+No,No,not_reviewed_(<100),823040520,Chlamydia Trachomatis IgG,0
+No,No,not_reviewed_(<100),823040521,Chlamydia Trachomatis IgM,0
+No,No,not_reviewed_(<100),823040542,Chromo:Tissue,NULL
+No,No,not_reviewed_(<100),823040659,Cmv IgG,0
+No,No,not_reviewed_(<100),823040775,"Cysticercus IgG Ab,Westernblot",6374-3
+No,No,not_reviewed_(<100),823041012,Filaria Antibody,7887-3
+No,No,not_reviewed_(<100),823042243,Rubella IgG Immune Status,0
+No,No,not_reviewed_(<100),8230420102,"FISH, FOLLICULAR LYMPHOMA, IGH/ BCL2, T(14;18)",0
+No,No,not_reviewed_(<100),8230420116,"FISH, MPN (EOSINOPHILIA)",0
+No,No,not_reviewed_(<100),8230420131,"HIV 1 RNA, QN BDNA",NULL
+No,No,not_reviewed_(<100),8230420132,"HIV 1 RNA, QN BDNA",NULL
+No,No,not_reviewed_(<100),570,RESULT,NULL
+No,No,not_reviewed_(<100),571,MUTATIONS/POLYMORPHISMS,NULL
+No,No,not_reviewed_(<100),573,REVIEWER,NULL
+No,No,not_reviewed_(<100),574,REPORTED ETHNICITY,NULL
+No,No,not_reviewed_(<100),575,CYSTIC FIBROSIS INTERPRETATION,NULL
+No,No,not_reviewed_(<100),576,CYSTIC FIBROSIS METHOD,NULL
+No,No,not_reviewed_(<100),604,IS2 DATE OF COLLECTION,NULL
+No,No,not_reviewed_(<100),123042424,% Synovial Cells-Fluid,0
+No,No,not_reviewed_(<100),123042724,"Ova/Parasites,Urine",673-4
+No,No,not_reviewed_(<100),823042282,NMO-IGG ANTIBODY TEST-QUEST,0
+No,No,not_reviewed_(<100),823042368,"FISH, MLL, 11Q23, GENE REARRANGEMENTS",0
+No,No,not_reviewed_(<100),823042706,eGFR,0
+No,No,not_reviewed_(<100),8230420008,"FISH, ALL/ NHL, MYC-BA 8Q24",0
+No,No,not_reviewed_(<100),8230420042,"SPECIMEN TYPE, LEUKEMIA",NULL
+No,No,not_reviewed_(<100),8230420043,"VIABILITY, LEKEMIA",NULL
+No,No,not_reviewed_(<100),8230420092,TCRB RESULT,0
+No,No,not_reviewed_(<100),8230431143,"Albumin, CSF",0
+No,No,not_reviewed_(<100),636,PREV PREGNANCY DOWN SYNDROME,NULL
+No,No,not_reviewed_(<100),637,DONOR EGG,NULL
+No,No,not_reviewed_(<100),638,DONOR AGE: EGG RETRIEVAL,NULL
+No,No,not_reviewed_(<100),702,IGVH STATUS,0
+No,No,not_reviewed_(<100),703,IGVH MUTATION RATE,0
+No,No,not_reviewed_(<100),707,"INSCAPE ER/ PR, QUANT. IHC",0
+No,No,not_reviewed_(<100),123040941,Epithelial Cell Casts-Urine,5786-9
+No,No,not_reviewed_(<100),123041086,% Giant Band-BM,NULL
+No,No,not_reviewed_(<100),123042044,% Promonocytes - Blood,30466-7
+No,No,not_reviewed_(<100),823000100,"Platelet IgG Ab, Indirect",15400-5
+No,No,not_reviewed_(<100),823041293,Homovanillic Acid-24Hr Urine,0
+No,No,not_reviewed_(<100),823041757,"Osmotic Fragility, 0.85% Nacl",0
+No,No,not_reviewed_(<100),823042339,"VITAMIN D, 25-OH, TOTAL",0
+No,No,not_reviewed_(<100),823042450,SAMPLE ID,0
+No,No,not_reviewed_(<100),823042453,"NPM (EXON 12) MUTATION ANALYSIS, CELL-BASED",0
+No,No,not_reviewed_(<100),823042469,"FISH, MULTIPLE MYELOMA, IGH/ MAFB, T(14;20)",0
+No,No,not_reviewed_(<100),823042536,Vascular Endothelial Growth Factor,0
+No,No,not_reviewed_(<100),823042597,FLT3 ITD,0
+No,No,not_reviewed_(<100),823042598,FLT3 TKD,0
+No,No,not_reviewed_(<100),823042599,Interpretation,0
+No,No,not_reviewed_(<100),823043066,"INFLIXIMAB AB, IBD",0
+No,No,not_reviewed_(<100),823043067,"INFLIXIMAB LEVEL, IBD",0
+No,No,not_reviewed_(<100),823043068,INTERPRETATION,0
+No,No,not_reviewed_(<100),823043069,COMMENT,0
+No,No,not_reviewed_(<100),8230420093,PATHOLOGIST INTERPRETATION - T-CELL,0
+No,No,not_reviewed_(<100),8230420267,DATE OF BIRTH,0
+No,No,not_reviewed_(<100),8230420268,SPECIMEN TYPE,0
+No,No,not_reviewed_(<100),8230420273,CEBPA Mutation,0
+No,No,not_reviewed_(<100),629,"FISH, PRENATAL SCREEN",0
+No,No,not_reviewed_(<100),807,"SPECIMEN SOURCE, CMV",0
+No,No,not_reviewed_(<100),810,HIV 2 ANTIBODY,NULL
+No,No,not_reviewed_(<100),897,"CREATININE, 24HR URINE OXALIC ACID",NULL
+No,No,not_reviewed_(<100),123040391,"Calcium,Synovial Fluid",0
+No,No,not_reviewed_(<100),123040670,Coarse Granular Casts-Urine,33227-0
+No,No,not_reviewed_(<100),123041248,"Hgb,Misc HPLC",42248-5
+No,No,not_reviewed_(<100),123042105,Other Cells Comment,0
+No,No,not_reviewed_(<100),823040296,"Bands Present,Cysticercus IgG",24039-0
+No,No,not_reviewed_(<100),823040303,Bartonella Henselae IgM Titer,6955-9
+No,No,not_reviewed_(<100),823040584,"Class,Chicken Egg White",0
+No,No,not_reviewed_(<100),823040590,"Class,Codfish",0
+No,No,not_reviewed_(<100),823040593,"Class,Cow's Milk",0
+No,No,not_reviewed_(<100),823040616,"Class,Peanut",0
+No,No,not_reviewed_(<100),823040623,"Class,Scallop",0
+No,No,not_reviewed_(<100),823040624,"Class,Sesame Seed",0
+No,No,not_reviewed_(<100),823040626,"Class,Shrimp",0
+No,No,not_reviewed_(<100),823040627,"Class,Soybean",0
+No,No,not_reviewed_(<100),823040630,"Class,Tuna",0
+No,No,not_reviewed_(<100),823040631,"Class,Walnut (Food)",0
+No,No,not_reviewed_(<100),823040632,"Class,Wheat",0
+No,No,not_reviewed_(<100),823040677,Codfish IgE,0
+No,No,not_reviewed_(<100),823040853,Dihydrotestosterone,0
+No,No,not_reviewed_(<100),823040912,"Egg White, Chicken, IgE",0
+No,No,not_reviewed_(<100),823041586,"Milk, Cow's IgE",0
+No,No,not_reviewed_(<100),823041769,OXALATE - 24HR URINE,NULL
+No,No,not_reviewed_(<100),823041770,Oxalate/Urine,27222-9
+No,No,not_reviewed_(<100),823041820,Peanut IgE,0
+No,No,not_reviewed_(<100),823042204,"ALUMINUM, 24 HOUR URINE",0
+No,No,not_reviewed_(<100),823042222,"CHROMOSOME ANALYSIS, TISSUE, NO GROWTH",0
+No,No,not_reviewed_(<100),823042267,Scallop IgE,0
+No,No,not_reviewed_(<100),823042291,"CARNITINE, FREE",0
+No,No,not_reviewed_(<100),823042294,"CARNITINE, TOTAL",0
+No,No,not_reviewed_(<100),823042295,Sesame Seed IgE,0
+No,No,not_reviewed_(<100),823042296,AC/ FC RATIO,0
+No,No,not_reviewed_(<100),823042305,Shrimp IgE,0
+No,No,not_reviewed_(<100),823042341,HAZELNUT (F17) IGE,0
+No,No,not_reviewed_(<100),823042342,"CLASS, HAZELNUT (F17) IGE",0
+No,No,not_reviewed_(<100),823042343,CASHEW NUT (F202) IGE,0
+No,No,not_reviewed_(<100),823042344,"CLASS, CASHEW NUT (F202) IGE",0
+No,No,not_reviewed_(<100),823042345,ALMOND (F20) IGE,0
+No,No,not_reviewed_(<100),823042346,"CLASS, ALMOND (F20) IGE",0
+No,No,not_reviewed_(<100),823042349,Soybean IgE,0
+No,No,not_reviewed_(<100),823042350,SALMON (F41) IGE,0
+No,No,not_reviewed_(<100),823042351,"CLASS, SALMON (F41) IGE",0
+No,No,not_reviewed_(<100),823042361,TUNA IGE,0
+No,No,not_reviewed_(<100),823042401,CHIKUNGUNYA IGG SCREEN,0
+No,No,not_reviewed_(<100),823042402,CHIKUNGUNYA IGM SCREEN,0
+No,No,not_reviewed_(<100),823042418,Sulfhemoglobin-Blood,4685-4
+No,No,not_reviewed_(<100),823042431,INTERPRETATION - CARNITINE,0
+No,No,not_reviewed_(<100),823042546,Tularemia Antibody,0
+No,No,not_reviewed_(<100),823042646,Walnut (Food) IgE,0
+No,No,not_reviewed_(<100),823042659,Wheat IgE,0
+No,No,not_reviewed_(<100),1230141153,HGB- Pathologist Review,0
+No,No,not_reviewed_(<100),8230420024,APOLIPOPROTEIN B,0
+No,No,not_reviewed_(<100),8230420198,"17-HYDROXYPREGNENOLONE, LC/MS/MS",0
+No,No,not_reviewed_(<100),8230420200,IMMUNE COMPLEX DETECTION BY C1Q BINDING,0
+No,No,not_reviewed_(<100),600,IS2 REFERRING PHYSICIAN NAME,NULL
+No,No,not_reviewed_(<100),601,REFERRING PHYSICIAN PHONE,NULL
+No,No,not_reviewed_(<100),602,REFERRING PHYSICIAN NPI,NULL
+No,No,not_reviewed_(<100),745,TETANUS ANTITOXOID,0
+No,No,not_reviewed_(<100),746,HISTAMINE RELEASE - CHRONIC URTICARIA,0
+No,No,not_reviewed_(<100),896,"CREATININE, 24HR URINE",NULL
+No,No,not_reviewed_(<100),123040692,Complement C3-Syn Fluid,0
+No,No,not_reviewed_(<100),123040694,Complement C4-Syn Fluid,0
+No,No,not_reviewed_(<100),123041496,% Lymphoblast-BM,50724-4
+No,No,not_reviewed_(<100),123042041,% Prolymphocyte-Bm,11121-1
+No,No,not_reviewed_(<100),123042072,PT (Meter) Comments,NULL
+No,No,not_reviewed_(<100),123042563,Tyrosine Crystals-Urine,0
+No,No,not_reviewed_(<100),123042770,Rbc With Hgb F-Amniotic Fld,0
+No,No,not_reviewed_(<100),123043026,"WBC COUNT,HID",0
+No,No,not_reviewed_(<100),123043027,"RBC COUNT,HID",0
+No,No,not_reviewed_(<100),123043029,"HEMOGLOBIN,HID",0
+No,No,not_reviewed_(<100),123043030,"HEMATOCRIT,HID",0
+No,No,not_reviewed_(<100),123043031,"RBC MCV,HID",0
+No,No,not_reviewed_(<100),123043032,"RBC MCHC,HID",0
+No,No,not_reviewed_(<100),123043033,"PLATELET COUNT,HID",0
+No,No,not_reviewed_(<100),123043034,"% NEUTROPHILS,HID",0
+No,No,not_reviewed_(<100),123043036,"% LYMPHOCYTES,HID",0
+No,No,not_reviewed_(<100),123043040,"PLATELET MPV, HID",0
+No,No,not_reviewed_(<100),823000399,OSMOTIC FRAGILITY INTERPRETATION,0
+No,No,not_reviewed_(<100),823040305,BARTONELLA QUINTANA IGG TITER-QUEST,0
+No,No,not_reviewed_(<100),823040324,BDNA Log10 Copies/Ml,29539-4
+No,No,not_reviewed_(<100),823040407,Candida Albicans,0
+No,No,not_reviewed_(<100),823040561,Citric Acid-24Hr Urine,6687-8
+No,No,not_reviewed_(<100),823040562,Citric Acid/Creatinine-Urine,44306-9
+No,No,not_reviewed_(<100),823040581,"Class,Candida Albicans",0
+No,No,not_reviewed_(<100),823040973,Ethylene Glycol Result,0
+No,No,not_reviewed_(<100),823041262,"HIV-1 RNA BDNA-Pcr,Quantitative",59419-2
+No,No,not_reviewed_(<100),823041284,"HIV-2 Ab Screen,Eia",30361-0
+No,No,not_reviewed_(<100),823041302,Hsv-1 IgM Screen,0
+No,No,not_reviewed_(<100),823041309,Hsv-2 IgM Screen,0
+No,No,not_reviewed_(<100),823041749,"Osmotic Fragility, 0.30% Nacl",0
+No,No,not_reviewed_(<100),823041750,"Osmotic Fragility, 0.35% Nacl",0
+No,No,not_reviewed_(<100),823041751,"Osmotic Fragility, 0.40% Nacl",0
+No,No,not_reviewed_(<100),823041752,"Osmotic Fragility, 0.45% Nacl",0
+No,No,not_reviewed_(<100),823041753,"Osmotic Fragility, 0.50% Nacl",0
+No,No,not_reviewed_(<100),823041754,"Osmotic Fragility, 0.55% Nacl",0
+No,No,not_reviewed_(<100),823041755,"Osmotic Fragility, 0.60% Nacl",0
+No,No,not_reviewed_(<100),823041756,"Osmotic Fragility, 0.65% Nacl",0
+No,No,not_reviewed_(<100),823041759,"Osmotic Fragility,RBC Commemt",0
+No,No,not_reviewed_(<100),823041856,Phenobarb As Metab.,3948-7
+No,No,not_reviewed_(<100),823042026,Primidone-Serum,3978-4
+No,No,not_reviewed_(<100),823042205,CD3-CD16+CD56 (ABS),0
+No,No,not_reviewed_(<100),823042207,"BETA GLUCOSIDASE, LEUKOCYTES",0
+No,No,not_reviewed_(<100),823042209,"INTERPRETATION, BGL",0
+No,No,not_reviewed_(<100),823042210,REVIEWED BY,0
+No,No,not_reviewed_(<100),823042451,Thiocyanate-Serum,0
+No,No,not_reviewed_(<100),823042476,"FISH, HIGH-GRADE LYMPHOMA PANEL",0
+No,No,not_reviewed_(<100),823042585,"Urine Collection,Duration",13362-9
+No,No,not_reviewed_(<100),823042642,L. pneumophila 1 Ab. IgG,0
+No,No,not_reviewed_(<100),823042643,L. pneumophila 1 Ab. IgM,0
+No,No,not_reviewed_(<100),823042644,L. pneumophila 2 Ab. IgG,0
+No,No,not_reviewed_(<100),823042647,Legionella pneumophila 2 Ab. IgM,0
+No,No,not_reviewed_(<100),823042648,Legionella pneumophila 3 Ab. IgG,0
+No,No,not_reviewed_(<100),823042649,Legionella pneumophila 3 Ab. IgM,0
+No,No,not_reviewed_(<100),823042651,Legionella pneumophila 4 Ab. IgG,0
+No,No,not_reviewed_(<100),823042652,Legionella pneumophila 4 Ab. IgM,0
+No,No,not_reviewed_(<100),823042653,Legionella pneumophila 5 Ab. IgG,0
+No,No,not_reviewed_(<100),823042654,Legionella pneumophila 5 Ab. IgM,0
+No,No,not_reviewed_(<100),823042655,Legionella pneumophila 6 Ab. IgG,0
+No,No,not_reviewed_(<100),823042660,Legionella pneumophila 6 Ab. IgM,0
+No,No,not_reviewed_(<100),823042777,SPECIMEN SOURCE-HVC-QUEST,0
+No,No,not_reviewed_(<100),823043074,Copeptin,0
+No,No,not_reviewed_(<100),8230420202,MUCOR RACEMOSUS(M4) IGE,0
+No,No,not_reviewed_(<100),8230420203,"CLASS, MUCOR RACEMOSUS(M4) IGE",0
+No,No,not_reviewed_(<100),8230420215,"CHROMOSOMAL MICROARRAY, PRENATAL, CLARISURE(R)",0
+No,No,not_reviewed_(<100),524,"FLUOXETINE, TOTAL",0
+No,No,not_reviewed_(<100),583,KRAS MUTATION,NULL
+No,No,not_reviewed_(<100),589,IS2 AGE RISK DOWN SYNDROME,0
+No,No,not_reviewed_(<100),591,IS2 MSS TRISOMY 18 RISK,0
+No,No,not_reviewed_(<100),592,IS2 CALCULATED GESTATIONAL AGE,0
+No,No,not_reviewed_(<100),594,IS2 HCG MOM,0
+No,No,not_reviewed_(<100),597,IS2 PAPP-A,0
+No,No,not_reviewed_(<100),617,"FISH, ALK 2P23 REARRANGEMENT",0
+No,No,not_reviewed_(<100),623,EPIDERMAL GROWTH FACTOR RECEPTOR (EGFR),0
+No,No,not_reviewed_(<100),809,ESTRIOL SERUM,0
+No,No,not_reviewed_(<100),915,"Creatinine, Urine - Aldosterone",0
+No,No,not_reviewed_(<100),916,"Total Volume, Urine - Aldosterone",0
+No,No,not_reviewed_(<100),82304316,ANA PATTERN-QUEST,0
+No,No,not_reviewed_(<100),123041096,"Glucose,1Hr (75Gm)",0
+No,No,not_reviewed_(<100),123041101,"Glucose,2Hr Pp-Plasma",1521-4
+No,No,not_reviewed_(<100),123041102,"Glucose,2Hr Prenatal (100Gm)",0
+No,No,not_reviewed_(<100),123041105,"Glucose,3Hr Prenatal (100Gm)",0
+No,No,not_reviewed_(<100),123041113,"Glucose,Fbs-Prenatal",0
+No,No,not_reviewed_(<100),123041240,"Hgb Phenotype,Prelim-HPLC",0
+No,No,not_reviewed_(<100),123041247,"Hgb,(Meter)",0
+No,No,not_reviewed_(<100),123041460,Leucine Crystals-Urine,0
+No,No,not_reviewed_(<100),123041573,"Other Cell Description,Synovial Fld",0
+No,No,not_reviewed_(<100),123042204,"Rheumatoid Factor,Synovial Fld",0
+No,No,not_reviewed_(<100),123043035,"# NEUTROPHILS,HID",0
+No,No,not_reviewed_(<100),123043037,"# LYMPHOCYTES,HID",0
+No,No,not_reviewed_(<100),123043038,"% MXD,HID",0
+No,No,not_reviewed_(<100),123043039,"# MXD,HID",0
+No,No,not_reviewed_(<100),123049263,HGB CC Crystals,0
+No,No,not_reviewed_(<100),823000431,RMSF IGM TITER,0
+No,No,not_reviewed_(<100),823040613,RAST: Mouse Epithelia IgE,0
+No,No,not_reviewed_(<100),823040846,Desmethyldoxepin,0
+No,No,not_reviewed_(<100),823040878,Doxepin,0
+No,No,not_reviewed_(<100),823040879,Doxepin-Total,0
+No,No,not_reviewed_(<100),823040885,"Ds-DNA Antibody,Crithidia",0
+No,No,not_reviewed_(<100),823041002,Felbamate-Serum,0
+No,No,not_reviewed_(<100),823041036,Protoporphyrins-Blood,0
+No,No,not_reviewed_(<100),823041438,Latex Specific Ige Class,0
+No,No,not_reviewed_(<100),823041439,RAST: Latex Specific IgE,0
+No,No,not_reviewed_(<100),823041611,Mouse Epithelia IgE,0
+No,No,not_reviewed_(<100),823041980,"LUNG CANCER (NSCLC), ALK 2P23",0
+No,No,not_reviewed_(<100),823042203,"LYMPHOCYTE, ABSOLUTE, NKC",0
+No,No,not_reviewed_(<100),823042206,CD3-/CD16+CD56+ (%),0
+No,No,not_reviewed_(<100),823042235,"HIV 1 RNA, QL, TMA-QUEST",0
+No,No,not_reviewed_(<100),823042362,Specimen Type,0
+No,No,not_reviewed_(<100),823042373,"THYROGLOBULIN, HAMA TREATED",0
+No,No,not_reviewed_(<100),823042374,"THYROGLOBULIN, UNTREATED",0
+No,No,not_reviewed_(<100),823042467,"FISH, TCL1, 14Q32.1",0
+No,No,not_reviewed_(<100),823042514,"FISH, ALL, PRE-B",0
+No,No,not_reviewed_(<100),823042809,CHLAMYDIAE SPECIES CULTURE-QUEST,0
+No,No,not_reviewed_(<100),823043055,"ANTI-MULLERIAN HORMONE (AMH), FEMALE",0
+No,No,not_reviewed_(<100),823043145,ANA TITER-QUEST,0
+No,No,not_reviewed_(<100),823046549,RED BLOOD CELL COUNT-QUEST,0
+No,No,not_reviewed_(<100),823046550,HEMOGLOBIN-QUEST,0
+No,No,not_reviewed_(<100),823046551,HEMATOCRIT -QUEST,0
+No,No,not_reviewed_(<100),823046552,MCV-QUEST,0
+No,No,not_reviewed_(<100),823046553,MCH-QUEST,0
+No,No,not_reviewed_(<100),823046555,RDW-QUEST,0
+No,No,not_reviewed_(<100),8230420002,"FISH, MANTLE CELL LYMPHOMA, IGH/CCND1",0
+No,No,not_reviewed_(<100),8230420044,"INTERPRETATION, LEUKEMIA",NULL
+No,No,not_reviewed_(<100),8230420045,"SAMPLE DESCRIPTION, LEUKEMIA",NULL
+No,No,not_reviewed_(<100),8230420048,"NUMBER OF MARKERS, LEUKEMIA",NULL
+No,No,not_reviewed_(<100),8230420125,B. PERTUSSIS DNA,0
+No,No,not_reviewed_(<100),8230420126,B. PARAPERTUSSIS DNA,0
+No,No,not_reviewed_(<100),8230420135,FLUOXETINE,0
+No,No,not_reviewed_(<100),8230420136,NORFLUOXETINE,0
+No,No,not_reviewed_(<100),8230420155,SPECIMEN SOURCE - BORDETELLA,0
+No,No,not_reviewed_(<100),8230420157,GESTATIONAL AGE (WEEKS),NULL
+No,No,not_reviewed_(<100),8230420158,GESTATIONAL AGE (DAYS),NULL
+No,No,not_reviewed_(<100),8230420160,MATERNAL HEIGHT (FEET),NULL
+No,No,not_reviewed_(<100),8230420161,MATERNAL HEIGHT (INCHES),NULL
+No,No,not_reviewed_(<100),8230420162,REASON(S) FOR HIGH RISK,NULL
+No,No,not_reviewed_(<100),8230420163,"OPT OUT MICRODELS 16,22",NULL
+No,No,not_reviewed_(<100),8230420164,USE LEFTOVER SAMPLE/ DATA,NULL
+No,No,not_reviewed_(<100),8230420165,ADDITIONAL COMMENTS,NULL
+No,No,not_reviewed_(<100),8230420166,TRISOMY 21 (T21),NULL
+No,No,not_reviewed_(<100),8230420167,TRISOMY 18 (T18),NULL
+No,No,not_reviewed_(<100),8230420168,TRISOMY 13 (T13),NULL
+No,No,not_reviewed_(<100),8230420169,INTERPRETATION - MATERNIT 21,NULL
+No,No,not_reviewed_(<100),8230420170,Y CHROMOSOME,NULL
+No,No,not_reviewed_(<100),8230420171,Y CHROMOSOME INTERPRETATION,NULL
+No,No,not_reviewed_(<100),8230420172,ADDITIONAL FINDINGS,NULL
+No,No,not_reviewed_(<100),8230420173,ADDITIONAL FINDINGS INTERPRETATION,NULL
+No,No,not_reviewed_(<100),8230420174,ADDITIONAL FINDINGS NOTE,NULL
+No,No,not_reviewed_(<100),8230420175,LAB DIRECTOR COMMENTS,NULL
+No,No,not_reviewed_(<100),8230420176,APPROVED BY,NULL
+No,No,not_reviewed_(<100),8230420177,TEST METHOD,NULL
+No,No,not_reviewed_(<100),8230420178,ABOUT THE TEST,NULL
+No,No,not_reviewed_(<100),8230420179,PERFORMANCE,NULL
+No,No,not_reviewed_(<100),8230420180,PERFORMANCE DATA,NULL
+No,No,not_reviewed_(<100),8230420181,LIMITATIONS OF THE TEST,NULL
+No,No,not_reviewed_(<100),8230420182,NOTE,NULL
+No,No,not_reviewed_(<100),8230420183,REFERENCES,NULL
+No,No,not_reviewed_(<100),8230420184,MATERNAL WEIGHT (LBS),NULL
+No,No,not_reviewed_(<100),8230420217,ANTI MULLERIAN HORMONE ASSESSR(TM),0
+No,No,not_reviewed_(<100),8230420281,HEMOGLOBIN A-QUEST,0
+No,No,not_reviewed_(<100),8230420282,HEMOGLOBIN S-QUEST,0
+No,No,not_reviewed_(<100),8230420287,INTERPRETATION-QUEST,0
+No,No,not_reviewed_(<100),8230420294,HEMOGLOBIN A2(QUANT)-QUEST,0
+No,No,not_reviewed_(<100),8230420295,HEMOGLOBIN F-QUEST,0
+No,No,not_reviewed_(<100),474,%OXIDATION POS NEUTROPHILS,0
+No,No,not_reviewed_(<100),493,ULTRASOUND DATE,0
+No,No,not_reviewed_(<100),558,MSS DOWN SYNDROME RISK,0
+No,No,not_reviewed_(<100),585,FRAGILE X PCR,0
+No,No,not_reviewed_(<100),588,IS2 RISK FOR ONTD,0
+No,No,not_reviewed_(<100),590,IS2 MSS DOWN SYNDROME RISK,0
+No,No,not_reviewed_(<100),593,IS2 AFP MOM,0
+No,No,not_reviewed_(<100),595,IS2 ESTRIOL MOM,0
+No,No,not_reviewed_(<100),596,"IS2 INHIBIN A, MOM",0
+No,No,not_reviewed_(<100),598,"IS2 PAPP-A, MOM",0
+No,No,not_reviewed_(<100),603,IPS2 SPECIMEN # PART 1,0
+No,No,not_reviewed_(<100),605,IS2 ESTIMATED DATE OF DELIVERY,0
+No,No,not_reviewed_(<100),610,IS2 MOTHER'S ETHNIC ORIGIN,0
+No,No,not_reviewed_(<100),611,IS2 REPEAT SPECIMEN,0
+No,No,not_reviewed_(<100),612,IS2 INSULIN DEPENDENT DIABETIC,0
+No,No,not_reviewed_(<100),613,IS2 NUMBER OF FETUSES,0
+No,No,not_reviewed_(<100),614,IS2 HX OF NEURAL TUBE DEFECT,0
+No,No,not_reviewed_(<100),635,BRIEF HISTORY (NTD),NULL
+No,No,not_reviewed_(<100),639,ULTRASONOGRAPHER'S NAME,0
+No,No,not_reviewed_(<100),640,NTQR ULTRASONOGRAPHER'S ID#,0
+No,No,not_reviewed_(<100),641,NTQR LOCATION ID#,0
+No,No,not_reviewed_(<100),642,NTQR READING PHYS ID#,0
+No,No,not_reviewed_(<100),643,FMF ULTRASONOGRAPHER ID#,0
+No,No,not_reviewed_(<100),644,CROWN RUMP LENGHT,0
+No,No,not_reviewed_(<100),645,NUCHAL TRANSLUCENCY,0
+No,No,not_reviewed_(<100),646,NASAL BONE,0
+No,No,not_reviewed_(<100),647,IF TWINS,0
+No,No,not_reviewed_(<100),648,TWIN B CROWN RUMP LENGHT,0
+No,No,not_reviewed_(<100),649,TWIN B NUCHAL TRANSLUCENCY,0
+No,No,not_reviewed_(<100),650,TWIN B NASAL BONE,0
+No,No,not_reviewed_(<100),732,"CHROMOSOME ANALYSIS, BLOOD NO GROWTH",0
+No,No,not_reviewed_(<100),741,PRENATAL SPECIMEN CULTURE,0
+No,No,not_reviewed_(<100),773,"HCG, SERUM",0
+No,No,not_reviewed_(<100),774,"NT MOM, 1",0
+No,No,not_reviewed_(<100),863,SIS2 PAPP-A MOM,0
+No,No,not_reviewed_(<100),906,Ethosuximide,NULL
+No,No,not_reviewed_(<100),1511112,POC Glucose,NULL
+No,No,not_reviewed_(<100),123040128,Alpha-2 Macroglobulin,1835-8
+No,No,not_reviewed_(<100),123040314,Base Excess-Micro,0
+No,No,not_reviewed_(<100),123041097,"Glucose,1Hr Prenatal (100Gm)",0
+No,No,not_reviewed_(<100),123041100,"Glucose,2Hr (75 Gm)",0
+No,No,not_reviewed_(<100),123041369,"INR,Hepzymed",0
+No,No,not_reviewed_(<100),123041816,Pco2-Micro,0
+No,No,not_reviewed_(<100),123041864,Ph-Micro,0
+No,No,not_reviewed_(<100),123041927,Po2-Micro,0
+No,No,not_reviewed_(<100),123042070,"Prothrombin Time,Hepzymed",0
+No,No,not_reviewed_(<100),123043028,"MALARIA SCREEN,HID",0
+No,No,not_reviewed_(<100),123043042,EBOLA INTERPRETATION,0
+No,No,not_reviewed_(<100),123051017,Fluorochrome Stain,0
+No,No,not_reviewed_(<100),823000077,Murine Typhus IgM,0
+No,No,not_reviewed_(<100),823000436,CHLAMYDIA PNEUMONIAE IGM,0
+No,No,not_reviewed_(<100),823040106,Alpha-Fetoprotein-Amniotic Fluid,0
+No,No,not_reviewed_(<100),823040424,Carotene-Serum,0
+No,No,not_reviewed_(<100),823040510,Chlamydia Pneumoniae Iga,0
+No,No,not_reviewed_(<100),823040511,Chlamydia Pneumoniae IgG,0
+No,No,not_reviewed_(<100),823040513,Chlamydia Pneumoniae Interp,0
+No,No,not_reviewed_(<100),823040514,Chlamydia Psittaci Iga,0
+No,No,not_reviewed_(<100),823040515,Chlamydia Psittaci IgG,0
+No,No,not_reviewed_(<100),823040516,Chlamydia Psittaci IgM,0
+No,No,not_reviewed_(<100),823040517,Chlamydia Psittaci Interp,0
+No,No,not_reviewed_(<100),823040777,Cystine-24Hr Urine,0
+No,No,not_reviewed_(<100),823040814,Date Began-Urine,19088-4
+No,No,not_reviewed_(<100),823040828,Decadienoyl Carnitine (C10:2),0
+No,No,not_reviewed_(<100),823040845,Desipramine,0
+No,No,not_reviewed_(<100),823040884,"Ds-DNA Ab Titer,Crithidida",0
+No,No,not_reviewed_(<100),823040961,Estrone-Serum,0
+No,No,not_reviewed_(<100),823041285,HIV-2 Ab Western Blot,5225-8
+No,No,not_reviewed_(<100),823041333,Imipramine,0
+No,No,not_reviewed_(<100),823041334,"Imipramine, Total",0
+No,No,not_reviewed_(<100),823041528,Malonyl Carnitine (C3Dc),0
+No,No,not_reviewed_(<100),823041624,Murine Typhus IgG,0
+No,No,not_reviewed_(<100),823041832,Pentobarbital-Serum,0
+No,No,not_reviewed_(<100),823041964,IGH RESULT,0
+No,No,not_reviewed_(<100),823041966,IGK RESULT,0
+No,No,not_reviewed_(<100),823041968,"COBALT, SERUM / PLASMA",0
+No,No,not_reviewed_(<100),823041993,ZONISAMIDE,0
+No,No,not_reviewed_(<100),823042000,"Date of Birth, Patient",0
+No,No,not_reviewed_(<100),823042001,PATHOLOGIST INTERPRETATION,0
+No,No,not_reviewed_(<100),823042106,"Q Fever IgG Titer,Phase Ii",0
+No,No,not_reviewed_(<100),823042285,INHIBIN A-QUEST,0
+No,No,not_reviewed_(<100),823042356,"Specimen Age, Cgd",0
+No,No,not_reviewed_(<100),823042376,"VASCULAR ENDOTHELIAL GROWTH FACTOR, ELISA",0
+No,No,not_reviewed_(<100),823042430,Tacrolimus/Prograf,0
+No,No,not_reviewed_(<100),823042449,"FLUPHENAZINE, SERUM/ PLASMA",0
+No,No,not_reviewed_(<100),823042472,Time Began-Urine,19089-2
+No,No,not_reviewed_(<100),823042500,TISSUE CULTURE FOR HEMATOLOGIC DISORDER,0
+No,No,not_reviewed_(<100),823042502,FISH B-CELL MALIGNANCY IGH 14Q32,0
+No,No,not_reviewed_(<100),823042510,"CHROM. MICROARRAY, HEMATOLOGIC MALIG.",0
+No,No,not_reviewed_(<100),823042533,Trypsin-Stool,0
+No,No,not_reviewed_(<100),823042554,FLT3 ITD AND TKD MUTATION,0
+No,No,not_reviewed_(<100),823042701,CIGARETTE SMOKER,0
+No,No,not_reviewed_(<100),823042859,Oxymorphone - Serum,0
+No,No,not_reviewed_(<100),823042860,Oxycodone - Serum,0
+No,No,not_reviewed_(<100),823042896,LACTIC,0
+No,No,not_reviewed_(<100),823042897,GLYCOLIC,0
+No,No,not_reviewed_(<100),823042898,2-HYDROXYBUTYRIC,0
+No,No,not_reviewed_(<100),823042899,3-HYDROXYPROPIONIC,0
+No,No,not_reviewed_(<100),823042900,3-HYDROXYISOBUTYRIC,0
+No,No,not_reviewed_(<100),823042901,3-HYDROXYBUTYRIC,0
+No,No,not_reviewed_(<100),823042902,2-HYDROXYISOVALERIC,0
+No,No,not_reviewed_(<100),823042903,"2-METHYL,3-HYDROXYBUTYRIC",0
+No,No,not_reviewed_(<100),823042904,3-HYDROXYISOVALERIC,0
+No,No,not_reviewed_(<100),823042905,METHYLMALONIC,0
+No,No,not_reviewed_(<100),823042906,2-ET-3OHPROPIONIC,0
+No,No,not_reviewed_(<100),823042907,2-HYDROXYISOCAPROIC,0
+No,No,not_reviewed_(<100),823042908,3-HYDROXYVALERIC,0
+No,No,not_reviewed_(<100),823042909,2-OH-3ME-VALERIC,0
+No,No,not_reviewed_(<100),823042910,OCTANOIC,0
+No,No,not_reviewed_(<100),823042911,ETHYLMALONIC,0
+No,No,not_reviewed_(<100),823042912,PHENYLACETIC,0
+No,No,not_reviewed_(<100),823042913,SUCCINIC,0
+No,No,not_reviewed_(<100),823042914,METHYLSUCCINIC,0
+No,No,not_reviewed_(<100),823042915,URACIL,0
+No,No,not_reviewed_(<100),823042916,FUMARIC,0
+No,No,not_reviewed_(<100),823042917,PROPIONYLGLYCINE,0
+No,No,not_reviewed_(<100),823042918,5-HYDROXYHEXANOIC,0
+No,No,not_reviewed_(<100),823042919,GLUTARIC,0
+No,No,not_reviewed_(<100),823042920,3-METHYLGLUTARIC,0
+No,No,not_reviewed_(<100),823042921,3-METHYLGLUTACONIC,0
+No,No,not_reviewed_(<100),823042922,GLUTACONIC,0
+No,No,not_reviewed_(<100),823042923,ISOVALERYLGLYCINE,0
+No,No,not_reviewed_(<100),823042924,GLYOXYLIC,0
+No,No,not_reviewed_(<100),823042925,MALIC,0
+No,No,not_reviewed_(<100),823042926,3-HYDROXYADIPIC,0
+No,No,not_reviewed_(<100),823042927,ADIPIC,0
+No,No,not_reviewed_(<100),823042928,PYRUVIC,0
+No,No,not_reviewed_(<100),823042929,5-OXOPROLINE,0
+No,No,not_reviewed_(<100),823042930,2-OXOISOVALERIC,0
+No,No,not_reviewed_(<100),823042931,3-METHYLCROTONYLGLYCINE,0
+No,No,not_reviewed_(<100),823042932,TIGLYLGLYCINE,0
+No,No,not_reviewed_(<100),823042933,MEVALONIC,0
+No,No,not_reviewed_(<100),823042934,2-HYDROXYGLUTARIC,0
+No,No,not_reviewed_(<100),823042935,3-HYDROXYGLUTARIC,0
+No,No,not_reviewed_(<100),823042936,ACETOACETIC,0
+No,No,not_reviewed_(<100),823042937,PHENYLLACTIC,0
+No,No,not_reviewed_(<100),823042938,3-OH-3-METHYLGLUTARIC,0
+No,No,not_reviewed_(<100),823042939,"2-OXO,3-METHYLVALERIC",0
+No,No,not_reviewed_(<100),823042940,2-OXOISOCAPROIC,0
+No,No,not_reviewed_(<100),823042941,HEXANOYLGLYCINE,0
+No,No,not_reviewed_(<100),823042942,4-HYDROXYPHENYLACETIC,0
+No,No,not_reviewed_(<100),823042943,2-HYDROXYADIPIC,0
+No,No,not_reviewed_(<100),823042944,OCTENEDIOIC,0
+No,No,not_reviewed_(<100),823042945,SUBERIC,0
+No,No,not_reviewed_(<100),823042946,ACONITIC,0
+No,No,not_reviewed_(<100),823042947,OROTIC,0
+No,No,not_reviewed_(<100),823042948,PHENYLPROPIONYLGLYCINE,0
+No,No,not_reviewed_(<100),823042949,HOMOVANILLIC ACID,0
+No,No,not_reviewed_(<100),823042950,ISOCITRIC,0
+No,No,not_reviewed_(<100),823042951,CITRIC,0
+No,No,not_reviewed_(<100),823042952,METHYLCITRIC,0
+No,No,not_reviewed_(<100),823042953,SEBACIC,0
+No,No,not_reviewed_(<100),823042954,DECADIENEDIOIC,0
+No,No,not_reviewed_(<100),823042955,4-HYDROXYPHENYLLACTIC,0
+No,No,not_reviewed_(<100),823042956,2-OXOGLUTARIC,0
+No,No,not_reviewed_(<100),823042957,PHENYLPYRUVIC,0
+No,No,not_reviewed_(<100),823042958,2-OXOADIPIC,0
+No,No,not_reviewed_(<100),823042959,HYDROXYDECANEDIOIC,0
+No,No,not_reviewed_(<100),823042960,DODECANEDIOIC,0
+No,No,not_reviewed_(<100),823042961,N-ACETYLTYROSINE,0
+No,No,not_reviewed_(<100),823042962,4-HYDROXYPHENYLPYRUVIC,0
+No,No,not_reviewed_(<100),823042963,SUCCINYLACETONE,0
+No,No,not_reviewed_(<100),823042964,INTERPRETATION - OA,0
+No,No,not_reviewed_(<100),823042965,SUBERYLGLYCINE,0
+No,No,not_reviewed_(<100),823042966,MALONIC,0
+No,No,not_reviewed_(<100),823042967,4 HYDROXYBUTYRIC,0
+No,No,not_reviewed_(<100),823042968,ISOBUTYRYLGLYCINE,0
+No,No,not_reviewed_(<100),823042969,2 METHYLBUTYRYLGLYCINE,0
+No,No,not_reviewed_(<100),823042970,4 HYDROXYCYCLOHEX- ANEACETIC,0
+No,No,not_reviewed_(<100),823042971,2 METHYLACETOACETIC,0
+No,No,not_reviewed_(<100),823042972,N ACETYLASPARTIC,0
+No,No,not_reviewed_(<100),823042973,3 HYDROXYSEBACIC,0
+No,No,not_reviewed_(<100),823042974,VMA,0
+No,No,not_reviewed_(<100),823042975,AGE - OA,0
+No,No,not_reviewed_(<100),823042976,"CREATININE, RANDOM URINE",0
+No,No,not_reviewed_(<100),823042977,CHROMOSOME REPORT-BLOOD,0
+No,No,not_reviewed_(<100),823043054,"ANTI-MULLERIAN HORMONE (AMH), MALE",0
+No,No,not_reviewed_(<100),823043059,"HEMATOLOGIC MALIGNANCY, CLARISURE",0
+No,No,not_reviewed_(<100),823043070,"INFLIXIMAB AB, RHEUM",0
+No,No,not_reviewed_(<100),823043071,"INFLIXIMAB LEVEL, RHEUM",0
+No,No,not_reviewed_(<100),823043072,INTERPRETATION,0
+No,No,not_reviewed_(<100),823043073,COMMENT,0
+No,No,not_reviewed_(<100),823046613,COMPLEMENT COMPONENT C3C-QUEST,0
+No,No,not_reviewed_(<100),823047029,APOLIPOPROTEIN B-QD,0
+No,No,not_reviewed_(<100),1233043010,Addendum 5,0
+No,No,not_reviewed_(<100),7230420027,WBC-LABCORP,0
+No,No,not_reviewed_(<100),7230420028,RBC-LABCORP,0
+No,No,not_reviewed_(<100),7230420029,HEMOGLOBIN-LABCORP,0
+No,No,not_reviewed_(<100),7230420030,HEMATOCRIT-LABCORP,0
+No,No,not_reviewed_(<100),7230420031,MCV-LABCORP,0
+No,No,not_reviewed_(<100),7230420032,MCH-LABCORP,0
+No,No,not_reviewed_(<100),7230420033,MCHC-LABCORP,0
+No,No,not_reviewed_(<100),7230420034,RDW-LABCORP,0
+No,No,not_reviewed_(<100),7230420035,PLATELETS-LABCORP,0
+No,No,not_reviewed_(<100),7230420064,RPR -LABCORP,0
+No,No,not_reviewed_(<100),7230420105, HBSAG SCREEN-LABCORP,0
+No,No,not_reviewed_(<100),8230420017,"LYMPHOCYTES, ABSOLUTE",0
+No,No,not_reviewed_(<100),8230420020,"CD19, ABSOLUTE",0
+No,No,not_reviewed_(<100),8230420022,CD19 PERCENTAGE,0
+No,No,not_reviewed_(<100),8230420028,"Fish, HER2/ neu, Paraffin Block",0
+No,No,not_reviewed_(<100),8230420046,"GATING STRATEGY, LEUKEMIA",NULL
+No,No,not_reviewed_(<100),8230420096,PATHOLOGIST INTERPRETATION - T-CELL BETA,0
+No,No,not_reviewed_(<100),8230420104,RESULT RECEIVED-QUEST,0
+No,No,not_reviewed_(<100),8230420111,NRAS MUTATION ANALYSIS,0
+No,No,not_reviewed_(<100),8230420117,"MELANOMA, BRAF V600 MUTATION, COBAS",0
+No,No,not_reviewed_(<100),8230420147,"EML4 - ALK GENE FUSION, PCR",0
+No,No,not_reviewed_(<100),8230420187,HLA - B57:01,NULL
+No,No,not_reviewed_(<100),8230420190,Comments,NULL

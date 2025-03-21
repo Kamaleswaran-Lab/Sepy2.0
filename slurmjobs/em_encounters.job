@@ -1,0 +1,46 @@
+#!/bin/bash
+#SBATCH --job-name=tomato
+#SBATCH --nodes=1 
+#SBATCH --ntasks=1 
+#SBATCH --mem=30G
+#SBATCH --time=36:00:00
+#SBATCH --output=/labs/collab/K-lab-MODS/EliteDataHacks/Sepy/out_em/em_encounter_%A_%a.out
+#SBATCH --error=/labs/collab/K-lab-MODS/EliteDataHacks/Sepy/out_em/em_encounter_%A_%a.err
+#SBATCH --array=0-10
+
+# This is the list of years to process; each core will take a fraction of each year
+YEARS=(2014)
+
+### These are variables passed into the Python Script ###
+# Total num of cores assigned to job (i.e. 16)
+NUM_OF_PROCESSES=$SLURM_ARRAY_TASK_COUNT
+
+# list of csn and the associated year
+CSN_LIST=/labs/collab/K-lab-MODS/EliteDataHacks/pt_lists/pt_list_2014.psv
+
+# path for yearly pickles
+PICKLE_PATH=/labs/collab/K-lab-MODS/Yearly_Pickles/HolderSuperTables/
+
+# place to write encounter pickles
+OUTPUT_PATH=/labs/collab/K-lab-MODS/MODS-PHI/Encounter_Pickles/emHolder_OutlierCorrected/
+
+### Print basic job info to log file for quality check ###
+echo The array number is- $SLURM_ARRAY_TASK_ID
+echo This is the csn list- $CSN_LIST
+echo This is the pickle path- $PICKLE_PATH
+echo This is the output path- $OUTPUT_PATH
+echo This is the num processes - $NUM_OF_PROCESSES
+
+## Activate the custom python environment
+source /home/maror24/anaconda3/bin/activate monai
+
+python --version
+
+#### FOR LOOP: takes each year and divides the patients in chunks based on number of cores ###
+for year in ${YEARS[*]}
+do
+echo Currently processing year: $year
+
+python /labs/collab/K-lab-MODS/EliteDataHacks/Sepy/em_make_dicts_Holder.py $CSN_LIST $PICKLE_PATH $OUTPUT_PATH $NUM_OF_PROCESSES $SLURM_ARRAY_TASK_ID $year
+
+done

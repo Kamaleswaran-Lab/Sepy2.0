@@ -1,0 +1,1281 @@
+﻿med_class,super_table_col_name,med_name,medication_id
+NULL,other,lactobacillus rhamnosus GG,9432349
+NULL,other,saccharomyces boulardii lyo,9433046
+NULL,other,melatonin,2206399
+NULL,other,omega-3 polyunsaturated fatty acids,2207046
+NULL,other,ubiquinone,2213163
+NULL,other,levOCARNitine,2205360
+NULL,other,lactobacillus acidophilus and bulgaricus,2205571
+NULL,other,lactobacillus reuteri,259104685
+NULL,other,cholecalciferol-lactobacillus reuteri,2162198207
+NULL,statin,atorvastatin,2196209
+NULL,statin,pravastatin,2209917
+NULL,statin,rosuvastatin,2209675
+NULL,other,ezetimibe,2201729
+NULL,other,cholestyramine,2197176
+NULL,other,fenofibrate,2201048
+NULL,other,niacin,2207977
+NULL,other,gemfibrozil,2204142
+NULL,other,colesevelam,2196961
+NULL,other,colestipol,2197054
+NULL,statin,lovastatin,2204867
+NULL,statin,simvastatin,2210101
+NULL,statin,fluvastatin,2200483
+NULL,statin,pitavastatin,293071892
+anti-infective,glycopeptide,vancomycin,2211730
+anti-infective,metronidazole,metroNIDAZOLE,2206719
+anti-infective,antifungals,nystatin,2208501
+anti-infective,penicillins,piperacillin-tazobactam,2209633
+anti-infective,cephalosporins,ceFAZolin,2196749
+anti-infective,antiviral,acyclovir,2193453
+anti-infective,cephalosporins,cefTAZidime,2196639
+anti-infective,carbapenems,meropenem,2205134
+anti-infective,cephalosporins,cefTRIAXone,2198043
+anti-infective,macrolide antibiotics,azithromycin,2196307
+anti-infective,cephalosporins,cefepime,2197362
+anti-infective,sulphonamides,sulfamethoxazole-trimethoprim,2211439
+anti-infective,fluoroquinolones,levoFLOXacin,2205622
+anti-infective,antifungals,nystatin topical,2208907
+anti-infective,tetracyclines,doxycycline,2199490
+anti-infective,antifungals,fluconazole,2202165
+anti-infective,antifungals,micafungin,7338777
+anti-infective,penicillins,ampicillin-sulbactam,2193679
+anti-infective,other,rifAXIMin,2257222
+anti-infective,lincosamides,clindamycin,2198408
+anti-infective,penicillins,penicillin G potassium,358250973
+NULL,other,amantadine,2194291
+NULL,antiparasitic,hydroxychloroquine,2203924
+anti-infective,macrolide antibiotics,erythromycin,2200361
+anti-infective,aminoglycosides,tobramycin,2211817
+anti-infective,cephalosporins,cefuroxime,2198574
+anti-infective,penicillins,ampicillin,2193538
+anti-infective,cephalosporins,cephalexin,2196573
+anti-infective,oxazolidinones,linezolid,2204456
+anti-infective,antifungals,clotrimazole,2198982
+anti-infective,other,colistimethate,2197271
+anti-infective,antiviral,valACYclovir,2210678
+anti-infective,monobactams,aztreonam,2194381
+anti-infective,other,amoxicillin-clavulanate,2193713
+anti-infective,antiviral,valganciclovir,2211022
+NULL,other,lithium,2204649
+anti-infective,antifungals,posaconazole,32432046
+anti-infective,fluoroquinolones,ciprofloxacin,2197748
+anti-infective,lipopeptide,DAPTOmycin,2226387
+anti-infective,antiviral,emtricitabine-tenofovir,2257458
+anti-infective,antiviral,oseltamivir,2209054
+NULL,other,atovaquone,2196362
+anti-infective,penicillins,nafcillin,2205736
+anti-infective,antiviral,ritonavir,2208709
+anti-infective,carbapenems,ertapenem,2200243
+anti-infective,aminoglycosides,gentamicin,2201928
+anti-infective,antiviral,dolutegravir,770575702
+anti-infective,cephalosporins,ceftaroline,346990604
+anti-infective,antifungals,amphotericin B,2193403
+anti-infective,penicillins,amoxicillin,2193386
+anti-infective,cephalosporins,cefOXitin,2198113
+anti-infective,antimycobacterial agents,rifAMPin,2211162
+anti-infective,other,nitrofurantoin,2208908
+anti-infective,antiviral,lamiVUDine,2206091
+anti-infective,macrolide antibiotics,clarithromycin,2197681
+anti-infective,sulphonamides,sulfaSALAzine,2209935
+anti-infective,antiviral,abacavir,2195804
+anti-infective,antiviral,darunavir,33830603
+anti-infective,antiviral,remdesivir,3598984819
+anti-infective,penicillins,ceftolozane-tazobactam,1193479491
+anti-infective,antiviral,ganciclovir,2203215
+anti-infective,antifungals,voriconazole,2212624
+anti-infective,antiviral,raltegravir,108202575
+anti-infective,antifungals,amphotericin B liposomal,2193501
+anti-infective,carbapenems,doripenem,108202322
+anti-infective,antiviral,cobicistat,587428635
+anti-infective,antifungals,isavuconazonium,1246025748
+anti-infective,antimycobacterial agents,isoniazid,2203255
+anti-infective,cephalosporins,avibactam-cefTAZidime,1268221638
+anti-infective,antimycobacterial agents,dapsone,2199141
+anti-infective,tetracyclines,tigecycline,8462065
+anti-infective,antiviral,tenofovir,2211063
+anti-infective,penicillins,penicillin V potassium,358251022
+anti-infective,antiviral,cobicistat/elvitegravir/emtricitabine/tenofov,587428606
+anti-infective,antiviral,efavirenz/emtricitabine/tenofovir,33833273
+anti-infective,antifungals,flucytosine,2202488
+anti-infective,antiviral,entecavir,23708217
+NULL,other,methylene blue,2205178
+anti-infective,antiviral,ribavirin,2210679
+anti-infective,antiviral,cefdinir,2197097
+anti-infective,antimycobacterial agents,ethambutol,2201888
+anti-infective,other,fidaxomicin,406392246
+anti-infective,tetracyclines,minocycline,2206857
+anti-infective,antiviral,bictegravir/emtricitabine/tenofovir,2817624197
+anti-infective,antimycobacterial agents,pyrazinamide,2210033
+anti-infective,antiviral,foscarnet,2201316
+anti-infective,antiviral,lamivudine-zidovudine,2206406
+anti-infective,tetracyclines,tetracycline,2212081
+anti-infective,antiviral,etravirine,124373726
+anti-infective,antiviral,zidovudine,2212908
+anti-infective,sulphonamides,sulfADIAZINE,2211255
+anti-infective,cephalosporins,cefpodoxime,2198402
+anti-infective,antiviral,lopinavir-ritonavir,2205830
+anti-infective,aminoglycosides,amikacin,2194786
+anti-infective,antiviral,emtricitabine,2200223
+NULL,other,bacitracin,2194523
+NULL,other,polymyxin B sulfate,2209437
+anti-infective,antiviral,rilpivirine,397545033
+anti-infective,antiviral,atazanavir,2195479
+anti-infective,antiviral,efavirenz,2200198
+anti-infective,antifungals,itraconazole,2203020
+anti-infective,antiviral,remdesivir.,3548590997
+anti-infective,tetracyclines,demeclocycline,2199981
+anti-infective,other,fosfomycin,2201407
+anti-infective,antiviral,famciclovir,2202246
+anti-infective,fluoroquinolones,moxifloxacin,2205982
+NULL,antiparasitic,pentamidine,2209961
+NULL,antiparasitic,primaquine,2207485
+anti-infective,antimycobacterial agents,rifabutin,2211060
+NULL,antiparasitic,nitazoxanide,2208383
+anti-infective,antiviral,zanamivir,2212872
+anti-infective,antiviral,nevirapine,2207854
+NULL,antiparasitic,pyrimethamine,2210643
+NULL,other,neomycin,2207087
+anti-infective,antifungals,terbinafine,2211503
+anti-infective,antifungals,ketoconazole,2204065
+anti-infective,carbapenems,imipenem-cilastatin,2202885
+anti-infective,carbapenems,meropenem-vaborbactam,2731369247
+anti-infective,antiviral,sofosbuvir-velpatasvir,2112876735
+anti-infective,penicillins,dicloxacillin,2199557
+anti-infective,tetracyclines,eravacycline,3065089235
+anti-infective,penicillins,penicillin G benzathine,358251079
+anti-infective,antiviral,letermovir,2800014841
+anti-infective,penicillins,oxacillin,2209216
+anti-infective,antiviral,sofosbuvir,844717767
+NULL,antiparasitic,ivermectin,2203233
+anti-infective,antiviral,ledipasvir-sofosbuvir,1106602598
+anti-infective,antiviral,fosamprenavir,2232358
+anti-infective,other,methenamine,2205431
+NULL,antiparasitic,atovaquone-proguanil,2194118
+NULL,other,thalidomide,2212159
+anti-infective,sulphonamides,trimethoprim,2212719
+anti-infective,penicillins,penicillin G sodium,358250932
+anti-infective,antiparasitic,albendazole,2194197
+anti-infective,glycopeptide,telavancin,259105835
+anti-infective,antiparasitic,quinine,2209969
+anti-infective,cephalosporins,cefotaxime,2197541
+anti-infective,antiviral,glecaprevir-pibrentasvir,2554889313
+anti-infective,antiviral,peramivir,1193479439
+anti-infective,antiviral,emtricitabine/rilpivirine/tenofovir,406392210
+anti-infective,penicillins,ticarcillin-clavulanate,2210040
+anti-infective,antiviral,didanosine,2199935
+anti-infective,antiviral,nelfinavir,2206973
+anti-infective,antiviral,cidofovir,2196694
+anti-infective,antiviral,stavudine,2212046
+anti-infective,fluoroquinolones,norfloxacin,2207839
+anti-infective,aminoglycosides,streptomycin,2210311
+NULL,other,palivizumab,2208076
+anti-infective,antiviral,dalfopristin-quinupristin,2200622
+anti-infective,antiviral,saquinavir,2209727
+NULL,other,interferon alfa-2b,2204747
+anti-infective,antiviral,simeprevir,844717708
+anti-infective,antiviral,adefovir,2193576
+anti-infective,antiparasitic,artemether-lumefantrine,211646858
+anti-infective,glycopeptide,dalbavancin,1033176907
+anti-infective,carbapenems,Meropenem 2gm Desensitization Rx Protocol- initiate,169489944
+anti-infective,tetracyclines,omadacycline,3230361275
+anti-infective,other,chloramphenicol,2198583
+anti-infective,antiviral,indinavir,2202301
+anti-infective,penicillins,procaine penicillin,197368042
+anti-infective,antiviral,riMANTAdine,2211619
+anti-infective,cephalosporins,Cefepime 2gm Desensitization Rx Protocol- initiate,169490007
+anti-infective,glycopeptide,Vancomycin Intermittent Dosing by Pharmacist,212308428
+anti-infective,penicillins,Nafcillin 2gm Desensitization Rx Protocol- initiate,169489953
+anti-infective,cephalosporins,cefadroxil,2196534
+NULL,antineoplastics,megestrol,2206234
+NULL,antineoplastics,hydroxyurea,2202255
+NULL,antineoplastics,methotrexate,2206564
+NULL,antineoplastics,medroxyPROGESTERone,2205676
+NULL,antineoplastics,sirolimus,2210440
+NULL,antineoplastics,riTUXimab,2208838
+NULL,antineoplastics,mesna,2205450
+NULL,antineoplastics,etoposide,2201207
+NULL,antineoplastics,anastrozole,2194198
+NULL,antineoplastics,cyclophosphamide,2199090
+NULL,antineoplastics,cytarabine,2199765
+NULL,antineoplastics,letrozole,2205644
+NULL,antineoplastics,bicalutamide,2194810
+NULL,antineoplastics,raloxifene,2210494
+NULL,antineoplastics,DOXOrubicin,2201480
+NULL,antineoplastics,tamoxifen,2212071
+NULL,antineoplastics,tretinoin,2212195
+NULL,antineoplastics,vinCRIStine,2211881
+NULL,antineoplastics,dasatinib,33830614
+NULL,antineoplastics,everolimus,211646740
+NULL,antineoplastics,ifosfamide,2202229
+NULL,antineoplastics,bortezomib,2196847
+NULL,antineoplastics,fludarabine,2202618
+NULL,antineoplastics,cisplatin,2198993
+NULL,antineoplastics,imatinib,2202507
+NULL,antineoplastics,exemestane,2201556
+NULL,antineoplastics,melphalan,2206656
+NULL,antineoplastics,palifermin,3548620
+NULL,antineoplastics,decitabine,26545759
+NULL,antineoplastics,arsenic trioxide,2194454
+NULL,antineoplastics,busulfan,2196366
+NULL,antineoplastics,IDArubicin,2204683
+NULL,antineoplastics,carboplatin,2198246
+NULL,antineoplastics,azaCITIDine,2257637
+NULL,antineoplastics,mercaptopurine,2205062
+NULL,antineoplastics,PACLitaxel,2207943
+NULL,antineoplastics,erlotinib,5168287
+NULL,antineoplastics,aldesleukin,2193819
+NULL,antineoplastics,venetoclax,2038523635
+NULL,antineoplastics,fluorouracil,2202837
+NULL,antineoplastics,midostaurin,2374773817
+NULL,antineoplastics,temozolomide,2210619
+NULL,antineoplastics,alemtuzumab,2193926
+NULL,antineoplastics,bevacizumab,2238074
+NULL,antineoplastics,carmustine,2198726
+NULL,antineoplastics,gemcitabine,2204001
+NULL,antineoplastics,SORAfenib,21485351
+NULL,antineoplastics,DAUNOrubicin,2199388
+NULL,antineoplastics,blinatumomab,1193479643
+NULL,antineoplastics,oxaliplatin,2207079
+NULL,antineoplastics,capecitabine,2199011
+NULL,antineoplastics,SUNItinib,33852148
+NULL,antineoplastics,leuprolide,2205915
+NULL,antineoplastics,mitoXANTRONE,2208420
+NULL,antineoplastics,dacarbazine,2200238
+NULL,antineoplastics,DOCEtaxel,2200058
+NULL,antineoplastics,ruxolitinib,511998341
+NULL,antineoplastics,gemtuzumab ozogamicin,2201841
+NULL,antineoplastics,trastuzumab,2212815
+NULL,antineoplastics,irinotecan,2202232
+NULL,antineoplastics,eculizumab,75357440
+NULL,antineoplastics,trabectedin,1471371097
+NULL,antineoplastics,cytarabine liposomal-daunorubicin liposomal,2554889421
+NULL,antineoplastics,pegaspargase,2207526
+NULL,antineoplastics,DOXOrubicin liposomal,2201947
+NULL,antineoplastics,aminolevulinic acid,3165961347
+NULL,antineoplastics,vinorelbine,2212011
+NULL,antineoplastics,PACLitaxel protein-bound,4222338
+NULL,antineoplastics,bendamustine,140004637
+NULL,antineoplastics,nelarabine,21485501
+NULL,antineoplastics,chlorambucil,2198499
+NULL,antineoplastics,bleomycin,2196186
+NULL,antineoplastics,cetuximab,2238004
+NULL,antineoplastics,thiotepa,2210218
+NULL,antineoplastics,vinBLAStine,2211787
+NULL,antineoplastics,DACTINomycin,2200498
+NULL,antineoplastics,cladribine,2197519
+NULL,antineoplastics,topotecan,2212076
+NULL,antineoplastics,clofarabine,5168422
+NULL,antineoplastics,cytarabine liposomal,2200025
+NULL,antineoplastics,Hexaminolevulinate 100mg kit inj,854828785
+NULL,antineoplastics,pentostatin,2208201
+NULL,antineoplastics,PEMEtrexed,2232472
+NULL,antineoplastics,mitoMYcin,2208094
+NULL,antineoplastics,panitumumab,44966791
+NULL,antineoplastics,pertuzumab,538333945
+NULL,antineoplastics,inotuzumab ozogamicin,2367531145
+NULL,antineoplastics,mitotane,2208299
+NULL,antineoplastics,Tagraxofusp-erzs 1000 mcg / 10 mL inj,3220635801
+NULL,antineoplastics,carfilzomib,568878671
+NULL,antineoplastics,obinutuzumab,818902532
+NULL,antineoplastics,streptozocin,2210358
+NULL,antineoplastics,eribulin,342625220
+NULL,antineoplastics,lenvatinib,1232888133
+NULL,antineoplastics,pembrolizumab,1098909694
+NULL,antineoplastics,temsirolimus,88751970
+NULL,antineoplastics,thioguanine,2212717
+NULL,antineoplastics,amifostine,2194707
+NULL,antineoplastics,lomustine,2205229
+NULL,antineoplastics,nivolumab,1193479470
+NULL,antineoplastics,ramucirumab,965384061
+NULL,antineoplastics,ado-trastuzumab emtansine,681216183
+NULL,antineoplastics,brentuximab vedotin,416860202
+NULL,antineoplastics,cabazitaxel,306458678
+NULL,antineoplastics,daratumumab,1471639321
+NULL,antineoplastics,epiRUBicin,2200810
+NULL,other,tbo-filgrastim,844717737
+NULL,other,darbepoetin alfa,2199202
+NULL,other,epoetin alfa,2201083
+NULL,other,filgrastim,2201549
+NULL,other,tuberculin purified protein derivative,2213196
+NULL,other,sargramostim,2209877
+NULL,other,arginine,2194085
+NULL,other,Plerixafor 24mg injection,186907274
+NULL,other,antivenin (Crotalidae) polyvalent,2194667
+NULL,other,pegfilgrastim,2207603
+NULL,other,secretin,2210365
+NULL,other,candida albicans extract,2198778
+vasopressor,norepinephrine,norepinephrine,2207578
+vasopressor,dobutamine,DOBUTamine,2199924
+vasopressor,epinephrine,epinephrine,2201598
+antiarrhythmics,other,amiodarone,2196231
+diuretic,other,furosemide,2202113
+bp_lowering,other,milrinone,2208831
+vasopressor,phenylephrine,phenylephrine,2208305
+bp_lowering,other,metoprolol,2206236
+antiarrhythmics,other,lidocaine,2205887
+bp_lowering,other,hydrALAZINE,2204725
+bp_lowering,other,carvedilol,2199078
+bp_lowering,other,niCARdipine,2208804
+bp_lowering,other,nitroglycerin,2207180
+vasopressor,dopamine,DOPamine,2199964
+bp_lowering,other,amLODIPine,2194378
+bp_lowering,other,diltiazem,2200124
+NULL,diuretic,spironolactone,2211440
+bp_lowering,other,labetalol,2205157
+bp_lowering,other,lisinopril,2204221
+bp_lowering,other,esmolol,2200164
+NULL,other,ephedrine,2201078
+NULL,other,tamsulosin,2212141
+NULL,other,midodrine,2208146
+diuretic,other,bumetanide,2199066
+diuretic,other,hydroCHLOROthiazide,2202387
+bp_lowering,other,epoprostenol,2201489
+bp_lowering,other,niMODipine,2208036
+diuretic,other,torsemide,2212221
+bp_lowering,other,valsartan,2211476
+bp_lowering,other,NIFEdipine,2207531
+bp_lowering,other,cloNIDine,2198178
+diuretic,other,acetaZOLAMIDE,2193664
+antiarrhythmics,other,digoxin,2201334
+diuretic,other,chlorothiazide,2197735
+bp_lowering,other,isosorbide mononitrate,2204711
+bp_lowering,other,sildenafil,2210706
+vasopressor,other,isoproterenol,2203865
+NULL,other,isosorbide dinitrate,2204102
+bp_lowering,other,propranolol,2208871
+bp_lowering,other,Angiotensin II,2793893043
+bp_lowering,other,verapamil,2210483
+diuretic,other,metolazone,2205968
+NULL,other,phenytoin,2207993
+bp_lowering,other,sotalol,2210699
+bp_lowering,other,atenolol,2195616
+antiarrhythmics,other,mexiletine,2206754
+bp_lowering,other,losartan,2204507
+bp_lowering,other,sodium nitroprusside,2208495
+antiarrhythmics,other,flecainide,2201942
+bp_lowering,other,doxazosin,2200585
+NULL,other,ranolazine,33850330
+NULL,other,cilostazol,2196812
+bp_lowering,other,eplerenone,2200899
+bp_lowering,other,tadalafil,2232520
+diuretic,other,hydrochlorothiazide-triamterene,2202804
+antiarrhythmics,other,dofetilide,2199514
+antiarrhythmics,other,atropine,2194282
+bp_lowering,other,terazosin,2211167
+diuretic,other,hydralazine-isosorbide dinitrate,9432811
+antiarrhythmics,other,procainamide,2207752
+bp_lowering,other,benazepril,2195900
+diuretic,other,mannitol,2206430
+diuretic,other,chlorthalidone,2196503
+bp_lowering,other,bisoprolol,2196843
+bp_lowering,other,enalapril,2200337
+antiarrhythmics,other,adenosine,2193598
+bp_lowering,other,captopril,2197042
+antiarrhythmics,other,propafenone,2208095
+bp_lowering,other,clevidipine,177652828
+bp_lowering,other,nadolol,2205454
+bp_lowering,other,sacubitril-valsartan,1311013537
+bp_lowering,other,ramipril,2210593
+bp_lowering,other,minoxidil,2207345
+bp_lowering,other,nebivolol,124373444
+NULL,other,glycerin,2202718
+NULL,other,racepinephrine,299764806
+NULL,other,tolvaptan,259105650
+bp_lowering,other,prazosin,2209379
+bp_lowering,other,methyldopa,2205045
+bp_lowering,other,alfuzosin,2194316
+diuretic,other,aMILoride,2194976
+antiarrhythmics,other,quinidine,2209699
+antiarrhythmics,other,dronedarone,259104558
+bp_lowering,other,olmesartan,2207946
+NULL,other,bosentan,2196966
+NULL,other,ambrisentan,88752043
+NULL,other,methazolAMIDE,2205298
+NULL,other,urea,2800015119
+bp_lowering,other,irbesartan,2204692
+NULL,other,ivabradine,1268221479
+diuretic,other,indapamide,2204754
+bp_lowering,other,pindolol,2209037
+bp_lowering,other,telmisartan,2210267
+bp_lowering,other,alprostadil,2195512
+bp_lowering,other,quinapril,2211973
+bp_lowering,other,guanFACINE,2202018
+antiarrhythmics,other,disopyramide,2199461
+bp_lowering,other,felodipine,2200774
+diuretic,other,hydrochlorothiazide-spironolactone,2202444
+diuretic,other,treprostinil,2213048
+bp_lowering,other,diazoxide,2200876
+diuretic,other,triamterene,2212904
+bp_lowering,other,macitentan,883744930
+bp_lowering,other,acebutolol,2196205
+diuretic,other,ethacrynic acid,2201719
+bp_lowering,other,candesartan,2198261
+antiarrhythmics,other,ibutilide,2204442
+bp_lowering,other,phenoxybenzamine,2207438
+bp_lowering,other,trandolapril,2212413
+bp_lowering,other,aliskiren,75356302
+bp_lowering,other,silodosin,211656507
+bp_lowering,other,fosinopril,2201541
+bp_lowering,other,nisoldipine,2208120
+NULL,other,conivaptan,21485280
+diuretic,other,bisoprolol-hydrochlorothiazide,2195643
+bp_lowering,other,timolol,2210371
+bp_lowering,other,phentolamine,2208193
+bp_lowering,other,isradipine,2202700
+bp_lowering,other,moexipril,2208857
+NULL,other,sodium tetradecyl sulfate,2211259
+NULL,other,papaverine,2208803
+diuretic,other,hydrochlorothiazide-olmesartan,2204327
+NULL,opiods,fentaNYL,2201670
+NULL,opiods,HYDROmorphone,2202326
+NULL,analgesics,acetaminophen,2196325
+NULL,opiods,oxyCODONE,2208538
+NULL,analgesics,aspirin,2196170
+NULL,opiods,morphine,2206389
+NULL,opiods,acetaminophen-oxycodone,2193955
+NULL,opiods,traMADol,2212348
+NULL,not_reviewed,dexmedetomidine,2199431
+NULL,opiods,acetaminophen-hydrocodone,2193611
+NULL,not_reviewed,ketorolac,2204670
+NULL,not_reviewed,ibuprofen,2202418
+NULL,not_reviewed,magnesium sulfate,2205738
+NULL,not_reviewed,diphenhydrAMINE,2198781
+NULL,not_reviewed,midazolam,2207969
+NULL,not_reviewed,gabapentin,2202382
+NULL,not_reviewed,LORazepam,2206594
+NULL,not_reviewed,propofol,2208515
+NULL,not_reviewed,levETIRAcetam,2206708
+NULL,not_reviewed,ondansetron,2207385
+NULL,not_reviewed,methadone,2205026
+NULL,not_reviewed,ketamine,2203869
+NULL,not_reviewed,metoclopramide,2205722
+NULL,not_reviewed,Al hydroxide/ASA/Ca carbonate/Mg hydroxide,2193681
+NULL,not_reviewed,clonazePAM,2197744
+NULL,not_reviewed,meperidine,2207114
+NULL,not_reviewed,pregabalin,9432403
+NULL,not_reviewed,ramelteon,8468846
+NULL,not_reviewed,prochlorperazine,2208603
+NULL,not_reviewed,celecoxib,2199082
+hypnotics,NULL,ALPRAZolam,2195356
+NULL,not_reviewed,cisatracurium,2198855
+NULL,not_reviewed,rocuronium,2209499
+NULL,not_reviewed,diazePAM,2200393
+NULL,not_reviewed,APAP/butalbital/caffeine,2195263
+NULL,not_reviewed,zolpidem,2212677
+NULL,not_reviewed,fentanyl-ropivacaine,5168644
+NULL,not_reviewed,hydrOXYzine,2202590
+NULL,not_reviewed,promethazine,2209630
+NULL,not_reviewed,baclofen,2195630
+NULL,not_reviewed,scopolamine,2210017
+NULL,not_reviewed,acetaminophen-codeine,2195938
+NULL,not_reviewed,nalbuphine,2206250
+NULL,not_reviewed,divalproex sodium,2199694
+NULL,not_reviewed,lamoTRIgine,2206522
+NULL,not_reviewed,busPIRone,2196168
+NULL,not_reviewed,lacosamide,211646372
+NULL,not_reviewed,donepezil,2199791
+NULL,not_reviewed,naproxen,2206463
+NULL,not_reviewed,opium,2208159
+NULL,not_reviewed,topiramate,2211889
+NULL,not_reviewed,carbidopa-levodopa,2198373
+NULL,not_reviewed,cyclobenzaprine,2198589
+NULL,not_reviewed,valproic acid,2211131
+NULL,not_reviewed,vecuronium,2212347
+NULL,not_reviewed,PHENobarbital,2210051
+NULL,not_reviewed,memantine,2226390
+NULL,not_reviewed,indomethacin,2202560
+NULL,not_reviewed,ticagrelor,406392120
+NULL,not_reviewed,SUMAtriptan,2211094
+NULL,not_reviewed,SUFentanil,2210966
+NULL,not_reviewed,tiZANidine,2211642
+NULL,not_reviewed,methocarbamol,2206087
+NULL,not_reviewed,OXcarbazepine,2207507
+NULL,not_reviewed,remifentanil,2211823
+NULL,not_reviewed,sugammadex,1718592497
+NULL,not_reviewed,temazepam,2210437
+NULL,not_reviewed,carBAMazepine,2197815
+NULL,not_reviewed,dronabinol,2200594
+NULL,not_reviewed,meloxicam,2206494
+NULL,not_reviewed,succinylcholine,2210590
+NULL,not_reviewed,methylphenidate,2205371
+NULL,not_reviewed,rOPINIRole,2209807
+NULL,not_reviewed,diclofenac,2201613
+NULL,not_reviewed,chlordiazePOXIDE,2198808
+NULL,not_reviewed,modafinil,2208668
+NULL,not_reviewed,belladonna-opium,2195770
+NULL,not_reviewed,amphetamine-dextroamphetamine,2194040
+NULL,not_reviewed,chlorproMAZINE,2198603
+NULL,not_reviewed,primidone,2207539
+NULL,not_reviewed,fosphenytoin,2201799
+NULL,not_reviewed,pramipexole,2210859
+NULL,not_reviewed,bromocriptine,2197919
+NULL,not_reviewed,cloBAZam,442376415
+NULL,not_reviewed,rivastigmine,2208956
+NULL,not_reviewed,carisoprodol,2198572
+NULL,not_reviewed,buprenorphine-naloxone,2195717
+NULL,not_reviewed,codeine,2198378
+NULL,not_reviewed,doxepin,2200820
+NULL,not_reviewed,dihydroergotamine,2202144
+NULL,not_reviewed,aprepitant,2195806
+NULL,not_reviewed,meclizine,2205222
+NULL,not_reviewed,caffeine,2195024
+NULL,not_reviewed,benztropine,2194467
+NULL,not_reviewed,zonisamide,2212740
+NULL,not_reviewed,tapentadol,259105720
+NULL,not_reviewed,granisetron,2204802
+NULL,not_reviewed,etomidate,2201044
+NULL,not_reviewed,entacapone,2200969
+NULL,not_reviewed,fosaprepitant,124373751
+NULL,not_reviewed,galantamine,2202926
+NULL,not_reviewed,dantrolene,2201143
+NULL,not_reviewed,nabumetone,2205353
+NULL,not_reviewed,bupivacaine-fentanyl,2195264
+NULL,not_reviewed,pilocarpine,2209583
+NULL,not_reviewed,clorazepate,2198740
+NULL,not_reviewed,buprenorphine,2195546
+NULL,not_reviewed,acetaminophen-tramadol,2193639
+NULL,not_reviewed,sulindac,2210934
+NULL,not_reviewed,perphenazine,2209110
+NULL,not_reviewed,butorphanol,2194582
+NULL,not_reviewed,PENTobarbital,2207967
+NULL,not_reviewed,trihexyphenidyl,2212965
+NULL,not_reviewed,felbamate,2200599
+NULL,not_reviewed,selegiline,2210517
+NULL,not_reviewed,cabergoline,2194964
+NULL,not_reviewed,carbidopa/entacapone/levodopa,2198090
+NULL,not_reviewed,salsalate,2211707
+NULL,not_reviewed,doxylamine,2200439
+NULL,not_reviewed,oxyMORphone,2207637
+NULL,not_reviewed,aspirin/butalbital/caffeine,2194606
+NULL,not_reviewed,perampanel,794418270
+NULL,not_reviewed,oxaprozin,2207320
+NULL,not_reviewed,metaxalone,2206317
+NULL,not_reviewed,droperidol,2200758
+NULL,not_reviewed,naltrexone,2206917
+NULL,not_reviewed,aspirin/butalbital/caffeine/codeine,2194835
+NULL,not_reviewed,eslicarbazepine,905174358
+NULL,not_reviewed,rasagiline,33850337
+NULL,not_reviewed,palonosetron,2208221
+NULL,not_reviewed,caffeine-sodium benzoate,2195592
+NULL,not_reviewed,atracurium,2194207
+NULL,not_reviewed,orphenadrine,2208532
+NULL,not_reviewed,oxazepam,2207403
+NULL,not_reviewed,tiaGABine,2212120
+NULL,not_reviewed,triazolam,2212979
+NULL,not_reviewed,ethosuximide,2199770
+NULL,not_reviewed,etodolac,2200603
+NULL,not_reviewed,rotigotine,75358324
+NULL,not_reviewed,APAP/dichloralphenazone/isometheptene,2194670
+NULL,not_reviewed,rizatriptan,2209248
+NULL,not_reviewed,meprobamate,2204718
+NULL,not_reviewed,onabotulinumtoxinA,299764878
+NULL,not_reviewed,trimethobenzamide,2213057
+NULL,not_reviewed,carbidopa,2197937
+NULL,not_reviewed,ergoloid mesylates,2199898
+NULL,not_reviewed,naratriptan,2207225
+NULL,not_reviewed,ZOLMitriptan,2212540
+NULL,not_reviewed,acetaminophen-diphenhydramine,2196390
+NULL,not_reviewed,alfentanil,2194116
+NULL,not_reviewed,aspirin/citric acid/sodium bicarbonate,2194444
+NULL,not_reviewed,chlorzoxazone,2196908
+NULL,not_reviewed,cevimeline,2197358
+NULL,not_reviewed,disulfiram,2199606
+NULL,not_reviewed,tolcapone,2210285
+NULL,not_reviewed,caffeine-ergotamine,2195483
+NULL,not_reviewed,hydrocodone-ibuprofen,2203789
+NULL,not_reviewed,ziconotide,5168558
+NULL,not_reviewed,methohexital,2206360
+NULL,not_reviewed,amobarbital,2193349
+NULL,not_reviewed,chloral hydrate,2198314
+NULL,anticoagulants,heparin,2204066
+NULL,anticoagulants,enoxaparin,2200866
+NULL,anticoagulants,apixaban,651861212
+NULL,anticoagulants,clopidogrel,2198643
+NULL,anticoagulants,argatroban,2196301
+NULL,anticoagulants,warfarin,2212723
+NULL,anticoagulants,alteplase,2193711
+NULL,anticoagulants,bivalirudin,2195904
+NULL,anticoagulants,tirofiban,2211477
+NULL,anticoagulants,rivaroxaban,397544718
+NULL,anticoagulants,aminocaproic acid,2195467
+NULL,anticoagulants,tranexamic acid,2212686
+NULL,anticoagulants,phytonadione,2209408
+NULL,anticoagulants,protamine,2209576
+NULL,anticoagulants,dabigatran,333938087
+NULL,anticoagulants,fondaparinux,2201691
+NULL,anticoagulants,prasugrel,232388547
+NULL,anticoagulants,pentoxifylline,2208282
+NULL,anticoagulants,heparin flush,197367861
+NULL,anticoagulants,aspirin-dipyridamole,2194863
+NULL,anticoagulants,dipyridamole,2199249
+NULL,anticoagulants,prothrombin complex conc human,753476949
+NULL,anticoagulants,coagulation factor VIIa,2199207
+NULL,anticoagulants,abciximab,2195962
+NULL,anticoagulants,anti-inhibitor coagulant complex,2193869
+NULL,anticoagulants,antithrombin III,2194425
+NULL,anticoagulants,antihemophilic factor,57707779
+NULL,anticoagulants,antihemophilic factor-von Willebrand factor inj,57707851
+NULL,anticoagulants,eptifibatide,2201990
+NULL,anticoagulants,coagulation factor IX,57707994
+NULL,anticoagulants,romiPLOStim,177717638
+NULL,anticoagulants,defibrotide,1913664727
+NULL,anticoagulants,thrombin topical,2210731
+NULL,anticoagulants,idaruCIZUmab,1438542087
+NULL,anticoagulants,eltrombopag,197366967
+NULL,anticoagulants,anagrelide,2194050
+NULL,anticoagulants,prothrombin complex concentrate,57708260
+NULL,anticoagulants,coagulation factor Xa,2932254241
+NULL,anticoagulants,"C1 esterase inhibitor, human",197367769
+NULL,anticoagulants,protein C,75357769
+NULL,anticoagulants,ticlopidine,2210172
+NULL,anticoagulants,fibrinogen,259104895
+NULL,anticoagulants,ecallantide,275034894
+NULL,anticoagulants,ferric subsulfate topical,9433009
+NULL,not_reviewed,docusate,2200177
+NULL,not_reviewed,pantoprazole,2208142
+NULL,not_reviewed,sodium bicarbonate,2211054
+NULL,not_reviewed,famotidine,2199613
+NULL,not_reviewed,senna,2211443
+NULL,not_reviewed,polyethylene glycol 3350,2257655
+NULL,not_reviewed,calcium carbonate,2194885
+NULL,not_reviewed,glycopyrrolate,2203733
+NULL,not_reviewed,simethicone,2211372
+NULL,not_reviewed,lactulose,2205725
+NULL,not_reviewed,sucralfate,2210819
+NULL,not_reviewed,bisacodyl,2195440
+NULL,not_reviewed,pancrelipase,2208882
+NULL,not_reviewed,loperamide,2205376
+NULL,not_reviewed,dicyclomine,2199679
+NULL,not_reviewed,ursodiol,2210510
+NULL,not_reviewed,sodium phosphate,2212265
+NULL,not_reviewed,Al hydroxide/Mg hydroxide/simethicone,2193750
+NULL,not_reviewed,psyllium,2210654
+NULL,not_reviewed,atropine-diphenoxylate,2194972
+NULL,not_reviewed,hyoscyamine,2203565
+NULL,not_reviewed,magnesium hydroxide,2204981
+NULL,not_reviewed,Methylnaltrexone 12mg inj.,138511365
+NULL,not_reviewed,raNITIdine,2210823
+NULL,not_reviewed,alvimopan,155712509
+NULL,not_reviewed,mesalamine,2205228
+NULL,not_reviewed,polyethylene glycol 3350 with electrolytes,2210073
+NULL,not_reviewed,sodium biphosphate-sodium phosphate,2211533
+NULL,not_reviewed,miSOPROStol,2207957
+NULL,not_reviewed,aluminum hydroxide,2193861
+NULL,not_reviewed,magnesium citrate,2206627
+NULL,not_reviewed,sorbitol,2210597
+NULL,not_reviewed,mineral oil,2209039
+NULL,not_reviewed,esomeprazole,2200378
+NULL,not_reviewed,bismuth subsalicylate,2196252
+NULL,not_reviewed,lubiprostone,33841918
+NULL,not_reviewed,omeprazole,2207264
+NULL,not_reviewed,polycarbophil,2209573
+NULL,not_reviewed,linaclotide,637924104
+NULL,not_reviewed,docusate-senna,2199295
+NULL,not_reviewed,solifenacin,5168368
+NULL,not_reviewed,magnesium/potassium/sodium sulfates,326912087
+NULL,not_reviewed,sodium citrate,2210548
+NULL,not_reviewed,cellulose,2196420
+NULL,not_reviewed,atropine/hyoscyamine/PB/scopolamine,2194609
+NULL,not_reviewed,chlordiazepoxide-clidinium,2196540
+NULL,not_reviewed,balsalazide,2195822
+NULL,not_reviewed,propantheline,2208240
+NULL,not_reviewed,darifenacin,5168427
+NULL,not_reviewed,lactase,2204488
+NULL,not_reviewed,charcoal,2197479
+NULL,not_reviewed,magnesium sulfate/potassium sulfate/sodium sulfate,3230361437
+NULL,not_reviewed,RABEprazole,2210095
+NULL,not_reviewed,lansoprazole,2204891
+NULL,not_reviewed,olsalazine,2206879
+NULL,not_reviewed,omeprazole-sodium bicarbonate,33847212
+NULL,not_reviewed,alginic acid/Al hydroxide/Mg trisilicate,2194652
+NULL,not_reviewed,castor oil,2195902
+vasopressor,vasopressin,vasopressin,2212259
+NULL,not_reviewed,insulin regular,2204944
+NULL,not_reviewed,insulin lispro,2204563
+NULL,not_reviewed,dexamethasone,2199509
+NULL,not_reviewed,insulin aspart,2203668
+NULL,not_reviewed,predniSONE,2209439
+NULL,not_reviewed,octreotide,2209724
+NULL,not_reviewed,methylPREDNISolone,2206148
+NULL,not_reviewed,insulin glargine,2203950
+NULL,not_reviewed,levothyroxine,2206319
+NULL,not_reviewed,hydrocortisone,2204719
+NULL,not_reviewed,oxytocin,2207872
+NULL,not_reviewed,budesonide,2198594
+NULL,not_reviewed,finasteride,2201700
+NULL,not_reviewed,cinacalcet,2257177
+NULL,not_reviewed,metFORMIN,2206467
+NULL,not_reviewed,fludrocortisone,2202746
+NULL,not_reviewed,insulin isophane (NPH),2204057
+NULL,not_reviewed,desmopressin,2200821
+NULL,not_reviewed,methIMAzole,2205752
+NULL,not_reviewed,SITagliptin,57657059
+NULL,not_reviewed,insulin isophane-insulin regular,2204277
+NULL,not_reviewed,insulin detemir,9432799
+NULL,not_reviewed,glipiZIDE,2203274
+NULL,not_reviewed,dutasteride,2201269
+NULL,not_reviewed,betamethasone,2195171
+NULL,not_reviewed,dinoprostone topical,2198550
+NULL,not_reviewed,calcitonin,2196336
+NULL,not_reviewed,oxandrolone,2207209
+NULL,not_reviewed,glucagon,2203790
+NULL,not_reviewed,methylergonovine,2205270
+NULL,not_reviewed,glimepiride,2203077
+NULL,not_reviewed,testosterone,2212370
+NULL,not_reviewed,cosyntropin,2199450
+NULL,not_reviewed,estradiol,2201265
+NULL,not_reviewed,liothyronine,2204677
+NULL,not_reviewed,thyroid desiccated,2211282
+NULL,not_reviewed,ethinyl estradiol-norgestrel,2201823
+NULL,not_reviewed,prednisoLONE,2207361
+NULL,not_reviewed,conjugated estrogens,2197889
+NULL,not_reviewed,glyBURIDE,2202127
+NULL,not_reviewed,propylthiouracil,2209527
+NULL,not_reviewed,norethindrone,2207667
+NULL,not_reviewed,potassium iodide,2211008
+NULL,not_reviewed,pioglitazone,2209134
+NULL,not_reviewed,alendronate,2193982
+NULL,not_reviewed,conjugated estrogens topical,2198518
+NULL,not_reviewed,repaglinide,2212010
+NULL,not_reviewed,zoledronic acid,2212432
+NULL,not_reviewed,triamcinolone,2212759
+NULL,not_reviewed,carboprost,2198472
+NULL,not_reviewed,somatropin,2211737
+NULL,not_reviewed,insulin glulisine,2257537
+NULL,not_reviewed,nateglinide,2207399
+NULL,not_reviewed,acarbose,2196040
+NULL,not_reviewed,pamidronate,2208416
+NULL,not_reviewed,insulin aspart-insulin aspart protamine,2203804
+NULL,not_reviewed,estradiol topical,2200656
+NULL,not_reviewed,dapagliflozin,865462181
+NULL,not_reviewed,danazol,2200939
+NULL,not_reviewed,insulin degludec,1475869449
+NULL,not_reviewed,conjugated estrogens-medroxyPROGESTERone,2198599
+NULL,not_reviewed,HYDROXYprogesterone,2204032
+NULL,not_reviewed,sAXagliptin,259105776
+NULL,not_reviewed,esterified estrogens-methyltestosterone,2200997
+NULL,not_reviewed,estropipate,2201383
+NULL,not_reviewed,etidronate,2200365
+NULL,not_reviewed,cortisone,2199350
+NULL,not_reviewed,levonorgestrel,2206046
+NULL,not_reviewed,risedronate,2211883
+NULL,not_reviewed,linagliptin,380980592
+NULL,not_reviewed,progesterone,2209282
+NULL,not_reviewed,corticotropin,2199144
+NULL,not_reviewed,corticorelin,2199067
+NULL,not_reviewed,insulin lispro-insulin lispro protamine,2204745
+NULL,not_reviewed,ibandronate,22683783
+NULL,not_reviewed,tacrolimus,2211800
+NULL,not_reviewed,mycophenolate mofetil,2209114
+NULL,not_reviewed,cycloSPORINE,2198765
+NULL,not_reviewed,"influenza virus vaccine, inactivated",2203038
+NULL,not_reviewed,pneumococcal 23-polyvalent vaccine,2257651
+NULL,not_reviewed,azaTHIOprine,2195783
+NULL,not_reviewed,mycophenolic acid,2257477
+NULL,not_reviewed,basiliximab,2196665
+NULL,not_reviewed,"diphtheria/pertussis, acel/tetanus adult (Tdap)",33832723
+NULL,not_reviewed,anti-thymocyte globulin (rabbit),299764764
+NULL,not_reviewed,immune globulin intravenous,2203712
+NULL,not_reviewed,measles/mumps/rubella virus vaccine,2204933
+NULL,not_reviewed,leflunomide,2205448
+NULL,not_reviewed,Belatacept,306549015
+NULL,not_reviewed,tetanus-diphth toxoids (Td) adult/adol,2227372
+NULL,not_reviewed,inFLIXimab,2202911
+NULL,not_reviewed,hepatitis B adult vaccine,299764860
+NULL,not_reviewed,pneumococcal 13-valent conjugate vaccine,278327397
+NULL,not_reviewed,hepatitis B pediatric vaccine,299764927
+NULL,not_reviewed,haemophilus b conjugate (PRP-OMP) vaccine,2257434
+NULL,not_reviewed,meningococcal conjugate vaccine,5168684
+NULL,not_reviewed,RHo (D) immune globulin,2210273
+NULL,not_reviewed,hepatitis A adult vaccine,2257488
+NULL,not_reviewed,"lymphocyte immune globulin, anti-thy (equine)",299764781
+NULL,not_reviewed,adalimumab,2193529
+NULL,not_reviewed,hepatitis A-hepatitis B vaccine,2202514
+NULL,not_reviewed,meningococcal group B vaccine,1181305739
+NULL,not_reviewed,cytomegalovirus immune globulin,2200128
+NULL,not_reviewed,anakinra,2194154
+NULL,not_reviewed,meningococcal polysaccharide vaccine,2206505
+NULL,not_reviewed,abatacept,21485205
+NULL,not_reviewed,"diphtheria/hepB/pertussis,acel/polio/tetanus",2201133
+NULL,not_reviewed,hepatitis B immune globulin,2202615
+NULL,not_reviewed,haemophilus b conjugate (PRP-T) vaccine,2257465
+NULL,not_reviewed,tocilizumab,275034863
+NULL,not_reviewed,"zoster vaccine, inactivated",2731369045
+NULL,not_reviewed,tetanus toxoid,2211421
+NULL,not_reviewed,zoster vaccine live,33854429
+NULL,not_reviewed,glatiramer,2202917
+NULL,not_reviewed,"rabies vaccine, purified chick embryo cell",33850303
+NULL,not_reviewed,tetanus immune globulin,2211300
+NULL,not_reviewed,ustekinumab,259105637
+NULL,not_reviewed,omalizumab,2206962
+NULL,not_reviewed,vedolizumab,998847786
+NULL,not_reviewed,"rabies vaccine, human diploid cell",33850294
+NULL,not_reviewed,"rabies immune globulin, human",2210185
+NULL,not_reviewed,varicella virus vaccine,2212151
+NULL,not_reviewed,SARS-CoV-2 (COVID-19) mRNA BNT-162b2 vaccine,3733806883
+NULL,not_reviewed,immune globulin intramuscular,2203554
+NULL,not_reviewed,influenza virus vaccine nasal spray,737332463
+NULL,not_reviewed,pneumococcal 7-valent vaccine,2226377
+NULL,not_reviewed,siltuximab,1033176839
+NULL,not_reviewed,yellow fever vaccine,2212191
+NULL,not_reviewed,mepolizumab,1674171635
+NULL,not_reviewed,ravulizumab-cwvz 300 mg/30mL inj,3156678795
+NULL,not_reviewed,sevelamer,2210227
+NULL,not_reviewed,acetylcysteine,2193376
+NULL,not_reviewed,hyperal peripheral,2252002
+NULL,not_reviewed,albumin human,2194244
+NULL,not_reviewed,Dextrose 10% in Water intravenous solution,2232680
+NULL,not_reviewed,allopurinol,2194880
+NULL,not_reviewed,calcium acetate,2194535
+NULL,not_reviewed,nicotine,2206838
+NULL,not_reviewed,bupivacaine,2196446
+NULL,not_reviewed,Juven Oral Powder 23gm packet,2237933
+NULL,not_reviewed,buPROPion,2195839
+NULL,not_reviewed,Magic Mouthwash 240mL susp.,2254259
+NULL,not_reviewed,Dextrose 50% in Water intravenous solution,2232722
+NULL,not_reviewed,neostigmine,2207537
+NULL,not_reviewed,PrismaSol B22GK4/2.5,2784131763
+NULL,not_reviewed,tolterodine,2211621
+NULL,not_reviewed,zinc oxide topical,2212408
+NULL,not_reviewed,collagenase topical,2197600
+NULL,not_reviewed,Anticoagulant Citrate Soln,2238021
+NULL,not_reviewed,sodium polystyrene sulfonate,2212335
+NULL,not_reviewed,diatrizoate,2201763
+NULL,not_reviewed,lanthanum carbonate,5168160
+NULL,not_reviewed,PrismaSol B22GK4/0 w/o Calcium,2779035243
+NULL,not_reviewed,citric acid-sodium citrate,2197299
+NULL,not_reviewed,colchicine,2199409
+NULL,not_reviewed,naloxone,2206703
+NULL,not_reviewed,pyridostigmine,2210137
+NULL,not_reviewed,leucovorin,2205734
+NULL,not_reviewed,phenazopyridine,2209632
+NULL,not_reviewed,bethanechol,2196722
+NULL,not_reviewed,ropivacaine,2210148
+NULL,not_reviewed,prismasate dialysate,21213750
+NULL,not_reviewed,disposable elastomeric pump,295333614
+NULL,not_reviewed,sodium acetate,2210891
+NULL,not_reviewed,tromethamine,2213002
+NULL,not_reviewed,oxybutynin,2207983
+NULL,not_reviewed,PrismaSol BGK2/3.5,2784113551
+NULL,not_reviewed,terbutaline,2211962
+NULL,not_reviewed,febuxostat,211646793
+NULL,not_reviewed,indocyanine green,2202458
+NULL,not_reviewed,patiromer,1674171433
+NULL,not_reviewed,hyperal neonate,2252013
+NULL,not_reviewed,Epidural Infusion,2229940
+NULL,not_reviewed,ferric citrate,1213196678
+NULL,not_reviewed,ethanol,2202009
+NULL,not_reviewed,varenicline,26543733
+NULL,not_reviewed,rasburicase,2211385
+NULL,not_reviewed,flumazenil,2202833
+NULL,not_reviewed,Flolan Tubing B 1.8mL Minibore,2237793
+NULL,not_reviewed,Anticoagulant Citrate Dex-B 500 mL,2238012
+NULL,not_reviewed,probenecid,2207696
+NULL,not_reviewed,epinephrine-lidocaine,2200184
+NULL,not_reviewed,indigo carmine,2204909
+NULL,not_reviewed,PrismaSol B22GK2/0,2784166067
+NULL,not_reviewed,Prismasate BK4/0 w/o Calcium,2261434
+NULL,not_reviewed,iohexol,2205162
+NULL,not_reviewed,sodium thiosulfate,2211433
+NULL,not_reviewed,flavoxATE,2201826
+NULL,not_reviewed,glucose,2204000
+NULL,not_reviewed,perflutren,2208456
+NULL,not_reviewed,ammonium alum,38620442
+NULL,not_reviewed,mepivacaine,2206726
+NULL,not_reviewed,bupivacaine-epinephrine,2195111
+NULL,not_reviewed,colchicine-probenecid,2196904
+NULL,not_reviewed,hyoscyamine/methenam/m-blue/phenyl salicyl,2204346
+NULL,not_reviewed,deferoxamine,2199558
+NULL,not_reviewed,pentosan polysulfate sodium,2208114
+NULL,not_reviewed,sterile talc,2209958
+NULL,not_reviewed,acetic acid topical,2193829
+NULL,not_reviewed,hemin,2203946
+NULL,not_reviewed,fesoterodine,211646518
+NULL,not_reviewed,uridine,2112876687
+NULL,not_reviewed,fomepizole,2201521
+NULL,not_reviewed,potassium citrate,2210532
+NULL,not_reviewed,benzylpenicilloyl-polylysine,2194577
+NULL,not_reviewed,PrismaSol BGK0/2.5,2914806287
+NULL,not_reviewed,trospium chloride,2257270
+NULL,not_reviewed,histamine phosphate,2203488
+NULL,not_reviewed,sodium benzoate-sodium phenylacetate,33851287
+NULL,not_reviewed,Lidocaine/Epinephrine/Tetracaine,2254333
+NULL,not_reviewed,bupivacaine liposome,465841824
+NULL,not_reviewed,hyaluronidase,2204525
+NULL,not_reviewed,charcoal-sorbitol,2198082
+NULL,not_reviewed,digoxin immune FAB,2201967
+NULL,not_reviewed,alum 2000ml irrig,2252406
+NULL,not_reviewed,isopropyl alcohol topical,2203655
+NULL,not_reviewed,dexrazoxane,2198768
+NULL,not_reviewed,physostigmine,2209202
+NULL,not_reviewed,iodixanol,2204868
+NULL,not_reviewed,barium sulfate,2196288
+NULL,not_reviewed,chloroprocaine,2197296
+NULL,not_reviewed,tetracaine,2211535
+NULL,not_reviewed,colloidal oatmeal topical,2197717
+NULL,not_reviewed,ioversol,2203818
+NULL,not_reviewed,Gelatin Sponge 12X7Mm,2237814
+NULL,not_reviewed,edrophonium,2200014
+NULL,not_reviewed,ethiodized oil,2199569
+NULL,not_reviewed,intravenous electrolyte solution,2205959
+NULL,not_reviewed,iopamidol,2205590
+NULL,not_reviewed,ammonia inhalant 2%,2252409
+NULL,not_reviewed,LEVOleucovorin,140005086
+NULL,not_reviewed,Butt Cream 30gm,2254261
+NULL,not_reviewed,deferasirox,21485405
+NULL,not_reviewed,isosulfan blue,2202395
+NULL,not_reviewed,sincalide,2210334
+NULL,not_reviewed,Cherry Syrup Diluent,2237812
+NULL,not_reviewed,dimethyl sulfoxide,2201502
+NULL,crystalloid,Sodium Chloride 0.9% intravenous solution,2231931
+NULL,not_reviewed,Dextrose 5% in Water intravenous solution,2225984
+NULL,not_reviewed,Lactated Ringers Injection intravenous solution,2232559
+NULL,not_reviewed,potassium chloride,2210969
+NULL,not_reviewed,Sodium Chloride 0.45% intravenous solution,2232608
+NULL,not_reviewed,Dextrose 5% with 0.45% NaCl intravenous solution,2232605
+NULL,not_reviewed,sodium chloride,2211895
+NULL,not_reviewed,Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution,2226024
+NULL,not_reviewed,Electrolyte (Plasma-Lyte) intravenous solution,2232765
+NULL,not_reviewed,Dextrose 5% with 0.9% NaCl intravenous solution,2232626
+NULL,not_reviewed,Sodium Chloride 3%,2232010
+NULL,not_reviewed,folic acid,2200914
+NULL,not_reviewed,multivitamin,2206218
+NULL,not_reviewed,ferrous sulfate,2200448
+NULL,not_reviewed,calcium gluconate,2197224
+NULL,not_reviewed,thiamine,2212399
+NULL,not_reviewed,potassium chloride-sodium chloride,2210429
+NULL,not_reviewed,cholecalciferol,2197099
+NULL,not_reviewed,magnesium oxide,2205282
+NULL,not_reviewed,multivitamin with minerals,2207117
+NULL,not_reviewed,ascorbic acid,2194629
+NULL,not_reviewed,potassium phosphate-sodium phosphate,2211536
+NULL,not_reviewed,Dextrose 5% in Lactated Ringers intravenous solution,2232397
+NULL,not_reviewed,cyanocobalamin,2197472
+NULL,not_reviewed,zinc sulfate,2212765
+NULL,not_reviewed,calcium-vitamin D,2198100
+NULL,not_reviewed,"multivitamin, prenatal",2207810
+NULL,not_reviewed,calcium chloride,2196685
+NULL,not_reviewed,pyridoxine,2210402
+NULL,not_reviewed,Sodium Chloride 7% nebulized,11158177
+NULL,not_reviewed,calcitriol,2196549
+NULL,not_reviewed,Dextrose 20% in Water intravenous solution,2232747
+NULL,not_reviewed,Dianeal Low Calcium with 2.5% Dextrose,2226063
+NULL,not_reviewed,potassium phosphate,2211391
+NULL,not_reviewed,iron sucrose,2202949
+NULL,not_reviewed,"fat emulsion, intravenous",2200042
+NULL,not_reviewed,Dianeal Low Calcium with 1.5% Dextrose,2226046
+NULL,not_reviewed,copper gluconate,2198946
+NULL,not_reviewed,NS Continuous Bladder Irrigation 3000mL,2038340301
+NULL,not_reviewed,Amino Acids 3% and Glycerin 3% with Electrolytes (ProcalAmine) intravenous solution,2232573
+NULL,not_reviewed,Dextrose 5% with 0.2% NaCl intravenous solution,2232525
+NULL,not_reviewed,vitamin E,2212557
+NULL,not_reviewed,Dextrose 5% in Water with KCl 20 mEq/l intravenous solution,2226017
+NULL,not_reviewed,sodium glycerophosphate,736645089
+NULL,not_reviewed,calcium citrate,2196765
+NULL,not_reviewed,vitamin A,2212070
+NULL,not_reviewed,Dextrose 4.25% with Electrolytes (Dianeal Low Calcium) intraperitoneal solution,2226068
+NULL,not_reviewed,iron polysaccharide,2202478
+NULL,not_reviewed,doxercalciferol,2201353
+NULL,not_reviewed,Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution,3718614
+NULL,not_reviewed,selenium,2210757
+NULL,not_reviewed,biotin,108201018
+NULL,not_reviewed,ergocalciferol,2199563
+NULL,not_reviewed,riboflavin,2210927
+NULL,not_reviewed,multivitamin with iron,2206100
+NULL,not_reviewed,potassium acetate,2209959
+NULL,not_reviewed,sodium chloride,38842520
+NULL,not_reviewed,zinc gluconate,2213115
+NULL,not_reviewed,magnesium gluconate,2206714
+NULL,not_reviewed,ferumoxytol,259104474
+NULL,not_reviewed,Dextrose 70% in Water intravenous solution,2232744
+NULL,not_reviewed,paricalcitol,2209328
+NULL,not_reviewed,iron dextran,2202336
+NULL,not_reviewed,Dianeal PD-2 with 1.5% Dextrose,2226401
+NULL,not_reviewed,copper chloride,2198904
+NULL,not_reviewed,Dextrose 10% with 0.2% NaCl intravenous solution,2226027
+NULL,not_reviewed,hydroxocobalamin,2203868
+NULL,not_reviewed,chromic chloride hexahydrate,2198581
+NULL,not_reviewed,trace elements with selenium,2212124
+NULL,not_reviewed,Amino Acids 15% (Clinisol Sulfite-Free),442376584
+NULL,not_reviewed,potassium bicarbonate-potassium chloride,2210457
+NULL,not_reviewed,citric acid-potassium citrate,2197063
+NULL,not_reviewed,beta-carotene,2194959
+NULL,not_reviewed,calcium glubionate,2197000
+NULL,not_reviewed,Amino Acid Injection 50gm/1000ml,3045067555
+NULL,not_reviewed,parenteral nutrition solution,477450329
+NULL,not_reviewed,sodium ferric gluconate complex,2210709
+NULL,not_reviewed,potassium bicarbonate,2210310
+NULL,not_reviewed,sodium chloride,38842985
+NULL,not_reviewed,copper sulfate,2198979
+NULL,not_reviewed,magnesium chloride,2206365
+NULL,not_reviewed,calcium carbonate-sodium fluoride,2196472
+NULL,not_reviewed,Dextrose 30% in Water,2232252
+NULL,not_reviewed,nicotinamide,2209184
+NULL,not_reviewed,hetastarch,2203110
+NULL,not_reviewed,"dextran, low molecular weight",2199294
+NULL,not_reviewed,"dextran, high molecular weight",2199099
+NULL,not_reviewed,hydroxyethyl starch,124373396
+NULL,not_reviewed,QUEtiapine,2211704
+NULL,not_reviewed,DULoxetine,2257451
+NULL,not_reviewed,traZODone,2212922
+NULL,not_reviewed,OLANZapine,2209835
+NULL,not_reviewed,mirtazapine,2207656
+NULL,not_reviewed,sertraline,2210041
+NULL,not_reviewed,venlafaxine,2212501
+NULL,not_reviewed,escitalopram,2199922
+NULL,not_reviewed,risperiDONE,2208086
+NULL,not_reviewed,FLUoxetine,2203183
+NULL,not_reviewed,citalopram,2199148
+NULL,not_reviewed,haloperidol,2203270
+NULL,not_reviewed,ARIPiprazole,2194191
+NULL,not_reviewed,amitriptyline,2193958
+NULL,not_reviewed,PARoxetine,2209511
+NULL,not_reviewed,nortriptyline,2208151
+NULL,not_reviewed,ziprasidone,2212993
+NULL,not_reviewed,cloZAPine,2199056
+NULL,not_reviewed,imipramine,2203030
+NULL,not_reviewed,fluPHENAZine,2203920
+NULL,not_reviewed,paliperidone,57709021
+NULL,not_reviewed,lurasidone,346990830
+NULL,not_reviewed,fluvoxaMINE,2200717
+NULL,not_reviewed,loxapine,2205255
+NULL,not_reviewed,nefazodone,2206770
+NULL,not_reviewed,desvenlafaxine,140004081
+NULL,not_reviewed,trifluoperazine,2212760
+NULL,not_reviewed,desipramine,2200440
+NULL,not_reviewed,thiothixene,2210322
+NULL,not_reviewed,thioridazine,2212907
+NULL,not_reviewed,clomiPRAMINE,2197530
+NULL,not_reviewed,phenelzine,2209670
+NULL,not_reviewed,maprotiline,2206782
+NULL,not_reviewed,milnacipran,211646610
+NULL,not_reviewed,vilazodone,397544784
+NULL,not_reviewed,protriptyline,2209745
+NULL,not_reviewed,albuterol,2194442
+NULL,not_reviewed,ipratropium,2204406
+NULL,not_reviewed,fluticasone-salmeterol,2200326
+NULL,not_reviewed,albuterol-ipratropium,2193683
+NULL,not_reviewed,guaiFENesin,2202787
+NULL,not_reviewed,levalbuterol,2206440
+NULL,not_reviewed,benzonatate,2194527
+NULL,not_reviewed,montelukast,2206010
+NULL,not_reviewed,loratadine,2206220
+NULL,not_reviewed,tiotropium,2232534
+NULL,not_reviewed,cetirizine,2197038
+NULL,steroid,fluticasone,2202411
+NULL,not_reviewed,dextromethorphan-guaifenesin,2200208
+NULL,not_reviewed,dornase alfa,2200116
+NULL,not_reviewed,codeine-guaiFENesin,2198099
+NULL,not_reviewed,budesonide-formoterol,44965802
+NULL,not_reviewed,beclomethasone,2194623
+NULL,not_reviewed,homatropine-hydrocodone,2204149
+NULL,not_reviewed,arformoterol,44966412
+NULL,not_reviewed,pseudoephedrine,2209863
+NULL,not_reviewed,cyproheptadine,2199393
+NULL,not_reviewed,theophylline,2212296
+NULL,not_reviewed,fexofenadine,2201765
+NULL,not_reviewed,chlorpheniramine,2198840
+NULL,not_reviewed,chlorpheniramine-hydrocodone,2196449
+NULL,not_reviewed,formoterol,2202028
+NULL,not_reviewed,roflumilast,380980760
+NULL,not_reviewed,dextromethorphan/guaifenesin/phenylephrine,2201249
+NULL,not_reviewed,dextromethorphan,2200185
+NULL,not_reviewed,formoterol-mometasone,306458486
+NULL,not_reviewed,salmeterol,2211498
+NULL,not_reviewed,Spag-2,2237780
+NULL,not_reviewed,pseudoephedrine-triprolidine,2209846
+NULL,not_reviewed,mometasone,9432369
+NULL,not_reviewed,aminophylline,2195993
+NULL,not_reviewed,codeine-promethazine,2199074
+NULL,not_reviewed,calfactant,2197422
+NULL,not_reviewed,clemastine,2198084
+NULL,not_reviewed,alpha 1-proteinase inhibitor,2195275
+NULL,not_reviewed,loratadine-pseudoephedrine,2206433
+NULL,steroid,flunisolide,2202919
+NULL,not_reviewed,aclidinium,619230087
+NULL,not_reviewed,pirbuterol,2208358
+NULL,other,sterile water,2210018
+NULL,other,lidocaine topical,2206793
+NULL,other,ocular lubricant,2207665
+NULL,other,chlorhexidine topical,2196597
+NULL,other,miconazole topical,2206878
+NULL,other,diclofenac topical,2202140
+NULL,other,mupirocin topical,2208824
+NULL,other,sodium chloride nasal,2212163
+NULL,other,fluticasone nasal,2202756
+NULL,other,povidone iodine topical,2211996
+NULL,other,latanoprost ophthalmic,2205227
+NULL,other,sodium hypochlorite topical,2211661
+NULL,other,"emollients, topical",2201070
+NULL,other,brimonidine ophthalmic,2197633
+NULL,other,prednisoLONE ophthalmic,2208417
+NULL,other,triamcinolone topical,2212416
+NULL,other,hydrocortisone topical,2202910
+NULL,other,clotrimazole topical,2199079
+NULL,other,balsam Peru/castor oil/trypsin topical,2195927
+NULL,other,silver sulfADIAZINE topical,2211130
+NULL,other,lanolin topical,2204487
+NULL,other,timolol ophthalmic,2210559
+NULL,other,dorzolamide-timolol ophthalmic,2200262
+NULL,other,balsam Peru-castor oil topical,2196147
+NULL,other,bacitracin topical,2194576
+NULL,other,dorzolamide ophthalmic,2200183
+NULL,other,phenylephrine topical,2209318
+NULL,other,erythromycin ophthalmic,2201880
+NULL,other,cyclosporine ophthalmic,2199262
+NULL,other,petrolatum topical,2209476
+NULL,other,glycerin-witch hazel topical,2203391
+NULL,other,dibucaine topical,2201150
+NULL,other,benzocaine-menthol topical,155713230
+NULL,other,oxymetazoline nasal,2209255
+NULL,other,moxifloxacin ophthalmic,2206113
+NULL,other,capsaicin topical,2196438
+NULL,other,phenol topical,2210374
+NULL,other,saliva substitutes,2211153
+NULL,other,ammonium lactate topical,2193293
+NULL,other,clobetasol topical,2199441
+NULL,other,gentamicin topical,2202443
+NULL,other,docosanol topical,2200119
+NULL,other,carbamide peroxide otic,2198369
+NULL,other,bacitracin/neomycin/polymyxin B topical,2195085
+NULL,other,menthol-phenol topical,2206892
+NULL,other,atropine ophthalmic,2194418
+NULL,other,benzocaine topical,2195863
+NULL,other,diphenhydramine-zinc acetate topical,2257264
+NULL,other,polymyxin B-trimethoprim ophthalmic,2209528
+NULL,other,clindamycin topical,2198789
+NULL,other,tetrahydrozoline ophthalmic,2212547
+NULL,other,azelastine nasal,2196144
+NULL,other,brimonidine-timolol ophthalmic,108202134
+NULL,other,gentamicin ophthalmic,2202212
+NULL,other,bacitracin-polymyxin B ophthalmic,2195426
+NULL,other,hydrocortisone-pramoxine topical,2203973
+NULL,other,betamethasone-clotrimazole topical,2196291
+NULL,other,hydrocortisone/neomycin/polymyxin B otic,2206003
+NULL,other,mineral oil/phenylephrine/shark liver oil,2206828
+NULL,other,metronidazole topical,2207222
+NULL,other,gentian violet topical,2202703
+NULL,other,fluocinonide topical,2203862
+NULL,other,ciprofloxacin ophthalmic,2198353
+NULL,other,dexamethasone-tobramycin ophthalmic,2198114
+NULL,other,tobramycin ophthalmic,2212149
+NULL,other,pilocarpine ophthalmic,2209669
+NULL,other,dexamethasone ophthalmic,2197026
+NULL,other,bimatoprost ophthalmic,2194969
+NULL,other,ofloxacin otic,2209763
+NULL,other,methyl salicylate topical,2205477
+NULL,other,bacitracin-polymyxin B topical,2195533
+NULL,other,levobunolol ophthalmic,2205079
+NULL,other,ipratropium nasal,2204556
+NULL,other,olopatadine ophthalmic,2206800
+NULL,other,ketoconazole topical,2204172
+NULL,other,terbinafine topical,2211628
+NULL,other,diclofenac ophthalmic,2202057
+NULL,other,cyclopentolate ophthalmic,2198753
+NULL,other,travoprost ophthalmic,2212868
+NULL,other,tacrolimus topical,2211987
+NULL,other,beclomethasone nasal,2194846
+NULL,other,alclometasone topical,2193749
+NULL,other,calamine topical,2195625
+NULL,other,betaxolol ophthalmic,2196563
+NULL,other,aluminum sulfate-calcium acetate topical,2194142
+NULL,other,tolnaftate topical,2210541
+NULL,other,ketorolac ophthalmic,2204946
+NULL,other,vitamin A & D topical,2212306
+NULL,other,nystatin-triamcinolone topical,2209199
+NULL,other,sulfacetamide sodium ophthalmic,2212507
+NULL,other,dexamethasone/neomycin/polymyxin B ophthalmic,2197307
+NULL,other,cromolyn nasal,2197084
+NULL,other,betamethasone topical,2195398
+NULL,other,bacitracin/neomycin/polymyxin B ophthalmic,2194974
+NULL,other,"sodium chloride, hypertonic, ophthalmic",2210349
+NULL,other,urea topical,2213408
+NULL,other,phenylephrine ophthalmic,2208917
+NULL,other,brinzolamide ophthalmic,2197778
+NULL,other,hydrocortisone/neomycin/polymyxin B ophth,2205814
+NULL,other,glycerin-phenol topical,2203273
+NULL,other,cadexomer-iodine topical,108201070
+NULL,other,mometasone nasal,2209332
+NULL,other,silver topical,271712685
+NULL,other,phenylephrine nasal,2208493
+NULL,other,lidocaine-prilocaine topical,2204054
+NULL,other,fluorescein ophthalmic,2201757
+NULL,other,gramicidin/neomycin/polymyxin B ophthalmic,2204568
+NULL,other,silver nitrate topical,2210913
+NULL,other,benzoyl peroxide topical,2194597
+NULL,other,cromolyn ophthalmic,2197174
+NULL,other,fluorometholone ophthalmic,2202376
+NULL,other,trifluridine ophthalmic,2212886
+NULL,other,fluorouracil topical,2202957
+NULL,other,cyclopentolate-phenylephrine ophthalmic,2198985
+NULL,other,hydroxypropyl methylcellulose ophthalmic,2204227
+NULL,other,MediHoney 1.5 oz tube,941059108
+NULL,other,trolamine salicylate topical,2212808
+NULL,other,homatropine ophthalmic,2204008
+NULL,other,flunisolide nasal,2203064
+NULL,other,ofloxacin ophthalmic,2209697
+NULL,other,tretinoin topical,2212301
+NULL,other,bacitracin ophthalmic,2194555
+NULL,other,ciprofloxacin otic,2198491
+NULL,other,permethrin topical,2208900
+NULL,other,fluocinolone topical,2203206
+NULL,other,triamcinolone nasal,2212217
+NULL,other,apraclonidine ophthalmic,2195715
+NULL,other,desonide topical,2201511
+NULL,other,acyclovir topical,2193514
+NULL,other,tropicamide ophthalmic,2213050
+NULL,other,pramoxine topical,2211205
+NULL,other,selenium sulfide topical,2210944
+NULL,other,proparacaine ophthalmic,2208357
+NULL,other,acetic acid-aluminum acetate otic,2193920
+NULL,other,antipyrine-benzocaine otic,2194036
+NULL,other,tetracaine ophthalmic,2211750
+NULL,other,naphazoline ophthalmic,2205497
+NULL,other,natamycin ophthalmic,2207333
+NULL,other,colistin/HC/neomycin/thonzonium otic,2197440
+NULL,other,sodium hyaluronate topical,21485512
+NULL,other,ciclopirox topical,2199012
+NULL,other,loteprednol ophthalmic,2204698
+NULL,other,benzocaine/butamben/tetracaine topical,2196065
+NULL,other,gatifloxacin ophthalmic,2203784
+NULL,other,ciprofloxacin-dexamethasone otic,2198539
+NULL,other,"ophthalmic irrigation, intraocular",2207935
+NULL,other,hydrocortisone/neomycin/polymyxin B topical,2206526
+NULL,other,iodine topical,2204498
+NULL,other,bacitracin/HC/neomycin/polymyxin B ophthalmic,2194647
+NULL,other,menthol-zinc oxide topical,108201401
+NULL,other,nepafenac ophthalmic,9432392
+NULL,other,menthol topical,2206260
+NULL,other,mometasone topical,2207094
+NULL,other,neomycin-polymyxin B sulfate topical,2207473
+NULL,other,camphor-phenol topical,2198141
+NULL,other,prednisolone-sulfacetamide sodium ophthalmic,2209012
+NULL,other,penciclovir topical,2208524
+NULL,other,coal tar topical,2199407
+NULL,other,carteolol ophthalmic,2199006
+NULL,other,camphor-menthol topical,2197943
+NULL,other,epoprostenol diluent,3245230395
+NULL,other,cocaine topical,2198171
+NULL,other,econazole topical,2199704
+NULL,other,"ophthalmic irrigation, extraocular",2207617
+NULL,other,salicylic acid-sulfur topical,2210464
+NULL,other,desoximetasone topical,2199287
+NULL,other,ethyl chloride topical,2200067
+NULL,other,hydrogen peroxide topical,2202120
+NULL,other,lodoxamide ophthalmic,2205090
+NULL,other,benzoin topical,2194319
+NULL,other,pimecrolimus topical,2208743
+NULL,other,acetic acid-hydrocortisone otic,2193979
+NULL,other,acetylcholine ophthalmic,2193363
+NULL,other,fluorescein-proparacaine ophthalmic,2202245
+NULL,other,fluticasone topical,2202882
+NULL,other,bromfenac ophthalmic,33824409
+NULL,other,ciprofloxacin-hydrocortisone otic,2198645
+NULL,other,terconazole topical,2212119
+NULL,other,budesonide nasal,2198880
+NULL,other,epinephrine/lidocaine/tetracaine topical,681216234
+NULL,other,flurbiprofen ophthalmic,2202203
+NULL,other,gentamicin-prednisolone ophthalmic,2202550
+NULL,other,EPINEPHrine topical,2199994
+NULL,other,vitamin E topical,2212303
