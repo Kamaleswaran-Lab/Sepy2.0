@@ -263,7 +263,6 @@ class sepyIMPORT:
             path_infusion_med_file,
             header=0,
             parse_dates=date_cols,
-            date_parser=self.d_parser,
             index_col=index_col,
             sep=self.delim,
             na_values=self.na_values,

@@ -14,7 +14,7 @@
 ###Y1=${YEARS[$SLURM_ARRAY_TASK_ID]}
 
 # Use this block to run a single year ###
-declare -i Y1=2022
+declare -i Y1=2014
 
 echo "$SLURM_ARRAY_TASK_ID"
 echo "Currently processing year: $Y1"
@@ -25,6 +25,6 @@ echo "Currently processing year: $Y1"
 ## python --version
 
 scl enable rh-python38 bash
-python /labs/kamaleswaranlab/MODS/EliteDataHacks/sepy/new_sepy_mehak/em_make_pickle.py $Y1
+python /cwork/jfr29/Sepy/make_pickle.py $Y1
 
 sleep 1

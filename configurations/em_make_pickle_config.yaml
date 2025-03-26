@@ -13,10 +13,10 @@ dictionary_paths:
     - "ICD10_quan_deyo"
     - "ICD10_quan_elix"
     - "ICD10_single_ccs"
-  em_types:
-    - "all_infusion_meds"
-    - "grouping_labs"
-    - "bed_labels"
+  grounping_types:
+    - "em_all_infusion_meds"
+    - "em_grouping_labs"
+    - "em_bed_labels"
   year_types:
     - "INFUSIONMEDS"
     - "LABS"
@@ -40,7 +40,7 @@ yearly_instance:
   import_demographics:
     drop_cols: []
     index_col: ["pat_id"]
-    date_cols: ["dob"]
+    date_cols: [] # removed 'dob'
   import_infusion_meds:
     drop_cols: []
     numeric_cols:

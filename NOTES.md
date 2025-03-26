@@ -27,6 +27,12 @@ March 21:
     - Stopped progression, expectred more errors will continue to occur
 
 
+- Once config are done, make a sincle script that works for several datasets
+- combine make dicts and make pickle
+    - How is yearly pickle file and we are making encounters from that
+    - consider more efficient methods of data storage
+
+
 
 
 

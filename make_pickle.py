@@ -2,9 +2,6 @@
 """
 This module provides functions to import data from flat files into pandas dataframes.
 The dataframes are then pickled for later use in super table construction.
-Upon running this script, the user will be prompted to enter the year for which they 
-would like to import data. The user will then be prompted to enter the path to the 
-parent directory containing the flat files for the specified year.
 
 Elite Data Hacks
 Author: Christopher S. Josef, MD
@@ -17,7 +14,7 @@ Edited: 2025-03-01
 Version: 0.2
 Changes:
      - update dictionary paths to by dynamically generated.
-     - update function documentation.
+     - update documentation.
      - added configuration file through yaml.
 """
 import pickle
@@ -28,7 +25,7 @@ import yaml
 
 import sepyIMPORT as si
 
-################################## Load YAML ##################################
+############################## Load YAML ##############################
 def load_yaml(filename):
     """
     Load and parse a YAML file.
@@ -39,8 +36,8 @@ def load_yaml(filename):
     """
     with open(filename, "r", encoding="utf-8") as file:
         return yaml.safe_load(file)
+yaml_data = load_yaml(str(sys.argv[2]))
 ############################## File Paths ##############################
-yaml_data = load_yaml("em_make_pickle_config.yaml")
 # Generate file paths
 ### data path is the parent directory for all the flat files; you'll specify each file location below
 # CSJPC data_path = "C:/Users/DataSci/Desktop/em_data"
@@ -63,21 +60,21 @@ def generate_paths(data_year):
     Generates a dictionary of file paths for comorbidities, emergency medicine data,
     and year-based data files.
     Parameters:
-       year (int or str): The year for which the data paths should be generated.
+       year (int): The year for which the data paths should be generated.
     Returns:
-       dict: A dictionary mapping descriptive keys to file paths.
+       paths (dict): A dictionary mapping descriptive keys to file paths.
     """
     paths = {}
     # load path types from yaml
     comorbidity_types = yaml_data["dictionary_paths"]["comorbidity_types"]
-    em_types = yaml_data["dictionary_paths"]["em_types"]
+    grouping_types = yaml_data["dictionary_paths"]["grouping_types"]
     year_types = yaml_data["dictionary_paths"]["year_types"]
     for comorbidity in comorbidity_types:
         paths[f"path_comorbid_{comorbidity}"] = glob.glob(
             f"{GROUPINGS_PATH}/comorbidities/{comorbidity}.csv"
         )[0]
-    for em_type in em_types:
-        paths[f"path_{em_type}"] = glob.glob(f"{GROUPINGS_PATH}/em_{em_type}*.csv")[0]
+    for type in grouping_types:
+        paths[f"path_{type}"] = glob.glob(f"{GROUPINGS_PATH}/{type}*.csv")[0]
     for year_type in year_types:
         paths[f"path_{year_type}"] = glob.glob(
             f"{DATA_PATH}/{data_year}/*_{year_type}*.dsv"
@@ -88,9 +85,7 @@ def import_data_frames(yearly_instance):
     """
     Imports data from a YAML structure and applies it to methods of a given instance.
     Args:
-        yearly_instance (object): The instance whose methods will be called.
-        yaml_config (dict): A dictionary containing method names and their parameters under
-                          the key "yearly_instance".
+        yearly_instance (sepyIMPORT): The instance whose methods will be called.
     """
     import_start_time = time.time()
     print(
@@ -99,7 +94,6 @@ def import_data_frames(yearly_instance):
     for method_name, params in yaml_data["yearly_instance"].items():
         method = getattr(yearly_instance, method_name, None)
         if callable(method):
-            # Convert string references to attributes if needed
             if "numeric_cols" in params and isinstance(params["numeric_cols"], str):
                 params["numeric_cols"] = getattr(yearly_instance, params["numeric_cols"], None)
             method(**params)
@@ -107,7 +101,7 @@ def import_data_frames(yearly_instance):
 ############################## Main Function ##############################
 if __name__ == "__main__":
     # Usage:
-    #   python make_pickle.py <year>
+    #   python make_pickle.py <year> <CONFIGURATION_PATH>
     # Parameters:
     #   <year> (int): The year for which data is being processed.
     # Error Handling:
@@ -121,7 +115,7 @@ if __name__ == "__main__":
             path_dictionary[year] = generate_paths(year)
         # starts yearly pickle timer
         start = time.perf_counter()
-        # accepts command line argument for year
+        # accepts command line arguments
         year = int(sys.argv[1])
         # creates pickle file name
         PICKLE_FILE_NAME = OUTPUT_PATH + "em_y" + str(year) + ".pickle"

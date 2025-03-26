@@ -1,0 +1,30 @@
+#!/bin/bash
+#SBATCH --job-name=potato0
+#SBATCH --nodes=1 --ntasks=7
+#SBATCH --time=6:30:00
+#SBATCH --mem=60G
+#SBATCH --output=/labs/kamaleswaranlab/MODS/EliteDataHacks/sepy/new_sepy_mehak/out/em_pickle_%A_%a.out
+##SBATCH --error=/labs/kamaleswaranlab/MODS/EliteDataHacks/sepy/new_sepy_mehak/out/em_pickle_%A_%a.err
+
+###SBATCH --array=0-6
+
+### Use this block to run ALL years ###
+###YEARS=(2017 2018 2019 2020)
+###Y1 is the element of the array found with ARRAY_ID 
+###Y1=${YEARS[$SLURM_ARRAY_TASK_ID]}
+
+# Use this block to run a single year ###
+declare -i Y1=2014
+
+echo "$SLURM_ARRAY_TASK_ID"
+echo "Currently processing year: $Y1"
+
+# set the correct python environment
+### source /labs/kamaleswaranlab/MODS/4.Environments/SOFA_calcs/bin/activate
+# print python version to check
+## python --version
+
+scl enable rh-python38 bash
+python /cwork/jfr29/Sepy/make_pickle.py $Y1
+
+sleep 1
