@@ -21,6 +21,16 @@ Program Documentation Notes:
 
     - TODO: add proper documentation to each step and clean up formating
 
+
+April 4:
+- a lot of variablility in file format (csv, xlsx) - better to conform to csv?
+- store cohort selector values in configuration file (351-356)
+
+- What are specifics read in through bash (324 and 330)
+
+
+
+
 March 21:
 - import_demographics - make_pickle expects "dob" within CJSEPSIS_DEMOGRAPHICS_2014.dsv but doesn't exist. Should this be a different age identifier?
     - same applies to import_infusion_meds, "vasopressor", "anti-infective"

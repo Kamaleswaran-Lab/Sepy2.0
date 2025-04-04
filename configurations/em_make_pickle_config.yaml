@@ -1,6 +1,12 @@
+# FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW"
 groupings_path: "/cwork/jfr29/Sepy/groupings"
-output_path: "/cwork/jfr29/"
+pickle_output_path: "/cwork/jfr29/"
+dictionary_output_path: "/cwork/jfr29/dictionaries"
+bed_unit_csv_fname:  "/cwork/jfr29/AdditionalInformation/bed_units_to_icu_Ah.csv"
+variable_bounds_csv_fname : "/cwork/jfr29/AdditionalInformation/Variable_Chart.xlsx"
+dialysis_info_csn_fname: "/cwork/jfr29/AdditionalInformation/PEACH_HD_CRRT(1).csv"
+# DICTIONARY PATH KEWORDS
 dictionary_paths:
   comorbidity_types:
     - "ICD9_ahrq"
@@ -29,6 +35,7 @@ dictionary_paths:
     - "BEDLOCATION"
     - "ORPROCEDURES"
     - "DIAGNOSIS"
+# YEARLY INSTANCE FUNCTIONS AND PARAMETERS
 yearly_instance:
   import_encounters:
     drop_cols: []
@@ -120,3 +127,30 @@ yearly_instance:
     drop_cols: []
     index_col: ["csn"]
     date_cols: ["dx_time_date"]
+# COMORBIDITY SUMMARY KEYWORDS
+comorbidity_summary:
+  comorbidity_types:
+    # - "ICD9_ahrq"
+    # - "ICD9_elix"
+    # - "ICD9_quan_deyo"
+    # - "ICD9_quan_elix"
+    # - "ICD9_single_ccs"
+    # - "ICD10_ahrq"
+    # - "ICD10_elix"
+    - "ICD10_quan_deyo"
+    - "ICD10_quan_elix"
+    # - "ICD10_single_ccs"
+# SEPSIS SUMMARY DIRECTORY PATHES
+sepsis_summary: ["em_sepsis_summary"]
+sepsis_summary_types:
+  - "sofa_summary"
+  - "sep3_summary"
+  - "sirs_summary"
+  - "sep2_summary"
+  - "encounter_summary"
+  - "error_summary"
+  # - "ahrq_ICD10_summary"
+  # - "elix_ICD10_summary"
+  - "quan_deyo_ICD10_summary"
+  - "quan_elix_ICD10_summary"
+  # - "ccs_ICD10_summary"
