@@ -452,7 +452,7 @@ if __name__ == "__main__":
             # write general files
             # Save encounter summary
             UNIQUE_FILE_ID = f"{processor_assignment}_{year}"
-            base_path = output_path / yaml_data["sepsis_summary"] / str(year)
+            base_path = output_path + yaml_data["sepsis_summary"] / str(year)
             pd.concat(appended_enc_summaries).to_csv(
                 base_path / "encounter_summary" / f"encounters_summary_{UNIQUE_FILE_ID}.csv",
                 index=True,

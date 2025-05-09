@@ -10,8 +10,8 @@ make_dictionary: "yes" # yes: make dictionary files, no: do not make dictionary 
 # FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW"
 groupings_path: "/cwork/jfr29/Sepy/groupings"
-pickle_output_path: "/cwork/jfr29/pickle/"
-dictionary_output_path: "/cwork/jfr29/supertables/em_y"
+pickle_output_path: "/cwork/jfr29/Sepy/pickle/"
+dictionary_output_path: "/cwork/jfr29/Sepy/supertables/em_y/"
 bed_unit_csv_fname:  "/cwork/jfr29/Sepy/AdditionalInformation/bed_units_to_icu_AH.csv"
 variable_bounds_csv_fname : "/cwork/jfr29/Sepy/AdditionalInformation/Variable_Chart.csv"
 dialysis_info_csn_fname: "/cwork/jfr29/Sepy/AdditionalInformation/PEACH_HD_CRRT.csv"
