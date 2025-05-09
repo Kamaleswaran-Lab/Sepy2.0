@@ -9,166 +9,80 @@ Kamaleswaran Labs
 Author: Jack F. Regan
 Edited: 2025-03-06
 Version: 0.2
+
 Changes:
-  -
+  - improved documentation
+  - implemented yaml configuration file
 """
 
 import time
+import yaml
 import pandas as pd
 import numpy as np
+import logging
 
-
+logging.basicConfig(level=logging.INFO)
+###########################################################################
+################################ Load YAML ################################
+###########################################################################
+def load_yaml(filename):
+    """
+    Load and parse a YAML file.
+    Args:
+        filename (str): The path to the YAML file to be loaded.
+    Returns:
+        dict: The contents of the YAML file as a dictionary.
+    """
+    with open(filename, "r", encoding="utf-8") as file:
+        return yaml.safe_load(file)
+yaml_data = load_yaml("/cwork/jfr29/Sepy/configurations/import_config.yaml")
+###########################################################################
+############################### IMPORT Class ##############################
+###########################################################################
 class sepyIMPORT:
     """
     A class for importing and processing clinical data from CSV files, specifically designed
     to handle electronic medical records (EMR) datasets with various preprocessing steps.
 
-    Attributes:
-        na_values : list
-            A list of string values representing missing data in the dataset.
-
-        vital_col_names : list
-            Column names related to vital signs.
-
-        vasopressor_units : list
-            Column names representing units for vasopressor medications.
-
-        numeric_lab_col_names : list
-            Column names for numerical lab results.
-
-        string_lab_col_names : list
-            Column names for categorical lab results.
+    Args:
+        na_values (list): A list of string values representing missing data in the dataset.
+        vital_col_names (list): Column names related to vital signs.
+        vasopressor_units (list): Column names representing units for vasopressor medications.
+        numeric_lab_col_names (list): Column names for numerical lab results.
+        string_lab_col_names (list): Column names for categorical lab results.
     """
-
-    # for us when importing CSVs
-    na_values = ["NULL", "Date\Time Correction", "(null)", "NOTRECORDED"]
-
-    # vital data type dictionary
-    vital_col_names = [
-        "temperature",
-        "daily_weight_kg",
-        "height_cm",
-        "sbp_line",
-        "dbp_line",
-        "map_line",
-        "sbp_cuff",
-        "dbp_cuff",
-        "map_cuff",
-        "pulse",
-        "unassisted_resp_rate",
-        "spo2",
-        "end_tidal_co2",
-        "o2_flow_rate",
-    ]
-
-    # Vasopressor units
-    vasopressor_units = [
-        "norepinephrine_dose_unit",
-        "epinephrine_dose_unit",
-        "dobutamine_dose_unit",
-        "dopamine_dose_unit",
-        "phenylephrine_dose_unit",
-        "vasopressin_dose_unit",
-    ]
-
-    # List of all lab names (some years might not have all listed labs)
-    numeric_lab_col_names = [
-        "anion_gap",
-        "base_excess",
-        "bicarb_(hco3)",
-        "blood_urea_nitrogen_(bun)",
-        "calcium",
-        "calcium_adjusted",
-        "calcium_ionized",
-        "chloride",
-        "creatinine",
-        "gfr",
-        "glucose",
-        "magnesium",
-        "osmolarity",
-        "phosphorus",
-        "potassium",
-        "sodium",
-        # CBC
-        "haptoglobin",
-        "hematocrit",
-        "hemoglobin",
-        "met_hgb",
-        "platelets",
-        "white_blood_cell_count",
-        "carboxy_hgb",
-        # Hepatic
-        "alanine_aminotransferase_(alt)",
-        "albumin",
-        "alkaline_phosphatase",
-        "ammonia",
-        "aspartate_aminotransferase_(ast)",
-        "bilirubin_direct",
-        "bilirubin_total",
-        "fibrinogen",
-        "inr",
-        "lactate_dehydrogenase",
-        "lactic_acid",
-        "partial_prothrombin_time_(ptt)",
-        "prealbumin",
-        "protein",
-        "prothrombin_time_(pt)",
-        "thrombin_time",
-        "transferrin",
-        # Pancreatic
-        "amylase",
-        "lipase",
-        # Cardiac
-        "b-type_natriuretic_peptide_(bnp)",
-        "troponin",
-        # ABG
-        "carboxy_hgb",
-        "fio2",
-        "partial_pressure_of_carbon_dioxide_(paco2)",
-        "partial_pressure_of_oxygen_(pao2)",
-        "ph",
-        "saturation_of_oxygen_(sao2)",
-        # Other
-        "d_dimer",
-        "hemoglobin_a1c",
-        "parathyroid_level",
-        "thyroid_stimulating_hormone_(tsh)",
-        # Inflammation
-        "crp_high_sens",
-        "procalcitonin",
-        "erythrocyte_sedimentation_rate_(esr)",
-        # Extra labs
-        "neutrophils",
-        "lymphocyte",
-    ]
-    string_lab_col_names = [
-        # PCR Testing
-        "c_diff",
-        "covid",
-        "mtp",
-    ]
-    all_lab_col_names = numeric_lab_col_names + string_lab_col_names
-
-    def __init__(self, file_dictionary, delim):
+    def __init__(self, file_dictionary, delim, config_data):
         # delimiter used in raw files can changea across data sets; the delim argument is specified by user
         self.delim = delim
         # dictionary has file locations for flat files
         self.file_dictionary = file_dictionary
-        # creates df with all lab groupings
-        self.df_grouping_labs = pd.read_csv(file_dictionary["path_grouping_labs"])
         # creates df with all medication groupings
-        self.df_grouping_all_meds = pd.read_csv(file_dictionary["path_all_infusion_meds"])
+        self.df_grouping_all_meds = pd.read_csv(file_dictionary[config_data["dictionary_paths"]["grouping_types"][0]])
+        # creates df with all lab groupings
+        self.df_grouping_labs = pd.read_csv(file_dictionary[config_data["dictionary_paths"]["grouping_types"][1]])
         # creates df with all bed location labels
-        self.df_bed_labels = pd.read_csv(file_dictionary["path_bed_labels"])
-    ########################## Rudimentary Data Cleaning ########################################
+        self.df_bed_labels = pd.read_csv(file_dictionary[config_data["dictionary_paths"]["grouping_types"][2]])
+        logging.info("sepyIMPORT initialized")
+    # for use when importing CSVs
+    na_values = yaml_data["na_values"]
+    # vital data type dictionary
+    vital_col_names = yaml_data["vital_col_names"]
+    # Vasopressor units
+    vasopressor_units = yaml_data["vasopressor_units"]
+    # List of all lab names (some years might not have all listed labs)
+    numeric_lab_col_names = yaml_data["numeric_lab_col_names"]
+    # List of all lab names (some years might not have all listed labs)
+    string_lab_col_names = yaml_data["string_lab_col_names"]
+    all_lab_col_names = numeric_lab_col_names + string_lab_col_names
+###########################################################################
+############################## Data Cleaning ##############################
+###########################################################################
     def make_numeric(self, df, cols):
         """  
         Cleans and converts specified columns in a DataFrame to numeric format.  
-        
         Args:  
             df (pandas.DataFrame): The DataFrame containing the columns to be processed.  
             cols (list): A list of column names to clean and convert to numeric values.  
-
         Returns:  
             pandas.DataFrame: The modified DataFrame with specified columns converted to numeric types.  
         """
@@ -177,29 +91,33 @@ class sepyIMPORT:
         # Converts specific cols to numeric
         df[cols] = df[cols].apply(pd.to_numeric, errors="coerce")
         return df
-
-    ###### Custom Date Parser to Handle Date Errors (i.e. coerce foolishness) ######
+###########################################################################
+### Custom Date Parser to Handle Date Errors (i.e. coerce foolishness) ####
+###########################################################################
     def d_parser(self, s):
         """  
         Parses a given string or array-like object into a datetime format.  
-
-        This function attempts to convert the input into a pandas datetime object,  
-        inferring the format automatically. Any parsing errors will result in NaT (Not a Time).  
-
         Args:  
             s (str, list, or pandas.Series): The input data to be converted to datetime.  
-
         Returns:  
-            pandas.Series or pandas.Timestamp: The parsed datetime object(s).  
+            pandas.Series or pandas.DateTimeIndex: The parsed datetime object(s).  
         """
-        return pd.to_datetime(s, infer_datetime_format = True, errors = "coerce")
-
-    #############################################################################################
-    ###### Create encounter df for all CSNs
-    #############################################################################################
+        return pd.to_datetime(s, errors = "coerce")
+###########################################################################
+##################### Create encounter df for all CSNs ####################
+###########################################################################
     def import_encounters(self, drop_cols, index_col, date_cols):
+        """
+        Imports the encounters dataset from a CSV file, parses date columns, 
+        drops specified columns, and stores the cleaned DataFrame.
 
-        path_encounters_file = self.file_dictionary["path_ENCOUNTER"]
+        Args:
+            drop_cols (list o str): Columns to drop from the DataFrame.
+            index_col (str): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin Encounters Import")
+        path_encounters_file = self.file_dictionary["ENCOUNTER"]
 
         # import file and set date/time cols
         df_encounters = pd.read_csv(
@@ -209,21 +127,28 @@ class sepyIMPORT:
             parse_dates=date_cols,
             na_values=self.na_values,
             sep=self.delim,
-            low_memory=False,
         )
+
 
         # drop unecessary cols
         df_encounters = df_encounters.drop(columns=drop_cols)
-
         self.df_encounters = df_encounters
-        print("Encounters success")
-
-    #############################################################################################
-    ###### Create demographic df for all CSNs
-    #############################################################################################
+        logging.info("Encounters success")
+###########################################################################
+#################### Create demographic df for all CSNs ###################
+###########################################################################
     def import_demographics(self, drop_cols, index_col, date_cols):
-        path_demographics_file = self.file_dictionary["path_DEMOGRAPHICS"]
+        """
+        Imports the demographics dataset from a CSV file, parses date columns, 
+        drops specified columns, and stores the cleaned DataFrame.
 
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            index_col (str): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin Demographics Import")
+        path_demographics_file = self.file_dictionary["DEMOGRAPHICS"]
         # import files and set date/time cols
         df_demographics = pd.read_csv(
             path_demographics_file,
@@ -238,11 +163,10 @@ class sepyIMPORT:
         df_demographics = df_demographics.drop(columns=drop_cols)
 
         self.df_demographics = df_demographics
-        print("Demographics success")
-
-    #############################################################################################
-    ###### Create df of filtered medications for all CSNs
-    #############################################################################################
+        logging.info("Demographics success")
+###########################################################################
+########### Create df of filtered medications for all CSNs ################
+###########################################################################
     def import_infusion_meds(
         self,
         drop_cols,
@@ -252,12 +176,25 @@ class sepyIMPORT:
         index_col,
         date_cols,
     ):
+        """
+        Imports the infusion medication dataset from a CSV file, processes the data by 
+        converting specified columns to numeric, removes unnecessary columns, checks for 
+        duplicates in medication IDs, and separates the data into anti-infective and 
+        vasopressor medication groups.
 
-        path_infusion_med_file = self.file_dictionary["path_INFUSIONMEDS"]
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            numeric_cols (list of str): Columns to convert to numeric values.
+            anti_infective_group_name (str): The name of the anti-infective medication group.
+            vasopressor_group_name (str): The name of the vasopressor medication group.
+            index_col (str): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        path_infusion_med_file = self.file_dictionary["INFUSIONMEDS"]
 
         # imports the infusion med file and sets date/time cols
         read_infusion_csv_time = time.time()
-        print("Starting csv read for infusion meds.")
+        logging.info("Starting csv read for infusion meds.")
 
         df_infusion_meds = pd.read_csv(
             path_infusion_med_file,
@@ -269,12 +206,12 @@ class sepyIMPORT:
             low_memory=False,
             memory_map=True,
         )
-        print(
-            f"It took {time.time()-read_infusion_csv_time} seconds to read the infusion csv."
+        logging.info(
+            f"It took {time.time()-read_infusion_csv_time} (s) to read the infusion csv."
         )
 
         df_infusion_meds = self.make_numeric(df_infusion_meds, numeric_cols)
-        print("Infusion columns are now numeric")
+        logging.info("Infusion columns are now numeric")
 
         # drop unecessary columns
         self.df_infusion_meds = df_infusion_meds.drop(columns=drop_cols)
@@ -284,22 +221,20 @@ class sepyIMPORT:
             self.df_grouping_all_meds.shape[0]
             - self.df_grouping_all_meds.drop_duplicates("medication_id").shape[0]
         )
-
         if rows_dropped > 0:
             # drop the duplicate rows in grouping all meds
             self.df_grouping_all_meds = self.df_grouping_all_meds.drop_duplicates(
                 subset="medication_id"
             )
-            print(
+            logging.info(
                 f"You have {rows_dropped} duplicates of medication ID that were dropped!"
             )
-
         else:
-            print("Congrats, You have NO duplicates of medication ID!")
+            logging.info("Congrats, You have NO duplicates of medication ID!")
 
         # get med_ids for anti_infective
         df_anti_infective_med_groups = self.df_grouping_all_meds[
-            self.df_grouping_all_meds["med_class"] == anti_infective_group_name
+        self.df_grouping_all_meds["med_class"] == anti_infective_group_name
         ][["super_table_col_name", "medication_id"]]
 
         # makes df with anti-infective meds
@@ -309,11 +244,11 @@ class sepyIMPORT:
             .set_index("csn")
         )
 
-        print("Anti-infective success")
+        logging.info("Anti-infective success")
 
         # get med_ids for vassopressors
         df_vasopressor_med_groups = self.df_grouping_all_meds[
-            self.df_grouping_all_meds["med_class"] == vasopressor_group_name
+        self.df_grouping_all_meds["med_class"] == vasopressor_group_name
         ][["super_table_col_name", "medication_id"]]
 
         # makes df with vasopressor ; adds a numerically increasing index along with csn and supertable name
@@ -329,7 +264,6 @@ class sepyIMPORT:
 
         # unstack the units
         units = df_vasopressor_meds["med_action_dose_unit"].unstack(level=3)
-
         # unstack the dose
         dose = df_vasopressor_meds["med_action_dose"].unstack(level=3)
         # merge the dose and units together
@@ -349,17 +283,16 @@ class sepyIMPORT:
         # drops med_order_time as index
         df_vasopressor_meds = df_vasopressor_meds.reset_index(1)
 
-        # cols that are have units will break "groupby" related actions later, so need to remove nan
+        # cols that don't units will break "groupby" related actions later, so need to remove nan
         df_vasopressor_meds[self.vasopressor_units] = df_vasopressor_meds[
             self.vasopressor_units
         ].replace({np.nan: ""})
 
         self.df_vasopressor_meds = df_vasopressor_meds
-        print("Vasopressor success")
-
-    #############################################################################################
-    ###### Create lab df for all CSNs
-    #############################################################################################
+        logging.info("Vasopressor success")
+###########################################################################
+####################### Create lab df for all CSNs ########################
+###########################################################################
     def import_labs(self, drop_cols, group_cols, date_cols, index_col, numeric_cols):
         ### The labs import needs a special function to tiddy the columns
         def tidy_index(df):
@@ -367,28 +300,23 @@ class sepyIMPORT:
             df = df.unstack(level=1)
             # unstack makes a multi-index for columns; this line removes "lab result" level
             df.columns = df.columns.droplevel()
-
             # this removes the "name" for all the columns i.e. super_table_col_names
             df.columns.name = None
-
             # removes numerical index for labs
             df = df.droplevel(0)
-
             return df
 
         # start timer for the lab import function
         start_import_time = time.time()
-        print("Begin Lab Import")
+        logging.info("Begin Lab Import")
         # Lab groups file has three important cols:
         # 1) component_id - the is the id number for the lab type
         # 2 )super_table_col_name- is the group name for similar labs
         # 3) physionet - indicates if used for physionet competition
 
         lab_groups = self.df_grouping_labs[group_cols]
-
-        #### Import Lab Data file #####
-        # set path variables based on file_dictionary
-        path_lab_file = self.file_dictionary["path_LABS"]
+        
+        path_lab_file = self.file_dictionary["LABS"]
 
         # import the lab flat file and set date/time
         df_labs = pd.read_csv(
@@ -438,17 +366,16 @@ class sepyIMPORT:
             append=True,
             inplace=True,
         )
-
-        ####### Select Labs that have string value ##########
+        
+        # Select Labs that have string value
         # isolate string lab value rows
         df_labs_filtered_string = df_labs_filtered.loc[
             df_labs_filtered.index.get_level_values("super_table_col_name").isin(
                 self.string_lab_col_names
             )
         ]
-        #####################################################
-
-        ####### Select and Treat Labs that have Numeric value ##########
+        
+        # Select and Treat Labs that have Numeric value
         # isolate numeric lab value rows
         df_labs_filtered_numeric = df_labs_filtered.loc[
             df_labs_filtered.index.get_level_values("super_table_col_name").isin(
@@ -456,7 +383,7 @@ class sepyIMPORT:
             )
         ]
 
-        # remove silly punctuation from numeric
+        # remove punctuation from numeric
         df_labs_filtered_numeric = df_labs_filtered_numeric.replace(
             r"\>|\<|\%|\/|\s", "", regex=True
         )
@@ -465,14 +392,12 @@ class sepyIMPORT:
         df_labs_filtered_numeric["lab_result"] = pd.to_numeric(
             df_labs_filtered_numeric["lab_result"], errors="coerce"
         )
-        #####################################################
 
         # Tiddy up index using previously defined fcn
         df_labs_numeric = tidy_index(df_labs_filtered_numeric)
         df_labs_string = tidy_index(df_labs_filtered_string)
 
-        # print time it takes to import and unstack labs
-        print(
+        logging.info(
             f"It took {time.time() - start_import_time}(s) to import and process labs."
         )
 
@@ -480,19 +405,33 @@ class sepyIMPORT:
         df_labs_string = df_labs_string
         # Concat the string and numeric dfs
         df_labs_all = pd.concat([df_labs_numeric, df_labs_string], axis=0)
-
+        
+        # Remove duplicate columns
+        df_labs_all = df_labs_all.loc[:, ~df_labs_all.columns.duplicated()]
+    
         # if there are missing cols (i.e. no COVID in 2014) then it ensures the col name is added
         self.df_labs = df_labs_all.reindex(
             df_labs_all.columns.union(self.all_lab_col_names), axis=1
         )
-        print("Labs success")
+        logging.info("Labs success")
+###########################################################################
+###################### Create vitals df for all CSNs ######################
+###########################################################################
+    def import_vitals(self, drop_cols, index_col, date_cols, merge_cols):
+        """
+        Imports the lab dataset from a CSV file, processes both numeric and string lab values, 
+        applies necessary transformations, and stores the cleaned DataFrame.
 
-    #############################################################################################
-    ###### Create vitals df for all CSNs
-    #############################################################################################
-    def import_vitals(self, drop_cols, numeric_cols, index_col, date_cols, merge_cols):
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            group_cols (list of str): Columns to group labs by for processing.
+            date_cols (list of str): Columns to parse as datetime objects.
+            index_col (str): Column to use as the DataFrame index.
+            numeric_cols (list of str): Columns that contain numeric lab results.
+        """
+        logging.info("Begin Vitals Import")
 
-        path_vitals_file = self.file_dictionary["path_VITALS"]
+        path_vitals_file = self.file_dictionary["VITALS"]
 
         # import vitals flat file and set date/time cols
         df_vitals = pd.read_csv(
@@ -518,20 +457,29 @@ class sepyIMPORT:
 
         # drop punctuation and make numeric
         start_to_numeric_conversion_time = time.time()  # start timer
-        df_vitals = self.make_numeric(df_vitals, numeric_cols)
-        print(
+        df_vitals = self.make_numeric(df_vitals, sepyIMPORT.vital_col_names)
+        logging.info(
             f"It took {time.time()-start_to_numeric_conversion_time} to convert vitals results to numeric."
         )
 
         self.df_vitals = df_vitals
-        print("Vitals success")
-
-    #############################################################################################
-    ###### Create vent df for all CSNs
-    #############################################################################################
+        logging.info("Vitals success")
+###########################################################################
+####################### Create vent df for all CSNs #######################
+###########################################################################
     def import_vent(self, drop_cols, numeric_cols, index_col, date_cols):
+        """
+        Imports the ventilation dataset from a CSV file, processes numeric columns, 
+        drops unnecessary columns, and stores the cleaned DataFrame.
 
-        path_vent_file = self.file_dictionary["path_VENT"]
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            numeric_cols (list of str): Columns to convert to numeric values.
+            index_col (str or int): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin Vent Import")
+        path_vent_file = self.file_dictionary["VENT"]
 
         # import vent flat files and set date/time
         df_vent = pd.read_csv(
@@ -550,14 +498,24 @@ class sepyIMPORT:
         df_vent = self.make_numeric(df_vent, numeric_cols)
 
         self.df_vent = df_vent
-        print("Vent success")
-
-    #############################################################################################
-    ###### Create GCS df for all CSNs
-    #############################################################################################
+        logging.info("Vent success")
+###########################################################################
+####################### Create GCS df for all CSNs ########################
+###########################################################################
     def import_gcs(self, drop_cols, index_col, numeric_col, date_cols):
+        """
+        Imports the GCS dataset from a CSV file, processes the numeric columns, 
+        aggregates GCS scores by timestamp, and stores the cleaned DataFrame.
 
-        path_gcs_file = self.file_dictionary["path_GCS"]
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            index_col (str): Column to use as the DataFrame index.
+            numeric_col (list of str): Columns to convert to numeric values.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin GCS Import")
+
+        path_gcs_file = self.file_dictionary["GCS"]
 
         # import gcs flat file and set date/time cols
         df_gcs = pd.read_csv(
@@ -585,20 +543,28 @@ class sepyIMPORT:
                 "gcs_total_score": ["mean"],
             }
         )
-
         # drops the column index "mean" which came from agg fcn
         # also moves 'recorded time' out of index into a column
         df_gcs = df_gcs.droplevel(1, axis=1).reset_index(level="recorded_time")
 
         self.df_gcs = df_gcs
-        print("GCS success")
-
-    #############################################################################################
-    ###### Create cultures df for all CSNs
-    #############################################################################################
+        logging.info("GCS success")
+###########################################################################
+#################### Create cultures df for all CSNs ######################
+###########################################################################
     def import_cultures(self, drop_cols, index_col, date_cols):
+        """
+        Imports the cultures dataset from a CSV file, processes date columns, 
+        drops unnecessary columns, and stores the cleaned DataFrame.
 
-        path_cultures_file = self.file_dictionary["path_CULTURES"]
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            index_col (str or int): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin Cultures Import")
+
+        path_cultures_file = self.file_dictionary["CULTURES"]
 
         # imports cultures and sets date/time cols
         df_cultures = pd.read_csv(
@@ -615,15 +581,25 @@ class sepyIMPORT:
         df_cultures = df_cultures.drop(columns=drop_cols)
 
         self.df_cultures = df_cultures
-        print("Cultures success")
-
-    #############################################################################################
-    ###### Create bed_location df for all CSNs
-    #############################################################################################
+        logging.info("Cultures success")
+###########################################################################
+################## Create bed_location df for all CSNs ####################
+###########################################################################
     def import_bed_locations(self, drop_cols, index_col, date_cols):
+        """
+        Imports the bed locations dataset from a CSV file, processes date columns, 
+        adds identifiers for various bed types (ICU, IMC, ED, procedure), 
+        filters out duplicate rows, drops unnecessary columns, and stores the cleaned DataFrame.
+
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            index_col (str): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin Bed Import")
 
         bed_labels = self.df_bed_labels
-        path_bed_locations_file = self.file_dictionary["path_BEDLOCATION"]
+        path_bed_locations_file = self.file_dictionary["BEDLOCATION"]
 
         # import bed flat files and set date/time cols
         df_beds = pd.read_csv(
@@ -636,7 +612,7 @@ class sepyIMPORT:
             low_memory=False,
         )
 
-        # drop anytimes where bed_location_start= bed_location_end
+        # drop anytimes where bed_location_start = bed_location_end
         df_beds = df_beds[df_beds["bed_location_start"] != df_beds["bed_location_end"]]
 
         # Identifier column for ICU bed
@@ -651,7 +627,7 @@ class sepyIMPORT:
         ed_units = bed_labels[bed_labels["ed"] == 1].bed_unit.tolist()
         df_beds["ed"] = np.where(df_beds["bed_unit"].isin(ed_units), 1, 0)
 
-        # Identifier column for peri procedure bed
+        # Identifier column for procedure bed
         procedure_units = bed_labels[bed_labels["procedure"] == 1].bed_unit.tolist()
         df_beds["procedure"] = np.where(df_beds["bed_unit"].isin(procedure_units), 1, 0)
 
@@ -666,13 +642,23 @@ class sepyIMPORT:
         df_beds = df_beds.drop(columns=drop_cols)
 
         self.df_beds = df_beds
-        print("Beds success")
-
-    #############################################################################################
-    ###### Create procedures df for all CSNs
-    #############################################################################################
+        logging.info("Beds success")
+###########################################################################
+################### Create procedures df for all CSNs #####################
+###########################################################################
     def import_procedures(self, drop_cols, index_col, date_cols):
-        path_procedures_file = self.file_dictionary["path_ORPROCEDURES"]
+        """
+        Imports the procedures dataset from a CSV file, processes date columns, 
+        drops unnecessary columns, and stores the cleaned DataFrame.
+
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            index_col (str): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin Procedures Import")
+        
+        path_procedures_file = self.file_dictionary["ORPROCEDURES"]
 
         # import procedure flat file and set date/time cols
         df_procedures = pd.read_csv(
@@ -690,13 +676,24 @@ class sepyIMPORT:
         df_procedures = df_procedures.drop(columns=drop_cols)
 
         self.df_procedures = df_procedures
-        print("Procedures success")
-
-    #############################################################################################
-    ###### Import ICD 9/10 Code df for all CSNs
-    #############################################################################################
+        logging.info("Procedures success")
+###########################################################################
+################## Import ICD 9/10 Code df for all CSNs ###################
+###########################################################################
     def import_diagnosis(self, drop_cols, index_col, date_cols):
-        path_diagnosis_file = self.file_dictionary["path_DIAGNOSIS"]
+        """
+        Imports the diagnosis dataset, processes date columns, drops unnecessary columns, 
+        and stores the cleaned DataFrame. Additionally, imports ICD10 comorbidity datasets 
+        and stores them.
+
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            index_col (str or int): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin diagnosis import.")
+        
+        path_diagnosis_file = self.file_dictionary["DIAGNOSIS"]
 
         # import diganosis flat file
         df_diagnosis = pd.read_csv(
@@ -713,36 +710,38 @@ class sepyIMPORT:
         df_diagnosis = df_diagnosis.drop(columns=drop_cols)
 
         self.df_diagnosis = df_diagnosis
-        print("Diagnosis success")
+        logging.info("Diagnosis success")
+        
+        logging.info("Begin comorbidity import.")
 
         #### ICD9 Portion
         # =============================================================================
-        #         self.df_ahrq_ICD9 = self.make_comorbid_df(self.file_dictionary['path_comorbid_ahrq_ICD9'],
+        #         self.df_ahrq_ICD9 = self.make_comorbid_df(self.file_dictionary['ICD9_ahrq'],
         #                                         'ICD9',
         #                                         'ahrq',
         #                                         'dx_code_icd9',
         #                                         'v_ahrq_labels')
         #         # makes df for ahrq (like elix)
-        #         self.df_elix_ICD9 = self.make_comorbid_df(self.file_dictionary['path_comorbid_elix_ICD9'],
+        #         self.df_elix_ICD9 = self.make_comorbid_df(self.file_dictionary['ICD9_elix'],
         #                                         'ICD9',
         #                                         'elix',
         #                                         'dx_code_icd9',
         #                                         'v_elix_labels')
         #         # makes df for Charlson
-        #         self.df_quan_deyo_ICD9 = self.make_comorbid_df(self.file_dictionary['path_comorbid_quan_deyo_ICD9'],
+        #         self.df_quan_deyo_ICD9 = self.make_comorbid_df(self.file_dictionary['ICD9_quan_deyo'],
         #                                         'ICD9',
         #                                         'quan_deyo',
         #                                         'dx_code_icd9',
         #                                         'v_quan_deyo_labels')
         #         # makes df for Quan's Elix
-        #         self.df_quan_elix_ICD9 = self.make_comorbid_df(self.file_dictionary['path_comorbid_quan_elix_ICD9'],
+        #         self.df_quan_elix_ICD9 = self.make_comorbid_df(self.file_dictionary['ICD9_quan_elix'],
         #                                 'ICD9',
         #                                 'quan_elix',
         #                                 'dx_code_icd9',
         #                                 'v_quan_elix_labels')
         #         # makes df for ccs
         #         self.df_ccs_ICD9 = self.make_comorbid_df(
-        #                                 self.file_dictionary['path_comorbid_ccs_ICD9'],
+        #                                 self.file_dictionary['ICD9_single_ccs'],
         #                                 'ICD9',
         #                                 'ccs_label',
         #                                 'dx_code_icd9',
@@ -751,13 +750,13 @@ class sepyIMPORT:
 
         #### ICD10 Portion
         # =============================================================================
-        #         self.df_ahrq_ICD10 = self.make_comorbid_df(self.file_dictionary['path_comorbid_ahrq_ICD10'],
+        #         self.df_ahrq_ICD10 = self.make_comorbid_df(self.file_dictionary['ICD10_ahrq'],
         #                                 'ICD10',
         #                                 'ahrq',
         #                                 'dx_code_icd10',
         #                                 'v_ahrq_labels')
         #         # makes df for ahrq (like elix)
-        #         self.df_elix_ICD10 = self.make_comorbid_df(self.file_dictionary['path_comorbid_elix_ICD10'],
+        #         self.df_elix_ICD10 = self.make_comorbid_df(self.file_dictionary['ICD10_elix'],
         #                                 'ICD10',
         #                                 'elix',
         #                                 'dx_code_icd10',
@@ -765,7 +764,7 @@ class sepyIMPORT:
         # =============================================================================
         # makes df for Charlson
         self.df_quan_deyo_ICD10 = self.make_comorbid_df(
-            self.file_dictionary["path_comorbid_quan_deyo_ICD10"],
+            self.file_dictionary["ICD10_quan_deyo"],
             "ICD10",
             "quan_deyo",
             "dx_code_icd10",
@@ -773,7 +772,7 @@ class sepyIMPORT:
         )
         # makes df for Quan's Elix
         self.df_quan_elix_ICD10 = self.make_comorbid_df(
-            self.file_dictionary["path_comorbid_quan_elix_ICD10"],
+            self.file_dictionary["ICD10_quan_elix"],
             "ICD10",
             "quan_elix",
             "dx_code_icd10",
@@ -782,13 +781,13 @@ class sepyIMPORT:
         # =============================================================================
         #         # makes df for ccs
         #         self.df_ccs_ICD10 = self.make_comorbid_df(
-        #                                 self.file_dictionary['path_comorbid_ccs_ICD10'],
+        #                                 self.file_dictionary['ICD10_single_ccs'],
         #                                 'ICD10',
         #                                 'ccs_label',
         #                                 'dx_code_icd10',
         #                                 'v_ccs_labels')
         # =============================================================================
-        print("Comorbid success")
+        logging.info("Comorbid success")
 
     def make_comorbid_df(
         self,
@@ -798,6 +797,20 @@ class sepyIMPORT:
         df_diagnosis_ICD_col,
         comorbid_labels,
     ):
+        """
+        Creates a comorbidity DataFrame by merging a mapping file with the diagnosis dataset, 
+        and extracts the relevant comorbidity labels.
+
+        Args:
+            comorbid_map_path (str): Path to the CSV file containing the comorbidity mapping.
+            map_ICD_col (str): Column name in the comorbidity map file containing the ICD code.
+            map_comorbidity_col (str): Column name in the comorbidity map file containing the comorbidity type.
+            df_diagnosis_ICD_col (str): Column name in the diagnosis DataFrame containing the ICD code.
+            comorbid_labels (str): The name of the attribute where the list of comorbidity labels will be stored.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing the merged data with patient IDs, diagnosis time, and comorbidity types.
+        """
         # import mapping file
         map_df = pd.read_csv(comorbid_map_path, header=0)
         # column names in map file
