@@ -4,28 +4,29 @@
 # SLURM CONFIGURATION
 num_processes: "7"
 processor_assignment: "1"
+
 # PIPELINE INSTRUCTIONS
-make_pickle: "yes" # yes: make pickle files, no: do not make pickle files
-make_dictionary: "yes" # yes: make dictionary files, no: do not make dictionary files
+make_yearly_pickle: "yes" # yes: make pickle files, no: do not make pickle files
+make_supertables: "yes" # yes: make supertables, no: do not make supertables
+
+
 # FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW"
-groupings_path: "/cwork/jfr29/Sepy/groupings"
-pickle_output_path: "/cwork/jfr29/Sepy/pickle/"
-dictionary_output_path: "/cwork/jfr29/Sepy/supertables/em_y/"
-bed_unit_csv_fname:  "/cwork/jfr29/Sepy/AdditionalInformation/bed_units_to_icu_AH.csv"
-variable_bounds_csv_fname : "/cwork/jfr29/Sepy/AdditionalInformation/Variable_Chart.csv"
-dialysis_info_csn_fname: "/cwork/jfr29/Sepy/AdditionalInformation/PEACH_HD_CRRT.csv"
-unique_encounters_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/2014/CJSEPSIS_ENCOUNTER_2014.dsv"
+groupings_path: "../groupings"
+pickle_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables/"
+dictionary_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_YearlyDictionaries/"
+bed_unit_csv_fname:  "../AdditionalInformation/bed_units_to_icu_AH.csv"
+variable_bounds_csv_fname : "../AdditionalInformation/Variable_Chart.csv"
+dialysis_info_csn_fname: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/PEACH_HD_CRRT.csv"
+encounters_path: "ENCOUNTER_FILE"
 dataset_identifier: "em_y"
-years_to_scrape_data: ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]
+
 # CSN FILTERING
-encounter_type: "IN" # "0" = EM, "1" = Inpatient, "all" = all encounter types
+encounter_type: 1 # "EM" = Emergency, "IN" = Inpatient, "all" = all encounter types ????? 
 age: "adult" # "adult": age >= 18, "pediatric": age < 18, "all": all ages
-unique_enc_filter: "no" # "yes": only unique encounters, "no": all encounters
-unique_enc:
-  # - CSN1
-  # - CSN2
-  # - CSN3
+specific_enc_filter: "no" # "yes": only specific encounters, "no": all encounters
+#specific_enc_filter_list: 
+
 # DICTIONARY PATH KEWORDS
 dictionary_paths:
   comorbidity_types:
@@ -43,7 +44,7 @@ dictionary_paths:
     - "em_all_infusion_meds"
     - "em_grouping_labs"
     - "em_bed_labels"
-  year_types:
+  flatfile_types:
     - ["INFUSIONMEDS", "INFUSIONMEDS"]
     - ["LABS", "LABS"]
     - ["VITALS", "VITALS"]
@@ -55,6 +56,11 @@ dictionary_paths:
     - ["BEDLOCATION", "BEDLOCATION"]
     - ["ORPROCEDURES", "ORPROCEDURES"]
     - ["DIAGNOSIS", "DIAGNOSIS"]
+    - ["PROCEDURES", "PROCEDURES"]
+  additional_files:
+    - ["DIALYSIS_INFO_CSN_FNAME", "PEACH_HD_CRRT.csv"]
+    - ["IN_OUT_FNAME", "in_out_AH.csv"]
+
 # YEARLY INSTANCE FUNCTIONS AND PARAMETERS
 yearly_instance:
   import_demographics:

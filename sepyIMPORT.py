@@ -56,24 +56,27 @@ class sepyIMPORT:
         self.delim = delim
         # dictionary has file locations for flat files
         self.file_dictionary = file_dictionary
+
         # creates df with all medication groupings
         self.df_grouping_all_meds = pd.read_csv(file_dictionary[config_data["dictionary_paths"]["grouping_types"][0]])
         # creates df with all lab groupings
         self.df_grouping_labs = pd.read_csv(file_dictionary[config_data["dictionary_paths"]["grouping_types"][1]])
         # creates df with all bed location labels
         self.df_bed_labels = pd.read_csv(file_dictionary[config_data["dictionary_paths"]["grouping_types"][2]])
+    
+        # for use when importing CSVs
+        self.na_values = yaml_data["na_values"]
+        # vital data type dictionary
+        self.vital_col_names = yaml_data["vital_col_names"]
+        # Vasopressor units
+        self.vasopressor_units = yaml_data["vasopressor_units"]
+        # List of all lab names (some years might not have all listed labs)
+        self.numeric_lab_col_names = yaml_data["numeric_lab_col_names"]
+        # List of all lab names (some years might not have all listed labs)
+        self.string_lab_col_names = yaml_data["string_lab_col_names"]
+        self.all_lab_col_names = self.numeric_lab_col_names + self.string_lab_col_names
         logging.info("sepyIMPORT initialized")
-    # for use when importing CSVs
-    na_values = yaml_data["na_values"]
-    # vital data type dictionary
-    vital_col_names = yaml_data["vital_col_names"]
-    # Vasopressor units
-    vasopressor_units = yaml_data["vasopressor_units"]
-    # List of all lab names (some years might not have all listed labs)
-    numeric_lab_col_names = yaml_data["numeric_lab_col_names"]
-    # List of all lab names (some years might not have all listed labs)
-    string_lab_col_names = yaml_data["string_lab_col_names"]
-    all_lab_col_names = numeric_lab_col_names + string_lab_col_names
+
 ###########################################################################
 ############################## Data Cleaning ##############################
 ###########################################################################
