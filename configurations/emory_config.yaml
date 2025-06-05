@@ -58,8 +58,8 @@ dictionary_paths:
     - ["DIAGNOSIS", "DIAGNOSIS"]
     - ["PROCEDURES", "PROCEDURES"]
   additional_files:
-    - ["DIALYSIS_INFO_CSN_FNAME", "PEACH_HD_CRRT.csv"]
-    - ["IN_OUT_FNAME", "in_out_AH.csv"]
+    - ["DIALYSIS", "PEACH_HD_CRRT.csv"]
+    - ["IN_OUT", "in_out_AH.csv"]
 
 # YEARLY INSTANCE FUNCTIONS AND PARAMETERS
 yearly_instance:

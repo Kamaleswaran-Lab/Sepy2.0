@@ -98,7 +98,7 @@ def process_csn(
     file_name = pickle_save_path / (str(encounter_csn) + ".pickle")
     # instantiate class for single encounter
     encounter_instance = sd.sepyDICT(
-        yearly_data_instance, encounter_csn, bed_unit_mapping, thresholds, dialysis_info
+        yearly_data_instance, encounter_csn, bed_unit_mapping, thresholds, dialysis_info, sepyDICTConfigs
     )
     # create encounter dictionary
     dictionary_instance = encounter_instance.encounter_dict
@@ -199,16 +199,22 @@ if __name__ == "__main__":
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Process EMR data for a specific year')
     parser.add_argument('year', type=int, help='The year for which data is being processed')
-    parser.add_argument('config', type=str, help='Path to the configuration file in YAML format')
-    parser.add_argument('num_processes', type=int, help='Number of processes to use')
+    parser.add_argument('data_config', type=str, default='configurations/emory_config.yaml', help='Path to the data configuration file in YAML format')
+    parser.add_argument('sepyIMPORT_config', type=str, default='configurations/import_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
+    parser.add_argument('sepyDICT_config', type=str, default='configurations/dict_config.yaml', help='Path to the sepyDICT configuration file in YAML format')
+    parser.add_argument('num_processes', type=int, default=10, help='Number of processes to use')
     parser.add_argument('processor_assignment', type=int, help='Processor assignment')
     args = parser.parse_args()
     
     year = args.year
-    config_path = args.config
+    dataConfig_path = args.data_config
+    sepyIMPORTConfigs_path = args.sepyIMPORT_config
+    sepyDICTConfigs_path = args.sepyDICT_config
     num_processes = args.num_processes
     processor_assignment = args.processor_assignment
-    configs = utils.load_yaml(config_path)
+    dataConfig = utils.load_yaml(dataConfig_path)
+    sepyIMPORTConfigs = utils.load_yaml(sepyIMPORTConfigs_path)
+    sepyDICTConfigs = utils.load_yaml(sepyDICTConfigs_path)
     logging.info(f"Sepy- The total number of processes: {num_processes}")
     logging.info(f"Sepy- The import year is: {year}")
     logging.info(f"Sepy- The processor assignment is: {processor_assignment}")
@@ -218,20 +224,20 @@ if __name__ == "__main__":
     #####################################################
 
     #parent directory for all the flat files
-    DATA_PATH = Path(configs["data_path"])
+    DATA_PATH = Path(dataConfig["data_path"])
     #path to the directory containing the grouping files, i.e., files that map component id to clinical features
-    GROUPINGS_PATH = Path(configs["groupings_path"])
+    GROUPINGS_PATH = Path(dataConfig["groupings_path"])
     #path to the directory where the supertable pickles will be written
-    SUPERTABLE_OUTPUT_PATH = Path(configs["pickle_output_path"])
+    SUPERTABLE_OUTPUT_PATH = Path(dataConfig["pickle_output_path"])
     #path to the directory where the yearly dictionaries will be written
-    YEARLY_DICTIONARY_OUTPUT_PATH = Path(configs["dictionary_output_path"])
-    YEARLY_DICTIONARY_FILE_NAME = os.path.join(YEARLY_DICTIONARY_OUTPUT_PATH, configs["dataset_identifier"] + str(year) + ".pickle")
+    YEARLY_DICTIONARY_OUTPUT_PATH = Path(dataConfig["pickle_output_path"])
+    YEARLY_DICTIONARY_FILE_NAME = os.path.join(YEARLY_DICTIONARY_OUTPUT_PATH, dataConfig["dataset_identifier"] + str(year) + ".pickle")
 
     paths = {}
-    comorbidity_types = configs["dictionary_paths"]["comorbidity_types"]
-    grouping_types = configs["dictionary_paths"]["grouping_types"]
-    flatfile_types = configs["dictionary_paths"]["flatfile_types"]
-    additional_files = configs["dictionary_paths"]["additional_files"]
+    comorbidity_types = dataConfig["dictionary_paths"]["comorbidity_types"]
+    grouping_types = dataConfig["dictionary_paths"]["grouping_types"]
+    flatfile_types = dataConfig["dictionary_paths"]["flatfile_types"]
+    additional_files = dataConfig["dictionary_paths"]["additional_files"]
     
     for comorbidity in comorbidity_types:
         paths[f"{comorbidity}"] = glob.glob(
@@ -251,27 +257,27 @@ if __name__ == "__main__":
 
     #Additional information 
     ### bed unit csv is a mapping of bed units to icu type [ed, ward, icu]
-    BED_UNIT_CSV_FNAME = Path(configs["bed_unit_csv_fname"])
+    BED_UNIT_CSV_FNAME = Path(dataConfig["bed_unit_csv_fname"])
     ### variable bounds is mapping from lab/vital and other clinical feature names to their expected upper and lower bounds. Used to detect outliers.
-    VARIABLE_BOUNDS_CSV_FNAME = Path(configs["variable_bounds_csv_fname"])
+    VARIABLE_BOUNDS_CSV_FNAME = Path(dataConfig["variable_bounds_csv_fname"])
     paths["BED_UNIT_CSV_FNAME"] = BED_UNIT_CSV_FNAME
     paths["VARIABLE_BOUNDS_CSV_FNAME"] = VARIABLE_BOUNDS_CSV_FNAME
 
     #####################################################
     ############ Create Pickle of Yearly Data ###########
     #####################################################
-    if configs["make_yearly_pickle"] == "yes":
+    if dataConfig["make_yearly_pickle"] == "yes":
         try:
             start = time.perf_counter()
             logging.info(f"Creating yearly pickle for {year}")
             logging.info(f"Yearly pickle will be saved to {YEARLY_DICTIONARY_FILE_NAME}")
 
-            import_instance = si.sepyIMPORT(paths, "|", configs)
+            import_instance = si.sepyIMPORT(paths, sepyIMPORTConfigs, dataConfig)
             logging.info(f"An instance of the sepyIMPORT class was created for {year}")
             
             logging.info(f"Importing data frames for {year}")
             logging.info(f"This may take a while...")
-            import_data_frames(import_instance, configs)
+            import_data_frames(import_instance, dataConfig)
             logging.info(f"Data frames imported for {year}")
             logging.info(f"Dumping import instance to pickle for {year}")
 
@@ -302,19 +308,19 @@ if __name__ == "__main__":
     ###########################################################################
     ###################### Begin Dictionary Construction ######################
     ###########################################################################
-    if configs["make_supertables"] == "yes":
+    if dataConfig["make_supertables"] == "yes":
         try:
             # set file path for unique encounters to create supertables for 
-            encounters_path = configs["encounters_path"]
+            encounters_path = dataConfig["encounters_path"]
             if encounters_path == "ENCOUNTER":
                 encounters_path = paths["ENCOUNTER"]
             logging.info(f"Sepy- The encounters path: {encounters_path}")
             
             # set filters for encounters
-            encounter_type = configs["encounter_type"]
-            age = configs["age"]
-            specific_enc_filter = configs["specific_enc_filter"]
-            specific_enc = configs["specific_enc"]
+            encounter_type = dataConfig["encounter_type"]
+            age = dataConfig["age"]
+            specific_enc_filter = dataConfig["specific_enc_filter"]
+            specific_enc = dataConfig["specific_enc"]
 
             # reads the list of csns
             csn_df = pd.read_csv(encounters_path, sep = "|", header = 0)
@@ -332,9 +338,9 @@ if __name__ == "__main__":
         
         # If specific encounter filter is applied, filter the encounters based on the list of specific encounters in the config file
         if specific_enc_filter == "yes":
-            if "specific_enc_filter_list" in configs and configs["specific_enc_filter_list"] and os.path.exists(configs["specific_enc_filter_list"]) and configs["specific_enc_filter_list"].endswith('.csv'):
+            if "specific_enc_filter_list" in dataConfig and dataConfig["specific_enc_filter_list"] and os.path.exists(dataConfig["specific_enc_filter_list"]) and dataConfig["specific_enc_filter_list"].endswith('.csv'):
                 try:
-                    specific_enc_filter_list = pd.read_csv(configs["specific_enc_filter_list"])
+                    specific_enc_filter_list = pd.read_csv(dataConfig["specific_enc_filter_list"])
                 except Exception as e:
                     logging.error(f"Sepy- Error in the specified encounter filter list. Please check the config file. {e}")
                 try:
@@ -389,7 +395,7 @@ if __name__ == "__main__":
         logging.info(f"Sepy- The process_list head:\n {process_list.head()}")
         
         # select correct pickle by year
-        pickle_name = YEARLY_DICTIONARY_OUTPUT_PATH + (configs["dataset_identifier"] + str(year) + ".pickle")
+        pickle_name = YEARLY_DICTIONARY_OUTPUT_PATH + (dataConfig["dataset_identifier"] + str(year) + ".pickle")
         logging.info(f"Sepy- The following pickle is being read: {pickle_name}")
         
         supertable_write_path = SUPERTABLE_OUTPUT_PATH / str(year)
@@ -415,7 +421,7 @@ if __name__ == "__main__":
         except ValueError:
             logging.error("Sepy- The bed to unit mapping file is not formatted correctly.")
         
-        dialysis = pd.read_csv(paths["DIALYSIS_INFO_CSN_FNAME"])
+        dialysis = pd.read_csv(paths["DIALYSIS"])   
         dialysis_year = dialysis.loc[
             dialysis["Encounter Number"].isin(csn_df["csn"].values)
         ]
@@ -492,14 +498,14 @@ if __name__ == "__main__":
         ########################## Export Sepsis Summary ##########################
         ###########################################################################
         # create sepsis_summary directory
-        base_sepsis_path = SUPERTABLE_OUTPUT_PATH / configs["sepsis_summary"] / str(year)
+        base_sepsis_path = SUPERTABLE_OUTPUT_PATH / dataConfig["sepsis_summary"] / str(year)
         Path.mkdir(base_sepsis_path, exist_ok=True)
-        for subdir in configs["sepsis_summary_types"]:
+        for subdir in dataConfig["sepsis_summary_types"]:
             Path.mkdir(base_sepsis_path / subdir, exist_ok=True)
 
         # Save encounter summary
         UNIQUE_FILE_ID = f"{processor_assignment}_{year}"
-        base_path = SUPERTABLE_OUTPUT_PATH / configs["sepsis_summary"] / str(year)
+        base_path = SUPERTABLE_OUTPUT_PATH / dataConfig["sepsis_summary"] / str(year)
         
         # Check if any results were collected before trying to concatenate
         if appended_enc_summaries:

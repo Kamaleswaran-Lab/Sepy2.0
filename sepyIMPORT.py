@@ -13,29 +13,23 @@ Version: 0.2
 Changes:
   - improved documentation
   - implemented yaml configuration file
+
+
+Changes Made by Mehak Arora:
+    - Added import_dialysis and import_in_out functions
+    - Created a utils function to read data files
+    - Created init args for both sets of configs (import and data)
+    - Removed delim as a function to SepyImport - was legacy, now makes zero sense to pass that as an argument
 """
 
 import time
-import yaml
+import utils
 import pandas as pd
 import numpy as np
 import logging
 
 logging.basicConfig(level=logging.INFO)
-###########################################################################
-################################ Load YAML ################################
-###########################################################################
-def load_yaml(filename):
-    """
-    Load and parse a YAML file.
-    Args:
-        filename (str): The path to the YAML file to be loaded.
-    Returns:
-        dict: The contents of the YAML file as a dictionary.
-    """
-    with open(filename, "r", encoding="utf-8") as file:
-        return yaml.safe_load(file)
-yaml_data = load_yaml("/cwork/jfr29/Sepy/configurations/import_config.yaml")
+
 ###########################################################################
 ############################### IMPORT Class ##############################
 ###########################################################################
@@ -45,70 +39,33 @@ class sepyIMPORT:
     to handle electronic medical records (EMR) datasets with various preprocessing steps.
 
     Args:
-        na_values (list): A list of string values representing missing data in the dataset.
-        vital_col_names (list): Column names related to vital signs.
-        vasopressor_units (list): Column names representing units for vasopressor medications.
-        numeric_lab_col_names (list): Column names for numerical lab results.
-        string_lab_col_names (list): Column names for categorical lab results.
+        file_dictionary (dict): A dictionary containing file paths for various data files.
+        config_data (dict): A dictionary containing configuration data for the import process.
     """
-    def __init__(self, file_dictionary, delim, config_data):
-        # delimiter used in raw files can changea across data sets; the delim argument is specified by user
-        self.delim = delim
+    def __init__(self, file_dictionary, sepyIMPORTConfigs, dataConfig):
         # dictionary has file locations for flat files
         self.file_dictionary = file_dictionary
 
         # creates df with all medication groupings
-        self.df_grouping_all_meds = pd.read_csv(file_dictionary[config_data["dictionary_paths"]["grouping_types"][0]])
+        self.df_grouping_all_meds = pd.read_csv(file_dictionary[dataConfig["dictionary_paths"]["grouping_types"][0]])
         # creates df with all lab groupings
-        self.df_grouping_labs = pd.read_csv(file_dictionary[config_data["dictionary_paths"]["grouping_types"][1]])
+        self.df_grouping_labs = pd.read_csv(file_dictionary[dataConfig["dictionary_paths"]["grouping_types"][1]])
         # creates df with all bed location labels
-        self.df_bed_labels = pd.read_csv(file_dictionary[config_data["dictionary_paths"]["grouping_types"][2]])
+        self.df_bed_labels = pd.read_csv(file_dictionary[dataConfig["dictionary_paths"]["grouping_types"][2]])
     
         # for use when importing CSVs
-        self.na_values = yaml_data["na_values"]
+        self.na_values = sepyIMPORTConfigs["na_values"]
         # vital data type dictionary
-        self.vital_col_names = yaml_data["vital_col_names"]
+        self.vital_col_names = sepyIMPORTConfigs["vital_col_names"]
         # Vasopressor units
-        self.vasopressor_units = yaml_data["vasopressor_units"]
+        self.vasopressor_units = sepyIMPORTConfigs["vasopressor_units"]
         # List of all lab names (some years might not have all listed labs)
-        self.numeric_lab_col_names = yaml_data["numeric_lab_col_names"]
+        self.numeric_lab_col_names = sepyIMPORTConfigs["numeric_lab_col_names"]
         # List of all lab names (some years might not have all listed labs)
-        self.string_lab_col_names = yaml_data["string_lab_col_names"]
+        self.string_lab_col_names = sepyIMPORTConfigs["string_lab_col_names"]
         self.all_lab_col_names = self.numeric_lab_col_names + self.string_lab_col_names
         logging.info("sepyIMPORT initialized")
 
-###########################################################################
-############################## Data Cleaning ##############################
-###########################################################################
-    def make_numeric(self, df, cols):
-        """  
-        Cleans and converts specified columns in a DataFrame to numeric format.  
-        Args:  
-            df (pandas.DataFrame): The DataFrame containing the columns to be processed.  
-            cols (list): A list of column names to clean and convert to numeric values.  
-        Returns:  
-            pandas.DataFrame: The modified DataFrame with specified columns converted to numeric types.  
-        """
-        # Remove all the non-numeric characters from numerical cols
-        df[cols] = df[cols].replace(r"\>|\<|\%|\/|\s", "", regex = True)
-        # Converts specific cols to numeric
-        df[cols] = df[cols].apply(pd.to_numeric, errors="coerce")
-        return df
-###########################################################################
-### Custom Date Parser to Handle Date Errors (i.e. coerce foolishness) ####
-###########################################################################
-    def d_parser(self, s):
-        """  
-        Parses a given string or array-like object into a datetime format.  
-        Args:  
-            s (str, list, or pandas.Series): The input data to be converted to datetime.  
-        Returns:  
-            pandas.Series or pandas.DateTimeIndex: The parsed datetime object(s).  
-        """
-        return pd.to_datetime(s, errors = "coerce")
-###########################################################################
-##################### Create encounter df for all CSNs ####################
-###########################################################################
     def import_encounters(self, drop_cols, index_col, date_cols):
         """
         Imports the encounters dataset from a CSV file, parses date columns, 
@@ -122,24 +79,20 @@ class sepyIMPORT:
         logging.info("Begin Encounters Import")
         path_encounters_file = self.file_dictionary["ENCOUNTER"]
 
-        # import file and set date/time cols
-        df_encounters = pd.read_csv(
-            path_encounters_file,
+        # Use the generic read_data_file function from utils
+        df_encounters = utils.read_data_file(
+            file_path=path_encounters_file,
             header=0,
             index_col=index_col,
-            parse_dates=date_cols,
+            date_cols=date_cols,
             na_values=self.na_values,
-            sep=self.delim,
+            drop_cols=drop_cols
         )
 
-
-        # drop unecessary cols
-        df_encounters = df_encounters.drop(columns=drop_cols)
         self.df_encounters = df_encounters
         logging.info("Encounters success")
-###########################################################################
-#################### Create demographic df for all CSNs ###################
-###########################################################################
+
+
     def import_demographics(self, drop_cols, index_col, date_cols):
         """
         Imports the demographics dataset from a CSV file, parses date columns, 
@@ -152,24 +105,21 @@ class sepyIMPORT:
         """
         logging.info("Begin Demographics Import")
         path_demographics_file = self.file_dictionary["DEMOGRAPHICS"]
-        # import files and set date/time cols
-        df_demographics = pd.read_csv(
-            path_demographics_file,
+        
+        # Use the generic read_data_file function from utils
+        df_demographics = utils.read_data_file(
+            file_path=path_demographics_file,
             header=0,
             index_col=index_col,
-            parse_dates=date_cols,
+            date_cols=date_cols,
             na_values=self.na_values,
-            sep=self.delim,
-            low_memory=False,
+            drop_cols=drop_cols,
+            low_memory=False
         )
-        # drop unecessary cols
-        df_demographics = df_demographics.drop(columns=drop_cols)
 
         self.df_demographics = df_demographics
         logging.info("Demographics success")
-###########################################################################
-########### Create df of filtered medications for all CSNs ################
-###########################################################################
+
     def import_infusion_meds(
         self,
         drop_cols,
@@ -199,25 +149,24 @@ class sepyIMPORT:
         read_infusion_csv_time = time.time()
         logging.info("Starting csv read for infusion meds.")
 
-        df_infusion_meds = pd.read_csv(
-            path_infusion_med_file,
+        # Use the generic read_data_file function from utils
+        df_infusion_meds = utils.read_data_file(
+            file_path=path_infusion_med_file,
             header=0,
-            parse_dates=date_cols,
             index_col=index_col,
-            sep=self.delim,
+            date_cols=date_cols,
             na_values=self.na_values,
             low_memory=False,
             memory_map=True,
+            numeric_cols=numeric_cols,
+            drop_cols=drop_cols
         )
+        
         logging.info(
             f"It took {time.time()-read_infusion_csv_time} (s) to read the infusion csv."
         )
 
-        df_infusion_meds = self.make_numeric(df_infusion_meds, numeric_cols)
-        logging.info("Infusion columns are now numeric")
-
-        # drop unecessary columns
-        self.df_infusion_meds = df_infusion_meds.drop(columns=drop_cols)
+        self.df_infusion_meds = df_infusion_meds
 
         # check if there are duplicate med id's & print warining if there is error
         rows_dropped = (
@@ -293,10 +242,19 @@ class sepyIMPORT:
 
         self.df_vasopressor_meds = df_vasopressor_meds
         logging.info("Vasopressor success")
-###########################################################################
-####################### Create lab df for all CSNs ########################
-###########################################################################
+
     def import_labs(self, drop_cols, group_cols, date_cols, index_col, numeric_cols):
+        """
+        Imports the lab dataset from a CSV file, processes both numeric and string lab values, 
+        applies necessary transformations, and stores the cleaned DataFrame.
+
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            group_cols (list of str): Columns to group labs by for processing.
+            date_cols (list of str): Columns to parse as datetime objects.
+            index_col (str): Column to use as the DataFrame index.
+            numeric_cols (list of str): Columns that contain numeric lab results.
+        """
         ### The labs import needs a special function to tiddy the columns
         def tidy_index(df):
             # turns super_table_name into a col
@@ -321,20 +279,17 @@ class sepyIMPORT:
         
         path_lab_file = self.file_dictionary["LABS"]
 
-        # import the lab flat file and set date/time
-        df_labs = pd.read_csv(
-            path_lab_file,
+        # Use the generic read_data_file function to import the lab flat file
+        df_labs = utils.read_data_file(
+            file_path=path_lab_file,
             header=0,
-            parse_dates=date_cols,
+            date_cols=date_cols,
             date_parser=self.d_parser,
             na_values=self.na_values,
-            sep=self.delim,
+            drop_cols=drop_cols,
             low_memory=False,
-            memory_map=True,
+            memory_map=True
         )
-
-        # drop unecessary cols
-        df_labs = df_labs.drop(columns=drop_cols)
 
         ### Select Relavent Lab Groups ###
         lab_groups = lab_groups[["super_table_col_name", "component_id"]][
@@ -417,38 +372,33 @@ class sepyIMPORT:
             df_labs_all.columns.union(self.all_lab_col_names), axis=1
         )
         logging.info("Labs success")
-###########################################################################
-###################### Create vitals df for all CSNs ######################
-###########################################################################
+
     def import_vitals(self, drop_cols, index_col, date_cols, merge_cols):
         """
-        Imports the lab dataset from a CSV file, processes both numeric and string lab values, 
-        applies necessary transformations, and stores the cleaned DataFrame.
+        Imports the vitals dataset from a CSV file, merges specified columns, 
+        converts vital sign data to numeric, and stores the cleaned DataFrame.
 
         Args:
             drop_cols (list of str): Columns to drop from the DataFrame.
-            group_cols (list of str): Columns to group labs by for processing.
-            date_cols (list of str): Columns to parse as datetime objects.
             index_col (str): Column to use as the DataFrame index.
-            numeric_cols (list of str): Columns that contain numeric lab results.
+            date_cols (list of str): Columns to parse as datetime objects.
+            merge_cols (list): List of column groups to merge.
         """
         logging.info("Begin Vitals Import")
 
         path_vitals_file = self.file_dictionary["VITALS"]
 
-        # import vitals flat file and set date/time cols
-        df_vitals = pd.read_csv(
-            path_vitals_file,
+        # Use the generic read_data_file function to import the vitals flat file
+        df_vitals = utils.read_data_file(
+            file_path=path_vitals_file,
             header=0,
-            dtype=object,
-            parse_dates=date_cols,
             index_col=index_col,
+            date_cols=date_cols,
             na_values=self.na_values,
-            sep=self.delim,
+            drop_cols=drop_cols,
             low_memory=False,
+            dtype=object  # Use object dtype to prevent numeric conversion before specific processing
         )
-        # drop unecssary cols
-        df_vitals = df_vitals.drop(columns=drop_cols)
 
         # If there are columns to merge then do this:
         if merge_cols is not None:
@@ -460,16 +410,14 @@ class sepyIMPORT:
 
         # drop punctuation and make numeric
         start_to_numeric_conversion_time = time.time()  # start timer
-        df_vitals = self.make_numeric(df_vitals, sepyIMPORT.vital_col_names)
+        df_vitals = self.make_numeric(df_vitals, self.vital_col_names)
         logging.info(
             f"It took {time.time()-start_to_numeric_conversion_time} to convert vitals results to numeric."
         )
 
         self.df_vitals = df_vitals
         logging.info("Vitals success")
-###########################################################################
-####################### Create vent df for all CSNs #######################
-###########################################################################
+
     def import_vent(self, drop_cols, numeric_cols, index_col, date_cols):
         """
         Imports the ventilation dataset from a CSV file, processes numeric columns, 
@@ -484,27 +432,80 @@ class sepyIMPORT:
         logging.info("Begin Vent Import")
         path_vent_file = self.file_dictionary["VENT"]
 
-        # import vent flat files and set date/time
-        df_vent = pd.read_csv(
-            path_vent_file,
+        # Use the generic read_data_file function to import the vent file
+        df_vent = utils.read_data_file(
+            file_path=path_vent_file,
             header=0,
-            parse_dates=date_cols,
             index_col=index_col,
+            date_cols=date_cols,
             na_values=self.na_values,
-            sep=self.delim,
+            drop_cols=drop_cols,
             low_memory=False,
+            numeric_cols=numeric_cols
         )
-
-        # drop unecessary cols
-        df_vent = df_vent.drop(columns=drop_cols)
-
-        df_vent = self.make_numeric(df_vent, numeric_cols)
 
         self.df_vent = df_vent
         logging.info("Vent success")
-###########################################################################
-####################### Create GCS df for all CSNs ########################
-###########################################################################
+    
+    def import_dialysis(self, drop_cols, numeric_cols, index_col, date_cols):
+        """
+        Imports the dialysis dataset from a CSV file, processes numeric columns, 
+        drops unnecessary columns, and stores the cleaned DataFrame.
+        
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            numeric_cols (list of str): Columns to convert to numeric values.
+            index_col (str or int): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin Dialysis Import")
+        path_dialysis_file = self.file_dictionary["DIALYSIS"]
+
+        # Use the generic read_data_file function to import the dialysis file
+        df_dialysis = utils.read_data_file(
+            file_path=path_dialysis_file,
+            header=0,
+            index_col=index_col,
+            date_cols=date_cols,
+            na_values=self.na_values,
+            drop_cols=drop_cols,
+            low_memory=False,
+            numeric_cols=numeric_cols
+        )
+
+        self.df_dialysis = df_dialysis
+        logging.info("Dialysis success")
+
+    def import_in_out(self, drop_cols, numeric_cols, index_col, date_cols):
+        """
+        Imports the in/out dataset from a CSV file, processes numeric columns, 
+        drops unnecessary columns, and stores the cleaned DataFrame.
+
+        Args:
+            drop_cols (list of str): Columns to drop from the DataFrame.
+            numeric_cols (list of str): Columns to convert to numeric values.
+            index_col (str or int): Column to use as the DataFrame index.
+            date_cols (list of str): Columns to parse as datetime objects.
+        """
+        logging.info("Begin In/Out Import")
+
+        path_in_out_file = self.file_dictionary["IN_OUT"]
+
+        # Use the generic read_data_file function to import the in/out file
+        df_in_out = utils.read_data_file(
+            file_path=path_in_out_file,
+            header=0,
+            index_col=index_col,
+            date_cols=date_cols,
+            na_values=self.na_values,
+            drop_cols=drop_cols,
+            low_memory=False,
+            numeric_cols=numeric_cols
+        )
+
+        self.df_in_out = df_in_out
+        logging.info("In/Out success")
+
     def import_gcs(self, drop_cols, index_col, numeric_col, date_cols):
         """
         Imports the GCS dataset from a CSV file, processes the numeric columns, 
@@ -520,22 +521,17 @@ class sepyIMPORT:
 
         path_gcs_file = self.file_dictionary["GCS"]
 
-        # import gcs flat file and set date/time cols
-        df_gcs = pd.read_csv(
-            path_gcs_file,
+        # Use the generic read_data_file function to import the GCS file
+        df_gcs = utils.read_data_file(
+            file_path=path_gcs_file,
             header=0,
-            parse_dates=date_cols,
             index_col=index_col,
+            date_cols=date_cols,
             na_values=self.na_values,
-            sep=self.delim,
+            drop_cols=drop_cols,
             low_memory=False,
+            numeric_cols=numeric_col
         )
-
-        # drop unecessary cols
-        df_gcs = df_gcs.drop(columns=drop_cols)
-
-        # ensure all score coloumns are numeric
-        self.make_numeric(df_gcs, numeric_col)
 
         # merges all gcs values into a single timestamp/row
         df_gcs = df_gcs.groupby(["csn", "recorded_time"]).aggregate(
@@ -552,9 +548,7 @@ class sepyIMPORT:
 
         self.df_gcs = df_gcs
         logging.info("GCS success")
-###########################################################################
-#################### Create cultures df for all CSNs ######################
-###########################################################################
+
     def import_cultures(self, drop_cols, index_col, date_cols):
         """
         Imports the cultures dataset from a CSV file, processes date columns, 
@@ -569,25 +563,20 @@ class sepyIMPORT:
 
         path_cultures_file = self.file_dictionary["CULTURES"]
 
-        # imports cultures and sets date/time cols
-        df_cultures = pd.read_csv(
-            path_cultures_file,
+        # Use the generic read_data_file function to import the cultures file
+        df_cultures = utils.read_data_file(
+            file_path=path_cultures_file,
             header=0,
-            parse_dates=date_cols,
             index_col=index_col,
+            date_cols=date_cols,
             na_values=self.na_values,
-            sep=self.delim,
-            low_memory=False,
+            drop_cols=drop_cols,
+            low_memory=False
         )
-
-        # drops unecessary cols
-        df_cultures = df_cultures.drop(columns=drop_cols)
 
         self.df_cultures = df_cultures
         logging.info("Cultures success")
-###########################################################################
-################## Create bed_location df for all CSNs ####################
-###########################################################################
+
     def import_bed_locations(self, drop_cols, index_col, date_cols):
         """
         Imports the bed locations dataset from a CSV file, processes date columns, 
@@ -604,15 +593,14 @@ class sepyIMPORT:
         bed_labels = self.df_bed_labels
         path_bed_locations_file = self.file_dictionary["BEDLOCATION"]
 
-        # import bed flat files and set date/time cols
-        df_beds = pd.read_csv(
-            path_bed_locations_file,
+        # Use the generic read_data_file function to import the bed locations file
+        df_beds = utils.read_data_file(
+            file_path=path_bed_locations_file,
             header=0,
-            parse_dates=date_cols,
             index_col=index_col,
+            date_cols=date_cols,
             na_values=self.na_values,
-            sep=self.delim,
-            low_memory=False,
+            low_memory=False
         )
 
         # drop anytimes where bed_location_start = bed_location_end
@@ -642,13 +630,13 @@ class sepyIMPORT:
         )
 
         # drop unecessary cols
-        df_beds = df_beds.drop(columns=drop_cols)
+        if drop_cols:
+            df_beds = df_beds.drop(columns=drop_cols)
 
         self.df_beds = df_beds
         logging.info("Beds success")
-###########################################################################
-################### Create procedures df for all CSNs #####################
-###########################################################################
+    
+
     def import_procedures(self, drop_cols, index_col, date_cols):
         """
         Imports the procedures dataset from a CSV file, processes date columns, 
@@ -663,26 +651,20 @@ class sepyIMPORT:
         
         path_procedures_file = self.file_dictionary["ORPROCEDURES"]
 
-        # import procedure flat file and set date/time cols
-        df_procedures = pd.read_csv(
-            path_procedures_file,
+        # Use the generic read_data_file function to import the procedures file
+        df_procedures = utils.read_data_file(
+            file_path=path_procedures_file,
             header=0,
-            parse_dates=date_cols,
-            infer_datetime_format=True,
             index_col=index_col,
+            date_cols=date_cols,
             na_values=self.na_values,
-            sep=self.delim,
-            low_memory=False,
+            drop_cols=drop_cols,
+            low_memory=False
         )
-
-        # drop unecessary cols
-        df_procedures = df_procedures.drop(columns=drop_cols)
 
         self.df_procedures = df_procedures
         logging.info("Procedures success")
-###########################################################################
-################## Import ICD 9/10 Code df for all CSNs ###################
-###########################################################################
+
     def import_diagnosis(self, drop_cols, index_col, date_cols):
         """
         Imports the diagnosis dataset, processes date columns, drops unnecessary columns, 
@@ -698,19 +680,16 @@ class sepyIMPORT:
         
         path_diagnosis_file = self.file_dictionary["DIAGNOSIS"]
 
-        # import diganosis flat file
-        df_diagnosis = pd.read_csv(
-            path_diagnosis_file,
+        # Use the generic read_data_file function to import the diagnosis file
+        df_diagnosis = utils.read_data_file(
+            file_path=path_diagnosis_file,
             header=0,
-            parse_dates=date_cols,
             index_col=index_col,
+            date_cols=date_cols,
             na_values=self.na_values,
-            sep=self.delim,
-            low_memory=False,
+            drop_cols=drop_cols,
+            low_memory=False
         )
-
-        # drop unecessary cols
-        df_diagnosis = df_diagnosis.drop(columns=drop_cols)
 
         self.df_diagnosis = df_diagnosis
         logging.info("Diagnosis success")
@@ -814,8 +793,12 @@ class sepyIMPORT:
         Returns:
             pd.DataFrame: A DataFrame containing the merged data with patient IDs, diagnosis time, and comorbidity types.
         """
-        # import mapping file
-        map_df = pd.read_csv(comorbid_map_path, header=0)
+        # import mapping file using the generic read_data_file function
+        map_df = utils.read_data_file(
+            file_path=comorbid_map_path,
+            header=0
+        )
+        
         # column names in map file
         map_df_col_names = map_df.columns.to_list()
 
