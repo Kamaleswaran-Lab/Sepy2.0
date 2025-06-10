@@ -1,7 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+Kamaleswaran Labs
+Author: Jack F. Regan
+Edited: 2025-03-06
+Version: 0.2
+Changes:
+  - improved documentation
+  - implemented yaml configuration file
+"""
+import logging
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-from sepyAGG import labAGG
 import time
 import pandas as pd
 import numpy as np
@@ -9,422 +19,186 @@ import numpy as np
 from functools import reduce
 from comorbidipy import comorbidity
 
-def agg_fn_wrapper(var_name, bounds):
-    df = bounds.loc[bounds['Location in SuperTable'] == var_name]
-    upperbound = df['Physical Upper bound'].values[0]
-    lowerbound = df['Physical lower bound'].values[0]
-    
-    if isinstance(upperbound, str):
-        upperbound = float("nan")
-    
-    def agg_fn(array):
-        if not np.isnan(array).any():
-            return float("nan")
-        else:
-            values = np.copy(array[~np.isnan(array)])
-            if ~np.isnan(lowerbound):
-                values = np.delete(values, values < lowerbound)
-            if ~np.isnan(upperbound):
-                values = np.delete(values, values > upperbound)
-            if len(values) > 0:
-                return np.mean(values)
-            else:
-                return float("nan")
-    return agg_fn
-
-def agg_fn_wrapper_min(var_name, bounds):
-    df = bounds.loc[bounds['Location in SuperTable'] == var_name]
-    upperbound = df['Physical Upper bound'].values[0]
-    lowerbound = df['Physical lower bound'].values[0]
-    
-    if isinstance(upperbound, str):
-        upperbound = float("nan")
-    
-    def agg_fn(array):
-        if not np.isnan(array).any():
-            return float("nan")
-        else:
-            values = np.copy(array[~np.isnan(array)])
-            if ~np.isnan(lowerbound):
-                values = np.delete(values, values < lowerbound)
-            if ~np.isnan(upperbound):
-                values = np.delete(values, values > upperbound)
-            if len(values) > 0:
-                return np.min(values)
-            else:
-                return float("nan")
-    return agg_fn
-
-def agg_fn_wrapper_max(var_name, bounds):
-    df = bounds.loc[bounds['Location in SuperTable'] == var_name]
-    upperbound = df['Physical Upper bound'].values[0]
-    lowerbound = df['Physical lower bound'].values[0]
-    
-    if isinstance(upperbound, str):
-        upperbound = float("nan")
-    
-    def agg_fn(array):
-        if not np.isnan(array).any():
-            return float("nan")
-        else:
-            values = np.copy(array[~np.isnan(array)])
-            if ~np.isnan(lowerbound):
-                values = np.delete(values, values < lowerbound)
-            if ~np.isnan(upperbound):
-                values = np.delete(values, values > upperbound)
-            if len(values) > 0:
-                return np.max(values)
-            else:
-                return float("nan")
-    return agg_fn
-
+import utils 
 
 
 class sepyDICT:
-    ########################################################################################################
-    ####################                  Class Variables                                ###################
-    ########################################################################################################
-    v_vital_col_names = ['temperature',
-              'daily_weight_kg', 'height_cm',
-              'sbp_line', 'dbp_line', 'map_line',
-              'sbp_cuff', 'dbp_cuff', 'map_cuff',
-              'pulse', 'unassisted_resp_rate', 'spo2', 'end_tidal_co2', 'o2_flow_rate'] 
-    
-    #List of all lab names (some years might not have all listed labs)
-    v_numeric_lab_col_names = ['anion_gap', 'base_excess', 'bicarb_(hco3)', 'blood_urea_nitrogen_(bun)',
-           'calcium', 'calcium_adjusted', 'calcium_ionized', 'chloride', 'creatinine',
-           'gfr', 'glucose', 'magnesium', 'osmolarity', 'phosphorus', 'potassium',
-           'sodium',
-           
-            #CBC  
-            'haptoglobin', 'hematocrit', 'hemoglobin', 'met_hgb', 'platelets',
-            'white_blood_cell_count','carboxy_hgb',
-            
-            #Hepatic
-            'alanine_aminotransferase_(alt)','albumin', 'alkaline_phosphatase',
-            'ammonia', 'aspartate_aminotransferase_(ast)', 'bilirubin_direct', 
-            'bilirubin_total', 'fibrinogen', 'inr', 'lactate_dehydrogenase', 'lactic_acid',
-            'partial_prothrombin_time_(ptt)', 'prealbumin', 'protein', 
-            'prothrombin_time_(pt)', 'thrombin_time', 'transferrin',
-            
-            #Pancreatic
-            'amylase','lipase',
-            
-            #Cardiac
-            'b-type_natriuretic_peptide_(bnp)', 'troponin',
-            
-            #ABG            
-            'carboxy_hgb', 'fio2', 'partial_pressure_of_carbon_dioxide_(paco2)',
-            'partial_pressure_of_oxygen_(pao2)', 'ph', 'saturation_of_oxygen_(sao2)',
-            
-            #Other            
-            'd_dimer', 'hemoglobin_a1c', 'parathyroid_level', 'thyroid_stimulating_hormone_(tsh)',
-            
-            #Inflammation           
-            'crp_high_sens', 'procalcitonin', 'erythrocyte_sedimentation_rate_(esr)',
-                               
-            'lymphocyte', 'neutrophils'
-            ]
-    
-    v_string_lab_col_names = [
-        #PCR Testing
-        'c_diff', 'covid', 'mtp']
+    """
+    Initializes a SepyDICT instance for a given patient encounter and processes relevant
+    clinical data for sepsis evaluation and dictionary creation.
 
-    v_all_lab_col_names = v_numeric_lab_col_names + v_string_lab_col_names  
-  
-    #Glasgow Comma Scale Cols
-    v_gcs_col_names = ['gcs_total_score', 'gcs_verbal_score', 'gcs_eye_score', 'gcs_motor_score']
+    Args:
+        imported (sepyIMPORT): An object containing preloaded clinical dataframes.
+        csn (str): The clinical serial number identifying a unique patient encounter.
+        bed_to_unit_mapping (dict): Mapping of bed identifiers to clinical unit names.
+        bounds (pandas.DataFrame): Threshold values and metadata for lab aggregation logic.
+        dialysis_year (int): The year used to contextualize dialysis-related events.
+    """
+    def __init__(self, master_df, sepyDICTConfigs, bed_to_unit_mapping, bounds, year):
+        self.v_vital_col_names = sepyDICTConfigs["vital_col_names"]
+        
+        # List of all lab names (some years might not have all listed labs)
+        self.v_numeric_lab_col_names = sepyDICTConfigs["numeric_lab_col_names"]
+        self.v_string_lab_col_names = sepyDICTConfigs["string_lab_col_names"]
+        self.v_all_lab_col_names = self.v_numeric_lab_col_names + self.v_string_lab_col_names  
     
-    #Bed Location Cols
-    v_bed_info = ['bed_location_start', 'bed_location_end',
-                'bed_unit', 'bed_room', 'bed_id', 'bed_label', 'hospital_service']
-    
-    #Vasopressor cols
-    v_vasopressor_names = ['norepinephrine', 
-                         'epinephrine', 
-                         'dobutamine', 
-                         'dopamine', 
-                         'phenylephrine', 
-                         'vasopressin'] 
-    
-    #Vasopressor units
-    v_vasopressor_units = ['norepinephrine_dose_unit', 
-                         'epinephrine_dose_unit', 
-                         'dobutamine_dose_unit', 
-                         'dopamine_dose_unit', 
-                         'phenylephrine_dose_unit', 
-                         'vasopressin_dose_unit'] 
-    
-    #Vasopressor Dose by weight
-    v_vasopressor_dose = ['norepinephrine_dose_weight', 
-                     'epinephrine_dose_weight', 
-                     'dobutamine_dose_weight', 
-                     'dopamine_dose_weight', 
-                     'phenylephrine_dose_weight', 
-                     'vasopressin_dose_weight'] 
-    
-    #Vassopressors Paired by Name
-    v_vasopressor_col_names = ['norepinephrine', 'norepinephrine_dose_unit','norepinephrine_dose_weight',
-                       'epinephrine', 'epinephrine_dose_unit', 'epinephrine_dose_weight',
-                       'dobutamine', 'dobutamine_dose_unit', 'dobutamine_dose_weight',
-                       'dopamine', 'dopamine_dose_unit', 'dopamine_dose_weight',
-                       'phenylephrine', 'phenylephrine_dose_unit','phenylephrine_dose_weight',
-                       'vasopressin','vasopressin_dose_unit','vasopressin_dose_weight']
-    
-    #Vent Col
-    v_vent_col_names = ['Status']
+        # Glasgow Comma Scale Cols
+        self.v_gcs_col_names = sepyDICTConfigs["gcs_col_names"]
+        
+        # Bed Location Cols
+        self.v_bed_info = sepyDICTConfigs["bed_info"]
+        
+        # Vasopressor cols
+        self.v_vasopressor_names = sepyDICTConfigs["vasopressor_names"]
+        
+        # Vasopressor units
+        self.v_vasopressor_units = sepyDICTConfigs["vasopressor_units"]
+        
+        # Vasopressor Dose by weight
+        self.v_vasopressor_dose = sepyDICTConfigs["vasopressor_dose"]
+        
+        # Vassopressors Paired by Name
+        self.v_vasopressor_col_names = sepyDICTConfigs["vasopressor_col_names"]
+        
+        # Vent Col
+        self.v_vent_col_names = sepyDICTConfigs["vent_col_names"]
+        self.v_vent_positive_vars = sepyDICTConfigs["vent_positive_vars"]
+        
+        # Blood Pressure Cols
+        self.v_bp_cols = sepyDICTConfigs["bp_cols"]
+        
+        # SOFA Cols
+        self.v_sofa_max_24h = sepyDICTConfigs["sofa_max_24h"]
+        self.v_fluids_med_names = sepyDICTConfigs["fluids_med_names"]
+        self.v_fluids_med_names_generic = sepyDICTConfigs["fluids_med_names_generic"]
 
-    v_vent_positive_vars = ['vent_mode', 'vent_rate_set', 'vent_tidal_rate_set', 
-                            'vent_tidal_rate_exhaled', 'peep'] #'fio2'
-    
-    #Blood Pressure Cols
-    v_bp_cols = ['sbp_line', 'dbp_line', 'map_line',
-               'sbp_cuff', 'dbp_cuff', 'map_cuff']
-    
-    #SOFA Cols
-    v_sofa_max_24h = ['SOFA_coag', 'SOFA_coag_24h_max',
-                    'SOFA_renal', 'SOFA_renal_24h_max',
-                    'SOFA_hep', 'SOFA_hep_24h_max',
-                    'SOFA_neuro', 'SOFA_neuro_24h_max',
-                    'SOFA_cardio', 'SOFA_cardio_24h_max',
-                    'SOFA_resp', 'SOFA_resp_24h_max',
-                    'hourly_total', 'hourly_total_24h_max',
-                    'delta_24h', 'delta_24h_24h_max']
-    
-    fluids_med_names = [
-    'Sodium Chloride 0.9% intravenous solution',
-    'Lactated Ringers Injection intravenous solution',
-    'Sodium Chloride 0.45% intravenous solution',
-    'Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution',
-    'potassium chloride-sodium chloride',
-    'Dextrose 5% in Lactated Ringers intravenous solution',
-    'Dextrose 20% in Water intravenous solution',
-    'Dextrose 5% in Water with KCl 20 mEq/l intravenous solution',
-    'Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution',
-    'dextran, low molecular weight',
-    'sodium chloride, hypertonic, ophthalmic',
-    'Electrolyte (Plasma-Lyte) intravenous solution'
-    ]
-    
-    fluids_med_names_generic = [
-        'Albumin 5%'
-    ]
-     
-    ########################################################################################################
-    ####################                  Instance Variables                             ###################
-    ########################################################################################################
-
-    # The following function accepts a list of patient mrns and creates a dictionary
-    def __init__(self, imported, csn, bed_to_unit_mapping, bounds, dialysis_year):
-        
-        print(f'SepyDICT- Creating sepyDICT instance for {csn}')
-        filter_date_start_time = time.time()
-        
-        ##############################
-        self.csn = csn
-        #set the pat id based on the encounter; take first incase multiple encounters
-        try:
-            self.pat_id = imported.df_encounters.loc[csn,['pat_id']].iloc[0].item()
-        except: 
-            self.pat_id = imported.df_encounters.loc[csn,['pat_id']].iloc[0]
-        
+        self.sepyDICTConfigs = sepyDICTConfigs
         self.bed_to_unit_mapping = bed_to_unit_mapping
         self.bounds = bounds
-        self.dialysis_year = dialysis_year
-        
+        self.year = year
+        self.master_df = master_df
+
+        labAGG = self.sepyDICTConfigs["lab_aggregation"]
         labs = labAGG.keys()
         for l in labs:
             if len(bounds.loc[bounds['Location in SuperTable'] == l]) > 0:
-                labAGG[l] = agg_fn_wrapper(l, bounds)
+                labAGG[l] = utils.agg_fn_wrapper(l, bounds)
         self.labAGG = labAGG
+     
+    def create_supertable_pickles(self, csn):
+        logging.info(f'SepyDICT- Creating sepyDICT instance for {csn}')
+        filter_date_start_time = time.time()
+        self.csn = csn
+
+        #set the pat id based on the encounter; take first incase multiple encounters
+        try:
+            self.pat_id = self.master_df.loc[csn,['pat_id']].iloc[0].item()
+        except:
+            self.pat_id = self.master_df.loc[csn,['pat_id']].iloc[0]
         
         #get filtered dfs for each patient encounter
-        self.try_except(imported, self.pat_id, 'demographics')
-        
-        #print(self.demographics_perCSN)
-        self.try_except(imported, csn, 'encounters')
-        self.try_except(imported, csn, 'labs')
-        self.try_except(imported, csn, 'vasopressor_meds')
-        self.try_except(imported, csn, 'anti_infective_meds')
-        self.try_except(imported, csn, 'vitals')
-        self.try_except(imported, csn, 'vent')
-        self.try_except(imported, csn, 'gcs')
-        self.try_except(imported, csn, 'cultures')
-        self.try_except(imported, csn, 'beds')
-        self.try_except(imported, csn, 'procedures')
-        self.try_except(imported, csn, 'diagnosis')
-        self.try_except(imported, csn, 'infusion_meds')
-        #self.try_except(imported, csn, 'ahrq_ICD9')
-        #self.try_except(imported, csn, 'elix_ICD9')
-        #self.try_except(imported, csn, 'quan_deyo_ICD9')
-        #self.try_except(imported, csn, 'quan_elix_ICD9')
-        #self.try_except(imported, csn, 'ccs_ICD9')
-        #self.try_except(imported, csn, 'ahrq_ICD10')
-        #self.try_except(imported, csn, 'elix_ICD10')
-        self.try_except(imported, csn, 'quan_deyo_ICD10')
-        self.try_except(imported, csn, 'quan_elix_ICD10')
-        #self.try_except(imported, csn, 'ccs_ICD10')
-        print('SepyDICT- Now making dictionary')
-        self.make_dict_elements(imported)
-        print('SepyDICT- Now calcuating Sepsis-2')
+        for item in self.sepyDICTConfigs["try_except_calls"]:
+            identifier = self.pat_id if item["id_type"] == "pat_id" else self.csn
+            self.try_except(self.master_df, identifier, item["section"])
+            
+        logging.info('SepyDICT- Now making dictionary')
+        self.make_dict_elements(self.master_df)
+        logging.info('SepyDICT- Now calcuating Sepsis-2')
         self.run_SEP2()
-        print('SepyDICT- Now calcuating Sepsis-3')
+        logging.info('SepyDICT- Now calcuating Sepsis-3')
         self.run_SEP3()
         self.create_infection_sepsis_time()
-        print('SepyDICT- Now writing dictionary')
+        logging.info('SepyDICT- Now writing dictionary')
         self.write_dict()
-        #print(f'SepyDICT- Selecting data and writing this dict by CSN took {time.time() - filter_date_start_time}(s).')
+        logging.info(f'SepyDICT- Selecting data and writing this dict by CSN took {time.time() - filter_date_start_time}(s).')
 
     def try_except(self, 
-                   imported, 
+                   master_df, 
                    csn,
                    name):
-        
+        """
+        Attempts to extract a subset of a DataFrame associated with the 
+        given `name` (e.g., 'demographics', 'labs', etc.) for a specific csn. If the 
+        index type of the 'demographics' DataFrame is object (string-based), the `csn` 
+        is cast to a string to ensure proper lookup.
+
+        If the specified CSN is not found or any error occurs during the lookup,
+        an empty DataFrame with the same structure is assigned instead.
+        Args:
+            imported (sepyIMPORT): An object containing preloaded clinical dataframes.
+            csn (str): The clinical serial number identifying a unique patient encounter.
+            name (str): The name of the data source (e.g., 'demographics', 'labs', etc.). This determines 
+                which DataFrame to access and how to handle indexing.
+        """
         filt_df_name = name + "_PerCSN"
         df_name = "df_" + name
         
         try:
-            #print(getattr(imported, df_name).loc[[str(csn)],:])
             if name == 'demographics': 
-                if getattr(imported, df_name).index.dtype == 'O':
-                    setattr(self, filt_df_name, getattr(imported, df_name).loc[[str(csn)],:])
+                if getattr(master_df, df_name).index.dtype == 'O':
+                    setattr(self, filt_df_name, getattr(master_df, df_name).loc[[str(csn)],:])
                 else:
-                    setattr(self, filt_df_name, getattr(imported, df_name).loc[[csn],:])
+                    setattr(self, filt_df_name, getattr(master_df, df_name).loc[[csn],:])
             else:
-                setattr(self, filt_df_name, getattr(imported, df_name).loc[[csn],:])
-            #print(f'The {name} file was imported')
-            
+                setattr(self, filt_df_name, getattr(master_df, df_name).loc[[csn],:])
+            logging.info(f'The {name} file was imported')
         except Exception as e: 
-            #print(e)
-            empty_df = getattr(imported, df_name).iloc[0:0]
-            empty_df.index.set_names(getattr(imported, df_name).index.names)
-            
+            empty_df = getattr(master_df, df_name).iloc[0:0]
+            empty_df.index.set_names(getattr(master_df, df_name).index.names)
             setattr(self, filt_df_name, empty_df)
-            print(f"The were no {name} data for csn {csn}")
-            
-    def flag_dict (self):
-        self.flags = {}
-        
-        #ID numbers
-        self.flags['csn'] = self.csn
-        self.flags['pt_id'] = self.pat_id
-        
-        #vent flags
-        self.flags['y_vent_rows'] = 0
-        self.flags['y_vent_start_time'] = 0
-        self.flags['y_vent_end_time'] = 0
-        self.flags['vent_start_time'] = pd.NaT
-        
-    def static_features_dict (self):
+            logging.info(f"There were no {name} data for csn {csn}")
 
-        #######################################
-        # static_features: Patient demographic & encounter features that will not change during admisssion
-        #######################################
-        # from encounters file
-        self.static_features = {}
-        # some patients have >1 encounter row; have to take 1st row
-        self.static_features ['admit_reason'] = self.encounters_PerCSN.iloc[0,:]['admit_reason']
-        self.static_features ['ed_arrival_source'] = self.encounters_PerCSN.iloc[0,:]['ed_arrival_source']
-        self.static_features ['total_icu_days'] = self.encounters_PerCSN.iloc[0,:]['total_icu_days']
-        self.static_features ['total_vent_days'] = self.encounters_PerCSN.iloc[0,:]['total_vent_days']
-        self.static_features ['total_hosp_days'] = self.encounters_PerCSN.iloc[0,:]['total_hosp_days']
-        self.static_features ['discharge_status'] = self.encounters_PerCSN.iloc[0,:]['discharge_status']
-        self.static_features ['discharge_to'] = self.encounters_PerCSN.iloc[0,:]['discharge_to']
-        self.static_features ['encounter_type'] = self.encounters_PerCSN.iloc[0,:]['encounter_type']
-        self.static_features ['age'] = self.encounters_PerCSN.iloc[0,:]['age']
-        # some patients have >1 demographic row; have to take 1st row
-        #print(self.demographics_PerCSN)
-        self.static_features ['gender'] = self.demographics_PerCSN.iloc[0,:]['gender']
-        self.static_features ['gender_code'] = self.demographics_PerCSN.iloc[0,:]['gender_code']
-        self.static_features ['race'] = self.demographics_PerCSN.iloc[0,:]['race']
-        self.static_features ['race_code'] = self.demographics_PerCSN.iloc[0,:]['race_code']
-        self.static_features ['ethnicity'] = self.demographics_PerCSN.iloc[0,:]['ethnicity']
-        self.static_features ['ethnicity_code'] = self.demographics_PerCSN.iloc[0,:]['ethnicity_code']
-        #self.static_features ['last4_ssn'] = self.demographics_PerCSN.iloc[0,:]['last4_ssn']
-    def event_times_dict (self):
-        #######################################
-        # event_times: Key event times during a patients admission not otherwise specified
-        #######################################
-        #print(self.encounters_PerCSN.ed_presentation_time)
-        self.event_times = {}    
-        self.event_times ['ed_presentation_time'] = self.encounters_PerCSN.iloc[0,:]['ed_presentation_time']
-        self.event_times ['hospital_admission_date_time'] = self.encounters_PerCSN.iloc[0,:]['hospital_admission_date_time']
-        self.event_times ['hospital_discharge_date_time'] = self.encounters_PerCSN.iloc[0,:]['hospital_discharge_date_time']
-        self.event_times ['start_index'] = min( self.encounters_PerCSN.iloc[0,:]['hospital_admission_date_time'], 
-                                                self.encounters_PerCSN.iloc[0,:]['ed_presentation_time'])
-        #Wait time
-        self.flags['ed_wait_time'] = (self.event_times['hospital_admission_date_time'] - self.event_times['ed_presentation_time'])\
-                                    .total_seconds() / 60
-
-        #bed_df = self.beds_PerCSN
-        
-      
-    def build_super_table_index(self):       
-        # this is index is used in the creation of super_table 
-    
-        start_time = self.event_times ['start_index']
-        end_time = self.event_times ['hospital_discharge_date_time']
-        self.super_table_time_index = pd.date_range(start_time, end_time, freq='H')
-               
-    def cultures_df (self):
-        #######################################
-        #cultures selects unique for the encounter
-        #######################################
-        selected_culture_cols = ['proc_code', 'proc_desc', 'component_id', 'component', 'loinc_code',
-                               'specimen_collect_time','order_time', 'order_id', 'lab_result_time', 
-                               'result_status', 'lab_result']
-
-        self.cultures_staging = self.cultures_PerCSN[selected_culture_cols]
-        
-    def antibiotics_df (self):
-        self.abx_staging = self.anti_infective_meds_PerCSN 
-        
     def bin_labs(self):
+        """
+        Resamples and aligns patient lab data to a unified hourly time index.
+        """
         df = self.labs_PerCSN
-
         if df.empty:
             #drop the multi index and keep only collection time
             df.index = df.index.get_level_values('collection_time')
             #create new index with super table time index
             self.labs_staging = pd.DataFrame(index = self.super_table_time_index, columns = df.columns)
-            
         else:
             df = df.reset_index('collection_time')
             new = pd.DataFrame([])
             for key, value in self.labAGG.items():
                 col1 = df[[key, 'collection_time']].resample('60min', on = "collection_time",  origin = self.event_times ['start_index']).apply(value)
-                
-                
                 #col1 = col1.drop(columns=['collection_time'])
-                #print(col1.columns)
+                #logging.info(col1.columns)
                 new = pd.concat((new, col1), axis = 1)
             self.labs_staging = new.reindex(self.super_table_time_index)
             #self.labs_staging.columns = [x[0] for x in self.labs_staging.columns]
-        
+
     def bin_vitals(self):
-       df = self.vitals_PerCSN 
+        """
+        Resamples and aligns patient vital data to a unified hourly time index.
+        """
+        df = self.vitals_PerCSN 
        
-       if df.empty:
+        if df.empty:
             #drop the multi index and keep only collection time
             #df.index = df.index.get_level_values('recorded_time')
             
             #create new index with super table time index
             self.vitals_staging = pd.DataFrame(index = self.super_table_time_index, columns = df.columns)
             
-       else:
+        else:
             new = pd.DataFrame([])
             for key in self.v_vital_col_names:
                 if len(self.bounds.loc[self.bounds['Location in SuperTable'] == key]) > 0:
-                    agg_fn = agg_fn_wrapper(key, self.bounds)
+                    agg_fn = utils.agg_fn_wrapper(key, self.bounds)
                 else:
                     agg_fn = "mean"
                 col1 = df[[key, 'recorded_time']].resample('60min', on = "recorded_time",  \
                                                            origin = self.event_times ['start_index']).apply(agg_fn)
                 #col1 = col1.drop(columns=['recorded_time'])
                 new = pd.concat((new, col1), axis = 1)
-            self.vitals_staging = new.reindex(self.super_table_time_index)
-                                        
+            self.vitals_staging = new.reindex(self.super_table_time_index)                 
+
     def bin_gcs(self):
+        """
+        Resamples and aligns patient gcs data to a unified hourly time index.
+        """
         df = self.gcs_PerCSN
  
         if df.empty:
@@ -435,7 +209,7 @@ class sepyDICT:
             new = pd.DataFrame([])
             for key in self.v_gcs_col_names:
                 if len(self.bounds.loc[self.bounds['Location in SuperTable'] == key]) > 0:
-                    agg_fn = agg_fn_wrapper_min(key, self.bounds)
+                    agg_fn = utils.agg_fn_wrapper_min(key, self.bounds)
                 else:
                     agg_fn = "min"
                 col1 = df[[key, 'recorded_time']].resample('60min', on = "recorded_time",  \
@@ -449,8 +223,11 @@ class sepyDICT:
             #                 origin = self.event_times ['start_index']).apply("min")
             #df = df.drop(columns=['recorded_time'])
             #self.gcs_staging = df.reindex(self.super_table_time_index)           
-        
+            
     def bin_vent(self):
+        """
+        Resamples and aligns patient ventilator data to a unified hourly time index.
+        """
         df = self.vent_PerCSN
 
         if df.empty:
@@ -476,7 +253,7 @@ class sepyDICT:
                 
                 #check if there are any "real" vent rows; if so 
                 if df['vent_status'].sum()>0:
-                    #print(df[df['vent_status']>0].vent_status)
+                    #logging.info(df[df['vent_status']>0].vent_status)
                     self.flags['vent_start_time']  =  df[df['vent_status']>0].recorded_time.iloc[0]
 
                 df = df[['recorded_time','vent_status','fio2']].resample('60min',
@@ -530,7 +307,6 @@ class sepyDICT:
 #                                              origin = self.event_times ['start_index']).mean() \
 #                                             .reindex(self.super_table_time_index)
 # =============================================================================
-            
             else:
                 #flag identifies the presence of vent rows, and start time
                 self.flags['y_vent_rows'] = 1
@@ -557,10 +333,10 @@ class sepyDICT:
                                              on = 'recorded_time',
                                              origin = self.event_times ['start_index']).mean() \
                                              .reindex(self.super_table_time_index)
-                                              
-########################################################################################################        
-
     def bin_vasopressors(self):
+        """
+        Resamples and aligns patient vasopressor data to a unified hourly time index.
+        """
         df = self.vasopressor_meds_PerCSN
         vas_cols = self.v_vasopressor_names + self.v_vasopressor_units + ['med_order_time']
         df =df[vas_cols]
@@ -571,12 +347,11 @@ class sepyDICT:
             
             #if no vasopressers then attach index to empty df
             self.vasopressor_meds_staging = pd.DataFrame(index = self.super_table_time_index, columns = df.columns)
-        
         else:
             new = pd.DataFrame([])
             for key in vas_keys:
                 if len(self.bounds.loc[self.bounds['Location in SuperTable'] == key]) > 0:
-                    agg_fn = agg_fn_wrapper_max(key, self.bounds)
+                    agg_fn = utils.agg_fn_wrapper_max(key, self.bounds)
                 else:
                     agg_fn = "max"
                 col1 = df[[key, 'med_order_time']].resample('60min', on = "med_order_time",  \
@@ -593,10 +368,12 @@ class sepyDICT:
             #df = df.drop(columns=['med_order_time'])
             
             #self.vasopressor_meds_staging = df.reindex(self.super_table_time_index)
-            
     def bin_fluids(self):
+        """
+        Resamples and aligns patient fluids data to a unified hourly time index.
+        """
         df = self.infusion_meds_PerCSN
-        cols = self.fluid_med_names + ['med_order_time']
+        cols = self.v_fluids_med_names + ['med_order_time']
         df =df[cols]
         
         if df.empty:
@@ -613,10 +390,76 @@ class sepyDICT:
             #drop unecessary cols
             df = df.drop(columns=['med_order_time'])
             
-            self.infusion_meds_staging = df.reindex(self.super_table_time_index)
-          
-########################################################################################################        
+            self.infusion_meds_staging = df.reindex(self.super_table_time_index)    
+###########################################################################
+################### Dictionary Construction Functions #####################
+###########################################################################
+    def flag_dict (self):
+        self.flags = {}
+    
+        # ID numbers
+        self.flags['csn'] = self.csn
+        self.flags['pt_id'] = self.pat_id
+        
+        # vent flags
+        self.flags['y_vent_rows'] = 0
+        self.flags['y_vent_start_time'] = 0
+        self.flags['y_vent_end_time'] = 0
+        self.flags['vent_start_time'] = pd.NaT
+    def static_features_dict (self):
+        # static_features: Patient demographic & encounter features that will not change during admisssion
 
+        # from encounters file
+        self.static_features = {}
+        # some patients have >1 encounter row; have to take 1st row
+        self.static_features ['admit_reason'] = self.encounters_PerCSN.iloc[0,:]['admit_reason']
+        self.static_features ['ed_arrival_source'] = self.encounters_PerCSN.iloc[0,:]['ed_arrival_source']
+        self.static_features ['total_icu_days'] = self.encounters_PerCSN.iloc[0,:]['total_icu_days']
+        self.static_features ['total_vent_days'] = self.encounters_PerCSN.iloc[0,:]['total_vent_days']
+        self.static_features ['total_hosp_days'] = self.encounters_PerCSN.iloc[0,:]['total_hosp_days']
+        self.static_features ['discharge_status'] = self.encounters_PerCSN.iloc[0,:]['discharge_status']
+        self.static_features ['discharge_to'] = self.encounters_PerCSN.iloc[0,:]['discharge_to']
+        self.static_features ['encounter_type'] = self.encounters_PerCSN.iloc[0,:]['encounter_type']
+        self.static_features ['age'] = self.encounters_PerCSN.iloc[0,:]['age']
+        # some patients have >1 demographic row; have to take 1st row
+        self.static_features ['gender'] = self.demographics_PerCSN.iloc[0,:]['gender']
+        self.static_features ['gender_code'] = self.demographics_PerCSN.iloc[0,:]['gender_code']
+        # self.static_features ['race'] = self.demographics_PerCSN.iloc[0,:]['race']
+        self.static_features ['race_code'] = self.demographics_PerCSN.iloc[0,:]['race_code']
+        # self.static_features ['ethnicity'] = self.demographics_PerCSN.iloc[0,:]['ethnicity']
+        self.static_features ['ethnicity_code'] = self.demographics_PerCSN.iloc[0,:]['ethnicity_code']
+        # self.static_features ['last4_ssn'] = self.demographics_PerCSN.iloc[0,:]['last4_ssn']
+    def event_times_dict (self):
+        # event_times: Key event times during a patients admission not otherwise specified
+
+        self.event_times = {}    
+        self.event_times ['ed_presentation_time'] = self.encounters_PerCSN.iloc[0,:]['ed_presentation_time']
+        self.event_times ['hospital_admission_date_time'] = self.encounters_PerCSN.iloc[0,:]['hospital_admission_date_time']
+        self.event_times ['hospital_discharge_date_time'] = self.encounters_PerCSN.iloc[0,:]['hospital_discharge_date_time']
+        self.event_times ['start_index'] = min( self.encounters_PerCSN.iloc[0,:]['hospital_admission_date_time'], 
+                                                self.encounters_PerCSN.iloc[0,:]['ed_presentation_time'])
+        #Wait time
+        self.flags['ed_wait_time'] = (self.event_times['hospital_admission_date_time'] - self.event_times['ed_presentation_time'])\
+                                    .total_seconds() / 60
+        #bed_df = self.beds_PerCSN
+    def build_super_table_index(self):       
+        # this is index is used in the creation of super_table 
+    
+        start_time = self.event_times ['start_index']
+        end_time = self.event_times ['hospital_discharge_date_time']
+        self.super_table_time_index = pd.date_range(start_time, end_time, freq='H')
+               
+    def cultures_df (self):
+        # cultures selects unique for the encounter
+
+        self.cultures_perCSN = ['proc_code', 'proc_desc', 'component_id', 'component', 'loinc_code',
+                               'specimen_collect_time','order_time', 'order_id', 'lab_result_time', 
+                               'result_status', 'lab_result']
+        # Ensure the required columns are present in the DataFrame
+        self.cultures_staging = self.cultures_PerCSN
+        
+    def antibiotics_df (self):
+        self.abx_staging = self.anti_infective_meds_PerCSN  
     def make_super_table(self):
 
         dfs = [self.vitals_staging, 
@@ -634,7 +477,6 @@ class sepyDICT:
             self.super_table.update(self.vent_fio2, overwrite=False)
         except:
             pass 
-        
     def assign_bed_location(self):
         df = self.beds_PerCSN
         #these columns have the flags for bed status
@@ -656,9 +498,6 @@ class sepyDICT:
         
         #this is bed status re_indexed with super_table index; gets merged in later
         self.bed_status = bed_status.reindex(self.super_table_time_index, method='nearest')
-                        
-
-
     def comorbid_dict(self, imported):
         ### ICD9 calcs
 # =============================================================================
@@ -770,9 +609,7 @@ class sepyDICT:
            #self.event_times ['first_icu'] =  self.beds_PerCSN[self.beds_PerCSN.icu==1].sort_values('bed_location_start').bed_location_start.iloc[0]
         else:
            self.event_times ['first_icu_start'] = None
-           self.event_times ['first_icu_end'] = None
-########################################################################################################        
-
+           self.event_times ['first_icu_end'] = None      
     def calc_t_susp(self):
         self.abx_order_time = self.abx_staging.med_order_time.unique()
 
@@ -797,11 +634,6 @@ class sepyDICT:
         t_suspicion = pd.DataFrame(t_susp_list, columns=['t_abx','t_clt'])
         t_suspicion['t_suspicion'] = t_suspicion[['t_abx','t_clt']].min(axis=1)
         self.t_suspicion = t_suspicion.sort_values('t_suspicion')
-
-########################################################################################################
-#### Handles missing weights & heights
-########################################################################################################
-
     def fill_height_weight(self, 
                            weight_col='daily_weight_kg', 
                            height_col='height_cm'):
@@ -849,10 +681,6 @@ class sepyDICT:
         #Fwdfill to discharge
         df[weight_col].fillna(method='ffill', inplace=True)
         df[height_col].fillna(method='ffill', inplace=True)
-                
-########################################################################################################
-#### Determines best MAP to use
-########################################################################################################
     def calc_best_map(self, row):
         if row[['sbp_line','dbp_line']].notnull().all() and (row['sbp_line'] - row['dbp_line']) > 15:
             best_map = (1/3)*row['sbp_line'] + (2/3)*row['dbp_line']
@@ -865,7 +693,6 @@ class sepyDICT:
         if np.isnan(best_map) and (best_map < 30 or best_map > 150):
             best_map = float("NaN")       
         return(best_map)
-    
     def calc_pulse_pressure(self, row):
         if row[['sbp_line','dbp_line']].notnull().all() and (row['sbp_line'] - row['dbp_line']) > 15:
             pulse_pressure = row['sbp_line'] - row['dbp_line']
@@ -874,8 +701,6 @@ class sepyDICT:
         else:
             pulse_pressure = float("NaN")
         return(pulse_pressure)
-        
-    
     def best_map_by_row(self, row):
         """
         Accepts- A patient_dictionary and a row from super_table
@@ -904,7 +729,6 @@ class sepyDICT:
             best_map = float("NaN")
 
         return(best_map)
-
     def best_map(self, 
                  v_bp_cols=['sbp_line', 'dbp_line', 'map_line',
                           'sbp_cuff', 'dbp_cuff', 'map_cuff']):
@@ -916,7 +740,6 @@ class sepyDICT:
         
         #picks or calculates the best map
         self.super_table['best_map'] = (self.super_table[v_bp_cols].apply(self.calc_best_map,axis=1))
-        
     def pulse_pressure(self, 
                  v_bp_cols=['sbp_line', 'dbp_line', 'map_line',
                           'sbp_cuff', 'dbp_cuff', 'map_cuff']):
@@ -928,11 +751,6 @@ class sepyDICT:
         
         #picks or calculates the pp
         self.super_table['pulse_pressure'] = (self.super_table[v_bp_cols].apply(self.calc_pulse_pressure,axis=1))
-
-########################################################################################################
-#### Calculates P:F & S:F Ratio
-########################################################################################################
-
     # Converts FiO2 to decimal if it is not in this form
     def fio2_decimal(self,
                      fio2 = 'fio2'):
@@ -951,8 +769,6 @@ class sepyDICT:
         
         df = self.super_table
         df[fio2]= df.apply(fio2_row, axis=1)
-        
-########################################################################################################
     def calc_nl(self, 
                     neutrophils = 'neutrophils', 
                     lymphocytes = 'lymphocyte'):
@@ -964,7 +780,6 @@ class sepyDICT:
 
             df['n_to_l'] = df[neutrophils]/df[lymphocytes]
             return 
-
     # Calculates pf ratio using SpO2 and PaO2 these P:F ratios are saved as new column     
     def calc_pf(self, 
                 spo2 = 'spo2', 
@@ -980,12 +795,13 @@ class sepyDICT:
         df['pf_sp'] = df[spo2]/df[fio2]
         df['pf_pa'] = df[pao2]/df[fio2]
         return 
-    
     def single_pressor_by_weight(self,
                                  row, 
                                  single_pressors_name):
-        """Accepts a row from an apply function, and a name of a pressor 
-        Checks the dosing rate and decides if division by weight is needed or not."""
+        """
+        Accepts a row from an apply function, and a name of a pressor 
+        Checks the dosing rate and decides if division by weight is needed or not.
+        """
 
         if single_pressors_name == 'vasopressin':
             val = row[single_pressors_name]
@@ -999,22 +815,20 @@ class sepyDICT:
         else:
             val = row[single_pressors_name]
         return(val)
-
-    def calc_all_pressors(self, 
-                          v_vasopressor_names = v_vasopressor_names):
-        """Accepts- Patient Dictionary, List of Vasopressor names
+    def calc_all_pressors(self):
+        """
+        Accepts- Patient Dictionary, List of Vasopressor names
         Does- Applies the 'single_pressor_by_weight' function to each pressor each pressor 
               column, one row at a time .
-        Returns- A column for each pressor that is adjusted for weight as needed."""
+        Returns- A column for each pressor that is adjusted for weight as needed.
+        """
 
         df = self.super_table
-        for val in v_vasopressor_names:
+        for val in self.v_vasopressor_names:
             df[val + '_dose_weight'] = df.apply(self.single_pressor_by_weight, single_pressors_name=val, axis=1)
-
-########################################################################################################
-#### Cleans up the vasopressors
-########################################################################################################
-
+###########################################################################
+########################## Vasopresor Clean Up ############################
+###########################################################################
     def fill_values(self, 
                     labs = None, 
                     vitals = None, 
@@ -1045,12 +859,13 @@ class sepyDICT:
                             v_vasopressor_units = None,
                             v_vasopressor_dose = None):
 
-        """Accepts- 1) Patient Dictionary
+        """
+        Accepts- 1) Patient Dictionary
                     2) Lists of Initial vasopressor dose, vasopressor units, vasopressor weight based dose
            Does- Forward fills from first non-null value to the last non-null value. 
            Returns- 
            Notes- The assumption is that the last pressor is the last dose.
-           """
+        """
        
     # Uses class variable for function
         if v_vasopressor_names is None:
@@ -1091,8 +906,7 @@ class sepyDICT:
         if df[df['vent_status']>0]['pf_sp'].size:
             self.flags['worst_pf_sp_time'] = df[df['vent_status']>0]['pf_sp'].idxmin( skipna=True)
         else: 
-            self.flags['worst_pf_sp_time'] =  pd.NaT                     
-#######################################################################################################   
+            self.flags['worst_pf_sp_time'] =  pd.NaT                       
 
 #Indicator variables for on pressors or on dobutamine
     def flag_variables_pressors(self):
@@ -1124,7 +938,7 @@ class sepyDICT:
         if start is None and end is None:
             self.super_table['elapsed_icu'] = [0]*len(self.super_table)
         elif start is None and end is not None:
-            print(str(self.csn) + 'probably has an error in icu start and end times')
+            logging.ERROR(str(self.csn) + 'probably has an error in icu start and end times')
         elif start is not None and end is None:
             end = self.super_table.index[-1]
             self.super_table['elapsed_icu'] = self.super_table.index
@@ -1202,7 +1016,7 @@ class sepyDICT:
                 if df['vent_status'].sum()>0:
                     vent_stop  =  df[df['vent_status']>0].recorded_time.iloc[-1:]
             
-            agg_fn = agg_fn_wrapper('fio2', self.bounds)
+            agg_fn = utils.agg_fn_wrapper('fio2', self.bounds)
             if len(vent_start) == 0: #No valid mechanical ventilation values
                 # vent_status and fio2 will get joined to super table later
                 vent_fio2 = df[['recorded_time','fio2']].resample('60min',
@@ -1246,8 +1060,8 @@ class sepyDICT:
         #Get static features
         age = self.static_features['age']
         gender = self.static_features['gender']
-        race = self.static_features['race']
-        ethnicity = self.static_features['ethnicity']
+        # race = self.static_features['race']
+        # ethnicity = self.static_features['ethnicity']
 
         df = pd.DataFrame()
         df['code'] = self.diagnosis_PerCSN['dx_code_icd9'].values
@@ -1289,13 +1103,11 @@ class sepyDICT:
 
         self.super_table['age'] = [age]*len(self.super_table)
         self.super_table['gender'] = [gender]*len(self.super_table)
-        self.super_table['race'] = [race]*len(self.super_table)
-        self.super_table['ethnicity'] = [ethnicity]*len(self.super_table)
+        # self.super_table['race'] = [race]*len(self.super_table)
+        # self.super_table['ethnicity'] = [ethnicity]*len(self.super_table)
 
         self.super_table['cci9'] = [cci9]*len(self.super_table)
         self.super_table['cci10'] = [cci10]*len(self.super_table)
-        
-    
     def create_bed_unit(self):
         bedDf = self.beds_PerCSN
         bed_start = bedDf['bed_location_start'].values
@@ -1321,32 +1133,27 @@ class sepyDICT:
         try:
             self.super_table['bed_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'unit_type'])
             self.super_table['icu_type'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'icu_type'])
-            #self.super_table['hospital'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'hospital'])
+            # self.super_table['hospital'] = self.super_table['bed_unit'].apply(map_bed_unit, args = [self.bed_to_unit_mapping, 'hospital'])
         except:
             self.super_table['bed_type'] = [float("nan")]*len(self.super_table)
             self.super_table['icu_type'] = [float("nan")]*len(self.super_table)
-            #self.super_table['hospital'] = [float("nan")]*len(self.super_table)
-            
+            # self.super_table['hospital'] = [float("nan")]*len(self.super_table)
     def on_dialysis(self):
         dd = self.dialysis_year.loc[self.dialysis_year['Encounter Encounter Number'] == self.csn]
         self.super_table['on_dialysis'] = [0]*len(self.super_table)
         for time in dd['Service Timestamp']:
             time = pd.to_datetime(time)
             self.super_table.loc[(self.super_table.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
-    
     def dialysis_history(self):
         dialysis_history = self.diagnosis_PerCSN.loc[(self.diagnosis_PerCSN.dx_code_icd9 == '585.6') | (self.diagnosis_PerCSN.dx_code_icd10 == 'N18.6')]
         if len(dialysis_history) == 0:
             self.super_table['history_of_dialysis'] = [0]*len(self.super_table)
         else:
             self.super_table['history_of_dialysis'] = [1]*len(self.super_table)
-    
-
-        
     def create_fluids_columns(self):
         infusionDf = self.infusion_meds_PerCSN
-        med_names = self.infusion_meds_PerCSN.loc[self.infusion_meds_PerCSN['med_name'].isin(self.fluids_med_names)]
-        med_names_generic = self.infusion_meds_PerCSN.loc[self.infusion_meds_PerCSN['med_name_generic'].isin(self.fluids_med_names_generic)]
+        # med_names = self.infusion_meds_PerCSN.loc[self.infusion_meds_PerCSN['med_name'].isin(self.fluids_med_names)]
+        # med_names_generic = self.infusion_meds_PerCSN.loc[self.infusion_meds_PerCSN['med_name_generic'].isin(self.fluids_med_names_generic)]
         
         for med in self.fluids_med_names:
             self.super_table[med] = [0]*len(self.super_table)
@@ -1369,152 +1176,46 @@ class sepyDICT:
                 med_dose = row['med_action_dose']
                 self.super_table.loc[(abs(self.super_table.index - med_start) < pd.Timedelta('60 min')) & (self.super_table.index - med_start > pd.Timedelta('0 seconds')), med] = 1
                 self.super_table.loc[(abs(self.super_table.index - med_start) < pd.Timedelta('60 min')) & (self.super_table.index - med_start > pd.Timedelta('0 seconds')), med + '_dose'] = med_dose
-        
-
     def make_dict_elements(self, imported):
-        print("INSIDE MAKE_DICT_ELEMENTS")
-        #start_dict_time = time.time()
-        self.flag_dict ()
-        print('flag complete')
-        self.static_features_dict()
-        print('static complete')
-        self.event_times_dict()
-        print('event complete')
-        self.cultures_df()
-        print('cultures complete')
-        self.antibiotics_df()
-        print('abx complete')
-        self.build_super_table_index()
-        print('super table index complete')
-        self.assign_bed_location()
-        print('the beds have been binned')
-        self.bin_labs()
-        print('labs complete')
-        self.bin_vitals()
-        print('vitals complete')        
-        self.bin_gcs()
-        print('gcs complete')
-        self.bin_vent()
-        print('vent complete')
-        self.bin_vasopressors()
-        print('vasopressors complete')
-        self.make_super_table()
-        print(self.super_table.columns)
-        self.calc_t_susp()
-        print('t susp complete')
-        self.fill_height_weight()
-        print('filling height weight complete')
-        self.best_map()
-        self.pulse_pressure()
-        self.calculate_anion_gap()
-        print('best map selected')
-        self.calc_all_pressors()
-        print('vasopressor mg/kg/min calculated')
-        #self.fill_values()
-        #print('most values filled fwd/bwd')
-        #self.fill_pressor_values()
-        #print('pressor values filled fwd/bwd')
-        self.fio2_decimal()
-        print('fio2 converted to decimal where appropriate')
-        self.calc_pf()
-        self.calc_nl()
-        print('all p:f and s:f ratios calculated')
-        self.comorbid_dict(imported)
-        print('the comorbid dictionary is updated')
-        self.calc_icu_stay()
-        print('the first icu stay has been calculated')
-        self.calc_worst_pf()
-        print('the worst pf has been calcd and saved')
-        self.flag_variables_pressors()
-        self.create_elapsed_icu()
-        self.create_elapsed_hosp()
-        
-        self.create_on_vent()
-        print("Created on vent")
-        self.static_cci_to_supertable()
-        print('static cci to super table complete')
-        
-        self.create_bed_unit() #For Grady - last three commented out 
-        print("Bed Unit created")
-        #self.on_dialysis() #For Grady - no dialysis data
-        #print("On dialysis created") 
-        self.create_fluids_columns()
-        print("Fluids columns created")
+        """
+        Iterates over a set of predefined dictionary elements and executes corresponding methods 
+        with optional arguments as specified in a configuration, logging each step if needed.
+        Args:
+            imported (object): This argument is included but not used in the current method. 
+                                It may be reserved for future use or passed in by the caller for external interactions.
+        """
+        for step in sepyDICTConfigs["dict_elements"]:
+            method_name = step["method"]
+            method = getattr(self, method_name)
+            args = step.get("args", [])
+            if args == "imported":
+                method(imported)
+            else:
+                method(*args)
 
-        self.dialysis_history()
-        print("Dialysis history created")
-
-
-
+            if "log" in step:
+                logging.info(step["log"])
     def write_dict(self):
-        encounter_dict = {}
-        encounter_dict['csn']=self.csn
-        encounter_dict['pat_id']=self.pat_id
-        encounter_dict['cultures_PerCSN'] = self.cultures_PerCSN
-        encounter_dict['beds_PerCSN'] = self.beds_PerCSN
-        encounter_dict['procedures_PerCSN'] =self.procedures_PerCSN
-        encounter_dict['diagnosis_PerCSN'] = self.diagnosis_PerCSN
-        encounter_dict['flags'] = self.flags
-        encounter_dict['static_features'] = self.static_features
-        encounter_dict['event_times'] = self.event_times        
-        encounter_dict['cultures_staging'] = self.cultures_staging
-        encounter_dict['abx_staging'] = self.abx_staging
-        encounter_dict['labs_staging'] = self.labs_staging
-        encounter_dict['vitals_staging'] = self.vitals_staging
-        encounter_dict['gcs_staging'] = self.gcs_staging
-        encounter_dict['vent_status'] = self.vent_status
-        encounter_dict['vent_fio2'] = self.vent_fio2
-        encounter_dict['vasopressor_meds_staging'] = self.vasopressor_meds_staging
-        encounter_dict['super_table'] = self.super_table
-        
-        #Suspicion
-        encounter_dict['abx_order_time'] = self.abx_order_time
-        encounter_dict['culture_times'] =self.culture_times
-        encounter_dict['t_suspicion'] = self.t_suspicion
-
-        #Sepsis 3
-        encounter_dict['sofa_scores'] = self.sofa_scores
-        encounter_dict['sep3_time'] = self.sep3_time
-
-        #Sepsis 2        
-        encounter_dict['sirs_scores'] = self.sirs_scores
-        encounter_dict['sep2_time'] = self.sep2_time
-        
+        """
+        Creates a dictionary of key attributes from the instance and stores it as an attribute.
+        """
+        encounter_keys = sepyDICTConfigs["write_dict_keys"]
+        encounter_dict = {key: getattr(self, key) for key in encounter_keys}
         #write to the instance
         self.encounter_dict = encounter_dict
 
-        
-########################################################################################################
-########################################################################################################
-########################################################################################################
-###
-###             BEGIN SEPSIS CALCS
-###
-########################################################################################################
-########################################################################################################
-########################################################################################################
-        
-
-
-########################################################################################################
-########################################################################################################
-########################################################################################################
-####################        Calc SEPSIS 3                                            ###################
-######################################################################################################## 
-########################################################################################################
-########################################################################################################
-
-########################################################################################################
-####################                  SOFA FUNCTIONS                                 ###################
-########################################################################################################
-
+###########################################################################
+############################ SOFA Functions ###############################
+###########################################################################
     def SOFA_resp(self,
                   row,
                   pf_pa='pf_pa',
                   pf_sp = 'pf_sp'):
-        """Accepts- class instance, one row from "super_table", "pf" cols
+        """
+        Accepts- class instance, one row from "super_table", "pf" cols
         Does- Calculates Respiratory SOFA score
-        Returns- Single value of Respiratory SOFA score """
+        Returns- Single value of Respiratory SOFA score
+        """
         if row[pf_pa] < 100:
             val = 4
         elif row[pf_pa] < 200:
@@ -1533,9 +1234,11 @@ class sepyDICT:
                   row,
                   pf_pa='pf_pa',
                   pf_sp = 'pf_sp'):
-        """Accepts- class instance, one row from "super_table", "pf" cols
+        """
+        Accepts- class instance, one row from "super_table", "pf" cols
         Does- Calculates Respiratory SOFA score
-        Returns- Single value of Respiratory SOFA score """
+        Returns- Single value of Respiratory SOFA score
+        """
         if row[pf_sp] < 67:
             val = 4
         elif row[pf_sp] < 142:
@@ -1670,9 +1373,14 @@ class sepyDICT:
         else:
             val = float("NaN")
         return val
-    
     def calc_all_SOFA(self,
                 window = 24):
+        """
+        Calculates the Sequential Organ Failure Assessment (SOFA) score for a patient based on various organ systems.
+        
+        Args:
+            window (int, optional): The rolling window size (in hours) used for calculating the delta of the SOFA score. The default value is 24 hours.
+        """
     
         df = self.super_table
         sofa_df = pd.DataFrame(index = self.super_table.index,
@@ -1767,14 +1475,16 @@ class sepyDICT:
 #         df.iloc[0,:] = df.iloc[0,].fillna(0)
 # =============================================================================
 
-########################################################################################################
-####################        Run all The Sepsis 3 steps                               ###################
-########################################################################################################       
+###########################################################################
+################# Run all The Sepsis 3 steps ##############################
+###########################################################################     
 
     def run_SEP3(self):
-        """Accepts- a SOFAPrep class instance
+        """
+        Accepts- a SOFAPrep class instance
         Does- Runs all the prep and calc steps for SOFA score calculation
-        Returns- A class instance with updated "super_table" and new "sofa_scores" data frame"""
+        Returns- A class instance with updated "super_table" and new "sofa_scores" data frame
+        """
         #start_sofa_calc = time.time()
         self.calc_all_SOFA()
         #self.hourly_max_SOFA ()
@@ -1785,12 +1495,12 @@ class sepyDICT:
         #Select the first row that has 3x values
         df = self.sep3_time[self.sep3_time.notna().all(axis=1)].reset_index()
         if df.empty:
-            print("No sep3 times to add to flag dict")
+            logging.info("No sep3 times to add to flag dict")
             self.flags['first_sep3_susp'] = None
             self.flags['first_sep3_SOFA'] = None
             self.flags['first_sep3_time'] = None
         else:
-            print("adding first sep3 times to flag dict")
+            logging.info("adding first sep3 times to flag dict")
             self.flags['first_sep3_susp'] = df['t_suspicion'][0]
             self.flags['first_sep3_SOFA'] = df['t_SOFA'][0]
             self.flags['first_sep3_time'] = df['t_sepsis3'][0]
@@ -1801,22 +1511,27 @@ class sepyDICT:
         #Set first sepsis 3 time in the flag dictionary
         df = self.sep3_time_mod[self.sep3_time_mod.notna().all(axis=1)].reset_index()
         if df.empty:
-            print("No sep3_mod times to add to flag dict")
+            logging.info("No sep3_mod times to add to flag dict")
             self.flags['first_sep3_susp_mod'] = None
             self.flags['first_sep3_SOFA_mod'] = None
             self.flags['first_sep3_time_mod'] = None
         else:
-            print("adding first sep3_mod times to flag dict")
+            logging.info("adding first sep3_mod times to flag dict")
             self.flags['first_sep3_susp_mod'] = df['t_suspicion'][0]
             self.flags['first_sep3_SOFA_mod'] = df['t_SOFA_mod'][0]
             self.flags['first_sep3_time_mod'] = df['t_sepsis3_mod'][0]
-                
-########################################################################################################
-####################        Calc Tsepsis-3                                           ###################
-########################################################################################################     
+###########################################################################
+############################# Calc Tsepsis-3 ##############################
+###########################################################################     
     def calc_sep3_time(self,
                        look_back = 24,
                        look_forward = 12):
+        """
+        Calculates the Sepsis-3 time based on suspicion of infection and SOFA (Sequential Organ Failure Assessment) scores.
+        Args:
+        look_back (int, optional): The number of hours before suspicion time to look for SOFA events (default is 24).
+        look_forward (int, optional): The number of hours after suspicion time to look for SOFA events (default is 12).
+        """
         
         # Initialize empty list to hold SOFA times in loops below 
         #t_SOFA_list = []
@@ -1855,14 +1570,14 @@ class sepyDICT:
 
                 # keep times that are with in a suspicion window
                 potential_sofa_times = potential_sofa_times.loc[start_window_time:end_window_time].index.tolist()
-                #print("These are potential SOFA Times: {}".format(potential_sofa_times))
+                #logging.info("These are potential SOFA Times: {}".format(potential_sofa_times))
 
                 if not potential_sofa_times:
                     sofa_times.append(float("NaN"))
-                    #print ("A NaN was appended")
+                    #logging.info ("A NaN was appended")
                 else:
                     sofa_times.append(potential_sofa_times[0])
-                    #print("This SOFA Score was appended: {}".format(potential_sofa_times[0]))
+                    #logging.info("This SOFA Score was appended: {}".format(potential_sofa_times[0]))
         
         #this adds Tsofa and Tsusp and picks the min; it's the most basic Tsep calculator
         sep3_time_df['t_suspicion'] = pd.to_datetime(suspicion_times.tolist())
@@ -1875,14 +1590,19 @@ class sepyDICT:
         #sep3_time_df = sep3_time_df.iloc[sep3_time_df['index'].fillna(sep3_time_df['t_suspicion']).argsort()].reset_index(drop=True).drop(columns=['t_SOFA']).rename(columns={'index':'t_SOFA'})
 
         self.sep3_time = sep3_time_df
-
-########################################################################################################
-####################        Calc Tsepsis-3      MOD                                  ###################
-########################################################################################################     
+###########################################################################
+############################# Calc Tsepsis-3 MOD  #########################
+###########################################################################    
     def calc_sep3_time_mod(self,
                        look_back = 24,
                        look_forward = 12):
-        
+        """
+        Calculates the Sepsis-3 time based on suspicion of infection and SOFA (Sequential Organ Failure Assessment) scores.
+
+        Args:
+            look_back (int): The number of hours before suspicion time to look for SOFA events (default is 24).
+            look_forward (int): The number of hours after suspicion time to look for SOFA events (default is 12).
+        """
         # Initialize empty list to hold SOFA times in loops below 
         #t_SOFA_list = []
         
@@ -1927,14 +1647,14 @@ class sepyDICT:
 # 
 # =============================================================================
                 potential_sofa_times_mod = self.sofa_scores[self.sofa_scores['delta_24h_mod'] >= 2].index.tolist()
-                #print("These are potential SOFA Times: {}".format(potential_sofa_times))
+                #logging.info("These are potential SOFA Times: {}".format(potential_sofa_times))
 
                 if not potential_sofa_times_mod:
                     sofa_times_mod.append(pd.to_datetime(float("NaN")))
-                    #print ("A NaN was appended")
+                    #logging.info("A NaN was appended")
                 else:
                     sofa_times_mod.append(potential_sofa_times_mod[0])
-                    #print("This SOFA Score was appended: {}".format(potential_sofa_times[0]))
+                    #logging.info("This SOFA Score was appended: {}".format(potential_sofa_times[0]))
 
         sep3_time_df_mod['t_suspicion'] = suspicion_times.tolist() 
         sep3_time_df_mod['t_SOFA_mod'] = sofa_times_mod
@@ -1945,26 +1665,18 @@ class sepyDICT:
         sep3_time_df_mod = sep3_time_df_mod.iloc[sep3_time_df_mod['index'].fillna(sep3_time_df_mod['t_suspicion']).argsort()].reset_index(drop=True).drop(columns=['t_SOFA_mod']).rename(columns={'index':'t_SOFA_mod'})
         
         self.sep3_time_mod = sep3_time_df_mod
-########################################################################################################
-########################################################################################################
-########################################################################################################
-####################        Calc SEPSIS 2                                            ###################
-######################################################################################################## 
-########################################################################################################
-########################################################################################################
-
-
-########################################################################################################
-####################        Calc SIRS Score                                          ###################
-########################################################################################################     
-   
+###########################################################################
+############################# Calc SIRS Score  ############################
+###########################################################################    
     def SIRS_resp(self,
                   row,
                   resp_rate = 'unassisted_resp_rate',
                   paco2 = 'partial_pressure_of_carbon_dioxide_(paco2)'):
-        """Accepts- class instance, one row from "super_table", "resp" cols
+        """
+        Accepts- class instance, one row from "super_table", "resp" cols
         Does- Calculates Respiratory SIRS score
-        Returns- Single value of Respiratory SIRS score """
+        Returns- Single value of Respiratory SIRS score
+        """
         if row[resp_rate] > 20:
             val = 1
         elif row[paco2] < 32:
@@ -1976,9 +1688,11 @@ class sepyDICT:
     def SIRS_cardio(self,
                   row,
                   hr = 'pulse'):
-        """Accepts- class instance, one row from "super_table", "hr" cols
+        """
+        Accepts- class instance, one row from "super_table", "hr" cols
         Does- Calculates Cardiac SIRS score
-        Returns- Single value of Cardiac SIRS score """
+        Returns- Single value of Cardiac SIRS score
+        """
         if row[hr] > 90:
             val = 1
         else: 
@@ -1987,9 +1701,11 @@ class sepyDICT:
     def SIRS_temp(self,
                   row,
                   temp = 'temperature'):
-        """Accepts- class instance, one row from "super_table", "temp" cols
+        """
+        Accepts- class instance, one row from "super_table", "temp" cols
         Does- Calculates Temp SIRS score
-        Returns- Single value of Temp SIRS score """
+        Returns- Single value of Temp SIRS score
+        """
         if row[temp] > 100.4:
             val = 1
         elif row[temp] < 95.8:
@@ -2007,9 +1723,11 @@ class sepyDICT:
     def SIRS_wbc(self,
                   row,
                   wbc = 'white_blood_cell_count'):
-        """Accepts- class instance, one row from "super_table", "wbc" cols
+        """
+        Accepts- class instance, one row from "super_table", "wbc" cols
         Does- Calculates White Blood Cell Count SIRS score
-        Returns- Single value of White Blood Cell Count SIRS score """
+        Returns- Single value of White Blood Cell Count SIRS score
+        """
         if row[wbc] > 12.0:
             val = 1
         elif row[wbc] < 4.0:
@@ -2025,6 +1743,15 @@ class sepyDICT:
     
     def calc_all_SIRS(self,
                 window = 24):
+        """
+        Calculates the SIRS (Systemic Inflammatory Response Syndrome) scores for a patient based on
+        multiple physiological parameters over time.
+        Args:
+            window (int): The number of hours over which the rolling calculations are performed 
+                                 (default is 24 hours). This affects the SIRS delta calculation and the 
+                                 rolling total of the SIRS score.
+        """
+
     
         df = self.super_table
         sirs_df = pd.DataFrame(index = self.super_table.index,
@@ -2053,16 +1780,20 @@ class sepyDICT:
         rolling(window=window, min_periods=1).max().rename(columns={'hourly_total':'delta_24h'}))
                 
         # Safe this dataframe into the patient dictionary
-        self.sirs_scores = sirs_df
-        
-########################################################################################################
-####################        Calc Tsepsis-2                                           ###################
-########################################################################################################     
-
+        self.sirs_scores = sirs_df  
+###########################################################################
+############################## Calc Tsepsis-2  ############################
+###########################################################################   
     def calc_sep2_time(self,
                        look_back = 24,
                        look_forward = 12):
-                
+        """
+        Calculates the Sepsis-2 time for a patient based on suspicion of infection and SIRS criteria.
+        Args:
+            look_back (int): The number of hours before suspicion time to look for SIRS events (default is 24).
+            look_forward (int): The number of hours after suspicion time to look for SIRS events (default is 12).
+        """
+        
         # Initialize empty df to hold suspicion and SIRS times
         sep2_time_df = pd.DataFrame(columns = ['t_suspicion','t_SIRS'])
 
@@ -2097,10 +1828,10 @@ class sepyDICT:
                 
                 if not potential_sirs_times:
                     sirs_times.append(float("NaN"))
-                    #print ("A NaN was appended")
+                    #logging.info("A NaN was appended")
                 else:
                     sirs_times.append(potential_sirs_times[0])
-                    #print("This SIRS Score was appended: {}".format(potential_sirs_times[0]))
+                    #logging.info("This SIRS Score was appended: {}".format(potential_sirs_times[0]))
         
         sep2_time_df['t_suspicion'] = pd.to_datetime(suspicion_times.tolist())
         sep2_time_df['t_SIRS'] = pd.to_datetime(sirs_times)
@@ -2111,15 +1842,15 @@ class sepyDICT:
             
         
         self.sep2_time = sep2_time_df
-        
-########################################################################################################
-####################        Run all The Sepsis 2 steps                               ###################
-########################################################################################################       
-
+###########################################################################
+######################### Run all The Sepsis 2 steps  #####################
+###########################################################################
     def run_SEP2(self):
-        """Accepts- a SOFAPrep class instance
+        """
+        Accepts- a SOFAPrep class instance
         Does- Runs all the prep and calc steps for SOFA score calculation
-        Returns- A class instance with updated "super_table" and new "sofa_scores" data frame"""
+        Returns- A class instance with updated "super_table" and new "sofa_scores" data frame
+        """
         #start_SEP2_calc = time.time()
         self.calc_all_SIRS()
         self.calc_sep2_time()
@@ -2135,4 +1866,4 @@ class sepyDICT:
                     self.flags['first_sep2_SIRS'] = df['t_SIRS'][0]
                     self.flags['first_sep2_time'] = df['t_sepsis2'][0]
         
-        #print(f'It took {time.time()-start_SEP2_calc}(s) to calculate Sepsis-2 scores.')
+        # logging.info(f'It took {time.time()-start_SEP2_calc}(s) to calculate Sepsis-2 scores.')
