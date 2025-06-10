@@ -1,0 +1,378 @@
+vital_col_names:
+- temperature
+- daily_weight_kg
+- height_cm
+- sbp_line
+- dbp_line
+- map_line
+- sbp_cuff
+- dbp_cuff
+- map_cuff
+- pulse
+- unassisted_resp_rate
+- spo2
+- end_tidal_co2
+- o2_flow_rate
+numeric_lab_col_names:
+- anion_gap
+- base_excess
+- bicarb_(hco3)
+- blood_urea_nitrogen_(bun)
+- calcium
+# - calcium_adjusted NOT FORMATTED PROPERLY
+- calcium_ionized
+- chloride
+- creatinine
+- gfr
+- glucose
+- magnesium
+- osmolarity
+- phosphorus
+- potassium
+- sodium
+- haptoglobin
+- hematocrit
+- hemoglobin
+- met_hgb
+- platelets
+- white_blood_cell_count
+- carboxy_hgb
+- alanine_aminotransferase_(alt)
+- albumin
+- alkaline_phosphatase
+- ammonia
+- aspartate_aminotransferase_(ast)
+- bilirubin_direct
+- bilirubin_total
+- fibrinogen
+- inr
+- lactate_dehydrogenase
+- lactic_acid
+- partial_prothrombin_time_(ptt)
+- prealbumin
+- protein
+- prothrombin_time_(pt)
+- thrombin_time
+- transferrin
+- amylase
+- lipase
+- b-type_natriuretic_peptide_(bnp)
+- troponin
+- carboxy_hgb
+- fio2
+- partial_pressure_of_carbon_dioxide_(paco2)
+- partial_pressure_of_oxygen_(pao2)
+- ph
+- saturation_of_oxygen_(sao2)
+- d_dimer
+- hemoglobin_a1c
+- parathyroid_level
+- thyroid_stimulating_hormone_(tsh)
+- crp_high_sens
+- procalcitonin
+- erythrocyte_sedimentation_rate_(esr)
+- lymphocyte
+- neutrophils
+string_lab_col_names:
+- c_diff
+- covid
+- mtp
+gcs_col_names:
+- gcs_total_score
+- gcs_verbal_score
+- gcs_eye_score
+- gcs_motor_score
+bed_info:
+- bed_location_start
+- bed_location_end
+- bed_unit
+- bed_room
+- bed_id
+- bed_label
+- hospital_service
+vasopressor_names:
+- norepinephrine
+- epinephrine
+- dobutamine
+- dopamine
+- phenylephrine
+- vasopressin
+vasopressor_units:
+- norepinephrine_dose_unit
+- epinephrine_dose_unit
+- dobutamine_dose_unit
+- dopamine_dose_unit
+- phenylephrine_dose_unit
+- vasopressin_dose_unit
+vasopressor_dose:
+- norepinephrine_dose_weight
+- epinephrine_dose_weight
+- dobutamine_dose_weight
+- dopamine_dose_weight
+- phenylephrine_dose_weight
+- vasopressin_dose_weight
+vasopressor_col_names:
+- norepinephrine
+- norepinephrine_dose_unit
+- norepinephrine_dose_weight
+- epinephrine
+- epinephrine_dose_unit
+- epinephrine_dose_weight
+- dobutamine
+- dobutamine_dose_unit
+- dobutamine_dose_weight
+- dopamine
+- dopamine_dose_unit
+- dopamine_dose_weight
+- phenylephrine
+- phenylephrine_dose_unit
+- phenylephrine_dose_weight
+- vasopressin
+- vasopressin_dose_unit
+- vasopressin_dose_weight
+vent_col_names:
+- Status
+vent_positive_vars:
+- vent_mode
+- vent_rate_set
+- vent_tidal_rate_set
+- vent_tidal_rate_exhaled
+- peep
+bp_cols:
+- sbp_line
+- dbp_line
+- map_line
+- sbp_cuff
+- dbp_cuff
+- map_cuff
+sofa_max_24h:
+- SOFA_coag
+- SOFA_coag_24h_max
+- SOFA_renal
+- SOFA_renal_24h_max
+- SOFA_hep
+- SOFA_hep_24h_max
+- SOFA_neuro
+- SOFA_neuro_24h_max
+- SOFA_cardio
+- SOFA_cardio_24h_max
+- SOFA_resp
+- SOFA_resp_24h_max
+- hourly_total
+- hourly_total_24h_max
+- delta_24h
+- delta_24h_24h_max
+fluids_med_names:
+- Sodium Chloride 0.9% intravenous solution
+- Lactated Ringers Injection intravenous solution
+- Sodium Chloride 0.45% intravenous solution
+- Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution
+- potassium chloride-sodium chloride
+- Dextrose 5% in Lactated Ringers intravenous solution
+- Dextrose 20% in Water intravenous solution
+- Dextrose 5% in Water with KCl 20 mEq/l intravenous solution
+- Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution
+- dextran, low molecular weight
+- sodium chloride, hypertonic, ophthalmic
+- Electrolyte (Plasma-Lyte) intravenous solution
+fluids_med_names_generic:
+- Albumin 5%
+try_except_calls:
+  - { id_type: "pat_id", section: "demographics" }
+  - { id_type: "csn", section: "encounters" }
+  - { id_type: "csn", section: "gcs" }
+  - { id_type: "csn", section: "cultures" }
+  - { id_type: "csn", section: "beds" }
+  - { id_type: "csn", section: "procedures" }
+  - { id_type: "csn", section: "vent" }
+  - { id_type: "csn", section: "diagnosis" }
+  - { id_type: "csn", section: "labs" }
+  - { id_type: "csn", section: "vasopressor_meds" }
+  - { id_type: "csn", section: "anti_infective_meds" }
+  - { id_type: "csn", section: "vitals" }
+  - { id_type: "csn", section: "infusion_meds" }
+  - { id_type: "csn", section: "quan_deyo_ICD10" }
+  - { id_type: "csn", section: "quan_elix_ICD10" }
+  # Optional/disabled sections (for reference/documentation):
+# - { id_type: "csn", section: "ahrq_ICD9" }
+# - { id_type: "csn", section: "elix_ICD9" }
+# - { id_type: "csn", section: "quan_deyo_ICD9" }
+# - { id_type: "csn", section: "quan_elix_ICD9" }
+# - { id_type: "csn", section: "ccs_ICD9" }
+# - { id_type: "csn", section: "ahrq_ICD10" }
+# - { id_type: "csn", section: "elix_ICD10" }
+# - { id_type: "csn", section: "ccs_ICD10" }
+# LAB AGGREGATION
+lab_aggregation:
+  # ELECTROLYTES
+  anion_gap: mean
+  base_excess: mean
+  bicarb_(hco3): mean
+  blood_urea_nitrogen_(bun): mean
+  calcium: mean
+  # calcium_adjusted: mean NOT PRESENT IN LAB BOUNDS
+  calcium_ionized: mean
+  chloride: mean
+  creatinine: mean
+  gfr: mean
+  glucose: mean
+  magnesium: mean
+  osmolarity: mean
+  phosphorus: mean
+  potassium: mean
+  sodium: mean
+  # CBC
+  haptoglobin: mean
+  hematocrit: mean
+  hemoglobin: mean
+  met_hgb: mean
+  platelets: mean
+  white_blood_cell_count: mean
+  carboxy_hgb: mean
+  # HEPATIC
+  alanine_aminotransferase_(alt): mean
+  albumin: mean
+  alkaline_phosphatase: mean
+  ammonia: mean
+  aspartate_aminotransferase_(ast): mean
+  bilirubin_direct: mean
+  bilirubin_total: mean
+  fibrinogen: mean
+  inr: mean
+  lactate_dehydrogenase: mean
+  lactic_acid: mean
+  partial_prothrombin_time_(ptt): mean
+  prealbumin: mean
+  protein: mean
+  prothrombin_time_(pt): mean
+  thrombin_time: mean
+  transferrin: mean
+  # PANCREIATIC
+  amylase: mean
+  lipase: mean
+  # CARDIA
+  b-type_natriuretic_peptide_(bnp): mean
+  troponin: mean
+  # ABG
+  fio2: mean
+  partial_pressure_of_carbon_dioxide_(paco2): mean
+  partial_pressure_of_oxygen_(pao2): mean
+  ph: mean
+  saturation_of_oxygen_(sao2): mean
+  # OTHER
+  d_dimer: mean
+  hemoglobin_a1c: mean
+  parathyroid_level: mean
+  thyroid_stimulating_hormone_(tsh): mean
+  lymphocyte: mean
+  neutrophils: mean
+  # INFLAMMATORY
+  crp_high_sens: mean
+  procalcitonin: mean
+  erythrocyte_sedimentation_rate_(esr): mean
+  # STRING RESULTS
+  c_diff: first
+  covid: first
+  mtp: first
+# DICT ELEMENTS
+dict_elements:
+  - method: flag_dict
+    log: "flag complete"
+  - method: static_features_dict
+    log: "static complete"
+  - method: event_times_dict
+    log: "event complete"
+  - method: cultures_df
+    log: "cultures complete"
+  - method: antibiotics_df
+    log: "abx complete"
+  - method: build_super_table_index
+    log: "super table index complete"
+  - method: assign_bed_location
+    log: "the beds have been binned"
+  - method: bin_labs
+    log: "labs complete"
+  - method: bin_vitals
+    log: "vitals complete"
+  - method: bin_gcs
+    log: "gcs complete"
+  - method: bin_vent
+    log: "vent complete"
+  - method: bin_vasopressors
+    log: "vasopressors complete"
+  - method: make_super_table
+    log: "super table created"
+  - method: calc_t_susp
+    log: "t susp complete"
+  - method: fill_height_weight
+    log: "filling height weight complete"
+  - method: best_map
+    log: "best map selected"
+  - method: pulse_pressure
+  - method: calculate_anion_gap
+  - method: calc_all_pressors
+    log: "vasopressor mg/kg/min calculated"
+  # Optional fill steps (commented out in original code)
+  # - method: fill_values
+  #   log: "most values filled fwd/bwd"
+  # - method: fill_pressor_values
+  #   log: "pressor values filled fwd/bwd"
+  - method: fio2_decimal
+    log: "fio2 converted to decimal where appropriate"
+  - method: calc_pf
+  - method: calc_nl
+    log: "all p:f and s:f ratios calculated"
+  - method: comorbid_dict
+    args: imported
+    log: "the comorbid dictionary is updated"
+  - method: calc_icu_stay
+    log: "the first icu stay has been calculated"
+  - method: calc_worst_pf
+    log: "the worst pf has been calcd and saved"
+  - method: flag_variables_pressors
+  - method: create_elapsed_icu
+  - method: create_elapsed_hosp
+  - method: create_on_vent
+    log: "Created on vent"
+  - method: static_cci_to_supertable
+    log: "static cci to super table complete"
+  - method: create_bed_unit
+    log: "Bed Unit created"
+  # Optional: only for some hospitals
+  # - method: on_dialysis
+  #   log: "On dialysis created"
+  - method: create_fluids_columns
+    log: "Fluids columns created"
+  - method: dialysis_history
+    log: "Dialysis history created"
+# WRITE DICT
+write_dict_keys:
+  - csn
+  - pat_id
+  - cultures_PerCSN
+  - beds_PerCSN
+  - procedures_PerCSN
+  - diagnosis_PerCSN
+  - flags
+  - static_features
+  - event_times
+  - cultures_staging
+  - abx_staging
+  - labs_staging
+  - vitals_staging
+  - gcs_staging
+  - vent_status
+  - vent_fio2
+  - vasopressor_meds_staging
+  - super_table
+  # SUSPISCION
+  - abx_order_time
+  - culture_times
+  - t_suspicion
+  # SEPSIS 3
+  - sofa_scores
+  - sep3_time
+  # SEPSIS 2
+  - sirs_scores
+  - sep2_time
+

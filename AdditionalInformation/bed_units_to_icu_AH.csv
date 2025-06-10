@@ -1,4 +1,4 @@
-,bed_units,icu_type,"ed, ward or icu?",hospital
+,bed_units,icu_type,unit_type,hospital
 0,10E EUH,,ward,e
 1,11 ECLH,,ward,m
 2,11 ICU ECLH,cticu,icu,m
