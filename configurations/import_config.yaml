@@ -1,10 +1,10 @@
 # IMPORT DATA LABELS
-na_values:
+na_values: #Entries in the data that should be converted to NA
   - "NULL"
   - "Date\\Time Correction"
   - "(null)"
   - "NOTRECORDED"
-vital_col_names:
+vital_col_names: #Vital names that should be converted to numeric
   - "temperature"
   - "daily_weight_kg"
   - "height_cm"

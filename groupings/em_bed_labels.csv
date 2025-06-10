@@ -1,0 +1,300 @@
+bed_units,icu_type,unit_type,hospital,icu,imc,ed,procedure,vent_capable,accomodation_code,bed_counts
+10E EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,616.0
+11 ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,909.0
+11 ICU ECLH,cticu,icu,m,1.0,0.0,0.0,0.0,0.0,ICU,490.0
+11E EUH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,1886.0
+1F ICU EJCH,,icu,j,,,,,,,
+1W SJH,,ward,s,,,,,,,
+1WA UNIT A WW,,other,,0.0,0.0,0.0,0.0,0.0,--,358.0
+1WB UNIT B WW,,other,,0.0,0.0,0.0,0.0,0.0,--,495.0
+21 ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,1199.0
+21 ICU ECLH,msicu,icu,m,,,,,,,
+22 ECLH,,ward,m,,,,,,,
+22 Observation ECLH,,obs,m,,,,,,,
+2B CIU EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,9.0
+2D-E ICU EUH,neuro,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,181.0
+2D-W ICU EUH,neuro,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,370.0
+2E ICU SJH,msicu,icu,s,1.0,0.0,0.0,0.0,0.0,ICU,793.0
+2G EUH,,ward,e,,,,,,,
+2G ICU EUH,neuro,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,167.0
+2G-N CCU EUH,ccu,icu,e,,,,,,,
+2G-S ICU EUH,neuro,icu,e,,,,,,,
+2NMB EJCH,,ward,j,0.0,0.0,0.0,0.0,0.0,R,586.0
+2S SJH,,ward,s,1.0,0.0,0.0,0.0,0.0,ICU,254.0
+2S SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,3.0
+2SW ICU SJH,cticu,icu,s,1.0,0.0,0.0,0.0,0.0,ICU,677.0
+2W ICU SJH,ccu,icu,s,1.0,0.0,0.0,0.0,0.0,ICU,498.0
+2WC LTAC WW,,other,,,,,,,,
+2WME EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,R,557.0
+31 ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,1126.0
+31 ICU ECLH,neuro,icu,m,1.0,0.0,0.0,0.0,0.0,ICU,391.0
+32 ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,282.0
+34 ECLH,,ward,m,,,,,,,
+34N Antepartum ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,R,250.0
+34S Mother/Baby ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,R,1200.0
+3D EUH,,ward,e,,,,,,,
+3E SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,956.0
+3EME EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,R,449.0
+3G CCU EUH,ccu,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,235.0
+3G EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,956.0
+3NME EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,R,444.0
+3NOP EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,O,13.0
+3R CRM EUH,,other,e,0.0,0.0,0.0,0.0,0.0,R,369.0
+3S ICU EJCH,msicu,icu,j,1.0,0.0,0.0,0.0,0.0,ICU,632.0
+3S SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,774.0
+3SW SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,291.0
+3W SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,1022.0
+3WME EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,R,478.0
+41 CCU ECLH,ccu,icu,m,1.0,0.0,0.0,0.0,0.0,ICU,478.0
+41 ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,1254.0
+42 ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,1003.0
+4A ICU EUH,cticu BEFORE 1/18/2018; micu ON OR AFTER 1/18/2018,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,21.0
+4B-N EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,616.0
+4B-S EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,525.0
+4E SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,857.0
+4ESU EJCH,,ward,j,0.0,0.0,0.0,0.0,0.0,R,462.0
+4G CCU EUH,ccu,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,227.0
+4G EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,1060.0
+4NOP EJCH,,other,j,,,,,,,
+4NSU EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,R,445.0
+4R CRM EUH,,other,e,0.0,0.0,0.0,0.0,0.0,R,363.0
+4S SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,1076.0
+4W SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,801.0
+4WSU EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,R,458.0
+51S ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,1516.0
+52 ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,658.0
+54 ECLH,,ward,m,,,,,,,
+5A ICU EUH,cticu BEFORE 1/18/2018; micu ON OR AFTER 1/18/2018,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,19.0
+5B-N EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,562.0
+5B-S EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,562.0
+5D EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,315.0
+5E ICU EUH,sicu BEFORE 1/18/2018; cticu ON OR AFTER 1/18/2018,,e,0.0,0.0,0.0,0.0,0.0,1,647.0
+5E SJH,,ward,s,,,,,,,
+5G EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,540.0
+5G ICU EUH,micu,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,250.0
+5T-N ICU EUH,micu,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,669.0
+5T-S ICU EUH,sicu BEFORE 1/18/2018,icu,e,1.0,0.0,0.0,0.0,0.0,ICU,686.0
+5W SJH,,ward,s,,,,,,,
+61S ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,1588.0
+62 ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,687.0
+6A EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,87.0
+6B-N Rollins N EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,96.0
+6B-S Rollins S EUH,,ward,e,,,,,,,
+6E,,ward,e,,,,,,,
+6E EUH,,ward,e,,,,,,,
+6E SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,790.0
+6G EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,807.0
+6G ICU EUH,micu,icu,e,,,,,,,
+6T-N EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,569.0
+6T-S EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,696.0
+6W SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,816.0
+71 ECLH,,ward,m,0.0,0.0,0.0,0.0,0.0,R,692.0
+71 ICU ECLH,micu,icu,m,1.0,0.0,0.0,0.0,0.0,ICU,922.0
+72 ECLH,,ward,m,,,,,,,
+7E EUH,,ward,e,,,,,,,
+7E SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,545.0
+7G CIU,,ward,e,,,,,,,
+7G EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,1089.0
+7T-N EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,575.0
+7T-S EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,1019.0
+7W SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,R,679.0
+8E EUH,,ward,e,,,,,,,
+8T-N EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,603.0
+8T-S EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,737.0
+9E EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,630.0
+9T-N EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,360.0
+9T-S EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,430.0
+A6,,,,,,,,,,
+AM Admit EUH,,other,e,,,,,,,
+AM Admit NL,,other,,,,,,,,
+ARU SJH,,,s,0.0,0.0,0.0,0.0,0.0,R,705.0
+Arrhythmia Cntr ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,51.0
+Breast Ctr EUH,,other,e,,,,,,,
+Breast Ctr SJH,,other,s,,,,,,,
+Breast Imaging Center EJCH,,other,m,,,,,,,
+CARDIOVASCULAR UNIT EUH,,w,e,,,,,,,
+CHFT ECLH,,,m,,,,,,,
+CHFT EUH,,,w,,,,,,,
+CIU ECLH,,,m,0.0,0.0,0.0,0.0,0.0,R,411.0
+COA ECLH,,,m,0.0,0.0,0.0,0.0,0.0,--,211.0
+COA EJCH,,,j,0.0,0.0,0.0,0.0,0.0,O,100.0
+COA EUH,,,e,0.0,0.0,0.0,0.0,0.0,--,258.0
+CRD Bldg A 2nd Fl,,other,j,0.0,0.0,0.0,0.0,0.0,--,15.0
+CRD Hrt Vascular Ctr EJCH,,other,j,,,,,,,
+CRD MOT 6 Flr,,other,j,0.0,0.0,0.0,0.0,0.0,--,5.0
+Cardiac MRI ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,3.0
+Cardiac Rehab SJH,,other,s,,,,,,,
+Cardiology DOB 4 SJH,,other,s,,,,,,,
+Cardiology DOB1 SJH,,other,s,,,,,,,
+Cath Lab Bldg A Tunl,,other,,0.0,0.0,0.0,0.0,0.0,--,2.0
+Cath Lab ECLH,,other,m,,,,,,,
+Cath Lab EJCH,,other,m,,,,,,,
+Cath Lab EUH,,other,e,,,,,,,
+Cath Lab SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,1.0
+Cell Separator EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,6.0
+DOB3 GF ARR SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,19.0
+Dialysis 4T EUH,,other,e,,,,,,,
+Dialysis ECLH,,other,m,,,,,,,
+Dialysis EUH,,other,e,,,,,,,
+Dialysis SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,1.0
+E8,,,,,,,,,,
+EC Nursery ECLH,,,m,0.0,0.0,0.0,0.0,0.0,R,3.0
+ECT WW,,,,,,,,,,
+ED ARR SJH,,ed,s,0.0,0.0,0.0,0.0,0.0,--,904.0
+ED CDU ECLH,,ed,m,0.0,0.0,0.0,0.0,0.0,--,12.0
+ED CDU EUH,,ed,e,0.0,0.0,0.0,0.0,0.0,--,9.0
+ED CDU SJH,,ed,s,0.0,0.0,0.0,0.0,0.0,--,9.0
+ED ECLH,,ed,m,0.0,0.0,1.0,0.0,0.0,--,16462.0
+ED EUH,,ed,e,0.0,0.0,1.0,0.0,0.0,R,13985.0
+ED SJH,,ed,s,0.0,0.0,1.0,0.0,0.0,--,10211.0
+EP,,other,,,,,,,,
+EP ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,2.0
+EP EUH,,other,e,,,,,,,
+EP SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,1.0
+ER CDU EJCH,,ed,j,0.0,0.0,0.0,0.0,0.0,--,9.0
+ER EJCH,,ed,j,0.0,0.0,1.0,0.0,0.0,--,5693.0
+EUH Transplant at SJH,,ward,s,0.0,0.0,0.0,0.0,0.0,--,1.0
+Echo ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,5.0
+Echo EJCH,,other,j,,,,,,,
+Echo EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,19.0
+Echo East Cobb SJH,,other,s,,,,,,,
+Echo SJH,,other,s,,,,,,,
+Endoscopy ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,8.0
+Endoscopy SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,15.0
+Endoscopy Unit EUH,,other,e,,,,,,,
+G3,,,,,,,,,,
+G6,,,,,,,,,,
+HFC SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,44.0
+HG EUH,,ward,e,1.0,0.0,0.0,0.0,0.0,ICU,7.0
+Head & Neck MDC ECLH,,other,m,,,,,,,
+Hemapheresis ECLH,,other,m,,,,,,,
+Hospice ECLH,,ward,m,,,,,,,
+Hospice EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,1.0
+Infus Nephrology MOT ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,1.0
+Infus Rheumatology Bldg A ECLH,,other,m,,,,,,,
+Infus Transplant Bldg B ECLH,,other,m,,,,,,,
+Infusion Center ECLH,,other,m,,,,,,,
+Infusion Center EUH,,other,e,,,,,,,
+Int Nursery EJCH,,ob,j,0.0,0.0,0.0,0.0,0.0,R,6.0
+L&D Pre-Registration ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,2185.0
+L1 ECLH,,other,m,,,,,,,
+LD EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,R,688.0
+LDPR EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,--,556.0
+LL ICU EJCH,,,j,,,,,,,
+LONG TERM ACUTE CARE ECLH,,other,m,,,,,,,
+Lab ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,3.0
+Lab EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,--,2.0
+Lab EUH,,other,e,,,,,,,
+Labor Delivery ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,R,2465.0
+MRI ECLH,,other,m,,,,,,,
+Main Registration ARR SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,1176.0
+Main Registration Arrival EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,--,142.0
+Main Registration CRM EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,510.0
+Main Registration ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,1485.0
+Main Registration EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,2568.0
+Main Registration LTAC WW,,other,,,,,,,,
+Main Registration NL,,other,,0.0,0.0,0.0,0.0,0.0,--,83.0
+Main Registration Psych WW,,other,,0.0,0.0,0.0,0.0,0.0,--,498.0
+Main Registration Tower EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,1178.0
+Main Registration WW,,other,,0.0,0.0,0.0,0.0,0.0,--,1.0
+Monitors SJH,,other,s,,,,,,,
+NICU ECLH,other,icu,m,1.0,0.0,0.0,0.0,0.0,ICU,5.0
+NICU EJCH,,icu,j,1.0,0.0,0.0,0.0,0.0,ICU,6.0
+NIMC ECLH,,,m,0.0,0.0,0.0,0.0,0.0,R,3.0
+NL2 NL,,,,0.0,0.0,0.0,0.0,0.0,--,645.0
+NL3,,,,,,,,,,
+NL3 NL,,,,0.0,0.0,0.0,0.0,0.0,R,184.0
+NL4,,,,,,,,,,
+NL4 NL,,,,0.0,0.0,0.0,0.0,0.0,R,811.0
+NLIC,,,,,,,,,,
+NLICU NL,,,,1.0,0.0,0.0,0.0,0.0,ICU,159.0
+NLKE,,,,,,,,,,
+NLOR,,,,,,,,,,
+Neuro CC Intermediate EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,R,359.0
+Not Recorded,,,,0.0,0.0,0.0,0.0,0.0,--,4891.0
+Nuclear Card ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,3.0
+Nursery ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,R,12.0
+Nursery EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,R,5.0
+OP Dept EUH,,other,e,,,,,,,
+OP Dept NL,,other,,,,,,,,
+OP Research EUH,,other,e,,,,,,,
+OP Surg Cntr ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,393.0
+OP Transplant EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,20.0
+OPD Dept SJH,,other,s,,,,,,,
+OPD EJCH,,other,j,,,,,,,
+OR ECLH,,or,m,0.0,0.0,0.0,1.0,1.0,--,1450.0
+OR EUH,,or,e,0.0,0.0,0.0,1.0,1.0,--,1806.0
+OR NL,,or,,0.0,0.0,0.0,1.0,1.0,--,1297.0
+OSP REG ARR SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,597.0
+OT ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,2.0
+OT EUH,,other,e,,,,,,,
+Oncology SJH,,ward,s,,,,,,,
+Outpt Specimens EJCH,,other,j,,,,,,,
+PACU,,other,,,,,,,,
+PACU EJCH,,other,j,,,,,,,
+PACU ICU EUH,,other,e,,,,,,,
+PACU II ECLH,msicu,icu,m,1.0,0.0,0.0,0.0,0.0,ICU,4.0
+PACU IP ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,1.0
+PACU NL,,other,,0.0,0.0,0.0,0.0,0.0,--,9.0
+PACU OP ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,1.0
+PAT EUH,,,e,,,,,,,
+PAT NL,,,,,,,,,,
+PAT SJH,,,s,,,,,,,
+PET Ctr ECLH,,,m,0.0,0.0,0.0,0.0,0.0,--,2.0
+POHA Observation EUH,,,e,0.0,0.0,0.0,0.0,0.0,R,237.0
+PRE ECLH,,,m,,,,,,,
+PT EUH,,,e,,,,,,,
+Pain Ctr EJCH,,other,j,,,,,,,
+Peachtree ICU ECLH,msicu,icu,m,1.0,0.0,0.0,0.0,0.0,ICU,559.0
+Perinatal ECLH,,other,m,,,,,,,
+Pharmacy EJCH,,other,j,,,,,,,
+Preadmit Test ECLH,,other,m,,,,,,,
+Pulm Funct Lab ECLH,,other,m,,,,,,,
+Pulmonary Rehab SJH,,other,s,,,,,,,
+RAD,,,,,,,,,,
+RAD PPCA ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,12.0
+RAD PPCA EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,123.0
+RAD ROCU EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,--,23.0
+REGM,,other,,,,,,,,
+Rad Bld A EUH,,other,e,,,,,,,
+Rad Buford ECLH,,other,m,,,,,,,
+Rad EP EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,2.0
+Rad EP12 EUH,,other,e,,,,,,,
+Rad MOT ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,19.0
+Rad Smyrna ECLH,,other,m,,,,,,,
+Rad WCI EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,51.0
+Radiation Oncology ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,2.0
+Radiation Oncology EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,3.0
+Radiology Centerpointe SJH,,other,s,,,,,,,
+Radiology ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,23.0
+Radiology EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,--,35.0
+Radiology EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,208.0
+Radiology Forsyth EJCH,,other,j,,,,,,,
+Radiology NL,,other,,0.0,0.0,0.0,0.0,0.0,--,2.0
+Radiology OPIC Main SJH,,other,s,,,,,,,
+Radiology SJH,,other,s,,,,,,,
+Radiology Sports Imaging EUH,,other,e,,,,,,,
+Radiology Tower EUH,,other,e,0.0,0.0,0.0,0.0,0.0,--,11.0
+Radiology WW,,other,,,,,,,,
+Resp Care EJCH,,ward,j,0.0,0.0,0.0,0.0,0.0,--,1.0
+Resp Care EUH,,ward,e,0.0,0.0,0.0,0.0,0.0,--,1.0
+Resp Care SJH,,ward,s,,,,,,,
+Rheumatology Bldg A ECLH,,other,m,,,,,,,
+SARR,,,,,,,,,,
+SP & Auditory EUH,,other,e,,,,,,,
+SURG 1FL SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,854.0
+SURG GF SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,602.0
+Smyrna Nursing Unit,,,,,,,,,,
+Surgery EJCH,,other,m,0.0,0.0,0.0,0.0,0.0,--,534.0
+Surgery Pre Post,,other,,,,,,,,
+Surgical Services ARR ECLH,,other,m,0.0,0.0,0.0,1.0,0.0,--,1805.0
+Surgical Services ARR EUH,,other,e,0.0,0.0,0.0,1.0,0.0,--,1792.0
+Surgical Services ARR NL,,other,,0.0,0.0,0.0,0.0,0.0,--,1313.0
+TR,,,,,,,,,,
+URODYNAMICS EUH,,,e,0.0,0.0,0.0,0.0,0.0,--,1.0
+Urodynamics ECLH,,,m,,,,,,,
+Vascular Lab DOB4 SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,15.0
+Vascular Lab SJH,,other,s,0.0,0.0,0.0,0.0,0.0,--,1.0
+WALK,,,,,,,,,,
+Wound Care ECLH,,other,m,0.0,0.0,0.0,0.0,0.0,--,10.0
+Wound Care EJCH,,other,j,0.0,0.0,0.0,0.0,0.0,--,1.0

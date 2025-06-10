@@ -144,7 +144,7 @@ def make_numeric(self, df, cols):
 ###########################################################################
 ### Custom Date Parser to Handle Date Errors (i.e. coerce foolishness) ####
 ###########################################################################
-def d_parser(self, s):
+def d_parser(s):
     """  
     Parses a given string or array-like object into a datetime format.  
     Args:  
@@ -161,7 +161,7 @@ def d_parser(self, s):
 
 def read_data_file(file_path, index_col=None, date_cols=None, na_values=None, 
                    drop_cols=None, numeric_cols=None, low_memory=False, 
-                   memory_map=False, date_parser=None, header=0, dtype=None):
+                   memory_map=False, date_parser=d_parser, header=0, dtype=None):
     """
     Generic function to read data files in various formats (CSV, DSV, pickle)
     with appropriate error handling and parameter support.

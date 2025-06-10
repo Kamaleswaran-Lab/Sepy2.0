@@ -228,40 +228,46 @@ if __name__ == "__main__":
     #path to the directory containing the grouping files, i.e., files that map component id to clinical features
     GROUPINGS_PATH = Path(dataConfig["groupings_path"])
     #path to the directory where the supertable pickles will be written
-    SUPERTABLE_OUTPUT_PATH = Path(dataConfig["pickle_output_path"])
+    SUPERTABLE_OUTPUT_PATH = Path(dataConfig["supertable_output_path"])
     #path to the directory where the yearly dictionaries will be written
-    YEARLY_DICTIONARY_OUTPUT_PATH = Path(dataConfig["pickle_output_path"])
+    YEARLY_DICTIONARY_OUTPUT_PATH = Path(dataConfig["yearly_pickle_output_path"])
     YEARLY_DICTIONARY_FILE_NAME = os.path.join(YEARLY_DICTIONARY_OUTPUT_PATH, dataConfig["dataset_identifier"] + str(year) + ".pickle")
 
     paths = {}
     comorbidity_types = dataConfig["dictionary_paths"]["comorbidity_types"]
     grouping_types = dataConfig["dictionary_paths"]["grouping_types"]
     flatfile_types = dataConfig["dictionary_paths"]["flatfile_types"]
-    additional_files = dataConfig["dictionary_paths"]["additional_files"]
+    combined_files = dataConfig["dictionary_paths"]["combined_files"]
     
     for comorbidity in comorbidity_types:
-        paths[f"{comorbidity}"] = glob.glob(
-            f"{GROUPINGS_PATH}/comorbidities/{comorbidity}.csv"
-        )[0]
+        try:
+            paths[f"{comorbidity}"] = glob.glob(
+                f"{GROUPINGS_PATH}/comorbidities/*{comorbidity}*"
+            )[0]
+        except IndexError:
+            logging.error(f"Sepy- could not find comorbidity file for {comorbidity}")
 
-    for type in grouping_types:
-        paths[f"{type}"] = glob.glob(f"{GROUPINGS_PATH}/{type}*.csv")[0]
+    for type, grouping_path in grouping_types:
+        try:
+            paths[f"{type}"] = glob.glob(f"{GROUPINGS_PATH}/{grouping_path}*")[0]
+        except IndexError:
+            logging.error(f"Sepy- could not find grouping file for {type}")
 
-    for flatfile_type in flatfile_types:
-        paths[f"{flatfile_type}"] = glob.glob(
-            f"{DATA_PATH}/{year}/*{flatfile_type}*.dsv"
-        )[0]
+    for flatfile_type, flatfile_name in flatfile_types:
+        try:
+            paths[f"{flatfile_type}"] = glob.glob(
+                f"{DATA_PATH}/{year}/*{flatfile_name}*"
+            )[0]
+        except IndexError:
+            logging.error(f"Sepy- could not find flatfile type for {flatfile_name}")
 
-    for additional_file in additional_files:
-        paths[f"{additional_file[0]}"] = additional_file[1]
-
-    #Additional information 
-    ### bed unit csv is a mapping of bed units to icu type [ed, ward, icu]
-    BED_UNIT_CSV_FNAME = Path(dataConfig["bed_unit_csv_fname"])
-    ### variable bounds is mapping from lab/vital and other clinical feature names to their expected upper and lower bounds. Used to detect outliers.
-    VARIABLE_BOUNDS_CSV_FNAME = Path(dataConfig["variable_bounds_csv_fname"])
-    paths["BED_UNIT_CSV_FNAME"] = BED_UNIT_CSV_FNAME
-    paths["VARIABLE_BOUNDS_CSV_FNAME"] = VARIABLE_BOUNDS_CSV_FNAME
+    for combined_file in combined_files:
+        try:
+            paths[f"{combined_file[0]}"] = glob.glob(
+                f"{DATA_PATH}/*{combined_file[1]}*"
+            )[0]
+        except IndexError:
+            logging.error(f"Sepy- could not find combined file for {combined_file[1]}")
 
     #####################################################
     ############ Create Pickle of Yearly Data ###########

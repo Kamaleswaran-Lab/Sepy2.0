@@ -12,12 +12,9 @@ make_supertables: "yes" # yes: make supertables, no: do not make supertables
 
 # FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW"
-groupings_path: "../groupings"
-pickle_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables/"
-dictionary_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_YearlyDictionaries/"
-bed_unit_csv_fname:  "../AdditionalInformation/bed_units_to_icu_AH.csv"
-variable_bounds_csv_fname : "../AdditionalInformation/Variable_Chart.csv"
-dialysis_info_csn_fname: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/PEACH_HD_CRRT.csv"
+groupings_path: "groupings"
+yearly_pickle_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_YEARLY_PICKLES/"
+supertable_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables/"
 encounters_path: "ENCOUNTER_FILE"
 dataset_identifier: "em_y"
 
@@ -41,9 +38,11 @@ dictionary_paths:
     - "ICD10_quan_elix"
     - "ICD10_single_ccs"
   grouping_types:
-    - "em_all_infusion_meds"
-    - "em_grouping_labs"
-    - "em_bed_labels"
+    - ["infusion_meds", "em_all_infusion_meds"]
+    - ["grouping_labs", "em_grouping_labs"]
+    - ["bed_labels", "em_bed_labels"]
+    - ["grouping_fluids", "em_grouping_fluids"]
+    - ["variable_chart", "em_variable_chart"]
   flatfile_types:
     - ["INFUSIONMEDS", "INFUSIONMEDS"]
     - ["LABS", "LABS"]
@@ -57,18 +56,23 @@ dictionary_paths:
     - ["ORPROCEDURES", "ORPROCEDURES"]
     - ["DIAGNOSIS", "DIAGNOSIS"]
     - ["PROCEDURES", "PROCEDURES"]
-  additional_files:
-    - ["DIALYSIS", "PEACH_HD_CRRT.csv"]
-    - ["IN_OUT", "in_out_AH.csv"]
+  combined_files:
+    - ["DIALYSIS", "DIALYSIS_EMORY14_21.csv"] 
+    - ["IN_OUT", "IN_OUT_EMORY14_21.csv"]
 
 # YEARLY INSTANCE FUNCTIONS AND PARAMETERS
 yearly_instance:
   import_demographics:
     drop_cols: []
     index_col: ["pat_id"]
-    date_cols: [] # removed 'dob'
+    date_cols: [] 
   import_encounters:
-    drop_cols: []
+    drop_cols: 
+      - "admit_reason"
+      - "insurance_status"
+      - "total_vent_days"
+      - "total_hosp_days"
+      - "discharge_status" # These fields were null in the data files. Insurance status was dropped because it wasn't needed for our analysis.
     index_col: ["csn"]
     date_cols:
       - "ed_presentation_time"
@@ -98,12 +102,11 @@ yearly_instance:
       - "collection_time"
       - "lab_result_time"
     index_col: ["csn"]
-    numeric_cols: null
   import_vitals:
     drop_cols: []
     index_col: ["csn"]
     date_cols: ["recorded_time"]
-    merge_cols: null
+    merge_cols: []
   import_vent:
     drop_cols: []
     index_col: ["csn"]

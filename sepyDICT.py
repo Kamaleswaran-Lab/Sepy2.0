@@ -13,115 +13,15 @@ import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 import time
-import yaml
 import pandas as pd
 import numpy as np
 
 from functools import reduce
 from comorbidipy import comorbidity
 
-###########################################################################
-##################### Aggregate Utility Functions #########################
-###########################################################################
-def get_bounds(var_name, bounds):
-    df = bounds.loc[bounds['Location in SuperTable'] == var_name]
-    upperbound = df['Physical Upper bound'].values[0]
-    lowerbound = df['Physical lower bound'].values[0]
-    
-    # Convert strings or invalid entries to np.nan
-    try:
-        upperbound = float(upperbound)
-    except (ValueError, TypeError):
-        upperbound = np.nan
-    try:
-        lowerbound = float(lowerbound)
-    except (ValueError, TypeError):
-        lowerbound = np.nan
-
-    return lowerbound, upperbound
+import utils 
 
 
-def agg_fn_wrapper(var_name, bounds):
-    lowerbound, upperbound = get_bounds(var_name, bounds)
-
-    def agg_fn(array):
-        try:
-            array = array.astype(float)
-        except (TypeError, ValueError):
-            return np.nan
-        
-        if np.isnan(array).all():
-            return np.nan
-        
-        values = array[~np.isnan(array)]
-        if not np.isnan(lowerbound):
-            values = values[values >= lowerbound]
-        if not np.isnan(upperbound):
-            values = values[values <= upperbound]
-
-        return np.mean(values) if len(values) > 0 else np.nan
-
-    return agg_fn
-
-
-def agg_fn_wrapper_min(var_name, bounds):
-    lowerbound, upperbound = get_bounds(var_name, bounds)
-
-    def agg_fn(array):
-        try:
-            array = array.astype(float)
-        except (TypeError, ValueError):
-            return np.nan
-        
-        if np.isnan(array).all():
-            return np.nan
-        
-        values = array[~np.isnan(array)]
-        if not np.isnan(lowerbound):
-            values = values[values >= lowerbound]
-        if not np.isnan(upperbound):
-            values = values[values <= upperbound]
-
-        return np.min(values) if len(values) > 0 else np.nan
-
-    return agg_fn
-
-
-def agg_fn_wrapper_max(var_name, bounds):
-    lowerbound, upperbound = get_bounds(var_name, bounds)
-
-    def agg_fn(array):
-        try:
-            array = array.astype(float)
-        except (TypeError, ValueError):
-            return np.nan
-        
-        if np.isnan(array).all():
-            return np.nan
-        
-        values = array[~np.isnan(array)]
-        if not np.isnan(lowerbound):
-            values = values[values >= lowerbound]
-        if not np.isnan(upperbound):
-            values = values[values <= upperbound]
-
-        return np.max(values) if len(values) > 0 else np.nan
-
-    return agg_fn
-###########################################################################
-################################ Load YAML ################################
-###########################################################################
-def load_yaml(filename):
-    """
-    Load and parse a YAML file.
-    Args:
-        filename (str): The path to the YAML file to be loaded.
-    Returns:
-        dict: The contents of the YAML file as a dictionary.
-    """
-    with open(filename, "r", encoding="utf-8") as file:
-        return yaml.safe_load(file)
-yaml_data = load_yaml("/cwork/jfr29/Sepy/configurations/dict_config.yaml")
 class sepyDICT:
     """
     Initializes a SepyDICT instance for a given patient encounter and processes relevant
@@ -134,75 +34,75 @@ class sepyDICT:
         bounds (pandas.DataFrame): Threshold values and metadata for lab aggregation logic.
         dialysis_year (int): The year used to contextualize dialysis-related events.
     """
-##########################################################################
-############################## Class Variables ###########################
-##########################################################################
-    v_vital_col_names = yaml_data["vital_col_names"]
+    def __init__(self, master_df, sepyDICTConfigs, bed_to_unit_mapping, bounds, year):
+        self.v_vital_col_names = sepyDICTConfigs["vital_col_names"]
+        
+        # List of all lab names (some years might not have all listed labs)
+        self.v_numeric_lab_col_names = sepyDICTConfigs["numeric_lab_col_names"]
+        self.v_string_lab_col_names = sepyDICTConfigs["string_lab_col_names"]
+        self.v_all_lab_col_names = self.v_numeric_lab_col_names + self.v_string_lab_col_names  
     
-    # List of all lab names (some years might not have all listed labs)
-    v_numeric_lab_col_names = yaml_data["numeric_lab_col_names"]
-    v_string_lab_col_names = yaml_data["string_lab_col_names"]
-    v_all_lab_col_names = v_numeric_lab_col_names + v_string_lab_col_names  
-  
-    # Glasgow Comma Scale Cols
-    v_gcs_col_names = yaml_data["gcs_col_names"]
-    
-    # Bed Location Cols
-    v_bed_info = yaml_data["bed_info"]
-    
-    # Vasopressor cols
-    v_vasopressor_names = yaml_data["vasopressor_names"]
-    
-    # Vasopressor units
-    v_vasopressor_units = yaml_data["vasopressor_units"]
-    
-    # Vasopressor Dose by weight
-    v_vasopressor_dose = yaml_data["vasopressor_dose"]
-    
-    # Vassopressors Paired by Name
-    v_vasopressor_col_names = yaml_data["vasopressor_col_names"]
-    
-    # Vent Col
-    v_vent_col_names = yaml_data["vent_col_names"]
-    v_vent_positive_vars = yaml_data["vent_positive_vars"]
-    
-    # Blood Pressure Cols
-    v_bp_cols = yaml_data["bp_cols"]
-    
-    # SOFA Cols
-    v_sofa_max_24h = yaml_data["sofa_max_24h"]
-    fluids_med_names = yaml_data["fluids_med_names"]
-    fluids_med_names_generic = yaml_data["fluids_med_names_generic"]
-     
-###########################################################################
-########################### Instance Variables ############################
-###########################################################################
-    def __init__(self, imported, csn, bed_to_unit_mapping, bounds, dialysis_year):
-        logging.info(f'SepyDICT- Creating sepyDICT instance for {csn}')
-        filter_date_start_time = time.time()
-        self.csn = csn
-        #set the pat id based on the encounter; take first incase multiple encounters
-        try:
-            self.pat_id = imported.df_encounters.loc[csn,['pat_id']].iloc[0].item()
-        except:
-            self.pat_id = imported.df_encounters.loc[csn,['pat_id']].iloc[0]
+        # Glasgow Comma Scale Cols
+        self.v_gcs_col_names = sepyDICTConfigs["gcs_col_names"]
+        
+        # Bed Location Cols
+        self.v_bed_info = sepyDICTConfigs["bed_info"]
+        
+        # Vasopressor cols
+        self.v_vasopressor_names = sepyDICTConfigs["vasopressor_names"]
+        
+        # Vasopressor units
+        self.v_vasopressor_units = sepyDICTConfigs["vasopressor_units"]
+        
+        # Vasopressor Dose by weight
+        self.v_vasopressor_dose = sepyDICTConfigs["vasopressor_dose"]
+        
+        # Vassopressors Paired by Name
+        self.v_vasopressor_col_names = sepyDICTConfigs["vasopressor_col_names"]
+        
+        # Vent Col
+        self.v_vent_col_names = sepyDICTConfigs["vent_col_names"]
+        self.v_vent_positive_vars = sepyDICTConfigs["vent_positive_vars"]
+        
+        # Blood Pressure Cols
+        self.v_bp_cols = sepyDICTConfigs["bp_cols"]
+        
+        # SOFA Cols
+        self.v_sofa_max_24h = sepyDICTConfigs["sofa_max_24h"]
+        self.v_fluids_med_names = sepyDICTConfigs["fluids_med_names"]
+        self.v_fluids_med_names_generic = sepyDICTConfigs["fluids_med_names_generic"]
+
+        self.sepyDICTConfigs = sepyDICTConfigs
         self.bed_to_unit_mapping = bed_to_unit_mapping
         self.bounds = bounds
-        self.dialysis_year = dialysis_year
-        labAGG = yaml_data["lab_aggregation"]
+        self.year = year
+        self.master_df = master_df
+
+        labAGG = self.sepyDICTConfigs["lab_aggregation"]
         labs = labAGG.keys()
         for l in labs:
             if len(bounds.loc[bounds['Location in SuperTable'] == l]) > 0:
-                labAGG[l] = agg_fn_wrapper(l, bounds)
+                labAGG[l] = utils.agg_fn_wrapper(l, bounds)
         self.labAGG = labAGG
+     
+    def create_supertable_pickles(self, csn):
+        logging.info(f'SepyDICT- Creating sepyDICT instance for {csn}')
+        filter_date_start_time = time.time()
+        self.csn = csn
+
+        #set the pat id based on the encounter; take first incase multiple encounters
+        try:
+            self.pat_id = self.master_df.loc[csn,['pat_id']].iloc[0].item()
+        except:
+            self.pat_id = self.master_df.loc[csn,['pat_id']].iloc[0]
         
         #get filtered dfs for each patient encounter
-        for item in yaml_data["try_except_calls"]:
-            identifier = self.pat_id if item["id_type"] == "pat_id" else csn
-            self.try_except(imported, identifier, item["section"])
+        for item in self.sepyDICTConfigs["try_except_calls"]:
+            identifier = self.pat_id if item["id_type"] == "pat_id" else self.csn
+            self.try_except(self.master_df, identifier, item["section"])
             
         logging.info('SepyDICT- Now making dictionary')
-        self.make_dict_elements(imported)
+        self.make_dict_elements(self.master_df)
         logging.info('SepyDICT- Now calcuating Sepsis-2')
         self.run_SEP2()
         logging.info('SepyDICT- Now calcuating Sepsis-3')
@@ -211,8 +111,9 @@ class sepyDICT:
         logging.info('SepyDICT- Now writing dictionary')
         self.write_dict()
         logging.info(f'SepyDICT- Selecting data and writing this dict by CSN took {time.time() - filter_date_start_time}(s).')
+
     def try_except(self, 
-                   imported, 
+                   master_df, 
                    csn,
                    name):
         """
@@ -234,21 +135,18 @@ class sepyDICT:
         
         try:
             if name == 'demographics': 
-                if getattr(imported, df_name).index.dtype == 'O':
-                    setattr(self, filt_df_name, getattr(imported, df_name).loc[[str(csn)],:])
+                if getattr(master_df, df_name).index.dtype == 'O':
+                    setattr(self, filt_df_name, getattr(master_df, df_name).loc[[str(csn)],:])
                 else:
-                    setattr(self, filt_df_name, getattr(imported, df_name).loc[[csn],:])
+                    setattr(self, filt_df_name, getattr(master_df, df_name).loc[[csn],:])
             else:
-                setattr(self, filt_df_name, getattr(imported, df_name).loc[[csn],:])
+                setattr(self, filt_df_name, getattr(master_df, df_name).loc[[csn],:])
             logging.info(f'The {name} file was imported')
         except Exception as e: 
-            empty_df = getattr(imported, df_name).iloc[0:0]
-            empty_df.index.set_names(getattr(imported, df_name).index.names)
+            empty_df = getattr(master_df, df_name).iloc[0:0]
+            empty_df.index.set_names(getattr(master_df, df_name).index.names)
             setattr(self, filt_df_name, empty_df)
             logging.info(f"There were no {name} data for csn {csn}")
-###########################################################################
-############################# Bin Functions ###############################
-###########################################################################
 
     def bin_labs(self):
         """
@@ -270,6 +168,7 @@ class sepyDICT:
                 new = pd.concat((new, col1), axis = 1)
             self.labs_staging = new.reindex(self.super_table_time_index)
             #self.labs_staging.columns = [x[0] for x in self.labs_staging.columns]
+
     def bin_vitals(self):
         """
         Resamples and aligns patient vital data to a unified hourly time index.
@@ -287,14 +186,15 @@ class sepyDICT:
             new = pd.DataFrame([])
             for key in self.v_vital_col_names:
                 if len(self.bounds.loc[self.bounds['Location in SuperTable'] == key]) > 0:
-                    agg_fn = agg_fn_wrapper(key, self.bounds)
+                    agg_fn = utils.agg_fn_wrapper(key, self.bounds)
                 else:
                     agg_fn = "mean"
                 col1 = df[[key, 'recorded_time']].resample('60min', on = "recorded_time",  \
                                                            origin = self.event_times ['start_index']).apply(agg_fn)
                 #col1 = col1.drop(columns=['recorded_time'])
                 new = pd.concat((new, col1), axis = 1)
-            self.vitals_staging = new.reindex(self.super_table_time_index)                               
+            self.vitals_staging = new.reindex(self.super_table_time_index)                 
+
     def bin_gcs(self):
         """
         Resamples and aligns patient gcs data to a unified hourly time index.
@@ -309,7 +209,7 @@ class sepyDICT:
             new = pd.DataFrame([])
             for key in self.v_gcs_col_names:
                 if len(self.bounds.loc[self.bounds['Location in SuperTable'] == key]) > 0:
-                    agg_fn = agg_fn_wrapper_min(key, self.bounds)
+                    agg_fn = utils.agg_fn_wrapper_min(key, self.bounds)
                 else:
                     agg_fn = "min"
                 col1 = df[[key, 'recorded_time']].resample('60min', on = "recorded_time",  \
@@ -323,6 +223,7 @@ class sepyDICT:
             #                 origin = self.event_times ['start_index']).apply("min")
             #df = df.drop(columns=['recorded_time'])
             #self.gcs_staging = df.reindex(self.super_table_time_index)           
+            
     def bin_vent(self):
         """
         Resamples and aligns patient ventilator data to a unified hourly time index.
@@ -450,7 +351,7 @@ class sepyDICT:
             new = pd.DataFrame([])
             for key in vas_keys:
                 if len(self.bounds.loc[self.bounds['Location in SuperTable'] == key]) > 0:
-                    agg_fn = agg_fn_wrapper_max(key, self.bounds)
+                    agg_fn = utils.agg_fn_wrapper_max(key, self.bounds)
                 else:
                     agg_fn = "max"
                 col1 = df[[key, 'med_order_time']].resample('60min', on = "med_order_time",  \
@@ -472,7 +373,7 @@ class sepyDICT:
         Resamples and aligns patient fluids data to a unified hourly time index.
         """
         df = self.infusion_meds_PerCSN
-        cols = self.fluid_med_names + ['med_order_time']
+        cols = self.v_fluids_med_names + ['med_order_time']
         df =df[cols]
         
         if df.empty:
@@ -914,8 +815,7 @@ class sepyDICT:
         else:
             val = row[single_pressors_name]
         return(val)
-    def calc_all_pressors(self, 
-                          v_vasopressor_names = v_vasopressor_names):
+    def calc_all_pressors(self):
         """
         Accepts- Patient Dictionary, List of Vasopressor names
         Does- Applies the 'single_pressor_by_weight' function to each pressor each pressor 
@@ -924,7 +824,7 @@ class sepyDICT:
         """
 
         df = self.super_table
-        for val in v_vasopressor_names:
+        for val in self.v_vasopressor_names:
             df[val + '_dose_weight'] = df.apply(self.single_pressor_by_weight, single_pressors_name=val, axis=1)
 ###########################################################################
 ########################## Vasopresor Clean Up ############################
@@ -1116,7 +1016,7 @@ class sepyDICT:
                 if df['vent_status'].sum()>0:
                     vent_stop  =  df[df['vent_status']>0].recorded_time.iloc[-1:]
             
-            agg_fn = agg_fn_wrapper('fio2', self.bounds)
+            agg_fn = utils.agg_fn_wrapper('fio2', self.bounds)
             if len(vent_start) == 0: #No valid mechanical ventilation values
                 # vent_status and fio2 will get joined to super table later
                 vent_fio2 = df[['recorded_time','fio2']].resample('60min',
@@ -1284,7 +1184,7 @@ class sepyDICT:
             imported (object): This argument is included but not used in the current method. 
                                 It may be reserved for future use or passed in by the caller for external interactions.
         """
-        for step in yaml_data["dict_elements"]:
+        for step in sepyDICTConfigs["dict_elements"]:
             method_name = step["method"]
             method = getattr(self, method_name)
             args = step.get("args", [])
@@ -1299,7 +1199,7 @@ class sepyDICT:
         """
         Creates a dictionary of key attributes from the instance and stores it as an attribute.
         """
-        encounter_keys = yaml_data["write_dict_keys"]
+        encounter_keys = sepyDICTConfigs["write_dict_keys"]
         encounter_dict = {key: getattr(self, key) for key in encounter_keys}
         #write to the instance
         self.encounter_dict = encounter_dict
