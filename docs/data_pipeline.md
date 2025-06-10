@@ -27,50 +27,61 @@ The pipeline expects the following flat files, each containing specific clinical
 | `DIAGNOSIS` | Patient diagnoses | Records of clinical diagnoses, including ICD codes |
 
 ## Expected Columns in Each Flat File
+## (M: Mandatory features - missing/differently named features will cause the pipeline to break)
+## (R: Reproducibility features: won't cause the code to break, but needed to match the Emory/Grady datasets)
 
 ### ENCOUNTER File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- `hospital_admission_date_time`: Time of admission
-- `hospital_discharge_date_time`: Time of discharge
-- `encounter_type`: ER/IN (Emergency or Inpatient)
-
-- Additional columns can be dropped using the `drop_cols` parameter
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `hospital_admission_date_time`: Time of admission
+- M: `hospital_discharge_date_time`: Time of discharge
+- M: `ed_presentation_time`: Time of ED presentation if applicable
+- M: `encounter_type`: ER/IN (Emergency or Inpatient)
+- M: `age`: age
+- R: `discharge_to` : Where the patient was discharged to - HOME SELF CARE/HOSPICE/EXPIRED etc.
+- R: `pre_admit_location` : TRANSFER/NON-HC FACILITY etc.
+- R: `total_icu_days`: Useful for filtering ICU encounters
+- Additional columns can be dropped using the `drop_cols` parameter in the data_config file.
 
 ### DEMOGRAPHICS File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- `age`: Patient age
-- `sex`: Patient biological sex
-- `race`: Patient race
-- `ethnicity`: Patient ethnicity
+- M: `pat_id`: Patient identifier (Used as index)
+- M: `gender`: Patient biological sex
+- M: `race_code`: Patient race CODE (because Emory and Grady were deidentified)
+- M: `ethnicity_code`: Patient ethnicity CODE (because Emory and Grady were deidentified)
 - Additional columns can be dropped using the `drop_cols` parameter
 
 ### INFUSIONMEDS File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- `medication_id`: Identifier for the medication
-- `med_order_time`: Time the medication was ordered
-- `med_action_dose`: Dosage of medication administered
-- `med_action_dose_unit`: Unit of the medication dose
-- Additional columns specified in `numeric_cols` are converted to numeric values
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `medication_id`: Identifier for the medication (used to map to medication type for grouping)
+- M: `med_order_time`: Time the medication was ordered
+- M: `med_action_time`: Time the medication was administered (when med_start is not recorded)
+- M: `med_start`: Time the medication administration (like begin bag) was started
+- M: `med_stop`: Time the medication was stopped
+- M: `med_order_route`: Adminstration route (IV etc.) 
+- M: `med_action_dose`: Dosage of medication administered (Needed for vasopressors)
+- M: `med_action_dose_unit`: Unit of the medication dose (Needed for vasopressors)
 - Columns specified in `drop_cols` are removed
 
 ### LABS File
-- `csn`: Unique encounter identifier
-- `pat_id`: Patient identifier
-- `component_id`: Identifier for the lab test
-- `lab_result`: Result of the lab test
-- `lab_result_time`: Time the result was reported
-- `collection_time`: Time the specimen was collected
-- `result_status`: Status of the result (final, preliminary, etc.)
-
-- Additional metadata columns (see code for full list)
+- M: `csn`: Unique encounter identifier
+- M: `pat_id`: Patient identifier
+- M: `component_id`: Identifier for the lab test (Used to mgroup labs into similar measurements)
+- M: `lab_result`: Result of the lab test
+- M: `lab_result_time`: Time the result was reported
+- M: `collection_time`: Time the specimen was collected
+- M: `result_status`: Status of the result (final, preliminary, etc.)
+- M: `proc_cat_id`: Procedure category (Blood, CSF etc.) number
+- M: `proc_cat_name`: Procedure category name
+- M: `proc_code`: Procedure code
+- M: `proc_desc`: Procedure description (text)
+- M: `component` : component name (change SepyImport file import_labs if you wanna remove some of these from the list) 
+- M: `loinc_code`: Loinc code
 
 ### VITALS File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- `recorded_time`: Time the vital signs were recorded
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `recorded_time`: Time the vital signs were recorded
 - Columns for various vital signs (specified in `vital_col_names`)
 - Additional columns can be dropped using the `drop_cols` parameter
 
