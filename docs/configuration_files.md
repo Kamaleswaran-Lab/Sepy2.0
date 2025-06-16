@@ -22,6 +22,8 @@ CULTURES: /path/to/cultures.csv
 BEDLOCATION: /path/to/bed_locations.csv
 ORPROCEDURES: /path/to/or_procedures.csv
 DIAGNOSIS: /path/to/diagnosis.csv
+RADIOLOGY_NOTES: /path/to/radiology_notes.csv
+CLINICAL_NOTES: /path/to/clinical_notes.csv
 ICD10_quan_deyo: /path/to/icd10_quan_deyo_mapping.csv
 ICD10_quan_elix: /path/to/icd10_quan_elix_mapping.csv
 ```
@@ -83,6 +85,21 @@ string_lab_col_names:
   - COVID19
   - TROPONIN_QUAL
   # Additional string lab names...
+
+# Text processing parameters
+text_processing:
+  # Radiology notes configuration
+  radiology_notes:
+    text_col: "report_text"           # Column containing the report text
+    clean_text: true                  # Whether to clean/normalize the text
+    max_length: null                  # Maximum text length to retain (null = no limit)
+
+  # Clinical notes configuration
+  clinical_notes:
+    text_col: "note_text"             # Column containing the note text
+    clean_text: true                  # Whether to clean/normalize the text
+    extract_sections: true            # Whether to extract common clinical note sections
+    max_length: null                  # Maximum text length to retain (null = no limit)
 ```
 
 ### Key Components:
@@ -145,3 +162,8 @@ These configuration files can be customized for different datasets and instituti
 3. **Update Vital Signs**: Add or remove vital signs in `vital_col_names` based on available data
 4. **Customize NA Values**: Adjust the `na_values` list to match your institution's representation of missing data
 5. **Update Grouping Files**: Create mapping files that reflect your institution's classification of medications, labs, and bed units 
+6. **Configure Text Processing**: Adjust the parameters in the `text_processing` section to customize how radiology and clinical notes are processed:
+   - Set `text_col` to match your dataset's column name containing the note text
+   - Set `clean_text` to `false` if you want to preserve the original text format
+   - Adjust `max_length` to limit the text length for processing very large notes
+   - For clinical notes, set `extract_sections` to `true` to automatically identify and extract common note sections (history, physical exam, assessment, plan) 

@@ -126,7 +126,7 @@ def comorbidity_summary(encounter_csn, encounter_instance, config_data, comorbid
 ###########################################################################
 ############################## Data Cleaning ##############################
 ###########################################################################
-def make_numeric(self, df, cols):
+def make_numeric(df, cols):
     """  
     Cleans and converts specified columns in a DataFrame to numeric format.  
     Args:  

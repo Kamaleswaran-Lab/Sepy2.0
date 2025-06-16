@@ -1,0 +1,354 @@
+vent_name,vent_cat
+AC Pressure,invasive ventilation
+"AC Pressure, APV CMV",invasive ventilation
+"AC Pressure, CPAP+PS",??
+"AC Pressure, Other:",invasive ventilation
+"AC Pressure, Other: In back up mode, apnea ventilation.",invasive ventilation
+"AC Pressure, Other: P-CMV",invasive ventilation
+"AC Pressure, Other: Pediatric mode",invasive ventilation
+"AC Pressure, Other: VV ECMO",invasive ventilation
+"AC Pressure, Other: changed mode due to pt peak pressures 42-44",invasive ventilation
+"AC Pressure, Other: found on",invasive ventilation
+"AC Pressure, Other: pediatric",invasive ventilation
+"AC Pressure, SIMV Pressure",invasive ventilation
+"AC, PS",invasive ventilation
+AC/CMV Volume,invasive ventilation
+"AC/CMV Volume, AC Pressure",invasive ventilation
+"AC/CMV Volume, APV CMV",invasive ventilation
+"AC/CMV Volume, APV SIMV",invasive ventilation
+"AC/CMV Volume, Bi-Level/DuoPAP/APRV",invasive ventilation
+"AC/CMV Volume, CPAP",??
+"AC/CMV Volume, CPAP+PS",??
+"AC/CMV Volume, CPAP, CPAP+PS",??
+"AC/CMV Volume, NIPPV",??
+"AC/CMV Volume, Other:",invasive ventilation
+"AC/CMV Volume, Other: ETT 8.0/ 23 at teeth",invasive ventilation
+"AC/CMV Volume, Other: SCMV",invasive ventilation
+"AC/CMV Volume, Other: changed to scmv per critical care fellow",invasive ventilation
+"AC/CMV Volume, Other: passive AC",invasive ventilation
+"AC/CMV Volume, Other: passive Ac",invasive ventilation
+"AC/CMV Volume, Other: passive ventilation",invasive ventilation
+"AC/CMV Volume, Other: per MD",invasive ventilation
+"AC/CMV Volume, Other: pt transferred to AC/VC mode due to apnea on ASV, PA told of changes and ABG is ordered in 2 hours",invasive ventilation
+"AC/CMV Volume, Other: vg+",invasive ventilation
+"AC/CMV Volume, PAV+",invasive ventilation
+"AC/CMV Volume, PRVC",invasive ventilation
+"AC/CMV Volume, SIMV Pressure",invasive ventilation
+"AC/CMV Volume, SIMV Volume",invasive ventilation
+"AC/CMV Volume, SIMV Volume, Other:",invasive ventilation
+APV CMV,invasive ventilation
+"APV CMV, APV SIMV",invasive ventilation
+"APV CMV, CPAP+PS",??
+"APV CMV, CPAP+PS, HFOV",invasive ventilation
+"APV CMV, NIPPV, SIMV Volume, Volume Support",??
+"APV CMV, Other:",invasive ventilation
+"APV CMV, Other: SCMV+",invasive ventilation
+"APV CMV, PAV+, SIMV Pressure",invasive ventilation
+"APV CMV, SIMV Pressure",invasive ventilation
+"APV CMV, SIMV Volume",invasive ventilation
+APV SIMV,invasive ventilation
+"APV SIMV, SIMV Volume",invasive ventilation
+ASV,invasive ventilation
+"ASV, AC/CMV Volume",invasive ventilation
+"ASV, AC/CMV Volume, AC Pressure",invasive ventilation
+"ASV, AC/CMV Volume, APV CMV",invasive ventilation
+"ASV, APV CMV",invasive ventilation
+"ASV, CPAP",??
+"ASV, CPAP+PS",??
+"ASV, NIPPV",??
+"ASV, Other:",invasive ventilation
+"ASV, Other: Attempted to pl;ace patient on Pressure support but exhibited signs of apneic events during this time and returne to ASV",invasive ventilation
+"ASV, Other: Patient placed back on ventilator at prior settings.",invasive ventilation
+"ASV, Other: T/C",??
+"ASV, SIMV Volume",invasive ventilation
+Bi-Level/DuoPAP/APRV,invasive ventilation
+"Bi-Level/DuoPAP/APRV, NIPPV",??
+"Bi-Level/DuoPAP/APRV, Other:",invasive ventilation
+"Bi-Level/DuoPAP/APRV, Other: APRV   PH 35,  PL 0,  TH 3.4,  TL 0.4",invasive ventilation
+"Bi-Level/DuoPAP/APRV, Other: APRV  PH 33, PL 0, TH 3.6m  TL 0.6",invasive ventilation
+CPAP,NIPPV
+CPAP+PS,NIPPV
+"CPAP+PS, NIPPV",NIPPV
+"CPAP+PS, Other:",NIPPV
+"CPAP+PS, Other: Mode change at 0755 to spontaneous by Gabe Najarro, PA",invasive ventilation; weaning mode
+"CPAP+PS, Other: PT ON PS 8/6",invasive ventilation; weaning mode
+"CPAP+PS, Other: Pt placed on Spontanoeous Breathing Trial per Dr. Aristizabal order.",invasive ventilation; weaning mode
+"CPAP+PS, Other: found on PSV",invasive ventilation; weaning mode
+"CPAP+PS, Other: found on Pressure Support",invasive ventilation; weaning mode
+"CPAP+PS, Other: pt uses home vent @ night, pressure support mode, pt has trach 4 uncuff",invasive ventilation
+"CPAP+PS, Other: spont",NIPPV
+"CPAP+PS, SIMV Volume",invasive ventilation
+"CPAP, CPAP+PS",NIPPV
+"CPAP, CPAP, non-invasive",NIPPV
+"CPAP, NIPPV",NIPPV
+"CPAP, NIPPV, Other: Autoset mode",NIPPV
+"CPAP, Other:",NIPPV
+"CPAP, Other: 4L 02 bleed in",NIPPV
+"CPAP, Other: CPAP of 6",NIPPV
+"CPAP, Other: Resmed",NIPPV
+"CPAP, Other: SBT",invasive ventilation; weaning mode
+"CPAP, Other: VS",invasive ventilation; weaning mode
+"CPAP, Other: Volume Support",invasive ventilation; weaning mode
+"CPAP, Other: cpap 10",NIPPV
+"CPAP, Other: cpap hs",NIPPV
+"CPAP, Other: home unit",home
+"CPAP, PS",NIPPV
+"CPAP, PSV",invasive ventilation; weaning mode
+"CPAP, bubble",??
+"CPAP, bubble, CPAP, non-invasive",NIPPV
+"CPAP, bubble, NIPPV",NIPPV
+"CPAP, bubble, PS",NIPPV
+"CPAP, non-invasive",NIPPV
+Date\\Time Correction,
+HFOV,invasive ventilation
+"HFOV, Other:",invasive ventilation
+NIPPV,NIPPV
+NIPPV AVAPS,NIPPV
+"NIPPV, NIPPV AVAPS",NIPPV
+"NIPPV, Other:",NIPPV
+"NIPPV, Other: AVAP",NIPPV
+"NIPPV, Other: AVAP-AE",NIPPV
+"NIPPV, Other: AVAPS",NIPPV
+"NIPPV, Other: AVAPS mode",NIPPV
+"NIPPV, Other: AVAPS pmax 22 pmin 8",NIPPV
+"NIPPV, Other: AutoSet Max 18, Min 5",NIPPV
+"NIPPV, Other: Autoset",NIPPV
+"NIPPV, Other: Avaps",NIPPV
+"NIPPV, Other: Avaps mode",NIPPV
+"NIPPV, Other: Bipap",NIPPV
+"NIPPV, Other: HS",NIPPV
+"NIPPV, Other: Home Resmed",NIPPV
+"NIPPV, Other: IVAPS, Resp. Med",NIPPV
+"NIPPV, Other: Mode: 15/5 rate: 12 40%",NIPPV
+"NIPPV, Other: Pt found on AVAPS",NIPPV
+"NIPPV, Other: S/T mode",NIPPV
+"NIPPV, Other: auto with 2L titrated in",NIPPV
+"NIPPV, Other: avaps",NIPPV
+"NIPPV, Other: changed to bipap mode per nurse practitioner",NIPPV
+"NIPPV, Other: cpap mode",NIPPV
+"NIPPV, Other: has 6L bled in",NIPPV
+"NIPPV, Other: home settings",home
+"NIPPV, Other: pt on bipap",NIPPV
+"NIPPV, Other: pt refuse.",NIPPV
+"NIPPV, Other: pt refusing bipap",NIPPV
+"NIPPV, Other: respmed",NIPPV
+"NIPPV, PAV+",??
+"NIPPV, SIMV Pressure",??
+"Other: ""17/8"" per mother. Pressure support",home
+"Other: ""17/8"" per mother. pressure support",home
+Other: (S) CMV,invasive ventilation
+Other: (S)CMV,invasive ventilation
+Other: (s)CMV,invasive ventilation
+Other: (s)cmv,invasive ventilation
+Other: 17/8 pressure support,invasive ventilation; weaning mode
+Other: AC,invasive ventilation
+Other: AC/VC+,invasive ventilation
+Other: AIR VO,HFNC (oxygen)
+Other: AIR vo,HFNC (oxygen)
+Other: ATC,invasive ventilation
+Other: AUTOPAP,NIPPV
+Other: AVAP,NIPPV
+Other: AVAPS,NIPPV
+"Other: AVAPS mode, Vt = 450, Pmin = 10, Pmax = 25",NIPPV
+"Other: AVAPS mode, Vt = 450, Pmin = 10. Pmax = 25",NIPPV
+"Other: AVAPS, Vt=450,Pmin=10, Pmax - 25",NIPPV
+Other: AVAPS-AE,NIPPV
+"Other: AVAPS: Min. Pres.= 15, Max. Pres. = 30,",NIPPV
+Other: Aerosol trach collar,
+Other: Airvo,HFNC (oxygen)
+Other: Autoset,NIPPV
+Other: Avap,NIPPV
+Other: Avaps,NIPPV
+Other: Avaps mode in use.,NIPPV
+Other: BIPAP,NIPPV
+Other: BIPAoff at this time.,NIPPV
+Other: BiPAP on standby,NIPPV
+Other: CMV+,invasive ventilation
+Other: CPAP + VS,invasive ventilation
+Other: CPAP +VS,invasive ventilation
+Other: CPAP+PS,invasive ventilation
+Other: CPAP+VS,invasive ventilation
+"Other: CPAP, weaning parameters performed.",??
+Other: HOME UNIT,home
+Other: Home Trilogy Passive AVAPS-AE,home
+Other: Home Vent,home
+Other: Home Vent.,home
+Other: Home Ventilator,home
+Other: IRV,invasive ventilation
+Other: MMV,invasive ventilation
+Other: N/C,
+Other: On Trach Collar,
+Other: P CMV,invasive ventilation
+"Other: P CMV, PC 16",invasive ventilation
+"Other: P CMV, with a PC of 18.",invasive ventilation
+Other: P-CMV,invasive ventilation
+Other: P-CMV with PC 16,invasive ventilation
+"Other: P-CMV, PC 16",invasive ventilation
+Other: PASSIVE A/C,invasive ventilation
+Other: PASSIVE AC,invasive ventilation
+Other: PC+,invasive ventilation
+Other: PCA+,invasive ventilation
+Other: PCV,invasive ventilation
+Other: PCV +,invasive ventilation
+Other: PCV+,invasive ventilation
+Other: PCV+      INSP PRESS 28,invasive ventilation
+Other: PCV+PS,invasive ventilation
+Other: PRESS CONTROL VENT/AC,invasive ventilation
+Other: PRESS CONTROL/ASSIST,invasive ventilation
+Other: PRVC,invasive ventilation
+Other: PSV,invasive ventilation
+Other: PSV+PS,invasive ventilation
+Other: PT refused to use unit,??
+Other: PVC+,invasive ventilation
+Other: Passive AC,invasive ventilation
+Other: Passive AVAPs Home Vent,home
+Other: Patient placed back on the ventilator. RN and CCM notified.,invasive ventilation
+Other: Patient placed in IRV per MD for hypoxemia.,invasive ventilation
+Other: Patient placed on prior settings.,invasive ventilation
+"Other: Placed in spontaneous Mode by Jacquelin, Resp. Therapist",invasive ventilation; weaning mode
+Other: Pressure Control,invasive ventilation
+Other: Pressure Support Trial,invasive ventilation; weaning mode
+Other: Pressure support by NP Bri Perry.,invasive ventilation; weaning mode
+Other: Pressure support trial,invasive ventilation; weaning mode
+Other: R/air.,
+Other: S CMV,invasive ventilation
+Other: S-CMV,invasive ventilation
+Other: S/CMV,invasive ventilation
+Other: SCMV,invasive ventilation
+Other: SCMV+,invasive ventilation
+Other: SCMV14/50%P+5,invasive ventilation
+Other: SIMV,invasive ventilation
+Other: SPONT,??
+Other: ST,invasive ventilation
+Other: ST avaps,invasive ventilation
+Other: ST/ AVAPS,invasive ventilation
+Other: ST/AVAPS,invasive ventilation
+Other: ST/AVaps,invasive ventilation
+Other: ST/Avaps,invasive ventilation
+Other: STBY,
+Other: Spont,??
+Other: Spont.,??
+Other: Spontaneous,??
+Other: Spontaneous breathing trial,invasive ventilation; weaning mode
+Other: St/Avaps,invasive ventilation
+Other: T Tube,invasive ventilation; weaning mode
+Other: T-P,invasive ventilation; weaning mode
+Other: T/C,
+Other: T/P,invasive ventilation; weaning mode
+Other: T/c,
+Other: TC,
+Other: TRACH CO;;AR,
+Other: TRACH COLLAR,
+Other: TV,??
+Other: Trach Collar,
+Other: Trach Collar. Vent on stand by tonight.,
+Other: Trilogy-Home Vent.,home
+Other: Tube Compensation,invasive ventilation
+Other: Tube compensation,invasive ventilation
+Other: VPAPS,??
+Other: VS,invasive ventilation
+Other: VS  Volume Support,invasive ventilation
+Other: VS MODE,invasive ventilation
+Other: VS MODE   VTARGET 620,invasive ventilation
+Other: VS Volume Support,invasive ventilation
+Other: VS/CPAP,??
+Other: Vent on S/B; Pt is on trach collar 40%,
+Other: Vol Support,invasive ventilation
+Other: Volume Support,invasive ventilation
+Other: Volume Support.,invasive ventilation
+Other: Volume support,invasive ventilation
+Other: Volume support.,invasive ventilation
+Other: ac passive,invasive ventilation
+Other: avap,invasive ventilation
+Other: avaps,invasive ventilation
+Other: avaps-ae,invasive ventilation
+Other: bag/mask,invasive ventilation
+Other: bagged,invasive ventilation
+Other: bagging with 100% FIO2 c peep valve @12,invasive ventilation
+Other: continue spontaneous mode per Cindy (Resident),invasive ventilation
+Other: cpap vs,NIPPV
+Other: decrease MV percent to 90,invasive ventilation
+Other: home CPAP,home
+Other: home Cpap unit with 6lpm of O2 bled in.,home
+Other: home cpap,home
+Other: home trilogy unit,home
+Other: home vent,home
+Other: home ventilator,home
+Other: iVAPS,NIPPV
+Other: n/c,
+Other: off,
+Other: on standby,
+Other: p-cmv,invasive ventilation
+Other: p-cmv of 20,invasive ventilation
+Other: pNeuton,invasive ventilation
+Other: p_cmv,invasive ventilation
+Other: passive AC,invasive ventilation
+Other: passive AC home setting,home
+Other: passive a/c,invasive ventilation
+Other: passive ac,invasive ventilation
+Other: patient removed herself from cpap,NIPPV
+Other: patient's home vent. trillogy,home
+Other: pc,invasive ventilation
+Other: pcmv,invasive ventilation
+Other: pcv,invasive ventilation
+Other: pcv +,invasive ventilation
+Other: pcv 36,invasive ventilation
+Other: pcv ip 28,invasive ventilation
+Other: pcv+,invasive ventilation
+Other: pcv+ps,invasive ventilation
+Other: press control\\assist,invasive ventilation
+Other: pt home setting autoset mode,home
+Other: pt on spontaneous mode,invasive ventilation; weaning mode
+Other: pvc+,invasive ventilation
+Other: r,??
+Other: s (CMV),invasive ventilation
+Other: s/t,??
+Other: scmv,invasive ventilation
+Other: sontaneousmode,invasive ventilation; weaning mode
+Other: spont,invasive ventilation; weaning mode
+Other: spont mode,invasive ventilation; weaning mode
+"Other: spont, MD changed setting",invasive ventilation; weaning mode
+Other: spontaneous,invasive ventilation; weaning mode
+Other: spontaneous breathing,invasive ventilation; weaning mode
+Other: spontaneous mode,invasive ventilation; weaning mode
+Other: spontaneousmode,invasive ventilation; weaning mode
+Other: spontanoeus,invasive ventilation; weaning mode
+Other: spontanueous,invasive ventilation; weaning mode
+Other: stand-by,
+Other: stby,
+Other: stby NIPPV,
+Other: stby Nippv,
+Other: std by,
+Other: t tube,invasive ventilation; weaning mode
+Other: tc,
+Other: trach collar,
+Other: trach. collar,
+Other: trachc collar,
+Other: trilogy,invasive ventilation
+Other: tube compensation,invasive ventilation
+Other: tube compensation for recruitment,invasive ventilation
+Other: tube compentsation,invasive ventilation
+Other: volume support,invasive ventilation
+Other: volume support.,invasive ventilation
+Other: vs,invasive ventilation
+PAV+,invasive ventilation
+"PC, PS, SIMV",invasive ventilation
+"PC, PS, SIMV, VG",invasive ventilation
+"PC, PS, VG",invasive ventilation
+"PC, PSV, SIMV",invasive ventilation
+"PC, SIMV",invasive ventilation
+"PC, SIMV, VG",invasive ventilation
+PRVC,invasive ventilation
+PS,invasive ventilation
+"PS, PSV, VG",invasive ventilation
+"PS, SIMV",invasive ventilation
+"PS, SIMV, Other:",invasive ventilation
+"PS, SIMV, VG",invasive ventilation
+"PSV, SIMV, VG",invasive ventilation
+"PSV, VG",invasive ventilation
+SIMV Pressure,invasive ventilation
+SIMV Volume,invasive ventilation
+"SIMV Volume, Other:",invasive ventilation
+SiPAP,invasive ventilation
+Volume Support,invasive ventilation
+,??

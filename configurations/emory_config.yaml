@@ -11,7 +11,7 @@ make_supertables: "yes" # yes: make supertables, no: do not make supertables
 
 
 # FILE PATHS
-data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW"
+data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI"
 groupings_path: "groupings"
 yearly_pickle_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_YEARLY_PICKLES/"
 supertable_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables/"
@@ -24,49 +24,59 @@ age: "adult" # "adult": age >= 18, "pediatric": age < 18, "all": all ages
 specific_enc_filter: "no" # "yes": only specific encounters, "no": all encounters
 #specific_enc_filter_list: 
 
-# DICTIONARY PATH KEWORDS
+
 dictionary_paths:
+  # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE groupings/comorbidities FOLDER
   comorbidity_types:
-    - "ICD9_ahrq"
-    - "ICD9_elix"
-    - "ICD9_quan_deyo"
-    - "ICD9_quan_elix"
-    - "ICD9_single_ccs"
-    - "ICD10_ahrq"
-    - "ICD10_elix"
-    - "ICD10_quan_deyo"
-    - "ICD10_quan_elix"
-    - "ICD10_single_ccs"
+    - ["ICD9_ahrq", "*ICD9_ahrq*"]
+    - ["ICD9_elix", "*ICD9_elix*"]
+    - ["ICD9_quan_deyo", "*ICD9_quan_deyo*"]
+    - ["ICD9_quan_elix", "*ICD9_quan_elix*"]
+    - ["ICD9_single_ccs", "*ICD9_single_ccs*"]
+    - ["ICD10_ahrq", "*ICD10_ahrq*"]
+    - ["ICD10_elix", "*ICD10_elix*"]
+    - ["ICD10_quan_deyo", "*ICD10_quan_deyo*"]
+    - ["ICD10_quan_elix", "*ICD10_quan_elix*"]
+    - ["ICD10_single_ccs", "*ICD10_single_ccs*"]
+  # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE groupings/ FOLDER
   grouping_types:
-    - ["infusion_meds", "em_all_infusion_meds"]
-    - ["grouping_labs", "em_grouping_labs"]
-    - ["bed_labels", "em_bed_labels"]
-    - ["grouping_fluids", "em_grouping_fluids"]
-    - ["variable_chart", "em_variable_chart"]
-  flatfile_types:
-    - ["INFUSIONMEDS", "INFUSIONMEDS"]
-    - ["LABS", "LABS"]
-    - ["VITALS", "VITALS"]
-    - ["VENT", "VENT"]
-    - ["DEMOGRAPHICS", "DEMOGRAPHICS"]
-    - ["GCS", "GCS"]
-    - ["ENCOUNTER", "ENCOUNTER"]
-    - ["CULTURES", "CULTURES"]
-    - ["BEDLOCATION", "BEDLOCATION"]
-    - ["ORPROCEDURES", "ORPROCEDURES"]
-    - ["DIAGNOSIS", "DIAGNOSIS"]
-    - ["PROCEDURES", "PROCEDURES"]
+    - ["infusion_meds", "em_all_infusion_meds.csv"]
+    - ["grouping_labs", "em_grouping_labs.csv"]
+    - ["bed_labels", "em_bed_labels.csv"]
+    - ["grouping_fluids", "em_fluids_labels.csv"]
+    - ["variable_chart", "em_variable_chart.csv"]
+    - ["grouping_vent", "em_vent_labels.csv"]
+  flatfile_types: 
+    # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/year/ FOLDER
+    - ["INFUSIONMEDS", "*INFUSIONMEDS*"]
+    - ["LABS", "*LABS*"]
+    - ["VITALS", "*VITALS*"]
+    - ["VENT", "*VENT_WITHO2*"]
+    - ["DEMOGRAPHICS", "*DEMOGRAPHICS*"]
+    - ["GCS", "*GCS*"]
+    - ["ENCOUNTER", "*ENCOUNTER*"]
+    - ["CULTURES", "*CULTURES*"]
+    - ["BEDLOCATION", "*BEDLOCATION*"]
+    - ["ORPROCEDURES", "*ORPROCEDURES*"]
+    - ["DIAGNOSIS", "*DIAGNOSIS*"]
+    - ["CPT_PROCEDURES", "*CPT*"]
+    - ["ICD_PROCEDURES", "*ICDPROCEDURES*"]
+    - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"]
   combined_files:
-    - ["DIALYSIS", "DIALYSIS_EMORY14_21.csv"] 
-    - ["IN_OUT", "IN_OUT_EMORY14_21.csv"]
+    # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/ FOLDER
+    - ["DIALYSIS", "DIALYSIS_14_21.dsv"] 
+    - ["IN_OUT", "CJSEPSIS_OUT_EO3.csv"]
+    - ["RADIOLOGY_NOTES", "all_radiology_notes.csv"]
 
 # YEARLY INSTANCE FUNCTIONS AND PARAMETERS
 yearly_instance:
   import_demographics:
+    file_key: "DEMOGRAPHICS"
     drop_cols: []
     index_col: ["pat_id"]
     date_cols: [] 
   import_encounters:
+    file_key: "ENCOUNTER"
     drop_cols: 
       - "admit_reason"
       - "insurance_status"
@@ -79,6 +89,7 @@ yearly_instance:
       - "hospital_admission_date_time"
       - "hospital_discharge_date_time"
   import_infusion_meds:
+    file_key: "INFUSIONMEDS"
     drop_cols: []
     numeric_cols:
       - "order_med_id"
@@ -92,16 +103,19 @@ yearly_instance:
       - "med_start"
       - "med_stop"
   import_labs:
+    file_key: "LABS"
     drop_cols: []
     date_cols:
       - "collection_time"
       - "lab_result_time"
   import_vitals:
+    file_key: "VITALS"
     drop_cols: []
     index_col: ["csn"]
     date_cols: ["recorded_time"]
     merge_cols: []
   import_vent:
+    file_key: "VENT"
     drop_cols: []
     index_col: ["csn"]
     numeric_cols:
@@ -114,7 +128,16 @@ yearly_instance:
       - "recorded_time"
       - "vent_start_time"
       - "vent_stop_time"
+  import_dialysis:
+    file_key: "DIALYSIS"
+    drop_cols: 
+      - "empi"
+      - "encounter_id"
+    index_col: ["csn"]
+    date_cols:
+      - "service_timestamp"
   import_gcs:
+    file_key: "GCS"
     drop_cols: []
     index_col: ["csn"]
     numeric_col:
@@ -124,6 +147,7 @@ yearly_instance:
       - "gcs_total_score"
     date_cols: ["recorded_time"]
   import_cultures:
+    file_key: "CULTURES"
     drop_cols: []
     index_col: ["csn"]
     date_cols:
@@ -131,12 +155,14 @@ yearly_instance:
       - "order_time"
       - "lab_result_time"
   import_bed_locations:
+    file_key: "BEDLOCATION"
     drop_cols: []
     index_col: ["csn"]
     date_cols:
       - "bed_location_start"
       - "bed_location_end"
   import_procedures:
+    file_key: "ORPROCEDURES"
     drop_cols: []
     index_col: ["csn"]
     date_cols:
@@ -146,9 +172,56 @@ yearly_instance:
       - "procedure_comp_dttm"
       - "out_or_dttm"
   import_diagnosis:
+    file_key: "DIAGNOSIS"
     drop_cols: []
     index_col: ["csn"]
     date_cols: ["dx_time_date"]
+  import_cpt_procedures:
+    file_key: "CPT_PROCEDURES"
+    drop_cols: 
+      - "group_modifier_cpt_desc"
+      - "modifier_cpt_seq_num"
+    index_col: ["csn"]
+    date_cols:
+      - "procedure_day"
+      - "procedure_dttm"
+  import_icd_procedures:
+    file_key: "ICD_PROCEDURES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "procedure_date"
+  import_in_out:
+    file_key: "IN_OUT"
+    drop_cols: []
+    numeric_cols: [] 
+    index_col: ["csn"]
+    date_cols:
+      - "service_date"
+      - "service_ts"
+      - "order_ts"
+  import_radiology_notes:
+    file_key: "RADIOLOGY_NOTES"
+    drop_cols: []
+    index_col: ["patient_id"]
+    date_cols:
+      - "day_verified"
+    text_col: "doc_text"
+    clean_text: true
+    max_length: null
+  import_clinical_notes:
+    file_key: "CLINICAL_NOTES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "note_date"
+      - "documented_date"
+    text_col: "note_text"
+    clean_text: true
+    extract_sections: true
+    max_length: null
+
+
 # COMORBIDITY SUMMARY KEYWORDS
 comorbidity_summary:
   - "ICD10_quan_deyo"
@@ -161,7 +234,9 @@ comorbidity_summary:
   # - "ICD10_ahrq"
   # - "ICD10_elix"
   # - "ICD10_single_ccs"
-# SEPSIS SUMMARY DIRECTORY PATHES
+
+
+# SEPSIS SUMMARY DIRECTORY PATHS
 sepsis_summary: "em_sepsis_summary"
 sepsis_summary_types:
   - "sofa_summary"
