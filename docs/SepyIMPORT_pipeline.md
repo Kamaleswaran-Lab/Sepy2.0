@@ -63,6 +63,10 @@ The pipeline expects the following flat files, each containing specific clinical
 - M: `med_action_dose_unit`: Unit of the medication dose (Needed for vasopressors)
 - Columns specified in `drop_cols` are removed
 
+TODO: Basically, vasopressors and anti-infective meds are instances of two broader categories of data types that you'd like to handle w.r.t medications. 
+Anti-infective meds: any med in this group can be given for "suspicion of infection", so it is only processed to check if there was one or not 
+Vasopressors: We create separate columns in the supertables as indicator variables for each of the 6 vasopressor 
+
 ### LABS File
 - M: `csn`: Unique encounter identifier
 - M: `pat_id`: Patient identifier
@@ -84,77 +88,116 @@ The pipeline expects the following flat files, each containing specific clinical
 - M: `recorded_time`: Time the vital signs were recorded
 - Columns for various vital signs (specified in `vital_col_names`)
 - Additional columns can be dropped using the `drop_cols` parameter
+- Option to merge columns with different names into one vitals feature. Since the vitals flatfile is expected to ALREADY BE PIVOTED. That happens at a later stage for labs etc.
 
 ### VENT File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- Ventilator parameters (specified in `numeric_cols`)
-- Timestamp columns specified in `date_cols`
-- Additional columns can be dropped using the `drop_cols` parameter
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- R: `vent_rate_set`: Ask?
+- R: `vent_tidal_rate_set`: Ask? 
+- M: `vent_tidal_rate_exhaled`: tidal volume 
+- M: `peep`: peep
+- M: `fio2`: fio2 (vent)
+- M: `o2_flow_rate`: Oxygen flow rate (nasal cannula)
+- M: `o2_flow_rate_units`: Units for oxygen flow rate 
+- M: `recorded_time`: For the measurements - like fio2, peep etc
+- M: `vent_start_time`: When this ventilation session started
+- M: `vent_stop_time`: When this ventilation session ended
 
 ### DIALYSIS File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- Dialysis parameters (specified in `numeric_cols`)
-- Timestamp columns specified in `date_cols`
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `service_timestamp`: Recorded timestamp of dialysis start
 - Additional columns can be dropped using the `drop_cols` parameter
 
 ### IN_OUT File
 - `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- Fluid input/output measurements (specified in `numeric_cols`)
-- Timestamp columns specified in `date_cols`
+- `service_ts`: Timestamp of start 
+- `order_ts`: Timestamp of fluid order 
+- `order_clinical_desc`: Description of order 
+- `order_catalog_desc`: Description of kind of fluid 
 - Additional columns can be dropped using the `drop_cols` parameter
 
 ### GCS File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- `recorded_time`: Time the GCS assessment was recorded
-- `gcs_eye_score`: Eye opening score (1-4)
-- `gcs_verbal_score`: Verbal response score (1-5)
-- `gcs_motor_score`: Motor response score (1-6)
-- `gcs_total_score`: Total GCS score (3-15)
+- M" `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `recorded_time`: Time the GCS assessment was recorded
+- M: `gcs_eye_score`: Eye opening score (1-4)
+- M: `gcs_verbal_score`: Verbal response score (1-5)
+- M: `gcs_motor_score`: Motor response score (1-6)
+- M: `gcs_total_score`: Total GCS score (3-15)
 - Additional columns can be dropped using the `drop_cols` parameter
 
 ### CULTURES File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- Culture result information
-- Timestamp columns specified in `date_cols`
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `specimen_collect_time`: Time specimen was collected
+- M: `order_time`: Time specimen was ordered
+- M: `lab_result_time`: Time of result 
+- M: `result_status`: Status (Completed, In process, Ordered etc.)
+- M: `proc_code`: procedure code 
+- M: `proc_desc`: procedure description 
+- M: `component_id`: component id number
+- M: `component`: Name of the component
+- M: `loinc_code`: Loinc mapping
 - Additional columns can be dropped using the `drop_cols` parameter
 
 ### BEDLOCATION File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- `bed_unit`: Identifier for the hospital unit
-- `bed_location_start`: Time the patient arrived at the location
-- `bed_location_end`: Time the patient left the location
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `bed_unit`: Identifier for the hospital unit
+- M: `bed_location_start`: Time the patient arrived at the location
+- M: `bed_location_end`: Time the patient left the location
 - Additional columns can be dropped using the `drop_cols` parameter
 
 ### ORPROCEDURES File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- Procedure information
-- Timestamp columns specified in `date_cols`
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `in_or_dttm`: Time patient was taken into the OR
+- M: `out_or_dttm`: Time patient was taken out of the OR
+- M: `procedure_start_dttm`: procedure start time
+- M: `procedure_end_dttm`: procedure end time 
+- M: `or_procedure_id`: procedure ID
+- M: `primary_procedure_nm`: Name of the procedure
+- R: `service_nm`: Name of the service department (Urology Sergery, Neurology Surgery etc.)
 - Additional columns can be dropped using the `drop_cols` parameter
 
 ### DIAGNOSIS File
-- `csn`: Unique encounter identifier (used as index)
-- `pat_id`: Patient identifier
-- `dx_code_icd10`: ICD-10 diagnosis code
-- `dx_time_date`: Time the diagnosis was recorded
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `dx_code_icd10`: ICD-10 diagnosis code
+- M: `dx_time_date`: Time the diagnosis was recorded
 - Additional columns can be dropped using the `drop_cols` parameter
+
+### ICD Procedures 
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `icd10_procedure_code`: Map all ICD9 to ICD10 please (look at data_processing_helper_functions)
+- M: `procedure_desc`: Description of the procedure
+- M: `procedure_date`: Date the procedure was performed  
+- Additional columns can be dropped using the `drop_cols` parameter
+
+### CPT Procedures 
+- M: `csn`: Unique encounter identifier (used as index)
+- M: `pat_id`: Patient identifier
+- M: `procedure_cpt_code`: Current Procedural Terminology procedure code
+- M: `procedure_cpt_desc`: Description of the procedure
+- M: `procedure_dttm`: Date and time the procedure was performed  
+- Additional columns can be dropped using the `drop_cols` parameter
+
 
 ## Additional Required Information (Groupings)
 
 The pipeline requires several mapping and grouping files to properly categorize and process the data:
+All columns specified are mandatory. 
 
 ### Medication Groupings
 File: Specified by `dataConfig["dictionary_paths"]["grouping_types"]["infusion_meds"]`
 
 This file maps medication IDs to clinical categories and includes:
 - `medication_id`: Unique identifier for medications
-- `super_table_col_name`: Standardized name for the medication
+- `med_name`: Name of medicine
+- `super_table_col_name`: Standardized name for the medication (Name that shows up in the final dataset)
 - `med_class`: Medication class (e.g., "anti-infective", "vasopressor")
 
 ### Lab Groupings
@@ -174,6 +217,8 @@ This file classifies hospital bed units and includes:
 - `imc`: Binary flag indicating if the unit is an intermediate care unit (1) or not (0)
 - `ed`: Binary flag indicating if the unit is an emergency department (1) or not (0)
 - `procedure`: Binary flag indicating if the unit is a procedure area (1) or not (0)
+- `icu_type`: Neuro/CTICU/Medical ICU/ Surgical ICU
+- `unit_type`: Ward/ICU etc. (May be redundant)
 
 ### Fluid Groupings
 File: Specified by `dataConfig["dictionary_paths"]["grouping_types"]["grouping_fluids"]`
@@ -190,17 +235,21 @@ These files include:
 - `ICD10`: ICD-10 diagnosis code
 - `quan_deyo` or `quan_elix`: Comorbidity category
 
+### Vent Mode Mapping Files
+File: Specified by `dataConfig["dictionary_paths"]["grouping_types"]["grouping_vent_mode"]`
+
+- `vent_name`: Name of the ventilator device 
+- `vent_cat`: Category (Invasive/Non-Invasive-Nasal Cannula) 
+
 ## Data Processing Steps
 
 For each data type, the processing follows these general steps:
 
+# SepyIMPORT: 
 1. **Import**: Read the raw data from CSV files
-2. **Clean**: Convert data types, handle missing values, drop unnecessary columns
-3. **Transform**: Apply transformations specific to each data type
-4. **Merge**: Join data with relevant grouping/mapping files
-5. **Store**: Save the processed data in class attributes for further use
-
-Specific processing steps for each data type are detailed in the respective import methods of the `sepyIMPORT` class.
+2. **Clean**: Convert data types, drop unnecessary columns, convert nan types to nan
+3. **Merge**: Join data with relevant grouping/mapping files
+4. **Store**: Save the processed data in class attributes for further use by SepyDICT
 
 ## Usage Example
 

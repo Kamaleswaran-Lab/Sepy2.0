@@ -89,3 +89,21 @@ string_lab_col_names:
   - "c_diff"
   - "covid"
   - "mtp"
+
+# Text processing configuration
+text_processing:
+  radiology_notes:
+    text_col: "report_text"           # Column containing the report text
+    clean_text: true                  # Whether to clean/normalize the text
+    max_length: null                  # Maximum text length to retain (null = no limit)
+    
+  clinical_notes:
+    text_col: "note_text"             # Column containing the note text
+    clean_text: true                  # Whether to clean/normalize the text
+    extract_sections: true            # Whether to extract common clinical note sections
+    max_length: null                  # Maximum text length to retain (null = no limit)
+    section_patterns:
+      history: "(?:history\\s+of\\s+present\\s+illness|history|hpi)[\\s\\:]+(.+?)(?=\\b(?:physical examination|assessment|plan|impression|vital signs|medications)\\b|$)"
+      physical_exam: "(?:physical\\s+examination|physical\\s+exam)[\\s\\:]+(.+?)(?=\\b(?:assessment|plan|impression|vital signs|medications)\\b|$)"
+      assessment: "(?:assessment|impression)[\\s\\:]+(.+?)(?=\\b(?:plan|recommendations|physical examination|medications)\\b|$)"
+      plan: "(?:plan|recommendations)[\\s\\:]+(.+?)(?=\\b(?:assessment|impression|physical examination|vital signs|medications)\\b|$)"

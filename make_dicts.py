@@ -63,12 +63,10 @@ def import_data_frames(yearly_instance, configs):
         "Sepy is currently reading flat files and importing them for analysis. Thank you for waiting."
     )
     for method_name, params in configs["yearly_instance"].items():
-        method = getattr(yearly_instance, method_name, None)
-        if callable(method):
-            # check if method requires numeric_cols parameter and access list in sepyIMPORT instnace
-            if "numeric_cols" in params and isinstance(params["numeric_cols"], str):
-                params["numeric_cols"] = getattr(yearly_instance, params["numeric_cols"], None)
-        method(**params)
+        data_type = method_name.split('_')[1]
+        params['data_type'] = data_type
+        yearly_instance.import_data(**params)
+    
     logging.info(f"Sepy took {time.time() - import_start_time} (s) to create a yearly pickle.")
 
 ###########################################################################
@@ -239,24 +237,24 @@ if __name__ == "__main__":
     flatfile_types = dataConfig["dictionary_paths"]["flatfile_types"]
     combined_files = dataConfig["dictionary_paths"]["combined_files"]
     
-    for comorbidity in comorbidity_types:
+    for comorbidity_type, comorbidity_file in comorbidity_types:
         try:
-            paths[f"{comorbidity}"] = glob.glob(
-                f"{GROUPINGS_PATH}/comorbidities/*{comorbidity}*"
+            paths[f"{comorbidity_type}"] = glob.glob(
+                f"{GROUPINGS_PATH}/comorbidities/{comorbidity_file}"
             )[0]
         except IndexError:
-            logging.error(f"Sepy- could not find comorbidity file for {comorbidity}")
+            logging.error(f"Sepy- could not find comorbidity file for {comorbidity_type}")
 
     for type, grouping_path in grouping_types:
         try:
-            paths[f"{type}"] = glob.glob(f"{GROUPINGS_PATH}/{grouping_path}*")[0]
+            paths[f"{type}"] = glob.glob(f"{GROUPINGS_PATH}/{grouping_path}")[0]
         except IndexError:
             logging.error(f"Sepy- could not find grouping file for {type}")
 
     for flatfile_type, flatfile_name in flatfile_types:
         try:
             paths[f"{flatfile_type}"] = glob.glob(
-                f"{DATA_PATH}/{year}/*{flatfile_name}*"
+                f"{DATA_PATH}/{year}/{flatfile_name}"
             )[0]
         except IndexError:
             logging.error(f"Sepy- could not find flatfile type for {flatfile_name}")
@@ -264,7 +262,7 @@ if __name__ == "__main__":
     for combined_file in combined_files:
         try:
             paths[f"{combined_file[0]}"] = glob.glob(
-                f"{DATA_PATH}/*{combined_file[1]}*"
+                f"{DATA_PATH}/{combined_file[1]}"
             )[0]
         except IndexError:
             logging.error(f"Sepy- could not find combined file for {combined_file[1]}")
@@ -278,7 +276,7 @@ if __name__ == "__main__":
             logging.info(f"Creating yearly pickle for {year}")
             logging.info(f"Yearly pickle will be saved to {YEARLY_DICTIONARY_FILE_NAME}")
 
-            import_instance = si.sepyIMPORT(paths, sepyIMPORTConfigs, dataConfig)
+            import_instance = si.sepyIMPORT(paths, sepyIMPORTConfigs)
             logging.info(f"An instance of the sepyIMPORT class was created for {year}")
             
             logging.info(f"Importing data frames for {year}")
