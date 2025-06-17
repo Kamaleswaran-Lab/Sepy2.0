@@ -14,15 +14,15 @@ make_supertables: "yes" # yes: make supertables, no: do not make supertables
 data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI"
 groupings_path: "groupings"
 yearly_pickle_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_YEARLY_PICKLES/"
-supertable_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables/"
+supertable_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables_test/"
 encounters_path: "ENCOUNTER_FILE"
 dataset_identifier: "em_y"
 
 # CSN FILTERING
-encounter_type: 1 # "EM" = Emergency, "IN" = Inpatient, "all" = all encounter types ????? 
+encounter_type: "IN" # "EM" = Emergency, "IN" = Inpatient, "all" = all encounter types ????? 
 age: "adult" # "adult": age >= 18, "pediatric": age < 18, "all": all ages
 specific_enc_filter: "no" # "yes": only specific encounters, "no": all encounters
-#specific_enc_filter_list: 
+#specific_enc_filter_list: []
 
 
 dictionary_paths:

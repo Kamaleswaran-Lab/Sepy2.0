@@ -75,9 +75,7 @@ def import_data_frames(yearly_instance, configs):
 def process_csn(
     encounter_csn,
     pickle_save_path,
-    bed_unit_mapping,
     thresholds,
-    dialysis_info,
     yearly_data_instance,
 ):
     """
@@ -86,9 +84,7 @@ def process_csn(
     Args:
         encounter_csn (str): The unique encounter ID (CSN) to process.
         pickle_save_path (Path): The directory path where the pickle file will be saved.
-        bed_unit_mapping (dict): A mapping of bed locations to ICU units.
         thresholds (dict): A dictionary containing threshold values or limits used in processing.
-        dialysis_info (dict): Information related to dialysis treatment for the patient.
         yearly_data_instance (object): An instance of the `sepyIMPORT` class containing the yearly data.
     Returns:
         sepyDICT: An instance of the `sepyDICT` class containing the processed encounter data.
@@ -96,7 +92,7 @@ def process_csn(
     file_name = pickle_save_path / (str(encounter_csn) + ".pickle")
     # instantiate class for single encounter
     encounter_instance = sd.sepyDICT(
-        yearly_data_instance, encounter_csn, bed_unit_mapping, thresholds, dialysis_info, sepyDICTConfigs
+        yearly_data_instance, encounter_csn, thresholds, sepyDICTConfigs
     )
     # create encounter dictionary
     dictionary_instance = encounter_instance.encounter_dict
@@ -116,9 +112,7 @@ def process_csn_with_summaries(
     chunk_size, 
     year, 
     supertable_write_path, 
-    bed_unit_mapping, 
     bounds, 
-    dialysis_year, 
     import_instance
 ):
     """
@@ -130,9 +124,7 @@ def process_csn_with_summaries(
         chunk_size: Total number of CSNs in this chunk
         year: The year being processed
         supertable_write_path: Path to save the supertable
-        bed_unit_mapping: Mapping of bed locations to units
         bounds: Threshold values for labs
-        dialysis_year: Dialysis information for the year
         import_instance: The yearly data import instance
         
     Returns:
@@ -150,7 +142,7 @@ def process_csn_with_summaries(
     
     try:
         logging.info(f"Sepy- Processing patient csn: {csn}, {count} of {chunk_size} for year {year}")
-        instance = process_csn(csn, supertable_write_path, bed_unit_mapping, bounds, dialysis_year, import_instance)
+        instance = process_csn(csn, supertable_write_path, bounds, import_instance)
         logging.info(f"Sepy- Instance created for csn: {csn}")
     except Exception as e:
         error_msg = str(e.args[0]) if e.args else str(e)
@@ -314,19 +306,21 @@ if __name__ == "__main__":
     ###########################################################################
     if dataConfig["make_supertables"] == "yes":
         try:
-            # set file path for unique encounters to create supertables for 
+            # set file path for the file containing the list of unique encounters to create supertables for 
+            # ENCOUNTER sets it to the path of the encounter flatfile 
             encounters_path = dataConfig["encounters_path"]
-            if encounters_path == "ENCOUNTER":
+            if encounters_path == "ENCOUNTER_FILE":
                 encounters_path = paths["ENCOUNTER"]
-            logging.info(f"Sepy- The encounters path: {encounters_path}")
+            logging.info(f"Sepy- You are trying to load the following CSN list: {encounters_path}")
             
-            # set filters for encounters
-            encounter_type = dataConfig["encounter_type"]
-            age = dataConfig["age"]
-            specific_enc_filter = dataConfig["specific_enc_filter"]
-            specific_enc = dataConfig["specific_enc"]
+            # set filters for encounters 
+            encounter_type = dataConfig["encounter_type"] #IN, EM, all
+            age = dataConfig["age"] #adult, pediatric, all
 
-            # reads the list of csns
+            # set filters for specific encounter numbers (csns)
+            specific_enc_filter = dataConfig["specific_enc_filter"] #yes, no
+
+            # reads the list of csns from the encounters path
             csn_df = pd.read_csv(encounters_path, sep = "|", header = 0)
             num_encounters = len(csn_df)
             logging.info(f"Sepy- The year {year} has {num_encounters} encounters before filtering.")
@@ -334,7 +328,7 @@ if __name__ == "__main__":
             logging.error(
                 f"Sepy- There was an error importing one of the arguments: {type(e).__name__}."
             )
-            logging.info(f"Sepy- You are trying to load the following CSN list {year}")
+            
 
         ###########################################################################
         ############ Filter the encounters based on configs #######################
@@ -371,11 +365,11 @@ if __name__ == "__main__":
         if age == "adult":
             csn_df = csn_df[csn_df.age >= 18]
             num_encounters = len(csn_df)
-            logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
+            logging.info(f"Sepy- The year {year} has {num_encounters} encounters after age filtering.")
         elif age == "pediatric":
             csn_df = csn_df[csn_df.age < 18]
             num_encounters = len(csn_df)
-            logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
+            logging.info(f"Sepy- The year {year} has {num_encounters} encounters after age filtering.")
         else:
             logging.info(f"Sepy- No specific age filter was applied")
         
@@ -388,22 +382,21 @@ if __name__ == "__main__":
         ################################################
         ############ Create Chunks of Encounters #######
         ################################################
+        # calculate the chunk size based on the number of processes and the total number of encounters
         chunk_size = int(total_num_enc / num_processes)
         logging.info(f"Sepy- The ~chunk size is {chunk_size}")
         
+        # split the encounters into chunks
         list_of_chunks = np.array_split(csn_df, num_processes)
         logging.info(f"Sepy- The list of chunks has {len(list_of_chunks)} unique dataframes.")
         
-        # uses processor assignment to select correct chunk
+        # uses processor assignment number to select correct chunk
         process_list = list_of_chunks[processor_assignment]["csn"]
         logging.info(f"Sepy- The process_list head:\n {process_list.head()}")
         
-        # select correct pickle by year
-        pickle_name = YEARLY_DICTIONARY_OUTPUT_PATH + (dataConfig["dataset_identifier"] + str(year) + ".pickle")
-        logging.info(f"Sepy- The following pickle is being read: {pickle_name}")
-        
+        # create the directory for the supertables
         supertable_write_path = SUPERTABLE_OUTPUT_PATH / str(year)
-        supertable_write_path.mkdir(exist_ok = True)
+        supertable_write_path.mkdir(exist_ok = True, parents = True)
         logging.info(f"Sepy-Directory for year {year} was set to {supertable_write_path}")
         
         # make empty list to handle csn's with errors
@@ -413,24 +406,8 @@ if __name__ == "__main__":
         #################### Load Files for Extra Processing ######################
         ###########################################################################
         start_csn_creation = time.perf_counter()
-        bed_to_unit_mapping = pd.read_csv(BED_UNIT_CSV_FNAME)
-        bed_to_unit_mapping.drop(columns=["Unnamed: 0"], inplace=True)
-        try:
-            bed_to_unit_mapping.columns = [
-                "bed_unit",
-                "icu_type",
-                "unit_type",
-                "hospital",
-            ]
-        except ValueError:
-            logging.error("Sepy- The bed to unit mapping file is not formatted correctly.")
-        
-        dialysis = pd.read_csv(paths["DIALYSIS"])   
-        dialysis_year = dialysis.loc[
-            dialysis["Encounter Number"].isin(csn_df["csn"].values)
-        ]
 
-        bounds = pd.read_csv(VARIABLE_BOUNDS_CSV_FNAME)
+        bounds = pd.read_csv(paths["variable_chart"])   
 
         ###########################################################################
         ######################### Make Dicts by CSN ###############################
@@ -449,9 +426,7 @@ if __name__ == "__main__":
             chunk_size=len(process_list),
             year=year,
             supertable_write_path=supertable_write_path,
-            bed_unit_mapping=bed_to_unit_mapping,
             bounds=bounds,
-            dialysis_year=dialysis_year,
             import_instance=import_instance
         )
         
