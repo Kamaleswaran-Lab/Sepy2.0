@@ -77,6 +77,7 @@ def process_csn(
     pickle_save_path,
     thresholds,
     yearly_data_instance,
+    sepyConfigs
 ):
     """
     Processes a single patient encounter (CSN) and serializes the encounter data to a pickle file.
@@ -86,13 +87,14 @@ def process_csn(
         pickle_save_path (Path): The directory path where the pickle file will be saved.
         thresholds (dict): A dictionary containing threshold values or limits used in processing.
         yearly_data_instance (object): An instance of the `sepyIMPORT` class containing the yearly data.
+        sepyConfigs (dict): A dictionary containing the configuration settings for the sepyDICT class.
     Returns:
         sepyDICT: An instance of the `sepyDICT` class containing the processed encounter data.
     """
     file_name = pickle_save_path / (str(encounter_csn) + ".pickle")
     # instantiate class for single encounter
     encounter_instance = sd.sepyDICT(
-        yearly_data_instance, encounter_csn, thresholds, sepyDICTConfigs
+        yearly_data_instance, encounter_csn, thresholds, sepyConfigs
     )
     # create encounter dictionary
     dictionary_instance = encounter_instance.encounter_dict
@@ -113,7 +115,8 @@ def process_csn_with_summaries(
     year, 
     supertable_write_path, 
     bounds, 
-    import_instance
+    import_instance,
+    sepyConfigs
 ):
     """
     Process a single CSN with all its summaries
@@ -126,7 +129,7 @@ def process_csn_with_summaries(
         supertable_write_path: Path to save the supertable
         bounds: Threshold values for labs
         import_instance: The yearly data import instance
-        
+        sepyConfigs: The configuration settings for the sepyDICT class
     Returns:
         tuple: A tuple containing all the summary dataframes or None values if errors occurred
     """
@@ -142,7 +145,7 @@ def process_csn_with_summaries(
     
     try:
         logging.info(f"Sepy- Processing patient csn: {csn}, {count} of {chunk_size} for year {year}")
-        instance = process_csn(csn, supertable_write_path, bounds, import_instance)
+        instance = process_csn(csn, supertable_write_path, bounds, import_instance, sepyConfigs)
         logging.info(f"Sepy- Instance created for csn: {csn}")
     except Exception as e:
         error_msg = str(e.args[0]) if e.args else str(e)
@@ -190,21 +193,18 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process EMR data for a specific year')
     parser.add_argument('year', type=int, help='The year for which data is being processed')
     parser.add_argument('data_config', type=str, default='configurations/emory_config.yaml', help='Path to the data configuration file in YAML format')
-    parser.add_argument('sepyIMPORT_config', type=str, default='configurations/import_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
-    parser.add_argument('sepyDICT_config', type=str, default='configurations/dict_config.yaml', help='Path to the sepyDICT configuration file in YAML format')
+    parser.add_argument('sepy_config', type=str, default='configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
     parser.add_argument('num_processes', type=int, default=10, help='Number of processes to use')
     parser.add_argument('processor_assignment', type=int, help='Processor assignment')
     args = parser.parse_args()
     
     year = args.year
     dataConfig_path = args.data_config
-    sepyIMPORTConfigs_path = args.sepyIMPORT_config
-    sepyDICTConfigs_path = args.sepyDICT_config
+    sepyConfigs_path = args.sepy_config
     num_processes = args.num_processes
     processor_assignment = args.processor_assignment
     dataConfig = utils.load_yaml(dataConfig_path)
-    sepyIMPORTConfigs = utils.load_yaml(sepyIMPORTConfigs_path)
-    sepyDICTConfigs = utils.load_yaml(sepyDICTConfigs_path)
+    sepyConfigs = utils.load_yaml(sepyConfigs_path)
     logging.info(f"Sepy- The total number of processes: {num_processes}")
     logging.info(f"Sepy- The import year is: {year}")
     logging.info(f"Sepy- The processor assignment is: {processor_assignment}")
@@ -268,7 +268,7 @@ if __name__ == "__main__":
             logging.info(f"Creating yearly pickle for {year}")
             logging.info(f"Yearly pickle will be saved to {YEARLY_DICTIONARY_FILE_NAME}")
 
-            import_instance = si.sepyIMPORT(paths, sepyIMPORTConfigs)
+            import_instance = si.sepyIMPORT(paths, sepyConfigs)
             logging.info(f"An instance of the sepyIMPORT class was created for {year}")
             
             logging.info(f"Importing data frames for {year}")
@@ -427,7 +427,8 @@ if __name__ == "__main__":
             year=year,
             supertable_write_path=supertable_write_path,
             bounds=bounds,
-            import_instance=import_instance
+            import_instance=import_instance,
+            sepyConfigs=sepyConfigs
         )
         
         # Initialize empty lists for results
