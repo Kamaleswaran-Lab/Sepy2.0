@@ -63,7 +63,7 @@ def import_data_frames(yearly_instance, configs):
         "Sepy is currently reading flat files and importing them for analysis. Thank you for waiting."
     )
     for method_name, params in configs["yearly_instance"].items():
-        data_type = method_name.split('_')[1]
+        data_type = method_name.split('import_')[-1]
         params['data_type'] = data_type
         yearly_instance.import_data(**params)
     
