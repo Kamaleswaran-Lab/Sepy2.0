@@ -1,4 +1,9 @@
-vital_col_names:
+na_values: #Entries in the data that should be converted to NA
+  - "NULL"
+  - "Date\\Time Correction"
+  - "(null)"
+  - "NOTRECORDED"
+vital_col_names: #Vital names that should be converted to numeric
 - temperature
 - daily_weight_kg
 - height_cm
@@ -13,7 +18,7 @@ vital_col_names:
 - spo2
 - end_tidal_co2
 - o2_flow_rate
-numeric_lab_col_names:
+numeric_lab_col_names: #Lab names that should be converted to numeric
 - anion_gap
 - base_excess
 - bicarb_(hco3)
@@ -73,7 +78,7 @@ numeric_lab_col_names:
 - erythrocyte_sedimentation_rate_(esr)
 - lymphocyte
 - neutrophils
-string_lab_col_names:
+string_lab_col_names: #Lab names that should be converted to string
 - c_diff
 - covid
 - mtp
