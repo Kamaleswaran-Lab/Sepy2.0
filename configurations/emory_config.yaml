@@ -78,7 +78,6 @@ yearly_instance:
   import_encounters:
     file_key: "ENCOUNTER"
     drop_cols: 
-      - "admit_reason"
       - "insurance_status"
       - "total_vent_days"
       - "total_hosp_days"

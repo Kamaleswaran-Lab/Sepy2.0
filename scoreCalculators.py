@@ -1,9 +1,8 @@
 from enum import Enum
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
+from typing import List, Dict
 import pandas as pd
 import numpy as np
-from dataclasses import dataclass
 
 # Clinical score constants - moved from sepyDICT.py
 RESAMPLE_FREQUENCY = '60min'
@@ -57,37 +56,7 @@ MIN_MAP = 30.0
 MAX_MAP = 150.0
 
 
-@dataclass
-class SepyDictConfig:
-    """Configuration class for sepyDICT with type safety and validation."""
-    vital_col_names: List[str]
-    numeric_lab_col_names: List[str]
-    string_lab_col_names: List[str]
-    gcs_col_names: List[str]
-    bed_info: List[str]
-    vasopressor_names: List[str]
-    vasopressor_units: List[str]
-    vasopressor_dose: List[str]
-    vasopressor_col_names: List[str]
-    vent_col_names: List[str]
-    vent_positive_vars: List[str]
-    bp_cols: List[str]
-    sofa_max_24h: List[str]
-    fluids_med_names: List[str]
-    fluids_med_names_generic: List[str]
-    try_except_calls: List[Dict[str, str]]
-    lab_aggregation: Dict[str, str]
-    dict_elements: List[Dict[str, Any]]
-    write_dict_keys: List[str]
-    
-    def __post_init__(self):
-        """Calculate derived fields after initialization."""
-        self.all_lab_col_names = self.numeric_lab_col_names + self.string_lab_col_names
-    
-    @classmethod
-    def from_dict(cls, config_dict: Dict[str, Any]) -> 'SepyDictConfig':
-        """Create configuration instance from dictionary."""
-        return cls(**config_dict)
+
 
 
 class ScoreType(Enum):
@@ -100,9 +69,6 @@ class ScoreType(Enum):
 
 class ScoreCalculatorBase(ABC):
     """Abstract base class for all score calculators."""
-    
-    def __init__(self, config: SepyDictConfig):
-        self.config = config
     
     @abstractmethod
     def calculate_scores(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -123,8 +89,7 @@ class ScoreCalculatorBase(ABC):
 class SOFACalculator(ScoreCalculatorBase):
     """SOFA Score Calculator implementation."""
     
-    def __init__(self, config: SepyDictConfig):
-        super().__init__(config)
+    def __init__(self):
         self.components = [
             'SOFA_resp', 'SOFA_cardio', 'SOFA_coag', 
             'SOFA_neuro', 'SOFA_hep', 'SOFA_renal'
@@ -359,8 +324,7 @@ class SOFACalculator(ScoreCalculatorBase):
 class SIRSCalculator(ScoreCalculatorBase):
     """SIRS Score Calculator implementation."""
     
-    def __init__(self, config: SepyDictConfig):
-        super().__init__(config)
+    def __init__(self):
         self.components = ['SIRS_resp', 'SIRS_cardio', 'SIRS_temp', 'SIRS_wbc']
     
     def calculate_scores(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -440,8 +404,7 @@ class SIRSCalculator(ScoreCalculatorBase):
 class QSOFACalculator(ScoreCalculatorBase):
     """qSOFA Score Calculator implementation."""
     
-    def __init__(self, config: SepyDictConfig):
-        super().__init__(config)
+    def __init__(self):
         self.components = ['qSOFA_resp', 'qSOFA_neuro', 'qSOFA_cardio']
     
     def calculate_scores(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -506,13 +469,12 @@ class ScoreCalculatorFactory:
     }
     
     @classmethod
-    def create_calculator(cls, score_type: ScoreType, config: SepyDictConfig) -> ScoreCalculatorBase:
+    def create_calculator(cls, score_type: ScoreType) -> ScoreCalculatorBase:
         """
         Create a score calculator instance.
         
         Args:
             score_type: Type of score calculator to create
-            config: Configuration object
             
         Returns:
             Score calculator instance
@@ -525,7 +487,7 @@ class ScoreCalculatorFactory:
             raise ValueError(f"Unsupported score type: {score_type}. Available types: {available_types}")
         
         calculator_class = cls._calculators[score_type]
-        return calculator_class(config)
+        return calculator_class()
     
     @classmethod
     def register_calculator(cls, score_type: ScoreType, calculator_class: type) -> None:
@@ -547,17 +509,14 @@ class ScoreCalculatorFactory:
         return list(cls._calculators.keys())
     
     @classmethod
-    def create_all_calculators(cls, config: SepyDictConfig) -> Dict[ScoreType, ScoreCalculatorBase]:
+    def create_all_calculators(cls) -> Dict[ScoreType, ScoreCalculatorBase]:
         """
         Create instances of all available calculators.
         
-        Args:
-            config: Configuration object
-            
         Returns:
             Dictionary mapping score types to calculator instances
         """
         return {
-            score_type: cls.create_calculator(score_type, config)
+            score_type: cls.create_calculator(score_type)
             for score_type in cls._calculators.keys()
         }
