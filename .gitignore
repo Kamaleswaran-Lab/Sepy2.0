@@ -30,3 +30,7 @@ ENV/
 # OS specific files
 .DS_Store
 Thumbs.db 
+
+# output and error files 
+slurmjobs/errors
+slurmjobs/output

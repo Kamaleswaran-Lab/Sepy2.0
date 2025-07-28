@@ -15,6 +15,7 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
+import argparse
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -712,8 +713,24 @@ class FluidProcessor:
 
 # Example usage
 if __name__ == "__main__":
-    # Example of how to use the fluid processor
-    in_outs = pd.read_csv('/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI/CJSEPSIS_OUT_EO3.csv')
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--index", type=int, required=True)
+    parser.add_argument("--chunks", type=int, required=True)
+    args = parser.parse_args()
+
+    index = args.index
+    chunks = args.chunks
+
+    in_outs = pd.read_csv(f'/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI/CJSEPSIS_OUT_EO3.csv')
+    
+    # Chunk data into chunks number of chunks, make sure to include the entire remaining rows for the last chunk
+    len_of_chunks = len(in_outs)//chunks
+    if index == chunks - 1:
+        in_outs = in_outs.iloc[index*len_of_chunks:]
+    else:
+        in_outs = in_outs.iloc[index*len_of_chunks:(index+1)*len_of_chunks]
+    
     in_outs['service_ts'] = pd.to_datetime(in_outs['service_ts'])
     
     # Create processor
@@ -721,24 +738,12 @@ if __name__ == "__main__":
     
     # Choose processing method based on your needs:
     
-    # Option 1: Most efficient for large datasets (recommended)
     print("Using vectorized processing...")
     processed_df, stats = processor.process_fluids_vectorized(
         in_outs, 
         batch_size=10000  # Larger batches are more efficient
     )
     
-    # Option 2: Middle ground - faster than iterrows, simpler than vectorized
-    # processed_df, stats = processor.process_fluids_apply(
-    #     in_outs, 
-    #     batch_size=5000
-    # )
-    
-    # Option 3: Original method (slowest but most readable)
-    # processed_df, stats = processor.process_fluids(
-    #     in_outs, 
-    #     batch_size=500
-    # )
     
     print("Processing completed!")
     print(f"Successfully processed: {stats.processed_successfully}/{stats.total_records} records")
@@ -749,4 +754,4 @@ if __name__ == "__main__":
     print("\nProcessing Summary:")
     print(summary_df)
 
-    processed_df.to_csv('/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI/CJSEPSIS_IN_OUT_PROCESSED.csv', index=False)
+    processed_df.to_csv(f'/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI/CJSEPSIS_IN_OUT_PROCESSED_{index}.csv', index=False)
