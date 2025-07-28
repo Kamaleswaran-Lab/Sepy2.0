@@ -32,6 +32,8 @@ from typing import List, Dict, Union, Optional, Any, Callable, TypeVar, Tuple
 from dataclasses import dataclass
 from contextlib import contextmanager
 
+from process_fluids import FluidProcessor, FluidProcessorConfig
+
 logging.basicConfig(level=logging.INFO)
 
 # Type variables for generic functions
@@ -670,12 +672,20 @@ class sepyIMPORT:
         self.df_in_out = df
         
         try:
+            self.fluid_stats = stats
             self.df_all_fluids = df
-            self.df_all_fluids = self._process_in_out_data()
             
+            pivoted_df = df.pivot_table(
+                index=['csn', 'service_ts'],
+                columns='order_catalog_desc', 
+                values='volume',
+                fill_value=np.nan,
+                aggfunc='sum'  # Adjust aggregation function as needed
+            )
+                        
             # Filter ORDER_CATALOG_DESC to include only those in the df_grouping_fluids file with individual_fluid_import = 1 
             self.df_individual_bolus = self.df_all_fluids[
-                self.df_all_fluids['ORDER_CATALOG_DESC'].isin(
+                self.df_all_fluids['order_catalog_desc'].isin(
                     self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name']
                 )
             ]
@@ -688,13 +698,6 @@ class sepyIMPORT:
             logging.warning("Using empty DataFrame for all fluids due to processing error")
             return 0
 
-    def _process_in_out_data(self) -> pd.DataFrame:
-        """
-        Processes the 'ORDER_CLINICAL_DESC' column of a DataFrame to extract fluid intake.
-        Returns processed fluid intake events DataFrame.
-        """
-        # Rename the method to avoid confusion with the processor function
-        return self._process_in_out()
         
     # Keeping the original method signatures for backwards compatibility
     

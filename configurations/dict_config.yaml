@@ -182,22 +182,27 @@ fluids_med_names:
 - Electrolyte (Plasma-Lyte) intravenous solution
 fluids_med_names_generic:
 - Albumin 5%
-try_except_calls:
-  - { id_type: "pat_id", section: "demographics" }
-  - { id_type: "csn", section: "encounters" }
-  - { id_type: "csn", section: "gcs" }
-  - { id_type: "csn", section: "cultures" }
-  - { id_type: "csn", section: "beds" }
-  - { id_type: "csn", section: "procedures" }
-  - { id_type: "csn", section: "vent" }
-  - { id_type: "csn", section: "diagnosis" }
-  - { id_type: "csn", section: "labs" }
-  - { id_type: "csn", section: "vasopressor_meds" }
-  - { id_type: "csn", section: "anti_infective_meds" }
-  - { id_type: "csn", section: "vitals" }
-  - { id_type: "csn", section: "infusion_meds" }
-  - { id_type: "csn", section: "quan_deyo_ICD10" }
-  - { id_type: "csn", section: "quan_elix_ICD10" }
+information_to_process:
+  - { id_type: "pat_id", source: "demographics" }
+  - { id_type: "csn", source: "encounters" }
+  - { id_type: "csn", source: "gcs" }
+  - { id_type: "csn", source: "cultures" }
+  - { id_type: "csn", source: "beds" }
+  - { id_type: "csn", source: "procedures" }
+  - { id_type: "csn", source: "vent" }
+  - { id_type: "csn", source: "diagnosis" }
+  - { id_type: "csn", source: "labs" }
+  - { id_type: "csn", source: "vasopressor_meds" }
+  - { id_type: "csn", source: "anti_infective_meds" }
+  - { id_type: "csn", source: "vitals" }
+  - { id_type: "csn", source: "infusion_meds" }
+  - { id_type: "csn", source: "quan_deyo_ICD10" }
+  - { id_type: "csn", source: "quan_elix_ICD10" }
+  - { id_type: "csn", source: "in_out" }
+  - { id_type: "csn", source: "clinical_notes" }
+  - { id_type: "csn", source: "radiology_notes" }
+  - {id_type: "csn", source: "icd_procedures"}
+  - {id_type: "csn", source: "cpt_procedures"}
   # Optional/disabled sections (for reference/documentation):
 # - { id_type: "csn", section: "ahrq_ICD9" }
 # - { id_type: "csn", section: "elix_ICD9" }
@@ -207,6 +212,7 @@ try_except_calls:
 # - { id_type: "csn", section: "ahrq_ICD10" }
 # - { id_type: "csn", section: "elix_ICD10" }
 # - { id_type: "csn", section: "ccs_ICD10" }
+
 # LAB AGGREGATION
 lab_aggregation:
   # ELECTROLYTES
@@ -279,20 +285,20 @@ lab_aggregation:
   c_diff: first
   covid: first
   mtp: first
+
+constants:
+  resample_frequency: "60min"
+  default_weight_male: 89.0
+  default_weight_female: 75.0
+  default_height_male: 175.3
+  default_height_female: 161.5
+
 # DICT ELEMENTS
 dict_elements:
-  - method: flag_dict
-    log: "flag complete"
-  - method: static_features_dict
-    log: "static complete"
-  - method: event_times_dict
-    log: "event complete"
   - method: cultures_df
     log: "cultures complete"
   - method: antibiotics_df
     log: "abx complete"
-  - method: build_super_table_index
-    log: "super table index complete"
   - method: assign_bed_location
     log: "the beds have been binned"
   - method: bin_labs

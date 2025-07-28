@@ -33,19 +33,29 @@ import sepyIMPORT  # only used for type annotations / IDE help
 
 # Import shared constants so that the extracted classes keep working identically
 from scoreCalculators import (
-    RESAMPLE_FREQUENCY,
-    DEFAULT_WEIGHT_MALE,
-    DEFAULT_WEIGHT_FEMALE,
-    DEFAULT_HEIGHT_MALE,
-    DEFAULT_HEIGHT_FEMALE,
-    GENDER_MALE,
-    GENDER_FEMALE,
     MIN_WEIGHT,
     MAX_WEIGHT,
     MIN_HEIGHT,
     MIN_MAP,
     MAX_MAP,
 )
+from process_fluids import FluidProcessorConfig, FluidProcessor
+
+###############################################################################
+# EncounterDictionary
+###############################################################################
+
+class EncounterDictionary:
+    """Handles final dictionary creation and serialization."""
+    
+    def __init__(self, config: Any):
+        self.config = config
+    
+    def write_dict(self, instance: Any) -> None:
+        """Create a dictionary of key attributes from the instance."""
+        encounter_keys = self.config.write_dict_keys
+        encounter_dict = {key: getattr(instance, key) for key in encounter_keys}
+        instance.encounter_dict = encounter_dict
 
 
 ###############################################################################
@@ -91,11 +101,7 @@ class ClinicalDataProcessor:
             if len(self.bounds.loc[self.bounds["Location in SuperTable"] == lab]) > 0:
                 lab_agg[lab] = utils.agg_fn_wrapper(lab, self.bounds)
         return lab_agg
-
-    # ------------------------------------------------------------------
-    # Public interface
-    # ------------------------------------------------------------------
-
+    
     def optimize_dataframe_memory(self, df: pd.DataFrame) -> pd.DataFrame:
         """Down-cast numeric dtypes and convert categoricals to save RAM."""
         df_optimized = df.copy()
@@ -129,47 +135,22 @@ class ClinicalDataProcessor:
         return df_optimized
 
     # ------------------------------------------------------------------
-    # Binning helpers – these were copied verbatim from sepyDICT.py
+    # Public interface
     # ------------------------------------------------------------------
 
-    def create_efficient_time_series(
-        self,
-        start_time: pd.Timestamp,
-        end_time: pd.Timestamp,
-        freq: str = RESAMPLE_FREQUENCY,
-    ) -> pd.DatetimeIndex:
-        """Return a DatetimeIndex with *freq* granularity."""
-        return pd.date_range(start=start_time, end=end_time, freq=freq)
+    def labs_staging(self, instance) -> None:
+        """
+        Resample lab values to config.constants['resample_frequency'] alignment.
+        Apply the aggregation function defined in the config file.
 
-    def try_except(self, master_df: Any, identifier: Any, name: str, instance: Any) -> None:  # noqa: D401
-        """Safely slice *master_df* by *identifier* and attach it to *instance*."""
-        filt_df_name = name + "_PerCSN"
-        df_name = "df_" + name
-
-        try:
-            source_df = getattr(master_df, df_name)
-            if source_df.index.dtype == "O":
-                setattr(instance, filt_df_name, source_df.loc[[str(identifier)], :])
-            else:
-                setattr(instance, filt_df_name, source_df.loc[[identifier], :])
-            logging.info("The %s file was imported", name)
-        except Exception:  # noqa: BLE001
-            empty_df = getattr(master_df, df_name).iloc[0:0]
-            empty_df.index.set_names(getattr(master_df, df_name).index.names)
-            setattr(instance, filt_df_name, empty_df)
-            logging.info("There were no %s data for identifier %s", name, identifier)
-
-    # NOTE: The remaining bin_* methods are unchanged.  They are lengthy but
-    #       crucial, so we include them in full for functional parity.
-
-    def bin_labs(self, instance: sepyIMPORT.sepyIMPORT) -> None:
-        """Resample lab values to *RESAMPLE_FREQUENCY* alignment."""
+        """
         df = instance.labs_PerCSN
         if df.empty:
             df.index = df.index.get_level_values("collection_time")
             instance.labs_staging = pd.DataFrame(index=instance.super_table_time_index, columns=df.columns)
         else:
-            df = df.reset_index("collection_time")
+            df = df.reset_index("collection_time") #results in a multi-index df with lab supertable col name and collection_time as data and the rest as indices
+            df = df.loc[:, ~df.columns.duplicated()] #removes duplicate columns
             resampled_data: Dict[str, pd.Series] = {}
 
             for key, agg_func in self.labAGG.items():
@@ -177,7 +158,7 @@ class ClinicalDataProcessor:
                     resampled_col = (
                         df[[key, "collection_time"]]
                         .set_index("collection_time")
-                        .resample(RESAMPLE_FREQUENCY, origin=instance.event_times["start_index"])
+                        .resample(self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])
                         .apply(agg_func)
                         .reindex(instance.super_table_time_index)
                     )
@@ -186,7 +167,7 @@ class ClinicalDataProcessor:
             instance.labs_staging = pd.DataFrame(resampled_data, index=instance.super_table_time_index)
             instance.labs_staging = self.optimize_dataframe_memory(instance.labs_staging)
 
-    def bin_vitals(self, instance: sepyIMPORT.sepyIMPORT) -> None:  # noqa: C901 – complexity inherited
+    def vitals_staging(self, instance) -> None:  # noqa: C901 – complexity inherited
         """Resample vital signs."""
         df = instance.vitals_PerCSN
         if df.empty:
@@ -204,7 +185,7 @@ class ClinicalDataProcessor:
                 resampled_col = (
                     df[[key, "recorded_time"]]
                     .set_index("recorded_time")
-                    .resample(RESAMPLE_FREQUENCY, origin=instance.event_times["start_index"])
+                    .resample(self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])
                     .apply(agg_fn)
                     .reindex(instance.super_table_time_index)
                 )
@@ -213,10 +194,7 @@ class ClinicalDataProcessor:
         instance.vitals_staging = pd.DataFrame(resampled_data, index=instance.super_table_time_index)
         instance.vitals_staging = self.optimize_dataframe_memory(instance.vitals_staging)
 
-    # bin_gcs and bin_vent follow – unchanged from original. They are omitted
-    # here for brevity but are included in full in the actual implementation.
-    # ------------------------------------------------------------------
-    def bin_gcs(self, instance: sepyIMPORT.sepyIMPORT) -> None:  # noqa: C901 – inherited complexity
+    def gcs_staging(self, instance) -> None: 
         """Resample Glasgow Coma Scale values."""
         df = instance.gcs_PerCSN
         if df.empty:
@@ -231,14 +209,14 @@ class ClinicalDataProcessor:
             else:
                 agg_fn = "min"
             col1 = (
-                df[[key, "recorded_time"]]
-                .resample("60min", on="recorded_time", origin=instance.event_times["start_index"])
+                    df[[key, "recorded_time"]]
+                    .resample(self.config.constants['resample_frequency'], on="recorded_time", origin=instance.event_times["start_index"])
                 .apply(agg_fn)
             )
             new_df = pd.concat((new_df, col1), axis=1)
         instance.gcs_staging = new_df.reindex(instance.super_table_time_index)
-
-    def bin_vent(self, instance: sepyIMPORT.sepyIMPORT) -> None:
+    
+    def vent_staging(self, instance) -> None:
         """Resamples and aligns patient ventilator data to a unified hourly time index."""
         df = instance.vent_PerCSN
 
@@ -280,13 +258,11 @@ class ClinicalDataProcessor:
                 #check if there are any "real" vent rows; if so 
                 if df['vent_status'].sum()>0:
                     vent_stop  =  df[df['vent_status']>0].recorded_time.iloc[-1:]
-            
-            # Import utils for agg function
-            import utils
-            agg_fn = utils.agg_fn_wrapper('fio2', instance.bounds)
+
+            agg_fn = utils.agg_fn_wrapper('fio2', self.bounds)
             if len(vent_start) == 0: #No valid mechanical ventilation values
                 # vent_status and fio2 will get joined to super table later
-                vent_fio2 = df[['recorded_time','fio2']].resample('60min',
+                vent_fio2 = df[['recorded_time','fio2']].resample(self.config.constants['resample_frequency'],
                                              on = 'recorded_time',
                                              origin = instance.event_times['start_index']).apply(agg_fn) \
                                              .reindex(instance.super_table_time_index)
@@ -307,19 +283,162 @@ class ClinicalDataProcessor:
                 vent_status = pd.DataFrame(data=([1.0]*len(index)), columns =['vent_status'], index=index)
                 
                 #sets column to 1 if vent was on    
-                vent_status = vent_status.resample('60min',
+                vent_status = vent_status.resample(self.config.constants['resample_frequency'],
                                                    origin = instance.event_times['start_index']).mean() \
                                                    .reindex(instance.super_table_time_index)
                             
-                vent_fio2 = df[['recorded_time','fio2']].resample('60min',
+                vent_fio2 = df[['recorded_time','fio2']].resample(self.config.constants['resample_frequency'],
                                              on = 'recorded_time',
                                              origin = instance.event_times['start_index']).apply(agg_fn) \
                                              .reindex(instance.super_table_time_index)
-                
-        instance.super_table['on_vent'] = vent_status
-        instance.super_table['vent_fio2'] = vent_fio2
 
-    def create_bed_unit(self, instance: Any) -> None:
+        instance.vent_staging = pd.DataFrame(index=instance.super_table_time_index)
+        instance.vent_staging['vent_status'] = vent_status
+        instance.vent_staging['vent_fio2'] = vent_fio2
+    
+    def cultures_staging(self, instance) -> None:
+        instance.cultures_staging = instance.cultures_PerCSN.copy()
+    
+    def antibiotics_staging(self, instance) -> None:
+        instance.abx_staging = instance.anti_infective_meds_PerCSN.copy() 
+    
+    def procedures_staging(self, instance) -> None:
+        def _create_procedure_series(procedures_df, index, time_col_start, time_col_end, procedure_name_col='primary_procedure_nm'):
+            """
+            Create a series aligned with supertable index showing procedure names
+            for hours that match the specified time column
+            """
+            result_series = pd.Series(index=index, dtype='object')
+            result_series[:] = np.nan
+            
+            for _, proc_row in procedures_df.iterrows():
+                if pd.notna(proc_row[time_col_start]):
+                    proc_hour = pd.Timestamp(proc_row[time_col_start]).floor(self.config.constants['resample_frequency'])
+
+                    if proc_hour in index:
+                        proc_hour_start = proc_hour
+                    else:
+                        logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but not found in supertable index")
+                        continue 
+
+                    if pd.notna(proc_row[time_col_end]):
+                        proc_hour_end = pd.Timestamp(proc_row[time_col_end]).floor(self.config.constants['resample_frequency'])
+                        if proc_hour_end in index and proc_hour_start <= proc_hour_end:
+                            result_series.loc[proc_hour_start:proc_hour_end] = proc_row[procedure_name_col]
+                        else:
+                            logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but ended at {proc_row[time_col_end]}")
+                            result_series.loc[proc_hour_start:] = proc_row[procedure_name_col]
+                    else:
+                        logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but {time_col_end} not found in supertable index")
+                        result_series.loc[proc_hour_start:] = proc_row[procedure_name_col]
+            
+            return result_series
+        
+        df = instance.procedures_PerCSN.copy()
+        if df.empty:
+            instance.procedures_staging = pd.DataFrame(index=instance.super_table_time_index)
+            return
+        
+        in_or_series = _create_procedure_series(df, instance.super_table_time_index, 'in_or_dttm', 'out_or_dttm')
+        proc_start_series = _create_procedure_series(df, instance.super_table_time_index, 'procedure_start_dttm', 'procedure_comp_dttm')
+
+        instance.procedures_staging = pd.DataFrame(index=instance.super_table_time_index)
+        instance.procedures_staging['in_or'] = in_or_series
+        instance.procedures_staging['proc_start'] = proc_start_series
+    
+    def icd_staging(self, instance) -> None:
+        df = instance.icd_procedures_PerCSN.copy()
+        if df.empty:
+            instance.icd_procedures_staging = pd.DataFrame(index=instance.super_table_time_index)
+            return
+        
+        df = df.set_index("procedure_date")
+        icd_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])).size()
+        instance.icd_procedures_staging = icd_counts.reindex(instance.super_table_time_index, fill_value=0)
+    
+    def cpt_staging(self, instance) -> None:
+        df = instance.cpt_procedures_PerCSN.copy()
+        if df.empty:
+            instance.cpt_procedures_staging = pd.DataFrame(index=instance.super_table_time_index)
+            return
+        
+        df = df.set_index("procedure_dttm")
+        procedure_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])).size()
+        instance.cpt_procedures_staging = procedure_counts.reindex(instance.super_table_time_index, fill_value=0)
+
+
+    def clinical_notes_staging(self, instance) -> None:
+        df = instance.clinical_notes_PerCSN.copy()
+        if df.empty:
+            instance.clinical_notes_staging = pd.DataFrame(index=instance.super_table_time_index)
+            return
+        
+        instance.clinical_notes_staging = df.resample(self.config.constants['resample_frequency'], origin=instance.event_times["start_index"]).last()
+        instance.clinical_notes_staging = instance.clinical_notes_staging.reindex(instance.super_table_time_index)
+    
+    def radiology_notes_staging(self, instance) -> None:
+        df = instance.radiology_notes_PerCSN.copy()
+        if df.empty:
+            instance.radiology_notes_staging = pd.DataFrame(index=instance.super_table_time_index)
+            return
+            
+        df['day_verified'] = pd.to_datetime(df['day_verified'])
+        df = df.set_index("day_verified")
+        notes_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])).size()
+        instance.radiology_notes_staging = notes_counts.reindex(instance.super_table_time_index, fill_value=0)
+    
+    def in_out_staging(self, instance) -> None:
+        df = instance.in_out_PerCSN.copy()
+        if df.empty:
+            instance.in_out_staging = pd.DataFrame(index=instance.super_table_time_index, columns=df.columns)
+            return
+        
+        fluidprocessor = FluidProcessor()
+        processed_df, stats = fluidprocessor.process_fluids(df)
+        
+        instance.in_out_staging = processed_df.reindex(instance.super_table_time_index)
+
+    
+    def comorbidity_staging(self, instance):                        
+        instance.quan_deyo_ICD10_staging = instance.quan_deyo_ICD10_PerCSN.reset_index().groupby(['ICD10']).first().\
+                                groupby(['quan_deyo']).agg(
+                                icd_count = pd.NamedAgg(column="csn", aggfunc="count"),
+                                date_time = pd.NamedAgg(column="dx_time_date", aggfunc="first"))\
+                                .reindex(instance.v_quan_deyo_labels).rename_axis(None)
+                                #.agg({'csn':'count', 'dx_time_date':'first'})\
+
+                                
+        instance.quan_elix_ICD10_staging = instance.quan_elix_ICD10_PerCSN.reset_index().groupby(['ICD10']).first().\
+                                groupby(['quan_elix']).agg(
+                                icd_count = pd.NamedAgg(column="csn", aggfunc="count"),
+                                date_time = pd.NamedAgg(column="dx_time_date", aggfunc="first"))\
+                                .reindex(instance.v_quan_elix_labels).rename_axis(None)
+                                #.agg({'csn':'count', 'dx_time_date':'first'})\
+    
+    
+    def assign_bed_status(self, instance):
+        df = instance.beds_PerCSN
+        #these columns have the flags for bed status
+        bed_category_names = ["icu", "imc", "ed", "procedure"]
+        #makes an empty dataframe
+        bed_status = pd.DataFrame(columns = bed_category_names)
+        
+        for i, row in df.iterrows():
+            #makes an hourly index from bed strat to bed end
+            index = pd.date_range(row['bed_location_start'], row['bed_location_end'], freq=self.config.constants['resample_frequency'])
+            
+            #makes a df for a single bed with the index and bed category values
+            single_bed = pd.DataFrame(data = np.repeat([row[bed_category_names].values], len(index), axis=0),    
+                                      columns = bed_category_names,
+                                      index = index)
+            #adds all beds to single df
+            bed_status = pd.concat([bed_status, single_bed])  
+        bed_status = bed_status[~bed_status.index.duplicated(keep='first')]
+        
+        #this is bed status re_indexed with super_table index; gets merged in later
+        instance.bed_status = bed_status.reindex(instance.super_table_time_index, method='nearest')
+
+    def create_bed_unit(self, instance) -> None:
         """Create bed unit and related columns."""
         bedDf = instance.beds_PerCSN
         bed_start = bedDf['bed_location_start'].values
@@ -351,13 +470,10 @@ class ClinicalDataProcessor:
             instance.super_table['icu_type'] = [float("nan")]*len(instance.super_table)
             # instance.super_table['hospital'] = [float("nan")]*len(instance.super_table)
 
-    def on_dialysis(self, instance: Any) -> None:
-        """Create dialysis status column."""
-        dd = instance.dialysis_year.loc[instance.dialysis_year['Encounter Encounter Number'] == instance.csn]
-        instance.super_table['on_dialysis'] = [0]*len(instance.super_table)
-        for time in dd['Service Timestamp']:
-            time = pd.to_datetime(time)
-            instance.super_table.loc[(instance.super_table.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
+    
+
+
+
 
 ###############################################################################
 # DerivedFeatures
@@ -409,6 +525,14 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
 
         df[weight_col] = df[weight_col].ffill()
         df[height_col] = df[height_col].ffill()
+    
+    def on_dialysis(self, instance) -> None:
+        """Create dialysis status column."""
+        df = instance.dialysis_PerCSN
+        instance.super_table['on_dialysis'] = [0]*len(instance.super_table)
+        for time in df['service_timestamp']:
+            time = pd.to_datetime(time)
+            instance.super_table.loc[(instance.super_table.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
 
     def calc_best_map(self, row: pd.Series) -> float:
         """
@@ -699,7 +823,7 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
             
             # Import utils for agg function
             import utils
-            agg_fn = utils.agg_fn_wrapper('fio2', instance.bounds)
+            agg_fn = utils.agg_fn_wrapper('fio2', self.bounds)
             if len(vent_start) == 0: #No valid mechanical ventilation values
                 # vent_status and fio2 will get joined to super table later
                 vent_fio2 = df[['recorded_time','fio2']].resample('60min',

@@ -41,6 +41,7 @@ The pipeline expects the following flat files, each containing specific clinical
 - R: `discharge_to` : Where the patient was discharged to - HOME SELF CARE/HOSPICE/EXPIRED etc.
 - R: `pre_admit_location` : TRANSFER/NON-HC FACILITY etc.
 - R: `total_icu_days`: Useful for filtering ICU encounters
+- R: `admit_reason`: Reason for ICU admission
 - Additional columns can be dropped using the `drop_cols` parameter in the data_config file.
 
 ### DEMOGRAPHICS File
