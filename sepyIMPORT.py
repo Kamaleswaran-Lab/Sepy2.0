@@ -22,6 +22,7 @@ Changes Made by Mehak Arora:
     - Removed delim as a function to SepyImport - was legacy, now makes zero sense to pass that as an argument
 """
 
+import pickle
 import time
 import utils
 import pandas as pd
@@ -80,10 +81,17 @@ class sepyIMPORT:
     Args:
         file_dictionary: A dictionary containing file paths for various data files.
         sepyIMPORTConfigs: Configuration settings for data import.
-        dataConfig: Configuration for data processing.
+        create_dataframes: Whether to create dataframes from the imported data.
+        save_dataframes: Whether to save the dataframes to a pickle file.
+        save_path: The path to save the dataframes to.
     """
     def __init__(self, file_dictionary: Dict[str, str], 
-                 sepyIMPORTConfigs: Dict[str, Any], dataConfig: Dict[str, Any]) -> None:
+                 sepyIMPORTConfigs: Dict[str, Any], 
+                 dataConfig: Dict[str, Any],
+                 create_dataframes: bool = True, 
+                 save_dataframes: bool = True, 
+                 save_path: str = None) -> None:
+        
         # dictionary has file locations for flat files
         self.file_dictionary = file_dictionary
 
@@ -106,10 +114,31 @@ class sepyIMPORT:
             numeric_lab_col_names=sepyIMPORTConfigs["numeric_lab_col_names"],
             string_lab_col_names=sepyIMPORTConfigs["string_lab_col_names"]
         )
+        self.dataConfig = dataConfig
+        self.create_dataframes = create_dataframes
+        self.save_dataframes = save_dataframes
+        self.save_path = save_path
+
+        logging.info("sepyIMPORT initialized")
+
+        if self.save_dataframes and not self.save_path:
+            logging.warning("No save path provided. Dataframes will not be saved.")
+
+        if self.create_dataframes:
+            logging.info("Creating dataframes")
+            self.dataframe_creation(self.dataConfig)
         
+        if self.save_dataframes and self.save_path:
+            logging.info(f"Saving dataframes to {self.save_path}")
+            with open(self.save_path, 'wb') as f:
+                pickle.dump(self, f)
+            logging.info("Dataframes saved successfully")
+        
+        
+    def dataframe_creation(self, dataConfig: Dict[str, Any]):
         #Import encounter data first 
         method_name = "encounters"
-        params = dataConfig["yearly_instance"]["import_encounters"]
+        params = dataConfig["import_encounters"]
         params['data_type'] = "encounters"
         self.import_data(**params) 
 
@@ -123,7 +152,7 @@ class sepyIMPORT:
             logging.info(f"Number of encounters: {len(self.csns)}")
             logging.info(f"CSNs: {self.csns}")
 
-        for method_name, params in dataConfig["yearly_instance"].items():
+        for method_name, params in dataConfig.items():
             if method_name == "import_encounters":
                 continue
             data_type = method_name.split('import_')[-1]
@@ -131,7 +160,7 @@ class sepyIMPORT:
             params['data_type'] = data_type
             self.import_data(**params)
         
-        logging.info("sepyIMPORT initialized")
+        logging.info("Data import complete")
 
     
     def _import_file_with_fallback(self, file_key: str, import_func: Callable, *args, **kwargs) -> pd.DataFrame:
