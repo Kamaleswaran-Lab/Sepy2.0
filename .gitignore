@@ -34,3 +34,6 @@ Thumbs.db
 # output and error files 
 slurmjobs/errors
 slurmjobs/output
+
+#pycache
+__pycache__/*
