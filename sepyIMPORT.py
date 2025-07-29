@@ -83,7 +83,7 @@ class sepyIMPORT:
         dataConfig: Configuration for data processing.
     """
     def __init__(self, file_dictionary: Dict[str, str], 
-                 sepyIMPORTConfigs: Dict[str, Any]) -> None:
+                 sepyIMPORTConfigs: Dict[str, Any], dataConfig: Dict[str, Any]) -> None:
         # dictionary has file locations for flat files
         self.file_dictionary = file_dictionary
 
@@ -107,13 +107,29 @@ class sepyIMPORT:
             string_lab_col_names=sepyIMPORTConfigs["string_lab_col_names"]
         )
         
-        # For backward compatibility, maintain direct attributes
-        self.na_values = self.config.na_values
-        self.vital_col_names = self.config.vital_col_names
-        self.vasopressor_units = self.config.vasopressor_units
-        self.numeric_lab_col_names = self.config.numeric_lab_col_names
-        self.string_lab_col_names = self.config.string_lab_col_names
-        self.all_lab_col_names = self.config.all_lab_col_names
+        #Import encounter data first 
+        method_name = "encounters"
+        params = dataConfig["yearly_instance"]["import_encounters"]
+        params['data_type'] = "encounters"
+        self.import_data(**params) 
+
+        if self.df_encounters.empty:
+            logging.warning("No encounters found. Please check the file path and try again.")
+            return 0
+        else:
+            logging.info("Encounters imported successfully")
+            self.csns = self.df_encounters.index.unique().tolist()
+            self.patids = self.df_encounters['pat_id'].unique().tolist()
+            logging.info(f"Number of encounters: {len(self.csns)}")
+            logging.info(f"CSNs: {self.csns}")
+
+        for method_name, params in dataConfig["yearly_instance"].items():
+            if method_name == "import_encounters":
+                continue
+            data_type = method_name.split('import_')[-1]
+            logging.info(f"Importing {data_type} data")
+            params['data_type'] = data_type
+            self.import_data(**params)
         
         logging.info("sepyIMPORT initialized")
 
@@ -170,7 +186,7 @@ class sepyIMPORT:
             "header": 0,
             "index_col": index_col,
             "date_cols": date_cols,
-            "na_values": self.na_values,
+            "na_values": self.config.na_values,
             "memory_map": memory_map,
             "drop_cols": drop_cols,
             "low_memory": False,
@@ -235,6 +251,16 @@ class sepyIMPORT:
         # Import the data using _common_import
         df = self._common_import(**common_params)
         
+        
+        #Filter to all patids in the encounters file 
+        if data_type == "demographics":
+            df = df[df.index.isin(self.patids)]
+
+        #Filter to all csns in the encounters file 
+        if data_type != "encounters":
+            df = df[df.index.isin(self.csns)]
+        
+
         # Store the dataframe with a consistent naming pattern
         df_attr_name = f"df_{data_type}"
         setattr(self, df_attr_name, df)
@@ -296,8 +322,8 @@ class sepyIMPORT:
         df_vasopressor_meds = df_vasopressor_meds.reset_index(1)
 
         # Replace NaN values in unit columns
-        df_vasopressor_meds[self.vasopressor_units] = df_vasopressor_meds[
-            self.vasopressor_units
+        df_vasopressor_meds[self.config.vasopressor_units] = df_vasopressor_meds[
+            self.config.vasopressor_units
         ].replace({np.nan: ""})
 
         self.df_vasopressor_meds = df_vasopressor_meds
@@ -355,14 +381,14 @@ class sepyIMPORT:
             # Select Labs that have string value
             df_labs_filtered_string = df_labs_filtered.loc[
                 df_labs_filtered.index.get_level_values("super_table_col_name").isin(
-                    self.string_lab_col_names
+                    self.config.string_lab_col_names
                 )
             ]
             
             # Select and Treat Labs that have Numeric value
             df_labs_filtered_numeric = df_labs_filtered.loc[
                 df_labs_filtered.index.get_level_values("super_table_col_name").isin(
-                    self.numeric_lab_col_names
+                    self.config.numeric_lab_col_names
                 )
             ]
 
@@ -388,7 +414,7 @@ class sepyIMPORT:
         
             # if there are missing cols (i.e. no COVID in 2014) then it ensures the col name is added
             df_labs = df_labs.reindex(
-                df_labs.columns.union(self.all_lab_col_names), axis=1
+                df_labs.columns.union(self.config.all_lab_col_names), axis=1
             )
             
             self.df_labs = df_labs
@@ -411,7 +437,7 @@ class sepyIMPORT:
                 df = df.drop(columns=[merge_set[0], merge_set[1]])
 
         # drop punctuation and make numeric
-        df = utils.make_numeric(df, self.vital_col_names)
+        df = utils.make_numeric(df, self.config.vital_col_names)
         self.df_vitals = df
         return 1
 
@@ -669,124 +695,45 @@ class sepyIMPORT:
 
     def _process_in_out(self, df: pd.DataFrame, **kwargs) -> None:
         """Process in/out data after initial import."""
-        self.df_in_out = df
         
         try:
-            self.fluid_stats = stats
-            self.df_all_fluids = df
+            # Filter ORDER_CATALOG_DESC to include only those in the df_grouping_fluids file with individual_fluid_import = 1 
+            df_individual_bolus = self.df[
+                self.df['order_catalog_desc'].isin(
+                    self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name']
+                )
+            ]
+
+            df_all_other_fluids = self.df[
+                ~self.df['order_catalog_desc'].isin(
+                    self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name']
+                )
+            ]
             
-            pivoted_df = df.pivot_table(
+            self.df_individual_bolus = df_individual_bolus.pivot_table(
                 index=['csn', 'service_ts'],
                 columns='order_catalog_desc', 
                 values='volume',
                 fill_value=np.nan,
-                aggfunc='sum'  # Adjust aggregation function as needed
+                aggfunc='sum'
             )
-                        
-            # Filter ORDER_CATALOG_DESC to include only those in the df_grouping_fluids file with individual_fluid_import = 1 
-            self.df_individual_bolus = self.df_all_fluids[
-                self.df_all_fluids['order_catalog_desc'].isin(
-                    self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name']
-                )
-            ]
+
+            self.df_non_bolus_fluids = df_all_other_fluids.pivot_table(
+                index=['csn', 'service_ts'],
+                columns='order_catalog_desc', 
+                values='volume',
+                fill_value=np.nan,
+                aggfunc='sum'
+            )               
+            
             return 1
         except Exception as e:
             logging.error(f"Error processing in/out data: {str(e)}")
             # Create an empty DataFrame with the expected columns
-            self.df_all_fluids = pd.DataFrame(columns=df.columns.tolist() + ['volume'])
             self.df_individual_bolus = pd.DataFrame(columns=df.columns.tolist() + ['volume'])
+            self.df_non_bolus_fluids = pd.DataFrame(columns=df.columns.tolist() + ['volume'])
             logging.warning("Using empty DataFrame for all fluids due to processing error")
             return 0
-
-        
-    # Keeping the original method signatures for backwards compatibility
-    
-    def import_encounters(self, drop_cols: List[str], index_col: str, date_cols: List[str]) -> None:
-        """Legacy method for importing encounters. Use import_data('encounters', ...) instead."""
-        self.import_data('encounters', drop_cols=drop_cols, index_col=index_col, date_cols=date_cols)
-
-    def import_demographics(self, drop_cols: List[str], index_col: str, date_cols: List[str]) -> None:
-        """Legacy method for importing demographics. Use import_data('demographics', ...) instead."""
-        self.import_data('demographics', drop_cols=drop_cols, index_col=index_col, date_cols=date_cols)
-
-    def import_infusion_meds(
-        self,
-        drop_cols: List[str],
-        numeric_cols: List[str],
-        anti_infective_group_name: str,
-        vasopressor_group_name: str,
-        index_col: str,
-        date_cols: List[str],
-    ) -> None:
-        """Legacy method for importing infusion meds. Use import_data('infusion_meds', ...) instead."""
-        self.import_data('infusion_meds', 
-                       drop_cols=drop_cols, 
-                       numeric_cols=numeric_cols,
-                       anti_infective_group_name=anti_infective_group_name,
-                       vasopressor_group_name=vasopressor_group_name,
-                       index_col=index_col,
-                       date_cols=date_cols)
-
-    def import_labs(self, drop_cols: List[str], date_cols: List[str]) -> None:
-        """Legacy method for importing labs. Use import_data('labs', ...) instead."""
-        self.import_data('labs', drop_cols=drop_cols, date_cols=date_cols)
-
-    def import_vitals(self, drop_cols: List[str], index_col: str, date_cols: List[str], merge_cols: Optional[List[List[str]]] = None) -> None:
-        """Legacy method for importing vitals. Use import_data('vitals', ...) instead."""
-        self.import_data('vitals', drop_cols=drop_cols, index_col=index_col, date_cols=date_cols, merge_cols=merge_cols)
-
-    def import_vent(self, drop_cols: List[str], numeric_cols: List[str], index_col: str, date_cols: List[str]) -> None:
-        """Legacy method for importing vent data. Use import_data('vent', ...) instead."""
-        self.import_data('vent', drop_cols=drop_cols, numeric_cols=numeric_cols, index_col=index_col, date_cols=date_cols)
-    
-    def import_dialysis(self, drop_cols: List[str], numeric_cols: List[str], index_col: str, date_cols: List[str]) -> None:
-        """Legacy method for importing dialysis data. Use import_data('dialysis', ...) instead."""
-        self.import_data('dialysis', drop_cols=drop_cols, numeric_cols=numeric_cols, index_col=index_col, date_cols=date_cols)
-
-    def import_in_out(self, drop_cols: List[str], numeric_cols: List[str], index_col: str, date_cols: List[str]) -> None:
-        """Legacy method for importing in/out data. Use import_data('in_out', ...) instead."""
-        self.import_data('in_out', drop_cols=drop_cols, numeric_cols=numeric_cols, index_col=index_col, date_cols=date_cols)
-
-    def import_gcs(self, drop_cols: List[str], index_col: str, numeric_col: List[str], date_cols: List[str]) -> None:
-        """Legacy method for importing GCS data. Use import_data('gcs', ...) instead."""
-        self.import_data('gcs', drop_cols=drop_cols, index_col=index_col, numeric_cols=numeric_col, date_cols=date_cols)
-
-    def import_cultures(self, drop_cols: List[str], index_col: str, date_cols: List[str]) -> None:
-        """Legacy method for importing cultures data. Use import_data('cultures', ...) instead."""
-        self.import_data('cultures', drop_cols=drop_cols, index_col=index_col, date_cols=date_cols)
-
-    def import_bed_locations(self, drop_cols: List[str], index_col: str, date_cols: List[str]) -> None:
-        """Legacy method for importing bed locations data. Use import_data('bed_locations', ...) instead."""
-        self.import_data('bed_locations', drop_cols=drop_cols, index_col=index_col, date_cols=date_cols)
-
-    def import_procedures(self, file_key: str, drop_cols: List[str], index_col: str, date_cols: List[str]) -> None:
-        """Legacy method for importing procedures data. Use import_data('procedures', ...) instead."""
-        self.import_data('procedures', file_key=file_key, drop_cols=drop_cols, index_col=index_col, date_cols=date_cols)
-
-    def import_diagnosis(self, drop_cols: List[str], index_col: str, date_cols: List[str]) -> None:
-        """Legacy method for importing diagnosis data. Use import_data('diagnosis', ...) instead."""
-        self.import_data('diagnosis', drop_cols=drop_cols, index_col=index_col, date_cols=date_cols)
-
-    def import_radiology_notes(self, drop_cols: List[str], index_col: str, date_cols: List[str], text_col: str = 'report_text', clean_text: bool = True, max_length: Optional[int] = None) -> None:
-        """Legacy method for importing radiology notes. Use import_data('radiology_notes', ...) instead."""
-        self.import_data('radiology_notes', 
-                       drop_cols=drop_cols, 
-                       index_col=index_col, 
-                       date_cols=date_cols,
-                       text_col=text_col,
-                       clean_text=clean_text,
-                       max_length=max_length)
-    
-    def import_clinical_notes(self, drop_cols: List[str], index_col: str, date_cols: List[str], text_col: str = 'note_text', clean_text: bool = True, extract_sections: bool = False, max_length: Optional[int] = None) -> None:
-        """Legacy method for importing clinical notes. Use import_data('clinical_notes', ...) instead."""
-        self.import_data('clinical_notes', 
-                       drop_cols=drop_cols, 
-                       index_col=index_col, 
-                       date_cols=date_cols,
-                       text_col=text_col,
-                       clean_text=clean_text,
-                       extract_sections=extract_sections,
-                       max_length=max_length)
 
     def _handle_duplicate_med_ids(self) -> None:
         """

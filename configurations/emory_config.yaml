@@ -1,9 +1,5 @@
 # SETUP INSTRUCTIONS
-## assign unique-encounters_path to the path of the unique encounters file
-
-# SLURM CONFIGURATION
-num_processes: "7"
-processor_assignment: "1"
+## assign unique_encounters_path to the path of the unique encounters file
 
 # PIPELINE INSTRUCTIONS
 make_yearly_pickle: "yes" # yes: make pickle files, no: do not make pickle files
@@ -12,7 +8,7 @@ make_supertables: "yes" # yes: make supertables, no: do not make supertables
 
 # FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI"
-groupings_path: "groupings"
+groupings_path: "$HOME/Sepy/groupings"
 yearly_pickle_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_YEARLY_PICKLES/"
 supertable_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables_test/"
 encounters_path: "ENCOUNTER_FILE"
