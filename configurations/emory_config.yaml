@@ -42,12 +42,13 @@ dictionary_paths:
     - ["grouping_fluids", "em_fluids_labels.csv"]
     - ["variable_chart", "em_variable_chart.csv"]
     - ["grouping_vent", "em_vent_labels.csv"]
+    - ["infusion_meds_volume", "em_infusion_meds_volume.csv"]
   flatfile_types: 
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/year/ FOLDER
     - ["INFUSIONMEDS", "*INFUSIONMEDS*"]
     - ["LABS", "*LABS*"]
-    - ["VITALS", "*VITALS*"]
-    - ["VENT", "*VENT_WITHO2*"]
+    - ["VITALS", "*VITALS_O2_FLOW_RATE_*.csv"]
+    - ["VENT", "*VENT*"]
     - ["DEMOGRAPHICS", "*DEMOGRAPHICS*"]
     - ["GCS", "*GCS*"]
     - ["ENCOUNTER", "*ENCOUNTER*"]
@@ -61,7 +62,7 @@ dictionary_paths:
   combined_files:
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/ FOLDER
     - ["DIALYSIS", "DIALYSIS_14_21.dsv"] 
-    - ["IN_OUT", "CJSEPSIS_OUT_EO3.csv"]
+    - ["IN_OUT", "CJSEPSIS_IN_OUT_PROCESSED_combined.csv"]
     - ["RADIOLOGY_NOTES", "all_radiology_notes.csv"]
 
 # YEARLY INSTANCE FUNCTIONS AND PARAMETERS

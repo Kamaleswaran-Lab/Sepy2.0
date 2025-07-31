@@ -28,7 +28,7 @@ import sepyIMPORT
 import clinicalFeatures
 import importlib
 importlib.reload(clinicalFeatures)
-from clinicalFeatures import ClinicalDataProcessor, DerivedFeatures, EncounterDictionary
+from clinicalFeatures import ClinicalDataProcessor, DerivedFeatures, SepyDictConfig, ClinicalData, supertable
 from scoreCalculators import (
      ScoreType, ScoreCalculatorFactory,
     DEFAULT_LOOKBACK_HOURS, DEFAULT_LOOKFORWARD_HOURS, SEPSIS_SCORE_THRESHOLD
@@ -36,44 +36,7 @@ from scoreCalculators import (
 from dataclasses import dataclass
 
 
-@dataclass
-class SepyDictConfig:
-    """Configuration class for sepyDICT with type safety and validation."""
-    vital_col_names: List[str]
-    numeric_lab_col_names: List[str]
-    string_lab_col_names: List[str]
-    gcs_col_names: List[str]
-    bed_info: List[str]
-    vasopressor_names: List[str]
-    vasopressor_units: List[str]
-    vasopressor_dose: List[str]
-    vasopressor_col_names: List[str]
-    vent_col_names: List[str]
-    vent_positive_vars: List[str]
-    bp_cols: List[str]
-    sofa_max_24h: List[str]
-    fluids_med_names: List[str]
-    fluids_med_names_generic: List[str]
-    information_to_process: List[Dict[str, str]]
-    lab_aggregation: Dict[str, str]
-    dict_elements: List[Dict[str, Any]]
-    write_dict_keys: List[str]
-    constants: Dict[str, Any]
-    
-    def __post_init__(self):
-        """Calculate derived fields after initialization."""
-        self.all_lab_col_names = self.numeric_lab_col_names + self.string_lab_col_names
-    
-    @classmethod
-    def from_dict(cls, config_dict: Dict[str, Any]) -> 'SepyDictConfig':
-        """Create configuration instance from dictionary."""
-        # Get field names from the dataclass
-        field_names = {field.name for field in cls.__dataclass_fields__.values()}
-        
-        # Filter config_dict to only include known fields
-        filtered_config = {k: v for k, v in config_dict.items() if k in field_names}
-        
-        return cls(**filtered_config)
+
 
 class SepsisScoreCalculator:
     """Handles sepsis-related score calculations using the factory pattern."""
@@ -115,182 +78,172 @@ class SepsisScoreCalculator:
         return self.sofa_calculator._calculate_neuro_vectorized(df)
 
 
-class sepyDICT:
+class sepyMaster:
     """
-    Main class that coordinates clinical data processing for sepsis evaluation.
-    
-    This class maintains the original interface while delegating responsibilities
-    to specialized processor classes.
-
-    Args:
-        master_df: Master DataFrame containing all clinical data
-        sepyDICTConfigs: Configuration dictionary for processing parameters
-        bounds: DataFrame with threshold values and metadata for lab aggregation
+    Main class that manages the yearly data and configuration.
+    Serves as a factory for creating sepyCSN instances.
     """
-    def __init__(self, master_df: Any, sepyDICTConfigs: Dict[str, Any], bounds: pd.DataFrame):
+    def __init__(self, yearly_data_instance: Any, sepyDICTConfigs: Dict[str, Any], bounds: pd.DataFrame):
         # Create configuration object
-        self.config = SepyDictConfig.from_dict(sepyDICTConfigs)
-        
-        # Store original config and data for backward compatibility
-        self.sepyDICTConfigs = sepyDICTConfigs
+        self.config = SepyDictConfig.initialize_config(yearly_data_instance.v_quan_deyo_labels, yearly_data_instance.v_quan_elix_labels, sepyDICTConfigs)
         self.bounds = bounds
-        self.master_df = master_df
+        self.yearly_data_instance = yearly_data_instance
+        
+        self.dataframes_id_mapping = {'beds': "csn",
+                                      'demographics': "pat_id",
+                                      'encounters': "csn",
+                                      'gcs': "csn",
+                                      'cultures': "csn",
+                                      'procedures': "csn",
+                                      'vent': "csn",
+                                      'diagnosis': "csn",
+                                      'labs': "csn",
+                                      'vasopressor_meds': "csn",
+                                      'anti_infective_meds': "csn",
+                                      'vitals': "csn",
+                                      'infusion_meds': "csn",
+                                      'quan_deyo_ICD10': "csn",
+                                      'quan_elix_ICD10': "csn",
+                                      'in_out_fluids': "csn", #TODO Change this name later 
+                                      'clinical_notes': "csn",
+                                      'radiology_notes': "csn",
+                                      'icd_procedures': "csn",
+                                      'cpt_procedures': "csn"}
 
-        # Initialize processor classes
-        self.data_processor = ClinicalDataProcessor(self.config, bounds, master_df)
+        # Initialize shared processors that can be reused
+        self.data_processor = ClinicalDataProcessor(self.config, bounds)
         self.score_calculator = SepsisScoreCalculator()
-        self.dict_builder = EncounterDictionary(self.config)
-        self.derived_features = DerivedFeatures(self.config)
-        
-        # Keep lab aggregation for backward compatibility
-        self.labAGG = self.data_processor.labAGG
-    
-    def flag_dict(self):
-        self.flags = {}
-        
-        #ID numbers
-        self.flags['csn'] = self.csn
-        self.flags['pt_id'] = self.pat_id
-        
-        #vent flags
-        self.flags['y_vent_rows'] = 0
-        self.flags['y_vent_start_time'] = 0
-        self.flags['y_vent_end_time'] = 0
-        self.flags['vent_start_time'] = pd.NaT
-    
-    def try_except(self, master_df: Any, identifier: Any, name: str) -> None:
-        """Safely slice *master_df* by *identifier* and attach it to *instance*."""
+
+    def slice_master_dataframes(self, identifier: Any, name: str) -> Tuple[pd.DataFrame, str]:
+        """Safely slice yearly_data_instance by identifier."""
         filt_df_name = name + "_PerCSN"
         df_name = "df_" + name
 
         try:
-            source_df = getattr(master_df, df_name)
+            source_df = getattr(self.yearly_data_instance, df_name)
             if source_df.index.dtype == "O":
-                setattr(self, filt_df_name, source_df.loc[[str(identifier)], :])
+                return source_df.loc[[str(identifier)], :], filt_df_name
             else:
-                setattr(self, filt_df_name, source_df.loc[[identifier], :])
-            logging.info("The %s file was imported", name)
+                return source_df.loc[[identifier], :], filt_df_name
         except Exception: 
-            empty_df = getattr(master_df, df_name).iloc[0:0]
-            empty_df.index.set_names(getattr(master_df, df_name).index.names)
-            setattr(self, filt_df_name, empty_df)
+            empty_df = getattr(self.yearly_data_instance, df_name).iloc[0:0]
+            empty_df.index.set_names(getattr(self.yearly_data_instance, df_name).index.names)
             logging.info("There were no %s data for identifier %s", name, identifier)
+            return empty_df, filt_df_name
     
+    def get_identifier(self, csn: Any, identifier_type: str) -> Any:
+        """Get the identifier for a given CSN and identifier type."""
+        if identifier_type == "csn":
+            return csn
+        elif identifier_type == "pat_id":
+            return self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
+        else:
+            raise ValueError(f"Invalid identifier type: {identifier_type}")
+
+    def create_csn_instance(self, csn: Any) -> 'sepyCSN':
+        """Factory method to create a new sepyCSN instance."""
+        # Pre-slice all required dataframes for this CSN
+        sliced_data = {}
+        for df_name, identifier_type in self.dataframes_id_mapping.items():
+            identifier = self.get_identifier(csn, identifier_type)
+            df, df_name = self.slice_master_dataframes(identifier, df_name)
+            sliced_data[df_name] = df
+        
+        logging.info(f"Slicing done for these dataframes: {sliced_data.keys()}")
+        # Create and return new sepyCSN instance
+        return sepyCSN(
+            csn=csn,
+            pat_id = self.get_identifier(csn, "pat_id"),
+            config=self.config,
+            sliced_data=sliced_data,
+            data_processor=self.data_processor,
+            score_calculator=self.score_calculator
+        )
     
-    def static_features_dict(self):
 
-        #######################################
-        # static_features: Patient demographic & encounter features that will not change during admisssion
-        #######################################
-        # from encounters file
-        self.static_features = {}
-        def safe_extract(df, column, default=None):
-            try:
-                return df.iloc[0, :][column] if not df.empty else default
-            except (KeyError, IndexError):
-                return default
+class sepyCSN:
+    """
+    Orchestrator class that coordinates the processing pipeline for a single patient encounter (CSN).
+    Responsibilities:
+    1. Coordinates the processing workflow
+    2. Manages interactions between different processors
+    3. Maintains the processing state
+    4. Provides a high-level interface for the application
+    """
+    def __init__(
+        self,
+        csn: Any,
+        pat_id: Any,
+        config: SepyDictConfig,
+        sliced_data: Dict[str, pd.DataFrame],
+        data_processor: ClinicalDataProcessor,
+        score_calculator: SepsisScoreCalculator
+    ):
+        self.config = config
+        self._data_processor = data_processor
+        self._score_calculator = score_calculator
+        self._derived_features = DerivedFeatures(config)
+        
+        # Initialize raw data
+        self.clinical_data = ClinicalData.from_sliced_data(
+            csn=csn, 
+            pat_id=pat_id,
+            config=self.config,
+            sliced_data=sliced_data
+        )
 
-        # Encounter features
-        self.static_features['ed_arrival_source'] = safe_extract(self.encounters_PerCSN, 'ed_arrival_source')
-        self.static_features['total_icu_days'] = safe_extract(self.encounters_PerCSN, 'total_icu_days', 0)
-        self.static_features['discharge_status'] = safe_extract(self.encounters_PerCSN, 'discharge_status')
-        self.static_features['discharge_to'] = safe_extract(self.encounters_PerCSN, 'discharge_to')
-        self.static_features['encounter_type'] = safe_extract(self.encounters_PerCSN, 'encounter_type')
-        self.static_features['age'] = safe_extract(self.encounters_PerCSN, 'age')
-        self.static_features['admit_reason'] = safe_extract(self.encounters_PerCSN, 'admit_reason')
+        logging.info("Clinical data initialized. Supertable time index created. Flags initialized. Event times initialized. Static features initialized.")
+        logging.info(f"Supertable starts at {self.clinical_data.super_table_time_index[0]} and ends at {self.clinical_data.super_table_time_index[-1]}, with {len(self.clinical_data.super_table_time_index)} rows.")
+        
+        # Processing state
+        self._processed = False
+        self._derived_features_calculated = False
+        self._super_table_created = False
+        self._sepsis_time_calculated = False
+        self._sofa_scores_calculated = False
+        self._sirs_scores_calculated = False
+    
+    def create_supertable(self):
+        self.supertable = self._data_processor.process_clinical_data(self.clinical_data)
+        logging.info(f"Supertable created with {len(self.supertable.supertable)} rows.")
+        self._super_table_created = True
 
-        # Demographics features
-        self.static_features['gender'] = safe_extract(self.demographics_PerCSN, 'gender')
-        self.static_features['gender_code'] = safe_extract(self.demographics_PerCSN, 'gender_code')
-        self.static_features['race'] = safe_extract(self.demographics_PerCSN, 'race')
-        self.static_features['race_code'] = safe_extract(self.demographics_PerCSN, 'race_code')
-        self.static_features['ethnicity'] = safe_extract(self.demographics_PerCSN, 'ethnicity')
-        self.static_features['ethnicity_code'] = safe_extract(self.demographics_PerCSN, 'ethnicity_code')
+    def process(self) -> None:
+        """
+        Main processing pipeline that coordinates all the steps needed
+        to analyze a patient encounter.
+        """
+        # 1. Process clinical data
+        self.clinical_data = self._data_processor.process_data(
+            self.clinical_data,
+            self.clinical_data.super_table_time_index
+        )
+
+        # 2. Calculate derived features
+        self._calculate_derived_features()
+
+        # 3. Calculate sepsis scores
+        self._calculate_sepsis_scores()
+
+        # 4. Mark as processed
+        self._processed = True
+
+    def _calculate_derived_features(self) -> None:
+        """Calculate all derived clinical features"""
+        if not self._processed:
+            raise ValueError("Must process clinical data before calculating features")
             
-    def event_times_dict (self):
-        #######################################
-        # event_times: Key event times during a patients admission not otherwise specified
-        #######################################
-        def safe_extract(df, column, default=None):
-            try:
-                return df.iloc[0, :][column] if not df.empty else default
-            except (KeyError, IndexError):
-                return default
-
-        self.event_times = {}    
-        self.event_times ['ed_presentation_time'] = safe_extract(self.encounters_PerCSN, 'ed_presentation_time')
-        self.event_times ['hospital_admission_date_time'] = safe_extract(self.encounters_PerCSN, 'hospital_admission_date_time')
-        self.event_times ['hospital_discharge_date_time'] = safe_extract(self.encounters_PerCSN, 'hospital_discharge_date_time')
-        self.event_times ['start_index'] = min(self.event_times['hospital_admission_date_time'], self.event_times['ed_presentation_time'])
-
-        #Wait time
-        self.flags['ed_wait_time'] = (self.event_times['hospital_admission_date_time'] - self.event_times['ed_presentation_time'])\
-                                    .total_seconds() / 60
-      
-    def build_super_table_index(self):       
-        """
-        Builds the timestamp index for the super_table.
-        """
-        start_time = self.event_times['start_index']
-        end_time = self.event_times['hospital_discharge_date_time']
-        resample_frequency = self.config.constants['resample_frequency']
-        self.super_table_time_index = pd.date_range(start_time, end_time, freq=resample_frequency)
-        logging.info(f'SepyDICT- Super table index built with frequency {resample_frequency}')
-    
-    def make_dict_elements(self, imported):
-        """
-        Iterates over a set of predefined dictionary elements and executes corresponding methods 
-        with optional arguments as specified in a configuration, logging each step if needed.
-        """
-        for step in self.config.dict_elements:
-            method_name = step["method"]
-            method = getattr(self, method_name)
-            args = step.get("args", [])
-            if args == "imported":
-                method(imported)
-            else:
-                method(*args)
-
-            if "log" in step:
-                logging.info(step["log"])
-     
-
-    def create_supertable_pickles(self, csn: Any) -> None:
-        """Main processing method that coordinates all data processing steps."""
-        logging.info(f'SepyDICT- Creating sepyDICT instance for {csn}')
-        filter_date_start_time = time.time()
-        self.csn = csn
-
-        # Set the patient ID based on the encounter
-        try:
-            self.pat_id = self.master_df.loc[csn,['pat_id']].iloc[0].item()
-        except:
-            self.pat_id = self.master_df.loc[csn,['pat_id']].iloc[0]
+        # Calculate MAP features
+        self.clinical_data = self._derived_features.calculate_map_features(
+            self.clinical_data
+        )
         
-        # Get filtered DataFrames for each patient encounter
-        for item in self.config.information_to_process:
-            identifier = self.pat_id if item["id_type"] == "pat_id" else self.csn
-            self.try_except(self.master_df, identifier, item["source"])
-            
-        logging.info('SepyDICT- Now making dictionary')
-        self.make_dict_elements(self.master_df)
-        logging.info('SepyDICT- Now calculating Sepsis-2')
-        self.run_SEP2()
-        logging.info('SepyDICT- Now calculating Sepsis-3')
-        self.run_SEP3()
-        self.derived_features.create_infection_sepsis_time(self)
-        logging.info('SepyDICT- Now writing dictionary')
-        self.write_dict()
+        # Calculate ventilator features
+        self.clinical_data = self._derived_features.calculate_vent_features(
+            self.clinical_data
+        )
         
-        # Optimize memory usage of final DataFrames
-        logging.info('SepyDICT- Optimizing memory usage')
-        self.optimize_super_table_memory()
-        
-        # Log memory usage summary
-        memory_summary = self.get_memory_usage_summary()
-        logging.info(f'SepyDICT- Memory usage summary: {memory_summary}')
-        
-        logging.info(f'SepyDICT- Selecting data and writing this dict by CSN took {time.time() - filter_date_start_time}(s).')
+        # Other feature calculations...
     
     def calc_icu_stay(self):                
         if self.bed_status.icu.sum() > 0:
@@ -341,229 +294,7 @@ class sepyDICT:
         t_suspicion = pd.DataFrame(t_susp_list, columns=['t_abx','t_clt'])
         t_suspicion['t_suspicion'] = t_suspicion[['t_abx','t_clt']].min(axis=1)
         self.t_suspicion = t_suspicion.sort_values('t_suspicion')
-
-    def fill_values(self, labs=None, vitals=None, gcs=None):
-        """
-        #NOTE : Not used!! 
-            Accepts- Patient Dictionary and list of patient features to fill 
-            Does- 1. Fwd fills each value for a max of 24hrs
-              2. Back fills for a max of 24hrs from admission (i.e. for labs 1hr after admit)
-        Returns- Patient Dictionary with filled patient features
-        """
-        if labs is None:
-            v_all_lab_col_names = self.v_all_lab_col_names
-        if vitals is None:
-            v_vital_col_names = self.v_vital_col_names
-        if gcs is None:
-            v_gcs_col_names = self.v_gcs_col_names
-            
-        numerical_cols = v_all_lab_col_names + v_vital_col_names + v_gcs_col_names
-
-        #Fwdfill to discharge    
-        for col in numerical_cols:
-            self.super_table[col] = self.super_table[col].ffill()
-   
-    def fill_pressor_values(self, v_vasopressor_names=None, v_vasopressor_units=None, v_vasopressor_dose=None):
-        """
-        Accepts- 1) Patient Dictionary
-                    2) Lists of Initial vasopressor dose, vasopressor units, vasopressor weight based dose
-           Does- Forward fills from first non-null value to the last non-null value. 
-           Returns- 
-           Notes- The assumption is that the last pressor is the last dose.
-        """
-        # Uses class variable for function
-        if v_vasopressor_names is None:
-            v_vasopressor_names = self.v_vasopressor_col_names
-            
-        if v_vasopressor_units is None:
-            v_vasopressor_units= self.v_vasopressor_units
-            
-        if v_vasopressor_dose is None:
-            v_vasopressor_dose = self.v_vasopressor_dose
-            
-        #create super_table variable
-        df=self.super_table
-        
-        #fills the value for the initial vasopressor dose
-        df[v_vasopressor_names]=df[v_vasopressor_names].apply(lambda columns: columns.loc[:columns.last_valid_index()].ffill())
-
-        #fills the vasopressor name 
-        df[v_vasopressor_units]=df[v_vasopressor_units].apply(lambda columns: columns.loc[:columns.last_valid_index()].ffill())
-        
-        #fills the weight based vasopressor dose
-        df[v_vasopressor_dose]=df[v_vasopressor_dose].apply(lambda columns: columns.loc[:columns.last_valid_index()].ffill())
-
-    def static_cci_to_supertable(self):
-        #Get static features
-        age = self.static_features['age']
-        gender = self.static_features['gender']
-
-        df = pd.DataFrame()
-        df['code'] = self.diagnosis_PerCSN['dx_code_icd9'].values
-        df['age'] = [age]*len(df)
-        df['id'] = self.diagnosis_PerCSN.index
-
-        if all(df['code'] == '--') or pd.isnull(df['code']).all():
-            cci9 = None
-        else:
-            df_out = comorbidity(df,  
-                                 id="id",
-                                 code="code",
-                                 age="age",
-                                 score="charlson",
-                                 icd="icd9",
-                                 variant="quan",
-                                 assign0=True)
-            cci9 = df_out['comorbidity_score'].values[0]
-
-        df = pd.DataFrame()
-        df['code'] = self.diagnosis_PerCSN['dx_code_icd10'].values
-        df['age'] = [age]*len(df)
-        df['id'] = self.diagnosis_PerCSN.index
-
-        if all(df['code'] == '--') or pd.isnull(df['code']).all():
-            cci10 = None
-        else:
-            df_out = comorbidity(df,  
-                                 id="id",
-                                 code="code",
-                                 age="age",
-                                 score="charlson",
-                                 icd="icd10",
-                                 variant="shmi",
-                                 weighting="shmi",
-                                 assign0=True)
-            cci10 = df_out['comorbidity_score'].values[0]
-
-        self.super_table['age'] = [age]*len(self.super_table)
-        self.super_table['gender'] = [gender]*len(self.super_table)
-        self.super_table['cci9'] = [cci9]*len(self.super_table)
-        self.super_table['cci10'] = [cci10]*len(self.super_table)
-
     
-
-    def calc_all_SOFA(self, window: int = DEFAULT_LOOKBACK_HOURS) -> None:
-        """
-        Calculates the Sequential Organ Failure Assessment (SOFA) score for a patient based on various organ systems.
-        
-        Uses vectorized operations for improved performance and memory efficiency.
-        
-        Args:
-            window: The rolling window size (in hours) used for calculating the delta of the SOFA score.
-        """
-        df = self.super_table
-        
-        # Use vectorized calculations where possible for better performance
-        try:
-            # Try vectorized approach first
-            sofa_df = pd.DataFrame(index=df.index)
-            
-            # Use vectorized methods from score calculator
-            sofa_df['SOFA_coag'] = self.score_calculator.calculate_sofa_coag_vectorized(df)
-            sofa_df['SOFA_cardio'] = self.score_calculator.calculate_sofa_cardio_vectorized(df)
-            sofa_df['SOFA_resp'] = self.score_calculator.calculate_sofa_resp_vectorized(df)
-            sofa_df['SOFA_resp_sa'] = self.score_calculator.calculate_sofa_resp_sa_vectorized(df)
-            sofa_df['SOFA_renal'] = self.score_calculator.calculate_sofa_renal_vectorized(df)
-            sofa_df['SOFA_hep'] = self.score_calculator.calculate_sofa_hep_vectorized(df)
-            sofa_df['SOFA_neuro'] = self.score_calculator.calculate_sofa_neuro_vectorized(df)
-            
-            # Modified cardio calculation still uses row-wise (more complex logic)
-            sofa_df['SOFA_cardio_mod'] = df.apply(self.SOFA_cardio_mod, axis=1).astype('int8')
-            
-        except Exception as e:
-            logging.warning(f"Vectorized SOFA calculation failed, falling back to row-wise: {e}")
-            # Fallback to original row-wise calculation
-            sofa_df = pd.DataFrame(index=df.index, columns=[
-                'SOFA_coag', 'SOFA_renal', 'SOFA_hep', 'SOFA_neuro',
-                'SOFA_cardio', 'SOFA_cardio_mod', 'SOFA_resp', 'SOFA_resp_sa'
-            ])
-            
-            sofa_df['SOFA_coag'] = df.apply(self.SOFA_coag, axis=1)
-            sofa_df['SOFA_renal'] = df.apply(self.SOFA_renal, axis=1)
-            sofa_df['SOFA_hep'] = df.apply(self.SOFA_hep, axis=1)
-            sofa_df['SOFA_neuro'] = df.apply(self.SOFA_neuro, axis=1)
-            sofa_df['SOFA_cardio'] = df.apply(self.SOFA_cardio, axis=1)
-            sofa_df['SOFA_cardio_mod'] = df.apply(self.SOFA_cardio_mod, axis=1)        
-            sofa_df['SOFA_resp'] = df.apply(self.SOFA_resp, axis=1)
-            sofa_df['SOFA_resp_sa'] = df.apply(self.SOFA_resp_sa, axis=1)
-            
-        # Calculate NORMAL hourly totals for each row
-        sofa_df['hourly_total'] = sofa_df[[
-                                   'SOFA_coag',
-                                   'SOFA_renal',
-                                   'SOFA_hep',
-                                   'SOFA_neuro',
-                                   'SOFA_cardio',
-                               'SOFA_resp']].sum(axis=1)
-        
-        # Calculate POST 24hr delta in total SOFA Score
-        sofa_df['delta_24h'] = sofa_df['hourly_total'].\
-        rolling(window=window, min_periods=24).\
-        apply(lambda x: x.max() - x.min() if x.idxmax().value> x.idxmin().value else 0 ).tolist()
- 
-        # Calculate FIRST 24h delta in total SOFA score
-        sofa_df.update(sofa_df.loc[sofa_df.index[0:24],['hourly_total']].\
-        rolling(window=window, min_periods=1).max().rename(columns={'hourly_total':'delta_24h'}))
-
-        # Calculate MODIFIED hourly totals for each row
-        sofa_df['hourly_total_mod'] = sofa_df[[
-                               'SOFA_coag',
-                               'SOFA_renal',
-                               'SOFA_hep',
-                               'SOFA_neuro',
-                                'SOFA_cardio_mod',
-                               'SOFA_resp_sa']].sum(axis=1)
-        
-        # Calculate POST 24hr delta in total SOFA Score
-        sofa_df['delta_24h_mod'] = sofa_df['hourly_total_mod'].\
-        rolling(window=window, min_periods=24).\
-        apply(lambda x: x.max() - x.min() if x.idxmax().value> x.idxmin().value else 0 ).tolist()
- 
-        # Calculate FIRST 24h delta in total SOFA score
-        sofa_df.update(sofa_df.loc[sofa_df.index[0:24],['hourly_total_mod']].\
-        rolling(window=window, min_periods=1).max().rename(columns={'hourly_total_mod':'delta_24h_mod'}))                
-        
-        # Optimize memory usage of SOFA scores DataFrame
-        self.sofa_scores = self.data_processor.optimize_dataframe_memory(sofa_df)
-
-    def optimize_super_table_memory(self) -> None:
-        """
-        Optimize the memory usage of the super_table DataFrame.
-        
-        This method should be called after all processing is complete.
-        """
-        if hasattr(self, 'super_table') and self.super_table is not None:
-            logging.info("Optimizing super_table memory usage...")
-            original_memory = self.super_table.memory_usage(deep=True).sum() / 1024**2  # MB
-            
-            self.super_table = self.data_processor.optimize_dataframe_memory(self.super_table)
-            
-            optimized_memory = self.super_table.memory_usage(deep=True).sum() / 1024**2  # MB
-            memory_saved = original_memory - optimized_memory
-            
-            logging.info(f"Memory optimization complete. Saved {memory_saved:.2f} MB "
-                        f"({(memory_saved/original_memory)*100:.1f}% reduction)")
-
-    def get_memory_usage_summary(self) -> Dict[str, float]:
-        """
-        Get memory usage summary for all major DataFrames.
-        
-        Returns:
-            Dictionary with memory usage in MB for each DataFrame
-        """
-        memory_usage = {}
-        
-        if hasattr(self, 'super_table') and self.super_table is not None:
-            memory_usage['super_table'] = self.super_table.memory_usage(deep=True).sum() / 1024**2
-            
-        if hasattr(self, 'sofa_scores') and self.sofa_scores is not None:
-            memory_usage['sofa_scores'] = self.sofa_scores.memory_usage(deep=True).sum() / 1024**2
-            
-        if hasattr(self, 'sirs_scores') and self.sirs_scores is not None:
-            memory_usage['sirs_scores'] = self.sirs_scores.memory_usage(deep=True).sum() / 1024**2
-            
-        memory_usage['total'] = sum(memory_usage.values())
-        return memory_usage
 
     def run_SEP2(self):
         """Calculate SIRS scores for Sepsis-2 criteria."""
@@ -714,6 +445,267 @@ class sepyDICT:
         sep3_time_df_mod = sep3_time_df_mod.iloc[sep3_time_df_mod['index'].fillna(sep3_time_df_mod['t_suspicion']).argsort()].reset_index(drop=True).drop(columns=['t_SOFA_mod']).rename(columns={'index':'t_SOFA_mod'})
         
         self.sep3_time_mod = sep3_time_df_mod
+
+
+    def _calculate_sepsis_scores(self) -> None:
+        """Calculate all sepsis-related scores"""
+        if not self._processed:
+            raise ValueError("Must process clinical data before calculating scores")
+            
+        # Calculate SOFA scores
+        sofa_scores = self._score_calculator.calculate_sofa_scores(
+            self.clinical_data
+        )
+        
+        # Calculate SIRS scores
+        sirs_scores = self._score_calculator.calculate_sirs_scores(
+            self.clinical_data
+        )
+        
+        # Store scores
+        self.clinical_data.sofa_scores = sofa_scores
+        self.clinical_data.sirs_scores = sirs_scores
+        
+        self._scores_calculated = True
+
+    def get_sepsis_status(self) -> Dict[str, Any]:
+        """Get the final sepsis determination and related metrics"""
+        if not self._scores_calculated:
+            raise ValueError("Must calculate scores before getting sepsis status")
+            
+        return {
+            'has_sepsis': self._determine_sepsis_status(),
+            'sofa_max': self.clinical_data.sofa_scores.max(),
+            'sirs_max': self.clinical_data.sirs_scores.max(),
+            'infection_time': self.clinical_data.event_times.get('infection_time'),
+            'sepsis_onset_time': self.clinical_data.event_times.get('sepsis_onset_time')
+        }
+
+    def get_processing_summary(self) -> Dict[str, Any]:
+        """Get summary of all processed data and calculations"""
+        return {
+            'csn': self.clinical_data.csn,
+            'pat_id': self.clinical_data.pat_id,
+            'processed': self._processed,
+            'scores_calculated': self._scores_calculated,
+            'flags': self.clinical_data.flags,
+            'event_times': self.clinical_data.event_times
+        }
+
+class sepyCSNold:
+    """
+    Class for processing individual CSN data.
+    Created per-CSN by sepyMaster.
+    """
+    def __init__(
+        self, 
+        csn: Any,
+        pat_id: Any,
+        config: SepyDictConfig,
+        sliced_data: Dict[str, pd.DataFrame],
+        data_processor: ClinicalDataProcessor,
+        score_calculator: SepsisScoreCalculator
+    ):
+        self.csn = csn
+        self.pat_id = pat_id
+        self.config = config
+        self.data_processor = data_processor
+        self.score_calculator = score_calculator
+        
+        # Attach sliced dataframes
+        for df_name, df in sliced_data.items():
+            setattr(self, df_name, df)
+    
+    
+   
+    def process_clinical_features(self):
+        """
+        Applies custom processing for each clinical feature type 
+        with optional arguments as specified in a configuration, logging each step if needed.
+        """
+
+
+        
+
+        """ for step in self.config.dict_elements:
+            method_name = step["method"]
+            method = getattr(self, method_name)
+            args = step.get("args", [])
+            if args == "imported":
+                method(imported)
+            else:
+                method(*args)
+
+            if "log" in step:
+                 logging.info(step["log"])
+        """
+
+    def create_supertable_pickles(self, csn: Any) -> None:
+        """Main processing method that coordinates all data processing steps."""
+        logging.info(f'SepyDICT- Creating sepyDICT instance for {csn}')
+        filter_date_start_time = time.time()
+        self.csn = csn
+
+        # Set the patient ID based on the encounter
+        try:
+            self.pat_id = self.master_df.loc[csn,['pat_id']].iloc[0].item()
+        except:
+            self.pat_id = self.master_df.loc[csn,['pat_id']].iloc[0]
+        
+        # Get filtered DataFrames for each patient encounter
+        for item in self.config.information_to_process:
+            identifier = self.pat_id if item["id_type"] == "pat_id" else self.csn
+            self.try_except(self.master_df, identifier, item["source"])
+            
+        logging.info('SepyDICT- Now making dictionary')
+        self.make_dict_elements(self.master_df)
+        logging.info('SepyDICT- Now calculating Sepsis-2')
+        self.run_SEP2()
+        logging.info('SepyDICT- Now calculating Sepsis-3')
+        self.run_SEP3()
+        self.derived_features.create_infection_sepsis_time(self)
+        logging.info('SepyDICT- Now writing dictionary')
+        self.write_dict()
+        
+        # Optimize memory usage of final DataFrames
+        logging.info('SepyDICT- Optimizing memory usage')
+        self.optimize_super_table_memory()
+        
+        # Log memory usage summary
+        memory_summary = self.get_memory_usage_summary()
+        logging.info(f'SepyDICT- Memory usage summary: {memory_summary}')
+        
+        logging.info(f'SepyDICT- Selecting data and writing this dict by CSN took {time.time() - filter_date_start_time}(s).')
+    
+
+
+
+    
+
+    def calc_all_SOFA(self, window: int = DEFAULT_LOOKBACK_HOURS) -> None:
+        """
+        Calculates the Sequential Organ Failure Assessment (SOFA) score for a patient based on various organ systems.
+        
+        Uses vectorized operations for improved performance and memory efficiency.
+        
+        Args:
+            window: The rolling window size (in hours) used for calculating the delta of the SOFA score.
+        """
+        df = self.super_table
+        
+        # Use vectorized calculations where possible for better performance
+        try:
+            # Try vectorized approach first
+            sofa_df = pd.DataFrame(index=df.index)
+            
+            # Use vectorized methods from score calculator
+            sofa_df['SOFA_coag'] = self.score_calculator.calculate_sofa_coag_vectorized(df)
+            sofa_df['SOFA_cardio'] = self.score_calculator.calculate_sofa_cardio_vectorized(df)
+            sofa_df['SOFA_resp'] = self.score_calculator.calculate_sofa_resp_vectorized(df)
+            sofa_df['SOFA_resp_sa'] = self.score_calculator.calculate_sofa_resp_sa_vectorized(df)
+            sofa_df['SOFA_renal'] = self.score_calculator.calculate_sofa_renal_vectorized(df)
+            sofa_df['SOFA_hep'] = self.score_calculator.calculate_sofa_hep_vectorized(df)
+            sofa_df['SOFA_neuro'] = self.score_calculator.calculate_sofa_neuro_vectorized(df)
+            
+            # Modified cardio calculation still uses row-wise (more complex logic)
+            sofa_df['SOFA_cardio_mod'] = df.apply(self.SOFA_cardio_mod, axis=1).astype('int8')
+            
+        except Exception as e:
+            logging.warning(f"Vectorized SOFA calculation failed, falling back to row-wise: {e}")
+            # Fallback to original row-wise calculation
+            sofa_df = pd.DataFrame(index=df.index, columns=[
+                'SOFA_coag', 'SOFA_renal', 'SOFA_hep', 'SOFA_neuro',
+                'SOFA_cardio', 'SOFA_cardio_mod', 'SOFA_resp', 'SOFA_resp_sa'
+            ])
+            
+            sofa_df['SOFA_coag'] = df.apply(self.SOFA_coag, axis=1)
+            sofa_df['SOFA_renal'] = df.apply(self.SOFA_renal, axis=1)
+            sofa_df['SOFA_hep'] = df.apply(self.SOFA_hep, axis=1)
+            sofa_df['SOFA_neuro'] = df.apply(self.SOFA_neuro, axis=1)
+            sofa_df['SOFA_cardio'] = df.apply(self.SOFA_cardio, axis=1)
+            sofa_df['SOFA_cardio_mod'] = df.apply(self.SOFA_cardio_mod, axis=1)        
+            sofa_df['SOFA_resp'] = df.apply(self.SOFA_resp, axis=1)
+            sofa_df['SOFA_resp_sa'] = df.apply(self.SOFA_resp_sa, axis=1)
+            
+        # Calculate NORMAL hourly totals for each row
+        sofa_df['hourly_total'] = sofa_df[[
+                                   'SOFA_coag',
+                                   'SOFA_renal',
+                                   'SOFA_hep',
+                                   'SOFA_neuro',
+                                   'SOFA_cardio',
+                               'SOFA_resp']].sum(axis=1)
+        
+        # Calculate POST 24hr delta in total SOFA Score
+        sofa_df['delta_24h'] = sofa_df['hourly_total'].\
+        rolling(window=window, min_periods=24).\
+        apply(lambda x: x.max() - x.min() if x.idxmax().value> x.idxmin().value else 0 ).tolist()
+ 
+        # Calculate FIRST 24h delta in total SOFA score
+        sofa_df.update(sofa_df.loc[sofa_df.index[0:24],['hourly_total']].\
+        rolling(window=window, min_periods=1).max().rename(columns={'hourly_total':'delta_24h'}))
+
+        # Calculate MODIFIED hourly totals for each row
+        sofa_df['hourly_total_mod'] = sofa_df[[
+                               'SOFA_coag',
+                               'SOFA_renal',
+                               'SOFA_hep',
+                               'SOFA_neuro',
+                                'SOFA_cardio_mod',
+                               'SOFA_resp_sa']].sum(axis=1)
+        
+        # Calculate POST 24hr delta in total SOFA Score
+        sofa_df['delta_24h_mod'] = sofa_df['hourly_total_mod'].\
+        rolling(window=window, min_periods=24).\
+        apply(lambda x: x.max() - x.min() if x.idxmax().value> x.idxmin().value else 0 ).tolist()
+ 
+        # Calculate FIRST 24h delta in total SOFA score
+        sofa_df.update(sofa_df.loc[sofa_df.index[0:24],['hourly_total_mod']].\
+        rolling(window=window, min_periods=1).max().rename(columns={'hourly_total_mod':'delta_24h_mod'}))                
+        
+        # Optimize memory usage of SOFA scores DataFrame
+        self.sofa_scores = self.data_processor.optimize_dataframe_memory(sofa_df)
+
+    def optimize_super_table_memory(self) -> None:
+        """
+        Optimize the memory usage of the super_table DataFrame.
+        
+        This method should be called after all processing is complete.
+        """
+        if hasattr(self, 'super_table') and self.super_table is not None:
+            logging.info("Optimizing super_table memory usage...")
+            original_memory = self.super_table.memory_usage(deep=True).sum() / 1024**2  # MB
+            
+            self.super_table = self.data_processor.optimize_dataframe_memory(self.super_table)
+            
+            optimized_memory = self.super_table.memory_usage(deep=True).sum() / 1024**2  # MB
+            memory_saved = original_memory - optimized_memory
+            
+            logging.info(f"Memory optimization complete. Saved {memory_saved:.2f} MB "
+                        f"({(memory_saved/original_memory)*100:.1f}% reduction)")
+
+    def get_memory_usage_summary(self) -> Dict[str, float]:
+        """
+        Get memory usage summary for all major DataFrames.
+        
+        Returns:
+            Dictionary with memory usage in MB for each DataFrame
+        """
+        memory_usage = {}
+        
+        if hasattr(self, 'super_table') and self.super_table is not None:
+            memory_usage['super_table'] = self.super_table.memory_usage(deep=True).sum() / 1024**2
+            
+        if hasattr(self, 'sofa_scores') and self.sofa_scores is not None:
+            memory_usage['sofa_scores'] = self.sofa_scores.memory_usage(deep=True).sum() / 1024**2
+            
+        if hasattr(self, 'sirs_scores') and self.sirs_scores is not None:
+            memory_usage['sirs_scores'] = self.sirs_scores.memory_usage(deep=True).sum() / 1024**2
+            
+        memory_usage['total'] = sum(memory_usage.values())
+        return memory_usage
+
+    
 
     # Score calculation methods - delegate to score calculator
     def SOFA_resp(self, row: pd.Series, pf_pa: str = 'pf_pa', pf_sp: str = 'pf_sp') -> float:

@@ -287,7 +287,11 @@ def get_bounds(var_name, bounds):
 
 
 def agg_fn_wrapper(var_name, bounds):
-    lowerbound, upperbound = get_bounds(var_name, bounds)
+    try:
+        lowerbound, upperbound = get_bounds(var_name, bounds)
+    except Exception as e:
+        logging.error(f"No bounds found for {var_name}")
+        return "mean"
 
     def agg_fn(array):
         try:

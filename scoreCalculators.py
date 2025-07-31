@@ -4,14 +4,7 @@ from typing import List, Dict
 import pandas as pd
 import numpy as np
 
-# Clinical score constants - moved from sepyDICT.py
-RESAMPLE_FREQUENCY = '60min'
-DEFAULT_WEIGHT_MALE = 89.0
-DEFAULT_WEIGHT_FEMALE = 75.0
-DEFAULT_HEIGHT_MALE = 175.3
-DEFAULT_HEIGHT_FEMALE = 161.5
-GENDER_MALE = 2
-GENDER_FEMALE = 1
+
 
 # Threshold constants for clinical scores
 MAP_THRESHOLD = 70.0

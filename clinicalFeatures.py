@@ -22,7 +22,12 @@ No other logic was modified.
 
 from __future__ import annotations  # postpone evaluation of type hints
 
+from dataclasses import dataclass
 import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
 from typing import Any, Dict, List, Optional
 
 import numpy as np
@@ -30,6 +35,7 @@ import pandas as pd
 
 import utils
 import sepyIMPORT  # only used for type annotations / IDE help
+from comorbidipy import comorbidity
 
 # Import shared constants so that the extracted classes keep working identically
 from scoreCalculators import (
@@ -39,24 +45,200 @@ from scoreCalculators import (
     MIN_MAP,
     MAX_MAP,
 )
-from process_fluids import FluidProcessorConfig, FluidProcessor
 
-###############################################################################
-# EncounterDictionary
-###############################################################################
 
-class EncounterDictionary:
-    """Handles final dictionary creation and serialization."""
+@dataclass
+class SepyDictConfig:
+    """Configuration class for sepyDICT with type safety and validation."""
+    vital_col_names: List[str]
+    numeric_lab_col_names: List[str]
+    string_lab_col_names: List[str]
+    gcs_col_names: List[str]
+    bed_info: List[str]
+    vasopressor_names: List[str]
+    vasopressor_units: List[str]
+    vasopressor_dose: List[str]
+    individual_fluid_columns: List[str]
+    lab_aggregation: Dict[str, str]
+    constants: Dict[str, Any]
+    quan_deyo_labels: List[str]
+    quan_elix_labels: List[str]
     
-    def __init__(self, config: Any):
-        self.config = config
+    def __post_init__(self):
+        """Calculate derived fields after initialization."""
+        self.all_lab_col_names = self.numeric_lab_col_names + self.string_lab_col_names
+        self.vasopressor_col_names = self.vasopressor_names + self.vasopressor_units + self.vasopressor_dose
     
-    def write_dict(self, instance: Any) -> None:
-        """Create a dictionary of key attributes from the instance."""
-        encounter_keys = self.config.write_dict_keys
-        encounter_dict = {key: getattr(instance, key) for key in encounter_keys}
-        instance.encounter_dict = encounter_dict
+    @classmethod
+    def initialize_config(cls, quan_deyo_labels: List[str], quan_elix_labels: List[str], config_dict: Dict[str, Any]) -> 'SepyDictConfig':
+        """Create configuration instance from dictionary."""
+        # Get field names from the dataclass
+        field_names = {field.name for field in cls.__dataclass_fields__.values()}
+        
+        # Filter config_dict to only include known fields
+        filtered_config = {k: v for k, v in config_dict.items() if k in field_names}
+        
+        return cls(quan_deyo_labels=quan_deyo_labels, quan_elix_labels=quan_elix_labels, **filtered_config)
+    
+@dataclass
+class ClinicalData:
+    """Class to store clinical data for a patient."""
+    pat_id: Any
+    csn: Any
+    config: SepyDictConfig
+    beds: pd.DataFrame
+    demographics: pd.DataFrame
+    encounters: pd.DataFrame
+    gcs: pd.DataFrame
+    cultures: pd.DataFrame
+    procedures: pd.DataFrame
+    vent: pd.DataFrame
+    diagnosis: pd.DataFrame
+    labs: pd.DataFrame
+    vasopressor_meds: pd.DataFrame
+    anti_infective_meds: pd.DataFrame
+    vitals: pd.DataFrame
+    infusion_meds: pd.DataFrame
+    quan_deyo_ICD10: pd.DataFrame
+    quan_elix_ICD10: pd.DataFrame
+    in_out_fluids: pd.DataFrame
+    clinical_notes: pd.DataFrame
+    radiology_notes: pd.DataFrame
+    icd_procedures: pd.DataFrame
+    cpt_procedures: pd.DataFrame
 
+    
+    #these are created in post_init
+    #flags: Dict[str, Any]
+    #super_table_time_index: pd.DatetimeIndex
+    #event_times: Dict[str, Any]
+    #static_features: Dict[str, Any]
+    
+    def __post_init__(self):
+        """Validate and initialize after creation"""
+        if not self.csn:
+            raise ValueError("CSN must be provided")
+        if not self.pat_id:
+            raise ValueError("Patient ID must be provided")
+        
+        # Initialize flags
+        self._initialize_flags()
+        
+        # Initialize event times if we have encounters data
+        if self.encounters is not None:
+            self._initialize_event_times()
+            self._build_super_table_index()
+            self._initialize_static_features()
+
+    def _initialize_flags(self) -> None:
+        """Initialize basic flags"""
+        self.flags = {
+            'csn': self.csn,
+            'pat_id': self.pat_id,
+            'y_vent_rows': 0,
+            'y_vent_start_time': 0,
+            'y_vent_end_time': 0,
+            'vent_start_time': pd.NaT
+        }
+
+    def _initialize_event_times(self) -> None:
+        """Initialize event times from encounters data"""
+        def safe_extract(df: pd.DataFrame, column: str, default: Any = None) -> Any:
+            try:
+                return df.iloc[0][column] if not df.empty else default
+            except (KeyError, IndexError):
+                return default
+
+        self.event_times = {
+            'ed_presentation_time': safe_extract(self.encounters, 'ed_presentation_time'),
+            'hospital_admission_date_time': safe_extract(self.encounters, 'hospital_admission_date_time'),
+            'hospital_discharge_date_time': safe_extract(self.encounters, 'hospital_discharge_date_time')
+        }
+        
+        # Calculate start index
+        self.event_times['start_index'] = min(
+            self.event_times['hospital_admission_date_time'],
+            self.event_times['ed_presentation_time']
+        )
+
+        # Calculate ED wait time
+        if all(time is not None for time in [
+            self.event_times['hospital_admission_date_time'],
+            self.event_times['ed_presentation_time']
+        ]):
+            self.flags['ed_wait_time'] = (
+                self.event_times['hospital_admission_date_time'] - 
+                self.event_times['ed_presentation_time']
+            ).total_seconds() / 60
+    
+    def add_flag(self, name: str, value: Any) -> None:
+        """Simple method to add or update a flag"""
+        self.flags[name] = value
+    
+    def add_event_time(self, name: str, value: Any) -> None:
+        """Simple method to add or update an event time"""
+        self.event_times[name] = value
+    
+    def add_static_feature(self, name: str, value: Any) -> None:
+        """Simple method to add or update a static feature"""
+        self.static_features[name] = value
+
+    def _build_super_table_index(self) -> None:
+        """Build the timestamp index for the super_table"""
+        if not all(key in self.event_times for key in ['start_index', 'hospital_discharge_date_time']):
+            raise ValueError("Required event times not initialized")
+            
+        self.super_table_time_index = pd.date_range(
+            self.event_times['start_index'],
+            self.event_times['hospital_discharge_date_time'],
+            freq=self.config.constants['resample_frequency']
+        )
+
+    def _initialize_static_features(self):
+
+        #######################################
+        # static_features: Patient demographic & encounter features that will not change during admisssion
+        #######################################
+        self.static_features = {}
+        def safe_extract(df, column, default=None):
+            try:
+                return df.iloc[0, :][column] if not df.empty else default
+            except (KeyError, IndexError):
+                return default
+
+        # Encounter features
+        self.static_features['ed_arrival_source'] = safe_extract(self.encounters, 'ed_arrival_source')
+        self.static_features['total_icu_days'] = safe_extract(self.encounters, 'total_icu_days', 0)
+        self.static_features['discharge_status'] = safe_extract(self.encounters, 'discharge_status')
+        self.static_features['discharge_to'] = safe_extract(self.encounters, 'discharge_to')
+        self.static_features['encounter_type'] = safe_extract(self.encounters, 'encounter_type')
+        self.static_features['age'] = safe_extract(self.encounters, 'age')
+        self.static_features['admit_reason'] = safe_extract(self.encounters, 'admit_reason')
+
+        # Demographics features
+        self.static_features['gender'] = safe_extract(self.demographics, 'gender')
+        self.static_features['gender_code'] = safe_extract(self.demographics, 'gender_code')
+        self.static_features['race'] = safe_extract(self.demographics, 'race')
+        self.static_features['race_code'] = safe_extract(self.demographics, 'race_code')
+        self.static_features['ethnicity'] = safe_extract(self.demographics, 'ethnicity')
+        self.static_features['ethnicity_code'] = safe_extract(self.demographics, 'ethnicity_code')
+        
+
+    @classmethod
+    def from_sliced_data(cls, csn: Any, pat_id: Any, config: Any, sliced_data: Dict[str, pd.DataFrame]) -> ClinicalData:
+        """Factory method to create from raw sliced data"""
+        # Clean up dataframe names and create instance
+        cleaned_data = {
+            k.replace('_PerCSN', ''): v 
+            for k, v in sliced_data.items()
+        }
+        return cls(csn=csn, pat_id=pat_id, config=config, **cleaned_data)
+
+@dataclass
+class supertable:
+    """Class to store the supertable"""
+    supertable: pd.DataFrame
+    time_index: pd.DatetimeIndex
 
 ###############################################################################
 # ClinicalDataProcessor
@@ -65,11 +247,9 @@ class EncounterDictionary:
 class ClinicalDataProcessor:  
     """Handles data binning, cleaning, and aggregation operations."""
 
-    # pylint: disable=too-many-instance-attributes
-    def __init__(self, config: Any, bounds: pd.DataFrame, master_df: Any):
+    def __init__(self, config: SepyDictConfig, bounds: pd.DataFrame):
         self.config = config
-        self.bounds = bounds
-        self.master_df = master_df
+        self.bounds = bounds 
 
         # Setup lab aggregation functions
         self.labAGG = self._setup_lab_aggregation()
@@ -138,16 +318,15 @@ class ClinicalDataProcessor:
     # Public interface
     # ------------------------------------------------------------------
 
-    def labs_staging(self, instance) -> None:
+    def labs_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         """
         Resample lab values to config.constants['resample_frequency'] alignment.
         Apply the aggregation function defined in the config file.
 
         """
-        df = instance.labs_PerCSN
         if df.empty:
             df.index = df.index.get_level_values("collection_time")
-            instance.labs_staging = pd.DataFrame(index=instance.super_table_time_index, columns=df.columns)
+            labs_df = pd.DataFrame(index=time_index, columns=df.columns)
         else:
             df = df.reset_index("collection_time") #results in a multi-index df with lab supertable col name and collection_time as data and the rest as indices
             df = df.loc[:, ~df.columns.duplicated()] #removes duplicate columns
@@ -158,20 +337,20 @@ class ClinicalDataProcessor:
                     resampled_col = (
                         df[[key, "collection_time"]]
                         .set_index("collection_time")
-                        .resample(self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])
+                        .resample(self.config.constants['resample_frequency'], origin=time_index[0])
                         .apply(agg_func)
-                        .reindex(instance.super_table_time_index)
+                        .reindex(time_index)
                     )
                     resampled_data[key] = resampled_col[key]
 
-            instance.labs_staging = pd.DataFrame(resampled_data, index=instance.super_table_time_index)
-            instance.labs_staging = self.optimize_dataframe_memory(instance.labs_staging)
+            labs_df = pd.DataFrame(resampled_data, index=time_index)
+            labs_df = self.optimize_dataframe_memory(labs_df)
+            return labs_df
 
-    def vitals_staging(self, instance) -> None:  # noqa: C901 – complexity inherited
+    def vitals_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:  # noqa: C901 – complexity inherited
         """Resample vital signs."""
-        df = instance.vitals_PerCSN
         if df.empty:
-            instance.vitals_staging = pd.DataFrame(index=instance.super_table_time_index, columns=df.columns)
+            vitals_df = pd.DataFrame(index=time_index, columns=df.columns)
             return
 
         resampled_data: Dict[str, pd.Series] = {}
@@ -185,21 +364,21 @@ class ClinicalDataProcessor:
                 resampled_col = (
                     df[[key, "recorded_time"]]
                     .set_index("recorded_time")
-                    .resample(self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])
+                    .resample(self.config.constants['resample_frequency'], origin=time_index[0])
                     .apply(agg_fn)
-                    .reindex(instance.super_table_time_index)
+                    .reindex(time_index)
                 )
                 resampled_data[key] = resampled_col[key]
 
-        instance.vitals_staging = pd.DataFrame(resampled_data, index=instance.super_table_time_index)
-        instance.vitals_staging = self.optimize_dataframe_memory(instance.vitals_staging)
+        vitals_df = pd.DataFrame(resampled_data, index=time_index)
+        vitals_df = self.optimize_dataframe_memory(vitals_df)
+        return vitals_df
 
-    def gcs_staging(self, instance) -> None: 
+    def gcs_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None: 
         """Resample Glasgow Coma Scale values."""
-        df = instance.gcs_PerCSN
         if df.empty:
             df = df.drop(columns=["recorded_time"])
-            instance.gcs_staging = pd.DataFrame(index=instance.super_table_time_index, columns=df.columns)
+            gcs_df = pd.DataFrame(index=time_index, columns=df.columns)
             return
 
         new_df = pd.DataFrame()
@@ -210,99 +389,111 @@ class ClinicalDataProcessor:
                 agg_fn = "min"
             col1 = (
                     df[[key, "recorded_time"]]
-                    .resample(self.config.constants['resample_frequency'], on="recorded_time", origin=instance.event_times["start_index"])
+                    .resample(self.config.constants['resample_frequency'], on="recorded_time", origin=time_index[0])
                 .apply(agg_fn)
             )
             new_df = pd.concat((new_df, col1), axis=1)
-        instance.gcs_staging = new_df.reindex(instance.super_table_time_index)
+        gcs_df = new_df.reindex(time_index)
+        return gcs_df
     
-    def vent_staging(self, instance) -> None:
+    def vent_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         """Resamples and aligns patient ventilator data to a unified hourly time index."""
-        df = instance.vent_PerCSN
-
+        check_mech_vent_vars = ['vent_tidal_rate_set', 'peep']
         if df.empty:
-            df = pd.DataFrame(columns=['vent_status','fio2'], index=instance.super_table_time_index)
-            instance.vent_status = df.vent_status
-            instance.vent_fio2 = df.fio2
+            vent_df = pd.DataFrame(columns=['vent_status','fio2'], index=time_index)
+            return vent_df
         else:
             vent_start = df[df.vent_start_time.notna()].vent_start_time.values
             vent_stop = df[df.vent_stop_time.notna()].vent_stop_time.values
             
-            if vent_start.size == 0:
-                instance.flags['y_vent_rows'] = 1
-                df['vent_status'] = np.where(df[self.config.vent_positive_vars].notnull().any(axis=1), 1, 0)
+            if len(vent_start) == 0: #CASE: Checking if there are valid mechanical ventilation rows that don't have a start time
+                df['vent_status'] = np.where(df[check_mech_vent_vars].notnull().any(axis=1), 1, 0)
                 
                 if df['vent_status'].sum() > 0:
-                    instance.flags['vent_start_time'] = df[df['vent_status'] > 0].recorded_time.iloc[0:1]
+                    vent_start = df[df['vent_status'] > 0].recorded_time.iloc[0:1]
                 else:
                     vent_start = []
                     
-             #If there is a vent start, but no stop; add 6hrs to start time  
+            #If there are valid mechanical ventilation rows, but no stop; add 6hrs to start time  
             if len(vent_start) != 0 and len(vent_stop) == 0:
                 #flag identifies the presence of vent rows, and start time
-                check_mech_vent_vars = ['vent_tidal_rate_set', 'peep']
                 df['vent_status'] = np.where(df[check_mech_vent_vars].notnull().any(axis=1),1,0)
-                
-                #check if there are any "real" vent rows; if so 
-                if df['vent_status'].sum()>0:
-                    vent_start  =  df[df['vent_status']>0].recorded_time.iloc[0:1]
-                else:
-                    vent_start = []
-                    
-             #If there is a vent start, but no stop; add 6hrs to start time  
-            if len(vent_start) != 0 and len(vent_stop) == 0:
-                #flag identifies the presence of vent rows, and start time
-                check_mech_vent_vars = ['vent_tidal_rate_set', 'peep']
-                df['vent_status'] = np.where(df[check_mech_vent_vars].notnull().any(axis=1),1,0)
-                
                 #check if there are any "real" vent rows; if so 
                 if df['vent_status'].sum()>0:
                     vent_stop  =  df[df['vent_status']>0].recorded_time.iloc[-1:]
 
-            agg_fn = utils.agg_fn_wrapper('fio2', self.bounds)
+            #Still no vent start after checking for valid mechanical ventilation rows
             if len(vent_start) == 0: #No valid mechanical ventilation values
-                # vent_status and fio2 will get joined to super table later
-                vent_fio2 = df[['recorded_time','fio2']].resample(self.config.constants['resample_frequency'],
-                                             on = 'recorded_time',
-                                             origin = instance.event_times['start_index']).apply(agg_fn) \
-                                             .reindex(instance.super_table_time_index)
-                df_dummy = pd.DataFrame(columns=['vent_status'], index=instance.super_table_time_index)
-                # vent_status and fio2 will get joined to super table later
-                vent_status = df_dummy.vent_status.values
+                vent_status = pd.DataFrame(columns=['vent_status'], index=time_index) #all nans
             else:
-            
                 index = pd.Index([])
                 vent_tuples = zip(vent_start, vent_stop )
     
                 for pair in set(vent_tuples):
                     if pair[0] < pair[1]:
-                        index = index.append( pd.date_range(pair[0], pair[1], freq='H'))
+                        index = index.append( pd.date_range(pair[0], pair[1], freq=self.config.constants['resample_frequency']))
                     else: #In case of a mistake in start and stop recording
-                        index = index.append( pd.date_range(pair[1], pair[0], freq='H'))  
+                        index = index.append( pd.date_range(pair[1], pair[0], freq=self.config.constants['resample_frequency']))  
                 
                 vent_status = pd.DataFrame(data=([1.0]*len(index)), columns =['vent_status'], index=index)
                 
                 #sets column to 1 if vent was on    
                 vent_status = vent_status.resample(self.config.constants['resample_frequency'],
-                                                   origin = instance.event_times['start_index']).mean() \
-                                                   .reindex(instance.super_table_time_index)
-                            
-                vent_fio2 = df[['recorded_time','fio2']].resample(self.config.constants['resample_frequency'],
-                                             on = 'recorded_time',
-                                             origin = instance.event_times['start_index']).apply(agg_fn) \
-                                             .reindex(instance.super_table_time_index)
+                                                   origin = time_index[0]).mean() \
+                                                   .reindex(time_index)
+        
+        #Create vent_fio2
+        agg_fn = utils.agg_fn_wrapper_max('fio2', self.bounds)
+        vent_fio2 = df[['recorded_time','fio2']].resample(self.config.constants['resample_frequency'],
+                                    on='recorded_time',
+                                    origin=time_index[0]).apply(agg_fn) \
+                                    .reindex(time_index)
 
-        instance.vent_staging = pd.DataFrame(index=instance.super_table_time_index)
-        instance.vent_staging['vent_status'] = vent_status
-        instance.vent_staging['vent_fio2'] = vent_fio2
-    
-    def cultures_staging(self, instance) -> None:
-        instance.cultures_staging = instance.cultures_PerCSN.copy()
-    
-    def antibiotics_staging(self, instance) -> None:
-        instance.abx_staging = instance.anti_infective_meds_PerCSN.copy() 
-    
-    def procedures_staging(self, instance) -> None:
+        #Create peep
+        agg_fn = utils.agg_fn_wrapper_max('peep', self.bounds)
+        peep = df[['recorded_time','peep']].resample(self.config.constants['resample_frequency'],
+                                    on='recorded_time',
+                                    origin=time_index[0]).apply(agg_fn) \
+                                    .reindex(time_index)
+
+        #Create vent_category
+        vent_category = df[['recorded_time','vent_category']].resample(self.config.constants['resample_frequency'],
+                                    on='recorded_time',
+                                    origin=time_index[0]).last() \
+                                    .reindex(time_index)
+
+        #Create vent_tidal_rate_exhaled
+        agg_fn = utils.agg_fn_wrapper_max('vent_tidal_rate_exhaled', self.bounds)
+        vent_tidal_rate_exhaled = df[['recorded_time','vent_tidal_rate_exhaled']].resample(self.config.constants['resample_frequency'],
+                                    on='recorded_time',
+                                    origin=time_index[0]).apply(agg_fn) \
+                                    .reindex(time_index)
+
+        #Create vent_tidal_rate_set
+        agg_fn = utils.agg_fn_wrapper_max('vent_tidal_rate_set', self.bounds)
+        vent_tidal_rate_set = df[['recorded_time','vent_tidal_rate_set']].resample(self.config.constants['resample_frequency'],
+                                    on='recorded_time',
+                                    origin=time_index[0]).apply(agg_fn) \
+                                    .reindex(time_index)
+
+        #Create vent_rate_set
+        agg_fn = utils.agg_fn_wrapper_max('vent_rate_set', self.bounds)
+        vent_rate_set = df[['recorded_time','vent_rate_set']].resample(self.config.constants['resample_frequency'],
+                                    on='recorded_time',
+                                    origin=time_index[0]).apply(agg_fn) \
+                                    .reindex(time_index)
+
+        vent_df = pd.DataFrame(index=time_index)
+        vent_df['vent_status'] = vent_status
+        vent_df['vent_fio2'] = vent_fio2
+        vent_df['peep'] = peep
+        vent_df['vent_category'] = vent_category
+        vent_df['vent_tidal_rate_exhaled'] = vent_tidal_rate_exhaled
+        vent_df['vent_tidal_rate_set'] = vent_tidal_rate_set
+        vent_df['vent_rate_set'] = vent_rate_set
+        return vent_df
+        
+    def procedures_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         def _create_procedure_series(procedures_df, index, time_col_start, time_col_end, procedure_name_col='primary_procedure_nm'):
             """
             Create a series aligned with supertable index showing procedure names
@@ -334,90 +525,220 @@ class ClinicalDataProcessor:
             
             return result_series
         
-        df = instance.procedures_PerCSN.copy()
-        if df.empty:
-            instance.procedures_staging = pd.DataFrame(index=instance.super_table_time_index)
-            return
-        
-        in_or_series = _create_procedure_series(df, instance.super_table_time_index, 'in_or_dttm', 'out_or_dttm')
-        proc_start_series = _create_procedure_series(df, instance.super_table_time_index, 'procedure_start_dttm', 'procedure_comp_dttm')
+        in_or_series = _create_procedure_series(df, time_index, 'in_or_dttm', 'out_or_dttm')
+        proc_start_series = _create_procedure_series(df, time_index, 'procedure_start_dttm', 'procedure_comp_dttm')
 
-        instance.procedures_staging = pd.DataFrame(index=instance.super_table_time_index)
-        instance.procedures_staging['in_or'] = in_or_series
-        instance.procedures_staging['proc_start'] = proc_start_series
+        procedures_df = pd.DataFrame(index=time_index)
+        procedures_df['in_or'] = in_or_series
+        procedures_df['proc_start'] = proc_start_series
+        return procedures_df
     
-    def icd_staging(self, instance) -> None:
-        df = instance.icd_procedures_PerCSN.copy()
+    def icd_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            instance.icd_procedures_staging = pd.DataFrame(index=instance.super_table_time_index)
-            return
+            icd_df = pd.DataFrame(index=time_index)
+            return icd_df
         
         df = df.set_index("procedure_date")
-        icd_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])).size()
-        instance.icd_procedures_staging = icd_counts.reindex(instance.super_table_time_index, fill_value=0)
-    
-    def cpt_staging(self, instance) -> None:
-        df = instance.cpt_procedures_PerCSN.copy()
+        icd_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])).size()
+        icd_df = icd_counts.reindex(time_index, fill_value=0)
+        return icd_df
+        
+    def cpt_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            instance.cpt_procedures_staging = pd.DataFrame(index=instance.super_table_time_index)
-            return
+            cpt_df = pd.DataFrame(index=time_index)
+            return cpt_df
         
         df = df.set_index("procedure_dttm")
-        procedure_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])).size()
-        instance.cpt_procedures_staging = procedure_counts.reindex(instance.super_table_time_index, fill_value=0)
+        procedure_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])).size()
+        cpt_df = procedure_counts.reindex(time_index, fill_value=0)
+        return cpt_df
 
 
-    def clinical_notes_staging(self, instance) -> None:
-        df = instance.clinical_notes_PerCSN.copy()
+    def clinical_notes_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            instance.clinical_notes_staging = pd.DataFrame(index=instance.super_table_time_index)
+            clinical_notes_df = pd.DataFrame(index=time_index)
             return
         
-        instance.clinical_notes_staging = df.resample(self.config.constants['resample_frequency'], origin=instance.event_times["start_index"]).last()
-        instance.clinical_notes_staging = instance.clinical_notes_staging.reindex(instance.super_table_time_index)
+        clinical_notes_df = df.resample(self.config.constants['resample_frequency'], origin=time_index[0]).last()
+        clinical_notes_df = clinical_notes_df.reindex(time_index)
+        return clinical_notes_df
     
-    def radiology_notes_staging(self, instance) -> None:
-        df = instance.radiology_notes_PerCSN.copy()
+    def radiology_notes_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            instance.radiology_notes_staging = pd.DataFrame(index=instance.super_table_time_index)
-            return
+            radiology_notes_df = pd.DataFrame(index=time_index)
+            return radiology_notes_df
             
         df['day_verified'] = pd.to_datetime(df['day_verified'])
         df = df.set_index("day_verified")
-        notes_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=instance.event_times["start_index"])).size()
-        instance.radiology_notes_staging = notes_counts.reindex(instance.super_table_time_index, fill_value=0)
+        notes_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])).size()
+        radiology_notes_df = notes_counts.reindex(time_index, fill_value=0)
+        return radiology_notes_df
     
-    def in_out_staging(self, instance) -> None:
-        df = instance.in_out_PerCSN.copy()
+    def vasopressor_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
+        vas_cols = self.config.vasopressor_names + self.config.vasopressor_units + ['med_order_time']
+        df =df[vas_cols]
+        vas_keys = self.config.vasopressor_names + self.config.vasopressor_units
+        
         if df.empty:
-            instance.in_out_staging = pd.DataFrame(index=instance.super_table_time_index, columns=df.columns)
-            return
+            df = df.drop(columns=['med_order_time'])
+            vasopressor_meds_df = pd.DataFrame(index = time_index, columns = df.columns)
+        else:
+            new = pd.DataFrame([])
+            for key in vas_keys:
+                if len(self.config.bounds.loc[self.config.bounds['Location in SuperTable'] == key]) > 0:
+                    agg_fn = utils.agg_fn_wrapper_max(key, self.config.bounds)
+                else:
+                    agg_fn = "max"
+                col1 = df[[key, 'med_order_time']].resample('60min', on = "med_order_time",  \
+                                                           origin = self.event_times ['start_index']).apply(agg_fn)
+                #col1 = col1.drop(columns=['med_order_time'])
+
+                new = pd.concat((new, col1), axis = 1)
+            vasopressor_meds_df = new.reindex(time_index)
+            
+        return vasopressor_meds_df
+
+    def individual_fluids_staging(self, df_in_out_fluids: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
+        if df_in_out_fluids.empty:
+            individual_fluids_df = pd.DataFrame(index=time_index)
+            return individual_fluids_df
         
-        fluidprocessor = FluidProcessor()
-        processed_df, stats = fluidprocessor.process_fluids(df)
+        volume_cols = [x for x in df_in_out_fluids.columns if x.endswith("_volume")]
+        df_in_out_fluids = df_in_out_fluids[volume_cols]
+        df_in_out_fluids.columns = [x.replace("_volume", "") for x in df_in_out_fluids.columns]
+        df_in_out_fluids = df_in_out_fluids.reset_index("service_ts") 
+        resampled_data: Dict[str, pd.Series] = {}
+
+        for column in self.config.individual_fluid_columns:
+            resampled_col = (
+                df_in_out_fluids[[column, "service_ts"]]
+                .set_index("service_ts")
+                .resample(self.config.constants['resample_frequency'], origin=time_index[0])
+                .last()
+                .reindex(time_index)
+            )
+            resampled_data[column] = resampled_col[column]
+
+        individual_fluids_df = pd.DataFrame(resampled_data, index=time_index)
         
-        instance.in_out_staging = processed_df.reindex(instance.super_table_time_index)
+        return individual_fluids_df
+        
+    def cumulative_fluids_staging(self, df_in_out_fluids: pd.DataFrame, df_infusion_meds: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
+        if df_in_out_fluids.empty and df_infusion_meds.empty:
+            cumulative_fluids_df = pd.DataFrame(index=time_index)
+            return cumulative_fluids_df
+        
+        ## Fluids from in_out_fluids
+        volume_cols = [x for x in df_in_out_fluids.columns if x.endswith("_volume")]
+        df_in_out_fluids = df_in_out_fluids[volume_cols]
+        df_in_out_fluids.columns = [x.replace("_volume", "") for x in df_in_out_fluids.columns]
+        df_in_out_fluids = df_in_out_fluids.reset_index("service_ts") 
+
+        resampled_data: Dict[str, pd.Series] = {}
+        all_cols = df_in_out_fluids.columns.tolist()
+        all_cols.remove('service_ts')
+        for column in all_cols:
+            resampled_col = (
+                df_in_out_fluids[[column, "service_ts"]]
+                .set_index("service_ts")
+                .resample(self.config.constants['resample_frequency'], origin=time_index[0])
+                .last()
+                .reindex(time_index)
+            )
+            resampled_data[column] = resampled_col[column]
+
+        all_fluids_df = pd.DataFrame(resampled_data, index=time_index)
+        cumulative_fluids_df = pd.DataFrame(index=time_index, columns = ['cumulative_fluids'])
+        cumulative_fluids_df['cumulative_fluids'] = all_fluids_df.sum(axis=1)
+        
+        #Fluids from infusion meds
+        df_infusion_meds = df_infusion_meds.loc[~df_infusion_meds.med_name.isin(self.config.individual_fluid_columns)]
+        df_infusion_meds = df_infusion_meds.loc[df_infusion_meds.volume != "none"]
+        df_infusion_meds.set_index("med_action_time", inplace=True)
+        df_infusion_meds_volume = df_infusion_meds['volume'].resample(self.config.constants['resample_frequency'], origin=time_index[0]).sum()
+        df_infusion_meds_volume = df_infusion_meds_volume.reindex(time_index).fillna(0)
+        
+        cumulative_fluids_df['cumulative_fluids'] = cumulative_fluids_df['cumulative_fluids'] + df_infusion_meds_volume
+        
+        return cumulative_fluids_df
+        
+    
+    def static_features_staging(self, age: int, gender: Any, diagnosis_PerCSN: pd.DataFrame, time_index: pd.DatetimeIndex) -> pd.DataFrame:
+        """
+        Creates columns for age, gender, and comorbidity scores
+        Args:
+            age: int
+            gender: Any
+            diagnosis_PerCSN: pd.DataFrame
+            time_index: pd.DatetimeIndex
+        Returns:
+            pd.DataFrame
+        """
+        #Get static features
+        df = pd.DataFrame()
+        df['code'] = diagnosis_PerCSN['dx_code_icd9'].values
+        df['age'] = [age]*len(df)
+        df['id'] = diagnosis_PerCSN.index
+
+        if all(df['code'] == '--') or pd.isnull(df['code']).all():
+            cci9 = None
+        else:
+            df_out = comorbidity(df,  
+                                 id="id",
+                                 code="code",
+                                 age="age",
+                                 score="charlson",
+                                 icd="icd9",
+                                 variant="quan",
+                                 assign0=True)
+            cci9 = df_out['comorbidity_score'].values[0]
+
+        df = pd.DataFrame()
+        df['code'] = diagnosis_PerCSN['dx_code_icd10'].values
+        df['age'] = [age]*len(df)
+        df['id'] = diagnosis_PerCSN.index
+
+        if all(df['code'] == '--') or pd.isnull(df['code']).all():
+            cci10 = None
+        else:
+            df_out = comorbidity(df,  
+                                 id="id",
+                                 code="code",
+                                 age="age",
+                                 score="charlson",
+                                 icd="icd10",
+                                 variant="shmi",
+                                 weighting="shmi",
+                                 assign0=True)
+            cci10 = df_out['comorbidity_score'].values[0]
+        
+        static_features = pd.DataFrame(index=time_index)
+        static_features['age'] = [age]*len(static_features)
+        static_features['gender'] = [gender]*len(static_features)
+        static_features['cci9'] = [cci9]*len(static_features)
+        static_features['cci10'] = [cci10]*len(static_features)
+
+        return static_features
 
     
-    def comorbidity_staging(self, instance):                        
-        instance.quan_deyo_ICD10_staging = instance.quan_deyo_ICD10_PerCSN.reset_index().groupby(['ICD10']).first().\
+    def comorbidity_staging(self, df_quan_deyo: pd.DataFrame, df_quan_elix: pd.DataFrame) -> None:                        
+        quan_deyo_ICD10_staging = df_quan_deyo.reset_index().groupby(['ICD10']).first().\
                                 groupby(['quan_deyo']).agg(
                                 icd_count = pd.NamedAgg(column="csn", aggfunc="count"),
                                 date_time = pd.NamedAgg(column="dx_time_date", aggfunc="first"))\
-                                .reindex(instance.v_quan_deyo_labels).rename_axis(None)
+                                .reindex(self.config.quan_deyo_labels).rename_axis(None)
                                 #.agg({'csn':'count', 'dx_time_date':'first'})\
 
                                 
-        instance.quan_elix_ICD10_staging = instance.quan_elix_ICD10_PerCSN.reset_index().groupby(['ICD10']).first().\
+        quan_elix_ICD10_staging = df_quan_elix.reset_index().groupby(['ICD10']).first().\
                                 groupby(['quan_elix']).agg(
                                 icd_count = pd.NamedAgg(column="csn", aggfunc="count"),
                                 date_time = pd.NamedAgg(column="dx_time_date", aggfunc="first"))\
-                                .reindex(instance.v_quan_elix_labels).rename_axis(None)
+                                .reindex(self.config.quan_elix_labels).rename_axis(None)
                                 #.agg({'csn':'count', 'dx_time_date':'first'})\
+        return quan_deyo_ICD10_staging, quan_elix_ICD10_staging
     
-    
-    def assign_bed_status(self, instance):
-        df = instance.beds_PerCSN
+    def assign_bed_status(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         #these columns have the flags for bed status
         bed_category_names = ["icu", "imc", "ed", "procedure"]
         #makes an empty dataframe
@@ -436,87 +757,194 @@ class ClinicalDataProcessor:
         bed_status = bed_status[~bed_status.index.duplicated(keep='first')]
         
         #this is bed status re_indexed with super_table index; gets merged in later
-        instance.bed_status = bed_status.reindex(instance.super_table_time_index, method='nearest')
+        bed_status = bed_status.reindex(time_index, method='nearest')
+        return bed_status
 
-    def create_bed_unit(self, instance) -> None:
+    def create_bed_unit(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         """Create bed unit and related columns."""
-        bedDf = instance.beds_PerCSN
-        bed_start = bedDf['bed_location_start'].values
-        bed_end = bedDf['bed_location_end'].values
-        bed_unit = bedDf['bed_unit'].values
-
-        instance.super_table['bed_unit'] = [0]*len(instance.super_table)
-
-        for i in range(len(bedDf)):
-            start = bed_start[i]
-            end = bed_end[i]
-            unit = bed_unit[i]
-            idx = np.bitwise_and(instance.super_table.index >= start ,  instance.super_table.index <= end)
-            instance.super_table.loc[idx, 'bed_unit'] = unit
-            
         def map_bed_unit(bed_code, bed_mapping, var_type):
             unit = bed_mapping.loc[bed_mapping['bed_unit'] == bed_code][var_type].values
             if len(unit) > 0:
                 return unit[0]
             else:
                 return float("nan")
+            
+        bed_start = df['bed_location_start'].values
+        bed_end = df['bed_location_end'].values
+        bed_unit = df['bed_unit'].values
+
+        bed_status = pd.DataFrame(index=time_index)
+        bed_status['bed_unit'] = [0]*len(time_index)
+        bed_status['bed_type'] = [0]*len(time_index)
+        bed_status['icu_type'] = [0]*len(time_index)
+
+        for i in range(len(df)):
+            start = bed_start[i]
+            end = bed_end[i]
+            unit = bed_unit[i]
+            idx = np.bitwise_and(time_index >= start ,  time_index <= end)
+            bed_status.loc[idx, 'bed_unit'] = unit
         
         try:
-            instance.super_table['bed_type'] = instance.super_table['bed_unit'].apply(map_bed_unit, args = [instance.bed_to_unit_mapping, 'unit_type'])
-            instance.super_table['icu_type'] = instance.super_table['bed_unit'].apply(map_bed_unit, args = [instance.bed_to_unit_mapping, 'icu_type'])
-            # instance.super_table['hospital'] = instance.super_table['bed_unit'].apply(map_bed_unit, args = [instance.bed_to_unit_mapping, 'hospital'])
+            bed_status['bed_type'] = bed_status['bed_unit'].apply(map_bed_unit, args = [self.config.bed_to_unit_mapping, 'unit_type'])
+            bed_status['icu_type'] = bed_status['bed_unit'].apply(map_bed_unit, args = [self.config.bed_to_unit_mapping, 'icu_type'])
         except:
-            instance.super_table['bed_type'] = [float("nan")]*len(instance.super_table)
-            instance.super_table['icu_type'] = [float("nan")]*len(instance.super_table)
-            # instance.super_table['hospital'] = [float("nan")]*len(instance.super_table)
+            bed_status['bed_type'] = [float("nan")]*len(bed_status)
+            bed_status['icu_type'] = [float("nan")]*len(bed_status)
 
+        return bed_status
     
+    def dialysis_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
+        """Create dialysis status column."""
+        if df.empty:
+            on_dialysis_df = pd.DataFrame(index=time_index)
+            return on_dialysis_df
+        
+        on_dialysis_df = pd.DataFrame(index=time_index)
+        on_dialysis_df['on_dialysis'] = [0]*len(time_index)
+        for time in df['service_timestamp']:
+            time = pd.to_datetime(time)
+            on_dialysis_df.loc[(on_dialysis_df.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
+        return on_dialysis_df
+    
+    def process_clinical_data(self, clinical_data: ClinicalData) -> None:
+        """Process clinical data and create supertable"""
+        
+        #Step 1: Initialize supertable
+        supertable_df = supertable(supertable=pd.DataFrame(index=clinical_data.super_table_time_index), time_index=clinical_data.super_table_time_index)
+        logging.info(f"Supertable data class object created with {len(supertable_df.supertable)} rows.")
+        
+        #Step 2: Add static features
+        static_features_columns = self.static_features_staging(clinical_data.static_features['age'],\
+                                                             clinical_data.static_features['gender'],
+                                                             clinical_data.diagnosis,
+                                                             supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, static_features_columns], axis=1)
+        logging.info(f"Static features added to supertable.")
+        
+        #Step 3: Add labs
+        labs_columns = self.labs_staging(clinical_data.labs, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, labs_columns], axis=1)
+        logging.info(f"Labs added to supertable.")
 
+        #Step 4: Add vitals
+        vitals_columns = self.vitals_staging(clinical_data.vitals, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, vitals_columns], axis=1)
+        logging.info(f"Vitals added to supertable.")
+        
+        #Step 5: Add procedures
+        procedures_columns = self.procedures_staging(clinical_data.procedures, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, procedures_columns], axis=1)
+        logging.info(f"Procedures added to supertable.")
 
+        #Step 6: gcs staging
+        gcs_columns = self.gcs_staging(clinical_data.gcs, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, gcs_columns], axis=1)
+        logging.info(f"GCS added to supertable.")
+
+        #Step 7: Add vent status
+        vent_columns = self.vent_staging(clinical_data.vent, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, vent_columns], axis=1)
+        logging.info(f"Vent status added to supertable.")
+
+        #Step 8: Add bed status
+        bed_status_columns = self.assign_bed_status(clinical_data.beds, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, bed_status_columns], axis=1)
+        logging.info(f"Bed status added to supertable.")
+
+        #Step 9: Add bed unit
+        bed_unit_columns = self.create_bed_unit(clinical_data.beds, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, bed_unit_columns], axis=1)
+        logging.info(f"Bed unit added to supertable.")
+
+        #Step 10: Add dialysis status
+        dialysis_columns = self.dialysis_staging(clinical_data.labs, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, dialysis_columns], axis=1)
+        logging.info(f"Dialysis status added to supertable.")
+
+        #Step 11: Add fluids
+        individual_fluids_columns = self.individual_fluids_staging(clinical_data.in_out_fluids, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, individual_fluids_columns], axis=1)
+        logging.info(f"Individual fluids added to supertable.")
+
+        #Step 12: Add cumulative fluids
+        cumulative_fluids_columns = self.cumulative_fluids_staging(clinical_data.in_out_fluids, clinical_data.infusion_meds, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, cumulative_fluids_columns], axis=1)
+        logging.info(f"Cumulative fluids added to supertable.")
+
+        #Step 13: radiology notes
+        radiology_notes_columns = self.radiology_notes_staging(clinical_data.radiology_notes, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, radiology_notes_columns], axis=1)
+        logging.info(f"Radiology notes added to supertable.")
+
+        #Step 14: clinical notes
+        clinical_notes_columns = self.clinical_notes_staging(clinical_data.clinical_notes, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, clinical_notes_columns], axis=1)
+        logging.info(f"Clinical notes added to supertable.")
+        
+        #Step 15: Add vasopressor meds
+        vasopressor_meds_columns = self.vasopressor_staging(clinical_data.vasopressor_meds, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, vasopressor_meds_columns], axis=1)
+        logging.info(f"Vasopressor meds added to supertable.")
+
+        #Step 16: Add comorbidity data
+        quan_deyo_ICD10_columns, quan_elix_ICD10_columns = self.comorbidity_staging(clinical_data.quan_deyo_ICD10, clinical_data.quan_elix_ICD10)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, quan_deyo_ICD10_columns], axis=1)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, quan_elix_ICD10_columns], axis=1)
+        logging.info(f"Comorbidity data added to supertable.")
+
+        #Step 17: Add icd procedures
+        icd_procedures_columns = self.icd_staging(clinical_data.icd_procedures, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, icd_procedures_columns], axis=1)
+        logging.info(f"ICD procedures added to supertable.")
+
+        #Step 18: Add cpt procedures
+        cpt_procedures_columns = self.cpt_staging(clinical_data.cpt_procedures, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, cpt_procedures_columns], axis=1)
+        logging.info(f"CPT procedures added to supertable.")
+
+        logging.info(f"Supertable created with {len(supertable_df.supertable)} rows.")
+        return supertable_df
 
 
 ###############################################################################
 # DerivedFeatures
 ###############################################################################
 
-class DerivedFeatures:  # noqa: WPS110 – keep original name
+class DerivedFeatures: 
     """Compute derived clinical features that are not directly measured."""
 
-    def __init__(self, config: Any):
+    def __init__(self, config: SepyDictConfig):
         self.config = config
-
-    # ------------------------------------------------------------------
-    # The following methods are direct carry-overs from *sepyDICT.py*.
-    # No behavioural changes were introduced.
-    # ------------------------------------------------------------------
-
-    def fill_height_weight(
+    
+    def height_weight_staging(
         self,
-        instance: Any,
+        static_features: Dict[str, Any],
+        super_table: pd.DataFrame,
         weight_col: str = "daily_weight_kg",
         height_col: str = "height_cm",
     ) -> None:
         """Fill missing height/weight using gender averages."""
-        df = instance.super_table
-        gender = instance.static_features.get("gender_code", 0)
-
+        gender = static_features.get("gender_code", 0)
+        df = super_table
+ 
         if df[weight_col].isnull().all():
-            if gender == GENDER_MALE:
-                df.iloc[0, df.columns.get_loc(weight_col)] = DEFAULT_WEIGHT_MALE
-                df.iloc[0, df.columns.get_loc(height_col)] = DEFAULT_HEIGHT_MALE
-            elif gender == GENDER_FEMALE:
-                df.iloc[0, df.columns.get_loc(weight_col)] = DEFAULT_WEIGHT_FEMALE
-                df.iloc[0, df.columns.get_loc(height_col)] = DEFAULT_HEIGHT_FEMALE
+            if gender == self.config.constants['gender_male']:
+                df.iloc[0, df.columns.get_loc(weight_col)] = self.config.constants['default_weight_male']
+                df.iloc[0, df.columns.get_loc(height_col)] = self.config.constants['default_height_male']
+            elif gender == self.config.constants['gender_female']:
+                df.iloc[0, df.columns.get_loc(weight_col)] = self.config.constants['default_weight_female']
+                df.iloc[0, df.columns.get_loc(height_col)] = self.config.constants['default_height_female']
             else:
-                df.iloc[0, df.columns.get_loc(weight_col)] = (DEFAULT_WEIGHT_MALE + DEFAULT_WEIGHT_FEMALE) / 2
-                df.iloc[0, df.columns.get_loc(height_col)] = (DEFAULT_HEIGHT_MALE + DEFAULT_HEIGHT_FEMALE) / 2
+                df.iloc[0, df.columns.get_loc(weight_col)] = (self.config.constants['default_weight_male'] + self.config.constants['default_weight_female']) / 2
+                df.iloc[0, df.columns.get_loc(height_col)] = (self.config.constants['default_height_male'] + self.config.constants['default_height_female']) / 2
 
         # Remove implausible values
         df[weight_col] = df[weight_col].where(
-            (df[weight_col] >= MIN_WEIGHT) & (df[weight_col] <= MAX_WEIGHT),
+            (df[weight_col] >= self.config.constants['min_weight']) & (df[weight_col] <= self.config.constants['max_weight']),
             np.nan,
         )
-        df[height_col] = df[height_col].where(df[height_col] > MIN_HEIGHT, np.nan)
+        df[height_col] = df[height_col].where(df[height_col] > self.config.constants['min_height'], np.nan)
 
         first_valid_idx = df[height_col].first_valid_index()
         if first_valid_idx is not None:
@@ -525,16 +953,10 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
 
         df[weight_col] = df[weight_col].ffill()
         df[height_col] = df[height_col].ffill()
-    
-    def on_dialysis(self, instance) -> None:
-        """Create dialysis status column."""
-        df = instance.dialysis_PerCSN
-        instance.super_table['on_dialysis'] = [0]*len(instance.super_table)
-        for time in df['service_timestamp']:
-            time = pd.to_datetime(time)
-            instance.super_table.loc[(instance.super_table.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
 
-    def calc_best_map(self, row: pd.Series) -> float:
+        return df
+
+    def calculate_best_map_row(self, row: pd.Series) -> float:
         """
         Calculate the best mean arterial pressure from available measurements.
         
@@ -558,7 +980,7 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
             return np.nan
         
         # Validate MAP is within reasonable physiological range
-        if best_map < MIN_MAP or best_map > MAX_MAP:
+        if best_map < 30.0 or best_map > 150.0:
             return np.nan
             
         return best_map
@@ -594,7 +1016,7 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
         
         # Validate physiological range
         best_map = np.where(
-            (best_map >= MIN_MAP) & (best_map <= MAX_MAP),
+            (best_map >= 30.0) & (best_map <= 150.0),
             best_map,
             np.nan
         )
@@ -623,7 +1045,7 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
             v_bp_cols = ['sbp_line', 'dbp_line', 'map_line', 'sbp_cuff', 'dbp_cuff', 'map_cuff']
         instance.super_table['pulse_pressure'] = instance.super_table[v_bp_cols].apply(self.calc_pulse_pressure, axis=1)
 
-    def fio2_decimal(self, instance: Any, fio2: str = 'fio2') -> None:
+    def fio2_decimal(self, supertable: pd.DataFrame, fio2: str = 'fio2') -> None:
         """Convert FiO2 to decimal format if it's in percentage."""
         def fio2_row(row, fio2=fio2):
             if row[fio2] <= 1.0:
@@ -631,19 +1053,31 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
             else:
                 return row[fio2]/100
         
-        df = instance.super_table
-        df[fio2] = df.apply(fio2_row, axis=1)
+        supertable[fio2] = supertable.apply(fio2_row, axis=1)
+        return supertable
 
-    def calc_nl(self, instance: Any, neutrophils: str = 'neutrophils', lymphocytes: str = 'lymphocyte') -> None:
+    def calc_nl(self, supertable: pd.DataFrame, neutrophils_col: str = 'neutrophils', lymphocytes_col: str = 'lymphocytes') -> None:
         """Calculate neutrophil to lymphocyte ratio."""
-        df = instance.super_table
-        df['n_to_l'] = df[neutrophils]/df[lymphocytes]
+        if neutrophils_col not in supertable.columns:
+            raise ValueError(f"Columns {neutrophils_col} not found in supertable")
+        if lymphocytes_col not in supertable.columns:
+            raise ValueError(f"Columns {lymphocytes_col} not found in supertable")
+        supertable['n_to_l'] = supertable[neutrophils_col]/supertable[lymphocytes_col]
+        return supertable
 
-    def calc_pf(self, instance: Any, spo2: str = 'spo2', pao2: str = 'partial_pressure_of_oxygen_(pao2)', fio2: str = 'fio2') -> None:
+    def calc_pf(self, supertable: pd.DataFrame, spo2_col: str = 'spo2', 
+                pao2_col: str = 'partial_pressure_of_oxygen_(pao2)', 
+                fio2_col: str = 'fio2') -> None:
         """Calculate P:F ratios using SpO2 and PaO2."""
-        df = instance.super_table
-        df['pf_sp'] = df[spo2]/df[fio2]
-        df['pf_pa'] = df[pao2]/df[fio2]
+        if spo2_col not in supertable.columns:
+            raise ValueError(f"Columns {spo2_col} not found in supertable")
+        if pao2_col not in supertable.columns:
+            raise ValueError(f"Columns {pao2_col} not found in supertable")
+        if fio2_col not in supertable.columns:
+            raise ValueError(f"Columns {fio2_col} not found in supertable")
+        supertable['pf_sp'] = supertable[spo2_col]/supertable[fio2_col]
+        supertable['pf_pa'] = supertable[pao2_col]/supertable[fio2_col]
+        return supertable
 
     def single_pressor_by_weight(self, row: pd.Series, single_pressors_name: str) -> float:
         """Calculate single vasopressor dose adjusted by weight."""
@@ -657,42 +1091,54 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
             val = row[single_pressors_name]
         return val
 
-    def calc_all_pressors(self, instance: Any) -> None:
+    def calc_all_pressors(self, supertable: pd.DataFrame) -> None:
         """Calculate weight-adjusted doses for all vasopressors."""
-        df = instance.super_table
         for val in self.config.vasopressor_names:
-            df[val + '_dose_weight'] = df.apply(self.single_pressor_by_weight, single_pressors_name=val, axis=1)
+            supertable[val + '_dose_weight'] = supertable.apply(self.single_pressor_by_weight, single_pressors_name=val, axis=1)
+        return supertable
 
-    def calculate_anion_gap(self, instance: Any) -> None:
+    def calculate_anion_gap(self, supertable: pd.DataFrame, sodium_col: str = 'sodium', 
+                            chloride_col: str = 'chloride', 
+                            bicarb_hco3_col: str = 'bicarb_(hco3)') -> None:
         """Calculate anion gap from electrolyte values."""
-        instance.super_table['anion_gap'] = instance.super_table['sodium'] - (instance.super_table['chloride'] + instance.super_table['bicarb_(hco3)'])
+        if 'sodium' not in supertable.columns:
+            raise ValueError(f"Columns {sodium_col} not found in supertable")
+        if 'chloride' not in supertable.columns:
+            raise ValueError(f"Columns {chloride_col} not found in supertable")
+        if 'bicarb_(hco3)' not in supertable.columns:
+            raise ValueError(f"Columns {bicarb_hco3_col} not found in supertable")
+        supertable['anion_gap'] = supertable['sodium'] - (supertable['chloride'] + supertable['bicarb_(hco3)'])
+        return supertable
 
-    def calc_worst_pf(self, instance: Any) -> None:
+    def calc_worst_pf(self, supertable: pd.DataFrame, vent_status_col: str = 'vent_status') -> None:
         """Calculate worst P:F ratios during ventilation."""
-        df = instance.super_table
+        if vent_status_col not in supertable.columns:
+            raise ValueError(f"Columns {vent_status_col} not found in supertable")
         #select worse pf_pa when on vent
-        instance.flags['worst_pf_pa'] = df[df['vent_status']>0]['pf_pa'].min()
-        if df[df['vent_status']>0]['pf_pa'].size:
-            instance.flags['worst_pf_pa_time'] = df[df['vent_status']>0]['pf_pa'].idxmin(skipna=True)
+        worst_pf_pa = supertable[supertable[vent_status_col]>0]['pf_pa'].min()
+        if supertable[supertable[vent_status_col]>0]['pf_pa'].size:
+            worst_pf_pa_time = supertable[supertable[vent_status_col]>0]['pf_pa'].idxmin(skipna=True)
         else: 
-            instance.flags['worst_pf_pa_time'] = pd.NaT
+            worst_pf_pa_time = pd.NaT
         #select worse pf_sp when on vent
-        instance.flags['worst_pf_sp'] = df[df['vent_status']>0]['pf_sp'].min() 
-        if df[df['vent_status']>0]['pf_sp'].size:
-            instance.flags['worst_pf_sp_time'] = df[df['vent_status']>0]['pf_sp'].idxmin(skipna=True)
+        worst_pf_sp = supertable[supertable[vent_status_col]>0]['pf_sp'].min() 
+        if supertable[supertable[vent_status_col]>0]['pf_sp'].size:
+            worst_pf_sp_time = supertable[supertable[vent_status_col]>0]['pf_sp'].idxmin(skipna=True)
         else: 
-            instance.flags['worst_pf_sp_time'] = pd.NaT
+            worst_pf_sp_time = pd.NaT
+        return worst_pf_pa, worst_pf_pa_time, worst_pf_sp, worst_pf_sp_time
 
-    def flag_variables_pressors(self, instance: Any) -> None:
+    def flag_variables_pressors(self, supertable: pd.DataFrame) -> None:
         """Create indicator variables for vasopressor usage."""
         v_vasopressor_names_wo_dobutamine = self.config.vasopressor_names.copy()
         v_vasopressor_names_wo_dobutamine.remove('dobutamine')
 
-        on_pressors = (instance.super_table[v_vasopressor_names_wo_dobutamine].notna()).any(axis=1)
-        on_dobutamine = (instance.super_table['dobutamine'] > 0) 
+        on_pressors = (supertable[v_vasopressor_names_wo_dobutamine].notna()).any(axis=1)
+        on_dobutamine = (supertable['dobutamine'] > 0) 
         
-        instance.super_table['on_pressors'] = on_pressors.astype('bool')
-        instance.super_table['on_dobutamine'] = on_dobutamine.astype('bool')
+        supertable['on_pressors'] = on_pressors.astype('bool')
+        supertable['on_dobutamine'] = on_dobutamine.astype('bool')
+        return supertable
 
     def create_elapsed_time(self, row: pd.Timestamp, start: pd.Timestamp, end: pd.Timestamp) -> float:
         """Calculate elapsed time between start and end for a given row timestamp."""
@@ -703,93 +1149,80 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
         elif row - end > pd.Timedelta('0 days'):
             return (end - start).days * 24 + np.ceil((end-start).seconds/3600)
 
-    def create_elapsed_icu(self, instance: Any) -> None:
+    def create_elapsed_icu(self, supertable: pd.DataFrame, 
+                           first_icu_start: pd.Timestamp, 
+                           first_icu_end: pd.Timestamp) -> None:
         """Create elapsed ICU time column."""
-        start = instance.event_times['first_icu_start']
-        end = instance.event_times['first_icu_end']
+        start = first_icu_start
+        end = first_icu_end
         
         if start is None and end is None:
-            instance.super_table['elapsed_icu'] = [0]*len(instance.super_table)
+            supertable['elapsed_icu'] = [0]*len(supertable)
         elif start is None and end is not None:
-            logging.ERROR(str(instance.csn) + 'probably has an error in icu start and end times')
+            logging.ERROR(str(supertable.index[0]) + 'probably has an error in icu start and end times')
         elif start is not None and end is None:
-            end = instance.super_table.index[-1]
-            instance.super_table['elapsed_icu'] = instance.super_table.index
-            instance.super_table['elapsed_icu'] = instance.super_table['elapsed_icu'].apply(self.create_elapsed_time, start=start, end=end)
+            end = supertable.index[-1]
+            supertable['elapsed_icu'] = supertable.index
+            supertable['elapsed_icu'] = supertable['elapsed_icu'].apply(self.create_elapsed_time, start=start, end=end)
         else:
-            instance.super_table['elapsed_icu'] = instance.super_table.index
-            instance.super_table['elapsed_icu'] = instance.super_table['elapsed_icu'].apply(self.create_elapsed_time, start=start, end=end)
+            supertable['elapsed_icu'] = supertable.index
+            supertable['elapsed_icu'] = supertable['elapsed_icu'].apply(self.create_elapsed_time, start=start, end=end)
+        return supertable
 
-    def create_elapsed_hosp(self, instance: Any) -> None:
+    def create_elapsed_hosp(self, supertable: pd.DataFrame, 
+                           first_hosp_start: pd.Timestamp, 
+                           first_hosp_end: pd.Timestamp) -> None:
         """Create elapsed hospital time column."""
-        start = instance.super_table.index[0]
-        end = instance.super_table.index[-1]
+        start = first_hosp_start
+        end = first_hosp_end
         
-        instance.super_table['elapsed_hosp'] = instance.super_table.index
-        instance.super_table['elapsed_hosp'] = instance.super_table['elapsed_hosp'].apply(self.create_elapsed_time, start=start, end=end)
+        supertable['elapsed_hosp'] = supertable.index
+        supertable['elapsed_hosp'] = supertable['elapsed_hosp'].apply(self.create_elapsed_time, start=start, end=end)
+        return supertable
+    
 
-    def create_infection_sepsis_time(self, instance: Any) -> None:
+    def create_infection_sepsis_time(self, supertable: pd.DataFrame, 
+                                    t_suspicion: pd.Timestamp, 
+                                    t_sepsis3: pd.Timestamp) -> None:
         """Create infection and sepsis indicator columns based on time."""
-        times = instance.sep3_time
-        
-        t_infection_idx = times['t_suspicion'].first_valid_index()
+        t_infection_idx = t_suspicion.first_valid_index()
         if t_infection_idx is not None:
-            t_infection = times['t_suspicion'].loc[t_infection_idx]
-            instance.super_table['infection'] = np.int32(instance.super_table.index > t_infection)
+            t_infection = t_suspicion.loc[t_infection_idx]
+            supertable['infection'] = np.int32(supertable.index > t_infection)
         else:
-            instance.super_table['infection'] = [0]*len(instance.super_table)
+            supertable['infection'] = [0]*len(supertable)
         
-        t_sepsis3_idx = times['t_sepsis3'].first_valid_index()
+        t_sepsis3_idx = t_sepsis3.first_valid_index()
         if t_sepsis3_idx is not None:
-            t_sepsis3 = times['t_sepsis3'].loc[t_sepsis3_idx]
-            instance.super_table['sepsis'] = np.int32(instance.super_table.index > t_sepsis3)
+            t_sepsis3 = t_sepsis3.loc[t_sepsis3_idx]
+            supertable['sepsis'] = np.int32(supertable.index > t_sepsis3)
         else:
-            instance.super_table['sepsis'] = [0]*len(instance.super_table)
+            supertable['sepsis'] = [0]*len(supertable)
+        return supertable
 
-    def dialysis_history(self, instance: Any) -> None:
+    def dialysis_history(self, supertable: pd.DataFrame, 
+                         dx_code_icd9: str = '585.6', 
+                         dx_code_icd10: str = 'N18.6') -> None:
         """Create dialysis history indicator column."""
-        dialysis_history = instance.diagnosis_PerCSN.loc[(instance.diagnosis_PerCSN.dx_code_icd9 == '585.6') | (instance.diagnosis_PerCSN.dx_code_icd10 == 'N18.6')]
+        dialysis_history = supertable.loc[(supertable.dx_code_icd9 == dx_code_icd9) | (supertable.dx_code_icd10 == dx_code_icd10)]
         if len(dialysis_history) == 0:
-            instance.super_table['history_of_dialysis'] = [0]*len(instance.super_table)
+            supertable['history_of_dialysis'] = [0]*len(supertable)
         else:
-            instance.super_table['history_of_dialysis'] = [1]*len(instance.super_table)
+            supertable['history_of_dialysis'] = [1]*len(supertable)
+        return supertable
 
-    def create_fluids_columns(self, instance: Any) -> None:
-        """Create fluid medication columns."""
-        infusionDf = instance.infusion_meds_PerCSN
-        
-        for med in self.config.fluids_med_names:
-            instance.super_table[med] = [0]*len(instance.super_table)
-            instance.super_table[med + '_dose'] = [float("nan")]*len(instance.super_table)
-            df = infusionDf.loc[infusionDf['med_name'] == med]
-            for j in range(len(df)):
-                row = df.iloc[j]
-                med_start = row['med_start']
-                med_dose = row['med_action_dose']
-                instance.super_table.loc[(abs(instance.super_table.index - med_start) < pd.Timedelta('60 min')) & (instance.super_table.index - med_start > pd.Timedelta('0 seconds')), med] = 1
-                instance.super_table.loc[(abs(instance.super_table.index - med_start) < pd.Timedelta('60 min')) & (instance.super_table.index - med_start > pd.Timedelta('0 seconds')), med + '_dose'] = med_dose
-        
-        for med in self.config.fluids_med_names_generic:
-            instance.super_table[med] = [0]*len(instance.super_table)
-            instance.super_table[med + '_dose'] = [float("nan")]*len(instance.super_table)
-            df = infusionDf.loc[infusionDf['med_name_generic'] == med]
-            for j in range(len(df)):
-                row = df.iloc[j]
-                med_start = row['med_start']
-                med_dose = row['med_action_dose']
-                instance.super_table.loc[(abs(instance.super_table.index - med_start) < pd.Timedelta('60 min')) & (instance.super_table.index - med_start > pd.Timedelta('0 seconds')), med] = 1
-                instance.super_table.loc[(abs(instance.super_table.index - med_start) < pd.Timedelta('60 min')) & (instance.super_table.index - med_start > pd.Timedelta('0 seconds')), med + '_dose'] = med_dose
-
-    def create_on_vent(self, instance: Any) -> None:
+    def create_on_vent(self, supertable: pd.DataFrame, 
+                       vent: pd.DataFrame,
+                       start_index: pd.Timestamp) -> None:
         """Create ventilator status columns."""
-        df = instance.vent_PerCSN
-        instance.super_table['on_vent_old'] = instance.vent_status
-        instance.super_table['vent_fio2_old'] = instance.vent_fio2
+        df = vent
+        supertable['on_vent_old'] = supertable['vent_status']
+        supertable['vent_fio2_old'] = supertable['vent_fio2']
 
         if df.empty:
             # No vent times were found so return empty table with 
             # all flags remain set at zero
-            df = pd.DataFrame(columns=['vent_status','fio2'], index=instance.super_table_time_index)
+            df = pd.DataFrame(columns=['vent_status','fio2'], index=supertable.index)
             # vent_status and fio2 will get joined to super table later
             vent_status = df.vent_status.values
             vent_fio2 = df.fio2.values
@@ -828,9 +1261,9 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
                 # vent_status and fio2 will get joined to super table later
                 vent_fio2 = df[['recorded_time','fio2']].resample('60min',
                                              on = 'recorded_time',
-                                             origin = instance.event_times['start_index']).apply(agg_fn) \
-                                             .reindex(instance.super_table_time_index)
-                df_dummy = pd.DataFrame(columns=['vent_status'], index=instance.super_table_time_index)
+                                             origin = start_index).apply(agg_fn) \
+                                             .reindex(supertable.index)
+                df_dummy = pd.DataFrame(columns=['vent_status'], index=supertable.index)
                 # vent_status and fio2 will get joined to super table later
                 vent_status = df_dummy.vent_status.values
             else:
@@ -848,53 +1281,15 @@ class DerivedFeatures:  # noqa: WPS110 – keep original name
                 
                 #sets column to 1 if vent was on    
                 vent_status = vent_status.resample('60min',
-                                                   origin = instance.event_times['start_index']).mean() \
-                                                   .reindex(instance.super_table_time_index)
+                                                   origin = start_index).mean() \
+                                                   .reindex(supertable.index)
                             
                 vent_fio2 = df[['recorded_time','fio2']].resample('60min',
                                              on = 'recorded_time',
-                                             origin = instance.event_times['start_index']).apply(agg_fn) \
-                                             .reindex(instance.super_table_time_index)
+                                             origin = start_index).apply(agg_fn) \
+                                             .reindex(supertable.index)
                 
-        instance.super_table['on_vent'] = vent_status
-        instance.super_table['vent_fio2'] = vent_fio2
+        supertable['on_vent'] = vent_status
+        supertable['vent_fio2'] = vent_fio2
+        return supertable
 
-    def create_bed_unit(self, instance: Any) -> None:
-        """Create bed unit and related columns."""
-        bedDf = instance.beds_PerCSN
-        bed_start = bedDf['bed_location_start'].values
-        bed_end = bedDf['bed_location_end'].values
-        bed_unit = bedDf['bed_unit'].values
-
-        instance.super_table['bed_unit'] = [0]*len(instance.super_table)
-
-        for i in range(len(bedDf)):
-            start = bed_start[i]
-            end = bed_end[i]
-            unit = bed_unit[i]
-            idx = np.bitwise_and(instance.super_table.index >= start ,  instance.super_table.index <= end)
-            instance.super_table.loc[idx, 'bed_unit'] = unit
-            
-        def map_bed_unit(bed_code, bed_mapping, var_type):
-            unit = bed_mapping.loc[bed_mapping['bed_unit'] == bed_code][var_type].values
-            if len(unit) > 0:
-                return unit[0]
-            else:
-                return float("nan")
-        
-        try:
-            instance.super_table['bed_type'] = instance.super_table['bed_unit'].apply(map_bed_unit, args = [instance.bed_to_unit_mapping, 'unit_type'])
-            instance.super_table['icu_type'] = instance.super_table['bed_unit'].apply(map_bed_unit, args = [instance.bed_to_unit_mapping, 'icu_type'])
-            # instance.super_table['hospital'] = instance.super_table['bed_unit'].apply(map_bed_unit, args = [instance.bed_to_unit_mapping, 'hospital'])
-        except:
-            instance.super_table['bed_type'] = [float("nan")]*len(instance.super_table)
-            instance.super_table['icu_type'] = [float("nan")]*len(instance.super_table)
-            # instance.super_table['hospital'] = [float("nan")]*len(instance.super_table)
-
-    def on_dialysis(self, instance: Any) -> None:
-        """Create dialysis status column."""
-        dd = instance.dialysis_year.loc[instance.dialysis_year['Encounter Encounter Number'] == instance.csn]
-        instance.super_table['on_dialysis'] = [0]*len(instance.super_table)
-        for time in dd['Service Timestamp']:
-            time = pd.to_datetime(time)
-            instance.super_table.loc[(instance.super_table.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
