@@ -143,7 +143,6 @@ class ProcessingStats:
 class FluidProcessor:
     """Comprehensive fluid processing class with all features integrated."""
     
-    # Compile regex patterns once for better performance
     NUMBER_PATTERN = re.compile(r"[-+]?(?:\d*\.\d+|\d+)")
     BOLUS_PATTERN = re.compile(r'\bbolus\b', re.IGNORECASE)
     VOLUME_PATTERN = re.compile(r'\bmL\b(?!/hr)', re.IGNORECASE)
@@ -344,7 +343,7 @@ class FluidProcessor:
             # Create base dataframe row
             base_row = pd.DataFrame([row]).reset_index(drop=True)
             
-            # Process based on available parameters (matching original logic exactly)
+            # Process based on available parameters
             if params.bolus:
                 # Bolus administration
                 base_row.at[0, 'volume'] = params.bolus

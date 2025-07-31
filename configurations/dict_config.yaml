@@ -17,7 +17,9 @@ vital_col_names: #Vital names that should be converted to numeric
 - unassisted_resp_rate
 - spo2
 - end_tidal_co2
-- o2_flow_rate
+- oxygen_flow_rate
+- o2_device 
+- cvp 
 numeric_lab_col_names: #Lab names that should be converted to numeric
 - anion_gap
 - base_excess
@@ -116,57 +118,11 @@ vasopressor_dose:
 - dopamine_dose_weight
 - phenylephrine_dose_weight
 - vasopressin_dose_weight
-vasopressor_col_names:
-- norepinephrine
-- norepinephrine_dose_unit
-- norepinephrine_dose_weight
-- epinephrine
-- epinephrine_dose_unit
-- epinephrine_dose_weight
-- dobutamine
-- dobutamine_dose_unit
-- dobutamine_dose_weight
-- dopamine
-- dopamine_dose_unit
-- dopamine_dose_weight
-- phenylephrine
-- phenylephrine_dose_unit
-- phenylephrine_dose_weight
-- vasopressin
-- vasopressin_dose_unit
-- vasopressin_dose_weight
-vent_col_names:
-- Status
-vent_positive_vars:
-- vent_mode
-- vent_rate_set
-- vent_tidal_rate_set
-- vent_tidal_rate_exhaled
-- peep
-bp_cols:
-- sbp_line
-- dbp_line
-- map_line
-- sbp_cuff
-- dbp_cuff
-- map_cuff
-sofa_max_24h:
-- SOFA_coag
-- SOFA_coag_24h_max
-- SOFA_renal
-- SOFA_renal_24h_max
-- SOFA_hep
-- SOFA_hep_24h_max
-- SOFA_neuro
-- SOFA_neuro_24h_max
-- SOFA_cardio
-- SOFA_cardio_24h_max
-- SOFA_resp
-- SOFA_resp_24h_max
-- hourly_total
-- hourly_total_24h_max
-- delta_24h
-- delta_24h_24h_max
+individual_fluid_columns:
+- Sodium Chloride 0.9% intravenous solution
+- Lactated Ringers Injection intravenous solution
+- Electrolyte (Plasma-Lyte) intravenous solution
+- albumin human 
 fluids_med_names:
 - Sodium Chloride 0.9% intravenous solution
 - Lactated Ringers Injection intravenous solution
@@ -182,36 +138,7 @@ fluids_med_names:
 - Electrolyte (Plasma-Lyte) intravenous solution
 fluids_med_names_generic:
 - Albumin 5%
-information_to_process:
-  - { id_type: "pat_id", source: "demographics" }
-  - { id_type: "csn", source: "encounters" }
-  - { id_type: "csn", source: "gcs" }
-  - { id_type: "csn", source: "cultures" }
-  - { id_type: "csn", source: "beds" }
-  - { id_type: "csn", source: "procedures" }
-  - { id_type: "csn", source: "vent" }
-  - { id_type: "csn", source: "diagnosis" }
-  - { id_type: "csn", source: "labs" }
-  - { id_type: "csn", source: "vasopressor_meds" }
-  - { id_type: "csn", source: "anti_infective_meds" }
-  - { id_type: "csn", source: "vitals" }
-  - { id_type: "csn", source: "infusion_meds" }
-  - { id_type: "csn", source: "quan_deyo_ICD10" }
-  - { id_type: "csn", source: "quan_elix_ICD10" }
-  - { id_type: "csn", source: "in_out" }
-  - { id_type: "csn", source: "clinical_notes" }
-  - { id_type: "csn", source: "radiology_notes" }
-  - {id_type: "csn", source: "icd_procedures"}
-  - {id_type: "csn", source: "cpt_procedures"}
-  # Optional/disabled sections (for reference/documentation):
-# - { id_type: "csn", section: "ahrq_ICD9" }
-# - { id_type: "csn", section: "elix_ICD9" }
-# - { id_type: "csn", section: "quan_deyo_ICD9" }
-# - { id_type: "csn", section: "quan_elix_ICD9" }
-# - { id_type: "csn", section: "ccs_ICD9" }
-# - { id_type: "csn", section: "ahrq_ICD10" }
-# - { id_type: "csn", section: "elix_ICD10" }
-# - { id_type: "csn", section: "ccs_ICD10" }
+
 
 # LAB AGGREGATION
 lab_aggregation:
@@ -292,6 +219,10 @@ constants:
   default_weight_female: 75.0
   default_height_male: 175.3
   default_height_female: 161.5
+  # Data validation constants
+  max_weight: 450.0
+  min_weight: 25.0
+  min_height: 0.0
 
 # DICT ELEMENTS
 dict_elements:

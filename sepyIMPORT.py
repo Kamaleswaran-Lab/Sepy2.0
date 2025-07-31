@@ -32,6 +32,9 @@ import logging
 from typing import List, Dict, Union, Optional, Any, Callable, TypeVar, Tuple
 from dataclasses import dataclass
 from contextlib import contextmanager
+import sys 
+
+
 
 from process_fluids import FluidProcessor, FluidProcessorConfig
 
@@ -105,6 +108,11 @@ class sepyIMPORT:
         self.df_vent_mappings = pd.read_csv(file_dictionary["grouping_vent"])
         # creates df with all fluid groupings
         self.df_grouping_fluids = pd.read_csv(file_dictionary["grouping_fluids"])
+
+        # creates df with all infusion meds volume
+        self.df_infusion_meds_volume = pd.read_csv(file_dictionary["infusion_meds_volume"])
+        self.volume_mapping = dict(zip(self.df_infusion_meds_volume['formulary_name'], self.df_infusion_meds_volume['volume_numeric']))
+        self.volume_unit_mapping = dict(zip(self.df_infusion_meds_volume['formulary_name'], self.df_infusion_meds_volume['volume_unit']))
     
         # Create configuration object
         self.config = ImportConfig(
@@ -150,7 +158,6 @@ class sepyIMPORT:
             self.csns = self.df_encounters.index.unique().tolist()
             self.patids = self.df_encounters['pat_id'].unique().tolist()
             logging.info(f"Number of encounters: {len(self.csns)}")
-            logging.info(f"CSNs: {self.csns}")
 
         for method_name, params in dataConfig.items():
             if method_name == "import_encounters":
@@ -282,11 +289,11 @@ class sepyIMPORT:
         
         
         #Filter to all patids in the encounters file 
-        if data_type == "demographics":
+        if data_type in ["demographics", "radiology_notes"]:
             df = df[df.index.isin(self.patids)]
 
         #Filter to all csns in the encounters file 
-        if data_type != "encounters":
+        elif data_type != "encounters":
             df = df[df.index.isin(self.csns)]
         
 
@@ -356,6 +363,11 @@ class sepyIMPORT:
         ].replace({np.nan: ""})
 
         self.df_vasopressor_meds = df_vasopressor_meds
+        
+        # Volume mapping 
+        self.df_infusion_meds['volume'] = self.df_infusion_meds['formulary_name'].map(self.volume_mapping)
+        self.df_infusion_meds['volume_unit'] = self.df_infusion_meds['formulary_name'].map(self.volume_unit_mapping)
+
         return 1 
     
     def _process_labs(self, df: pd.DataFrame, **kwargs) -> None:
@@ -726,41 +738,35 @@ class sepyIMPORT:
         """Process in/out data after initial import."""
         
         try:
+            self.individual_fluid_columns = self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name'].tolist()
+            self.all_fluid_columns = self.df_grouping_fluids['fluid_name'].tolist()
+
             # Filter ORDER_CATALOG_DESC to include only those in the df_grouping_fluids file with individual_fluid_import = 1 
-            df_individual_bolus = self.df[
-                self.df['order_catalog_desc'].isin(
-                    self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name']
-                )
+            df_in_out_fluids = df[
+                df['order_catalog_desc'].isin(self.all_fluid_columns)
             ]
 
-            df_all_other_fluids = self.df[
-                ~self.df['order_catalog_desc'].isin(
-                    self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name']
-                )
-            ]
-            
-            self.df_individual_bolus = df_individual_bolus.pivot_table(
+            self.df_in_out_fluids = df_in_out_fluids.pivot_table(
                 index=['csn', 'service_ts'],
                 columns='order_catalog_desc', 
-                values='volume',
+                values=['volume', 'record_type'],
                 fill_value=np.nan,
                 aggfunc='sum'
             )
 
-            self.df_non_bolus_fluids = df_all_other_fluids.pivot_table(
-                index=['csn', 'service_ts'],
-                columns='order_catalog_desc', 
-                values='volume',
-                fill_value=np.nan,
-                aggfunc='sum'
-            )               
-            
+            self.df_in_out_fluids.columns = [f"{col[1]}_{col[0]}" for col in self.df_in_out_fluids.columns]
+
+            if [col.split("_")[0] for col in self.df_in_out_fluids.columns.tolist() if col.split("_")[0] not in self.individual_fluid_columns]:
+                #Add any missing columns to the df_in_out_fluids dataframe
+                missing_columns = set(self.individual_fluid_columns) - set([col.split("_")[0] for col in self.df_in_out_fluids.columns.tolist()])
+                for col in missing_columns:
+                    self.df_in_out_fluids[col + "_volume"] = np.nan
+                    self.df_in_out_fluids[col + "_record_type"] = np.nan      
             return 1
         except Exception as e:
             logging.error(f"Error processing in/out data: {str(e)}")
             # Create an empty DataFrame with the expected columns
-            self.df_individual_bolus = pd.DataFrame(columns=df.columns.tolist() + ['volume'])
-            self.df_non_bolus_fluids = pd.DataFrame(columns=df.columns.tolist() + ['volume'])
+            self.df_in_out_fluids = pd.DataFrame(columns=df.columns.tolist())
             logging.warning("Using empty DataFrame for all fluids due to processing error")
             return 0
 
