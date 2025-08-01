@@ -269,9 +269,9 @@ def read_flatfile(file_path):
 ##################### Aggregate Utility Functions #########################
 ###########################################################################
 def get_bounds(var_name, bounds):
-    df = bounds.loc[bounds['Location in SuperTable'] == var_name]
-    upperbound = df['Physical Upper bound'].values[0]
-    lowerbound = df['Physical lower bound'].values[0]
+    df = bounds.loc[bounds['location in supertable'] == var_name]
+    upperbound = df['physical upper bound'].values[0]
+    lowerbound = df['physical lower bound'].values[0]
     
     # Convert strings or invalid entries to np.nan
     try:
