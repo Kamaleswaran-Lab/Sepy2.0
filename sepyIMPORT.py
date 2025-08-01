@@ -289,12 +289,16 @@ class sepyIMPORT:
         
         
         #Filter to all patids in the encounters file 
-        if data_type in ["demographics", "radiology_notes"]:
-            df = df[df.index.isin(self.patids)]
+        if data_type != "encounters":
+            index_col = common_params.get("index_col", [])
+            if index_col in ["pat_id", "patient_id"]:
+                df = df[df.index.isin(self.patids)]
 
-        #Filter to all csns in the encounters file 
-        elif data_type != "encounters":
-            df = df[df.index.isin(self.csns)]
+            #Filter to all csns in the encounters file 
+            elif index_col == "csn":
+                df = df[df.index.isin(self.csns)]
+            elif index_col is None:
+                df = df.loc[df.csn.isin(self.csns)] 
         
 
         # Store the dataframe with a consistent naming pattern
@@ -310,6 +314,7 @@ class sepyIMPORT:
                 return_state = processor(df, **kwargs)
                 if return_state == 1:
                     logging.info(f"{data_type.capitalize()} processing successful")
+                    logging.info(f"df_{data_type} with {getattr(self, df_attr_name).shape} shape")
                 else:
                     logging.warning(f"Processing for {data_type} may be incomplete")
             except Exception as e:

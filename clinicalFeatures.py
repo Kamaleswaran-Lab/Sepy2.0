@@ -63,6 +63,8 @@ class SepyDictConfig:
     constants: Dict[str, Any]
     quan_deyo_labels: List[str]
     quan_elix_labels: List[str]
+    bounds: pd.DataFrame
+    temperature_in_celsius: bool
     
     def __post_init__(self):
         """Calculate derived fields after initialization."""
@@ -70,7 +72,7 @@ class SepyDictConfig:
         self.vasopressor_col_names = self.vasopressor_names + self.vasopressor_units + self.vasopressor_dose
     
     @classmethod
-    def initialize_config(cls, quan_deyo_labels: List[str], quan_elix_labels: List[str], config_dict: Dict[str, Any]) -> 'SepyDictConfig':
+    def initialize_config(cls, quan_deyo_labels: List[str], quan_elix_labels: List[str], bounds: pd.DataFrame, config_dict: Dict[str, Any]) -> 'SepyDictConfig':
         """Create configuration instance from dictionary."""
         # Get field names from the dataclass
         field_names = {field.name for field in cls.__dataclass_fields__.values()}
@@ -78,8 +80,9 @@ class SepyDictConfig:
         # Filter config_dict to only include known fields
         filtered_config = {k: v for k, v in config_dict.items() if k in field_names}
         
-        return cls(quan_deyo_labels=quan_deyo_labels, quan_elix_labels=quan_elix_labels, **filtered_config)
-    
+        return cls(quan_deyo_labels=quan_deyo_labels, quan_elix_labels=quan_elix_labels, 
+                   bounds = bounds, 
+                   **filtered_config)
 @dataclass
 class ClinicalData:
     """Class to store clinical data for a patient."""
@@ -106,7 +109,11 @@ class ClinicalData:
     radiology_notes: pd.DataFrame
     icd_procedures: pd.DataFrame
     cpt_procedures: pd.DataFrame
-
+    dialysis: pd.DataFrame
+    sirs_scores: pd.DataFrame | None = None
+    sofa_scores: pd.DataFrame | None = None
+    t_suspicion: pd.DataFrame | None = None
+    t_sepsis3: pd.DataFrame | None = None
     
     #these are created in post_init
     #flags: Dict[str, Any]
@@ -129,6 +136,7 @@ class ClinicalData:
             self._initialize_event_times()
             self._build_super_table_index()
             self._initialize_static_features()
+            self.quan_deyo_ICD10_staging, self.quan_elix_ICD10_staging = pd.DataFrame(), pd.DataFrame()
 
     def _initialize_flags(self) -> None:
         """Initialize basic flags"""
@@ -247,9 +255,9 @@ class supertable:
 class ClinicalDataProcessor:  
     """Handles data binning, cleaning, and aggregation operations."""
 
-    def __init__(self, config: SepyDictConfig, bounds: pd.DataFrame):
+    def __init__(self, config: SepyDictConfig):
         self.config = config
-        self.bounds = bounds 
+        self.bounds = config.bounds 
 
         # Setup lab aggregation functions
         self.labAGG = self._setup_lab_aggregation()
@@ -278,7 +286,7 @@ class ClinicalDataProcessor:
         """Attach "smart" aggregation functions for the configured labs."""
         lab_agg: Dict[str, Any] = self.config.lab_aggregation.copy()
         for lab in lab_agg.keys():
-            if len(self.bounds.loc[self.bounds["Location in SuperTable"] == lab]) > 0:
+            if len(self.bounds.loc[self.bounds["location in supertable"] == lab]) > 0:
                 lab_agg[lab] = utils.agg_fn_wrapper(lab, self.bounds)
         return lab_agg
     
@@ -356,7 +364,7 @@ class ClinicalDataProcessor:
         resampled_data: Dict[str, pd.Series] = {}
         for key in self.config.vital_col_names:
             if key in df.columns:
-                if len(self.bounds.loc[self.bounds["Location in SuperTable"] == key]) > 0:
+                if len(self.bounds.loc[self.bounds["location in supertable"] == key]) > 0:
                     agg_fn = utils.agg_fn_wrapper(key, self.bounds)
                 else:
                     agg_fn = "mean"
@@ -383,7 +391,7 @@ class ClinicalDataProcessor:
 
         new_df = pd.DataFrame()
         for key in self.config.gcs_col_names:
-            if len(self.bounds.loc[self.bounds["Location in SuperTable"] == key]) > 0:
+            if len(self.bounds.loc[self.bounds["location in supertable"] == key]) > 0:
                 agg_fn = utils.agg_fn_wrapper_min(key, self.bounds)
             else:
                 agg_fn = "min"
@@ -400,7 +408,7 @@ class ClinicalDataProcessor:
         """Resamples and aligns patient ventilator data to a unified hourly time index."""
         check_mech_vent_vars = ['vent_tidal_rate_set', 'peep']
         if df.empty:
-            vent_df = pd.DataFrame(columns=['vent_status','fio2'], index=time_index)
+            vent_df = pd.DataFrame(columns=['vent_status','vent_fio2', 'peep', 'vent_category', 'vent_tidal_rate_exhaled', 'vent_tidal_rate_set', 'vent_rate_set'], index=time_index)
             return vent_df
         else:
             vent_start = df[df.vent_start_time.notna()].vent_start_time.values
@@ -525,6 +533,10 @@ class ClinicalDataProcessor:
             
             return result_series
         
+        if df.empty:
+            procedures_df = pd.DataFrame(columns=['in_or', 'proc_start'], index=time_index)
+            return procedures_df
+        
         in_or_series = _create_procedure_series(df, time_index, 'in_or_dttm', 'out_or_dttm')
         proc_start_series = _create_procedure_series(df, time_index, 'procedure_start_dttm', 'procedure_comp_dttm')
 
@@ -535,28 +547,30 @@ class ClinicalDataProcessor:
     
     def icd_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            icd_df = pd.DataFrame(index=time_index)
+            icd_df = pd.DataFrame(columns=['icd_count'], index=time_index)
             return icd_df
         
         df = df.set_index("procedure_date")
         icd_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])).size()
         icd_df = icd_counts.reindex(time_index, fill_value=0)
+        icd_df = pd.DataFrame(icd_df, columns = ['icd_procedures'])
         return icd_df
         
     def cpt_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            cpt_df = pd.DataFrame(index=time_index)
+            cpt_df = pd.DataFrame(columns=['cpt_count'], index=time_index)
             return cpt_df
         
         df = df.set_index("procedure_dttm")
         procedure_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])).size()
         cpt_df = procedure_counts.reindex(time_index, fill_value=0)
+        cpt_df = pd.DataFrame(cpt_df, columns = ['cpt_procedures'])
         return cpt_df
 
 
     def clinical_notes_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            clinical_notes_df = pd.DataFrame(index=time_index)
+            clinical_notes_df = pd.DataFrame(columns=['clinical_notes'], index=time_index)
             return
         
         clinical_notes_df = df.resample(self.config.constants['resample_frequency'], origin=time_index[0]).last()
@@ -565,13 +579,17 @@ class ClinicalDataProcessor:
     
     def radiology_notes_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            radiology_notes_df = pd.DataFrame(index=time_index)
+            radiology_notes_df = pd.DataFrame(columns=['radiology_notes'], index=time_index)
             return radiology_notes_df
             
         df['day_verified'] = pd.to_datetime(df['day_verified'])
         df = df.set_index("day_verified")
-        notes_counts = df.groupby(pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])).size()
-        radiology_notes_df = notes_counts.reindex(time_index, fill_value=0)
+        notes_acc_nbr = df['acc_nbr'].groupby(
+            pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])
+        ).apply(lambda x: ','.join(x.astype(str)))
+
+        radiology_notes_df = notes_acc_nbr.reindex(time_index, fill_value=0)
+        radiology_notes_df = pd.DataFrame(radiology_notes_df, columns = ['radiology_acc_nbr'])
         return radiology_notes_df
     
     def vasopressor_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
@@ -581,12 +599,12 @@ class ClinicalDataProcessor:
         
         if df.empty:
             df = df.drop(columns=['med_order_time'])
-            vasopressor_meds_df = pd.DataFrame(index = time_index, columns = df.columns)
+            vasopressor_meds_df = pd.DataFrame(columns = df.columns, index = time_index)
         else:
             new = pd.DataFrame([])
             for key in vas_keys:
-                if len(self.config.bounds.loc[self.config.bounds['Location in SuperTable'] == key]) > 0:
-                    agg_fn = utils.agg_fn_wrapper_max(key, self.config.bounds)
+                if len(self.bounds.loc[self.bounds['location in supertable'] == key]) > 0:
+                    agg_fn = utils.agg_fn_wrapper_max(key, self.bounds)
                 else:
                     agg_fn = "max"
                 col1 = df[[key, 'med_order_time']].resample('60min', on = "med_order_time",  \
@@ -600,7 +618,7 @@ class ClinicalDataProcessor:
 
     def individual_fluids_staging(self, df_in_out_fluids: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df_in_out_fluids.empty:
-            individual_fluids_df = pd.DataFrame(index=time_index)
+            individual_fluids_df = pd.DataFrame(columns=self.config.individual_fluid_columns, index=time_index)
             return individual_fluids_df
         
         volume_cols = [x for x in df_in_out_fluids.columns if x.endswith("_volume")]
@@ -618,6 +636,20 @@ class ClinicalDataProcessor:
                 .reindex(time_index)
             )
             resampled_data[column] = resampled_col[column]
+            
+            # if values per hour are less than 250ml per hour, set to 0
+            # TODO: this is such a hack, we should have a better way to do this
+            if self.config.constants['resample_frequency'] == '1H' or self.config.constants['resample_frequency'] == '60min':
+                threshold = 250
+            elif self.config.constants['resample_frequency'] == '15min':
+                threshold = 250.0/4
+            elif self.config.constants['resample_frequency'] == '5min':
+                threshold = 250.0/12
+            elif self.config.constants['resample_frequency'] == '30min':
+                threshold = 250.0/2
+            else:
+                threshold = 0
+            resampled_col[column] = resampled_col[column].apply(lambda x: 0 if x < threshold else x) #if values per hour are less than 250ml per hour, set to 0
 
         individual_fluids_df = pd.DataFrame(resampled_data, index=time_index)
         
@@ -625,7 +657,7 @@ class ClinicalDataProcessor:
         
     def cumulative_fluids_staging(self, df_in_out_fluids: pd.DataFrame, df_infusion_meds: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df_in_out_fluids.empty and df_infusion_meds.empty:
-            cumulative_fluids_df = pd.DataFrame(index=time_index)
+            cumulative_fluids_df = pd.DataFrame(columns=['cumulative_fluids'], index=time_index)
             return cumulative_fluids_df
         
         ## Fluids from in_out_fluids
@@ -658,8 +690,8 @@ class ClinicalDataProcessor:
         df_infusion_meds_volume = df_infusion_meds['volume'].resample(self.config.constants['resample_frequency'], origin=time_index[0]).sum()
         df_infusion_meds_volume = df_infusion_meds_volume.reindex(time_index).fillna(0)
         
-        cumulative_fluids_df['cumulative_fluids'] = cumulative_fluids_df['cumulative_fluids'] + df_infusion_meds_volume
-        
+        cumulative_fluids_df['all_fluids'] = cumulative_fluids_df['cumulative_fluids'] + df_infusion_meds_volume
+        cumulative_fluids_df['cumulative_fluids'] = cumulative_fluids_df['all_fluids'].cumsum()
         return cumulative_fluids_df
         
     
@@ -762,16 +794,12 @@ class ClinicalDataProcessor:
 
     def create_bed_unit(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         """Create bed unit and related columns."""
-        def map_bed_unit(bed_code, bed_mapping, var_type):
-            unit = bed_mapping.loc[bed_mapping['bed_unit'] == bed_code][var_type].values
-            if len(unit) > 0:
-                return unit[0]
-            else:
-                return float("nan")
             
         bed_start = df['bed_location_start'].values
         bed_end = df['bed_location_end'].values
         bed_unit = df['bed_unit'].values
+        bed_type = df['unit_type'].values
+        icu_type = df['icu_type'].values
 
         bed_status = pd.DataFrame(index=time_index)
         bed_status['bed_unit'] = [0]*len(time_index)
@@ -784,20 +812,15 @@ class ClinicalDataProcessor:
             unit = bed_unit[i]
             idx = np.bitwise_and(time_index >= start ,  time_index <= end)
             bed_status.loc[idx, 'bed_unit'] = unit
-        
-        try:
-            bed_status['bed_type'] = bed_status['bed_unit'].apply(map_bed_unit, args = [self.config.bed_to_unit_mapping, 'unit_type'])
-            bed_status['icu_type'] = bed_status['bed_unit'].apply(map_bed_unit, args = [self.config.bed_to_unit_mapping, 'icu_type'])
-        except:
-            bed_status['bed_type'] = [float("nan")]*len(bed_status)
-            bed_status['icu_type'] = [float("nan")]*len(bed_status)
+            bed_status.loc[idx, 'bed_type'] = bed_type[i]
+            bed_status.loc[idx, 'icu_type'] = icu_type[i]
 
         return bed_status
     
     def dialysis_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         """Create dialysis status column."""
         if df.empty:
-            on_dialysis_df = pd.DataFrame(index=time_index)
+            on_dialysis_df = pd.DataFrame(columns=['on_dialysis'], index=time_index)
             return on_dialysis_df
         
         on_dialysis_df = pd.DataFrame(index=time_index)
@@ -806,6 +829,20 @@ class ClinicalDataProcessor:
             time = pd.to_datetime(time)
             on_dialysis_df.loc[(on_dialysis_df.index - time > pd.Timedelta('0 seconds')), 'on_dialysis'] = 1
         return on_dialysis_df
+    
+    def create_history_of_dialysis(self, diagnosis: pd.DataFrame, time_index: pd.DatetimeIndex) -> pd.DataFrame:
+        """Create history of dialysis indicator column."""
+        icd9_code = '585.6'
+        icd10_code = 'N18.6'
+        if diagnosis.empty:
+            history_of_dialysis = [0]*len(time_index)
+        else:
+            check = diagnosis.loc[diagnosis.dx_code_icd9 == icd9_code] | diagnosis.loc[diagnosis.dx_code_icd10 == icd10_code]
+            if len(check) > 0:
+                history_of_dialysis = [1]*len(time_index)
+            else:
+                history_of_dialysis = [0]*len(time_index)
+        return pd.DataFrame(history_of_dialysis, index=time_index, columns=['history_of_dialysis'], dtype='int32')
     
     def process_clinical_data(self, clinical_data: ClinicalData) -> None:
         """Process clinical data and create supertable"""
@@ -858,50 +895,59 @@ class ClinicalDataProcessor:
         logging.info(f"Bed unit added to supertable.")
 
         #Step 10: Add dialysis status
-        dialysis_columns = self.dialysis_staging(clinical_data.labs, supertable_df.time_index)
+        dialysis_columns = self.dialysis_staging(clinical_data.dialysis, supertable_df.time_index)
         supertable_df.supertable = pd.concat([supertable_df.supertable, dialysis_columns], axis=1)
         logging.info(f"Dialysis status added to supertable.")
 
-        #Step 11: Add fluids
+        #Step 11: Add history of dialysis
+        history_of_dialysis_columns = self.create_history_of_dialysis(clinical_data.diagnosis, supertable_df.time_index)
+        supertable_df.supertable = pd.concat([supertable_df.supertable, history_of_dialysis_columns], axis=1)
+        logging.info(f"History of dialysis added to supertable.")
+
+        #Step 12: Add fluids
         individual_fluids_columns = self.individual_fluids_staging(clinical_data.in_out_fluids, supertable_df.time_index)
         supertable_df.supertable = pd.concat([supertable_df.supertable, individual_fluids_columns], axis=1)
         logging.info(f"Individual fluids added to supertable.")
 
-        #Step 12: Add cumulative fluids
+        #Step 13: Add cumulative fluids
         cumulative_fluids_columns = self.cumulative_fluids_staging(clinical_data.in_out_fluids, clinical_data.infusion_meds, supertable_df.time_index)
         supertable_df.supertable = pd.concat([supertable_df.supertable, cumulative_fluids_columns], axis=1)
         logging.info(f"Cumulative fluids added to supertable.")
 
-        #Step 13: radiology notes
+        #Step 14: radiology notes
         radiology_notes_columns = self.radiology_notes_staging(clinical_data.radiology_notes, supertable_df.time_index)
         supertable_df.supertable = pd.concat([supertable_df.supertable, radiology_notes_columns], axis=1)
         logging.info(f"Radiology notes added to supertable.")
 
-        #Step 14: clinical notes
+        #Step 15: clinical notes
         clinical_notes_columns = self.clinical_notes_staging(clinical_data.clinical_notes, supertable_df.time_index)
         supertable_df.supertable = pd.concat([supertable_df.supertable, clinical_notes_columns], axis=1)
         logging.info(f"Clinical notes added to supertable.")
         
-        #Step 15: Add vasopressor meds
+        #Step 16: Add vasopressor meds
         vasopressor_meds_columns = self.vasopressor_staging(clinical_data.vasopressor_meds, supertable_df.time_index)
         supertable_df.supertable = pd.concat([supertable_df.supertable, vasopressor_meds_columns], axis=1)
         logging.info(f"Vasopressor meds added to supertable.")
 
-        #Step 16: Add comorbidity data
-        quan_deyo_ICD10_columns, quan_elix_ICD10_columns = self.comorbidity_staging(clinical_data.quan_deyo_ICD10, clinical_data.quan_elix_ICD10)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, quan_deyo_ICD10_columns], axis=1)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, quan_elix_ICD10_columns], axis=1)
-        logging.info(f"Comorbidity data added to supertable.")
-
-        #Step 17: Add icd procedures
+        #Step 18: Add icd procedures
         icd_procedures_columns = self.icd_staging(clinical_data.icd_procedures, supertable_df.time_index)
         supertable_df.supertable = pd.concat([supertable_df.supertable, icd_procedures_columns], axis=1)
         logging.info(f"ICD procedures added to supertable.")
 
-        #Step 18: Add cpt procedures
+        #Step 19: Add cpt procedures
         cpt_procedures_columns = self.cpt_staging(clinical_data.cpt_procedures, supertable_df.time_index)
         supertable_df.supertable = pd.concat([supertable_df.supertable, cpt_procedures_columns], axis=1)
         logging.info(f"CPT procedures added to supertable.")
+
+        # Step 20: Add gender code 
+        supertable_df.supertable['gender_code'] = clinical_data.static_features.get("gender_code", 0)
+        logging.info(f"Gender code added to supertable.")
+
+        #Step 21: Add comorbidity data
+        quan_deyo_ICD10_columns, quan_elix_ICD10_columns = self.comorbidity_staging(clinical_data.quan_deyo_ICD10, clinical_data.quan_elix_ICD10)
+        clinical_data.quan_deyo_ICD10_staging = quan_deyo_ICD10_columns
+        clinical_data.quan_elix_ICD10_staging = quan_elix_ICD10_columns
+        logging.info(f"Comorbidity data added to Clinical Data.")
 
         logging.info(f"Supertable created with {len(supertable_df.supertable)} rows.")
         return supertable_df
@@ -916,16 +962,16 @@ class DerivedFeatures:
 
     def __init__(self, config: SepyDictConfig):
         self.config = config
+        self.bounds = config.bounds
     
-    def height_weight_staging(
+    def height_weight_postprocessing(
         self,
-        static_features: Dict[str, Any],
         super_table: pd.DataFrame,
         weight_col: str = "daily_weight_kg",
         height_col: str = "height_cm",
     ) -> None:
         """Fill missing height/weight using gender averages."""
-        gender = static_features.get("gender_code", 0)
+        gender = super_table['gender_code'].iloc[0]
         df = super_table
  
         if df[weight_col].isnull().all():
@@ -956,36 +1002,8 @@ class DerivedFeatures:
 
         return df
 
-    def calculate_best_map_row(self, row: pd.Series) -> float:
-        """
-        Calculate the best mean arterial pressure from available measurements.
-        
-        Uses constants and improved logic for better maintainability.
-        
-        Args:
-            row: Pandas Series containing BP measurements
-            
-        Returns:
-            Best MAP value or NaN if unavailable/invalid
-        """
-        # Check arterial line measurements first (more accurate)
-        if (pd.notna(row.get('sbp_line')) and pd.notna(row.get('dbp_line')) and 
-            (row['sbp_line'] - row['dbp_line']) > 15):
-            best_map = (1/3) * row['sbp_line'] + (2/3) * row['dbp_line']
-        # Check cuff measurements as fallback
-        elif (pd.notna(row.get('sbp_cuff')) and pd.notna(row.get('dbp_cuff')) and 
-              (row['sbp_cuff'] - row['dbp_cuff']) > 15):
-            best_map = (1/3) * row['sbp_cuff'] + (2/3) * row['dbp_cuff']
-        else:
-            return np.nan
-        
-        # Validate MAP is within reasonable physiological range
-        if best_map < 30.0 or best_map > 150.0:
-            return np.nan
-            
-        return best_map
 
-    def calculate_best_map_vectorized(self, df: pd.DataFrame) -> pd.Series:
+    def calculate_best_map_vectorized(self, supertable: pd.DataFrame) -> pd.Series:
         """
         Vectorized calculation of best MAP for entire DataFrame.
         
@@ -997,17 +1015,17 @@ class DerivedFeatures:
         """
         # Calculate MAP from arterial line
         map_line = np.where(
-            (df['sbp_line'].notna() & df['dbp_line'].notna() & 
-             ((df['sbp_line'] - df['dbp_line']) > 15)),
-            (1/3) * df['sbp_line'] + (2/3) * df['dbp_line'],
+            (supertable['sbp_line'].notna() & supertable['dbp_line'].notna() & 
+             ((supertable['sbp_line'] - supertable['dbp_line']) > 15)),
+            (1/3) * supertable['sbp_line'] + (2/3) * supertable['dbp_line'],
             np.nan
         )
         
         # Calculate MAP from cuff (fallback)
         map_cuff = np.where(
-            (df['sbp_cuff'].notna() & df['dbp_cuff'].notna() & 
-             ((df['sbp_cuff'] - df['dbp_cuff']) > 15)),
-            (1/3) * df['sbp_cuff'] + (2/3) * df['dbp_cuff'],
+            (supertable['sbp_cuff'].notna() & supertable['dbp_cuff'].notna() & 
+             ((supertable['sbp_cuff'] - supertable['dbp_cuff']) > 15)),
+            (1/3) * supertable['sbp_cuff'] + (2/3) * supertable['dbp_cuff'],
             np.nan
         )
         
@@ -1015,57 +1033,53 @@ class DerivedFeatures:
         best_map = np.where(pd.notna(map_line), map_line, map_cuff)
         
         # Validate physiological range
+        upper_bound = self.bounds.loc[self.bounds["location in supertable"] == "best_map", "physical upper bound"]
+        lower_bound = self.bounds.loc[self.bounds["location in supertable"] == "best_map", "physical lower bound"]
         best_map = np.where(
-            (best_map >= 30.0) & (best_map <= 150.0),
+            (best_map >= lower_bound) & (best_map <= upper_bound),
             best_map,
             np.nan
         )
         
-        return pd.Series(best_map, index=df.index, dtype='float32')
+        return pd.DataFrame(best_map, columns=['best_map'], index=supertable.index, dtype='float32')
 
-    def calc_pulse_pressure(self, row: pd.Series) -> float:
-        """Calculate pulse pressure from systolic and diastolic measurements."""
-        if row[['sbp_line','dbp_line']].notnull().all() and (row['sbp_line'] - row['dbp_line']) > 15:
-            pulse_pressure = row['sbp_line'] - row['dbp_line']
-        elif row[['sbp_cuff','dbp_cuff']].notnull().all() and (row['sbp_cuff'] - row['dbp_cuff']) > 15:
-            pulse_pressure = row['sbp_cuff'] - row['dbp_cuff']
-        else:
-            pulse_pressure = float("NaN")
-        return pulse_pressure
+    
+    def calculate_pulse_pressure_vectorized(self, supertable: pd.DataFrame) -> pd.Series:
+        """Calculation of pulse pressure from systolic and diastolic measurements."""
+        pulse_pressure_line = np.where(
+            (supertable['sbp_line'].notna() & supertable['dbp_line'].notna() & 
+             ((supertable['sbp_line'] - supertable['dbp_line']) > 15)),
+            supertable['sbp_line'] - supertable['dbp_line'],
+            np.nan)
+        pulse_pressure_cuff = np.where(
+            (supertable['sbp_cuff'].notna() & supertable['dbp_cuff'].notna() & 
+             ((supertable['sbp_cuff'] - supertable['dbp_cuff']) > 15)),
+            supertable['sbp_cuff'] - supertable['dbp_cuff'],
+            np.nan)
+        pulse_pressure = np.where(pd.notna(pulse_pressure_line), pulse_pressure_line, pulse_pressure_cuff)
+        return pd.DataFrame(pulse_pressure, columns=['pulse_pressure'], index=supertable.index, dtype='float32')
 
-    def best_map(self, instance: Any, v_bp_cols: Optional[List[str]] = None) -> None:
-        """Add best MAP column to super_table."""
-        if v_bp_cols is None:
-            v_bp_cols = ['sbp_line', 'dbp_line', 'map_line', 'sbp_cuff', 'dbp_cuff', 'map_cuff']
-        instance.super_table['best_map'] = instance.super_table[v_bp_cols].apply(self.calc_best_map, axis=1)
-
-    def pulse_pressure(self, instance: Any, v_bp_cols: Optional[List[str]] = None) -> None:
-        """Add pulse pressure column to super_table."""
-        if v_bp_cols is None:
-            v_bp_cols = ['sbp_line', 'dbp_line', 'map_line', 'sbp_cuff', 'dbp_cuff', 'map_cuff']
-        instance.super_table['pulse_pressure'] = instance.super_table[v_bp_cols].apply(self.calc_pulse_pressure, axis=1)
-
-    def fio2_decimal(self, supertable: pd.DataFrame, fio2: str = 'fio2') -> None:
+    def fio2_decimal(self, supertable: pd.DataFrame, fio2_column: str = 'fio2') -> None:
         """Convert FiO2 to decimal format if it's in percentage."""
-        def fio2_row(row, fio2=fio2):
-            if row[fio2] <= 1.0:
-                return row[fio2]
+        def fio2_row(row, fio2_column=fio2_column):
+            if row[fio2_column] <= 1.0:
+                return row[fio2_column]
             else:
-                return row[fio2]/100
+                return row[fio2_column]/100
         
-        supertable[fio2] = supertable.apply(fio2_row, axis=1)
+        supertable[fio2_column] = supertable.apply(fio2_row, axis=1)
         return supertable
 
-    def calc_nl(self, supertable: pd.DataFrame, neutrophils_col: str = 'neutrophils', lymphocytes_col: str = 'lymphocytes') -> None:
+    def calculate_nl(self, supertable: pd.DataFrame, neutrophils_col: str = 'neutrophils', lymphocytes_col: str = 'lymphocytes') -> None:
         """Calculate neutrophil to lymphocyte ratio."""
         if neutrophils_col not in supertable.columns:
             raise ValueError(f"Columns {neutrophils_col} not found in supertable")
         if lymphocytes_col not in supertable.columns:
             raise ValueError(f"Columns {lymphocytes_col} not found in supertable")
-        supertable['n_to_l'] = supertable[neutrophils_col]/supertable[lymphocytes_col]
-        return supertable
+        n_to_l = supertable[neutrophils_col]/supertable[lymphocytes_col]
+        return pd.DataFrame(n_to_l, columns=['n_to_l'], index=supertable.index, dtype='float32')
 
-    def calc_pf(self, supertable: pd.DataFrame, spo2_col: str = 'spo2', 
+    def calculate_pf(self, supertable: pd.DataFrame, spo2_col: str = 'spo2', 
                 pao2_col: str = 'partial_pressure_of_oxygen_(pao2)', 
                 fio2_col: str = 'fio2') -> None:
         """Calculate P:F ratios using SpO2 and PaO2."""
@@ -1075,11 +1089,13 @@ class DerivedFeatures:
             raise ValueError(f"Columns {pao2_col} not found in supertable")
         if fio2_col not in supertable.columns:
             raise ValueError(f"Columns {fio2_col} not found in supertable")
-        supertable['pf_sp'] = supertable[spo2_col]/supertable[fio2_col]
-        supertable['pf_pa'] = supertable[pao2_col]/supertable[fio2_col]
-        return supertable
+        
+        df = pd.DataFrame(index=supertable.index)
+        df[f's2f_{fio2_col}'] = supertable[spo2_col]/supertable[fio2_col]
+        df[f'p2f_{fio2_col}'] = supertable[pao2_col]/supertable[fio2_col]
+        return df
 
-    def single_pressor_by_weight(self, row: pd.Series, single_pressors_name: str) -> float:
+    def _single_pressor_by_weight(self, row: pd.Series, single_pressors_name: str) -> float:
         """Calculate single vasopressor dose adjusted by weight."""
         if single_pressors_name == 'vasopressin':
             val = row[single_pressors_name]
@@ -1091,10 +1107,10 @@ class DerivedFeatures:
             val = row[single_pressors_name]
         return val
 
-    def calc_all_pressors(self, supertable: pd.DataFrame) -> None:
+    def calculate_all_pressors(self, supertable: pd.DataFrame) -> None:
         """Calculate weight-adjusted doses for all vasopressors."""
         for val in self.config.vasopressor_names:
-            supertable[val + '_dose_weight'] = supertable.apply(self.single_pressor_by_weight, single_pressors_name=val, axis=1)
+            supertable[val + '_dose_weight'] = supertable.apply(self._single_pressor_by_weight, single_pressors_name=val, axis=1)
         return supertable
 
     def calculate_anion_gap(self, supertable: pd.DataFrame, sodium_col: str = 'sodium', 
@@ -1107,23 +1123,23 @@ class DerivedFeatures:
             raise ValueError(f"Columns {chloride_col} not found in supertable")
         if 'bicarb_(hco3)' not in supertable.columns:
             raise ValueError(f"Columns {bicarb_hco3_col} not found in supertable")
-        supertable['anion_gap'] = supertable['sodium'] - (supertable['chloride'] + supertable['bicarb_(hco3)'])
-        return supertable
+        anion_gap = supertable['sodium'] - (supertable['chloride'] + supertable['bicarb_(hco3)'])
+        return pd.DataFrame(anion_gap, columns=['anion_gap'], index=supertable.index, dtype='float32')
 
-    def calc_worst_pf(self, supertable: pd.DataFrame, vent_status_col: str = 'vent_status') -> None:
+    def calculate_worst_pf(self, supertable: pd.DataFrame, vent_status_col: str = 'vent_status', fio2_col: str = 'vent_fio2') -> None:
         """Calculate worst P:F ratios during ventilation."""
         if vent_status_col not in supertable.columns:
             raise ValueError(f"Columns {vent_status_col} not found in supertable")
         #select worse pf_pa when on vent
-        worst_pf_pa = supertable[supertable[vent_status_col]>0]['pf_pa'].min()
-        if supertable[supertable[vent_status_col]>0]['pf_pa'].size:
-            worst_pf_pa_time = supertable[supertable[vent_status_col]>0]['pf_pa'].idxmin(skipna=True)
+        worst_pf_pa = supertable[supertable[vent_status_col]>0][f'p2f_{fio2_col}'].min()
+        if supertable[supertable[vent_status_col]>0][f'p2f_{fio2_col}'].size:
+            worst_pf_pa_time = supertable[supertable[vent_status_col]>0][f'p2f_{fio2_col}'].idxmin(skipna=True)
         else: 
             worst_pf_pa_time = pd.NaT
         #select worse pf_sp when on vent
-        worst_pf_sp = supertable[supertable[vent_status_col]>0]['pf_sp'].min() 
-        if supertable[supertable[vent_status_col]>0]['pf_sp'].size:
-            worst_pf_sp_time = supertable[supertable[vent_status_col]>0]['pf_sp'].idxmin(skipna=True)
+        worst_pf_sp = supertable[supertable[vent_status_col]>0][f's2f_{fio2_col}'].min() 
+        if supertable[supertable[vent_status_col]>0][f's2f_{fio2_col}'].size:
+            worst_pf_sp_time = supertable[supertable[vent_status_col]>0][f's2f_{fio2_col}'].idxmin(skipna=True)
         else: 
             worst_pf_sp_time = pd.NaT
         return worst_pf_pa, worst_pf_pa_time, worst_pf_sp, worst_pf_sp_time
@@ -1136,11 +1152,12 @@ class DerivedFeatures:
         on_pressors = (supertable[v_vasopressor_names_wo_dobutamine].notna()).any(axis=1)
         on_dobutamine = (supertable['dobutamine'] > 0) 
         
-        supertable['on_pressors'] = on_pressors.astype('bool')
-        supertable['on_dobutamine'] = on_dobutamine.astype('bool')
-        return supertable
+        df = pd.DataFrame(index=supertable.index)
+        df['on_pressors'] = on_pressors.astype('bool')
+        df['on_dobutamine'] = on_dobutamine.astype('bool')
+        return df
 
-    def create_elapsed_time(self, row: pd.Timestamp, start: pd.Timestamp, end: pd.Timestamp) -> float:
+    def _create_elapsed_time(self, row: pd.Timestamp, start: pd.Timestamp, end: pd.Timestamp) -> float:
         """Calculate elapsed time between start and end for a given row timestamp."""
         if row - start > pd.Timedelta('0 days') and row - end <= pd.Timedelta('0 days'):
             return (row-start).days*24 + np.ceil((row-start).seconds/3600)
@@ -1162,12 +1179,12 @@ class DerivedFeatures:
             logging.ERROR(str(supertable.index[0]) + 'probably has an error in icu start and end times')
         elif start is not None and end is None:
             end = supertable.index[-1]
-            supertable['elapsed_icu'] = supertable.index
-            supertable['elapsed_icu'] = supertable['elapsed_icu'].apply(self.create_elapsed_time, start=start, end=end)
+            elapsed_icu = supertable.index
+            elapsed_icu = elapsed_icu.apply(self._create_elapsed_time, start=start, end=end)
         else:
-            supertable['elapsed_icu'] = supertable.index
-            supertable['elapsed_icu'] = supertable['elapsed_icu'].apply(self.create_elapsed_time, start=start, end=end)
-        return supertable
+            elapsed_icu = supertable.index
+            elapsed_icu = elapsed_icu.apply(self._create_elapsed_time, start=start, end=end)
+        return pd.DataFrame(elapsed_icu, columns=['elapsed_icu'], index=supertable.index, dtype='float32')
 
     def create_elapsed_hosp(self, supertable: pd.DataFrame, 
                            first_hosp_start: pd.Timestamp, 
@@ -1176,9 +1193,9 @@ class DerivedFeatures:
         start = first_hosp_start
         end = first_hosp_end
         
-        supertable['elapsed_hosp'] = supertable.index
-        supertable['elapsed_hosp'] = supertable['elapsed_hosp'].apply(self.create_elapsed_time, start=start, end=end)
-        return supertable
+        elapsed_hosp = supertable.index
+        elapsed_hosp = elapsed_hosp.apply(self._create_elapsed_time, start=start, end=end)
+        return pd.DataFrame(elapsed_hosp, columns=['elapsed_hosp'], index=supertable.index, dtype='float32')
     
 
     def create_infection_sepsis_time(self, supertable: pd.DataFrame, 
@@ -1188,108 +1205,14 @@ class DerivedFeatures:
         t_infection_idx = t_suspicion.first_valid_index()
         if t_infection_idx is not None:
             t_infection = t_suspicion.loc[t_infection_idx]
-            supertable['infection'] = np.int32(supertable.index > t_infection)
+            infection = np.int32(supertable.index > t_infection)
         else:
-            supertable['infection'] = [0]*len(supertable)
+            infection = [0]*len(supertable)
         
         t_sepsis3_idx = t_sepsis3.first_valid_index()
         if t_sepsis3_idx is not None:
             t_sepsis3 = t_sepsis3.loc[t_sepsis3_idx]
-            supertable['sepsis'] = np.int32(supertable.index > t_sepsis3)
+            sepsis = np.int32(supertable.index > t_sepsis3)
         else:
-            supertable['sepsis'] = [0]*len(supertable)
-        return supertable
-
-    def dialysis_history(self, supertable: pd.DataFrame, 
-                         dx_code_icd9: str = '585.6', 
-                         dx_code_icd10: str = 'N18.6') -> None:
-        """Create dialysis history indicator column."""
-        dialysis_history = supertable.loc[(supertable.dx_code_icd9 == dx_code_icd9) | (supertable.dx_code_icd10 == dx_code_icd10)]
-        if len(dialysis_history) == 0:
-            supertable['history_of_dialysis'] = [0]*len(supertable)
-        else:
-            supertable['history_of_dialysis'] = [1]*len(supertable)
-        return supertable
-
-    def create_on_vent(self, supertable: pd.DataFrame, 
-                       vent: pd.DataFrame,
-                       start_index: pd.Timestamp) -> None:
-        """Create ventilator status columns."""
-        df = vent
-        supertable['on_vent_old'] = supertable['vent_status']
-        supertable['vent_fio2_old'] = supertable['vent_fio2']
-
-        if df.empty:
-            # No vent times were found so return empty table with 
-            # all flags remain set at zero
-            df = pd.DataFrame(columns=['vent_status','fio2'], index=supertable.index)
-            # vent_status and fio2 will get joined to super table later
-            vent_status = df.vent_status.values
-            vent_fio2 = df.fio2.values
-             
-        else:
-            #check to see there is a start & stop time
-            vent_start = df[df.vent_start_time.notna()].vent_start_time.values
-            vent_stop =  df[df.vent_stop_time.notna()].vent_stop_time.values
-            
-            #If no vent start time then examin vent_plus rows
-            if len(vent_start) == 0:
-                # identify rows that are real vent vals (i.e. no fio2 alone)
-                check_mech_vent_vars = ['vent_tidal_rate_set', 'peep']
-                df['vent_status'] = np.where(df[check_mech_vent_vars].notnull().any(axis=1),1,0)
-                
-                #check if there are any "real" vent rows; if so 
-                if df['vent_status'].sum()>0:
-                    vent_start  =  df[df['vent_status']>0].recorded_time.iloc[0:1]
-                else:
-                    vent_start = []
-                    
-             #If there is a vent start, but no stop; add 6hrs to start time  
-            if len(vent_start) != 0 and len(vent_stop) == 0:
-                #flag identifies the presence of vent rows, and start time
-                check_mech_vent_vars = ['vent_tidal_rate_set', 'peep']
-                df['vent_status'] = np.where(df[check_mech_vent_vars].notnull().any(axis=1),1,0)
-                
-                #check if there are any "real" vent rows; if so 
-                if df['vent_status'].sum()>0:
-                    vent_stop  =  df[df['vent_status']>0].recorded_time.iloc[-1:]
-            
-            # Import utils for agg function
-            import utils
-            agg_fn = utils.agg_fn_wrapper('fio2', self.bounds)
-            if len(vent_start) == 0: #No valid mechanical ventilation values
-                # vent_status and fio2 will get joined to super table later
-                vent_fio2 = df[['recorded_time','fio2']].resample('60min',
-                                             on = 'recorded_time',
-                                             origin = start_index).apply(agg_fn) \
-                                             .reindex(supertable.index)
-                df_dummy = pd.DataFrame(columns=['vent_status'], index=supertable.index)
-                # vent_status and fio2 will get joined to super table later
-                vent_status = df_dummy.vent_status.values
-            else:
-            
-                index = pd.Index([])
-                vent_tuples = zip(vent_start, vent_stop )
-    
-                for pair in set(vent_tuples):
-                    if pair[0] < pair[1]:
-                        index = index.append( pd.date_range(pair[0], pair[1], freq='H'))
-                    else: #In case of a mistake in start and stop recording
-                        index = index.append( pd.date_range(pair[1], pair[0], freq='H'))  
-                
-                vent_status = pd.DataFrame(data=([1.0]*len(index)), columns =['vent_status'], index=index)
-                
-                #sets column to 1 if vent was on    
-                vent_status = vent_status.resample('60min',
-                                                   origin = start_index).mean() \
-                                                   .reindex(supertable.index)
-                            
-                vent_fio2 = df[['recorded_time','fio2']].resample('60min',
-                                             on = 'recorded_time',
-                                             origin = start_index).apply(agg_fn) \
-                                             .reindex(supertable.index)
-                
-        supertable['on_vent'] = vent_status
-        supertable['vent_fio2'] = vent_fio2
-        return supertable
-
+            sepsis = [0]*len(supertable)
+        return pd.DataFrame(infection, columns=['infection'], index=supertable.index, dtype='int32'), pd.DataFrame(sepsis, columns=['sepsis'], index=supertable.index, dtype='int32')

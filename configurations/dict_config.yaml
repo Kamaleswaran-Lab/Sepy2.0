@@ -224,6 +224,9 @@ constants:
   min_weight: 25.0
   min_height: 0.0
 
+#options for the score calculators
+temperature_in_celsius: true 
+
 # DICT ELEMENTS
 dict_elements:
   - method: cultures_df
