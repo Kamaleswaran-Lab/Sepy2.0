@@ -38,6 +38,7 @@ import numpy as np
 from pathlib import Path
 import argparse
 import os
+import gc
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from functools import partial
 logging.basicConfig(level=logging.INFO)
@@ -91,50 +92,23 @@ def make_sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir):
     sepyMaster_instance = sd.sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir)
     return sepyMaster_instance
 
-def make_sepyCSN(
-    sepyMaster_instance,
-    encounter_csn
+
+def process_csn_instance(
+    csn_instance,
+    count,
+    chunk_size,
+    year
 ):
     """
-    Processes a single patient encounter (CSN) and serializes the encounter data to a pickle file.
-
-    Args:
-        encounter_csn (str): The unique encounter ID (CSN) to process.
-        pickle_save_path (Path): The directory path where the pickle file will be saved.
-        thresholds (dict): A dictionary containing threshold values or limits used in processing.
-        yearly_data_instance (object): An instance of the `sepyIMPORT` class containing the yearly data.
-        sepyConfigs (dict): A dictionary containing the configuration settings for the sepyDICT class.
-    Returns:
-        sepyDICT: An instance of the `sepyDICT` class containing the processed encounter data.
-    """
-    # instantiate class for single encounter
-    sepyCSN_instance = sepyMaster_instance.create_csn_instance(encounter_csn)
-    
-    sepyCSN_instance.process()
-
-    return
-
-
-def process_csn_with_summaries(
-    csn, 
-    count, 
-    chunk_size, 
-    year, 
-    sepyMaster_instance,
-    sepyConfigs
-):
-    """
-    Process a single CSN with all its summaries
+    Process a pre-created sepyCSN instance.
     
     Args:
-        csn: The CSN to process
-        count: The count of this CSN in the processing list
-        chunk_size: Total number of CSNs in this chunk
-        year: The year being processed
-        sepyMaster_instance: The sepyMaster instance
-        save_dir: The directory to save the supertable
+        csn_instance: Pre-created sepyCSN instance
+        count: Current count in processing
+        chunk_size: Total number of CSNs to process
+        year: Year being processed
     Returns:
-        tuple: A tuple containing all the summary dataframes or None values if errors occurred
+        dict: Dictionary containing all summary dataframes or None values if errors occurred
     """
     result = {
         'sofa_summary': None,
@@ -147,48 +121,114 @@ def process_csn_with_summaries(
     }
     
     try:
-        logging.info(f"Sepy- Processing patient csn: {csn}, {count} of {chunk_size} for year {year}")
-        instance = make_sepyCSN(sepyMaster_instance, csn)
-        logging.info(f"Sepy- Instance created for csn: {csn}")
+        logging.info(f"Sepy- Processing patient csn: {csn_instance.clinical_data.csn}, {count} of {chunk_size} for year {year}")
+        csn_instance.process()
+        logging.info(f"Sepy- Instance processed for csn: {csn_instance.clinical_data.csn}")
     except Exception as e:
         error_msg = str(e.args[0]) if e.args else str(e)
-        logging.error(f"Sepy- Error in creating instance for csn {csn}: {error_msg}")
-        result['error'] = [csn, error_msg]
+        logging.error(f"Sepy- Error in processing instance for csn {csn_instance.clinical_data.csn}: {error_msg}")
+        result['error'] = [csn_instance.clinical_data.csn, error_msg]
         return result
     
     # Running summaries with error handling
     try:
-        result['sofa_summary'] = utils.sofa_summary(csn, instance)
+        result['sofa_summary'] = utils.sofa_summary(csn_instance)
     except Exception as e:
-        logging.error(f"Sepy- Error in Sofa Summary for csn {csn}: {e}")
+        logging.error(f"Sepy- Error in Sofa Summary for csn {csn_instance.clinical_data.csn}: {e}")
     
     try:
-        result['sep3_summary'] = utils.sepsis3_summary(csn, instance)
+        result['sep3_summary'] = utils.sepsis3_summary(csn_instance)
     except Exception as e:
-        logging.error(f"Sepy- Error in Sepsis 3 Summary for csn {csn}: {e}")
+        logging.error(f"Sepy- Error in Sepsis 3 Summary for csn {csn_instance.clinical_data.csn}: {e}")
     
     try:
-        result['sirs_summary'] = utils.sirs_summary(csn, instance)
+        result['sirs_summary'] = utils.sirs_summary(csn_instance)
     except Exception as e:
-        logging.error(f"Sepy- Error in SIRS Summary for csn {csn}: {e}")
+        logging.error(f"Sepy- Error in SIRS Summary for csn {csn_instance.clinical_data.csn}: {e}")
+    
     
     try:
-        result['sep2_summary'] = utils.sepsis2_summary(csn, instance)
+        result['enc_summary'] = utils.enc_summary(csn_instance)
     except Exception as e:
-        logging.error(f"Sepy- Error in Sepsis 2 Summary for csn {csn}: {e}")
+        logging.error(f"Sepy- Error in Encounter Summary for csn {csn_instance.clinical_data.csn}: {e}")
     
     try:
-        result['enc_summary'] = utils.enc_summary(instance)
+        result['comorbidity_summary'] = utils.comorbidity_summary(csn_instance, dataConfig)
     except Exception as e:
-        logging.error(f"Sepy- Error in Encounter Summary for csn {csn}: {e}")
-    
-    try:
-        result['comorbidity_summary'] = utils.comorbidity_summary(csn, instance, sepyConfigs)
-    except Exception as e:
-        logging.error(f"Sepy- Error in Comorbidity Summary for csn {csn}: {e}")
+        logging.error(f"Sepy- Error in Comorbidity Summary for csn {csn_instance.clinical_data.csn}: {e}")
     
     logging.info(f"Sepy- Encounter {count} of {chunk_size} is complete!")
     return result
+
+def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
+    """
+    Process a batch of CSNs and return their results
+    
+    Args:
+        process_list: List of CSNs to process
+        sepyMaster_instance: Instance of sepyMaster
+        year: Year being processed
+        start_count: Starting count for this batch
+    Returns:
+        list: List of results for each CSN in the batch
+    """
+    results = []
+    num_local_workers = min(os.cpu_count() - 1, 4)
+    
+    # Create CSN instances for just this batch
+    csn_instances = []
+    for i, csn in enumerate(process_list):
+        try:
+            csn_instance = sepyMaster_instance.create_csn_instance(csn)
+            csn_instances.append(csn_instance)
+        except Exception as e:
+            logging.error(f"Sepy- Error creating instance for csn {csn}: {e}")
+            results.append({
+                'error': [csn, str(e)],
+                'sofa_summary': None,
+                'sep3_summary': None,
+                'sirs_summary': None,
+                'sep2_summary': None,
+                'enc_summary': None,
+                'comorbidity_summary': None
+            })
+
+    # Process the batch in parallel
+    with ProcessPoolExecutor(max_workers=num_local_workers) as executor:
+        future_to_csn = {
+            executor.submit(
+                process_csn_instance,
+                csn_instance=csn_instance,
+                count=start_count+i,
+                chunk_size=len(process_list),
+                year=year
+            ): (csn_instance.clinical_data.csn, start_count+i) 
+            for i, csn_instance in enumerate(csn_instances)
+        }
+        
+        # Collect results as they complete
+        for future in as_completed(future_to_csn):
+            try:
+                result = future.result()
+                results.append(result)
+            except Exception as e:
+                csn, _ = future_to_csn[future]
+                logging.error(f"Sepy- Error processing result for csn {csn}: {e}")
+                results.append({
+                    'error': [csn, str(e)],
+                    'sofa_summary': None,
+                    'sep3_summary': None,
+                    'sirs_summary': None,
+                    'sep2_summary': None,
+                    'enc_summary': None,
+                    'comorbidity_summary': None
+                })
+    
+    # Clear the batch from memory
+    del csn_instances
+    gc.collect()
+    
+    return results
 
 
 if __name__ == "__main__":
@@ -406,7 +446,7 @@ if __name__ == "__main__":
         save_dir.mkdir(exist_ok = True, parents = True)
         clinical_data_write_path = save_dir / "ClinicalData"
         clinical_data_write_path.mkdir(exist_ok = True, parents = True)
-        supertable_write_path = save_dir / str(year)
+        supertable_write_path = save_dir / "Supertables"
         supertable_write_path.mkdir(exist_ok = True, parents = True)
         logging.info(f"Sepy-Directory for year {year} was set to {save_dir}")
         
@@ -428,63 +468,60 @@ if __name__ == "__main__":
         ###########################################################################
         logging.info("Making supertables")
         
-        # Determine the number of workers for local multiprocessing
-        # Use a smaller number of local processes to avoid overloading the system
-        # since we're already running multiple SLURM jobs
-        num_local_workers = min(os.cpu_count(), 4)  # Use at most 4 cores per SLURM job
-        logging.info(f"Sepy- Using {num_local_workers} local worker processes")
-        
-        # Create partial function with fixed arguments
-        process_func = partial(
-            process_csn_with_summaries,
-            chunk_size=len(process_list),
-            year=year,
-            sepyMaster_instance=sepyMaster_instance,
-            sepyConfigs=sepyConfigs
-        )
-        
-        # Initialize empty lists for results
+        # Initialize result lists
         appended_sofa_scores = []
         appended_sep3_time = []
         appended_sirs_scores = []
         appended_sep2_time = []
         appended_enc_summaries = []
         appended_comorbidity_summaries = []
+        error_list = []
+
+        # Determine batch size based on number of workers
+        num_local_workers = os.cpu_count() - 1
+        batch_size = num_local_workers
+        logging.info(f"Sepy- Using {num_local_workers} local worker processes with batch size {batch_size}")
         
-        # Process CSNs in parallel
-        with ProcessPoolExecutor(max_workers=num_local_workers) as executor:
-            # Submit all tasks
-            future_to_csn = {
-                executor.submit(process_func, csn, i+1): (csn, i+1) 
-                for i, csn in enumerate(process_list)
-            }
+        # Process CSNs in batches
+        total_csns = len(process_list)
+        for batch_start in range(0, total_csns, batch_size):
+            batch_end = min(batch_start + batch_size, total_csns)
+            current_batch = process_list[batch_start:batch_end]
             
-            # Process results as they complete
-            for future in as_completed(future_to_csn):
-                csn, count = future_to_csn[future]
-                try:
-                    result = future.result()
-                    if result['error']:
-                        error_list.append(result['error'])
-                        continue
-                        
-                    # Append valid results to their respective lists
-                    if result['sofa_summary'] is not None:
-                        appended_sofa_scores.append(result['sofa_summary'])
-                    if result['sep3_summary'] is not None:
-                        appended_sep3_time.append(result['sep3_summary'])
-                    if result['sirs_summary'] is not None:
-                        appended_sirs_scores.append(result['sirs_summary'])
-                    if result['sep2_summary'] is not None:
-                        appended_sep2_time.append(result['sep2_summary'])
-                    if result['enc_summary'] is not None:
-                        appended_enc_summaries.append(result['enc_summary'])
-                    if result['comorbidity_summary'] is not None:
-                        appended_comorbidity_summaries.append(result['comorbidity_summary'])
-                        
-                except Exception as e:
-                    logging.error(f"Sepy- Error processing result for csn {csn}: {e}")
-                    error_list.append([csn, str(e)])
+            logging.info(f"Sepy- Processing batch {batch_start//batch_size + 1} of {(total_csns + batch_size - 1)//batch_size}")
+            
+            # Process the batch
+            batch_results = process_batch_of_csns(
+                process_list=current_batch,
+                sepyMaster_instance=sepyMaster_instance,
+                year=year,
+                start_count=batch_start
+            )
+            
+            # Accumulate results from this batch
+            for result in batch_results:
+                if result['error']:
+                    error_list.append(result['error'])
+                    continue
+                    
+                if result['sofa_summary'] is not None:
+                    appended_sofa_scores.append(result['sofa_summary'])
+                if result['sep3_summary'] is not None:
+                    appended_sep3_time.append(result['sep3_summary'])
+                if result['sirs_summary'] is not None:
+                    appended_sirs_scores.append(result['sirs_summary'])
+                if result['sep2_summary'] is not None:
+                    appended_sep2_time.append(result['sep2_summary'])
+                if result['enc_summary'] is not None:
+                    appended_enc_summaries.append(result['enc_summary'])
+                if result['comorbidity_summary'] is not None:
+                    appended_comorbidity_summaries.append(result['comorbidity_summary'])
+            
+            # Force garbage collection after each batch
+            gc.collect()
+            
+            # Log progress
+            logging.info(f"Sepy- Completed batch {batch_start//batch_size + 1}, processed {batch_end} of {total_csns} CSNs")
 
         ###########################################################################
         ########################## Export Sepsis Summary ##########################

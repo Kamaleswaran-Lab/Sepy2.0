@@ -1,9 +1,0 @@
-/var/spool/slurmd/job33222525/slurm_script: line 24: /home/maror24/anaconda3/bin/activate: No such file or directory
-INFO:root:Sepy- The total number of processes: 13
-INFO:root:Sepy- The import year is: 2019
-INFO:root:Sepy- The processor assignment is: 9
-ERROR:root:Sepy- could not find flatfile type for *CLINICAL_NOTES*
-INFO:root:Skipping creation of yearly pickle for 2019 -  it should already exist
-INFO:root:Yearly pickle for 2019 exists
-/var/spool/slurmd/job33222525/slurm_script: line 28: 275430 Killed                  python /hpc/home/ma618/Sepy/make_dicts.py --year $YEAR --num_processes $NUM_OF_PROCESSES --processor_assignment $SLURM_ARRAY_TASK_ID
-slurmstepd: error: Detected 1 oom_kill event in StepId=33222525.batch. Some of the step tasks have been OOM Killed.

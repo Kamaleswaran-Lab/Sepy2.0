@@ -99,8 +99,6 @@ Vasopressors: We create separate columns in the supertables as indicator variabl
 - M: `vent_tidal_rate_exhaled`: tidal volume 
 - M: `peep`: peep
 - M: `fio2`: fio2 (vent)
-- M: `o2_flow_rate`: Oxygen flow rate (nasal cannula)
-- M: `o2_flow_rate_units`: Units for oxygen flow rate 
 - M: `recorded_time`: For the measurements - like fio2, peep etc
 - M: `vent_start_time`: When this ventilation session started
 - M: `vent_stop_time`: When this ventilation session ended
