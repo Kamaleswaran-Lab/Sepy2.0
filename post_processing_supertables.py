@@ -7,13 +7,15 @@ import pandas as pd
 import numpy as np
 from pathlib import Path 
 import os 
+import argparse
 
 SUPERTABLE_FEATURES_MAP = {
     'age': 'age',
     'gender': 'gender',
     'race': 'race',
     'ethnicity': 'ethnicity',
-    'cci': 'cci',
+    'cci9': 'cci_icd9',
+    'cci10': 'cci_icd10',
     'height_cm': 'height_cm',
 
     'daily_weight_kg': 'daily_weight_kg',
@@ -57,10 +59,10 @@ SUPERTABLE_FEATURES_MAP = {
 
     'haptoglobin': 'haptoglobin',
     'hematocrit': 'hematocrit',
-    'hemoglobin': 'hemoglobin',
+    'hemoglobin': 'hemoglobin', #TODO: ask between this and hemoglobin_a1c
     'platelets': 'platelets',
     'white_blood_cell_count': 'white_blood_cell_count',
-    'N/L ratio': 'N/L ratio',
+    'n_to_l': 'n_to_l',
 
     'fibrinogen': 'fibrinogen',
     'inr': 'inr',
@@ -69,16 +71,17 @@ SUPERTABLE_FEATURES_MAP = {
     'd_dimer': 'd_dimer',
     'thrombin_time': 'thrombin_time',
 
-    'o2_flow_rate': 'o2_flow_rate',
+    'oxygen_flow_rate': 'o2_flow_rate',
     'fio2': 'fio2',
+    'vent_fio2': 'vent_fio2',
     'partial_pressure_of_carbon_dioxide_(paco2)': 'partial_pressure_of_carbon_dioxide_(paco2)',
     'partial_pressure_of_oxygen_(pao2)': 'partial_pressure_of_oxygen_(pao2)',
     'ph': 'ph',
     'saturation_of_oxygen_(sao2)': 'saturation_of_oxygen_(sao2)',
     'met_hgb': 'met_hgb',
     'carboxy_hgb': 'carboxy_hgb',
-    'pf_sp': 'pf_sp',
-    'pf_pa': 'pf_pa',
+    's2f_vent_fio2': 'pf_sp',
+    'p2f_vent_fio2': 'pf_pa',
 
     'transferrin': 'transferrin',
     'lactic_acid': 'lactic_acid',
@@ -93,23 +96,20 @@ SUPERTABLE_FEATURES_MAP = {
     'crp_high_sens': 'crp_high_sens',
     'procalcitonin': 'procalcitonin',
     'erythrocyte_sedimentation_rate_(esr)': 'erythrocyte_sedimentation_rate_(esr)',
+    
     'icu_type': 'icu_type',
-    'elapsed_icu_los': 'elapsed_icu_los',
-    'elapsed_hosp_los': 'elapsed_hosp_los',
+    'elapsed_icu': 'elapsed_icu_los',
+    'elapsed_hosp': 'elapsed_hosp_los',
     'imc': 'imc',
     'ed': 'ed',
     'mtp': 'mtp',
     'c_diff': 'c_diff',
     'covid': 'covid',
 
-    'procedure': 'procedure',
-    'sensitivity': 'sensitivity',
-    'culture_organism': 'culture_organism',
-
     'infection': 'infection',
     'sepsis': 'sepsis',
     'on_dialysis': 'on_dialysis',
-    'on_vent': 'on_vent',
+    'vent_status': 'on_vent',
     'on_pressors': 'on_pressors',
 
     'norepinephrine': 'norepinephrine',
@@ -132,3 +132,23 @@ SUPERTABLE_FEATURES_MAP = {
     'phenylephrine_dose_weight': 'phenylephrine_dose_weight',
     'vasopressin_dose_weight': 'vasopressin_dose_weight',
 }
+
+def prepare_df_for_csv(supertable: pd.DataFrame, features_map: dict) -> pd.DataFrame:
+    """
+    Prepare a supertable for csv export.
+    """
+    supertable_ = supertable[SUPERTABLE_FEATURES_MAP.keys()]
+    supertable_.rename(columns = SUPERTABLE_FEATURES_MAP, inplace = True)
+    
+    return supertable_
+
+def safe_read_pickle(path: str) -> pd.DataFrame:
+    """
+    Read a pickle file and return a dataframe.
+    """
+    try:
+        df = pd.read_pickle(path)
+    except Exception as e:
+        print(f"Error reading pickle file {path}: {e}")
+        return None
+    return df
