@@ -38,3 +38,7 @@ out_em/
 
 #pycache
 __pycache__/*
+
+#Oddjob specific files
+configurations/*oddjobs*
+slurmjobs/*oddjobs*
