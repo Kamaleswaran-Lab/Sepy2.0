@@ -11,29 +11,23 @@ Changes:
   - improved separation of concerns
 """
 import logging
+import pickle
 import warnings
+import clinicalFeatures
+import scoreCalculators
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-import time
 import pandas as pd
-import numpy as np
 
-from comorbidipy import comorbidity
-from typing import List, Dict, Any, Optional, Tuple
-
-import utils
-import sepyIMPORT
+from typing import Dict, Any, Tuple
 
 # Import from proper modules to avoid duplication
-import clinicalFeatures
-import importlib
-importlib.reload(clinicalFeatures)
 from clinicalFeatures import ClinicalDataProcessor, DerivedFeatures, SepyDictConfig, ClinicalData, supertable
+
 from scoreCalculators import (
-     ScoreType, ScoreCalculatorFactory, OrganSystemScoreCalculator, SIRSCalculator, SOFACalculator,
-    DEFAULT_LOOKBACK_HOURS, DEFAULT_LOOKFORWARD_HOURS, SEPSIS_SCORE_THRESHOLD
+    OrganSystemScoreCalculator, SIRSCalculator, SOFACalculator,
 )
-from dataclasses import dataclass
+
 
 
 
@@ -42,7 +36,8 @@ class sepyMaster:
     Main class that manages the yearly data and configuration.
     Serves as a factory for creating sepyCSN instances.
     """
-    def __init__(self, yearly_data_instance: Any, sepyDICTConfigs: Dict[str, Any], bounds: pd.DataFrame):
+    def __init__(self, yearly_data_instance: Any, sepyDICTConfigs: Dict[str, Any], 
+                 bounds: pd.DataFrame, save_dir: str):
         # Create configuration object
         self.config = SepyDictConfig.initialize_config(yearly_data_instance.v_quan_deyo_labels, 
                                                        yearly_data_instance.v_quan_elix_labels, 
@@ -50,7 +45,7 @@ class sepyMaster:
                                                        sepyDICTConfigs)
         self.bounds = bounds
         self.yearly_data_instance = yearly_data_instance
-        
+        self.save_dir = save_dir
         self.dataframes_id_mapping = {'beds': "csn",
                                       'demographics': "pat_id",
                                       'encounters': "csn",
@@ -124,7 +119,8 @@ class sepyMaster:
             data_processor=self.data_processor,
             sofa_calculator=self.sofa_calculator,
             sirs_calculator=self.sirs_calculator,
-            organ_system_calculator=self.organ_system_calculator
+            organ_system_calculator=self.organ_system_calculator,
+            save_dir=self.save_dir
         )
     
 
@@ -146,7 +142,8 @@ class sepyCSN:
         data_processor: ClinicalDataProcessor,
         sofa_calculator: SOFACalculator,
         sirs_calculator: SIRSCalculator,
-        organ_system_calculator: OrganSystemScoreCalculator
+        organ_system_calculator: OrganSystemScoreCalculator,
+        save_dir: str
     ):
         self.config = config
         self._data_processor = data_processor
@@ -154,7 +151,8 @@ class sepyCSN:
         self._sirs_calculator = sirs_calculator
         self._organ_system_calculator = organ_system_calculator
         self._derived_features = DerivedFeatures(config)
-        
+        self.save_dir = save_dir
+    
         # Initialize raw data
         self.clinical_data = ClinicalData.from_sliced_data(
             csn=csn, 
@@ -180,31 +178,54 @@ class sepyCSN:
         Main processing pipeline that coordinates all the steps needed
         to analyze a patient encounter.
         """        
-        # 1. create supertables
-        self.create_supertable()
+        logging.info(f"Processing CSN: {self.clinical_data.csn}")
+        try:
+            # 1. create supertables
+            self.create_supertable()
+            logging.info("Supertable created")
 
-        # 2. Calculate ICU stay 
-        self.calculate_icu_stay()
+            # 2. Calculate derived features
+            self._calculate_derived_features()
+            logging.info("Derived features calculated")
+            
+            # 2. Calculate ICU stay 
+            self.calculate_icu_stay()
+            logging.info("ICU stay calculated")
+            
+            # 3. Calculate suspicion time
+            self.calculate_t_susp()
+            logging.info("T suspicion calculated")
+            
+            # 4. Calculate scores
+            self.calculate_sirs_scores()
+            self.calculate_sofa_scores()
+            self.calculate_organ_system_scores()
+            logging.info("Scores calculated")
+            
+            # 6. Create sepsis indicator label
+            self.create_sepsis_flags()
+            logging.info("Sepsis flags created")
+            
+            # 7. Calculate indicator variables
+            self._calculate_indicator_variables()
+            logging.info("Indicator variables calculated")
+            
+            # 7. Mark as processed (this is the final step)
+            self._processed = True
+            self.save_supertable()
+            self.save_clinical_data()
+        except Exception as e:
+            logging.error(f"Error processing CSN: {self.clinical_data.csn}")
+            logging.error(e)
 
-        # 3. Calculate suspicion time
-        self.calculate_t_susp()
-
-        # 4. Calculate scores
-        self.calculate_sirs_scores()
-        self.calculate_sofa_scores()
-        self.calculate_organ_system_scores()
-
-        # 5. Calculate sepsis time
-        self.calculate_sep3_time()
-
-        # 6. Create sepsis indicator label
-        self.create_sepsis_flags()
-        
-        # 7. Calculate derived features
-        self._calculate_derived_features(self.supertable)
-
-        # 8. Mark as processed (this is the final step)
-        self._processed = True
+    def save_supertable(self):
+        self.supertable.supertable.to_pickle(f"{self.save_dir}/Supertables/{self.clinical_data.csn}.pkl")
+        logging.info(f"Supertable saved to {self.save_dir}/Supertables/{self.clinical_data.csn}.pkl")
+    
+    def save_clinical_data(self):
+        with open(f"{self.save_dir}/ClinicalData/{self.clinical_data.csn}.pkl", "wb") as f:
+            pickle.dump(self.clinical_data, f)
+        logging.info(f"Clinical data saved to {self.save_dir}/ClinicalData/{self.clinical_data.csn}.pkl")
     
     def create_supertable(self):
         self.supertable = self._data_processor.process_clinical_data(self.clinical_data)
@@ -216,11 +237,11 @@ class sepyCSN:
         if not self._super_table_created:
             raise ValueError("Must process clinical data into supertables before calculating ICU stay")
             
-        bed_status = self.supertable['bed_status']
-        if bed_status.icu.sum() > 0:
+        icu_status = self.supertable.supertable['icu']
+        if icu_status.sum() > 0:
             # mask all zeros (i.e. make nan) if there is a gap <=12hrs between ICU bed times then if fills it; otherwise it's zero
-            gap_filled = ((bed_status.mask(bed_status.icu == 0).icu.fillna(method='ffill', limit=12)) + 
-                          (bed_status.mask(bed_status.icu == 0).icu.fillna(method='bfill') * 0))
+            gap_filled = ((icu_status.mask(icu_status == 0).fillna(method='ffill', limit=12)) + 
+                          (icu_status.mask(icu_status == 0).fillna(method='bfill') * 0))
             self.gap_filled = gap_filled
             #converts index into a series 
             s = gap_filled.dropna().index.to_series()
@@ -240,6 +261,8 @@ class sepyCSN:
         else:
             self.clinical_data.add_event_time('first_icu_start', None)
             self.clinical_data.add_event_time('first_icu_end', None)
+        
+        logging.info("ICU stay calculated. First ICU start: %s, First ICU end: %s", self.clinical_data.event_times.get('first_icu_start'), self.clinical_data.event_times.get('first_icu_end'))
 
     def calculate_t_susp(self) -> None:
         """Calculate suspicion time"""
@@ -265,6 +288,7 @@ class sepyCSN:
         t_suspicion['t_suspicion'] = t_suspicion[['t_abx','t_clt']].min(axis=1)
         self.clinical_data.t_suspicion = t_suspicion.sort_values('t_suspicion')
         self._t_suspicion_calculated = True
+        logging.info("T suspicion calculated") 
 
     def calculate_sirs_scores(self):
         """Calculate SIRS scores for Sepsis-2 criteria."""
@@ -273,24 +297,39 @@ class sepyCSN:
         
         # Use the SIRS calculator from scoreCalculators
         sirs_df = self._sirs_calculator.calculate_scores(self.supertable.supertable)
-        self.clinical_data.sirs_scores = sirs_df
+        self.clinical_data.sirs_scores = sirs_df.copy()
+        sirs_df = sirs_df.rename(columns={'hourly_total':'sirs_total'})
+        sirs_df = sirs_df.rename(columns={'delta_24h':'sirs_delta_24h'})
+        self.supertable.supertable = pd.concat([self.supertable.supertable, sirs_df], axis = 1)
+        
         self._sirs_scores_calculated = True
+        logging.info("SIRS scores calculated")
 
     def calculate_sofa_scores(self):
         """Calculate SOFA scores for Sepsis-2 criteria."""
         if not self._super_table_created:
             raise ValueError("Must process clinical data into supertables before calculating SOFA scores")
         
-        self.supertable.supertable = self._sofa_calculator.calculate_scores(self.supertable.supertable)
+        sofa_df = self._sofa_calculator.calculate_scores(self.supertable.supertable)
+        self.clinical_data.sofa_scores = sofa_df.copy()
+        sofa_df = sofa_df.rename(columns={'hourly_total':'sofa_total'})
+        sofa_df = sofa_df.rename(columns={'delta_24h':'sofa_delta_24h'})
+        sofa_df = sofa_df.rename(columns={'hourly_total_mod':'sofa_total_mod'})
+        sofa_df = sofa_df.rename(columns={'delta_24h_mod':'sofa_delta_24h_mod'})
+        self.supertable.supertable = pd.concat([self.supertable.supertable, sofa_df], axis = 1)
         self._sofa_scores_calculated = True
+        logging.info("SOFA scores calculated")
 
     def calculate_organ_system_scores(self):
         """Calculate organ system scores for Sepsis-2 criteria."""
         if not self._super_table_created:
             raise ValueError("Must process clinical data into supertables before calculating organ system scores")
         
-        self.supertable.supertable = self._organ_system_calculator.calculate_scores(self.supertable.supertable)
+        organ_system_df = self._organ_system_calculator.calculate_scores(self.supertable.supertable)
+        self.supertable.supertable = pd.concat([self.supertable.supertable, organ_system_df], axis = 1)
+        self.clinical_data.organ_system_scores = organ_system_df
         self._organ_system_scores_calculated = True
+        logging.info("Organ system scores calculated")
 
     def create_sepsis_flags(self):
         """
@@ -301,8 +340,8 @@ class sepyCSN:
         if not self._super_table_created:
             raise ValueError("Must process clinical data into supertables before calculating sepsis time")
         
-        sep3_time_df = self.calc_sep3_time()
-        sep3_time_df_mod = self.calc_sep3_time_mod()
+        sep3_time_df = self.calculate_sep3_time()
+        sep3_time_df_mod = self.calculate_sep3_time_mod()
 
         # Set first sepsis 3 time in the flag dictionary
         df = sep3_time_df[sep3_time_df.notna().all(axis=1)].reset_index()
@@ -331,8 +370,9 @@ class sepyCSN:
             self.clinical_data.add_event_time('first_sep3_time_mod', df['t_sepsis3_mod'][0])
 
         self._sepsis_time_calculated = True
-    
-    def calc_sep3_time(self, look_back=24, look_forward=12):
+        logging.info("Sepsis flags created")
+
+    def calculate_sep3_time(self, look_back=24, look_forward=12):
         """
         Calculates the Sepsis-3 time based on suspicion of infection and SOFA (Sequential Organ Failure Assessment) scores.
         Args:
@@ -389,8 +429,10 @@ class sepyCSN:
         sep3_time_df['t_sepsis3'] = sep3_time_df.min(axis=1, skipna =False)
         
         self.clinical_data.sep3_time = sep3_time_df
+        logging.info("Sepsis-3 time calculated")
+        return sep3_time_df
 
-    def calc_sep3_time_mod(self, look_back=24, look_forward=12):
+    def calculate_sep3_time_mod(self, look_back=24, look_forward=12):
         """
         Calculates the Sepsis-3 time based on suspicion of infection and SOFA (Sequential Organ Failure Assessment) scores.
 
@@ -408,7 +450,10 @@ class sepyCSN:
         if suspicion_times.empty:
             df = self.clinical_data.sofa_scores
             #get index of times when total change is >= 2
-            sofa_times_mod = df[df['hourly_total_mod'] >= 2].index
+            if df.empty:
+                pass
+            else:
+                sofa_times_mod = df[df['hourly_total_mod'] >= 2].index
 
             if sofa_times_mod.empty:
                 pass
@@ -441,8 +486,9 @@ class sepyCSN:
         sep3_time_df_mod = sep3_time_df_mod.iloc[sep3_time_df_mod['index'].fillna(sep3_time_df_mod['t_suspicion']).argsort()].reset_index(drop=True).drop(columns=['t_SOFA_mod']).rename(columns={'index':'t_SOFA_mod'})
         
         self.clinical_data.sep3_time_mod = sep3_time_df_mod
-
-
+        logging.info("Sepsis-3 time (modified) calculated")
+        return sep3_time_df_mod
+    
     def get_sepsis_status(self) -> Dict[str, Any]:
         """Get the final sepsis determination and related metrics"""
         if not self._sofa_scores_calculated or not self._sirs_scores_calculated or not self._sepsis_time_calculated:
@@ -477,39 +523,39 @@ class sepyCSN:
 
     def _calculate_derived_features(self) -> None:
         """Calculate all derived clinical features"""
-        if not self._super_table_created or not self._sepsis_time_calculated:
-            raise ValueError("Must process clinical data into supertables and calculate sepsis time before calculating features")
+        if not self._super_table_created:
+            raise ValueError("Must process clinical data into supertables before calculating features")
             
         # process height weight
         self.supertable.supertable = self._derived_features.height_weight_postprocessing(self.supertable.supertable)
         
-                # process MAP
+        # process MAP
         best_map_df = self._derived_features.calculate_best_map(self.supertable.supertable)
         self.supertable.supertable = pd.concat([self.supertable.supertable, best_map_df], axis=1)
-        
+
         # process pulse pressure
-        pulse_pressure_df = self._derived_features.calculate_pulse_pressure_vectorized(self.supertable.supertable)
+        pulse_pressure_df = self._derived_features.calculate_pulse_pressure(self.supertable.supertable)
         self.supertable.supertable = pd.concat([self.supertable.supertable, pulse_pressure_df], axis=1)
         
         # process fio2
         self.supertable.supertable = self._derived_features.fio2_decimal(self.supertable.supertable, fio2_column='fio2')
         self.supertable.supertable = self._derived_features.fio2_decimal(self.supertable.supertable, fio2_column='vent_fio2')
-        
+
         # process nl
         nl_df = self._derived_features.calculate_nl(self.supertable.supertable)
         self.supertable.supertable = pd.concat([self.supertable.supertable, nl_df], axis=1)
-        
+
         # process pf
         pf_df = self._derived_features.calculate_pf(self.supertable.supertable)
         self.supertable.supertable = pd.concat([self.supertable.supertable, pf_df], axis=1)
-        
+
         # process pressors
         self.supertable.supertable = self._derived_features.calculate_all_pressors(self.supertable.supertable)
-
+        
         # anion gap 
         anion_gap_df = self._derived_features.calculate_anion_gap(self.supertable.supertable)
-        self.supertable.supertable = pf.concat([self.supertable.supertable, anion_gap_df])
-
+        self.supertable.supertable = pd.concat([self.supertable.supertable, anion_gap_df], axis = 1)
+        
         #Worst pf
         worst_pf_pa, worst_pf_pa_time, worst_pf_sp, worst_pf_sp_time = self._derived_features.calculate_worst_pf(self.supertable.supertable)
         self.clinical_data.add_event_time('worst_pf_pa', worst_pf_pa)
@@ -521,6 +567,7 @@ class sepyCSN:
         pressor_flag_df = self._derived_features.flag_variables_pressors(self.supertable.supertable)
         self.supertable.supertable = pd.concat([self.supertable.supertable, pressor_flag_df], axis=1)
 
+    def _calculate_indicator_variables(self):
         # flag sepsis, t sus
         tsus_df, sepsis_df = self._derived_features.create_infection_sepsis_time(self.supertable.supertable, 
                                                                                  self.clinical_data.t_suspicion, 
@@ -533,7 +580,7 @@ class sepyCSN:
                                                                    self.clinical_data.event_times.get('first_icu_end'))
         self.supertable.supertable = pd.concat([self.supertable.supertable, elapsed_icu_df], axis=1)
         elapsed_hosp_df = self._derived_features.create_elapsed_hosp(self.supertable.supertable, 
-                                                                     self.supertable.time_index[0], 
-                                                                     self.supertable.time_index[-1])
+                                                                     self.clinical_data.event_times.get('hospital_admission_date_time'), 
+                                                                     self.clinical_data.event_times.get('hospital_discharge_date_time'))
         self.supertable.supertable = pd.concat([self.supertable.supertable, elapsed_hosp_df], axis=1)
 

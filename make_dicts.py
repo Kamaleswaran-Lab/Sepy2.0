@@ -42,10 +42,12 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from functools import partial
 logging.basicConfig(level=logging.INFO)
 
+import sys
+sys.path.append("/hpc/home/ma618/Sepy/")
+
 import sepyIMPORT as si
 import sepyDICT as sd
 import utils
-
 
 
 
@@ -63,21 +65,35 @@ def import_data_frames(yearly_instance, configs):
         "Sepy is currently reading flat files and importing them for analysis. Thank you for waiting."
     )
     for method_name, params in configs["yearly_instance"].items():
-        data_type = method_name.split('import_')[-1]
-        params['data_type'] = data_type
-        yearly_instance.import_data(**params)
-    
+        method = getattr(yearly_instance, method_name, None)
+        if callable(method):
+            # check if method requires numeric_cols parameter and access list in sepyIMPORT instnace
+            if "numeric_cols" in params and isinstance(params["numeric_cols"], str):
+                params["numeric_cols"] = getattr(yearly_instance, params["numeric_cols"], None)
+        method(**params)
     logging.info(f"Sepy took {time.time() - import_start_time} (s) to create a yearly pickle.")
 
 ###########################################################################
 ############################# Make Supertables ###########################
 ###########################################################################
-def process_csn(
-    encounter_csn,
-    pickle_save_path,
-    thresholds,
-    yearly_data_instance,
-    sepyConfigs
+def make_sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir):
+    """
+    Creates a sepyMaster instance for a given year.
+    
+    Args:
+        yearly_data_instance (object): An instance of the `sepyIMPORT` class containing the yearly data.
+        sepyConfigs (dict): A dictionary containing the configuration settings for the sepyDICT class.  
+        bounds (dict): A dictionary containing the threshold values for the supertable.
+        save_dir (str): The directory where the supertable will be saved.
+    Returns:
+        sepyMaster: An instance of the `sepyMaster` class containing the processed encounter data.
+    """
+    sepyMaster_instance = sd.sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir)
+    return sepyMaster_instance
+
+def make_sepyCSN(
+    sepyMaster_instance,
+    encounter_csn
 ):
     """
     Processes a single patient encounter (CSN) and serializes the encounter data to a pickle file.
@@ -91,21 +107,12 @@ def process_csn(
     Returns:
         sepyDICT: An instance of the `sepyDICT` class containing the processed encounter data.
     """
-    file_name = pickle_save_path / (str(encounter_csn) + ".pickle")
     # instantiate class for single encounter
-    encounter_instance = sd.sepyDICT(
-        yearly_data_instance, encounter_csn, thresholds, sepyConfigs
-    )
-    # create encounter dictionary
-    dictionary_instance = encounter_instance.encounter_dict
-    # create a pickle file for encounter
-    picklefile = open(file_name, "wb")
-    # pickle the encounter dictionary and write it to file
-    pickle.dump(dictionary_instance, picklefile)
-    # close the file
-    picklefile.close()
-    # return dictionary for summary report functions
-    return encounter_instance
+    sepyCSN_instance = sepyMaster_instance.create_csn_instance(encounter_csn)
+    
+    sepyCSN_instance.process()
+
+    return
 
 
 def process_csn_with_summaries(
@@ -113,9 +120,7 @@ def process_csn_with_summaries(
     count, 
     chunk_size, 
     year, 
-    supertable_write_path, 
-    bounds, 
-    import_instance,
+    sepyMaster_instance,
     sepyConfigs
 ):
     """
@@ -126,10 +131,8 @@ def process_csn_with_summaries(
         count: The count of this CSN in the processing list
         chunk_size: Total number of CSNs in this chunk
         year: The year being processed
-        supertable_write_path: Path to save the supertable
-        bounds: Threshold values for labs
-        import_instance: The yearly data import instance
-        sepyConfigs: The configuration settings for the sepyDICT class
+        sepyMaster_instance: The sepyMaster instance
+        save_dir: The directory to save the supertable
     Returns:
         tuple: A tuple containing all the summary dataframes or None values if errors occurred
     """
@@ -145,7 +148,7 @@ def process_csn_with_summaries(
     
     try:
         logging.info(f"Sepy- Processing patient csn: {csn}, {count} of {chunk_size} for year {year}")
-        instance = process_csn(csn, supertable_write_path, bounds, import_instance, sepyConfigs)
+        instance = make_sepyCSN(sepyMaster_instance, csn)
         logging.info(f"Sepy- Instance created for csn: {csn}")
     except Exception as e:
         error_msg = str(e.args[0]) if e.args else str(e)
@@ -180,7 +183,7 @@ def process_csn_with_summaries(
         logging.error(f"Sepy- Error in Encounter Summary for csn {csn}: {e}")
     
     try:
-        result['comorbidity_summary'] = utils.comorbidity_summary(csn, instance)
+        result['comorbidity_summary'] = utils.comorbidity_summary(csn, instance, sepyConfigs)
     except Exception as e:
         logging.error(f"Sepy- Error in Comorbidity Summary for csn {csn}: {e}")
     
@@ -191,11 +194,11 @@ def process_csn_with_summaries(
 if __name__ == "__main__":
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Process EMR data for a specific year')
-    parser.add_argument('year', type=int, help='The year for which data is being processed')
-    parser.add_argument('data_config', type=str, default='configurations/emory_config.yaml', help='Path to the data configuration file in YAML format')
-    parser.add_argument('sepy_config', type=str, default='configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
-    parser.add_argument('num_processes', type=int, default=10, help='Number of processes to use')
-    parser.add_argument('processor_assignment', type=int, help='Processor assignment')
+    parser.add_argument('--year', type=int, help='The year for which data is being processed')
+    parser.add_argument('--data_config', type=str, default='configurations/emory_config.yaml', help='Path to the data configuration file in YAML format')
+    parser.add_argument('--sepy_config', type=str, default='configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
+    parser.add_argument('--num_processes', type=int, default=10, help='Number of processes to use')
+    parser.add_argument('--processor_assignment', type=int, help='Processor assignment')
     args = parser.parse_args()
     
     year = args.year
@@ -212,15 +215,15 @@ if __name__ == "__main__":
     #####################################################
     ######### Create Dictionary of File Paths ###########
     #####################################################
+    
 
-    #parent directory for all the flat files
-    DATA_PATH = Path(dataConfig["data_path"])
+    DATA_PATH = Path(os.path.expandvars(dataConfig["data_path"]))
     #path to the directory containing the grouping files, i.e., files that map component id to clinical features
-    GROUPINGS_PATH = Path(dataConfig["groupings_path"])
+    GROUPINGS_PATH = Path(os.path.expandvars(dataConfig["groupings_path"]))
     #path to the directory where the supertable pickles will be written
-    SUPERTABLE_OUTPUT_PATH = Path(dataConfig["supertable_output_path"])
+    SUPERTABLE_OUTPUT_PATH = Path(os.path.expandvars(dataConfig["supertable_output_path"]))
     #path to the directory where the yearly dictionaries will be written
-    YEARLY_DICTIONARY_OUTPUT_PATH = Path(dataConfig["yearly_pickle_output_path"])
+    YEARLY_DICTIONARY_OUTPUT_PATH = Path(os.path.expandvars(dataConfig["yearly_pickle_output_path"]))
     YEARLY_DICTIONARY_FILE_NAME = os.path.join(YEARLY_DICTIONARY_OUTPUT_PATH, dataConfig["dataset_identifier"] + str(year) + ".pickle")
 
     paths = {}
@@ -228,14 +231,14 @@ if __name__ == "__main__":
     grouping_types = dataConfig["dictionary_paths"]["grouping_types"]
     flatfile_types = dataConfig["dictionary_paths"]["flatfile_types"]
     combined_files = dataConfig["dictionary_paths"]["combined_files"]
-    
+
     for comorbidity_type, comorbidity_file in comorbidity_types:
-        try:
-            paths[f"{comorbidity_type}"] = glob.glob(
-                f"{GROUPINGS_PATH}/comorbidities/{comorbidity_file}"
-            )[0]
-        except IndexError:
-            logging.error(f"Sepy- could not find comorbidity file for {comorbidity_type}")
+            try:
+                paths[f"{comorbidity_type}"] = glob.glob(
+                    f"{GROUPINGS_PATH}/comorbidities/{comorbidity_file}"
+                )[0]
+            except IndexError:
+                logging.error(f"Sepy- could not find comorbidity file for {comorbidity_type}")
 
     for type, grouping_path in grouping_types:
         try:
@@ -254,10 +257,14 @@ if __name__ == "__main__":
     for combined_file in combined_files:
         try:
             paths[f"{combined_file[0]}"] = glob.glob(
-                f"{DATA_PATH}/{combined_file[1]}"
+                f"{DATA_PATH}/*{combined_file[1]}*"
             )[0]
+            
         except IndexError:
             logging.error(f"Sepy- could not find combined file for {combined_file[1]}")
+    print(paths)
+
+    file_dictionary = paths
 
     #####################################################
     ############ Create Pickle of Yearly Data ###########
@@ -268,7 +275,7 @@ if __name__ == "__main__":
             logging.info(f"Creating yearly pickle for {year}")
             logging.info(f"Yearly pickle will be saved to {YEARLY_DICTIONARY_FILE_NAME}")
 
-            import_instance = si.sepyIMPORT(paths, sepyConfigs)
+            import_instance = si.sepyIMPORT(paths, sepyConfigs, dataConfig)
             logging.info(f"An instance of the sepyIMPORT class was created for {year}")
             
             logging.info(f"Importing data frames for {year}")
@@ -311,8 +318,8 @@ if __name__ == "__main__":
             encounters_path = dataConfig["encounters_path"]
             if encounters_path == "ENCOUNTER_FILE":
                 encounters_path = paths["ENCOUNTER"]
-            logging.info(f"Sepy- You are trying to load the following CSN list: {encounters_path}")
-            
+            logging.info(f"Sepy- The encounters path: {encounters_path}")
+
             # set filters for encounters 
             encounter_type = dataConfig["encounter_type"] #IN, EM, all
             age = dataConfig["age"] #adult, pediatric, all
@@ -321,7 +328,7 @@ if __name__ == "__main__":
             specific_enc_filter = dataConfig["specific_enc_filter"] #yes, no
 
             # reads the list of csns from the encounters path
-            csn_df = pd.read_csv(encounters_path, sep = "|", header = 0)
+            csn_df = pd.read_csv(encounters_path, sep = "|")
             num_encounters = len(csn_df)
             logging.info(f"Sepy- The year {year} has {num_encounters} encounters before filtering.")
         except (IndexError, ValueError, TypeError) as e:
@@ -395,9 +402,13 @@ if __name__ == "__main__":
         logging.info(f"Sepy- The process_list head:\n {process_list.head()}")
         
         # create the directory for the supertables
-        supertable_write_path = SUPERTABLE_OUTPUT_PATH / str(year)
+        save_dir = SUPERTABLE_OUTPUT_PATH / str(year)
+        save_dir.mkdir(exist_ok = True, parents = True)
+        clinical_data_write_path = save_dir / "ClinicalData"
+        clinical_data_write_path.mkdir(exist_ok = True, parents = True)
+        supertable_write_path = save_dir / str(year)
         supertable_write_path.mkdir(exist_ok = True, parents = True)
-        logging.info(f"Sepy-Directory for year {year} was set to {supertable_write_path}")
+        logging.info(f"Sepy-Directory for year {year} was set to {save_dir}")
         
         # make empty list to handle csn's with errors
         error_list = []
@@ -408,11 +419,14 @@ if __name__ == "__main__":
         start_csn_creation = time.perf_counter()
 
         bounds = pd.read_csv(paths["variable_chart"])   
+       
+        sepyMaster_instance = make_sepyMaster(import_instance, sepyConfigs, bounds, save_dir)
+        logging.info(f"Sepy- A sepyMaster instance was created for {year}")
 
         ###########################################################################
         ######################### Make Dicts by CSN ###############################
         ###########################################################################
-        logging.info("making dicts")
+        logging.info("Making supertables")
         
         # Determine the number of workers for local multiprocessing
         # Use a smaller number of local processes to avoid overloading the system
@@ -425,9 +439,7 @@ if __name__ == "__main__":
             process_csn_with_summaries,
             chunk_size=len(process_list),
             year=year,
-            supertable_write_path=supertable_write_path,
-            bounds=bounds,
-            import_instance=import_instance,
+            sepyMaster_instance=sepyMaster_instance,
             sepyConfigs=sepyConfigs
         )
         

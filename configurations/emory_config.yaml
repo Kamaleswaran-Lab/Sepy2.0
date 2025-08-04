@@ -2,7 +2,7 @@
 ## assign unique_encounters_path to the path of the unique encounters file
 
 # PIPELINE INSTRUCTIONS
-make_yearly_pickle: "yes" # yes: make pickle files, no: do not make pickle files
+make_yearly_pickle: "no" # yes: make pickle files, no: do not make pickle files
 make_supertables: "yes" # yes: make supertables, no: do not make supertables
 
 

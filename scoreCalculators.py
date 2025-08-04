@@ -45,13 +45,6 @@ FILL_LIMIT_HOURS = 24
 VENT_FILL_LIMIT = 6
 
 
-class ScoreType(Enum):
-    """Enumeration of available score types."""
-    SOFA = "sofa"
-    SIRS = "sirs"
-    APACHE = "apache"
-    QSOFA = "qsofa"
-
 
 class ScoreCalculatorBase(ABC):
     """Abstract base class for all score calculators."""
@@ -222,6 +215,22 @@ class SOFACalculator(ScoreCalculatorBase):
             val = float("NaN")
         return val
     
+    def SOFA_neuro(self,
+                  row):
+        if (row['gcs_total_score'] == 15):
+            val = 0
+        elif (row['gcs_total_score'] >= 13) & (row['gcs_total_score'] <= 14):
+            val = 1
+        elif (row['gcs_total_score'] >= 10) & (row['gcs_total_score'] <= 12):
+            val = 2
+        elif (row['gcs_total_score'] >= 6) & (row['gcs_total_score'] <= 9):
+            val = 3
+        elif (row['gcs_total_score'] < 6):
+            val = 4
+        else:
+            val = float("NaN")
+        return val
+    
     def calculate_single_score(self, row: pd.Series) -> pd.DataFrame:
         """Calculate SOFA score for a single row."""
         scores = {}
@@ -314,7 +323,7 @@ class SIRSCalculator(ScoreCalculatorBase):
     def __init__(self, config: dict):
         self.config = config
         self.components = ['SIRS_resp', 'SIRS_cardio', 'SIRS_temp', 'SIRS_wbc']
-        self.temperature_in_celsius = config['temperature_in_celsius']
+        self.temperature_in_celsius = config.temperature_in_celsius
     
     def SIRS_resp(self,
                   row,
@@ -417,7 +426,7 @@ class SIRSCalculator(ScoreCalculatorBase):
                 
         # Calculate hourly totals for each row
         sirs_df['hourly_total'] = sirs_df.sum(axis=1)
-    
+        
         # Calculate POST 24hr delta in total SIRS Score
         sirs_df['delta_24h'] = sirs_df['hourly_total'].\
         rolling(window=window, min_periods=24).\
@@ -530,9 +539,9 @@ class OrganSystemScoreCalculator(ScoreCalculatorBase):
         with warnings.catch_warnings():
             warnings.simplefilter(action = 'ignore', category = FutureWarning)
             out = self.aki_flagger.returnAKIpatients(dfin)
-            aki_column = out['aki']
-        
-        aki_df = pd.DataFrame(index = df.index, columns = ['AKI_score'])
+            aki_column = out['aki'].values
+
+        aki_df = pd.DataFrame(index = df.index, columns = ['aki_score'])
         aki_df['aki_score'] = aki_column
         return aki_df
     
@@ -553,8 +562,9 @@ class OrganSystemScoreCalculator(ScoreCalculatorBase):
     def calculate_scores(self, df: pd.DataFrame) -> pd.DataFrame:
         """Calculate all organ system scores for DataFrame."""
         organ_system_df = pd.DataFrame(index=df.index)
-        organ_system_df['meld_score']  = self.calculate_meld_score(df)
-        organ_system_df['aki_score'] = self.calculate_aki_score(df)
+        meld_df = self.calculate_meld_score(df)
+        aki_df = self.calculate_aki_score(df)
+        organ_system_df = pd.concat([meld_df, aki_df], axis = 1)
         return organ_system_df
     
     def calculate_single_score(self, row: pd.Series) -> pd.DataFrame:

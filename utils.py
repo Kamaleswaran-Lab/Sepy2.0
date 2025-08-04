@@ -27,7 +27,7 @@ def sofa_summary(encounter_csn, encounter_instance):
         encounter_instance (sepyDICT): An instance of the sepyDICT class, containing the encounter data.
     """
     sofa_scores = (
-        encounter_instance.encounter_dict["sofa_scores"]
+        encounter_instance.clinical_data.sofa_scores
         .reset_index()
         .rename(columns={"index": "time_stamp"})
     )
@@ -42,7 +42,7 @@ def sepsis3_summary(encounter_csn, encounter_instance):
         encounter_csn (str): The unique encounter ID (CSN) for the patient encounter.
         encounter_instance (sepyDICT): An instance of the sepyDICT class, containing the encounter data.
     """
-    sep3_time = encounter_instance.encounter_dict["sep3_time"]
+    sep3_time = encounter_instance.clinical_data.sep3_time
     sep3_time["csn"] = encounter_csn
     return sep3_time
 
@@ -55,7 +55,7 @@ def sirs_summary(encounter_csn, encounter_instance):
         encounter_instance (sepyDICT): An instance of the sepyDICT class, containing the encounter data.
     """
     sirs_scores = (
-        encounter_instance.encounter_dict["sirs_scores"]
+        encounter_instance.clinical_data.sirs_scores
         .reset_index()
         .rename(columns={"index": "time_stamp"})
     )
@@ -70,7 +70,7 @@ def sepsis2_summary(encounter_csn, encounter_instance):
         encounter_csn (str): The unique encounter ID (CSN) for the patient encounter.
         encounter_instance (sepyDICT): An instance of the sepyDICT class, containing the encounter data.
     """
-    sep2_time = encounter_instance.encounter_dict["sep2_time"]
+    sep2_time = encounter_instance.clinical_data.sep2_time
     sep2_time["csn"] = encounter_csn
     return sep2_time
 
@@ -83,26 +83,15 @@ def enc_summary(encounter_instance):
         encounter_instance (sepyDICT): An instance of the sepyDICT class, containing the encounter data, including flags, static features, and event times.
     """
     enc_summary_dict = {
-        **encounter_instance.flags,
-        **encounter_instance.static_features,
-        **encounter_instance.event_times,
+        **encounter_instance.clinical_data.flags,
+        **encounter_instance.clinical_data.static_features,
+        **encounter_instance.clinical_data.event_times,
     }
     enc_summary_df = pd.DataFrame(enc_summary_dict, index=[0]).set_index(["csn"])
     return enc_summary_df
 
-def create_comorbidity_summary_dicts(config_data):
-    """
-    Creates a dictionary of comorbidity summary dictionaries based on the configuration data.
 
-    Args:
-        config_data (dict): A dictionary containing configuration data for comorbidity summaries.
-    """
-    comorbidity_summary_dicts = {}
-    for summary_name in config_data['comorbidity_summary']:
-        comorbidity_summary_dicts[summary_name + '_dict'] = {}
-    return comorbidity_summary_dicts
-
-def comorbidity_summary(encounter_csn, encounter_instance, config_data, comorbidity_summary_dicts):
+def comorbidity_summary(encounter_csn, encounter_instance, config_data):
     """
     Summarizes the comorbidity data for a single patient encounter based on a configuration file.
 
@@ -110,11 +99,14 @@ def comorbidity_summary(encounter_csn, encounter_instance, config_data, comorbid
         encounter_csn (str): The unique encounter ID (CSN) for the patient encounter.
         encounter_instance (sepyDICT): An instance of the sepyDICT class, containing comorbidity-related data.
         config_data (dict): A dictionary containing configuration data for comorbidity summaries.
-        comorbidity_summary_dicts (dict): A dictionary of comorbidity summary dictionaries.
     """
+    comorbidity_summary_dicts = {}
+    for summary_name in config_data['comorbidity_summary']:
+        comorbidity_summary_dicts[summary_name + '_dict'] = {}
+        
     for summary_name in config_data['comorbidity_summary']:
         try:
-            comorbidity_summary_dicts[summary_name + '_dict'][encounter_csn] = getattr(encounter_instance, f"{summary_name}_PerCSN").icd_count
+            comorbidity_summary_dicts[summary_name + '_dict'][encounter_csn] = getattr(encounter_instance.clinical_data, f"{summary_name}_PerCSN").icd_count
         except AttributeError:
             logging.warning(f"Attribute {summary_name}_PerCSN not found for csn {encounter_csn}")
         except KeyError as e:
@@ -203,7 +195,8 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
             )
             
         elif file_path.endswith(".dsv"):
-            df = pd.read_csv(
+            try:
+                df = pd.read_csv(
                 file_path,
                 header=header,
                 index_col=index_col,
@@ -214,7 +207,22 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
                 memory_map=memory_map,
                 date_parser=date_parser,
                 dtype=dtype
-            )
+                )
+            except Exception as e:
+                print(f"Error reading file {file_path}: {str(e)}")
+                print(f"Attempting to read file with no pipe separator")    
+                df = pd.read_csv(
+                    file_path,
+                    header=header,
+                    index_col=index_col,
+                    parse_dates=date_cols,
+                    na_values=na_values,
+                    low_memory=low_memory,  
+                    memory_map=memory_map,
+                    date_parser=date_parser,
+                    dtype=dtype
+                )
+                print(f"File read successfully with {df.shape[0]} rows and {df.shape[1]} columns")
             
         elif file_path.endswith(".pkl") or file_path.endswith(".pickle"):
             df = pd.read_pickle(file_path)
