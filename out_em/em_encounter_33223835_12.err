@@ -1,0 +1,28 @@
+/var/spool/slurmd/job33223835/slurm_script: line 24: /home/maror24/anaconda3/bin/activate: No such file or directory
+INFO:root:Sepy- The total number of processes: 13
+INFO:root:Sepy- The import year is: 2019
+INFO:root:Sepy- The processor assignment is: 12
+ERROR:root:Sepy- could not find flatfile type for *CLINICAL_NOTES*
+INFO:root:Skipping creation of yearly pickle for 2019 -  it should already exist
+INFO:root:Yearly pickle for 2019 exists
+INFO:root:Sepy- The encounters path: /hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI/2019/CJSEPSIS_ENCOUNTER_2019.dsv
+INFO:root:Sepy- The year 2019 has 253611 encounters before filtering.
+INFO:root:Sepy- No specific encounter filter was applied
+INFO:root:Sepy- The year 2019 has 83611 encounters after filtering.
+INFO:root:Sepy- The year 2019 has 83416 encounters after age filtering.
+INFO:root:Sepy- The year 2019 has 83416 encounters after filtering and dropping duplicates.
+INFO:root:Sepy- The ~chunk size is 6416
+INFO:root:Sepy- The list of chunks has 13 unique dataframes.
+INFO:root:Sepy- The process_list head:
+ 234359    dae84bbe996377f7475d577c4989b858b6ba175bb017e9...
+234366    9fe4d28c4c1426e10765b2182659f90ec778e7f17e4861...
+234374    5a8f78c834d7c4b9206b41ff1de173834e727106c617f1...
+234376    b9a5c1df7a79503b134c92cba16c1d46647d72bc28d662...
+234378    e7f24cf66254abcfd8c317d6c4472633720d56f5f3afb2...
+Name: csn, dtype: object
+INFO:root:Sepy-Directory for year 2019 was set to /hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables_test/2019
+INFO:root:Sepy- A sepyMaster instance was created for 2019
+INFO:root:Making supertables
+INFO:root:Sepy- Using 4 local worker processes
+/var/spool/slurmd/job33223835/slurm_script: line 28: 281383 Killed                  python /hpc/home/ma618/Sepy/make_dicts.py --year $YEAR --num_processes $NUM_OF_PROCESSES --processor_assignment $SLURM_ARRAY_TASK_ID
+slurmstepd: error: Detected 1 oom_kill event in StepId=33223835.batch. Some of the step tasks have been OOM Killed.
