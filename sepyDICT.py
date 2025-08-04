@@ -68,11 +68,6 @@ class sepyMaster:
                                       'cpt_procedures': "csn",
                                       'dialysis': "csn"}
 
-        # Initialize shared processors that can be reused
-        self.data_processor = ClinicalDataProcessor(self.config)
-        self.sofa_calculator = SOFACalculator(self.config)
-        self.sirs_calculator = SIRSCalculator(self.config)
-        self.organ_system_calculator = OrganSystemScoreCalculator(self.config)
 
     def slice_master_dataframes(self, identifier: Any, name: str) -> Tuple[pd.DataFrame, str]:
         """Safely slice yearly_data_instance by identifier."""
@@ -116,10 +111,6 @@ class sepyMaster:
             pat_id = self.get_identifier(csn, "pat_id"),
             config=self.config,
             sliced_data=sliced_data,
-            data_processor=self.data_processor,
-            sofa_calculator=self.sofa_calculator,
-            sirs_calculator=self.sirs_calculator,
-            organ_system_calculator=self.organ_system_calculator,
             save_dir=self.save_dir
         )
     
@@ -139,17 +130,14 @@ class sepyCSN:
         pat_id: Any,
         config: SepyDictConfig,
         sliced_data: Dict[str, pd.DataFrame],
-        data_processor: ClinicalDataProcessor,
-        sofa_calculator: SOFACalculator,
-        sirs_calculator: SIRSCalculator,
-        organ_system_calculator: OrganSystemScoreCalculator,
         save_dir: str
     ):
         self.config = config
-        self._data_processor = data_processor
-        self._sofa_calculator = sofa_calculator
-        self._sirs_calculator = sirs_calculator
-        self._organ_system_calculator = organ_system_calculator
+        self._data_processor = ClinicalDataProcessor(self.config)
+        self._sofa_calculator = SOFACalculator(self.config)
+        self._sirs_calculator = SIRSCalculator(self.config)
+        self._organ_system_calculator = OrganSystemScoreCalculator(self.config)
+        
         self._derived_features = DerivedFeatures(config)
         self.save_dir = save_dir
     
@@ -368,7 +356,7 @@ class sepyCSN:
             self.clinical_data.add_event_time('first_sep3_susp_mod', df['t_suspicion'][0])
             self.clinical_data.add_event_time('first_sep3_SOFA_mod', df['t_SOFA_mod'][0])
             self.clinical_data.add_event_time('first_sep3_time_mod', df['t_sepsis3_mod'][0])
-
+        
         self._sepsis_time_calculated = True
         logging.info("Sepsis flags created")
 

@@ -504,23 +504,29 @@ class ClinicalDataProcessor:
             
             for _, proc_row in procedures_df.iterrows():
                 if pd.notna(proc_row[time_col_start]):
-                    proc_hour = pd.Timestamp(proc_row[time_col_start]).floor(self.config.constants['resample_frequency'])
-
-                    if proc_hour in index:
-                        proc_hour_start = proc_hour
+                    start_index = time_index.loc[time_index >= proc_row[time_col_start]]
+                    if start_index.empty:
+                        logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but not found in supertable index, imputing to first supertable index")
+                        proc_hour_start = time_index.iloc[0]
                     else:
-                        logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but not found in supertable index")
-                        continue 
+                        proc_hour_start = start_index.iloc[0]
 
                     if pd.notna(proc_row[time_col_end]):
-                        proc_hour_end = pd.Timestamp(proc_row[time_col_end]).floor(self.config.constants['resample_frequency'])
-                        if proc_hour_end in index and proc_hour_start <= proc_hour_end:
+                        end_index = time_index.loc[time_index >= proc_row[time_col_end]]
+                        if end_index.empty:
+                            logger.warning(f"Procedure {proc_row[procedure_name_col]} ended at {proc_row[time_col_end]} but not found in supertable index, imputing to last supertable index")
+                            proc_hour_end = time_index.iloc[-1]
+                        else:
+                            proc_hour_end = end_index.iloc[0]
+                            
+                        if proc_hour_start <= proc_hour_end:
                             result_series.loc[proc_hour_start:proc_hour_end] = proc_row[procedure_name_col]
                         else:
                             logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but ended at {proc_row[time_col_end]}")
                             result_series.loc[proc_hour_start:] = proc_row[procedure_name_col]
                     else:
-                        logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but {time_col_end} not found in supertable index")
+                        logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but {time_col_end} not found in supertable index, imputing to last supertable index")
+                        proc_hour_end = time_index.iloc[-1]
                         result_series.loc[proc_hour_start:] = proc_row[procedure_name_col]
             
             return result_series
@@ -708,12 +714,15 @@ class ClinicalDataProcessor:
         return cumulative_fluids_df
         
     
-    def static_features_staging(self, age: int, gender: Any, diagnosis_PerCSN: pd.DataFrame, time_index: pd.DatetimeIndex) -> pd.DataFrame:
+    def static_features_staging(self, age: int, gender: Any, race: Any, ethnicity: Any, 
+                                diagnosis_PerCSN: pd.DataFrame, time_index: pd.DatetimeIndex) -> pd.DataFrame:
         """
         Creates columns for age, gender, and comorbidity scores
         Args:
             age: int
             gender: Any
+            race: Any
+            ethnicity: Any
             diagnosis_PerCSN: pd.DataFrame
             time_index: pd.DatetimeIndex
         Returns:
@@ -760,6 +769,9 @@ class ClinicalDataProcessor:
         static_features = pd.DataFrame(index=time_index)
         static_features['age'] = [age]*len(static_features)
         static_features['gender'] = [gender]*len(static_features)
+        static_features['race'] = [race]*len(static_features)
+        static_features['ethnicity'] = [ethnicity]*len(static_features)
+        
         static_features['cci9'] = [cci9]*len(static_features)
         static_features['cci10'] = [cci10]*len(static_features)
 
@@ -863,7 +875,9 @@ class ClinicalDataProcessor:
         
         #Step 2: Add static features
         static_features_columns = self.static_features_staging(clinical_data.static_features['age'],\
-                                                             clinical_data.static_features['gender'],
+                                                             clinical_data.static_features['gender'], \
+                                                             clinical_data.static_features['race'], \
+                                                             clinical_data.static_features['ethnicity'], \
                                                              clinical_data.diagnosis,
                                                              supertable_df.time_index)
         supertable_df.supertable = pd.concat([supertable_df.supertable, static_features_columns], axis=1)

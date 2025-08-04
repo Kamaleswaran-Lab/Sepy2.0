@@ -18,7 +18,7 @@ def load_yaml(filename):
 ###########################################################################
 ############################# Summary Functions ###########################
 ###########################################################################
-def sofa_summary(encounter_csn, encounter_instance):
+def sofa_summary(encounter_instance):
     """
     Summarizes the SOFA scores for a single patient encounter and returns a dataframe.
 
@@ -31,10 +31,10 @@ def sofa_summary(encounter_csn, encounter_instance):
         .reset_index()
         .rename(columns={"index": "time_stamp"})
     )
-    sofa_scores["csn"] = encounter_csn
+    sofa_scores["csn"] = encounter_instance.clinical_data.csn
     return sofa_scores
 
-def sepsis3_summary(encounter_csn, encounter_instance):
+def sepsis3_summary(encounter_instance):
     """
     Summarizes the Sepsis-3 time data for a single patient encounter and returns a dataframe.
 
@@ -42,11 +42,13 @@ def sepsis3_summary(encounter_csn, encounter_instance):
         encounter_csn (str): The unique encounter ID (CSN) for the patient encounter.
         encounter_instance (sepyDICT): An instance of the sepyDICT class, containing the encounter data.
     """
-    sep3_time = encounter_instance.clinical_data.sep3_time
-    sep3_time["csn"] = encounter_csn
-    return sep3_time
+    sep3_time = encounter_instance.clinical_data.event_times['first_sep3_time_mod']
+    sep3_time_df = pd.DataFrame(columns = ['csn', 'first_sep3_time_mod'], index = [0])
+    sep3_time_df["csn"] = encounter_instance.clinical_data.csn
+    sep3_time_df["first_sep3_time_mod"] = sep3_time
+    return sep3_time_df
 
-def sirs_summary(encounter_csn, encounter_instance):
+def sirs_summary(encounter_instance):
     """
     Summarizes the SIRS scores for a single patient encounter and returns a dataframe.
 
@@ -59,10 +61,10 @@ def sirs_summary(encounter_csn, encounter_instance):
         .reset_index()
         .rename(columns={"index": "time_stamp"})
     )
-    sirs_scores["csn"] = encounter_csn
+    sirs_scores["csn"] = encounter_instance.clinical_data.csn
     return sirs_scores
 
-def sepsis2_summary(encounter_csn, encounter_instance):
+def sepsis2_summary(encounter_instance):
     """
     Summarizes the Sepsis-2 time data for a single patient encounter and returns a dataframe.
 
@@ -71,7 +73,7 @@ def sepsis2_summary(encounter_csn, encounter_instance):
         encounter_instance (sepyDICT): An instance of the sepyDICT class, containing the encounter data.
     """
     sep2_time = encounter_instance.clinical_data.sep2_time
-    sep2_time["csn"] = encounter_csn
+    sep2_time["csn"] = encounter_instance.clinical_data.csn
     return sep2_time
 
 def enc_summary(encounter_instance):
@@ -87,11 +89,13 @@ def enc_summary(encounter_instance):
         **encounter_instance.clinical_data.static_features,
         **encounter_instance.clinical_data.event_times,
     }
-    enc_summary_df = pd.DataFrame(enc_summary_dict, index=[0]).set_index(["csn"])
+    enc_summary_df = pd.DataFrame(enc_summary_dict, index=[0])
+    enc_summary_df["csn"] = encounter_instance.clinical_data.csn
+    enc_summary_df = enc_summary_df.set_index(["csn"])
     return enc_summary_df
 
 
-def comorbidity_summary(encounter_csn, encounter_instance, config_data):
+def comorbidity_summary(encounter_instance, config_data):
     """
     Summarizes the comorbidity data for a single patient encounter based on a configuration file.
 
@@ -100,6 +104,7 @@ def comorbidity_summary(encounter_csn, encounter_instance, config_data):
         encounter_instance (sepyDICT): An instance of the sepyDICT class, containing comorbidity-related data.
         config_data (dict): A dictionary containing configuration data for comorbidity summaries.
     """
+    encounter_csn = encounter_instance.clinical_data.csn
     comorbidity_summary_dicts = {}
     for summary_name in config_data['comorbidity_summary']:
         comorbidity_summary_dicts[summary_name + '_dict'] = {}
@@ -294,74 +299,50 @@ def get_bounds(var_name, bounds):
     return lowerbound, upperbound
 
 
+class BoundAggregator:
+    def __init__(self, lowerbound, upperbound, operation='mean'):
+        self.lowerbound = lowerbound
+        self.upperbound = upperbound
+        self.operation = operation
+    
+    def __call__(self, array):
+        try:
+            array = array.astype(float)
+        except (TypeError, ValueError):
+            return np.nan
+        
+        if np.isnan(array).all():
+            return np.nan
+        
+        values = array[~np.isnan(array)]
+        if not np.isnan(self.lowerbound):
+            values = values[values >= self.lowerbound]
+        if not np.isnan(self.upperbound):
+            values = values[values <= self.upperbound]
+
+        if len(values) == 0:
+            return np.nan
+            
+        if self.operation == 'mean':
+            return np.mean(values)
+        elif self.operation == 'min':
+            return np.min(values)
+        elif self.operation == 'max':
+            return np.max(values)
+
 def agg_fn_wrapper(var_name, bounds):
     try:
         lowerbound, upperbound = get_bounds(var_name, bounds)
     except Exception as e:
         logging.error(f"No bounds found for {var_name}")
         return "mean"
-
-    def agg_fn(array):
-        try:
-            array = array.astype(float)
-        except (TypeError, ValueError):
-            return np.nan
-        
-        if np.isnan(array).all():
-            return np.nan
-        
-        values = array[~np.isnan(array)]
-        if not np.isnan(lowerbound):
-            values = values[values >= lowerbound]
-        if not np.isnan(upperbound):
-            values = values[values <= upperbound]
-
-        return np.mean(values) if len(values) > 0 else np.nan
-
-    return agg_fn
-
+    
+    return BoundAggregator(lowerbound, upperbound, 'mean')
 
 def agg_fn_wrapper_min(var_name, bounds):
     lowerbound, upperbound = get_bounds(var_name, bounds)
-
-    def agg_fn(array):
-        try:
-            array = array.astype(float)
-        except (TypeError, ValueError):
-            return np.nan
-        
-        if np.isnan(array).all():
-            return np.nan
-        
-        values = array[~np.isnan(array)]
-        if not np.isnan(lowerbound):
-            values = values[values >= lowerbound]
-        if not np.isnan(upperbound):
-            values = values[values <= upperbound]
-
-        return np.min(values) if len(values) > 0 else np.nan
-
-    return agg_fn
-
+    return BoundAggregator(lowerbound, upperbound, 'min')
 
 def agg_fn_wrapper_max(var_name, bounds):
     lowerbound, upperbound = get_bounds(var_name, bounds)
-
-    def agg_fn(array):
-        try:
-            array = array.astype(float)
-        except (TypeError, ValueError):
-            return np.nan
-        
-        if np.isnan(array).all():
-            return np.nan
-        
-        values = array[~np.isnan(array)]
-        if not np.isnan(lowerbound):
-            values = values[values >= lowerbound]
-        if not np.isnan(upperbound):
-            values = values[values <= upperbound]
-
-        return np.max(values) if len(values) > 0 else np.nan
-
-    return agg_fn
+    return BoundAggregator(lowerbound, upperbound, 'max')
