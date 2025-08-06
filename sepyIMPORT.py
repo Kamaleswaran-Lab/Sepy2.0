@@ -36,7 +36,6 @@ import sys
 
 
 
-from process_fluids import FluidProcessor, FluidProcessorConfig
 
 logging.basicConfig(level=logging.INFO)
 
