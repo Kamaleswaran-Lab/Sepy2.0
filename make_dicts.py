@@ -528,9 +528,9 @@ if __name__ == "__main__":
         ###########################################################################
         # create sepsis_summary directory
         base_sepsis_path = SUPERTABLE_OUTPUT_PATH / dataConfig["sepsis_summary"] / str(year)
-        Path.mkdir(base_sepsis_path, exist_ok=True)
+        Path.mkdir(base_sepsis_path, exist_ok=True, parents=True)
         for subdir in dataConfig["sepsis_summary_types"]:
-            Path.mkdir(base_sepsis_path / subdir, exist_ok=True)
+            Path.mkdir(base_sepsis_path / subdir, exist_ok=True, parents=True)
 
         # Save encounter summary
         UNIQUE_FILE_ID = f"{processor_assignment}_{year}"

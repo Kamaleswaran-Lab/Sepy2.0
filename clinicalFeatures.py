@@ -501,24 +501,26 @@ class ClinicalDataProcessor:
             """
             result_series = pd.Series(index=index, dtype='object')
             result_series[:] = np.nan
-            
+
             for _, proc_row in procedures_df.iterrows():
                 if pd.notna(proc_row[time_col_start]):
-                    start_index = time_index.loc[time_index >= proc_row[time_col_start]]
-                    if start_index.empty:
+                    # Find first index >= proc_row[time_col_start]
+                    start_idx_arr = np.where(time_index >= proc_row[time_col_start])[0]
+                    if len(start_idx_arr) == 0:
                         logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but not found in supertable index, imputing to first supertable index")
-                        proc_hour_start = time_index.iloc[0]
+                        proc_hour_start = time_index[0]
                     else:
-                        proc_hour_start = start_index.iloc[0]
+                        proc_hour_start = time_index[start_idx_arr[0]]
 
                     if pd.notna(proc_row[time_col_end]):
-                        end_index = time_index.loc[time_index >= proc_row[time_col_end]]
-                        if end_index.empty:
+                        # Find first index >= proc_row[time_col_end]
+                        end_idx_arr = np.where(time_index >= proc_row[time_col_end])[0]
+                        if len(end_idx_arr) == 0:
                             logger.warning(f"Procedure {proc_row[procedure_name_col]} ended at {proc_row[time_col_end]} but not found in supertable index, imputing to last supertable index")
-                            proc_hour_end = time_index.iloc[-1]
+                            proc_hour_end = time_index[-1]
                         else:
-                            proc_hour_end = end_index.iloc[0]
-                            
+                            proc_hour_end = time_index[end_idx_arr[0]]
+
                         if proc_hour_start <= proc_hour_end:
                             result_series.loc[proc_hour_start:proc_hour_end] = proc_row[procedure_name_col]
                         else:
@@ -526,7 +528,7 @@ class ClinicalDataProcessor:
                             result_series.loc[proc_hour_start:] = proc_row[procedure_name_col]
                     else:
                         logger.warning(f"Procedure {proc_row[procedure_name_col]} started at {proc_row[time_col_start]} but {time_col_end} not found in supertable index, imputing to last supertable index")
-                        proc_hour_end = time_index.iloc[-1]
+                        proc_hour_end = time_index[-1]
                         result_series.loc[proc_hour_start:] = proc_row[procedure_name_col]
             
             return result_series
