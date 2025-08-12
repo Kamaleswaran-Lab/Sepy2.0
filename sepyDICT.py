@@ -90,7 +90,7 @@ class sepyMaster:
         """Get the identifier for a given CSN and identifier type."""
         if identifier_type == "csn":
             return csn
-        elif identifier_type == "pat_id":
+        elif (identifier_type == "pat_id") or (identifier_type == "patient_id"):
             return self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
         else:
             raise ValueError(f"Invalid identifier type: {identifier_type}")
