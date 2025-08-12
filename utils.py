@@ -111,9 +111,9 @@ def comorbidity_summary(encounter_instance, config_data):
         
     for summary_name in config_data['comorbidity_summary']:
         try:
-            comorbidity_summary_dicts[summary_name + '_dict'][encounter_csn] = getattr(encounter_instance.clinical_data, f"{summary_name}_PerCSN").icd_count
+            comorbidity_summary_dicts[summary_name + '_dict'][encounter_csn] = getattr(encounter_instance.clinical_data, f"{summary_name}").icd_count
         except AttributeError:
-            logging.warning(f"Attribute {summary_name}_PerCSN not found for csn {encounter_csn}")
+            logging.warning(f"Attribute {summary_name} not found for csn {encounter_csn}")
         except KeyError as e:
             logging.error(f"Key error for {summary_name}_dict: {e}")
         except Exception as e:
