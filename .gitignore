@@ -38,3 +38,6 @@ out_em/
 
 #pycache
 __pycache__/*
+
+# scratch files
+scratch_files/*

@@ -402,7 +402,8 @@ if __name__ == "__main__":
             
         # If encounter type filter is applied, filter the encounters based on the encounter type in the config file (EM, IN, all)
         if encounter_type != "all":
-            csn_df = csn_df[csn_df.encounter_type == encounter_type]
+            print(csn_df.head())
+            csn_df = csn_df[csn_df["encounter_type"] == encounter_type]
             num_encounters = len(csn_df)
             logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
         else:
