@@ -36,7 +36,6 @@ import sys
 
 
 
-from process_fluids import FluidProcessor, FluidProcessorConfig
 
 logging.basicConfig(level=logging.INFO)
 
@@ -48,7 +47,8 @@ DataFrame = TypeVar('DataFrame', bound=pd.DataFrame)
 class ImportConfig:
     """Configuration for sepyIMPORT class."""
     na_values: List[str]
-    vital_col_names: List[str]
+    numeric_vital_col_names: List[str]
+    string_vital_col_names: List[str]
     vasopressor_units: List[str]
     numeric_lab_col_names: List[str]
     string_lab_col_names: List[str]
@@ -117,7 +117,8 @@ class sepyIMPORT:
         # Create configuration object
         self.config = ImportConfig(
             na_values=sepyIMPORTConfigs["na_values"],
-            vital_col_names=sepyIMPORTConfigs["vital_col_names"],
+            numeric_vital_col_names=sepyIMPORTConfigs["numeric_vital_col_names"],
+            string_lab_col_names=sepyIMPORTConfigs["string_vital_col_names"],
             vasopressor_units=sepyIMPORTConfigs["vasopressor_units"],
             numeric_lab_col_names=sepyIMPORTConfigs["numeric_lab_col_names"],
             string_lab_col_names=sepyIMPORTConfigs["string_lab_col_names"]
@@ -483,8 +484,10 @@ class sepyIMPORT:
                 df = df.drop(columns=[merge_set[0], merge_set[1]])
 
         # drop punctuation and make numeric
-        df = utils.make_numeric(df, self.config.vital_col_names)
-        self.df_vitals = df
+        df_numeric = utils.make_numeric(df, self.config.numeric_vital_col_names)
+
+        df_string = df[self.config.string_vital_col_names]
+        self.df_vitals = pd.concat([df_numeric, df_string], axis=1)
         return 1
 
     def _process_vent(self, df: pd.DataFrame, **kwargs) -> None:
