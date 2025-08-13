@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/hpc/home/ma618/Sepy/process_fluids.py", line 497, in <module>
-    sample_data, 
-    ^^^^^^^^^^^
-NameError: name 'sample_data' is not defined

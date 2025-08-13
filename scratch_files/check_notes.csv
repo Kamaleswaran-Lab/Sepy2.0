@@ -1,0 +1,394 @@
+,Unnamed: 0,ACC_NBR,PATIENT_ID,EMPI_NBR,ENCNTR_ID,HNAM_DOCUMENT_CLINICAL_ID,HNAM_DOCUMENT_CLINICAL_NM,DAY_VERIFIED,DOC_TEXT,DOC_ABSTRACT,EVENT_DOCUMENT_DESC,EVENT_DOCUMENT_KEY,ENCOUNTER_ID,ENCOUNTER_NBR,notes_deid
+0,0,00006DX190104831,18007243.0,803350.0,156619493.0,2228789^EVENT,XR Chest 1 View Portable,06/28/2019,"REPORTEXAM: XR Chest 1 View Portable
+
+ESRC.4.6.1
+
+CLINICAL INDICATION: Shortness of breath
+
+COMPARISON: None 
+
+FINDINGS: 
+Support Devices: none 
+
+Lungs/pleura: No pneumothorax. No consolidation or pleural effusion. 
+
+Heart/mediastinum: No cardiomegaly. Mild uncoiling of the aorta.
+
+Other: None
+
+IMPRESSION: 
+Minimal reticular changes right base most commonly reflecting discoid
+atelectasis. No consolidating pneumonia
+
+
+","REPORTEXAM: XR Chest 1 View Portable
+
+ESRC.4.6.1
+
+CLINICAL INDICATION: Shortness of breath
+
+COMPARISON: None 
+
+FINDINGS: 
+Support Devices: none 
+
+Lungs/pleura: No pneumothorax. No consolidation or pleural effusion. 
+
+Heart/mediastinum: No cardiomegaly. Mild uncoiling of the aorta.
+
+Other: None
+
+IMPRESSION: 
+Minimal reticular changes right base most commonly reflecting discoid
+atelectasis. No consolidating pneumonia
+
+
+",00006DX20190104831,127041997.0,156619493.0,63013709179.0,REPORT EXAM: XR Chest 1 View Portable ESRC.4.6.1 CLINICAL INDICATION: Shortness of breath COMPARISON: None FINDINGS: Support Devices: none Lungs/pleura: No pneumothorax. No consolidation or pleural effusion. Heart/mediastinum: No cardiomegaly. Mild uncoiling of the aorta. Other: None IMPRESSION: Minimal reticular changes right base most commonly reflecting discoid atelectasis. No consolidating pneumonia
+1,1,00006CT190105070,18007243.0,803350.0,156619493.0,2233385^EVENT,CT Chest w/o Contrast,06/28/2019,"REPORTEXAM:CT Chest w/o Contrast
+
+CLINICAL INDICATION: Persistent SOB despite diuresis, r/o PNA ot other lung
+pathology;Shortness of breath. SOB,COPD,SMOKER,COUGH,LE EDEMA
+
+TECHNIQUE: Non-gated spiral axial images of the chest were obtained without
+intravenous contrast. Coronal and sagittal reformats were submitted. 
+
+COMPARISON: None.
+
+FINDINGS:
+
+Lack of IV contrast limits evaluation of solid organs, lymph nodes, and vascular
+structures. 
+
+Support devices: None.
+
+Vasculature: The thoracic aorta is unremarkable. No evidence of main pulmonary
+artery dilatation. Heavy coronary artery calcifications.
+
+Mediastinum: The heart and pericardium are normal. Severe aortic valve leaflets
+calcifications. The visualized portions of the thyroid demonstrate no
+abnormality.
+
+Lymph nodes: No pathologically enlarged lymph nodes.
+
+Airways/lungs/pleura: The airways are patent. No focal consolidation, pleural
+effusion, or pneumothorax. Diffuse mild lower lobe predominant bronchial wall
+thickening. Bilateral lower lobe and lingular subsegmental atelectasis. Punctate
+scattered bilateral pulmonary nodules measuring up to 2 mm for reference a right
+upper lobe pulmonary nodule measures 2 mm (series 4 image 35).
+
+Upper abdomen: No acute abnormalities. Cholecystectomy.
+
+Bones and soft tissues: No aggressive osseous lesion.
+
+IMPRESSION:
+1. Diffuse mild lower lobe predominant bronchial wall thickening, which could be
+consistent with bronchitis.
+2. Bilateral lower lobe and lingular subsegmental atelectasis.
+3. Severe aortic valve leaflets calcifications. Heavy coronary artery
+calcifications.
+4. Punctate scattered bilateral pulmonary nodules measuring up to 2 mm. 
+According to the Fleischner Society Guidelines for incidentally discovered solid
+pulmonary nodules (MacMahon et al, Radiology, 2017):  Recommend correlation with
+prior exams if available to confirm stability. Otherwise, if patient is at low
+risk for lung cancer, no further followup is required; if patient is at high
+risk for lung cancer, recommend followup CT at 12 months.  
+","REPORTEXAM:CT Chest w/o Contrast
+
+CLINICAL INDICATION: Persistent SOB despite diuresis, r/o PNA ot other lung
+pathology;Shortness of breath. SOB,COPD,SMOKER,COUGH,LE EDEMA
+
+TECHNIQUE: Non-gated spiral axial images of the chest were obtained without
+intravenous contrast. Coronal and sagittal reformats were submitted. 
+
+COMPARISON: None.
+
+FINDINGS:
+
+Lack of IV contrast limits evaluation of solid organs, lymph nodes, and vascular
+structures. 
+
+Support devices: None.
+
+Vasculature: The thoracic aorta is unremarkable. No evidence of main pulmonary
+artery dilatation. Heavy coronary artery calcifications.
+
+Mediastinum: The heart and pericardium are normal. Severe aortic valve leaflets
+calcifications. The visualized portions of the thyroid demonstrate no
+abnormality.
+
+Lymph nodes: No pathologically enlarged lymph nodes.
+
+Airways/lungs/pleura: The airways are patent. No focal consolidation, pleural
+effusion, or pneumothorax. Diffuse mild lower lobe predominant bronchial wall
+thickening. Bilateral lower lobe and lingular subsegmental atelectasis. Punctate
+scattered bilateral pulmonary nodules measuring up to 2 mm for reference a right
+upper lobe pulmonary nodule measures 2 mm (series 4 image 35).
+
+Upper abdomen: No acute abnormalities. Cholecystectomy.
+
+Bones and soft tissues: No aggressive osseous lesion.
+
+IMPRESSION:
+1. Diffuse mild lower lobe predominant bronchial wall thickening, which could be
+consistent with bronchitis.
+2. Bilateral lower lobe and lingular subsegmental atelectasis.
+3. Severe aortic valve leaflets calcifications. Heavy coronary artery
+calcifications.
+4. Punctate scattered bilateral pulmonary nodules measuring up to 2 mm. 
+According to the Fleischner Society Guidelines for incidentally discovered solid
+pulmonary nodules (MacMahon et al, Radiology, 2017):  Recommend correlation with
+prior exams if available to confirm stability. Otherwise, if patient is at low
+risk for lung cancer, no further followup is required; if patient is at high
+risk for lung cancer, recommend followup CT at 12 months.  
+",00006CT20190105070,127048596.0,156619493.0,63013709179.0,"REPORT EXAM:CT Chest w/o Contrast CLINICAL INDICATION: Persistent SOB despite diuresis, r/o PNA ot other lung pathology;Shortness of breath. SOB,COPD,SMOKER,COUGH,LE EDEMA TECHNIQUE: Non-gated spiral axial images of the chest were obtained without intravenous contrast. Coronal and sagittal reformats were submitted. COMPARISON: None. FINDINGS: Lack of IV contrast limits evaluation of solid organs, lymph nodes, and vascular structures. Support devices: None. Vasculature: The thoracic aorta is unremarkable. No evidence of main pulmonary artery dilatation. Heavy coronary artery calcifications. Mediastinum: The heart and pericardium are normal. Severe aortic valve leaflets calcifications. The visualized portions of the thyroid demonstrate no abnormality. Lymph nodes: No pathologically enlarged lymph nodes. Airways/lungs/pleura: The airways are patent. No focal consolidation, pleural effusion, or pneumothorax. Diffuse mild lower lobe predominant bronchial wall thickening. Bilateral lower lobe and lingular subsegmental atelectasis. Punctate scattered bilateral pulmonary nodules measuring up to 2 mm for reference a right upper lobe pulmonary nodule measures 2 mm (series 4 image 35). Upper abdomen: No acute abnormalities. Cholecystectomy. Bones and soft tissues: No aggressive osseous lesion. IMPRESSION: 1. Diffuse mild lower lobe predominant bronchial wall thickening, which could be consistent with bronchitis. 2. Bilateral lower lobe and lingular subsegmental atelectasis. 3. Severe aortic valve leaflets calcifications. Heavy coronary artery calcifications. 4. Punctate scattered bilateral pulmonary nodules measuring up to 2 mm. According to the Fleischner Society Guidelines for incidentally discovered solid pulmonary nodules ({{{REDACTED-age}}} et al, Radiology, 2017):  Recommend correlation with prior exams if available to confirm stability. Otherwise, if {{{REDACTED-age}}} is at low risk for lung cancer, no further followup is required; if {{{REDACTED-age}}} is at high risk for lung cancer, recommend followup CT at 12 months."
+2,2,00002CT190001454,38047690.0,11235747.0,148240847.0,2233435^EVENT,CT Head w/o Contrast,01/03/2019,"REPORTEXAM: CT Head w/o Contrast
+
+CLINICAL INDICATION: Near syncope with head trauma. Headache.
+
+TECHNIQUE:  Helical CT images from skull base to vertex without IV contrast.
+ESRC1.1.2
+
+COMPARISON: None.
+
+FINDINGS: 
+Parenchyma: No infarction. No hemorrhage. No mass or mass effect.
+
+Extra-axial Collection:  None
+
+Ventricular System:  Normal
+
+Dural Venous Sinuses:  Normal
+
+Osseous Structures:  Normal
+
+Included Orbits: Normal
+
+Paranasal Sinuses:  Predominantly clear
+
+Tympanomastoid Cavities:  Normal
+
+Other:  None
+
+IMPRESSION:
+Normal CT head without contrast.
+
+The images were reviewed and interpreted by Patricia A Hudgins, MD.","REPORTEXAM: CT Head w/o Contrast
+
+CLINICAL INDICATION: Near syncope with head trauma. Headache.
+
+TECHNIQUE:  Helical CT images from skull base to vertex without IV contrast.
+ESRC1.1.2
+
+COMPARISON: None.
+
+FINDINGS: 
+Parenchyma: No infarction. No hemorrhage. No mass or mass effect.
+
+Extra-axial Collection:  None
+
+Ventricular System:  Normal
+
+Dural Venous Sinuses:  Normal
+
+Osseous Structures:  Normal
+
+Included Orbits: Normal
+
+Paranasal Sinuses:  Predominantly clear
+
+Tympanomastoid Cavities:  Normal
+
+Other:  None
+
+IMPRESSION:
+Normal CT head without contrast.
+
+The images were reviewed and interpreted by Patricia A Hudgins, MD.",00002CT20190001454,114574338.0,148240847.0,60434429003.0,"REPORT EXAM: CT Head w/o Contrast CLINICAL INDICATION: Near syncope with head trauma. Headache. TECHNIQUE:  Helical CT images from skull base to vertex without IV contrast. ESRC1.1.2 COMPARISON: None. FINDINGS: Parenchyma: No infarction. No hemorrhage. No mass or mass effect. Extra-axial Collection:  None Ventricular System:  Normal Dural Venous Sinuses:  Normal Osseous Structures:  Normal Included Orbits: Normal Paranasal Sinuses:  Predominantly clear Tympanomastoid Cavities: Normal Other:  None IMPRESSION: Normal CT head without contrast. The images were reviewed and interpreted by {{{REDACTED-age}}}, MD."
+3,3,00002CT190001808,38047690.0,11235747.0,148240847.0,325252317^EVENT,CT Abdomen + Pelvis w/o IV Contrast,01/03/2019,"REPORTEXAM: CT Abdomen + Pelvis w/o IV Contrast
+
+CLINICAL INDICATION: Abdominal pain.
+
+TECHNIQUE: Noncontrast images were obtained through the abdomen and pelvis.
+ESRC1.7.2
+
+COMPARISON: None
+
+FINDINGS: 
+Lower Thorax: No pleural or pericardial effusion.
+
+Liver: No contour deforming lesions
+
+Gallbladder/Biliary Tree: Status post cholecystectomy. No biliary ductal
+dilation.
+
+Spleen: Normal.
+
+Pancreas: Single coarse calcification in the pancreatic head, which could
+represent sequela of prior pancreatitis.
+
+Adrenal Glands: Normal.
+
+Kidneys/Ureters: No urolithiasis or hydroureteronephrosis.
+
+Gastrointestinal: No bowel obstruction or wall thickening. Mild colonic
+diverticulosis.
+
+Bladder: Normal.
+
+Uterus/Adnexa: Enlarged lobulated uterus, either due to underlying leiomyomas or
+adenomyosis. No suspicious adnexal mass.
+
+Lymph Nodes: No abdominal or pelvic lymphadenopathy.
+
+Vessels: Fusiform ectasia of the lower thoracic aorta up to 3.7 x 3.4 cm (2:20).
+Atherosclerotic aorta.
+
+Peritoneum/Retroperitoneum: No free air or free fluid.
+
+Bones/Soft Tissues: No aggressive osseous lesion.  
+
+IMPRESSION: 
+1. No bowel obstruction or wall thickening.
+2. Fusiform ectasia of the lower thoracic aorta up to 3.7 x 3.4 cm.
+3. Enlarged lobulated uterus, either due to underlying leiomyomas or
+adenomyosis. 
+
+The images were reviewed and interpreted by Justin McClain, MD.","REPORTEXAM: CT Abdomen + Pelvis w/o IV Contrast
+
+CLINICAL INDICATION: Abdominal pain.
+
+TECHNIQUE: Noncontrast images were obtained through the abdomen and pelvis.
+ESRC1.7.2
+
+COMPARISON: None
+
+FINDINGS: 
+Lower Thorax: No pleural or pericardial effusion.
+
+Liver: No contour deforming lesions
+
+Gallbladder/Biliary Tree: Status post cholecystectomy. No biliary ductal
+dilation.
+
+Spleen: Normal.
+
+Pancreas: Single coarse calcification in the pancreatic head, which could
+represent sequela of prior pancreatitis.
+
+Adrenal Glands: Normal.
+
+Kidneys/Ureters: No urolithiasis or hydroureteronephrosis.
+
+Gastrointestinal: No bowel obstruction or wall thickening. Mild colonic
+diverticulosis.
+
+Bladder: Normal.
+
+Uterus/Adnexa: Enlarged lobulated uterus, either due to underlying leiomyomas or
+adenomyosis. No suspicious adnexal mass.
+
+Lymph Nodes: No abdominal or pelvic lymphadenopathy.
+
+Vessels: Fusiform ectasia of the lower thoracic aorta up to 3.7 x 3.4 cm (2:20).
+Atherosclerotic aorta.
+
+Peritoneum/Retroperitoneum: No free air or free fluid.
+
+Bones/Soft Tissues: No aggressive osseous lesion.  
+
+IMPRESSION: 
+1. No bowel obstruction or wall thickening.
+2. Fusiform ectasia of the lower thoracic aorta up to 3.7 x 3.4 cm.
+3. Enlarged lobulated uterus, either due to underlying leiomyomas or
+adenomyosis. 
+
+The images were reviewed and interpreted by Justin McClain, MD.",00002CT20190001808,114581418.0,148240847.0,60434429003.0,"REPORT EXAM: CT Abdomen + Pelvis w/o IV Contrast CLINICAL INDICATION: Abdominal pain. TECHNIQUE: Noncontrast images were obtained through the abdomen and pelvis. ESRC1.7.2 COMPARISON: None FINDINGS: Lower Thorax: No pleural or pericardial effusion. Liver: No contour deforming lesions Gallbladder/Biliary Tree: Status post cholecystectomy. No biliary ductal dilation. Spleen: Normal. Pancreas: Single coarse calcification in the pancreatic head, which could represent sequela of prior pancreatitis. Adrenal Glands: Normal. Kidneys/Ureters: No urolithiasis or hydroureteronephrosis. Gastrointestinal: No bowel obstruction or wall thickening. Mild colonic diverticulosis. Bladder: Normal. Uterus/Adnexa: Enlarged lobulated uterus, either due to underlying leiomyomas or adenomyosis. No suspicious adnexal mass. Lymph Nodes: No abdominal or pelvic lymphadenopathy. Vessels: Fusiform ectasia of the lower thoracic aorta up to 3.7 x 3.4 cm (2:20). Atherosclerotic aorta. Peritoneum/Retroperitoneum: No free air or free fluid. Bones/Soft Tissues: No aggressive osseous lesion. IMPRESSION: 1. No bowel obstruction or wall thickening. 2. Fusiform ectasia of the lower thoracic aorta up to 3.7 x 3.4 cm. 3. Enlarged lobulated uterus, either due to underlying leiomyomas or adenomyosis. The images were reviewed and interpreted by {{{REDACTED-age}}}, MD."
+4,4,00005CT190014130,19328256.0,7597774.0,150281428.0,2233232^EVENT,CT Neck Soft Tissue w/ Contrast,02/18/2019,"REPORTEXAM: CT Neck Soft Tissue w/ Contrast
+
+CLINICAL INDICATION:  clinical strep pharyngitis, refractory to initial abx tx,
+dysphagia/odynophagia, eval for abscess. Sore throat x 5 days, difficulty
+talking
+
+TECHNIQUE: Helical CT examination of the neck with IV contrast. Sagittal and
+coronal reformations were generated. If applicable, point-of-care testing was
+approved following departmental protocol.
+
+COMPARISON:  None.
+
+FINDINGS: 
+Aerodigestive Tract Structures: Tonsils are prominent in size. The present a
+striated enhancement pattern. No focal collections.
+
+Lymph Nodes: Multiple enlarged bilateral cervical lymph nodes.
+
+Parotid Glands: Normal
+Submandibular Glands: Normal
+Thyroid Gland: Normal
+
+Included Intracranial Structures: Normal
+Included Orbits: Normal
+
+Paranasal Sinuses:  Normal
+Tympanomastoid Cavities:  Normal
+
+Vascular Structures: Normal
+Osseous Structures:  Normal
+Included Lung Apices: Normal
+
+Abnormal Enhancement: None
+
+IMPRESSION:
+Prominent palatine tonsils suspicious for tonsillitis. No focal collections.
+
+Cervical adenopathy.
+
+Preliminary report provided at 2/18/2019 at 12:13 AM.
+WET READ02/18/2019 00:13 am America/New_York, Patel, Dhruv M
+Striated bilateral palatine tonsils which are enlarged likley representing tonsillitis. Multiple enlarged bilateral cervical lymph nodes are likely reactive in nature.
+
+02/18/2019 00:12 am America/New_York, Patel, Dhruv M
+There is predominantly peripheral enhancing 1.8 x 1.1 x 4.2 cm (series 3, image 46 and series 602, image 52) enhancing solid area likely representing inflammaed parapharyngeal lymph node. No definite drainable collection.","REPORTEXAM: CT Neck Soft Tissue w/ Contrast
+
+CLINICAL INDICATION:  clinical strep pharyngitis, refractory to initial abx tx,
+dysphagia/odynophagia, eval for abscess. Sore throat x 5 days, difficulty
+talking
+
+TECHNIQUE: Helical CT examination of the neck with IV contrast. Sagittal and
+coronal reformations were generated. If applicable, point-of-care testing was
+approved following departmental protocol.
+
+COMPARISON:  None.
+
+FINDINGS: 
+Aerodigestive Tract Structures: Tonsils are prominent in size. The present a
+striated enhancement pattern. No focal collections.
+
+Lymph Nodes: Multiple enlarged bilateral cervical lymph nodes.
+
+Parotid Glands: Normal
+Submandibular Glands: Normal
+Thyroid Gland: Normal
+
+Included Intracranial Structures: Normal
+Included Orbits: Normal
+
+Paranasal Sinuses:  Normal
+Tympanomastoid Cavities:  Normal
+
+Vascular Structures: Normal
+Osseous Structures:  Normal
+Included Lung Apices: Normal
+
+Abnormal Enhancement: None
+
+IMPRESSION:
+Prominent palatine tonsils suspicious for tonsillitis. No focal collections.
+
+Cervical adenopathy.
+
+Preliminary report provided at 2/18/2019 at 12:13 AM.
+WET READ02/18/2019 00:13 am America/New_York, Patel, Dhruv M
+Striated bilateral palatine tonsils which are enlarged likley representing tonsillitis. Multiple enlarged bilateral cervical lymph nodes are likely reactive in nature.
+
+02/18/2019 00:12 am America/New_York, Patel, Dhruv M
+There is predominantly peripheral enhancing 1.8 x 1.1 x 4.2 cm (series 3, image 46 and series 602, image 52) enhancing solid area likely representing inflammaed parapharyngeal lymph node. No definite drainable collection.",00005CT20190014130,115952544.0,150281428.0,39026829048.0,"REPORT EXAM: CT Neck Soft Tissue w/ Contrast CLINICAL INDICATION:  clinical strep pharyngitis, refractory to initial abx tx, dysphagia/odynophagia, eval for abscess. Sore throat x 5 days, difficulty talking TECHNIQUE: Helical CT examination of the neck with IV contrast. Sagittal and coronal reformations were generated. If applicable, point-of-care testing was approved following departmental protocol. COMPARISON:  None. FINDINGS: Aerodigestive Tract Structures: Tonsils are prominent in size. The present a striated enhancement pattern. No focal collections. Lymph Nodes: Multiple enlarged bilateral cervical lymph nodes. Parotid Glands: Normal Submandibular Glands: Normal Thyroid Gland: Normal Included Intracranial Structures: Normal Included Orbits: Normal Paranasal Sinuses:  Normal Tympanomastoid Cavities:  Normal Vascular Structures: Normal Osseous Structures:  Normal Included Lung Apices: Normal Abnormal Enhancement: None IMPRESSION: Prominent palatine tonsils suspicious for tonsillitis. No focal collections. Cervical adenopathy. Preliminary report provided at {{{REDACTED-date}}} at 12:13 AM. WET READ {{{REDACTED-date}}} 00:13 am America/New_York, {{{REDACTED-age}}}, {{{REDACTED-age}}} Striated bilateral palatine tonsils which are enlarged likley representing tonsillitis. Multiple enlarged bilateral cervical lymph nodes are likely reactive in nature. {{{REDACTED-date}}} 00:12 am America/New_York, {{{REDACTED-age}}}, {{{REDACTED-age}}} There is predominantly peripheral enhancing 1.8 x 1.1 x 4.2 cm (series 3, image 46 and series 602, image 52) enhancing solid area likely representing inflammaed parapharyngeal lymph node. No definite drainable collection."
