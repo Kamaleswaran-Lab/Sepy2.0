@@ -716,13 +716,23 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--index", type=int, required=True)
     parser.add_argument("--chunks", type=int, required=True)
+    parser.add_argument("--filepath", type = str, required=True)
+    parser.add_argument("--savepath", type = str, required=True)
     args = parser.parse_args()
 
     index = args.index
     chunks = args.chunks
+    filepath = Path(args.filepath)
+    savepath = Path(args.savepath) 
 
-    in_outs = pd.read_csv(f'/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI/CJSEPSIS_OUT_EO3.csv')
+    if not filepath.exists():
+        print(f"File not found: {filepath}")
+        exit()
+     
+    in_outs = pd.read_csv(filepath)
     
+    savepath.mkdir(exist_ok=True, parents=True)
+
     # Chunk data into chunks number of chunks, make sure to include the entire remaining rows for the last chunk
     len_of_chunks = len(in_outs)//chunks
     if index == chunks - 1:
@@ -753,4 +763,4 @@ if __name__ == "__main__":
     print("\nProcessing Summary:")
     print(summary_df)
 
-    processed_df.to_csv(f'/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI/CJSEPSIS_IN_OUT_PROCESSED_{index}.csv', index=False)
+    processed_df.to_csv(savepath / f'CJSEPSIS_IN_OUT_PROCESSED_{index}.csv', index=False)
