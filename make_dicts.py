@@ -402,7 +402,8 @@ if __name__ == "__main__":
             
         # If encounter type filter is applied, filter the encounters based on the encounter type in the config file (EM, IN, all)
         if encounter_type != "all":
-            csn_df = csn_df[csn_df.encounter_type == encounter_type]
+            print(csn_df.head())
+            csn_df = csn_df[csn_df["encounter_type"] == encounter_type]
             num_encounters = len(csn_df)
             logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
         else:
@@ -528,9 +529,9 @@ if __name__ == "__main__":
         ###########################################################################
         # create sepsis_summary directory
         base_sepsis_path = SUPERTABLE_OUTPUT_PATH / dataConfig["sepsis_summary"] / str(year)
-        Path.mkdir(base_sepsis_path, exist_ok=True)
+        Path.mkdir(base_sepsis_path, exist_ok=True, parents=True)
         for subdir in dataConfig["sepsis_summary_types"]:
-            Path.mkdir(base_sepsis_path / subdir, exist_ok=True)
+            Path.mkdir(base_sepsis_path / subdir, exist_ok=True, parents=True)
 
         # Save encounter summary
         UNIQUE_FILE_ID = f"{processor_assignment}_{year}"

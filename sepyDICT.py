@@ -90,7 +90,7 @@ class sepyMaster:
         """Get the identifier for a given CSN and identifier type."""
         if identifier_type == "csn":
             return csn
-        elif identifier_type == "pat_id":
+        elif (identifier_type == "pat_id") or (identifier_type == "patient_id"):
             return self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
         else:
             raise ValueError(f"Invalid identifier type: {identifier_type}")
@@ -211,8 +211,17 @@ class sepyCSN:
         logging.info(f"Supertable saved to {self.save_dir}/Supertables/{self.clinical_data.csn}.pkl")
     
     def save_clinical_data(self):
+        clinical_data_dict = {
+            'static_features': self.clinical_data.static_features,
+            'event_times': self.clinical_data.event_times,
+            'flags': self.clinical_data.flags,
+            'quan_deyo_ICD10': self.clinical_data.quan_deyo_ICD10,
+            'quan_elix_ICD10': self.clinical_data.quan_elix_ICD10,
+            'csn': self.clinical_data.csn,
+            'pat_id': self.clinical_data.pat_id
+        }
         with open(f"{self.save_dir}/ClinicalData/{self.clinical_data.csn}.pkl", "wb") as f:
-            pickle.dump(self.clinical_data, f)
+            pickle.dump(clinical_data_dict, f)
         logging.info(f"Clinical data saved to {self.save_dir}/ClinicalData/{self.clinical_data.csn}.pkl")
     
     def create_supertable(self):

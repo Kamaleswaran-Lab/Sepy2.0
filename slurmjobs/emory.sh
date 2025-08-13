@@ -4,9 +4,9 @@
 #SBATCH --ntasks=1 
 #SBATCH --mem=64G
 #SBATCH --time=36:00:00
-#SBATCH --output=/hpc/home/ma618/Sepy/out_em/em_encounter_%A_%a.out
-#SBATCH --error=/hpc/home/ma618/Sepy/out_em/em_encounter_%A_%a.err
-#SBATCH --array=0-12
+#SBATCH --output=/hpc/home/ma618/Sepy/out_em/2019/em_encounter_%A_%a.out
+#SBATCH --error=/hpc/home/ma618/Sepy/out_em/2019/em_encounter_%A_%a.err
+#SBATCH --array=0-15
 
 # This is the list of years to process; each core will take a fraction of each year
 YEAR=2019
