@@ -315,7 +315,7 @@ if __name__ == "__main__":
             logging.info(f"Creating yearly pickle for {year}")
             logging.info(f"Yearly pickle will be saved to {YEARLY_DICTIONARY_FILE_NAME}")
 
-            import_instance = si.sepyIMPORT(paths, sepyConfigs, dataConfig)
+            import_instance = si.sepyIMPORT(paths, sepyConfigs, dataConfig["yearly_instance"])
             logging.info(f"An instance of the sepyIMPORT class was created for {year}")
             
             logging.info(f"Importing data frames for {year}")
