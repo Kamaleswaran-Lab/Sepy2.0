@@ -4,8 +4,8 @@
 #SBATCH --ntasks=1 
 #SBATCH --mem=64G
 #SBATCH --time=72:00:00
-#SBATCH --output=./output/combine_chunks_%j_%a.out
-#SBATCH --error=./errors/combine_chunks_%j_%a.err
+#SBATCH --output=./output/combine_chunks_fluids.out
+#SBATCH --error=./errors/combine_chunks_fluids.err
 
-python $HOME/Sepy/combine_chunks.py --root /hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI --glob_template CJSEPSIS_IN_OUT_PROCESSED_*.csv
+python $HOME/Sepy2.0/data_preprocess/combine_chunks.py --root /labs/collab/K-lab-MODS/MODS-PHI/Emory_Data/INs --glob_template CJSEPSIS_IN_OUT_PROCESSED_*.csv
 

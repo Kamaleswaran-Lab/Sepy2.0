@@ -1,0 +1,554 @@
+Unnamed: 0,med_name,med_class,super_table_col_name
+0,famotidine,gastrointestinal,acid_suppressant
+1,Sodium Chloride 0.9% intravenous solution,fluid_electrolyte,other
+3,cefTRIAXone,anti-infective,cephalosporins
+4,ondansetron,antiemetic,other
+5,gentamicin,anti-infective,aminoglycosides
+6,diphenhydrAMINE,antihistamine,other
+7,morphine,analgesic,opioids
+9,Dextrose 5% in Lactated Ringers intravenous solution,fluid_electrolyte,other
+10,pantoprazole,gastrointestinal,acid_suppressant
+12,thiamine,vitamin_supplement,other
+14,Sodium Chloride 0.45% intravenous solution,fluid_electrolyte,other
+15,vancomycin,anti-infective,glycopeptide
+16,potassium chloride,fluid_electrolyte,other
+17,albumin human,fluid_electrolyte,other
+18,ANES vasopressin 200 unit/500 mL NS drip,vasopressor,vasopressin
+19,nitroglycerin,other,other
+20,succinylcholine,neuromuscular_blocker,other
+21,propofol,sedative,anesthetic
+22,calcium chloride,fluid_electrolyte,other
+23,epinephrine,vasopressor,epinephrine
+24,Premix Dextrose 5%,other,other
+25,Premix NS,other,other
+26,dexmedetomidine,sedative,anesthetic
+28,ceFAZolin,anti-infective,cephalosporins
+29,norepinephrine,vasopressor,norepinephrine
+30,insulin regular,endocrine,diabetes
+31,vasopressin,vasopressor,vasopressin
+33,milrinone,vasopressor,other
+35,Dextrose 5% in Water intravenous solution,fluid_electrolyte,other
+36,amiodarone,antiarrhythmics,other
+37,hydrALAZINE,bp_lowering,other
+38,furosemide,diuretic,other
+39,HYDROmorphone,analgesic,opioids
+41,Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution,fluid_electrolyte,other
+44,Dextrose 5% with 0.45% NaCl intravenous solution,fluid_electrolyte,other
+45,piperacillin-tazobactam,anti-infective,penicillins
+46,Premix Diluent,other,other
+47,heparin,anticoagulant,other
+49,Lactated Ringers Injection intravenous solution,fluid_electrolyte,other
+50,niCARdipine,bp_lowering,other
+51,fentaNYL,analgesic,opioids
+52,midazolam,sedative,benzodiazepine
+54,dexamethasone,endocrine,corticosteroids
+61,Dextrose 50% in Water intravenous solution,endocrine,diabetes
+63,Dextrose 10% in Water intravenous solution,fluid_electrolyte,other
+64,LORazepam,sedative,benzodiazepine
+65,hydrocortisone,endocrine,corticosteroids
+66,ampicillin,anti-infective,penicillins
+72,meropenem,anti-infective,carbapenems
+73,magnesium sulfate,fluid_electrolyte,other
+76,labetalol,bp_lowering,other
+77,potassium chloride-sodium chloride,fluid_electrolyte,other
+78,sodium bicarbonate,fluid_electrolyte,other
+79,cytarabine,other,other
+80,cefuroxime,anti-infective,cephalosporins
+81,tranexamic acid,other,other
+82,rocuronium,neuromuscular_blocker,other
+86,phenylephrine,vasopressor,phenylephrine
+87,protamine,reversal_agent,other
+88,esmolol,bp_lowering,other
+89,methylPREDNISolone,endocrine,corticosteroids
+90,metroNIDAZOLE,anti-infective,metronidazole
+97,metoprolol,bp_lowering,other
+102,doxycycline,anti-infective,tetracyclines
+103,ketorolac,analgesic,nsaid
+104,ampicillin-sulbactam,anti-infective,penicillins
+110,Electrolyte (Plasma-Lyte) intravenous solution,other,other
+111,neostigmine,reversal_agent,other
+112,ephedrine,other,other
+113,lidocaine,antiarrhythmics,other
+115,glycopyrrolate,reversal_agent,other
+117,cefOXitin,anti-infective,cephalosporins
+119,azithromycin,anti-infective,macrolide antibiotics
+126,ketamine,sedative,anesthetic
+131,levoFLOXacin,anti-infective,fluoroquinolones
+132,DOBUTamine,vasopressor,dobutamine
+133,cefTAZidime,anti-infective,cephalosporins
+135,metoclopramide,antiemetic,other
+136,oxytocin,other,other
+140,Dextrose 20% in Water intravenous solution,fluid_electrolyte,other
+147,acyclovir,anti-infective,antiviral
+149,levETIRAcetam,neurologic,anticonvulsant
+150,cefepime,anti-infective,cephalosporins
+151,potassium phosphate,other,other
+154,Sodium Chloride 3%,other,other
+155,sterile water,other,other
+157,levothyroxine,other,other
+160,mannitol,fluid_electrolyte,other
+161,cisatracurium,neuromuscular_blocker,other
+166,lacosamide,other,other
+169,Dextrose 5% with 0.9% NaCl intravenous solution,fluid_electrolyte,other
+170,diltiazem,bp_lowering,other
+173,fluconazole,anti-infective,antifungals
+175,sodium phosphate,other,other
+177,clindamycin,anti-infective,lincosamides
+180,Empty Container,other,other
+187,leucovorin,other,other
+190,alteplase,other,other
+191,tromethamine,other,other
+193,acetylcysteine,other,other
+194,folic acid,vitamin_supplement,other
+195,nalbuphine,analgesic,opioids
+199,diazePAM,sedative,benzodiazepine
+204,nafcillin,anti-infective,penicillins
+205,DAPTOmycin,anti-infective,lipopeptide
+206,fludarabine,other,other
+208,tacrolimus,other,other
+210,micafungin,anti-infective,antifungals
+211,acetaminophen,analgesic,non-opioid
+212,ethiodized oil,other,other
+217,bumetanide,diuretic,other
+219,pyridoxine,vitamin_supplement,other
+221,sodium chloride,other,other
+223,calcium gluconate,fluid_electrolyte,other
+224,central hyperalimentation (TPN),other,other
+225,sodium glycerophosphate,other,other
+226,erythromycin,anti-infective,macrolide antibiotics
+227,vecuronium,neuromuscular_blocker,other
+229,atropine,reversal_agent,other
+230,dihydroergotamine,other,other
+233,Dextrose 5% in Water with KCl 20 mEq/l intravenous solution,fluid_electrolyte,other
+235,tigecycline,anti-infective,tetracyclines
+237,octreotide,other,other
+238,ganciclovir,anti-infective,antiviral
+239,hyperal peripheral,other,other
+241,mycophenolate mofetil,other,other
+249,haloperidol,other,other
+251,penicillin G potassium,anti-infective,penicillins
+256,"hyperalimentation, adult",other,other
+261,methocarbamol,other,other
+266,PHENobarbital,other,other
+268,carmustine,other,other
+271,promethazine,antiemetic,other
+272,naloxone,reversal_agent,other
+273,scopolamine,other,other
+274,"fat emulsion, intravenous",other,other
+277,ciprofloxacin,anti-infective,fluoroquinolones
+278,hydromorphone bolus from current pca,analgesic,opioids
+279,busulfan,other,other
+280,mesna,other,other
+283,digoxin,other,other
+285,multivitamin,vitamin_supplement,other
+287,fosphenytoin,neurologic,anticonvulsant
+290,epoprostenol,other,other
+292,sodium nitroprusside,other,other
+293,chlorothiazide,diuretic,other
+295,basiliximab,other,other
+303,phytonadione,vitamin_supplement,other
+305,flumazenil,reversal_agent,other
+306,anti-thymocyte globulin (rabbit),other,other
+307,desmopressin,other,other
+310,methylene blue,other,other
+314,DOXOrubicin,other,other
+315,riTUXimab,other,other
+316,Misc Medication TNF,other,other
+318,DOPamine,vasopressor,dopamine
+320,etomidate,sedative,anesthetic
+322,levOCARNitine,other,other
+323,remifentanil,analgesic,opioids
+327,rasburicase,other,other
+328,cyclophosphamide,other,other
+329,SUFentanil,analgesic,opioids
+338,zidovudine,other,other
+339,Belatacept,other,other
+343,sulfamethoxazole-trimethoprim,other,other
+345,iron sucrose,other,other
+348,cycloSPORINE,other,other
+349,cosyntropin,other,other
+350,prochlorperazine,antiemetic,other
+352,linezolid,anti-infective,oxazolidinones
+361,etoposide,other,other
+366,aztreonam,anti-infective,monobactams
+373,valproic acid,neurologic,anticonvulsant
+374,rifAMPin,anti-infective,antimycobacterial agents
+376,tobramycin,anti-infective,aminoglycosides
+378,doripenem,anti-infective,carbapenems
+380,darbepoetin alfa,other,other
+382,colistimethate,other,other
+388,Amino Acids 3% and Glycerin 3% with Electrolytes (ProcalAmine) intravenous solution,other,other
+390,carboplatin,other,other
+394,aminocaproic acid,other,other
+402,argatroban,other,other
+403,ertapenem,anti-infective,carbapenems
+405,imipenem-cilastatin,anti-infective,carbapenems
+409,bivalirudin,other,other
+418,inFLIXimab,other,other
+423,pamidronate,other,other
+424,adenosine,other,other
+429,vinCRIStine,other,other
+431,insulin aspart,endocrine,diabetes
+432,butorphanol,other,other
+442,tirofiban,other,other
+447,ceftaroline,anti-infective,cephalosporins
+450,decitabine,other,other
+454,cisplatin,other,other
+455,paricalcitol,other,other
+464,acetaZOLAMIDE,other,other
+466,melphalan,other,other
+470,fosaprepitant,other,other
+471,aldesleukin,other,other
+481,immune globulin intravenous,other,other
+483,isavuconazonium,other,other
+484,fluorescein ophthalmic,other,other
+491,foscarnet,anti-infective,antiviral
+494,methotrexate,other,other
+497,physostigmine,other,other
+501,enoxaparin,anticoagulant,other
+503,coagulation factor VIIa,other,other
+505,hetastarch,fluid_electrolyte,other
+507,Dextrose 5% with 0.2% NaCl intravenous solution,fluid_electrolyte,other
+514,arginine,other,other
+518,glucagon,endocrine,diabetes
+524,ANES amiodarone 750 mg/500 mL D5W Premix,antiarrhythmics,other
+525,enalapril,other,other
+527,epoetin alfa,other,other
+528,methadone,analgesic,opioids
+535,ifosfamide,other,other
+538,ibutilide,other,other
+541,Factor VIII injection,other,other
+545,conjugated estrogens,other,other
+546,posaconazole,anti-infective,antifungals
+549,avibactam-cefTAZidime,anti-infective,cephalosporins
+552,ferumoxytol,other,other
+555,ceftolozane-tazobactam,anti-infective,cephalosporins
+556,meperidine,other,other
+563,potassium acetate,other,other
+565,amphotericin B liposomal,anti-infective,antifungals
+568,IDArubicin,other,other
+574,isoproterenol,other,other
+575,anti-inhibitor coagulant complex,other,other
+576,granisetron,antiemetic,other
+580,ethacrynic acid,other,other
+581,copper chloride,other,other
+587,telavancin,anti-infective,glycopeptide
+592,amikacin,anti-infective,aminoglycosides
+598,hyperal neonate,other,other
+608,procainamide,antiarrhythmics,other
+610,PACLitaxel,other,other
+614,antihemophilic factor,other,other
+615,indocyanine green,other,other
+621,zoledronic acid,other,other
+622,voriconazole,anti-infective,antifungals
+623,pentamidine,anti-infective,antiparasitic
+624,verapamil,bp_lowering,other
+633,indigo carmine,other,other
+634,coagulation factor IX,other,other
+647,gabapentin,neurologic,anticonvulsant
+649,ascorbic acid,vitamin_supplement,other
+650,iron dextran,fluid_electrolyte,other
+651,prothrombin complex conc human,other,other
+656,PENTobarbital,other,other
+674,arsenic trioxide,other,other
+681,cyanocobalamin,vitamin_supplement,other
+689,azaCITIDine,other,other
+691,bevacizumab,other,other
+692,fluorouracil,other,other
+704,terbutaline,other,other
+706,DOXOrubicin liposomal,other,other
+708,prasugrel,other,other
+717,chlorproMAZINE,other,other
+721,oxacillin,anti-infective,penicillins
+726,alemtuzumab,other,other
+728,sodium acetate,other,other
+730,vinorelbine,other,other
+731,moxifloxacin,anti-infective,fluoroquinolones
+737,antihemophilic factor-von Willebrand factor inj,other,other
+741,albuterol,other,other
+742,cytomegalovirus immune globulin,other,other
+744,oxaliplatin,other,other
+746,oxymetazoline nasal,other,other
+748,irinotecan,other,other
+750,clevidipine,bp_lowering,other
+751,aprepitant,other,other
+762,caffeine,other,other
+765,Standard PAL Line IV fluid,other,other
+773,cefotaxime,other,other
+775,allopurinol,other,other
+779,antithrombin III,other,other
+782,minocycline,anti-infective,tetracyclines
+789,abciximab,other,other
+792,DOCEtaxel,other,other
+802,mitoXANTRONE,other,other
+804,Dextrose 70% in Water intravenous solution,fluid_electrolyte,other
+810,calcitriol,other,other
+814,propranolol,bp_lowering,other
+816,bupivacaine-epinephrine,other,other
+817,raNITIdine,gastrointestinal,acid_suppressant
+818,Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution,fluid_electrolyte,other
+819,"Bag, PCA  Infusion",other,other
+821,phenytoin,neurologic,anticonvulsant
+826,vedolizumab,other,other
+835,bupivacaine,other,other
+836,heparin flush,anticoagulant,other
+840,fomepizole,other,other
+841,phenylephrine nasal,vasopressor,phenylephrine
+842,dalfopristin-quinupristin,other,other
+845,penicillin G sodium,anti-infective,penicillins
+846,Dextrose 10% with 0.2% NaCl intravenous solution,fluid_electrolyte,other
+848,palonosetron,antiemetic,other
+849,PEMEtrexed,other,other
+850,gemcitabine,other,other
+864,Standard UAC Line IV fluid,other,other
+869,"Premix Water, Sterile",other,other
+875,prothrombin complex concentrate,other,other
+876,blinatumomab,other,other
+877,IV Stabilizer Solution inj,other,other
+880,hydroxocobalamin,other,other
+896,aminophylline,other,other
+899,"lymphocyte immune globulin, anti-thy (equine)",other,other
+908,dofetilide,other,other
+909,treprostinil,other,other
+913,sildenafil,other,other
+918,dantrolene,other,other
+922,hepatitis B immune globulin,other,other
+930,amphotericin B,anti-infective,antifungals
+932,vinBLAStine,other,other
+944,DAUNOrubicin,other,other
+945,dacarbazine,other,other
+956,benztropine,other,other
+964,streptomycin,anti-infective,aminoglycosides
+965,methohexital,other,other
+967,citric acid-sodium citrate,other,other
+968,bortezomib,other,other
+971,pyridostigmine,other,other
+973,Insulin/PBO for Shine Study,endocrine,diabetes
+975,tetanus-diphth toxoids (Td) adult/adol,other,other
+977,perflutren,other,other
+983,papaverine,other,other
+986,sodium benzoate-sodium phenylacetate,other,other
+992,streptozocin,other,other
+997,aspirin,analgesic,nsaid
+999,ticagrelor,other,other
+1000,pregabalin,neurologic,anticonvulsant
+1003,trimethobenzamide,other,other
+1004,insulin glargine,endocrine,diabetes
+1008,bleomycin,other,other
+1009,Vancomycin Trough Reminder,anti-infective,glycopeptide
+1010,quinidine,antiarrhythmics,other
+1012,cidofovir,anti-infective,antiviral
+1015,RHo (D) immune globulin,other,other
+1018,digoxin immune FAB,other,other
+1019,selenium,other,other
+1025,ziprasidone,other,other
+1037,traMADol,analgesic,opioids
+1045,Standard UVC Line IV fluid,other,other
+1052,Al hydroxide/ASA/Ca carbonate/Mg hydroxide,other,other
+1054,methylergonovine,other,other
+1057,lidocaine topical,antiarrhythmics,other
+1058,celecoxib,analgesic,nsaid
+1060,Flolan Cassette,other,other
+1065,cladribine,other,other
+1077,cocaine topical,other,other
+1080,ticarcillin-clavulanate,anti-infective,penicillins
+1082,benzocaine topical,other,other
+1084,PACLitaxel protein-bound,other,other
+1088,isosulfan blue,other,other
+1089,mepivacaine,other,other
+1096,insulin isophane (NPH),endocrine,diabetes
+1105,hydromor/ketamine bolus from current pca,sedative,anesthetic
+1115,bupivacaine liposome,other,other
+1116,pertuzumab,other,other
+1117,trastuzumab,other,other
+1121,fibrinogen,other,other
+1122,conivaptan,other,other
+1126,pegaspargase,other,other
+1138,ramucirumab,other,other
+1142,morphine bolus from current pca,analgesic,opioids
+1146,epinephrine-lidocaine,antiarrhythmics,other
+1163,eribulin,other,other
+1166,pentostatin,other,other
+1176,panitumumab,other,other
+1183,calcium glubionate,fluid_electrolyte,other
+1188,ALPRAZolam,sedative,benzodiazepine
+1190,bendamustine,other,other
+1200,sirolimus,other,other
+1218,deferoxamine,other,other
+1224,dicyclomine,other,other
+1240,cetuximab,other,other
+1241,Al hydroxide/Mg hydroxide/simethicone,other,other
+1247,zinc sulfate,other,other
+1249,fentanyl bolus from current pca,analgesic,opioids
+1261,calcium carbonate,fluid_electrolyte,other
+1262,edrophonium,other,other
+1263,caffeine-sodium benzoate,other,other
+1266,Hexaminolevulinate 100mg kit inj,other,other
+1271,alprostadil,other,other
+1658,cloNIDine,other,other
+1680,sugammadex,reversal_agent,other
+1828,ethanol,other,other
+1829,trabectedin,other,other
+1873,"dextran, high molecular weight",fluid_electrolyte,other
+1909,clofarabine,other,other
+2030,tbo-filgrastim,other,other
+2034,"dextran, low molecular weight",fluid_electrolyte,other
+2079,palifermin,other,other
+2116,thiotepa,other,other
+2123,peramivir,other,other
+2131,buprenorphine,analgesic,opioids
+2133,indomethacin,analgesic,nsaid
+2163,idaruCIZUmab,other,other
+2168,polymyxin B sulfate,other,other
+2169,bacitracin,other,other
+2202,sargramostim,other,other
+2212,phenol topical,other,other
+2237,ANES Bupivicaine 0.15%/NS 250 mL Epidural,other,other
+2247,antivenin (Crotalidae) polyvalent,other,other
+2257,Acetylcholine I-coronary 18mcg/mL High conc. 20mL syringe,other,other
+2266,iohexol,other,other
+2267,Neonate Starter Hyperal,other,other
+2277,Acetylcholine I-coronary 0.18mcg/mL Low conc. 20mL syringe,other,other
+2286,insulin pump patient - regular,endocrine,diabetes
+2299,clopidogrel,other,other
+2317,OLANZapine,other,other
+2330,azaTHIOprine,other,other
+2335,dexrazoxane,other,other
+2337,filgrastim,other,other
+2340,sodium tetradecyl sulfate,other,other
+2365,ado-trastuzumab emtansine,other,other
+2382,ropivacaine,other,other
+2391,iodixanol,other,other
+2407,amifostine,other,other
+2411,Amino Acid 3% UAC Line Fluid,other,other
+2437,"influenza virus vaccine, inactivated",other,other
+2439,eculizumab,other,other
+2448,loratadine,antihistamine,other
+2453,"bag, sterile",other,other
+2461,nelarabine,other,other
+2466,thrombin topical,other,other
+2469,topotecan,other,other
+2474,magnesium citrate,other,other
+2478,copper sulfate,other,other
+2534,hydrOXYzine,antihistamine,other
+2554,Anticoagulant Citrate Soln,other,other
+2557,calcitonin,other,other
+2558,topiramate,neurologic,anticonvulsant
+2566,"C1 esterase inhibitor, human",other,other
+2580,NS Continuous Bladder Irrigation 3000mL,other,other
+2584,secretin,other,other
+2594,sodium citrate,other,other
+2596,carboprost,other,other
+2602,SUMAtriptan,other,other
+3295,insulin lispro,endocrine,diabetes
+3344,Amino Acids 15% (Clinisol Sulfite-Free),other,other
+3359,parenteral nutrition solution,other,other
+3372,abatacept,other,other
+3384,divalproex sodium,other,other
+3408,hemin,other,other
+3445,fentanyl-ropivacaine,analgesic,opioids
+3479,intravenous electrolyte solution,other,other
+3502,dalbavancin,anti-infective,glycopeptide
+3529,cytarabine liposomal-daunorubicin liposomal,other,other
+3536,corticorelin,other,other
+3553,protein C,other,other
+3559,glucose,other,other
+3587,"bottle, sterile",other,other
+3681,pneumococcal 23-polyvalent vaccine,other,other
+3698,prismasate dialysate,other,other
+3757,chloramphenicol,other,other
+3764,Methylnaltrexone 12mg inj.,other,other
+3778,Vancomycin Intermittent Dosing by Pharmacist,anti-infective,glycopeptide
+3779,Nafcillin 2gm Desensitization Rx Protocol- initiate,anti-infective,penicillins
+3781,levalbuterol,other,other
+3815,procaine penicillin,anti-infective,penicillins
+3816,alfentanil,analgesic,opioids
+3827,hyaluronidase,other,other
+3861,methyldopa,other,other
+3888,PCA IV Syringe,other,other
+3892,penicillin G benzathine,anti-infective,penicillins
+3922,insulin detemir,endocrine,diabetes
+3941,Epoprostenol CADD Conc-Dose-Rate Confirm,other,other
+4318,Angiotensin II,other,other
+4386,PCA Reservoir & Syringe Volume Confirm,other,other
+4644,sodium thiosulfate,other,other
+4723,trace elements with selenium,other,other
+4828,meropenem-vaborbactam,anti-infective,carbapenems
+4838,mitoMYcin,other,other
+4881,Meropenem 2gm Desensitization Rx Protocol- initiate,anti-infective,carbapenems
+4898,Prismasate BK4/0 w/o Calcium,fluid_electrolyte,other
+4964,gemtuzumab ozogamicin,other,other
+4988,epoprostenol diluent,other,other
+5021,tocilizumab,other,other
+5051,liothyronine,other,other
+5130,predniSONE,endocrine,corticosteroids
+5177,Fentanyl Patch Removal,analgesic,opioids
+5187,ustekinumab,other,other
+5213,Dianeal PD-2 with 1.5% Dextrose,other,other
+5217,insulin pump patient - lispro,endocrine,diabetes
+5234,carbidopa-levodopa,other,other
+5776,Amino Acid Injection 50gm/1000ml,other,other
+5939,eravacycline,other,other
+5949,imdevimab,other,other
+6062,Dianeal Low Calcium with 1.5% Dextrose,fluid_electrolyte,other
+6077,defibrotide,other,other
+6136,ravulizumab-cwvz 300 mg/30mL inj,other,other
+6204,coagulation factor Xa,other,other
+6231,Hyperalimentation for charging,other,other
+6234,Tagraxofusp-erzs 1000 mcg / 10 mL inj,other,other
+6258,Epidural Infusion,other,other
+6309,Cefepime 2gm Desensitization Rx Protocol- initiate,anti-infective,cephalosporins
+6375,sincalide,other,other
+6431,casirivimab,other,other
+6453,inotuzumab ozogamicin,other,other
+6499,Dextrose 30% in Water,other,other
+6522,Potassium Level Recheck Reminder,other,other
+6544,estradiol,other,other
+6561,triamcinolone,endocrine,corticosteroids
+6808,PrismaSol B22GK4/0 w/o Calcium,fluid_electrolyte,other
+6877,remdesivir.,anti-infective,antiviral
+6883,remdesivir,anti-infective,antiviral
+7101,sodium ferric gluconate complex,other,other
+7104,regadenoson,other,other
+7210,phenylephrine ophthalmic,vasopressor,phenylephrine
+7250,droperidol,antiemetic,other
+7316,chromic chloride hexahydrate,other,other
+7446,omadacycline,other,other
+7455,DACTINomycin,other,other
+7464,tetracaine,other,other
+7500,siltuximab,other,other
+7551,nivolumab,other,other
+7565,carvedilol,other,other
+7590,obinutuzumab,other,other
+7663,midodrine,other,other
+7709,miSOPROStol,other,other
+7724,chloroprocaine,other,other
+7736,daratumumab,other,other
+7761,insulin isophane-insulin regular,endocrine,diabetes
+7765,pembrolizumab,other,other
+7787,atropine-diphenoxylate,reversal_agent,other
+7814,docusate,other,other
+7822,ocular lubricant,other,other
+7831,brentuximab vedotin,other,other
+8084,cangrelor,other,other
+8289,casirivimab-imdevimab,other,other
+8333,cefiderocol,anti-infective,cephalosporins
+8432,glucarpidase,other,other
+8581,D12.5W 0.2%NS,other,other
+8637,Lorazepam IV Therapy,sedative,benzodiazepine
+8673,amobarbital,other,other
+8675,D20W,other,other
+8689,D12.5W 0.45%NS,other,other
+8713,D25W 250mL,other,other
+8769,"diphtheria/pertussis, acel/tetanus adult (Tdap)",other,other
+8804,carfilzomib,other,other
+8818,betamethasone,other,other
+8844,von Willebrand factor,other,other
+8876,D20W 0.2%NS,other,other
+8948,immune globulin intravenous and subcutaneous,other,other
+8958,D10W 0.45%NS,other,other
+8975,patisiran,other,other
+9000,D15%W 250 ml,other,other
+9050,D12.5%W,other,other
+9076,Description Missing,other,other
+9082,tamsulosin,other,other

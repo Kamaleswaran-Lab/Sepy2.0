@@ -1,0 +1,554 @@
+med_name,med_class,med_subclass
+famotidine,,not_reviewed
+Sodium Chloride 0.9% intravenous solution,,crystalloid
+cefTRIAXone,anti-infective,cephalosporins
+ondansetron,,not_reviewed
+gentamicin,anti-infective,aminoglycosides
+diphenhydrAMINE,,not_reviewed
+morphine,,opiods
+Dextrose 5% in Lactated Ringers intravenous solution,,not_reviewed
+pantoprazole,,not_reviewed
+thiamine,,not_reviewed
+Sodium Chloride 0.45% intravenous solution,,not_reviewed
+vancomycin,anti-infective,glycopeptide
+potassium chloride,,not_reviewed
+albumin human,,not_reviewed
+ANES vasopressin 200 unit/500 mL NS drip,,
+nitroglycerin,bp_lowering,other
+succinylcholine,,not_reviewed
+propofol,,not_reviewed
+calcium chloride,,not_reviewed
+epinephrine,vasopressor,epinephrine
+Premix Dextrose 5%,,
+Premix NS,,
+dexmedetomidine,,not_reviewed
+ceFAZolin,anti-infective,cephalosporins
+norepinephrine,vasopressor,norepinephrine
+insulin regular,,not_reviewed
+vasopressin,vasopressor,vasopressin
+milrinone,bp_lowering,other
+Dextrose 5% in Water intravenous solution,,not_reviewed
+amiodarone,antiarrhythmics,other
+hydrALAZINE,bp_lowering,other
+furosemide,diuretic,other
+HYDROmorphone,,opiods
+Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution,,not_reviewed
+Dextrose 5% with 0.45% NaCl intravenous solution,,not_reviewed
+piperacillin-tazobactam,anti-infective,penicillins
+Premix Diluent,,
+heparin,,anticoagulants
+Lactated Ringers Injection intravenous solution,,not_reviewed
+niCARdipine,bp_lowering,other
+fentaNYL,,opiods
+midazolam,,not_reviewed
+dexamethasone,,not_reviewed
+Dextrose 50% in Water intravenous solution,,not_reviewed
+Dextrose 10% in Water intravenous solution,,not_reviewed
+LORazepam,,not_reviewed
+hydrocortisone,,not_reviewed
+ampicillin,anti-infective,penicillins
+meropenem,anti-infective,carbapenems
+magnesium sulfate,,not_reviewed
+labetalol,bp_lowering,other
+potassium chloride-sodium chloride,,not_reviewed
+sodium bicarbonate,,not_reviewed
+cytarabine,,antineoplastics
+cefuroxime,anti-infective,cephalosporins
+tranexamic acid,,anticoagulants
+rocuronium,,not_reviewed
+phenylephrine,vasopressor,phenylephrine
+protamine,,anticoagulants
+esmolol,bp_lowering,other
+methylPREDNISolone,,not_reviewed
+metroNIDAZOLE,anti-infective,metronidazole
+metoprolol,bp_lowering,other
+doxycycline,anti-infective,tetracyclines
+ketorolac,,not_reviewed
+ampicillin-sulbactam,anti-infective,penicillins
+Electrolyte (Plasma-Lyte) intravenous solution,,not_reviewed
+neostigmine,,not_reviewed
+ephedrine,,other
+lidocaine,antiarrhythmics,other
+glycopyrrolate,,not_reviewed
+cefOXitin,anti-infective,cephalosporins
+azithromycin,anti-infective,macrolide antibiotics
+ketamine,,not_reviewed
+levoFLOXacin,anti-infective,fluoroquinolones
+DOBUTamine,vasopressor,dobutamine
+cefTAZidime,anti-infective,cephalosporins
+metoclopramide,,not_reviewed
+oxytocin,,not_reviewed
+Dextrose 20% in Water intravenous solution,,not_reviewed
+acyclovir,anti-infective,antiviral
+levETIRAcetam,,not_reviewed
+cefepime,anti-infective,cephalosporins
+potassium phosphate,,not_reviewed
+Sodium Chloride 3%,,not_reviewed
+sterile water,,other
+levothyroxine,,not_reviewed
+mannitol,diuretic,other
+cisatracurium,,not_reviewed
+lacosamide,,not_reviewed
+Dextrose 5% with 0.9% NaCl intravenous solution,,not_reviewed
+diltiazem,bp_lowering,other
+fluconazole,anti-infective,antifungals
+sodium phosphate,,not_reviewed
+clindamycin,anti-infective,lincosamides
+Empty Container,,
+leucovorin,,not_reviewed
+alteplase,,anticoagulants
+tromethamine,,not_reviewed
+acetylcysteine,,not_reviewed
+folic acid,,not_reviewed
+nalbuphine,,not_reviewed
+diazePAM,,not_reviewed
+nafcillin,anti-infective,penicillins
+DAPTOmycin,anti-infective,lipopeptide
+fludarabine,,antineoplastics
+tacrolimus,,not_reviewed
+micafungin,anti-infective,antifungals
+acetaminophen,,analgesics
+ethiodized oil,,not_reviewed
+bumetanide,diuretic,other
+pyridoxine,,not_reviewed
+sodium chloride,,not_reviewed
+calcium gluconate,,not_reviewed
+central hyperalimentation (TPN),,
+sodium glycerophosphate,,not_reviewed
+erythromycin,anti-infective,macrolide antibiotics
+vecuronium,,not_reviewed
+atropine,antiarrhythmics,other
+dihydroergotamine,,not_reviewed
+Dextrose 5% in Water with KCl 20 mEq/l intravenous solution,,not_reviewed
+tigecycline,anti-infective,tetracyclines
+octreotide,,not_reviewed
+ganciclovir,anti-infective,antiviral
+hyperal peripheral,,not_reviewed
+mycophenolate mofetil,,not_reviewed
+haloperidol,,not_reviewed
+penicillin G potassium,anti-infective,penicillins
+"hyperalimentation, adult",,
+methocarbamol,,not_reviewed
+PHENobarbital,,not_reviewed
+carmustine,,antineoplastics
+promethazine,,not_reviewed
+naloxone,,not_reviewed
+scopolamine,,not_reviewed
+"fat emulsion, intravenous",,not_reviewed
+ciprofloxacin,anti-infective,fluoroquinolones
+hydromorphone bolus from current pca,,
+busulfan,,antineoplastics
+mesna,,antineoplastics
+digoxin,antiarrhythmics,other
+multivitamin,,not_reviewed
+fosphenytoin,,not_reviewed
+epoprostenol,bp_lowering,other
+sodium nitroprusside,bp_lowering,other
+chlorothiazide,diuretic,other
+basiliximab,,not_reviewed
+phytonadione,,anticoagulants
+flumazenil,,not_reviewed
+anti-thymocyte globulin (rabbit),,not_reviewed
+desmopressin,,not_reviewed
+methylene blue,,other
+DOXOrubicin,,antineoplastics
+riTUXimab,,antineoplastics
+Misc Medication TNF,,
+DOPamine,vasopressor,dopamine
+etomidate,,not_reviewed
+levOCARNitine,,other
+remifentanil,,not_reviewed
+rasburicase,,not_reviewed
+cyclophosphamide,,antineoplastics
+SUFentanil,,not_reviewed
+zidovudine,anti-infective,antiviral
+Belatacept,,not_reviewed
+sulfamethoxazole-trimethoprim,anti-infective,sulphonamides
+iron sucrose,,not_reviewed
+cycloSPORINE,,not_reviewed
+cosyntropin,,not_reviewed
+prochlorperazine,,not_reviewed
+linezolid,anti-infective,oxazolidinones
+etoposide,,antineoplastics
+aztreonam,anti-infective,monobactams
+valproic acid,,not_reviewed
+rifAMPin,anti-infective,antimycobacterial agents
+tobramycin,anti-infective,aminoglycosides
+doripenem,anti-infective,carbapenems
+darbepoetin alfa,,other
+colistimethate,anti-infective,other
+Amino Acids 3% and Glycerin 3% with Electrolytes (ProcalAmine) intravenous solution,,not_reviewed
+carboplatin,,antineoplastics
+aminocaproic acid,,anticoagulants
+argatroban,,anticoagulants
+ertapenem,anti-infective,carbapenems
+imipenem-cilastatin,anti-infective,carbapenems
+bivalirudin,,anticoagulants
+inFLIXimab,,not_reviewed
+pamidronate,,not_reviewed
+adenosine,antiarrhythmics,other
+vinCRIStine,,antineoplastics
+insulin aspart,,not_reviewed
+butorphanol,,not_reviewed
+tirofiban,,anticoagulants
+ceftaroline,anti-infective,cephalosporins
+decitabine,,antineoplastics
+cisplatin,,antineoplastics
+paricalcitol,,not_reviewed
+acetaZOLAMIDE,diuretic,other
+melphalan,,antineoplastics
+fosaprepitant,,not_reviewed
+aldesleukin,,antineoplastics
+immune globulin intravenous,,not_reviewed
+isavuconazonium,anti-infective,antifungals
+fluorescein ophthalmic,,other
+foscarnet,anti-infective,antiviral
+methotrexate,,antineoplastics
+physostigmine,,not_reviewed
+enoxaparin,,anticoagulants
+coagulation factor VIIa,,anticoagulants
+hetastarch,,not_reviewed
+Dextrose 5% with 0.2% NaCl intravenous solution,,not_reviewed
+arginine,,other
+glucagon,,not_reviewed
+ANES amiodarone 750 mg/500 mL D5W Premix,,
+enalapril,bp_lowering,other
+epoetin alfa,,other
+methadone,,not_reviewed
+ifosfamide,,antineoplastics
+ibutilide,antiarrhythmics,other
+Factor VIII injection,,
+conjugated estrogens,,not_reviewed
+posaconazole,anti-infective,antifungals
+avibactam-cefTAZidime,anti-infective,cephalosporins
+ferumoxytol,,not_reviewed
+ceftolozane-tazobactam,anti-infective,penicillins
+meperidine,,not_reviewed
+potassium acetate,,not_reviewed
+amphotericin B liposomal,anti-infective,antifungals
+IDArubicin,,antineoplastics
+isoproterenol,vasopressor,other
+anti-inhibitor coagulant complex,,anticoagulants
+granisetron,,not_reviewed
+ethacrynic acid,diuretic,other
+copper chloride,,not_reviewed
+telavancin,anti-infective,glycopeptide
+amikacin,anti-infective,aminoglycosides
+hyperal neonate,,not_reviewed
+procainamide,antiarrhythmics,other
+PACLitaxel,,antineoplastics
+antihemophilic factor,,anticoagulants
+indocyanine green,,not_reviewed
+zoledronic acid,,not_reviewed
+voriconazole,anti-infective,antifungals
+pentamidine,,antiparasitic
+verapamil,bp_lowering,other
+indigo carmine,,not_reviewed
+coagulation factor IX,,anticoagulants
+gabapentin,,not_reviewed
+ascorbic acid,,not_reviewed
+iron dextran,,not_reviewed
+prothrombin complex conc human,,anticoagulants
+PENTobarbital,,not_reviewed
+arsenic trioxide,,antineoplastics
+cyanocobalamin,,not_reviewed
+azaCITIDine,,antineoplastics
+bevacizumab,,antineoplastics
+fluorouracil,,antineoplastics
+terbutaline,,not_reviewed
+DOXOrubicin liposomal,,antineoplastics
+prasugrel,,anticoagulants
+chlorproMAZINE,,not_reviewed
+oxacillin,anti-infective,penicillins
+alemtuzumab,,antineoplastics
+sodium acetate,,not_reviewed
+vinorelbine,,antineoplastics
+moxifloxacin,anti-infective,fluoroquinolones
+antihemophilic factor-von Willebrand factor inj,,anticoagulants
+albuterol,,not_reviewed
+cytomegalovirus immune globulin,,not_reviewed
+oxaliplatin,,antineoplastics
+oxymetazoline nasal,,other
+irinotecan,,antineoplastics
+clevidipine,bp_lowering,other
+aprepitant,,not_reviewed
+caffeine,,not_reviewed
+Standard PAL Line IV fluid,,
+cefotaxime,anti-infective,cephalosporins
+allopurinol,,not_reviewed
+antithrombin III,,anticoagulants
+minocycline,anti-infective,tetracyclines
+abciximab,,anticoagulants
+DOCEtaxel,,antineoplastics
+mitoXANTRONE,,antineoplastics
+Dextrose 70% in Water intravenous solution,,not_reviewed
+calcitriol,,not_reviewed
+propranolol,bp_lowering,other
+bupivacaine-epinephrine,,not_reviewed
+raNITIdine,,not_reviewed
+Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution,,not_reviewed
+"Bag, PCA  Infusion",,
+phenytoin,,other
+vedolizumab,,not_reviewed
+bupivacaine,,not_reviewed
+heparin flush,,anticoagulants
+fomepizole,,not_reviewed
+phenylephrine nasal,,other
+dalfopristin-quinupristin,anti-infective,antiviral
+penicillin G sodium,anti-infective,penicillins
+Dextrose 10% with 0.2% NaCl intravenous solution,,not_reviewed
+palonosetron,,not_reviewed
+PEMEtrexed,,antineoplastics
+gemcitabine,,antineoplastics
+Standard UAC Line IV fluid,,
+"Premix Water, Sterile",,
+prothrombin complex concentrate,,anticoagulants
+blinatumomab,,antineoplastics
+IV Stabilizer Solution inj,,
+hydroxocobalamin,,not_reviewed
+aminophylline,,not_reviewed
+"lymphocyte immune globulin, anti-thy (equine)",,not_reviewed
+dofetilide,antiarrhythmics,other
+treprostinil,diuretic,other
+sildenafil,bp_lowering,other
+dantrolene,,not_reviewed
+hepatitis B immune globulin,,not_reviewed
+amphotericin B,anti-infective,antifungals
+vinBLAStine,,antineoplastics
+DAUNOrubicin,,antineoplastics
+dacarbazine,,antineoplastics
+benztropine,,not_reviewed
+streptomycin,anti-infective,aminoglycosides
+methohexital,,not_reviewed
+citric acid-sodium citrate,,not_reviewed
+bortezomib,,antineoplastics
+pyridostigmine,,not_reviewed
+Insulin/PBO for Shine Study,,
+tetanus-diphth toxoids (Td) adult/adol,,not_reviewed
+perflutren,,not_reviewed
+papaverine,,other
+sodium benzoate-sodium phenylacetate,,not_reviewed
+streptozocin,,antineoplastics
+aspirin,,analgesics
+ticagrelor,,not_reviewed
+pregabalin,,not_reviewed
+trimethobenzamide,,not_reviewed
+insulin glargine,,not_reviewed
+bleomycin,,antineoplastics
+Vancomycin Trough Reminder,,
+quinidine,antiarrhythmics,other
+cidofovir,anti-infective,antiviral
+RHo (D) immune globulin,,not_reviewed
+digoxin immune FAB,,not_reviewed
+selenium,,not_reviewed
+ziprasidone,,not_reviewed
+traMADol,,opiods
+Standard UVC Line IV fluid,,
+Al hydroxide/ASA/Ca carbonate/Mg hydroxide,,not_reviewed
+methylergonovine,,not_reviewed
+lidocaine topical,,other
+celecoxib,,not_reviewed
+Flolan Cassette,,
+cladribine,,antineoplastics
+cocaine topical,,other
+ticarcillin-clavulanate,anti-infective,penicillins
+benzocaine topical,,other
+PACLitaxel protein-bound,,antineoplastics
+isosulfan blue,,not_reviewed
+mepivacaine,,not_reviewed
+insulin isophane (NPH),,not_reviewed
+hydromor/ketamine bolus from current pca,,
+bupivacaine liposome,,not_reviewed
+pertuzumab,,antineoplastics
+trastuzumab,,antineoplastics
+fibrinogen,,anticoagulants
+conivaptan,,other
+pegaspargase,,antineoplastics
+ramucirumab,,antineoplastics
+morphine bolus from current pca,,
+epinephrine-lidocaine,,not_reviewed
+eribulin,,antineoplastics
+pentostatin,,antineoplastics
+panitumumab,,antineoplastics
+calcium glubionate,,not_reviewed
+ALPRAZolam,hypnotics,
+bendamustine,,antineoplastics
+sirolimus,,antineoplastics
+deferoxamine,,not_reviewed
+dicyclomine,,not_reviewed
+cetuximab,,antineoplastics
+Al hydroxide/Mg hydroxide/simethicone,,not_reviewed
+zinc sulfate,,not_reviewed
+fentanyl bolus from current pca,,
+calcium carbonate,,not_reviewed
+edrophonium,,not_reviewed
+caffeine-sodium benzoate,,not_reviewed
+Hexaminolevulinate 100mg kit inj,,antineoplastics
+alprostadil,bp_lowering,other
+cloNIDine,bp_lowering,other
+sugammadex,,not_reviewed
+ethanol,,not_reviewed
+trabectedin,,antineoplastics
+"dextran, high molecular weight",,not_reviewed
+clofarabine,,antineoplastics
+tbo-filgrastim,,other
+"dextran, low molecular weight",,not_reviewed
+palifermin,,antineoplastics
+thiotepa,,antineoplastics
+peramivir,anti-infective,antiviral
+buprenorphine,,not_reviewed
+indomethacin,,not_reviewed
+idaruCIZUmab,,anticoagulants
+polymyxin B sulfate,,other
+bacitracin,,other
+sargramostim,,other
+phenol topical,,other
+ANES Bupivicaine 0.15%/NS 250 mL Epidural,,
+antivenin (Crotalidae) polyvalent,,other
+Acetylcholine I-coronary 18mcg/mL High conc. 20mL syringe,,
+iohexol,,not_reviewed
+Neonate Starter Hyperal,,
+Acetylcholine I-coronary 0.18mcg/mL Low conc. 20mL syringe,,
+insulin pump patient - regular,,
+clopidogrel,,anticoagulants
+OLANZapine,,not_reviewed
+azaTHIOprine,,not_reviewed
+dexrazoxane,,not_reviewed
+filgrastim,,other
+sodium tetradecyl sulfate,,other
+ado-trastuzumab emtansine,,antineoplastics
+ropivacaine,,not_reviewed
+iodixanol,,not_reviewed
+amifostine,,antineoplastics
+Amino Acid 3% UAC Line Fluid,,
+"influenza virus vaccine, inactivated",,not_reviewed
+eculizumab,,antineoplastics
+loratadine,,not_reviewed
+"bag, sterile",,
+nelarabine,,antineoplastics
+thrombin topical,,anticoagulants
+topotecan,,antineoplastics
+magnesium citrate,,not_reviewed
+copper sulfate,,not_reviewed
+hydrOXYzine,,not_reviewed
+Anticoagulant Citrate Soln,,not_reviewed
+calcitonin,,not_reviewed
+topiramate,,not_reviewed
+"C1 esterase inhibitor, human",,anticoagulants
+NS Continuous Bladder Irrigation 3000mL,,not_reviewed
+secretin,,other
+sodium citrate,,not_reviewed
+carboprost,,not_reviewed
+SUMAtriptan,,not_reviewed
+insulin lispro,,not_reviewed
+Amino Acids 15% (Clinisol Sulfite-Free),,not_reviewed
+parenteral nutrition solution,,not_reviewed
+abatacept,,not_reviewed
+divalproex sodium,,not_reviewed
+hemin,,not_reviewed
+fentanyl-ropivacaine,,not_reviewed
+intravenous electrolyte solution,,not_reviewed
+dalbavancin,anti-infective,glycopeptide
+cytarabine liposomal-daunorubicin liposomal,,antineoplastics
+corticorelin,,not_reviewed
+protein C,,anticoagulants
+glucose,,not_reviewed
+"bottle, sterile",,
+pneumococcal 23-polyvalent vaccine,,not_reviewed
+prismasate dialysate,,not_reviewed
+chloramphenicol,anti-infective,other
+Methylnaltrexone 12mg inj.,,not_reviewed
+Vancomycin Intermittent Dosing by Pharmacist,anti-infective,glycopeptide
+Nafcillin 2gm Desensitization Rx Protocol- initiate,anti-infective,penicillins
+levalbuterol,,not_reviewed
+procaine penicillin,anti-infective,penicillins
+alfentanil,,not_reviewed
+hyaluronidase,,not_reviewed
+methyldopa,bp_lowering,other
+PCA IV Syringe,,
+penicillin G benzathine,anti-infective,penicillins
+insulin detemir,,not_reviewed
+Epoprostenol CADD Conc-Dose-Rate Confirm,,
+Angiotensin II,bp_lowering,other
+PCA Reservoir & Syringe Volume Confirm,,
+sodium thiosulfate,,not_reviewed
+trace elements with selenium,,not_reviewed
+meropenem-vaborbactam,anti-infective,carbapenems
+mitoMYcin,,antineoplastics
+Meropenem 2gm Desensitization Rx Protocol- initiate,anti-infective,carbapenems
+Prismasate BK4/0 w/o Calcium,,not_reviewed
+gemtuzumab ozogamicin,,antineoplastics
+epoprostenol diluent,,other
+tocilizumab,,not_reviewed
+liothyronine,,not_reviewed
+predniSONE,,not_reviewed
+Fentanyl Patch Removal,,
+ustekinumab,,not_reviewed
+Dianeal PD-2 with 1.5% Dextrose,,not_reviewed
+insulin pump patient - lispro,,
+carbidopa-levodopa,,not_reviewed
+Amino Acid Injection 50gm/1000ml,,not_reviewed
+eravacycline,anti-infective,tetracyclines
+imdevimab,,
+Dianeal Low Calcium with 1.5% Dextrose,,not_reviewed
+defibrotide,,anticoagulants
+ravulizumab-cwvz 300 mg/30mL inj,,not_reviewed
+coagulation factor Xa,,anticoagulants
+Hyperalimentation for charging,,
+Tagraxofusp-erzs 1000 mcg / 10 mL inj,,antineoplastics
+Epidural Infusion,,not_reviewed
+Cefepime 2gm Desensitization Rx Protocol- initiate,anti-infective,cephalosporins
+sincalide,,not_reviewed
+casirivimab,,
+inotuzumab ozogamicin,,antineoplastics
+Dextrose 30% in Water,,not_reviewed
+Potassium Level Recheck Reminder,,
+estradiol,,not_reviewed
+triamcinolone,,not_reviewed
+PrismaSol B22GK4/0 w/o Calcium,,not_reviewed
+remdesivir.,anti-infective,antiviral
+remdesivir,anti-infective,antiviral
+sodium ferric gluconate complex,,not_reviewed
+regadenoson,,
+phenylephrine ophthalmic,,other
+droperidol,,not_reviewed
+chromic chloride hexahydrate,,not_reviewed
+omadacycline,anti-infective,tetracyclines
+DACTINomycin,,antineoplastics
+tetracaine,,not_reviewed
+siltuximab,,not_reviewed
+nivolumab,,antineoplastics
+carvedilol,bp_lowering,other
+obinutuzumab,,antineoplastics
+midodrine,,other
+miSOPROStol,,not_reviewed
+chloroprocaine,,not_reviewed
+daratumumab,,antineoplastics
+insulin isophane-insulin regular,,not_reviewed
+pembrolizumab,,antineoplastics
+atropine-diphenoxylate,,not_reviewed
+docusate,,not_reviewed
+ocular lubricant,,other
+brentuximab vedotin,,antineoplastics
+cangrelor,,
+casirivimab-imdevimab,,
+cefiderocol,,
+glucarpidase,,
+D12.5W 0.2%NS,,
+Lorazepam IV Therapy,,
+amobarbital,,not_reviewed
+D20W,,
+D12.5W 0.45%NS,,
+D25W 250mL,,
+"diphtheria/pertussis, acel/tetanus adult (Tdap)",,not_reviewed
+carfilzomib,,antineoplastics
+betamethasone,,not_reviewed
+von Willebrand factor,,
+D20W 0.2%NS,,
+immune globulin intravenous and subcutaneous,,
+D10W 0.45%NS,,
+patisiran,,
+D15%W 250 ml,,
+D12.5%W,,
+Description Missing,,
+tamsulosin,,other
