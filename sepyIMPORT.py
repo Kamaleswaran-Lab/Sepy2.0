@@ -118,7 +118,7 @@ class sepyIMPORT:
         self.config = ImportConfig(
             na_values=sepyIMPORTConfigs["na_values"],
             numeric_vital_col_names=sepyIMPORTConfigs["numeric_vital_col_names"],
-            string_lab_col_names=sepyIMPORTConfigs["string_vital_col_names"],
+            string_vital_col_names=sepyIMPORTConfigs["string_vital_col_names"],
             vasopressor_units=sepyIMPORTConfigs["vasopressor_units"],
             numeric_lab_col_names=sepyIMPORTConfigs["numeric_lab_col_names"],
             string_lab_col_names=sepyIMPORTConfigs["string_lab_col_names"]
