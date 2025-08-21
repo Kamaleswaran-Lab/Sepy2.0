@@ -1,0 +1,30 @@
+med_class,super_table_col_name,med_name,medication_id
+anti-infective,aminoglycosides,4,4
+anti-infective,antifungals,14,14
+anti-infective,antimycobacterial agents,6,6
+anti-infective,antiparasitic,3,3
+anti-infective,antiviral,52,52
+anti-infective,carbapenems,6,6
+anti-infective,cephalosporins,13,13
+anti-infective,fluoroquinolones,4,4
+anti-infective,glycopeptide,4,4
+anti-infective,lincosamides,1,1
+anti-infective,lipopeptide,1,1
+anti-infective,macrolide antibiotics,3,3
+anti-infective,metronidazole,1,1
+anti-infective,monobactams,1,1
+anti-infective,other,8,8
+anti-infective,oxazolidinones,1,1
+anti-infective,penicillins,15,15
+anti-infective,sulphonamides,4,4
+anti-infective,tetracyclines,7,7
+antiarrhythmics,other,14,14
+bp_lowering,other,64,64
+diuretic,other,19,19
+vasopressor,dobutamine,1,1
+vasopressor,dopamine,1,1
+vasopressor,epinephrine,1,1
+vasopressor,norepinephrine,1,1
+vasopressor,other,1,1
+vasopressor,phenylephrine,1,1
+vasopressor,vasopressin,1,1

@@ -1,0 +1,74 @@
+med_name,fluid_type,med_class,med_subclass
+Sodium Chloride 0.9% intravenous solution,Isotonic Crystalloid,,crystalloid
+Dextrose 5% in Lactated Ringers intravenous solution,Isotonic Crystalloid,,not_reviewed
+Sodium Chloride 0.45% intravenous solution,Hypotonic Crystalloid,,not_reviewed
+potassium chloride,Electrolyte Solution (Potassium),,not_reviewed
+albumin human,Natural Colloid,,not_reviewed
+calcium chloride,Electrolyte Solution (Calcium),,not_reviewed
+Premix Dextrose 5%,Premix,,
+Premix NS,Premix,,
+Dextrose 5% in Water intravenous solution,Hypotonic Crystalloid,,not_reviewed
+Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution,Hypotonic Crystalloid,,not_reviewed
+Dextrose 5% with 0.45% NaCl intravenous solution,Hypotonic Crystalloid,,not_reviewed
+Premix Diluent,Premix,,
+Lactated Ringers Injection intravenous solution,Isotonic Crystalloid,,not_reviewed
+Dextrose 50% in Water intravenous solution,Hypertonic Crystalloid,,not_reviewed
+Dextrose 10% in Water intravenous solution,Hypertonic Crystalloid,,not_reviewed
+magnesium sulfate,Electrolyte Solution (Magnesium),,not_reviewed
+potassium chloride-sodium chloride,Electrolyte Solution (Potassium),,not_reviewed
+sodium bicarbonate,Electrolyte Solution (Bicarbonate),,not_reviewed
+Electrolyte (Plasma-Lyte) intravenous solution,Electrolyte Solution,,not_reviewed
+Dextrose 20% in Water intravenous solution,Hypertonic Crystalloid,,not_reviewed
+potassium phosphate,Electrolyte Solution (Potassium),,not_reviewed
+Sodium Chloride 3%,Hypertonic Crystalloid,,not_reviewed
+sterile water,Sterile Water,,other
+mannitol,Hypertonic Crystalloid,diuretic,other
+Dextrose 5% with 0.9% NaCl intravenous solution,Isotonic Crystalloid,,not_reviewed
+sodium phosphate,Electrolyte Solution (Phosphate),,not_reviewed
+calcium gluconate,Electrolyte Solution (Calcium),,not_reviewed
+central hyperalimentation (TPN),Parenteral Nutrition,,
+sodium glycerophosphate,Electrolyte Solution (Phosphate),,not_reviewed
+Dextrose 5% in Water with KCl 20 mEq/l intravenous solution,Hypotonic Crystalloid,,not_reviewed
+hyperal peripheral,Parenteral Nutrition,,not_reviewed
+"hyperalimentation, adult",Parenteral Nutrition,,
+"fat emulsion, intravenous",Parenteral Nutrition,,not_reviewed
+Amino Acids 3% and Glycerin 3% with Electrolytes (ProcalAmine) intravenous solution,Electrolyte Solution,,not_reviewed
+hetastarch,Synthetic Colloid,,not_reviewed
+Dextrose 5% with 0.2% NaCl intravenous solution,Hypotonic Crystalloid,,not_reviewed
+potassium acetate,Electrolyte Solution (Potassium),,not_reviewed
+hyperal neonate,Parenteral Nutrition,,not_reviewed
+sodium acetate,Electrolyte Solution (Other),,not_reviewed
+Standard PAL Line IV fluid,IV Line Fluid,,
+Dextrose 70% in Water intravenous solution,Hypertonic Crystalloid,,not_reviewed
+Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution,Isotonic Crystalloid,,not_reviewed
+Dextrose 10% with 0.2% NaCl intravenous solution,Hypotonic Crystalloid,,not_reviewed
+Standard UAC Line IV fluid,IV Line Fluid,,
+"Premix Water, Sterile",Premix,,
+IV Stabilizer Solution inj,IV Line Fluid,,
+citric acid-sodium citrate,Electrolyte Solution (Other),,not_reviewed
+Standard UVC Line IV fluid,IV Line Fluid,,
+calcium glubionate,Electrolyte Solution (Calcium),,not_reviewed
+Neonate Starter Hyperal,Parenteral Nutrition,,
+magnesium citrate,Electrolyte Solution (Other),,not_reviewed
+NS Continuous Bladder Irrigation 3000mL,IV Line Fluid,,not_reviewed
+sodium citrate,Electrolyte Solution (Other),,not_reviewed
+Amino Acids 15% (Clinisol Sulfite-Free),Parenteral Nutrition,,not_reviewed
+parenteral nutrition solution,Parenteral Nutrition,,not_reviewed
+intravenous electrolyte solution,Electrolyte Solution,,not_reviewed
+prismasate dialysate,Dialysis Solution,,not_reviewed
+PCA IV Syringe,IV Line Fluid,,
+Prismasate BK4/0 w/o Calcium,Dialysis Solution,,not_reviewed
+Dianeal PD-2 with 1.5% Dextrose,Dialysis Solution,,not_reviewed
+Amino Acid Injection 50gm/1000ml,Parenteral Nutrition,,not_reviewed
+Dianeal Low Calcium with 1.5% Dextrose,Dialysis Solution,,not_reviewed
+Hyperalimentation for charging,Parenteral Nutrition,,
+Dextrose 30% in Water,Hypertonic Crystalloid,,not_reviewed
+PrismaSol B22GK4/0 w/o Calcium,Dialysis Solution,,not_reviewed
+D12.5W 0.2%NS,Hypertonic Crystalloid,,
+D20W,Hypertonic Crystalloid,,
+D12.5W 0.45%NS,Hypertonic Crystalloid,,
+D25W 250mL,Hypertonic Crystalloid,,
+D20W 0.2%NS,Hypertonic Crystalloid,,
+D10W 0.45%NS,Hypertonic Crystalloid,,
+D15%W 250 ml,Hypertonic Crystalloid,,
+D12.5%W,Hypertonic Crystalloid,,

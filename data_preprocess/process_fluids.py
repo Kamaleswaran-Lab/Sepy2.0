@@ -729,7 +729,13 @@ if __name__ == "__main__":
         print(f"File not found: {filepath}")
         exit()
      
-    in_outs = pd.read_csv(filepath)
+    try: 
+        in_outs = pd.read_csv(filepath)
+    except Exception as e:
+        in_outs = pd.read_csv(filepath, sep = '|')
+    
+    in_outs.columns = in_outs.columns.str.lower()
+    in_outs['service_ts'] = pd.to_datetime(in_outs['service_ts'])
     
     savepath.mkdir(exist_ok=True, parents=True)
 
@@ -739,8 +745,6 @@ if __name__ == "__main__":
         in_outs = in_outs.iloc[index*len_of_chunks:]
     else:
         in_outs = in_outs.iloc[index*len_of_chunks:(index+1)*len_of_chunks]
-    
-    in_outs['service_ts'] = pd.to_datetime(in_outs['service_ts'])
     
     # Create processor
     processor = FluidProcessor()

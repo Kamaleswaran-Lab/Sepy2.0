@@ -1,0 +1,554 @@
+Unnamed: 0,med_name,is_fluids,fluid_type,med_class,med_subclass
+3372,abatacept,FALSE,Medication,other,other
+789,abciximab,FALSE,Medication,other,other
+211,acetaminophen,FALSE,Medication,analgesic,non-opioid
+464,acetaZOLAMIDE,FALSE,Medication,diuretic,other
+2277,Acetylcholine I-coronary 0.18mcg/mL Low conc. 20mL syringe,FALSE,Medication,other,other
+2257,Acetylcholine I-coronary 18mcg/mL High conc. 20mL syringe,FALSE,Medication,other,other
+193,acetylcysteine,FALSE,Medication,other,other
+147,acyclovir,FALSE,Medication,anti-infective,antiviral
+424,adenosine,FALSE,Medication,antiarrhythmics,other
+2365,ado-trastuzumab emtansine,FALSE,Medication,other,other
+1052,Al hydroxide/ASA/Ca carbonate/Mg hydroxide,FALSE,Medication,other,other
+1241,Al hydroxide/Mg hydroxide/simethicone,FALSE,Medication,other,other
+17,albumin human,TRUE,Natural Colloid,fluid_electrolyte,other
+741,albuterol,FALSE,Medication,other,other
+471,aldesleukin,FALSE,Medication,other,other
+726,alemtuzumab,FALSE,Medication,other,other
+3816,alfentanil,FALSE,Medication,analgesic,opioids
+775,allopurinol,FALSE,Medication,other,other
+1188,ALPRAZolam,FALSE,Medication,sedative,benzodiazepine
+1271,alprostadil,FALSE,Medication,bp_lowering,other
+190,alteplase,FALSE,Medication,other,other
+2407,amifostine,FALSE,Medication,other,other
+592,amikacin,FALSE,Medication,anti-infective,aminoglycosides
+2411,Amino Acid 3% UAC Line Fluid,FALSE,Medication,other,other
+5776,Amino Acid Injection 50gm/1000ml,TRUE,Parenteral Nutrition,other,other
+3344,Amino Acids 15% (Clinisol Sulfite-Free),TRUE,Parenteral Nutrition,other,other
+388,Amino Acids 3% and Glycerin 3% with Electrolytes (ProcalAmine) intravenous solution,TRUE,Electrolyte Solution,other,other
+394,aminocaproic acid,FALSE,Medication,other,other
+896,aminophylline,FALSE,Medication,other,other
+36,amiodarone,FALSE,Medication,antiarrhythmics,other
+8673,amobarbital,FALSE,Medication,other,other
+930,amphotericin B,FALSE,Medication,anti-infective,antifungals
+565,amphotericin B liposomal,FALSE,Medication,anti-infective,antifungals
+66,ampicillin,FALSE,Medication,anti-infective,penicillins
+104,ampicillin-sulbactam,FALSE,Medication,anti-infective,penicillins
+524,ANES amiodarone 750 mg/500 mL D5W Premix,FALSE,Medication,antiarrhythmics,other
+2237,ANES Bupivicaine 0.15%/NS 250 mL Epidural,FALSE,Medication,other,other
+18,ANES vasopressin 200 unit/500 mL NS drip,FALSE,Medication,pressor,vasopressor
+4318,Angiotensin II,FALSE,Medication,pressor,vasopressor
+2554,Anticoagulant Citrate Soln,FALSE,Medication,other,other
+614,antihemophilic factor,FALSE,Medication,other,other
+737,antihemophilic factor-von Willebrand factor inj,FALSE,Medication,other,other
+575,anti-inhibitor coagulant complex,FALSE,Medication,other,other
+779,antithrombin III,FALSE,Medication,other,other
+306,anti-thymocyte globulin (rabbit),FALSE,Medication,other,other
+2247,antivenin (Crotalidae) polyvalent,FALSE,Medication,other,other
+751,aprepitant,FALSE,Medication,other,other
+402,argatroban,FALSE,Medication,other,other
+514,arginine,FALSE,Medication,other,other
+674,arsenic trioxide,FALSE,Medication,other,other
+649,ascorbic acid,FALSE,Medication,vitamin_supplement,other
+997,aspirin,FALSE,Medication,analgesic,nsaid
+229,atropine,FALSE,Medication,anticholinergic,other
+7787,atropine-diphenoxylate,FALSE,Medication,anticholinergic,other
+549,avibactam-cefTAZidime,FALSE,Medication,anti-infective,cephalosporins
+689,azaCITIDine,FALSE,Medication,other,other
+2330,azaTHIOprine,FALSE,Medication,other,other
+119,azithromycin,FALSE,Medication,anti-infective,macrolide antibiotics
+366,aztreonam,FALSE,Medication,anti-infective,monobactams
+2169,bacitracin,FALSE,Medication,other,other
+819,"Bag, PCA  Infusion",FALSE,Medication,other,other
+2453,"bag, sterile",FALSE,Medication,other,other
+295,basiliximab,FALSE,Medication,other,other
+339,Belatacept,FALSE,Medication,other,other
+1190,bendamustine,FALSE,Medication,other,other
+1082,benzocaine topical,FALSE,Medication,other,other
+956,benztropine,FALSE,Medication,other,other
+8818,betamethasone,FALSE,Medication,other,other
+691,bevacizumab,FALSE,Medication,other,other
+409,bivalirudin,FALSE,Medication,other,other
+1008,bleomycin,FALSE,Medication,other,other
+876,blinatumomab,FALSE,Medication,other,other
+968,bortezomib,FALSE,Medication,other,other
+3587,"bottle, sterile",FALSE,Medication,other,other
+7831,brentuximab vedotin,FALSE,Medication,other,other
+217,bumetanide,FALSE,Medication,diuretic,other
+835,bupivacaine,FALSE,Medication,other,other
+1115,bupivacaine liposome,FALSE,Medication,other,other
+816,bupivacaine-epinephrine,FALSE,Medication,other,other
+2131,buprenorphine,FALSE,Medication,analgesic,opioids
+279,busulfan,FALSE,Medication,other,other
+432,butorphanol,FALSE,Medication,other,other
+2566,"C1 esterase inhibitor, human",FALSE,Medication,other,other
+762,caffeine,FALSE,Medication,other,other
+1263,caffeine-sodium benzoate,FALSE,Medication,other,other
+2557,calcitonin,FALSE,Medication,other,other
+810,calcitriol,FALSE,Medication,other,other
+1261,calcium carbonate,FALSE,Medication,fluid_electrolyte,other
+22,calcium chloride,TRUE,Electrolyte Solution (Calcium),fluid_electrolyte,other
+1183,calcium glubionate,TRUE,Electrolyte Solution (Calcium),fluid_electrolyte,other
+223,calcium gluconate,TRUE,Electrolyte Solution (Calcium),fluid_electrolyte,other
+8084,cangrelor,FALSE,Medication,other,other
+5234,carbidopa-levodopa,FALSE,Medication,other,other
+390,carboplatin,FALSE,Medication,other,other
+2596,carboprost,FALSE,Medication,other,other
+8804,carfilzomib,FALSE,Medication,other,other
+268,carmustine,FALSE,Medication,other,other
+7565,carvedilol,FALSE,Medication,bp_lowering,beta_blocker
+6431,casirivimab,FALSE,Medication,other,other
+8289,casirivimab-imdevimab,FALSE,Medication,other,other
+28,ceFAZolin,FALSE,Medication,anti-infective,cephalosporins
+150,cefepime,FALSE,Medication,anti-infective,cephalosporins
+6309,Cefepime 2gm Desensitization Rx Protocol- initiate,FALSE,Medication,anti-infective,cephalosporins
+8333,cefiderocol,FALSE,Medication,anti-infective,cephalosporins
+773,cefotaxime,FALSE,Medication,anti-infective,cephalosporins
+117,cefOXitin,FALSE,Medication,anti-infective,cephalosporins
+447,ceftaroline,FALSE,Medication,anti-infective,cephalosporins
+133,cefTAZidime,FALSE,Medication,anti-infective,cephalosporins
+555,ceftolozane-tazobactam,FALSE,Medication,anti-infective,cephalosporins
+3,cefTRIAXone,FALSE,Medication,anti-infective,cephalosporins
+80,cefuroxime,FALSE,Medication,anti-infective,cephalosporins
+1058,celecoxib,FALSE,Medication,analgesic,nsaid
+224,central hyperalimentation (TPN),TRUE,Parenteral Nutrition,other,other
+1240,cetuximab,FALSE,Medication,other,other
+3757,chloramphenicol,FALSE,Medication,anti-infective,other
+7724,chloroprocaine,FALSE,Medication,other,other
+293,chlorothiazide,FALSE,Medication,diuretic,other
+717,chlorproMAZINE,FALSE,Medication,other,other
+7316,chromic chloride hexahydrate,FALSE,Medication,other,other
+1012,cidofovir,FALSE,Medication,anti-infective,antiviral
+277,ciprofloxacin,FALSE,Medication,anti-infective,fluoroquinolones
+161,cisatracurium,FALSE,Medication,neuromuscular_blocker,other
+454,cisplatin,FALSE,Medication,other,other
+967,citric acid-sodium citrate,TRUE,Electrolyte Solution (Other),other,other
+1065,cladribine,FALSE,Medication,other,other
+750,clevidipine,FALSE,Medication,bp_lowering,other
+177,clindamycin,FALSE,Medication,anti-infective,lincosamides
+1909,clofarabine,FALSE,Medication,other,other
+1658,cloNIDine,FALSE,Medication,bp_lowering,other
+2299,clopidogrel,FALSE,Medication,other,other
+634,coagulation factor IX,FALSE,Medication,other,other
+503,coagulation factor VIIa,FALSE,Medication,other,other
+6204,coagulation factor Xa,FALSE,Medication,other,other
+1077,cocaine topical,FALSE,Medication,other,other
+382,colistimethate,FALSE,Medication,anti-infective,polymixin
+1122,conivaptan,FALSE,Medication,other,other
+545,conjugated estrogens,FALSE,Medication,other,other
+581,copper chloride,FALSE,Medication,other,other
+2478,copper sulfate,FALSE,Medication,other,other
+3536,corticorelin,FALSE,Medication,other,other
+349,cosyntropin,FALSE,Medication,other,other
+681,cyanocobalamin,FALSE,Medication,vitamin_supplement,other
+328,cyclophosphamide,FALSE,Medication,other,other
+348,cycloSPORINE,FALSE,Medication,other,other
+79,cytarabine,FALSE,Medication,other,other
+3529,cytarabine liposomal-daunorubicin liposomal,FALSE,Medication,other,other
+742,cytomegalovirus immune globulin,FALSE,Medication,other,other
+8958,D10W 0.45%NS,TRUE,Hypertonic Crystalloid,other,other
+9050,D12.5%W,TRUE,Hypertonic Crystalloid,other,other
+8581,D12.5W 0.2%NS,TRUE,Hypertonic Crystalloid,other,other
+8689,D12.5W 0.45%NS,TRUE,Hypertonic Crystalloid,other,other
+9000,D15%W 250 ml,TRUE,Hypertonic Crystalloid,other,other
+8675,D20W,TRUE,Hypertonic Crystalloid,other,other
+8876,D20W 0.2%NS,TRUE,Hypertonic Crystalloid,other,other
+8713,D25W 250mL,TRUE,Hypertonic Crystalloid,other,other
+945,dacarbazine,FALSE,Medication,other,other
+7455,DACTINomycin,FALSE,Medication,other,other
+3502,dalbavancin,FALSE,Medication,anti-infective,glycopeptide
+842,dalfopristin-quinupristin,FALSE,Medication,anti-infective,streptogramin
+918,dantrolene,FALSE,Medication,other,other
+205,DAPTOmycin,FALSE,Medication,anti-infective,lipopeptide
+7736,daratumumab,FALSE,Medication,other,other
+380,darbepoetin alfa,FALSE,Medication,other,other
+944,DAUNOrubicin,FALSE,Medication,other,other
+450,decitabine,FALSE,Medication,other,other
+1218,deferoxamine,FALSE,Medication,other,other
+6077,defibrotide,FALSE,Medication,other,other
+9076,Description Missing,FALSE,Medication,other,other
+307,desmopressin,FALSE,Medication,other,other
+54,dexamethasone,FALSE,Medication,corticosteroids,other
+26,dexmedetomidine,FALSE,Medication,sedative,anesthetic
+2335,dexrazoxane,FALSE,Medication,other,other
+1873,"dextran, high molecular weight",TRUE,Hypertonic Crystalloid,fluid_electrolyte,other
+2034,"dextran, low molecular weight",TRUE,Hypertonic Crystalloid,fluid_electrolyte,other
+63,Dextrose 10% in Water intravenous solution,TRUE,Hypertonic Crystalloid,fluid_electrolyte,other
+846,Dextrose 10% with 0.2% NaCl intravenous solution,TRUE,Hypotonic Crystalloid,fluid_electrolyte,other
+140,Dextrose 20% in Water intravenous solution,TRUE,Hypertonic Crystalloid,fluid_electrolyte,other
+6499,Dextrose 30% in Water,TRUE,Hypertonic Crystalloid,other,other
+9,Dextrose 5% in Lactated Ringers intravenous solution,TRUE,Isotonic Crystalloid,fluid_electrolyte,other
+818,Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution,TRUE,Isotonic Crystalloid,fluid_electrolyte,other
+35,Dextrose 5% in Water intravenous solution,TRUE,Hypotonic Crystalloid,fluid_electrolyte,other
+233,Dextrose 5% in Water with KCl 20 mEq/l intravenous solution,TRUE,Hypotonic Crystalloid,fluid_electrolyte,other
+41,Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution,TRUE,Hypotonic Crystalloid,fluid_electrolyte,other
+507,Dextrose 5% with 0.2% NaCl intravenous solution,TRUE,Hypotonic Crystalloid,fluid_electrolyte,other
+44,Dextrose 5% with 0.45% NaCl intravenous solution,TRUE,Hypotonic Crystalloid,fluid_electrolyte,other
+169,Dextrose 5% with 0.9% NaCl intravenous solution,TRUE,Isotonic Crystalloid,fluid_electrolyte,other
+61,Dextrose 50% in Water intravenous solution,TRUE,Hypertonic Crystalloid,endocrine,diabetes
+804,Dextrose 70% in Water intravenous solution,TRUE,Hypertonic Crystalloid,fluid_electrolyte,other
+6062,Dianeal Low Calcium with 1.5% Dextrose,TRUE,Dialysis Solution,fluid_electrolyte,other
+5213,Dianeal PD-2 with 1.5% Dextrose,TRUE,Dialysis Solution,other,other
+199,diazePAM,FALSE,Medication,sedative,benzodiazepine
+1224,dicyclomine,FALSE,Medication,other,other
+283,digoxin,FALSE,Medication,antiarrhythmics,other
+1018,digoxin immune FAB,FALSE,Medication,other,other
+230,dihydroergotamine,FALSE,Medication,other,other
+170,diltiazem,FALSE,Medication,bp_lowering,other
+6,diphenhydrAMINE,FALSE,Medication,antihistamine,other
+8769,"diphtheria/pertussis, acel/tetanus adult (Tdap)",FALSE,Medication,other,other
+3384,divalproex sodium,FALSE,Medication,other,other
+132,DOBUTamine,FALSE,Medication,pressor,inotrope
+792,DOCEtaxel,FALSE,Medication,other,other
+7814,docusate,FALSE,Medication,other,other
+908,dofetilide,FALSE,Medication,antiarrhythmics,other
+318,DOPamine,FALSE,Medication,pressor,inotrope
+378,doripenem,FALSE,Medication,anti-infective,carbapenems
+314,DOXOrubicin,FALSE,Medication,other,other
+706,DOXOrubicin liposomal,FALSE,Medication,other,other
+102,doxycycline,FALSE,Medication,anti-infective,tetracyclines
+7250,droperidol,FALSE,Medication,antiemetic,other
+2439,eculizumab,FALSE,Medication,other,other
+1262,edrophonium,FALSE,Medication,other,other
+110,Electrolyte (Plasma-Lyte) intravenous solution,TRUE,Electrolyte Solution,other,other
+180,Empty Container,FALSE,Medication,other,other
+525,enalapril,FALSE,Medication,bp_lowering,other
+501,enoxaparin,FALSE,Medication,anticoagulant,other
+112,ephedrine,FALSE,Medication,other,other
+6258,Epidural Infusion,FALSE,Medication,other,other
+23,epinephrine,FALSE,Medication,pressor,inotrope
+1146,epinephrine-lidocaine,FALSE,Medication,antiarrhythmics,other
+527,epoetin alfa,FALSE,Medication,other,other
+290,epoprostenol,FALSE,Medication,bp_lowering,other
+3941,Epoprostenol CADD Conc-Dose-Rate Confirm,FALSE,Medication,other,other
+4988,epoprostenol diluent,FALSE,Medication,other,other
+5939,eravacycline,FALSE,Medication,anti-infective,tetracyclines
+1163,eribulin,FALSE,Medication,other,other
+403,ertapenem,FALSE,Medication,anti-infective,carbapenems
+226,erythromycin,FALSE,Medication,anti-infective,macrolide antibiotics
+88,esmolol,FALSE,Medication,bp_lowering,beta_blocker
+6544,estradiol,FALSE,Medication,other,other
+580,ethacrynic acid,FALSE,Medication,diuretic,other
+1828,ethanol,FALSE,Medication,other,other
+212,ethiodized oil,FALSE,Medication,other,other
+320,etomidate,FALSE,Medication,sedative,anesthetic
+361,etoposide,FALSE,Medication,other,other
+541,Factor VIII injection,FALSE,Medication,other,other
+0,famotidine,FALSE,Medication,antihistamine,acid_suppressant
+274,"fat emulsion, intravenous",TRUE,Parenteral Nutrition,other,other
+51,fentaNYL,FALSE,Medication,analgesic,opioids
+1249,fentanyl bolus from current pca,FALSE,Medication,analgesic,opioids
+5177,Fentanyl Patch Removal,FALSE,Medication,analgesic,opioids
+3445,fentanyl-ropivacaine,FALSE,Medication,analgesic,opioids
+552,ferumoxytol,FALSE,Medication,other,other
+1121,fibrinogen,FALSE,Medication,other,other
+2337,filgrastim,FALSE,Medication,other,other
+1060,Flolan Cassette,FALSE,Medication,other,other
+173,fluconazole,FALSE,Medication,anti-infective,antifungals
+206,fludarabine,FALSE,Medication,other,other
+305,flumazenil,FALSE,Medication,benzodiazepine antagonist,other
+484,fluorescein ophthalmic,FALSE,Medication,other,other
+692,fluorouracil,FALSE,Medication,other,other
+194,folic acid,FALSE,Medication,vitamin_supplement,other
+840,fomepizole,FALSE,Medication,other,other
+470,fosaprepitant,FALSE,Medication,other,other
+491,foscarnet,FALSE,Medication,anti-infective,antiviral
+287,fosphenytoin,FALSE,Medication,anticonvulsant,other
+38,furosemide,FALSE,Medication,diuretic,other
+647,gabapentin,FALSE,Medication,gabapentinoid,other
+238,ganciclovir,FALSE,Medication,anti-infective,antiviral
+850,gemcitabine,FALSE,Medication,other,other
+4964,gemtuzumab ozogamicin,FALSE,Medication,other,other
+5,gentamicin,FALSE,Medication,anti-infective,aminoglycosides
+518,glucagon,FALSE,Medication,hypoglycemia,other
+8432,glucarpidase,FALSE,Medication,other,other
+3559,glucose,FALSE,Medication,other,other
+115,glycopyrrolate,FALSE,Medication,reversal_agent,other
+576,granisetron,FALSE,Medication,antiemetic,other
+249,haloperidol,FALSE,Medication,other,other
+3408,hemin,FALSE,Medication,other,other
+47,heparin,FALSE,Medication,anticoagulant,other
+836,heparin flush,FALSE,Medication,anticoagulant,other
+922,hepatitis B immune globulin,FALSE,Medication,other,other
+505,hetastarch,TRUE,Synthetic Colloid,fluid_electrolyte,other
+1266,Hexaminolevulinate 100mg kit inj,FALSE,Medication,other,other
+3827,hyaluronidase,FALSE,Medication,other,other
+37,hydrALAZINE,FALSE,Medication,bp_lowering,other
+65,hydrocortisone,FALSE,Medication,corticosteroids,other
+1105,hydromor/ketamine bolus from current pca,FALSE,Medication,analgesic,other
+39,HYDROmorphone,FALSE,Medication,analgesic,opioids
+278,hydromorphone bolus from current pca,FALSE,Medication,analgesic,opioids
+880,hydroxocobalamin,FALSE,Medication,other,other
+2534,hydrOXYzine,FALSE,Medication,antihistamine,other
+598,hyperal neonate,TRUE,Parenteral Nutrition,other,other
+239,hyperal peripheral,TRUE,Parenteral Nutrition,other,other
+6231,Hyperalimentation for charging,TRUE,Parenteral Nutrition,other,other
+256,"hyperalimentation, adult",TRUE,Parenteral Nutrition,other,other
+538,ibutilide,FALSE,Medication,antiarrhythmics,other
+568,IDArubicin,FALSE,Medication,other,other
+2163,idaruCIZUmab,FALSE,Medication,other,other
+535,ifosfamide,FALSE,Medication,other,other
+5949,imdevimab,FALSE,Medication,other,other
+405,imipenem-cilastatin,FALSE,Medication,anti-infective,carbapenems
+481,immune globulin intravenous,FALSE,Medication,other,other
+8948,immune globulin intravenous and subcutaneous,FALSE,Medication,other,other
+633,indigo carmine,FALSE,Medication,other,other
+615,indocyanine green,FALSE,Medication,other,other
+2133,indomethacin,FALSE,Medication,analgesic,nsaid
+418,inFLIXimab,FALSE,Medication,other,other
+2437,"influenza virus vaccine, inactivated",FALSE,Medication,other,other
+6453,inotuzumab ozogamicin,FALSE,Medication,other,other
+431,insulin aspart,FALSE,Medication,insulin,other
+3922,insulin detemir,FALSE,Medication,insulin,other
+1004,insulin glargine,FALSE,Medication,insulin,other
+1096,insulin isophane (NPH),FALSE,Medication,insulin,other
+7761,insulin isophane-insulin regular,FALSE,Medication,insulin,other
+3295,insulin lispro,FALSE,Medication,insulin,other
+5217,insulin pump patient - lispro,FALSE,Medication,insulin,other
+2286,insulin pump patient - regular,FALSE,Medication,insulin,other
+30,insulin regular,FALSE,Medication,insulin,other
+973,Insulin/PBO for Shine Study,FALSE,Medication,insulin,other
+3479,intravenous electrolyte solution,TRUE,Electrolyte Solution,other,other
+2391,iodixanol,FALSE,Medication,other,other
+2266,iohexol,FALSE,Medication,other,other
+748,irinotecan,FALSE,Medication,other,other
+650,iron dextran,FALSE,Medication,nutritional_supplement,mineral
+345,iron sucrose,FALSE,Medication,other,other
+483,isavuconazonium,FALSE,Medication,anti-infective,antifungals
+574,isoproterenol,FALSE,Medication,pressor,vasopressor
+1088,isosulfan blue,FALSE,Medication,other,other
+877,IV Stabilizer Solution inj,TRUE,IV Line Fluid,other,other
+126,ketamine,FALSE,Medication,analgesic,other
+103,ketorolac,FALSE,Medication,analgesic,nsaid
+76,labetalol,FALSE,Medication,bp_lowering,beta_blocker
+166,lacosamide,FALSE,Medication,other,other
+49,Lactated Ringers Injection intravenous solution,TRUE,Isotonic Crystalloid,fluid_electrolyte,other
+187,leucovorin,FALSE,Medication,other,other
+3781,levalbuterol,FALSE,Medication,other,other
+149,levETIRAcetam,FALSE,Medication,anticonvulsant,other
+322,levOCARNitine,FALSE,Medication,other,other
+131,levoFLOXacin,FALSE,Medication,anti-infective,fluoroquinolones
+157,levothyroxine,FALSE,Medication,other,other
+113,lidocaine,FALSE,Medication,antiarrhythmics,other
+1057,lidocaine topical,FALSE,Medication,analgesic,other
+352,linezolid,FALSE,Medication,anti-infective,oxazolidinones
+5051,liothyronine,FALSE,Medication,other,other
+2448,loratadine,FALSE,Medication,antihistamine,other
+64,LORazepam,FALSE,Medication,sedative,benzodiazepine
+8637,Lorazepam IV Therapy,FALSE,Medication,sedative,benzodiazepine
+899,"lymphocyte immune globulin, anti-thy (equine)",FALSE,Medication,other,other
+2474,magnesium citrate,TRUE,Electrolyte Solution (Other),other,other
+73,magnesium sulfate,TRUE,Electrolyte Solution (Magnesium),fluid_electrolyte,other
+160,mannitol,TRUE,Hypertonic Crystalloid,diuretic,other
+466,melphalan,FALSE,Medication,other,other
+556,meperidine,FALSE,Medication,other,other
+1089,mepivacaine,FALSE,Medication,other,other
+72,meropenem,FALSE,Medication,anti-infective,carbapenems
+4881,Meropenem 2gm Desensitization Rx Protocol- initiate,FALSE,Medication,anti-infective,carbapenems
+4828,meropenem-vaborbactam,FALSE,Medication,anti-infective,carbapenems
+280,mesna,FALSE,Medication,other,other
+528,methadone,FALSE,Medication,analgesic,opioids
+261,methocarbamol,FALSE,Medication,other,other
+965,methohexital,FALSE,Medication,other,other
+494,methotrexate,FALSE,Medication,other,other
+3861,methyldopa,FALSE,Medication,bp_lowering,other
+310,methylene blue,FALSE,Medication,other,other
+1054,methylergonovine,FALSE,Medication,other,other
+3764,Methylnaltrexone 12mg inj.,FALSE,Medication,other,other
+89,methylPREDNISolone,FALSE,Medication,corticosteroids,other
+135,metoclopramide,FALSE,Medication,antiemetic,other
+97,metoprolol,FALSE,Medication,bp_lowering,beta_blocker
+90,metroNIDAZOLE,FALSE,Medication,anti-infective,metronidazole
+210,micafungin,FALSE,Medication,anti-infective,antifungals
+52,midazolam,FALSE,Medication,sedative,benzodiazepine
+7663,midodrine,FALSE,Medication,other,other
+33,milrinone,FALSE,Medication,bp_lowering,other
+782,minocycline,FALSE,Medication,anti-infective,tetracyclines
+316,Misc Medication TNF,FALSE,Medication,other,other
+7709,miSOPROStol,FALSE,Medication,other,other
+4838,mitoMYcin,FALSE,Medication,other,other
+802,mitoXANTRONE,FALSE,Medication,other,other
+7,morphine,FALSE,Medication,analgesic,opioids
+1142,morphine bolus from current pca,FALSE,Medication,analgesic,opioids
+731,moxifloxacin,FALSE,Medication,anti-infective,fluoroquinolones
+285,multivitamin,FALSE,Medication,vitamin_supplement,other
+241,mycophenolate mofetil,FALSE,Medication,other,other
+204,nafcillin,FALSE,Medication,anti-infective,penicillins
+3779,Nafcillin 2gm Desensitization Rx Protocol- initiate,FALSE,Medication,anti-infective,penicillins
+195,nalbuphine,FALSE,Medication,analgesic,opioids
+272,naloxone,FALSE,Medication,analgesic,opioids
+2461,nelarabine,FALSE,Medication,other,other
+2267,Neonate Starter Hyperal,TRUE,Parenteral Nutrition,other,other
+111,neostigmine,FALSE,Medication,reversal_agent,other
+50,niCARdipine,FALSE,Medication,bp_lowering,other
+19,nitroglycerin,FALSE,Medication,bp_lowering,other
+7551,nivolumab,FALSE,Medication,other,other
+29,norepinephrine,FALSE,Medication,pressor,vasopressor
+2580,NS Continuous Bladder Irrigation 3000mL,TRUE,IV Line Fluid,other,other
+7590,obinutuzumab,FALSE,Medication,other,other
+237,octreotide,FALSE,Medication,other,other
+7822,ocular lubricant,FALSE,Medication,other,other
+2317,OLANZapine,FALSE,Medication,other,other
+7446,omadacycline,FALSE,Medication,anti-infective,tetracyclines
+4,ondansetron,FALSE,Medication,antiemetic,other
+721,oxacillin,FALSE,Medication,anti-infective,penicillins
+744,oxaliplatin,FALSE,Medication,other,other
+746,oxymetazoline nasal,FALSE,Medication,other,other
+136,oxytocin,FALSE,Medication,other,other
+610,PACLitaxel,FALSE,Medication,other,other
+1084,PACLitaxel protein-bound,FALSE,Medication,other,other
+2079,palifermin,FALSE,Medication,other,other
+848,palonosetron,FALSE,Medication,antiemetic,other
+423,pamidronate,FALSE,Medication,other,other
+1176,panitumumab,FALSE,Medication,other,other
+10,pantoprazole,FALSE,Medication,proton_pump_inhibitor,other
+983,papaverine,FALSE,Medication,other,other
+3359,parenteral nutrition solution,TRUE,Parenteral Nutrition,other,other
+455,paricalcitol,FALSE,Medication,other,other
+8975,patisiran,FALSE,Medication,other,other
+3888,PCA IV Syringe,TRUE,IV Line Fluid,other,other
+4386,PCA Reservoir & Syringe Volume Confirm,FALSE,Medication,other,other
+1126,pegaspargase,FALSE,Medication,other,other
+7765,pembrolizumab,FALSE,Medication,other,other
+849,PEMEtrexed,FALSE,Medication,other,other
+3892,penicillin G benzathine,FALSE,Medication,anti-infective,penicillins
+251,penicillin G potassium,FALSE,Medication,anti-infective,penicillins
+845,penicillin G sodium,FALSE,Medication,anti-infective,penicillins
+623,pentamidine,FALSE,Medication,anti-infective,antiparasitic
+656,PENTobarbital,FALSE,Medication,other,other
+1166,pentostatin,FALSE,Medication,other,other
+2123,peramivir,FALSE,Medication,anti-infective,antiviral
+977,perflutren,FALSE,Medication,other,other
+1116,pertuzumab,FALSE,Medication,other,other
+266,PHENobarbital,FALSE,Medication,other,other
+2212,phenol topical,FALSE,Medication,other,other
+86,phenylephrine,FALSE,Medication,pressor,vasopressor
+841,phenylephrine nasal,FALSE,Medication,pressor,vasopressor
+7210,phenylephrine ophthalmic,FALSE,Medication,pressor,vasopressor
+821,phenytoin,FALSE,Medication,anticonvulsant,other
+497,physostigmine,FALSE,Medication,other,other
+303,phytonadione,FALSE,Medication,vitamin_supplement,other
+45,piperacillin-tazobactam,FALSE,Medication,anti-infective,penicillins
+3681,pneumococcal 23-polyvalent vaccine,FALSE,Medication,other,other
+2168,polymyxin B sulfate,FALSE,Medication,other,other
+546,posaconazole,FALSE,Medication,anti-infective,antifungals
+563,potassium acetate,TRUE,Electrolyte Solution (Potassium),other,other
+16,potassium chloride,TRUE,Electrolyte Solution (Potassium),fluid_electrolyte,other
+77,potassium chloride-sodium chloride,TRUE,Electrolyte Solution (Potassium),fluid_electrolyte,other
+6522,Potassium Level Recheck Reminder,FALSE,Medication,other,other
+151,potassium phosphate,TRUE,Electrolyte Solution (Potassium),other,other
+708,prasugrel,FALSE,Medication,other,other
+5130,predniSONE,FALSE,Medication,corticosteroids,other
+1000,pregabalin,FALSE,Medication,gabapentinoid,other
+24,Premix Dextrose 5%,TRUE,Premix,other,other
+46,Premix Diluent,TRUE,Premix,other,other
+25,Premix NS,TRUE,Premix,other,other
+869,"Premix Water, Sterile",TRUE,Premix,other,other
+4898,Prismasate BK4/0 w/o Calcium,TRUE,Dialysis Solution,fluid_electrolyte,other
+3698,prismasate dialysate,TRUE,Dialysis Solution,other,other
+6808,PrismaSol B22GK4/0 w/o Calcium,TRUE,Dialysis Solution,fluid_electrolyte,other
+608,procainamide,FALSE,Medication,antiarrhythmics,other
+3815,procaine penicillin,FALSE,Medication,anti-infective,penicillins
+350,prochlorperazine,FALSE,Medication,antiemetic,other
+271,promethazine,FALSE,Medication,antiemetic,other
+21,propofol,FALSE,Medication,sedative,anesthetic
+814,propranolol,FALSE,Medication,bp_lowering,other
+87,protamine,FALSE,Medication,reversal_agent,anticoagulant
+3553,protein C,FALSE,Medication,other,other
+651,prothrombin complex conc human,FALSE,Medication,other,other
+875,prothrombin complex concentrate,FALSE,Medication,other,other
+971,pyridostigmine,FALSE,Medication,other,other
+219,pyridoxine,FALSE,Medication,vitamin_supplement,other
+1010,quinidine,FALSE,Medication,antiarrhythmics,other
+1138,ramucirumab,FALSE,Medication,other,other
+817,raNITIdine,FALSE,Medication,antihistamine,acid_suppressant
+327,rasburicase,FALSE,Medication,other,other
+6136,ravulizumab-cwvz 300 mg/30mL inj,FALSE,Medication,other,other
+7104,regadenoson,FALSE,Medication,other,other
+6883,remdesivir,FALSE,Medication,anti-infective,antiviral
+6877,remdesivir.,FALSE,Medication,anti-infective,antiviral
+323,remifentanil,FALSE,Medication,analgesic,opioids
+1015,RHo (D) immune globulin,FALSE,Medication,other,other
+374,rifAMPin,FALSE,Medication,anti-infective,antimycobacterial agents
+315,riTUXimab,FALSE,Medication,other,other
+82,rocuronium,FALSE,Medication,neuromuscular_blocker,other
+2382,ropivacaine,FALSE,Medication,other,other
+2202,sargramostim,FALSE,Medication,other,other
+273,scopolamine,FALSE,Medication,other,other
+2584,secretin,FALSE,Medication,other,other
+1019,selenium,FALSE,Medication,other,other
+913,sildenafil,FALSE,Medication,bp_lowering,other
+7500,siltuximab,FALSE,Medication,other,other
+6375,sincalide,FALSE,Medication,other,other
+1200,sirolimus,FALSE,Medication,other,other
+728,sodium acetate,TRUE,Electrolyte Solution (Other),other,other
+986,sodium benzoate-sodium phenylacetate,FALSE,Medication,other,other
+78,sodium bicarbonate,TRUE,Electrolyte Solution (Bicarbonate),fluid_electrolyte,other
+221,sodium chloride,FALSE,Medication,other,other
+14,Sodium Chloride 0.45% intravenous solution,TRUE,Hypotonic Crystalloid,fluid_electrolyte,other
+1,Sodium Chloride 0.9% intravenous solution,TRUE,Isotonic Crystalloid,fluid_electrolyte,other
+154,Sodium Chloride 3%,TRUE,Hypertonic Crystalloid,other,other
+2594,sodium citrate,TRUE,Electrolyte Solution (Other),other,other
+7101,sodium ferric gluconate complex,FALSE,Medication,other,other
+225,sodium glycerophosphate,TRUE,Electrolyte Solution (Phosphate),other,other
+292,sodium nitroprusside,FALSE,Medication,bp_lowering,other
+175,sodium phosphate,TRUE,Electrolyte Solution (Phosphate),other,other
+2340,sodium tetradecyl sulfate,FALSE,Medication,other,other
+4644,sodium thiosulfate,FALSE,Medication,other,other
+765,Standard PAL Line IV fluid,TRUE,IV Line Fluid,other,other
+864,Standard UAC Line IV fluid,TRUE,IV Line Fluid,other,other
+1045,Standard UVC Line IV fluid,TRUE,IV Line Fluid,other,other
+155,sterile water,TRUE,Sterile Water,other,other
+964,streptomycin,FALSE,Medication,anti-infective,aminoglycosides
+992,streptozocin,FALSE,Medication,other,other
+20,succinylcholine,FALSE,Medication,neuromuscular_blocker,other
+329,SUFentanil,FALSE,Medication,analgesic,opioids
+1680,sugammadex,FALSE,Medication,reversal_agent,other
+343,sulfamethoxazole-trimethoprim,FALSE,Medication,anti-infective,sulphonamides
+2602,SUMAtriptan,FALSE,Medication,other,other
+208,tacrolimus,FALSE,Medication,other,other
+6234,Tagraxofusp-erzs 1000 mcg / 10 mL inj,FALSE,Medication,other,other
+9082,tamsulosin,FALSE,Medication,other,other
+2030,tbo-filgrastim,FALSE,Medication,other,other
+587,telavancin,FALSE,Medication,anti-infective,glycopeptide
+704,terbutaline,FALSE,Medication,other,other
+975,tetanus-diphth toxoids (Td) adult/adol,FALSE,Medication,other,other
+7464,tetracaine,FALSE,Medication,other,other
+12,thiamine,FALSE,Medication,vitamin_supplement,other
+2116,thiotepa,FALSE,Medication,other,other
+2466,thrombin topical,FALSE,Medication,other,other
+999,ticagrelor,FALSE,Medication,other,other
+1080,ticarcillin-clavulanate,FALSE,Medication,anti-infective,penicillins
+235,tigecycline,FALSE,Medication,anti-infective,tetracyclines
+442,tirofiban,FALSE,Medication,other,other
+376,tobramycin,FALSE,Medication,anti-infective,aminoglycosides
+5021,tocilizumab,FALSE,Medication,other,other
+2558,topiramate,FALSE,Medication,anticonvulsant,other
+2469,topotecan,FALSE,Medication,other,other
+1829,trabectedin,FALSE,Medication,other,other
+4723,trace elements with selenium,FALSE,Medication,other,other
+1037,traMADol,FALSE,Medication,analgesic,opioids
+81,tranexamic acid,FALSE,Medication,other,other
+1117,trastuzumab,FALSE,Medication,other,other
+909,treprostinil,FALSE,Medication,bp_lowering,vasodilator
+6561,triamcinolone,FALSE,Medication,corticosteroids,other
+1003,trimethobenzamide,FALSE,Medication,other,other
+191,tromethamine,FALSE,Medication,other,other
+5187,ustekinumab,FALSE,Medication,other,other
+373,valproic acid,FALSE,Medication,anticonvulsant,other
+15,vancomycin,FALSE,Medication,anti-infective,glycopeptide
+3778,Vancomycin Intermittent Dosing by Pharmacist,FALSE,Medication,anti-infective,glycopeptide
+1009,Vancomycin Trough Reminder,FALSE,Medication,anti-infective,glycopeptide
+31,vasopressin,FALSE,Medication,pressor,vasopressor
+227,vecuronium,FALSE,Medication,neuromuscular_blocker,other
+826,vedolizumab,FALSE,Medication,other,other
+624,verapamil,FALSE,Medication,bp_lowering,other
+932,vinBLAStine,FALSE,Medication,other,other
+429,vinCRIStine,FALSE,Medication,other,other
+730,vinorelbine,FALSE,Medication,other,other
+8844,von Willebrand factor,FALSE,Medication,other,other
+622,voriconazole,FALSE,Medication,anti-infective,antifungals
+338,zidovudine,FALSE,Medication,anti-infective,antiviral
+1247,zinc sulfate,FALSE,Medication,other,other
+1025,ziprasidone,FALSE,Medication,other,other
+621,zoledronic acid,FALSE,Medication,other,other
