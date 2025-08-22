@@ -50,7 +50,8 @@ dictionary_paths:
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/year/ FOLDER
     - ["INFUSIONMEDS", "*INFUSIONMEDS*"]
     - ["LABS", "*LABS*"]
-    - ["VITALS", "*VITALS_O2_FLOW_RATE_*.csv"]
+    # - ["VITALS", "*VITALS_O2_FLOW_RATE_*.csv"]
+    - ["VITALS", "*VITALS*"]
     - ["VENT", "*VENT*"]
     - ["DEMOGRAPHICS", "*DEMOGRAPHICS*"]
     - ["GCS", "*GCS*"]
@@ -61,7 +62,7 @@ dictionary_paths:
     - ["DIAGNOSIS", "*DIAGNOSIS*"]
     - ["CPT_PROCEDURES", "*CPT*"]
     - ["ICD_PROCEDURES", "*ICDPROCEDURES*"]
-    - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"]
+    # - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"] # This file is not in the data_path/year/ folder
   combined_files:
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/ FOLDER
     - ["DIALYSIS", "DIALYSIS_14_21.dsv"] 
