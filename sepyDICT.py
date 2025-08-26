@@ -62,7 +62,7 @@ class sepyMaster:
                                       'quan_deyo_ICD10': "csn",
                                       'quan_elix_ICD10': "csn",
                                       'in_out_fluids': "csn", #TODO Change this name later 
-                                      'clinical_notes': "csn",
+                                    #   'clinical_notes': "csn", #TODO: Uncomment this later when we have clinical notes
                                       'radiology_notes': "csn",
                                       'icd_procedures': "csn",
                                       'cpt_procedures': "csn",
@@ -76,11 +76,14 @@ class sepyMaster:
 
         try:
             source_df = getattr(self.yearly_data_instance, df_name)
+            print(source_df)
             if source_df.index.dtype == "O":
                 return source_df.loc[[str(identifier)], :], filt_df_name
             else:
                 return source_df.loc[[identifier], :], filt_df_name
         except Exception: 
+            print(self.yearly_data_instance.__dict__.keys())
+            print(df_name)
             empty_df = getattr(self.yearly_data_instance, df_name).iloc[0:0]
             empty_df.index.set_names(getattr(self.yearly_data_instance, df_name).index.names)
             logging.info("There were no %s data for identifier %s", name, identifier)
@@ -91,6 +94,7 @@ class sepyMaster:
         if identifier_type == "csn":
             return csn
         elif (identifier_type == "pat_id") or (identifier_type == "patient_id"):
+            print(csn)
             return self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
         else:
             raise ValueError(f"Invalid identifier type: {identifier_type}")
