@@ -40,7 +40,8 @@ from comorbidipy import comorbidity
 @dataclass
 class SepyDictConfig:
     """Configuration class for sepyDICT with type safety and validation."""
-    vital_col_names: List[str]
+    numeric_vital_col_names: List[str]
+    string_vital_col_names: List[str]
     numeric_lab_col_names: List[str]
     string_lab_col_names: List[str]
     gcs_col_names: List[str]
@@ -95,7 +96,7 @@ class ClinicalData:
     quan_deyo_ICD10: pd.DataFrame
     quan_elix_ICD10: pd.DataFrame
     in_out_fluids: pd.DataFrame
-    clinical_notes: pd.DataFrame
+    # clinical_notes: pd.DataFrame #TODO: Uncomment this later when we have clinical notes
     radiology_notes: pd.DataFrame
     icd_procedures: pd.DataFrame
     cpt_procedures: pd.DataFrame
@@ -354,7 +355,7 @@ class ClinicalDataProcessor:
             return vitals_df    
 
         resampled_data: Dict[str, pd.Series] = {}
-        for key in self.config.vital_col_names:
+        for key in self.config.numeric_vital_col_names:
             if key in df.columns:
                 if len(self.bounds.loc[self.bounds["location in supertable"] == key]) > 0:
                     agg_fn = utils.agg_fn_wrapper(key, self.bounds)

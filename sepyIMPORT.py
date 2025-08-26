@@ -92,7 +92,7 @@ class sepyIMPORT:
                  sepyIMPORTConfigs: Dict[str, Any], 
                  dataConfig: Dict[str, Any],
                  create_dataframes: bool = True, 
-                 save_dataframes: bool = True, 
+                 save_dataframes: bool = False, 
                  save_path: str = None) -> None:
         
         # dictionary has file locations for flat files

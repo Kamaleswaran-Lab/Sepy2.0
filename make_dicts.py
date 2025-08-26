@@ -53,28 +53,6 @@ import utils
 
 
 ###########################################################################
-########## Import Data Frames and Create Yearly Pickle ####################
-###########################################################################
-def import_data_frames(yearly_instance, configs):
-    """
-    Imports data from a YAML structure and applies it to methods of a passed instance.
-    Args:
-        yearly_instance (sepyIMPORT): The instance whose methods will be called.
-    """
-    import_start_time = time.time()
-    logging.info(
-        "Sepy is currently reading flat files and importing them for analysis. Thank you for waiting."
-    )
-    for method_name, params in configs["yearly_instance"].items():
-        method = getattr(yearly_instance, method_name, None)
-        if callable(method):
-            # check if method requires numeric_cols parameter and access list in sepyIMPORT instnace
-            if "numeric_cols" in params and isinstance(params["numeric_cols"], str):
-                params["numeric_cols"] = getattr(yearly_instance, params["numeric_cols"], None)
-        method(**params)
-    logging.info(f"Sepy took {time.time() - import_start_time} (s) to create a yearly pickle.")
-
-###########################################################################
 ############################# Make Supertables ###########################
 ###########################################################################
 def make_sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir):
@@ -178,20 +156,23 @@ def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
     # Create CSN instances for just this batch
     csn_instances = []
     for i, csn in enumerate(process_list):
-        try:
-            csn_instance = sepyMaster_instance.create_csn_instance(csn)
-            csn_instances.append(csn_instance)
-        except Exception as e:
-            logging.error(f"Sepy- Error creating instance for csn {csn}: {e}")
-            results.append({
-                'error': [csn, str(e)],
-                'sofa_summary': None,
-                'sep3_summary': None,
-                'sirs_summary': None,
-                'sep2_summary': None,
-                'enc_summary': None,
-                'comorbidity_summary': None
-            })
+        # try:
+        #     csn_instance = sepyMaster_instance.create_csn_instance(csn)
+        #     csn_instances.append(csn_instance)
+        # except Exception as e:
+        #     logging.error(f"Sepy- Error creating instance for csn {csn}: {e}")
+        #     results.append({
+        #         'error': [csn, str(e)],
+        #         'sofa_summary': None,
+        #         'sep3_summary': None,
+        #         'sirs_summary': None,
+        #         'sep2_summary': None,
+        #         'enc_summary': None,
+        #         'comorbidity_summary': None
+        #     })
+        print("THIS IS THE CSN", csn)
+        csn_instance = sepyMaster_instance.create_csn_instance(csn)
+        csn_instances.append(csn_instance)
 
     # Process the batch in parallel
     with ProcessPoolExecutor(max_workers=num_local_workers) as executor:
@@ -238,7 +219,7 @@ if __name__ == "__main__":
     parser.add_argument('--data_config', type=str, default='configurations/emory_config.yaml', help='Path to the data configuration file in YAML format')
     parser.add_argument('--sepy_config', type=str, default='configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
     parser.add_argument('--num_processes', type=int, default=10, help='Number of processes to use')
-    parser.add_argument('--processor_assignment', type=int, help='Processor assignment')
+    parser.add_argument('--processor_assignment', default=0, type=int, help='Processor assignment')
     args = parser.parse_args()
     
     year = args.year
@@ -319,12 +300,7 @@ if __name__ == "__main__":
             logging.info(f"Yearly pickle will be saved to {YEARLY_DICTIONARY_FILE_NAME}")
 
             import_instance = si.sepyIMPORT(paths, sepyConfigs, dataConfig["yearly_instance"])
-            logging.info(f"An instance of the sepyIMPORT class was created for {year}")
-            
-            logging.info(f"Importing data frames for {year}")
-            logging.info(f"This may take a while...")
-            import_data_frames(import_instance, dataConfig)
-            logging.info(f"Data frames imported for {year}")
+            logging.info(f"An instance of the sepyIMPORT class was created for {year}, data was automatically imported")
             logging.info(f"Dumping import instance to pickle for {year}")
 
             with open(YEARLY_DICTIONARY_FILE_NAME, "wb") as handle:
@@ -371,7 +347,8 @@ if __name__ == "__main__":
             specific_enc_filter = dataConfig["specific_enc_filter"] #yes, no
 
             # reads the list of csns from the encounters path
-            csn_df = pd.read_csv(encounters_path, sep = "|")
+            # csn_df = pd.read_csv(encounters_path, sep = "|")
+            csn_df = import_instance.df_encounters
             num_encounters = len(csn_df)
             logging.info(f"Sepy- The year {year} has {num_encounters} encounters before filtering.")
         except (IndexError, ValueError, TypeError) as e:
@@ -442,7 +419,7 @@ if __name__ == "__main__":
         logging.info(f"Sepy- The list of chunks has {len(list_of_chunks)} unique dataframes.")
         
         # uses processor assignment number to select correct chunk
-        process_list = list_of_chunks[processor_assignment]["csn"]
+        process_list = list_of_chunks[processor_assignment].index.to_frame()
         logging.info(f"Sepy- The process_list head:\n {process_list.head()}")
         
         # create the directory for the supertables
@@ -490,8 +467,8 @@ if __name__ == "__main__":
         total_csns = len(process_list)
         for batch_start in range(0, total_csns, batch_size):
             batch_end = min(batch_start + batch_size, total_csns)
-            current_batch = process_list[batch_start:batch_end]
-            
+            current_batch = process_list[batch_start:batch_end].values.flatten().tolist()
+
             logging.info(f"Sepy- Processing batch {batch_start//batch_size + 1} of {(total_csns + batch_size - 1)//batch_size}")
             
             # Process the batch
