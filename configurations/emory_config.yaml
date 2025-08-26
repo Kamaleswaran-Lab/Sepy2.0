@@ -2,8 +2,8 @@
 ## assign unique_encounters_path to the path of the unique encounters file
 
 # PIPELINE INSTRUCTIONS
-make_yearly_pickle: "yes" # yes: make pickle files, no: do not make pickle files
-make_supertables: "no" # yes: make supertables, no: do not make supertables
+make_yearly_pickle: "no" # yes: make pickle files, no: do not make pickle files
+make_supertables: "yes" # yes: make supertables, no: do not make supertables
 
 
 # FILE PATHS
@@ -209,17 +209,17 @@ yearly_instance:
     text_col: "doc_text"
     clean_text: true
     max_length: null
-  import_clinical_notes:
-    file_key: "CLINICAL_NOTES"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "note_date"
-      - "documented_date"
-    text_col: "note_text"
-    clean_text: true
-    extract_sections: true
-    max_length: null
+  # import_clinical_notes:
+  #   file_key: "CLINICAL_NOTES"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "note_date"
+  #     - "documented_date"
+  #   text_col: "note_text"
+  #   clean_text: true
+  #   extract_sections: true
+  #   max_length: null
 
 
 # COMORBIDITY SUMMARY KEYWORDS
