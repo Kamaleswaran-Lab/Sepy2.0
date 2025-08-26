@@ -17,7 +17,8 @@ numeric_vital_col_names: #Vital names that should be converted to numeric
 - unassisted_resp_rate
 - spo2
 - end_tidal_co2
-- oxygen_flow_rate 
+# - oxygen_flow_rate 
+- o2_flow_rate
 - cvp 
 string_vital_col_names:
 - o2_device
