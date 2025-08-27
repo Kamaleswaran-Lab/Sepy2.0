@@ -13,7 +13,7 @@ from functools import partial
 logging.basicConfig(level=logging.INFO)
 
 import sys
-sys.path.append("/hpc/home/ma618/Sepy/")
+sys.path.append(os.path.expandvars("$HOME/Sepy2.0/"))
 
 import sepyIMPORT as si
 import sepyDICT as sd
