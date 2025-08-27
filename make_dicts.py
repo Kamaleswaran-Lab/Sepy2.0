@@ -170,7 +170,6 @@ def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
         #         'enc_summary': None,
         #         'comorbidity_summary': None
         #     })
-        print("THIS IS THE CSN", csn)
         csn_instance = sepyMaster_instance.create_csn_instance(csn)
         csn_instances.append(csn_instance)
 
@@ -382,7 +381,6 @@ if __name__ == "__main__":
             
         # If encounter type filter is applied, filter the encounters based on the encounter type in the config file (EM, IN, all)
         if encounter_type != "all":
-            print(csn_df.head())
             csn_df = csn_df[csn_df["encounter_type"] == encounter_type]
             num_encounters = len(csn_df)
             logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")

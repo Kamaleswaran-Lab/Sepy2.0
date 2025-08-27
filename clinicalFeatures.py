@@ -878,7 +878,6 @@ class ClinicalDataProcessor:
             logging.info(f"Supertable data class object created with {len(supertable_df.supertable)} rows.")
         except Exception as e:
             logging.error(f"Error in Step 1 (Initialize supertable): {str(e)}")
-            raise
         
         #Step 2: Add static features
         try:
@@ -892,7 +891,6 @@ class ClinicalDataProcessor:
             logging.info(f"Static features added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 2 (Add static features): {str(e)}")
-            raise
 
         #Step 3: Add labs
         try:
@@ -901,7 +899,6 @@ class ClinicalDataProcessor:
             logging.info(f"Labs added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 3 (Add labs): {str(e)}")
-            raise
 
         #Step 4: Add vitals
         try:
@@ -910,7 +907,6 @@ class ClinicalDataProcessor:
             logging.info(f"Vitals added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 4 (Add vitals): {str(e)}")
-            raise
         
         #Step 5: Add procedures
         try:
@@ -919,7 +915,6 @@ class ClinicalDataProcessor:
             logging.info(f"Procedures added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 5 (Add procedures): {str(e)}")
-            raise
 
         #Step 6: gcs staging
         try:
@@ -928,7 +923,6 @@ class ClinicalDataProcessor:
             logging.info(f"GCS added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 6 (Add GCS): {str(e)}")
-            raise
 
         #Step 7: Add vent status
         try:
@@ -937,7 +931,6 @@ class ClinicalDataProcessor:
             logging.info(f"Vent status added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 7 (Add vent status): {str(e)}")
-            raise
 
         #Step 8: Add bed status
         try:
@@ -946,7 +939,6 @@ class ClinicalDataProcessor:
             logging.info(f"Bed status added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 8 (Add bed status): {str(e)}")
-            raise
 
         #Step 9: Add bed unit
         try:
@@ -955,7 +947,6 @@ class ClinicalDataProcessor:
             logging.info(f"Bed unit added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 9 (Add bed unit): {str(e)}")
-            raise
 
         #Step 10: Add dialysis status
         try:
@@ -964,7 +955,6 @@ class ClinicalDataProcessor:
             logging.info(f"Dialysis status added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 10 (Add dialysis status): {str(e)}")
-            raise
 
         #Step 11: Add history of dialysis
         try:
@@ -973,7 +963,6 @@ class ClinicalDataProcessor:
             logging.info(f"History of dialysis added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 11 (Add history of dialysis): {str(e)}")
-            raise
 
         #Step 12: Add fluids
         try:
@@ -982,7 +971,6 @@ class ClinicalDataProcessor:
             logging.info(f"Individual fluids added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 12 (Add individual fluids): {str(e)}")
-            raise
 
         #Step 13: Add cumulative fluids
         try:
@@ -991,7 +979,6 @@ class ClinicalDataProcessor:
             logging.info(f"Cumulative fluids added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 13 (Add cumulative fluids): {str(e)}")
-            raise
 
         #Step 14: radiology notes
         try:
@@ -1000,7 +987,6 @@ class ClinicalDataProcessor:
             logging.info(f"Radiology notes added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 14 (Add radiology notes): {str(e)}")
-            raise
 
         #Step 15: clinical notes
         try:
@@ -1009,7 +995,6 @@ class ClinicalDataProcessor:
             logging.info(f"Clinical notes added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 15 (Add clinical notes): {str(e)}")
-            raise
         
         #Step 16: Add vasopressor meds
         try:
@@ -1018,7 +1003,6 @@ class ClinicalDataProcessor:
             logging.info(f"Vasopressor meds added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 16 (Add vasopressor meds): {str(e)}")
-            raise
 
         #Step 18: Add icd procedures
         try:
@@ -1027,7 +1011,6 @@ class ClinicalDataProcessor:
             logging.info(f"ICD procedures added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 18 (Add ICD procedures): {str(e)}")
-            raise
 
         #Step 19: Add cpt procedures
         try:
@@ -1036,7 +1019,6 @@ class ClinicalDataProcessor:
             logging.info(f"CPT procedures added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 19 (Add CPT procedures): {str(e)}")
-            raise
 
         # Step 20: Add gender code 
         try:
@@ -1044,7 +1026,6 @@ class ClinicalDataProcessor:
             logging.info(f"Gender code added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 20 (Add gender code): {str(e)}")
-            raise
 
         #Step 21: Add comorbidity data
         try:
@@ -1054,7 +1035,6 @@ class ClinicalDataProcessor:
             logging.info(f"Comorbidity data added to Clinical Data.")
         except Exception as e:
             logging.error(f"Error in Step 21 (Add comorbidity data): {str(e)}")
-            raise
 
         logging.info(f"Supertable created with {len(supertable_df.supertable)} rows.")
         return supertable_df

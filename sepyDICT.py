@@ -76,17 +76,18 @@ class sepyMaster:
 
         try:
             source_df = getattr(self.yearly_data_instance, df_name)
-            print(source_df)
             if source_df.index.dtype == "O":
                 return source_df.loc[[str(identifier)], :], filt_df_name
             else:
                 return source_df.loc[[identifier], :], filt_df_name
-        except Exception: 
+        except Exception as e:
+            logging.info("BEGIN LOG There were no %s data for identifier %s", name, identifier)
+            print(e)
             print(self.yearly_data_instance.__dict__.keys())
             print(df_name)
             empty_df = getattr(self.yearly_data_instance, df_name).iloc[0:0]
             empty_df.index.set_names(getattr(self.yearly_data_instance, df_name).index.names)
-            logging.info("There were no %s data for identifier %s", name, identifier)
+            logging.info("END LOG There were no %s data for identifier %s", name, identifier)
             return empty_df, filt_df_name
     
     def get_identifier(self, csn: Any, identifier_type: str) -> Any:
@@ -94,7 +95,6 @@ class sepyMaster:
         if identifier_type == "csn":
             return csn
         elif (identifier_type == "pat_id") or (identifier_type == "patient_id"):
-            print(csn)
             return self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
         else:
             raise ValueError(f"Invalid identifier type: {identifier_type}")
