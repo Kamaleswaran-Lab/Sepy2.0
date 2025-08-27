@@ -80,9 +80,8 @@ class sepyMaster:
                 return source_df.loc[[str(identifier)], :], filt_df_name
             else:
                 return source_df.loc[[identifier], :], filt_df_name
-        except Exception as e:
-            logging.info("BEGIN LOG There were no %s data for identifier %s", name, identifier)
-            logging.error(e)
+        except KeyError:
+            logging.info("There were no %s data for identifier %s", name, identifier)
             empty_df = getattr(self.yearly_data_instance, df_name).iloc[0:0]
             empty_df.index.set_names(getattr(self.yearly_data_instance, df_name).index.names)
             return empty_df, filt_df_name
