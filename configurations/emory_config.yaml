@@ -21,6 +21,7 @@ dataset_identifier: "em_y"
 encounter_type: "IN" # "EM" = Emergency, "IN" = Inpatient, "all" = all encounter types ????? 
 age: "adult" # "adult": age >= 18, "pediatric": age < 18, "all": all ages
 specific_enc_filter: "no" # "yes": only specific encounters, "no": all encounters
+# specific_enc_filter_list can be a list of csns to filter by, or a path to a csv file with a column called "csn"
 # specific_enc_filter_list: []
 
 
