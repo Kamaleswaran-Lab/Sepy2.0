@@ -44,7 +44,7 @@ dictionary_paths:
     - "gr_grouping_labs"
     - "gr_bed_labels"
   # year_types:
-  flatfile_types
+  flatfile_types:
     - ["INFUSIONMEDS", "infusion_meds"]
     - ["LABS", "lab"]
     - ["VITALS", "vitals"]
