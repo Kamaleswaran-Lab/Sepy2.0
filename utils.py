@@ -480,8 +480,8 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
                 dtype=dtype
                 )
             except Exception as e:
-                print(f"Error reading file {file_path}: {str(e)}")
-                print(f"Attempting to read file with no pipe separator")    
+                logging.error(f"Error reading file {file_path}: {str(e)}")
+                logging.info(f"Attempting to read file with no pipe separator")    
                 df = pd.read_csv(
                     file_path,
                     header=header,
@@ -493,7 +493,7 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
                     date_parser=date_parser,
                     dtype=dtype
                 )
-                print(f"File read successfully with {df.shape[0]} rows and {df.shape[1]} columns")
+                logging.info(f"File read successfully with {df.shape[0]} rows and {df.shape[1]} columns")
             
         elif file_path.endswith(".pkl") or file_path.endswith(".pickle"):
             df = pd.read_pickle(file_path)
@@ -519,7 +519,7 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
                 date_parser=date_parser,
                 dtype=dtype
                 )
-            except Exception as e:
+            except FileNotFoundError as e:
                 logging.error(f"Error reading file {file_path}: {str(e)}")
                 raise FileNotFoundError(f"Error reading file {file_path}: {str(e)}")
             
@@ -536,7 +536,7 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
         logging.info(f"Successfully read file with {df.shape[0]} rows and {df.shape[1]} columns")
         return df
         
-    except Exception as e:
+    except FileNotFoundError as e:
         error_msg = f"Error reading file {file_path}: {str(e)}"
         logging.error(error_msg)
         raise FileNotFoundError(error_msg)

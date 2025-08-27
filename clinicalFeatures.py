@@ -96,7 +96,7 @@ class ClinicalData:
     quan_deyo_ICD10: pd.DataFrame
     quan_elix_ICD10: pd.DataFrame
     in_out_fluids: pd.DataFrame
-    # clinical_notes: pd.DataFrame #TODO: Uncomment this later when we have clinical notes
+    clinical_notes: pd.DataFrame
     radiology_notes: pd.DataFrame
     icd_procedures: pd.DataFrame
     cpt_procedures: pd.DataFrame

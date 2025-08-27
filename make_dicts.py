@@ -248,14 +248,12 @@ if __name__ == "__main__":
                 )[0]
             except IndexError:
                 logging.error(f"Sepy- could not find comorbidity file for {comorbidity_type}")
-                raise Exception(f"Sepy- could not find comorbidity file for {comorbidity_type}")
 
     for type, grouping_path in grouping_types:
         try:
             paths[f"{type}"] = glob.glob(f"{GROUPINGS_PATH}/{grouping_path}")[0]
         except IndexError:
             logging.error(f"Sepy- could not find grouping file for {type}")
-            raise Exception(f"Sepy- could not find grouping file for {type}")
 
     for flatfile_type, flatfile_name in flatfile_types:
         try:
@@ -264,7 +262,6 @@ if __name__ == "__main__":
             )[0]
         except IndexError:
             logging.error(f"Sepy- could not find flatfile type for {flatfile_name}")
-            raise Exception(f"Sepy- could not find flatfile type for {flatfile_name}")
 
     for combined_file in combined_files:
         try:
@@ -274,7 +271,6 @@ if __name__ == "__main__":
             
         except IndexError:
             logging.error(f"Sepy- could not find combined file for {combined_file[1]}")
-            raise Exception(f"Sepy- could not find combined file for {combined_file[1]}")
 
     file_dictionary = paths
 

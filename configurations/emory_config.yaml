@@ -62,7 +62,7 @@ dictionary_paths:
     - ["DIAGNOSIS", "*DIAGNOSIS*"]
     - ["CPT_PROCEDURES", "*CPT*"]
     - ["ICD_PROCEDURES", "*ICDPROCEDURES*"]
-    # - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"] # This file is not in the data_path/year/ folder
+    - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"]
   combined_files:
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/ FOLDER
     - ["DIALYSIS", "DIALYSIS_14_21.dsv"] 
@@ -209,17 +209,17 @@ yearly_instance:
     text_col: "doc_text"
     clean_text: true
     max_length: null
-  # import_clinical_notes:
-  #   file_key: "CLINICAL_NOTES"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   date_cols:
-  #     - "note_date"
-  #     - "documented_date"
-  #   text_col: "note_text"
-  #   clean_text: true
-  #   extract_sections: true
-  #   max_length: null
+  import_clinical_notes:
+    file_key: "CLINICAL_NOTES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "note_date"
+      - "documented_date"
+    text_col: "note_text"
+    clean_text: true
+    extract_sections: true
+    max_length: null
 
 
 # COMORBIDITY SUMMARY KEYWORDS
