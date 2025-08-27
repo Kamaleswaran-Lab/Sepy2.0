@@ -91,7 +91,12 @@ class sepyMaster:
         if identifier_type == "csn":
             return csn
         elif (identifier_type == "pat_id") or (identifier_type == "patient_id"):
-            return self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
+            pat_id = self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
+            # check if pat_id is a string
+            if isinstance(pat_id, str):
+                return pat_id
+            else:
+                raise ValueError(f"pat_id is not a string: {pat_id}")
         else:
             raise ValueError(f"Invalid identifier type: {identifier_type}")
 
