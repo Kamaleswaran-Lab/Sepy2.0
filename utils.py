@@ -448,8 +448,6 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
     
     try:
         # Determine file type and read accordingly
-        # log that we're reading a csv file
-        
         if file_path.endswith(".csv"):
             logging.info(f"Reading CSV file: {file_path}")
             df = pd.read_csv(
