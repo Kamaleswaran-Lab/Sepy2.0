@@ -520,7 +520,7 @@ if __name__ == "__main__":
             
         # Save comorbidity summary
         if appended_comorbidity_summaries:
-            print(appended_comorbidity_summaries)
+            logging.debug(appended_comorbidity_summaries)
             pd.concat(appended_comorbidity_summaries).to_csv(
                 base_path / "comorbidity_summary" / f"comorbidity_summary_{UNIQUE_FILE_ID}.csv",
                 index=False,
