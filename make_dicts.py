@@ -131,7 +131,10 @@ def process_csn_instance(
         logging.error(f"Sepy- Error in Encounter Summary for csn {csn_instance.clinical_data.csn}: {e}")
     
     try:
-        result['comorbidity_summary'] = utils.comorbidity_summary(csn_instance, dataConfig)
+        series_dict = {k.replace('_dict', ''): pd.Series(v) for k, v in utils.comorbidity_summary(csn_instance, dataConfig).items()}
+        df = pd.DataFrame(series_dict).reset_index()
+        df.rename(columns={'index': 'csn'}, inplace=True)
+        result['comorbidity_summary'] = df
     except Exception as e:
         logging.error(f"Sepy- Error in Comorbidity Summary for csn {csn_instance.clinical_data.csn}: {e}")
     
@@ -156,20 +159,6 @@ def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
     # Create CSN instances for just this batch
     csn_instances = []
     for i, csn in enumerate(process_list):
-        # try:
-        #     csn_instance = sepyMaster_instance.create_csn_instance(csn)
-        #     csn_instances.append(csn_instance)
-        # except Exception as e:
-        #     logging.error(f"Sepy- Error creating instance for csn {csn}: {e}")
-        #     results.append({
-        #         'error': [csn, str(e)],
-        #         'sofa_summary': None,
-        #         'sep3_summary': None,
-        #         'sirs_summary': None,
-        #         'sep2_summary': None,
-        #         'enc_summary': None,
-        #         'comorbidity_summary': None
-        #     })
         csn_instance = sepyMaster_instance.create_csn_instance(csn)
         csn_instances.append(csn_instance)
 
@@ -362,22 +351,31 @@ if __name__ == "__main__":
         
         # If specific encounter filter is applied, filter the encounters based on the list of specific encounters in the config file
         if specific_enc_filter == "yes":
-            if "specific_enc_filter_list" in dataConfig and dataConfig["specific_enc_filter_list"] and os.path.exists(dataConfig["specific_enc_filter_list"]) and dataConfig["specific_enc_filter_list"].endswith('.csv'):
-                try:
-                    specific_enc_filter_list = pd.read_csv(dataConfig["specific_enc_filter_list"])
-                except Exception as e:
-                    logging.error(f"Sepy- Error in the specified encounter filter list. Please check the config file. {e}")
-                try:
-                    csn_df = csn_df[csn_df.csn.isin(specific_enc_filter_list["csn"])]
-                except Exception as e:
-                    logging.error(f"Sepy- Error in filtering encounters. Please check the config file. {e}")
+            if "specific_enc_filter_list" in dataConfig and dataConfig["specific_enc_filter_list"]:
                 
-                num_encounters = len(csn_df)
-                logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
+                try:
+                    if os.path.exists(dataConfig["specific_enc_filter_list"]) and dataConfig["specific_enc_filter_list"].endswith('.csv'):
+                        specific_enc_filter_list = pd.read_csv(dataConfig["specific_enc_filter_list"])
+                        try:
+                            csn_df = csn_df[csn_df.index.isin(specific_enc_filter_list["csn"])]
+                        except Exception as e:
+                            logging.error(f"Sepy- Error in filtering encounters. Please check the config file. {e}")
+                except Exception as e:
+                    logging.error(f"Sepy- Error in the specified encounter filter list. List is not a csv file. {e}")
+                # if the list is a list in the config file, convert it to a dataframe
+                    if isinstance(dataConfig["specific_enc_filter_list"], list):
+                        specific_enc_filter_list = pd.DataFrame(dataConfig["specific_enc_filter_list"], columns=["csn"])
+                        try:
+                            csn_df = csn_df[csn_df.index.isin(specific_enc_filter_list["csn"])]
+                        except Exception as e:
+                            logging.error(f"Sepy- Error in filtering encounters. Please check the config file. {e}")
             else:
                 logging.info(f"Sepy- Error in the specified encounter filter list. Please check the config file.")
         else:
             logging.info(f"Sepy- No specific encounter filter was applied")
+
+        num_encounters = len(csn_df)
+        logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
             
         # If encounter type filter is applied, filter the encounters based on the encounter type in the config file (EM, IN, all)
         if encounter_type != "all":
@@ -417,8 +415,8 @@ if __name__ == "__main__":
         logging.info(f"Sepy- The list of chunks has {len(list_of_chunks)} unique dataframes.")
         
         # uses processor assignment number to select correct chunk
-        process_list = list_of_chunks[processor_assignment].index.to_frame()
-        logging.info(f"Sepy- The process_list head:\n {process_list.head()}")
+        process_list = list_of_chunks[processor_assignment].index.to_list()
+        logging.info(f"Sepy- The process_list head:\n {process_list[:5]}")
         
         # create the directory for the supertables
         save_dir = SUPERTABLE_OUTPUT_PATH / str(year)
@@ -465,7 +463,7 @@ if __name__ == "__main__":
         total_csns = len(process_list)
         for batch_start in range(0, total_csns, batch_size):
             batch_end = min(batch_start + batch_size, total_csns)
-            current_batch = process_list[batch_start:batch_end].values.flatten().tolist()
+            current_batch = process_list[batch_start:batch_end]
 
             logging.info(f"Sepy- Processing batch {batch_start//batch_size + 1} of {(total_csns + batch_size - 1)//batch_size}")
             
@@ -526,6 +524,7 @@ if __name__ == "__main__":
             
         # Save comorbidity summary
         if appended_comorbidity_summaries:
+            print(appended_comorbidity_summaries)
             pd.concat(appended_comorbidity_summaries).to_csv(
                 base_path / "comorbidity_summary" / f"comorbidity_summary_{UNIQUE_FILE_ID}.csv",
                 index=False,

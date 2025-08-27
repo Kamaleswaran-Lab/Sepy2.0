@@ -247,6 +247,7 @@ sepsis_summary_types:
   - "error_summary"
   # - "ahrq_ICD10_summary"
   # - "elix_ICD10_summary"
-  - "quan_deyo_ICD10_summary"
-  - "quan_elix_ICD10_summary"
+  # - "quan_deyo_ICD10_summary"
+  # - "quan_elix_ICD10_summary" # comorbidity summary is outputted in the comorbidity_summary section
+  - "comorbidity_summary"
   # - "ccs_ICD10_summary"

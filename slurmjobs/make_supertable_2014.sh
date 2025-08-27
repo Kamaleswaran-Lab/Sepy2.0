@@ -47,8 +47,8 @@ python make_dicts.py \
     --year 2014 \
     --num_processes $NUM_OF_PROCESSES \
     --data_config /work/rrz4/Sepy2.0/configurations/emory_config.yaml \
-    --sepy_config /work/rrz4/Sepy2.0/configurations/dict_config.yaml
-    --processor_assignment $SLURM_ARRAY_TASK_ID
+    --sepy_config /work/rrz4/Sepy2.0/configurations/dict_config.yaml \
+    --processor_assignment $SLURM_ARRAY_TASK_ID \
 # Check if the command was successful
 if [ $? -eq 0 ]; then
     echo "Job completed successfully at: $(date)"
