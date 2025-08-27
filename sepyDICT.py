@@ -62,7 +62,7 @@ class sepyMaster:
                                       'quan_deyo_ICD10': "csn",
                                       'quan_elix_ICD10': "csn",
                                       'in_out_fluids': "csn", #TODO Change this name later 
-                                    #   'clinical_notes': "csn", #TODO: Uncomment this later when we have clinical notes
+                                      'clinical_notes': "csn",
                                       'radiology_notes': "csn",
                                       'icd_procedures': "csn",
                                       'cpt_procedures': "csn",

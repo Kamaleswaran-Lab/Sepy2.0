@@ -188,7 +188,7 @@ class sepyIMPORT:
             return import_func(*args, **kwargs)
         except FileNotFoundError:
             logging.warning(f"File {file_key} not found. Using empty DataFrame.")
-            raise Exception(f"File {file_key} not found. Please check the file path and try again.")
+            return pd.DataFrame()
         except Exception as e:
             logging.error(f"Error importing {file_key}: {str(e)}")
             raise Exception(f"Error importing {file_key}: {str(e)}")
