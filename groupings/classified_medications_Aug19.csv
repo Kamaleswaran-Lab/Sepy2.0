@@ -238,7 +238,7 @@ Unnamed: 0,med_name,is_fluids,fluid_type,med_class,med_subclass
 274,"fat emulsion, intravenous",TRUE,Parenteral Nutrition,other,other
 51,fentaNYL,FALSE,Medication,analgesic,opioids
 1249,fentanyl bolus from current pca,FALSE,Medication,analgesic,opioids
-5177,Fentanyl Patch Removal,FALSE,Medication,analgesic,opioids
+5177,Fentanyl Patch Removal,FALSE,Medication,removal,other
 3445,fentanyl-ropivacaine,FALSE,Medication,analgesic,opioids
 552,ferumoxytol,FALSE,Medication,other,other
 1121,fibrinogen,FALSE,Medication,other,other
@@ -268,7 +268,7 @@ Unnamed: 0,med_name,is_fluids,fluid_type,med_class,med_subclass
 249,haloperidol,FALSE,Medication,other,other
 3408,hemin,FALSE,Medication,other,other
 47,heparin,FALSE,Medication,anticoagulant,other
-836,heparin flush,FALSE,Medication,anticoagulant,other
+836,heparin flush,FALSE,Medication,flush,other
 922,hepatitis B immune globulin,FALSE,Medication,other,other
 505,hetastarch,TRUE,Synthetic Colloid,fluid_electrolyte,other
 1266,Hexaminolevulinate 100mg kit inj,FALSE,Medication,other,other
@@ -384,7 +384,7 @@ Unnamed: 0,med_name,is_fluids,fluid_type,med_class,med_subclass
 19,nitroglycerin,FALSE,Medication,bp_lowering,other
 7551,nivolumab,FALSE,Medication,other,other
 29,norepinephrine,FALSE,Medication,pressor,vasopressor
-2580,NS Continuous Bladder Irrigation 3000mL,TRUE,IV Line Fluid,other,other
+2580,NS Continuous Bladder Irrigation 3000mL,FALSE,Not intake,other,other
 7590,obinutuzumab,FALSE,Medication,other,other
 237,octreotide,FALSE,Medication,other,other
 7822,ocular lubricant,FALSE,Medication,other,other

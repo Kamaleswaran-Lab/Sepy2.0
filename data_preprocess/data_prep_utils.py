@@ -52,7 +52,11 @@ def convert_icd9_to_icd10(df: pd.DataFrame, icd9_col: str, icd10_col: str, mappi
 
 def safe_read_dsv(file_path: Path) -> pd.DataFrame:
     try:
-        df = pd.read_csv(file_path, sep="|")
+        try:
+            df = pd.read_csv(file_path, sep="|")
+        except:
+            df = pd.read_csv(file_path)
+
         if df.shape[1] == 1:
             df = pd.read_csv(file_path)
         return df
@@ -456,10 +460,12 @@ def process_medication_csv_with_amounts(input_dataframe = None, input_file = Non
             volume_count += 1
         
         # check if formulary name has indicators for it not being an infusion
+        ## TODO: include the same check in the med_name also, not only the formulary name. For now, this was done manually. Some heparin flushes are 
+        ## not called so in the formulary name but rather in the med_name
         terms_to_exclude = ["inj", "syringe", "tab", "cap", "inhale",
                             "inhalation", "inhaler", "supp", "oral", "aero",
                             "epidural", "granules", "spray", "gel", "patch",
-                            "syr", "lozenge"] 
+                            "syr", "lozenge", "vial", "flush", "irrigation"] 
         if any(term in formulary_name.lower() for term in terms_to_exclude):
             df.at[idx, 'is_infusion'] = False
         else: 
@@ -570,22 +576,27 @@ def process_medication_csv_with_extraction(input_file, output_file=None):
     return df
 
 def main():
-    #root = Path("/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI")
+    root = Path("/labs/collab/K-lab-MODS/MODS-PHI/Emory_Data/")
+    o2_file = root / "JGSEPSIS_VENTSETTINGS.csv"
+    df_o2_flow = safe_read_dsv(o2_file)
+    print("Shape of the main o2_file: ",  df_o2_flow.shape)
+    df_o2_flow.columns = df_o2_flow.columns.str.lower()
 
-    #for year in range(2015, 2022):
-    #    vent_file = root / f"{year}" / f"CJSEPSIS_VITALS_{year}.dsv"
-    #    o2_file = root / f"{year}" / f"vent_o2_flow_rate{year}.dsv"
+    for year in range(2019, 2022):
+        vitals_file = root / f"{year}" / f"CJSEPSIS_VITALS_{year}.dsv"
+        df_vent = safe_read_dsv(vitals_file)
+        print("Shape of the vitals file for year", year, "is : " , df_vent.shape)
+        merged_df = merge_o2_flow_and_vent_data(df_o2_flow, df_vent)
         
-    #    df_vent = safe_read_dsv(vent_file)
-    #    df_o2_flow = safe_read_dsv(o2_file)
-        
-    #    merged_df = merge_o2_flow_and_vent_data(df_o2_flow, df_vent)
-        
-    #    merged_df.to_csv(root / f"{year}" / f"VITALS_O2_FLOW_RATE_{year}.csv", index=False)
-    #    print(f"Processed {year}")
+        merged_df.to_csv(root / f"{year}" / f"VITALS_O2_FLOW_RATE_{year}.csv", index=False)
+        print(f"Processed {year}")
+        del merged_df 
+        del df_vent
+
+    """
     infusion_meds_mapping = pd.read_csv("../groupings/em_infusion_meds_volume.csv")
     df = process_medication_csv_with_amounts(input_dataframe = infusion_meds_mapping)
-    """
+    
     df["is_fluids"] = False 
     fluid_cols = [
 		'Sodium Chloride 0.9% intravenous solution',
@@ -602,9 +613,9 @@ def main():
 		'Electrolyte (Plasma-Lyte) intravenous solution',
 		'Albumin 5%', 'albumin human', 'albumin 25%']
     fluid_cols = [col.lower() for col in fluid_cols]
-    df.loc[df["med_name_generic"].str.lower().isin(fluid_cols), "is_fluids"] = True """
+    df.loc[df["med_name_generic"].str.lower().isin(fluid_cols), "is_fluids"] = True 
     df.to_csv("../groupings/em_infusion_meds_volume_amounts.csv", index=False)
-
+    """
 if __name__ == "__main__":
     main()
         
