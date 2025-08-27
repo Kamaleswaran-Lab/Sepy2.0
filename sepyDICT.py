@@ -83,11 +83,8 @@ class sepyMaster:
         except Exception as e:
             logging.info("BEGIN LOG There were no %s data for identifier %s", name, identifier)
             print(e)
-            print(self.yearly_data_instance.__dict__.keys())
-            print(df_name)
             empty_df = getattr(self.yearly_data_instance, df_name).iloc[0:0]
             empty_df.index.set_names(getattr(self.yearly_data_instance, df_name).index.names)
-            logging.info("END LOG There were no %s data for identifier %s", name, identifier)
             return empty_df, filt_df_name
     
     def get_identifier(self, csn: Any, identifier_type: str) -> Any:
