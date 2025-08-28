@@ -51,8 +51,7 @@ dictionary_paths:
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/year/ FOLDER
     - ["INFUSIONMEDS", "*INFUSIONMEDS*"]
     - ["LABS", "*LABS*"]
-    # - ["VITALS", "*VITALS_O2_FLOW_RATE_*.csv"]
-    - ["VITALS", "*VITALS*"]
+    - ["VITALS", "*VITALS_O2_FLOW_RATE_*.csv"]
     - ["VENT", "*VENT*"]
     - ["DEMOGRAPHICS", "*DEMOGRAPHICS*"]
     - ["GCS", "*GCS*"]
