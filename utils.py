@@ -442,13 +442,14 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
         pandas.DataFrame: The loaded data
         
     Raises:
-        ValueError: If there's an error reading the file
+        FileNotFoundError: If there's an error reading the file
     """
     logging.info(f"Reading file: {file_path}")
     
     try:
         # Determine file type and read accordingly
         if file_path.endswith(".csv"):
+            logging.info(f"Reading CSV file: {file_path}")
             df = pd.read_csv(
                 file_path,
                 header=header,
@@ -462,6 +463,7 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
             )
             
         elif file_path.endswith(".dsv"):
+            logging.info(f"Reading DSV file: {file_path}")
             try:
                 df = pd.read_csv(
                 file_path,
@@ -476,8 +478,8 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
                 dtype=dtype
                 )
             except Exception as e:
-                print(f"Error reading file {file_path}: {str(e)}")
-                print(f"Attempting to read file with no pipe separator")    
+                logging.error(f"Error reading file {file_path}: {str(e)}")
+                logging.info(f"Attempting to read file with no pipe separator")    
                 df = pd.read_csv(
                     file_path,
                     header=header,
@@ -489,7 +491,7 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
                     date_parser=date_parser,
                     dtype=dtype
                 )
-                print(f"File read successfully with {df.shape[0]} rows and {df.shape[1]} columns")
+                logging.info(f"File read successfully with {df.shape[0]} rows and {df.shape[1]} columns")
             
         elif file_path.endswith(".pkl") or file_path.endswith(".pickle"):
             df = pd.read_pickle(file_path)
@@ -503,7 +505,8 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
         else:
             # Default to CSV reading for unknown extensions
             logging.warning(f"Unknown file extension for {file_path}, attempting to read as CSV")
-            df = pd.read_csv(
+            try:
+                df = pd.read_csv(
                 file_path,
                 header=header,
                 index_col=index_col,
@@ -513,7 +516,10 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
                 memory_map=memory_map,
                 date_parser=date_parser,
                 dtype=dtype
-            )
+                )
+            except FileNotFoundError as e:
+                logging.error(f"Error reading file {file_path}: {str(e)}")
+                raise FileNotFoundError(f"Error reading file {file_path}: {str(e)}")
             
         # Post-processing: drop columns if specified
         if drop_cols:
@@ -528,10 +534,10 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
         logging.info(f"Successfully read file with {df.shape[0]} rows and {df.shape[1]} columns")
         return df
         
-    except Exception as e:
+    except FileNotFoundError as e:
         error_msg = f"Error reading file {file_path}: {str(e)}"
         logging.error(error_msg)
-        raise ValueError(error_msg)
+        raise FileNotFoundError(error_msg)
 
 def read_flatfile(file_path):
     """
