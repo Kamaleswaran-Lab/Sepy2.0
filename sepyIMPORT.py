@@ -319,6 +319,7 @@ class sepyIMPORT:
                 else:
                     logging.warning(f"Processing for {data_type} may be incomplete")
             except Exception as e:
+                
                 logging.error(f"Error in {data_type} processing: {str(e)}")
             
     # Data-specific processors
@@ -327,6 +328,11 @@ class sepyIMPORT:
         anti_infective_group_name = kwargs.get('anti_infective_group_name', 'anti_infective')
         vasopressor_group_name = kwargs.get('vasopressor_group_name', 'vasopressor')
         
+        # Drop index name if it exists in the columns
+        index_name = df.index.name 
+        if index_name in df.columns:
+            df = df.drop(columns=[index_name]) 
+
         self.df_infusion_meds = df
         self._handle_duplicate_med_ids()
         
