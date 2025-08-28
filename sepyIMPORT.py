@@ -92,7 +92,7 @@ class sepyIMPORT:
                  sepyIMPORTConfigs: Dict[str, Any], 
                  dataConfig: Dict[str, Any],
                  create_dataframes: bool = True, 
-                 save_dataframes: bool = True, 
+                 save_dataframes: bool = False, 
                  save_path: str = None) -> None:
         
         # dictionary has file locations for flat files
@@ -191,7 +191,7 @@ class sepyIMPORT:
             return pd.DataFrame()
         except Exception as e:
             logging.error(f"Error importing {file_key}: {str(e)}")
-            return pd.DataFrame()
+            raise Exception(f"Error importing {file_key}: {str(e)}")
             
     def _common_import(self, 
                       file_key: str, 
