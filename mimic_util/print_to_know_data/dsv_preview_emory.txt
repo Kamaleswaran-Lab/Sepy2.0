@@ -1,0 +1,515 @@
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_BEDLOCATION_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'bed_location_start', 'bed_location_end', 'bed_unit', 'bed_room', 'bed_id', 'bed_label', 'hospital_service', 'accomodation_code', 'accomodation_description']
+
+列名 → 示例值:
+  pat_id: 4644de4101c0ae43b8e5f387b043684693b2c0f9dfa8af4ce966fea8884e8a63
+  csn: 0bd738891146ffee83f26000708f28fef037ea46433f824376ddac1ae358a550
+  bed_location_start: 1990-05-08 00:51:33
+  bed_location_end: 1990-05-08 01:41:16
+  bed_unit: ED ECLH
+  bed_room: Not Recorded
+  bed_id: Not Recorded
+  bed_label: Not Recorded
+  hospital_service: HOSPITAL MEDICINE
+  accomodation_code: --
+  accomodation_description: Not Recorded
+
+前10行数据:
+['4644de4101c0ae43b8e5f387b043684693b2c0f9dfa8af4ce966fea8884e8a63', '0bd738891146ffee83f26000708f28fef037ea46433f824376ddac1ae358a550', '1990-05-08 00:51:33', '1990-05-08 01:41:16', 'ED ECLH', 'Not Recorded', 'Not Recorded', 'Not Recorded', 'HOSPITAL MEDICINE', '--', 'Not Recorded']
+['4644de4101c0ae43b8e5f387b043684693b2c0f9dfa8af4ce966fea8884e8a63', '0bd738891146ffee83f26000708f28fef037ea46433f824376ddac1ae358a550', '1990-05-08 01:41:16', '1990-05-08 15:35:17', 'ED ECLH', 'AC 14', 'a', 'Not Recorded', 'HOSPITAL MEDICINE', '--', 'Not Recorded']
+['4644de4101c0ae43b8e5f387b043684693b2c0f9dfa8af4ce966fea8884e8a63', '0bd738891146ffee83f26000708f28fef037ea46433f824376ddac1ae358a550', '1990-05-08 15:35:17', '1990-05-19 17:48:20', '11 ECLH', '1106', '01', 'PRIVATE', 'HOSPITAL MEDICINE', 'R', 'ROUTINE']
+['48c29606bd109e14c37d4c17033193f3cf96454c863befc2a8ee589b22366a2a', 'bbcd3dc377b79039700644eac38091d0c5b7e3f2d30c4b68d6d5d3cea38c885c', '1990-09-25 21:08:59', '1990-09-25 21:09:40', 'Main Registration Tower EUH', 'Not Recorded', 'Not Recorded', 'Not Recorded', 'GASTROENTEROLOGY', '--', 'Not Recorded']
+['48c29606bd109e14c37d4c17033193f3cf96454c863befc2a8ee589b22366a2a', 'bbcd3dc377b79039700644eac38091d0c5b7e3f2d30c4b68d6d5d3cea38c885c', '1990-09-25 21:09:40', '1990-10-01 13:35:20', '6T-S EUH', 'T619', '01', 'PRIVATE', 'GASTROENTEROLOGY', 'R', 'ROUTINE']
+['4e4fd793b4dbf0705d0136329a08406c7583edebbbd5a6aa46f64802c9130761', '0144d92cb7c1f59accfb53358a33766893ea2c4b8f75aac60bbd87b91119998c', '1990-05-09 04:19:10', '1990-05-09 04:49:00', 'ED ECLH', 'Not Recorded', 'Not Recorded', 'Not Recorded', 'HOSPITAL MEDICINE', '--', 'Not Recorded']
+['4e4fd793b4dbf0705d0136329a08406c7583edebbbd5a6aa46f64802c9130761', '0144d92cb7c1f59accfb53358a33766893ea2c4b8f75aac60bbd87b91119998c', '1990-05-09 04:49:00', '1990-05-09 15:47:55', 'ED ECLH', 'AC 09', 'a', 'Not Recorded', 'HOSPITAL MEDICINE', '--', 'Not Recorded']
+['4e4fd793b4dbf0705d0136329a08406c7583edebbbd5a6aa46f64802c9130761', '0144d92cb7c1f59accfb53358a33766893ea2c4b8f75aac60bbd87b91119998c', '1990-05-09 15:47:55', '1990-05-12 10:12:20', '61S ECLH', '6103', '01', 'PRIVATE', 'HOSPITAL MEDICINE', 'R', 'ROUTINE']
+['4e4fd793b4dbf0705d0136329a08406c7583edebbbd5a6aa46f64802c9130761', 'edc944838d4af464a6459b93c5a9945e2c09341f37e9f7a26c9971ae357682bd', '1990-11-13 02:33:23', '1990-11-13 09:47:32', 'ED ECLH', 'Not Recorded', 'Not Recorded', 'Not Recorded', 'HOSPITAL MEDICINE', '--', 'Not Recorded']
+['4e4fd793b4dbf0705d0136329a08406c7583edebbbd5a6aa46f64802c9130761', 'edc944838d4af464a6459b93c5a9945e2c09341f37e9f7a26c9971ae357682bd', '1990-11-13 09:47:32', '1990-11-13 19:02:02', 'ED ECLH', 'AC 49', 'a', 'Not Recorded', 'HOSPITAL MEDICINE', '--', 'Not Recorded']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_LABS_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'proc_cat_id', 'proc_cat_name', 'proc_code', 'proc_desc', 'component_id', 'component', 'loinc_code', 'collection_time', 'result_status', 'lab_result_time', 'lab_result']
+
+列名 → 示例值:
+  pat_id: 537a673e59f738985e39da2c8196353bca0d8ee95792d648ec1755e78b7d54ce
+  csn: 28ff561b6ac67eef481c39458adc9728fc66819deddae679e64337ed73b39df8
+  proc_cat_id: 1011
+  proc_cat_name: Urine
+  proc_code: 2232710179
+  proc_desc: Urine Culture C&S + Colony Count if Abnormal Urinalysis
+  component_id: 1513018
+  component: Urobilinogen Urine Qualitative
+  loinc_code: 5818-0
+  collection_time: 1990-05-04 07:54:20
+  result_status: Auth (Verified)
+  lab_result_time: 1990-05-04 08:09:49
+  lab_result: 4.0
+
+前10行数据:
+['537a673e59f738985e39da2c8196353bca0d8ee95792d648ec1755e78b7d54ce', '28ff561b6ac67eef481c39458adc9728fc66819deddae679e64337ed73b39df8', '1011', 'Urine', '2232710179', 'Urine Culture C&S + Colony Count if Abnormal Urinalysis', '1513018', 'Urobilinogen Urine Qualitative', '5818-0', '1990-05-04 07:54:20', 'Auth (Verified)', '1990-05-04 08:09:49', '4.0']
+['537a673e59f738985e39da2c8196353bca0d8ee95792d648ec1755e78b7d54ce', '28ff561b6ac67eef481c39458adc9728fc66819deddae679e64337ed73b39df8', '1011', 'Urine', '2213938', 'Toxicology Drug Screen Urine', '1513008', 'Amphetamines Screen Urine Random', '3349-8', '1990-05-04 07:54:20', 'Auth (Verified)', '1990-05-04 08:38:26', 'Positive']
+['8ec01b35e2059e1d3636fdc32de8260335a33d407b3f0bdd0253a81e20cdc295', 'f370befe31d3fc0a6741558491d8e48f9a9e434c89dcc3aac60455fa449dfab8', '574', 'Blood', '2214641', 'Manual Differential', '1513408', 'MONO', '5905-5', '1990-05-09 00:06:20', 'Auth (Verified)', '1990-05-09 06:34:33', '0']
+['8ec01b35e2059e1d3636fdc32de8260335a33d407b3f0bdd0253a81e20cdc295', 'f370befe31d3fc0a6741558491d8e48f9a9e434c89dcc3aac60455fa449dfab8', '574', 'Blood', '2214641', 'Manual Differential', '1514834', 'BASO', '706-2', '1990-05-09 00:06:20', 'Auth (Verified)', '1990-05-09 06:34:33', '0']
+['8ec01b35e2059e1d3636fdc32de8260335a33d407b3f0bdd0253a81e20cdc295', 'f370befe31d3fc0a6741558491d8e48f9a9e434c89dcc3aac60455fa449dfab8', '574', 'Blood', '2213300', 'Complete Blood Count with Indices', '1513472', 'MCH', '785-6', '1990-05-10 01:03:20', 'Auth (Verified)', '1990-05-10 03:27:26', '28.9']
+['8ec01b35e2059e1d3636fdc32de8260335a33d407b3f0bdd0253a81e20cdc295', 'f370befe31d3fc0a6741558491d8e48f9a9e434c89dcc3aac60455fa449dfab8', '574', 'Blood', '2213540', 'Basic Metabolic Panel', '1514422', 'Creatinine', '2160-0', '1990-05-10 01:03:20', 'Auth (Verified)', '1990-05-10 02:10:29', '0.52']
+['8ec01b35e2059e1d3636fdc32de8260335a33d407b3f0bdd0253a81e20cdc295', 'f370befe31d3fc0a6741558491d8e48f9a9e434c89dcc3aac60455fa449dfab8', '574', 'Blood', '2213561', 'Comprehensive Metabolic Panel', '1514512', 'Osmolality, Calculated', '2692-2', '1990-05-11 03:22:20', 'Auth (Verified)', '1990-05-11 04:19:45', '281']
+['8ec01b35e2059e1d3636fdc32de8260335a33d407b3f0bdd0253a81e20cdc295', 'f370befe31d3fc0a6741558491d8e48f9a9e434c89dcc3aac60455fa449dfab8', '574', 'Blood', '2213561', 'Comprehensive Metabolic Panel', '1513627', 'Potassium Level', '2823-3', '1990-05-11 03:22:20', 'Auth (Verified)', '1990-05-11 04:19:45', '4.5']
+['8ec01b35e2059e1d3636fdc32de8260335a33d407b3f0bdd0253a81e20cdc295', 'f370befe31d3fc0a6741558491d8e48f9a9e434c89dcc3aac60455fa449dfab8', '574', 'Blood', '2213540', 'Basic Metabolic Panel', '1513370', 'Sodium Level', '2951-2', '1990-05-12 02:29:20', 'Auth (Verified)', '1990-05-12 03:17:25', '137']
+['8ec01b35e2059e1d3636fdc32de8260335a33d407b3f0bdd0253a81e20cdc295', 'f370befe31d3fc0a6741558491d8e48f9a9e434c89dcc3aac60455fa449dfab8', '574', 'Blood', '2213300', 'Complete Blood Count with Indices', '1513471', 'MCHC', '786-4', '1990-05-13 03:41:20', 'Auth (Verified)', '1990-05-13 04:25:33', '32.3']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_SENSITIVITIES_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'order_time', 'order_id', 'result_id', 'organism_id', 'organism_name', 'antibiotic_c', 'antibiotic_name', 'sens_c', 'sens_name']
+
+列名 → 示例值:
+  pat_id: de3c7fd8676a8e502d1157a9f36e1e7c32510e5e0fdd33d296191b2973819143
+  csn: f0850a4c9d623bbe04706a580b079b099a2cd8480355718fadfc394caf7edca1
+  order_time: 1990-04-22 10:16:20
+  order_id: 3583015291
+  result_id: 22021363007549
+  organism_id: 310216
+  organism_name: Escherichia coli
+  antibiotic_c: 2399371747
+  antibiotic_name: Cefazolin Urine    $
+  sens_c: 309712
+  sens_name: Susceptible
+
+前10行数据:
+['de3c7fd8676a8e502d1157a9f36e1e7c32510e5e0fdd33d296191b2973819143', 'f0850a4c9d623bbe04706a580b079b099a2cd8480355718fadfc394caf7edca1', '1990-04-22 10:16:20', '3583015291', '22021363007549', '310216', 'Escherichia coli', '2399371747', 'Cefazolin Urine    $', '309712', 'Susceptible']
+['de3c7fd8676a8e502d1157a9f36e1e7c32510e5e0fdd33d296191b2973819143', 'f0850a4c9d623bbe04706a580b079b099a2cd8480355718fadfc394caf7edca1', '1990-04-22 10:16:20', '3583015291', '22021363007549', '310216', 'Escherichia coli', '309663', 'Gentamicin    $', '309712', 'Susceptible']
+['de3c7fd8676a8e502d1157a9f36e1e7c32510e5e0fdd33d296191b2973819143', 'f0850a4c9d623bbe04706a580b079b099a2cd8480355718fadfc394caf7edca1', '1990-04-22 10:16:20', '3583015291', '22021363007549', '310216', 'Escherichia coli', '309641', 'Piperacillin/Tazobactam $$', '309712', 'Susceptible']
+['073e92f68405633f2d359a9125071757928ff4a733ef307392ea44ce59b25422', 'e63188805f40b0f0ef832f7d19d55ff5d696bd302f683ef2cb55a4520db9f45c', '1990-04-25 10:27:20', '3585731564', '52022001005314', '469353120', 'Klebsiella pneumoniae subsp pneumoniae', '309702', 'Ampicillin/Sulbactam $$', '309705', 'Intermediate']
+['073e92f68405633f2d359a9125071757928ff4a733ef307392ea44ce59b25422', 'e63188805f40b0f0ef832f7d19d55ff5d696bd302f683ef2cb55a4520db9f45c', '1990-04-25 10:27:20', '3585731564', '52022001005314', '469353120', 'Klebsiella pneumoniae subsp pneumoniae', '309692', 'Cefepime    $$', '309712', 'Susceptible']
+['073e92f68405633f2d359a9125071757928ff4a733ef307392ea44ce59b25422', 'e63188805f40b0f0ef832f7d19d55ff5d696bd302f683ef2cb55a4520db9f45c', '1990-04-25 10:27:20', '3585731564', '52022001005314', '469353120', 'Klebsiella pneumoniae subsp pneumoniae', '309641', 'Piperacillin/Tazobactam $$', '309712', 'Susceptible']
+['36a759073811e68b73a151ba0b3da16a7395ec059a2dff8f7bc57bf142cec9e0', '10455ccefe84699da8e7be50155a496d91dcbe7fb3e02d1f9d4e90a2fa82d096', '1990-04-25 16:20:20', '3585733731', '52022001006715', '469353120', 'Klebsiella pneumoniae subsp pneumoniae', '309625', 'Amikacin      $', '309712', 'Susceptible']
+['36a759073811e68b73a151ba0b3da16a7395ec059a2dff8f7bc57bf142cec9e0', '10455ccefe84699da8e7be50155a496d91dcbe7fb3e02d1f9d4e90a2fa82d096', '1990-04-25 16:20:20', '3585733731', '52022001006715', '469353120', 'Klebsiella pneumoniae subsp pneumoniae', '664888', 'Levofloxacin $', '309712', 'Susceptible']
+['36a759073811e68b73a151ba0b3da16a7395ec059a2dff8f7bc57bf142cec9e0', '10455ccefe84699da8e7be50155a496d91dcbe7fb3e02d1f9d4e90a2fa82d096', '1990-04-25 16:20:20', '3585733731', '52022001006715', '469353120', 'Klebsiella pneumoniae subsp pneumoniae', '309633', 'Trimethoprim/Sulfa $', '309712', 'Susceptible']
+['7827b3ce9642b708f4f79b82535a926c7c8622edfd1252f1915d3e9ccce1e1ef', 'cca7d05fa9aa0d2daa6974ac28193681460a133a5fd78c7fee53e98e30763f99', '1990-04-25 12:02:20', '3585734387', '62022001007740', '310355', 'Klebsiella oxytoca', '309699', 'Aztreonam  $$$$', '309712', 'Susceptible']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_DEMOGRAPHICS_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'gender_code', 'gender', 'race_code', 'ethnicity_code']
+
+列名 → 示例值:
+  pat_id: 7c018011a28fd20a69ac092858a0b705b5133f8012331fda18e02c29bff62dba
+  gender_code: 362
+  gender: Female
+  race_code: 309315
+  ethnicity_code: 312507
+
+前10行数据:
+['7c018011a28fd20a69ac092858a0b705b5133f8012331fda18e02c29bff62dba', '362', 'Female', '309315', '312507']
+['ccc5d494d31ea2e120c50cd0d3e4a87f3b7214bcac21bdd6d7634ce38eb505d0', '362', 'Female', '309315', '312508']
+['71e6138825cb3f926d625fc7dda7476dc8ee1ed0b7f890825a338477b7654951', '363', 'Male', '309315', '312508']
+['95deebf12bf26c75071448c104a72547b2215955f83c9667f1f5b711af61a8e5', '363', 'Male', '309316', '312507']
+['63236522968bd6ecbfdc5e60dcdabdd006e10ddc49b60297419f6a13c33a6c94', '363', 'Male', '309315', '312507']
+['aed48895d334d65d4dd91df824fd87ad6605d2888cf1b3f90316aee230e4aec4', '362', 'Female', '309315', '312507']
+['546139ae33ca9947ef3a3c7115d64b007341c6cc9c8f0308ba119d0a139579b6', '363', 'Male', '309316', '312507']
+['a9966f91107b5e62c5cad7127a57021543d259c13210380a6d586d97c91aa9ba', '362', 'Female', '309316', '312507']
+['bc9a2b26d0d7486fd98fd25201556808d8745809c59260d62479df0293c43e59', '362', 'Female', '309316', 'NOTRECORDED']
+['7c6d6bf250203435e6148177ddba0af52c0f7c02d674fb533923c95b66f07e94', '362', 'Female', '309315', '312507']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_ORPROCEDURES_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'surgery_date', 'in_or_dttm', 'procedure_start_dttm', 'procedure_comp_dttm', 'out_or_dttm', 'primary_procedure_nm', 'cpt_code', 'service_nm']
+
+列名 → 示例值:
+  pat_id: f4bd03f073eb202bcdce1fbc9b9a2cfa700b02bab8a1ad177cf048844dd0bd64
+  csn: 6dc20eb693a9cb75ce8c3035cd279d9c85da26ced1efbc1083d451e9ee5e3864
+  surgery_date: 1990-05-26 22:13:20
+  in_or_dttm: 1990-05-27 05:45:20
+  procedure_start_dttm: 1990-05-27 06:29:20
+  procedure_comp_dttm: 1990-05-27 10:07:20
+  out_or_dttm: 1990-05-27 10:29:20
+  primary_procedure_nm: Breast Reduction
+  cpt_code: --
+  service_nm: Plastic Surgery SS
+
+前10行数据:
+['f4bd03f073eb202bcdce1fbc9b9a2cfa700b02bab8a1ad177cf048844dd0bd64', '6dc20eb693a9cb75ce8c3035cd279d9c85da26ced1efbc1083d451e9ee5e3864', '1990-05-26 22:13:20', '1990-05-27 05:45:20', '1990-05-27 06:29:20', '1990-05-27 10:07:20', '1990-05-27 10:29:20', 'Breast Reduction', '--', 'Plastic Surgery SS']
+['879bc3720ccb4d3c4d044aecc050fe0423a2ed8b677c7ee3b787120ba59924da', '1fc55ef217c2476b9f9c6e79b656cd4ef30d0b7a85ae03d2078daaf50a0d55a8', '1990-09-22 22:13:20', '1990-09-23 10:46:20', '1990-09-23 11:23:20', '1990-09-23 13:51:20', '1990-09-23 14:02:20', 'Breast Reduction', '--', 'Plastic Surgery SS']
+['f8f3bd748f8dcacaa95120fdfd15c2d57cf6f4e77b80d7e4c0e6e8dec80cb30b', 'b88ec6d14be23cdd71f6d19c0af4b50d00bbb96df6de6947da96b89bb68644b3', '1990-05-28 22:13:20', '1990-05-29 05:42:20', '1990-05-29 06:13:20', '1990-05-29 07:05:20', '1990-05-29 07:25:20', 'Tonsillectomy', '--', 'Otolaryngology Surgery SS']
+['5120f82e00e6808bb16236df99ed689a9a22a30b3b4db74522720838314e0f82', '981b5b7df97ee47a5f3f94226f8e8c94c9ea3fc1b2dbb994847abb5ae1df869d', '1990-05-04 22:13:20', '1990-05-05 14:15:20', '1990-05-05 14:25:20', '1990-05-05 14:43:20', '1990-05-05 14:56:20', 'Tonsillectomy', '--', 'Otolaryngology Surgery SS']
+['6e4b9e5df204fc06b285f9a23b4dc5ea931c4384f5a69c352b39ffc066fe1f74', 'efb3e454fec76f8acd4c23a0c7ad5eeb7053f79952e2d431a22dffa6ee4d6ad2', '1990-09-14 22:13:20', '1990-09-15 11:55:20', '1990-09-15 12:37:20', '1990-09-15 15:21:20', '1990-09-15 16:16:20', 'Tonsillectomy', '--', 'Otolaryngology Surgery SS']
+['debe23acce9257f662dd55254c4f724a889228712b9c1b3bf3bc7a7ba0a19356', '534c638653a41ed322c355d4156eb8e8594f4c37530a2d31e0de7a5f2f6ded7b', '1990-11-21 22:13:20', '1990-11-22 05:00:20', '1990-11-22 05:16:20', '1990-11-22 05:24:20', '1990-11-22 05:34:20', 'Tonsillectomy', '--', 'Otolaryngology Surgery SS']
+['5b58cde1961bdded22e88759bf9e2d3caa535c32dab85c86507bca7d581a4064', '006c0a17ba01170f76d17815717fc65871cf5ee66763e712dfe96d29d65a0e90', '1990-08-24 22:13:20', '1990-08-25 09:55:20', '1990-08-25 10:47:20', '1990-08-25 13:44:20', '1990-08-25 13:53:20', 'Nephrectomy Partial', '--', 'Urology Surgery SS']
+['19aefadbfbbf0c4bc852c2effeb485601571655aac974baa1c3869f01310b119', 'e5b6c4133abaef957ee39b877503f84bb876a89ccd414a64fcbcd6b7a422b00d', '1990-12-14 22:13:20', '1990-12-15 05:47:20', '1990-12-15 07:13:20', '1990-12-15 11:49:20', '1990-12-15 12:08:20', 'Nephrectomy Partial', '--', 'Urology Surgery SS']
+['89ce0e6e52204b5aed443522027aa8ba7ce2ff5e926196951331271e31ef32f5', 'a5b1f82a8821520b3f9e99e0ee6cc0dffd0478cde26f146cf04901ffc8894b56', '1990-09-29 22:13:20', '1990-09-30 09:32:20', '1990-09-30 10:33:20', '1990-09-30 12:35:20', '1990-09-30 13:30:20', 'Nephrectomy Partial', '--', 'Urology Surgery SS']
+['0116729644c105ba39f90c25c10df8243cd37cfbad5ace60ef12bff88cc05a5e', '5b0aef19b60a4cf7195b622e9a065fa8e46eb132384ecf2346e2f5a0697c225c', '1990-11-16 22:13:20', '1990-11-17 10:13:20', '1990-11-17 11:18:20', '1990-11-17 13:47:20', '1990-11-17 13:54:20', 'Nephrectomy Partial', '--', 'Urology Surgery SS']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_ENCOUNTER_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'age', 'ed_arrival_source', 'pre_admit_location', 'ed_presentation_time', 'hospital_admission_date_time', 'hospital_discharge_date_time', 'admit_reason', 'insurance_status', 'cpr_in_ed', 'total_icu_days', 'total_vent_days', 'total_hosp_days', 'discharge_status', 'discharge_to', 'encounter_type', 'facility_nm']
+
+列名 → 示例值:
+  pat_id: 8369bf77b76dff81cfbb85189c1088ff5b08425202009f0e4e6df77bd72d6e55
+  csn: f4ebfa979bba489796ab0b0289c7ba5f8ab8b391ac994059cfd887414b734e74
+  age: 29
+  ed_arrival_source: Private Vehicle
+  pre_admit_location: NON-HC FACILITY POO
+  ed_presentation_time: 1990-07-21 14:29:17
+  hospital_admission_date_time: 1990-07-21 14:28:20
+  hospital_discharge_date_time: 1990-07-21 19:53:20
+  admit_reason: (null)
+  insurance_status: MEDICAID
+  cpr_in_ed: (null)
+  total_icu_days: 
+  total_vent_days: (null)
+  total_hosp_days: 
+  discharge_status: (null)
+  discharge_to: HOME SELF CARE
+  encounter_type: ER
+  facility_nm: EUH Midtown
+
+前10行数据:
+['8369bf77b76dff81cfbb85189c1088ff5b08425202009f0e4e6df77bd72d6e55', 'f4ebfa979bba489796ab0b0289c7ba5f8ab8b391ac994059cfd887414b734e74', '29', 'Private Vehicle', 'NON-HC FACILITY POO', '1990-07-21 14:29:17', '1990-07-21 14:28:20', '1990-07-21 19:53:20', '(null)', 'MEDICAID', '(null)', '', '(null)', '', '(null)', 'HOME SELF CARE', 'ER', 'EUH Midtown']
+['4f774f8333b9d830f63976365c5770e0ac844aa446132f29b7954b4dcb846897', 'd80b6c90c78c3a8ad9ac21baa4b7ca2587a667b0602b15e4a30225a22da201d0', '53', '', 'TFR FROM OTHER HCF', '', '1990-07-26 17:13:20', '1990-07-27 19:58:20', '(null)', 'MANAGED CARE', '(null)', '', '(null)', '1.0', '(null)', 'HOME SELF CARE', 'OV', 'EUH Midtown']
+['d7cabc2f36725a891e43390083af5276ecc00cd39424f1b048c6d0dc5fc06107', '956ccfde5d8054e21698b1a6551b94f74df2100d769f343de4d750d0048bd0ac', '60', 'Private Vehicle', 'NON-HC FACILITY POO', '1990-10-16 12:44:48', '1990-10-16 20:36:20', '1990-10-23 15:38:20', '(null)', 'MANAGED CARE', '(null)', '1.0', '(null)', '7.0', '(null)', 'HOME SELF CARE', 'IN', 'Emory University Hospital']
+['d47b112d0e2f563693742fee2e2540e3f6b9f8c3ce4e45281decf70d5ae383e2', '453ccc0a3974c179a6ff98c02c1f01c1e62f71fbee4ea082094d20bf49447e83', '71', 'EMS Ground', 'NON-HC FACILITY POO', '1990-05-13 09:25:38', '1990-05-13 14:33:20', '1990-05-17 10:28:20', '(null)', 'MEDICARE A', '(null)', '', '(null)', '4.0', '(null)', 'HOME SELF CARE', 'IN', 'Emory Saint Josephs Hospital']
+['9f02e274cf0de72aaa77e74de5c9e010b321676ecf5c108d8c962abf229b46c8', '72467cf020ba3cb8424d9c04e6b45f085f2406648a0ab843c5ecbed843a34bcf', '53', '', 'NON-HC FACILITY POO', '', '1990-06-22 12:02:20', '1990-06-24 16:39:20', '(null)', 'MEDICAID', '(null)', '', '(null)', '2.0', '(null)', 'HOME SELF CARE', 'IN', 'Emory University Hospital']
+['05322da52c98e9747e481756db63a05dbf6a79f1fbebd54220887a9d4db03680', '30d48c1e13654fcf9830f8322d6afbed1b99b298e80974acd7c6b27d2952de81', '46', '', 'TRANSFER FROM HOSP', '', '1990-09-10 09:19:20', '1990-09-30 12:38:20', '(null)', 'MANAGED CARE', '(null)', '20.0', '(null)', '20.0', '(null)', 'HOME SELF CARE', 'IN', 'Emory University Hospital']
+['4112c9df0453971c54458dda1fb9613975b9d131dc450a68c01c49ec909e4a8b', '624fd0ff7db68b3d69387886495f289f70efc899863a1e7b4160c234cc0b5801', '42', 'Private Vehicle', 'NON-HC FACILITY POO', '1990-09-14 17:48:36', '1990-09-14 17:48:20', '1990-09-14 20:46:20', '(null)', 'MANAGED CARE', '(null)', '', '(null)', '', '(null)', 'HOME SELF CARE', 'ER', 'EUH Midtown']
+['bb5d2003b7e6ebbfa1344fbbc59a1663e6fcf6b8499ec5c45e1e0adeb2801bd7', '841da7a556b44cad4363d3f29a9b364e6baada8a56f68c755175a917a8b2d17d', '41', 'Private Vehicle', 'NON-HC FACILITY POO', '1990-10-28 02:28:34', '1990-10-28 10:26:20', '1990-11-03 15:23:20', '(null)', 'SELF-PAY', '(null)', '', '(null)', '6.0', '(null)', 'HOME SELF CARE', 'IN', 'Emory Saint Josephs Hospital']
+['df6f88bf492e583b7d9cb45851c9b5537fe2bde39bac56cf20f3bc8b2393693c', '7f24e7a0fa7fc56be735b614b3311d7a76befc8292d8b947477ba8362994e946', '68', 'Private Vehicle', 'NON-HC FACILITY POO', '1990-05-13 11:29:49', '1990-05-13 22:04:20', '1990-05-27 11:32:20', '(null)', 'MEDICARE', '(null)', '', '(null)', '13.0', '(null)', 'SKILLED NURSING FAC', 'IN', 'EUH Midtown']
+['5be1c119a8672f1feb47fdfe4094fe92076cf8d3bf2d9d21ed62ea6a4faca88a', '3c4f13ff487c8d921a950d95241e5d9fe5cc916009acf2f2703253be40a8eac7', '58', '', 'TRANSFER FROM HOSP', '', '1990-05-19 00:57:20', '1990-05-31 18:27:20', '(null)', 'MEDICAID', '(null)', '', '(null)', '12.0', '(null)', 'HOME SELF CARE', 'IN', 'Emory University Hospital']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_CULTURES_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'proc_code', 'proc_desc', 'component_id', 'component', 'loinc_code', 'specimen_collect_time', 'order_time', 'order_id', 'result_id', 'lab_result_time', 'result_status', 'lab_result']
+
+列名 → 示例值:
+  pat_id: 48c29606bd109e14c37d4c17033193f3cf96454c863befc2a8ee589b22366a2a
+  csn: bbcd3dc377b79039700644eac38091d0c5b7e3f2d30c4b68d6d5d3cea38c885c
+  proc_code: 2225101
+  proc_desc: Blood Culture Bacterial/Yeast
+  component_id: 169542759
+  component: Blood Peripheral
+  loinc_code: 8125-7
+  specimen_collect_time: 1990-09-25 22:09:20
+  order_time: 1990-09-25 21:31:19
+  order_id: 37
+  result_id: 12022154014233
+  lab_result_time: 1990-10-01 06:18:23
+  result_status: Completed
+  lab_result: Negative
+
+前10行数据:
+['48c29606bd109e14c37d4c17033193f3cf96454c863befc2a8ee589b22366a2a', 'bbcd3dc377b79039700644eac38091d0c5b7e3f2d30c4b68d6d5d3cea38c885c', '2225101', 'Blood Culture Bacterial/Yeast', '169542759', 'Blood Peripheral', '8125-7', '1990-09-25 22:09:20', '1990-09-25 21:31:19', '37', '12022154014233', '1990-10-01 06:18:23', 'Completed', 'Negative']
+['48c29606bd109e14c37d4c17033193f3cf96454c863befc2a8ee589b22366a2a', 'bbcd3dc377b79039700644eac38091d0c5b7e3f2d30c4b68d6d5d3cea38c885c', '2225101', 'Blood Culture Bacterial/Yeast', '169542759', 'Blood Peripheral', '8125-7', '1990-09-25 22:15:20', '1990-09-25 21:31:19', '37', '12022154014234', '1990-10-01 06:18:23', 'Completed', 'Negative']
+['48c29606bd109e14c37d4c17033193f3cf96454c863befc2a8ee589b22366a2a', 'bbcd3dc377b79039700644eac38091d0c5b7e3f2d30c4b68d6d5d3cea38c885c', '2225717', 'Fecal Ova and Parasite Exam', '1891837', 'Feces', '82213-0', '1990-09-26 11:08:20', '1990-09-26 05:53:10', '37', '12022155003724', '', 'Canceled', 'Not Recorded']
+['48c29606bd109e14c37d4c17033193f3cf96454c863befc2a8ee589b22366a2a', 'bbcd3dc377b79039700644eac38091d0c5b7e3f2d30c4b68d6d5d3cea38c885c', '2225744', 'Fecal Culture Bacterial', '1891837', 'Feces', '82213-0', '1990-09-26 11:08:20', '1990-09-26 05:52:58', '37', '12022155003724', '1990-09-28 09:06:04', 'Completed', 'Negative']
+['48c29606bd109e14c37d4c17033193f3cf96454c863befc2a8ee589b22366a2a', 'bbcd3dc377b79039700644eac38091d0c5b7e3f2d30c4b68d6d5d3cea38c885c', '2225757', 'Fecal WBC/Leukocyte Test', '1891837', 'Feces', '82213-0', '1990-09-26 11:08:20', '1990-09-26 05:53:08', '37', '12022155003724', '1990-09-28 12:15:36', 'Completed', 'Positive']
+['48c29606bd109e14c37d4c17033193f3cf96454c863befc2a8ee589b22366a2a', 'bbcd3dc377b79039700644eac38091d0c5b7e3f2d30c4b68d6d5d3cea38c885c', '2225458', 'Urine Culture  + Colony Count', '312665', 'Urine', '9508-3', '1990-09-26 18:53:20', '1990-09-25 21:31:19', '37', '12022154014231', '', 'Canceled', 'Not Recorded']
+['4e4fd793b4dbf0705d0136329a08406c7583edebbbd5a6aa46f64802c9130761', '42ae8dda927b596837bb4932c79fedb705a21023718829fe8bda16d3451a1ff2', '2225101', 'Blood Culture Bacterial/Yeast', '169542759', 'Blood Peripheral', '8125-7', '1991-01-20 04:16:20', '1991-01-20 03:59:02', '39', '22022271003171', '1991-01-25 14:17:35', 'Completed', 'Negative']
+['4e4fd793b4dbf0705d0136329a08406c7583edebbbd5a6aa46f64802c9130761', '42ae8dda927b596837bb4932c79fedb705a21023718829fe8bda16d3451a1ff2', '2225101', 'Blood Culture Bacterial/Yeast', '169542759', 'Blood Peripheral', '8125-7', '1991-01-20 04:23:20', '1991-01-20 03:59:02', '39', '22022271003172', '1991-01-25 14:17:35', 'Completed', 'Negative']
+['3a2ddfd74c3dfffe525ed94c2bd86af317ac057d05ab6723334a7c58c3faf927', '8c26851f90f5c535e13f4bcbbfdae6e8f3e534a5cfe2f544363e4b0755c8d09b', '2225101', 'Blood Culture Bacterial/Yeast', '169542759', 'Blood Peripheral', '8125-7', '1990-07-05 04:09:20', '1990-07-04 21:50:13', '36', '22022071009431', '1990-07-10 14:18:01', 'Completed', 'Negative']
+['3a2ddfd74c3dfffe525ed94c2bd86af317ac057d05ab6723334a7c58c3faf927', '8c26851f90f5c535e13f4bcbbfdae6e8f3e534a5cfe2f544363e4b0755c8d09b', '2225085', 'Cryptococcal Antigen Blood', '1765', 'Blood', '9838-4', '1990-07-06 17:56:20', '1990-07-06 14:52:17', '36', '22022073012076', '1990-07-07 09:41:54', 'Completed', 'Negative']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_NONINFUSEDMEDS_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['patient_id', 'csn', 'order_med_id', 'medication_id', 'med_name', 'mad_name_generic', 'med_order_time', 'med_action_time', 'med_start_timestamp', 'med_stop_timestamp', 'med_ordered_dose', 'med_ordered_route_c', 'med_ordered_route', 'med_order_dose_unit', 'med_frequency', 'med_action_code', 'med_action', 'med_action_dose', 'med_action_dose_unit', 'med_action_route_c', 'med_action_route']
+
+列名 → 示例值:
+  patient_id: 98036744
+  csn: e765931f0509dc77c7110bc8789e22ad819ea3f8baf4bbf4c0b3a610f7fa931c
+  order_med_id: 13990458931
+  medication_id: 2209499
+  med_name: rocuronium
+  mad_name_generic: rocuronium
+  med_order_time: 1990-05-08 07:41:20
+  med_action_time: 1990-05-08 07:41:20
+  med_start_timestamp: 1990-05-08 07:41:20
+  med_stop_timestamp: 1990-05-08 07:41:20
+  med_ordered_dose: 20.0
+  med_ordered_route_c: 318170
+  med_ordered_route: intravenous
+  med_order_dose_unit: Milligram
+  med_frequency: Once
+  med_action_code: (null)
+  med_action: (null)
+  med_action_dose: 0.0
+  med_action_dose_unit: (null)
+  med_action_route_c: (null)
+  med_action_route: (null)
+
+前10行数据:
+['98036744', 'e765931f0509dc77c7110bc8789e22ad819ea3f8baf4bbf4c0b3a610f7fa931c', '13990458931', '2209499', 'rocuronium', 'rocuronium', '1990-05-08 07:41:20', '1990-05-08 07:41:20', '1990-05-08 07:41:20', '1990-05-08 07:41:20', '20.0', '318170', 'intravenous', 'Milligram', 'Once', '(null)', '(null)', '0.0', '(null)', '(null)', '(null)']
+['99431231', '87bd5a7155f8ae9cd318e7f1875a7a4ef8a9e3b3d470e41e6b8cdb6932230284', '14317239687', '2197299', 'citric acid-sodium citrate', 'citric acid-na citrate', '1990-07-09 06:31:24', '1990-07-09 06:53:20', '1990-07-09 06:53:20', '1990-07-09 06:53:20', '30.0', '318185', 'by mouth', 'Milliliter', 'Once', '(null)', '(null)', '0.0', '(null)', '(null)', '(null)']
+['99431231', '87bd5a7155f8ae9cd318e7f1875a7a4ef8a9e3b3d470e41e6b8cdb6932230284', '14316963047', '2206319', 'levothyroxine', 'levothyroxine', '1990-07-09 05:45:54', '1990-07-09 09:34:20', '1990-07-09 09:34:20', '1990-07-09 09:34:20', '150.0', '318185', 'by mouth', 'Microgram', 'Once', '(null)', '(null)', '0.0', '(null)', '(null)', '(null)']
+['17639232', 'b19eccb2cf958bfa8a614901bb4c2d21981e176b369e70f44cdc74a847d6375f', '13911655175', '2231931', 'Sodium Chloride 0.9% intravenous solution', 'nacl 0.9%', '1990-05-27 13:24:58', '1990-05-27 14:23:20', '1990-05-27 14:23:20', '', '0.0', '318166', 'intradermally', 'Milliliter', '--', '(null)', '(null)', '50.0', '(null)', '(null)', '(null)']
+['17639232', 'b19eccb2cf958bfa8a614901bb4c2d21981e176b369e70f44cdc74a847d6375f', '13911655327', '375477567', 'Premix NS', 'Premix NS', '1990-05-27 13:24:58', '1990-05-27 17:13:20', '1990-05-27 17:13:20', '', '0.0', '318170', 'intravenous', 'Milliliter', '--', '(null)', '(null)', '100.0', '(null)', '(null)', '(null)']
+['17639232', 'b19eccb2cf958bfa8a614901bb4c2d21981e176b369e70f44cdc74a847d6375f', '13911655327', '375477567', 'Premix NS', 'Premix NS', '1990-05-27 13:24:58', '1990-05-27 16:13:20', '1990-05-27 16:13:20', '', '1.6', '318170', 'intravenous', 'Milliliter', '--', '(null)', '(null)', '100.0', '(null)', '(null)', '(null)']
+['17639232', 'b19eccb2cf958bfa8a614901bb4c2d21981e176b369e70f44cdc74a847d6375f', '13911655327', '2204944', 'insulin regular', 'insulin reg human premix', '1990-05-27 13:24:58', '1990-05-27 17:13:20', '1990-05-27 17:13:20', '', '0.0', '318170', 'intravenous', 'unit(s)', '--', '(null)', '(null)', '0.0', '(null)', '(null)', '(null)']
+['17639232', 'b19eccb2cf958bfa8a614901bb4c2d21981e176b369e70f44cdc74a847d6375f', '13911655327', '2204944', 'insulin regular', 'insulin reg human premix', '1990-05-27 13:24:58', '1990-05-27 20:13:20', '1990-05-27 20:13:20', '', '0.0', '318170', 'intravenous', 'unit(s)', '--', '(null)', '(null)', '0.0', '(null)', '(null)', '(null)']
+['17639232', 'b19eccb2cf958bfa8a614901bb4c2d21981e176b369e70f44cdc74a847d6375f', '13911655327', '375477567', 'Premix NS', 'Premix NS', '1990-05-27 13:24:58', '1990-05-28 02:13:20', '1990-05-28 02:13:20', '', '0.0', '318170', 'intravenous', 'Milliliter', '--', '(null)', '(null)', '100.0', '(null)', '(null)', '(null)']
+['17639232', 'b19eccb2cf958bfa8a614901bb4c2d21981e176b369e70f44cdc74a847d6375f', '13911655327', '2204944', 'insulin regular', 'insulin reg human premix', '1990-05-27 13:24:58', '1990-05-28 00:15:20', '1990-05-28 00:15:20', '', '0.0', '318170', 'intravenous', 'unit(s)', '--', '(null)', '(null)', '0.0', '(null)', '(null)', '(null)']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_INFUSIONMEDS_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'order_med_id', 'medication_id', 'med_name', 'formulary_code', 'formulary_name', 'med_name_generic', 'med_order_time', 'med_action_time', 'med_action_code', 'med_action', 'med_start', 'med_stop', 'med_order_route_c', 'med_order_route', 'med_action_dose', 'med_action_dose_unit']
+
+列名 → 示例值:
+  pat_id: 5073b55c8aae56eac15a9a49f215aafc867ec0e7cf23481f1fa614f41ffddb7f
+  csn: e765931f0509dc77c7110bc8789e22ad819ea3f8baf4bbf4c0b3a610f7fa931c
+  order_med_id: 13990458937
+  medication_id: 2207385
+  med_name: ondansetron
+  formulary_code: 102623852
+  formulary_name: ANES Ondansetron 2 mg/1 mL inj
+  med_name_generic: ondansetron
+  med_order_time: 1990-05-08 08:03:20
+  med_action_time: 1990-05-08 08:03:20
+  med_action_code: NOTRECORDED
+  med_action: Not Recorded
+  med_start: 1990-05-08 08:03:20
+  med_stop: 1990-05-08 08:03:20
+  med_order_route_c: 318170
+  med_order_route: intravenous
+  med_action_dose: 0.0
+  med_action_dose_unit: Not Recorded
+
+前10行数据:
+['5073b55c8aae56eac15a9a49f215aafc867ec0e7cf23481f1fa614f41ffddb7f', 'e765931f0509dc77c7110bc8789e22ad819ea3f8baf4bbf4c0b3a610f7fa931c', '13990458937', '2207385', 'ondansetron', '102623852', 'ANES Ondansetron 2 mg/1 mL inj', 'ondansetron', '1990-05-08 08:03:20', '1990-05-08 08:03:20', 'NOTRECORDED', 'Not Recorded', '1990-05-08 08:03:20', '1990-05-08 08:03:20', '318170', 'intravenous', '0.0', 'Not Recorded']
+['5073b55c8aae56eac15a9a49f215aafc867ec0e7cf23481f1fa614f41ffddb7f', 'e765931f0509dc77c7110bc8789e22ad819ea3f8baf4bbf4c0b3a610f7fa931c', '13990201203', '2199509', 'dexamethasone', '774014', 'Dexamethasone 4 mg/1 mL inj', 'dexamethasone', '1990-05-08 06:23:20', '1990-05-08 06:23:20', 'NOTRECORDED', 'Not Recorded', '1990-05-08 06:23:20', '1990-05-08 06:23:20', '318170', 'intravenous', '0.0', 'Not Recorded']
+['5073b55c8aae56eac15a9a49f215aafc867ec0e7cf23481f1fa614f41ffddb7f', 'e765931f0509dc77c7110bc8789e22ad819ea3f8baf4bbf4c0b3a610f7fa931c', '13990458927', '2208305', 'phenylephrine', '1172368', 'ANES PHENYLephrine 100mcg/mL OR syringe', 'PHENYLephrine', '1990-05-08 06:30:20', '1990-05-08 06:30:20', 'NOTRECORDED', 'Not Recorded', '1990-05-08 06:30:20', '1990-05-08 06:30:20', '318170', 'intravenous', '0.0', 'Not Recorded']
+['5073b55c8aae56eac15a9a49f215aafc867ec0e7cf23481f1fa614f41ffddb7f', 'e765931f0509dc77c7110bc8789e22ad819ea3f8baf4bbf4c0b3a610f7fa931c', '13990458941', '1718592497', 'sugammadex', '155980767', 'ANES sugammadex 100 mg/mL soln', 'sugammadex', '1990-05-08 08:15:20', '1990-05-08 08:15:20', 'NOTRECORDED', 'Not Recorded', '1990-05-08 08:15:20', '1990-05-08 08:15:20', '318170', 'intravenous', '0.0', 'Not Recorded']
+['5073b55c8aae56eac15a9a49f215aafc867ec0e7cf23481f1fa614f41ffddb7f', 'e765931f0509dc77c7110bc8789e22ad819ea3f8baf4bbf4c0b3a610f7fa931c', '13991163169', '2232559', 'Lactated Ringers Injection intravenous solution', '771029', 'LR 1000 mL IV bag', 'lactated ringers', '1990-05-08 08:44:03', '1990-05-09 04:06:20', '733', 'Begin Bag', '1990-05-09 04:06:20', '', '318170', 'intravenous', '0.0', 'Not Recorded']
+['7c018011a28fd20a69ac092858a0b705b5133f8012331fda18e02c29bff62dba', '87bd5a7155f8ae9cd318e7f1875a7a4ef8a9e3b3d470e41e6b8cdb6932230284', '14317173873', '2232559', 'Lactated Ringers Injection intravenous solution', '771029', 'LR 1000 mL IV bag', 'lactated ringers', '1990-07-09 06:29:38', '1990-07-09 09:36:20', '733', 'Begin Bag', '1990-07-09 09:36:20', '', '318170', 'intravenous', '0.0', 'Not Recorded']
+['73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5', '3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb', '13930321311', '2208305', 'phenylephrine', '1172368', 'ANES PHENYLephrine 100mcg/mL OR syringe', 'PHENYLephrine', '1990-04-27 05:44:20', '1990-04-27 05:44:20', 'NOTRECORDED', 'Not Recorded', '1990-04-27 05:44:20', '1990-04-27 05:44:20', '318170', 'intravenous', '0.0', 'Not Recorded']
+['73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5', '3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb', '13929321569', '2209499', 'rocuronium', '102659742', 'ANES Rocuronium 10 mg/mL 10 mL inj', 'rocuronium', '1990-04-27 06:51:20', '1990-04-27 06:51:20', 'NOTRECORDED', 'Not Recorded', '1990-04-27 06:51:20', '1990-04-27 06:51:20', '318170', 'intravenous', '0.0', 'Not Recorded']
+['73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5', '3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb', '13929321565', '2208515', 'propofol', '764273', 'ANES Propofol 1000 mg/100 mL Drip std*', 'propofol', '1990-04-27 05:43:20', '1990-04-27 05:43:20', 'NOTRECORDED', 'Not Recorded', '1990-04-27 05:43:20', '1990-04-27 05:43:20', '318170', 'intravenous', '0.0', 'Not Recorded']
+['73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5', '3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb', '13932441935', '2232765', 'Electrolyte (Plasma-Lyte) intravenous solution', '769574', 'Plasma-Lyte A 1000 mL bag', 'plasmalyte a', '1990-04-27 05:58:20', '1990-04-27 05:58:20', 'NOTRECORDED', 'Not Recorded', '1990-04-27 05:58:20', '1990-04-27 12:25:20', '318170', 'intravenous', '155.038759689922', 'Hour']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_VENT_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'recorded_time', 'vent_start_time', 'vent_stop_time', 'vent_type', 'vent_mode', 'vent_rate_set', 'vent_tidal_rate_set', 'vent_tidal_rate_exhaled', 'peep', 'fio2']
+
+列名 → 示例值:
+  pat_id: c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7
+  csn: 0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90
+  recorded_time: 1990-05-10 09:08:20
+  vent_start_time: 1990-05-10 09:08:20
+  vent_stop_time: 1990-05-28 07:27:20
+  vent_type: Hamilton MR-1
+  vent_mode: AC/CMV Volume
+  vent_rate_set: 18.0
+  vent_tidal_rate_set: 440.0
+  vent_tidal_rate_exhaled: 437
+  peep: 10
+  fio2: 1.0
+
+前10行数据:
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 09:08:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'Hamilton MR-1', 'AC/CMV Volume', '18.0', '440.0', '437', '10', '1.0']
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 09:33:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'Hamilton MR-1', 'AC/CMV Volume', '18.0', '440.0', '429', '10', '1.0']
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 09:43:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'PB 980', 'AC/CMV Volume', '20.0', '400.0', '408', '8', '1']
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 10:53:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'PB 980', '', '', '', '', '', '']
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 13:00:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'PB 980', 'AC/CMV Volume', '20.0', '400.0', '463', '8', '0.8']
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 14:27:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'PB 980', 'AC/CMV Volume', '20.0', '400.0', '396', '8', '0.8']
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 16:40:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'PB 980', '', '', '', '', '', '0.5']
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 18:55:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'PB 980', 'AC/CMV Volume', '20.0', '400.0', '535', '8', '0.50']
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 19:19:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'PB 980', '', '', '', '', '10', '']
+['c70f61d098fe2d4a86cb6ba6681c6cd3ae1161b99ce511a49cf3361e8f0cc4b7', '0e33e6e97314cdcaacd187f52e4b5eacbe64b6cf1618241e1e0748f015d43a90', '1990-05-10 22:42:20', '1990-05-10 09:08:20', '1990-05-28 07:27:20', 'PB 980', 'AC/CMV Volume', '20.0', '400.0', '384', '10', '0.50']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_DIAGNOSIS_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'dx_line', 'dx_icd_scope', 'dx_code_icd9', 'dx_code_icd10', 'dx_source', 'dx_time_date', 'dx_code', 'dx_name']
+
+列名 → 示例值:
+  pat_id: 2c539eed9deba8f7156e44041618967a3dfd7ec5b732dc4675093a247af46a49
+  csn: 9b2fb4e0e2bd364f844785a181ee2550fc90b7996d8a9bf47b10e633fab2139e
+  dx_line: Not Recorded
+  dx_icd_scope: Discharge Diagnosis
+  dx_code_icd9: 780.60
+  dx_code_icd10: R50.9
+  dx_source: PowerChart
+  dx_time_date: 1990-04-24 22:13:20
+  dx_code: 780.60
+  dx_name: Fever, unspecified
+
+前10行数据:
+['2c539eed9deba8f7156e44041618967a3dfd7ec5b732dc4675093a247af46a49', '9b2fb4e0e2bd364f844785a181ee2550fc90b7996d8a9bf47b10e633fab2139e', 'Not Recorded', 'Discharge Diagnosis', '780.60', 'R50.9', 'PowerChart', '1990-04-24 22:13:20', '780.60', 'Fever, unspecified']
+['549e2f05c6cceeb6255ff2428128ab91e76e114a90fd83213f4e2a58d707a614', '9234ce8f8ea94b1f4f410a802d70ff17622a1b2488e526c74965af03d0b59c5b', 'Secondary', 'Billing Diagnosis', '780.39', 'R56.9', 'The Emory Clinic Registration (IDX)', '1990-12-08 22:13:20', '780.39', 'Other convulsions']
+['549e2f05c6cceeb6255ff2428128ab91e76e114a90fd83213f4e2a58d707a614', '2dd13f2526ba7a7bfaccf073be9aba03efa2a150d04be5f6cc2a8fd55c805991', 'Not Recorded', 'Admitting Diagnosis', '780.79', 'R53.83', 'Medical Records Coding System', '1990-12-24 22:13:20', '780.79', 'Other malaise and fatigue']
+['492b2a274b4d5f7845c4d5c96c7d2e1f46eeedae01a0db15a1da0a9b74d29d55', '76a18e8ec3260cf729c3a22cc0bb83387f057b5deff0206a3bad7247c03435c5', 'Secondary', 'Billing Diagnosis', '486', 'J18.9', 'Medical Records Coding System', '1990-09-15 22:13:20', '486', 'Pneumonia, organism unspecified']
+['2f7608eb0d7f4ccce5f61a6ff188c6009c377bf305df9bb5348fb9472c64edd6', 'f20365db6f471545d053aced788645a4defb7870771d646a7e62ac9aa8aa3134', 'Primary', 'Billing Diagnosis', '518.0', 'J98.11', 'The Emory Clinic Registration (IDX)', '1990-10-24 22:13:20', '518.0', 'Pulmonary collapse']
+['6160df62609a188cb78116ffe8975673343656993bb39e6f0926f9d9f0e14fcf', '3be2321eea3e70f33dcae3a18842548d84898729a3a63c25a8fc4fda726cec56', 'Secondary', 'Billing Diagnosis', '571.8', 'K75.81', 'Medical Records Coding System', '1990-09-09 22:13:20', '571.8', 'Other chronic nonalcoholic liver disease']
+['6160df62609a188cb78116ffe8975673343656993bb39e6f0926f9d9f0e14fcf', '3be2321eea3e70f33dcae3a18842548d84898729a3a63c25a8fc4fda726cec56', 'Secondary', 'Billing Diagnosis', 'V15.82', 'Z87.891', 'Medical Records Coding System', '1990-09-09 22:13:20', 'V15.82', 'History of tobacco use']
+['33c95ef3033c75af21c72bc32d89c8f8383d18a4b967afaf3a5be1b5f9ab240c', '81e19a67f9f29a3bc5ad699b5c3585c06ac6bc37da8d1a8d29b9c5bd95586a79', 'Primary', 'Reason For Visit', '870.0', 'S01.112A', 'Medical Records Coding System', '1990-09-28 22:13:20', '870.0', 'Laceration of skin of eyelid and periocular area']
+['32fd05610934290c2ac9f42eab0854ac878c4964bc5283a5581fbe0c34a17770', '16b041926cbfd2c60fa8ee5e121c41ec7341bbf7859323d83b43516ddd015306', 'Not Recorded', 'Admitting Diagnosis', '935.0', 'T18.0XXA', 'Medical Records Coding System', '1990-09-29 22:13:20', '935.0', 'Foreign body in mouth']
+['754d23df54688af191a6c8082f72b0e6bf681f297262a772630285c5c85481b5', 'c6457112dfb289c2204bfbe6b315774000aa08145a0372480531260e3f08035c', 'Secondary', 'Billing Diagnosis', '733.13', 'M48.54XA', 'Medical Records Coding System', '1990-09-28 22:13:20', '733.13', 'Pathologic fracture of vertebrae']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_CPT_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'procedure_cpt_cd', 'procedure_cpt_desc', 'modifier_cpt_cd', 'procedure_dttm', 'procedure_day', 'modifier_cpt_seq_num', 'group_modifier_cpt_desc']
+
+列名 → 示例值:
+  pat_id: 73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5
+  csn: 3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb
+  procedure_cpt_cd: 76377
+  procedure_cpt_desc: 3D rendering with interpretation and reporting of computed tomography, magnetic resonance imaging, ultrasound, or other tomographic modality with image postprocessing under concurrent supervision; requiring image postprocessing on an independent workstati
+  modifier_cpt_cd: --
+  procedure_dttm: 1990-04-26 22:13:20
+  procedure_day: 1990-04-26 22:13:20
+  modifier_cpt_seq_num: 
+  group_modifier_cpt_desc: 
+
+前10行数据:
+['73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5', '3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb', '76377', '3D rendering with interpretation and reporting of computed tomography, magnetic resonance imaging, ultrasound, or other tomographic modality with image postprocessing under concurrent supervision; requiring image postprocessing on an independent workstati', '--', '1990-04-26 22:13:20', '1990-04-26 22:13:20', '', '']
+['73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5', '3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb', '71045', 'Radiologic examination, chest; single view', '--', '1990-05-01 22:13:20', '1990-05-01 22:13:20', '', '']
+['73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5', '3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb', '71045', 'Radiologic examination, chest; single view', '--', '1990-04-30 22:13:20', '1990-04-30 22:13:20', '', '']
+['73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5', '3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb', '71045', 'Radiologic examination, chest; single view', '--', '1990-04-28 22:13:20', '1990-04-28 22:13:20', '', '']
+['d433f34acb723daee15e8998273e87f4b309d31b3561c75249f1bc86fceec657', 'd3bd69f25b5edbd3bd6097ff4184569549f6c7e82294716abfeee1f0d83dc563', '01214', 'Anesthesia for open procedures involving hip joint; total hip arthroplasty', '--', '1990-06-09 22:13:20', '1990-06-09 22:13:20', '', '']
+['d433f34acb723daee15e8998273e87f4b309d31b3561c75249f1bc86fceec657', 'd3bd69f25b5edbd3bd6097ff4184569549f6c7e82294716abfeee1f0d83dc563', '27130', 'Arthroplasty, acetabular and proximal femoral prosthetic replacement (total hip arthroplasty), with or without autograft or allograft', '--', '1990-06-09 22:13:20', '1990-06-09 22:13:20', '', '']
+['f6a16558b3e27079573e2fb13487ed7a4e3cbef2da8dc523759576a8158994c7', 'd0fc462ca269da4269ac0473fd4314aa8899623207a7ade87e3643db669ae4df', '72020', 'Radiologic examination, spine, single view, specify level', '--', '1990-05-03 22:13:20', '1990-05-03 22:13:20', '', '']
+['f6a16558b3e27079573e2fb13487ed7a4e3cbef2da8dc523759576a8158994c7', 'd0fc462ca269da4269ac0473fd4314aa8899623207a7ade87e3643db669ae4df', '22551', 'Arthrodesis, anterior interbody, including disc space preparation, discectomy, osteophytectomy and decompression of spinal cord and/or nerve roots; cervical below C2', '--', '1990-05-03 22:13:20', '1990-05-03 22:13:20', '', '']
+['f6a16558b3e27079573e2fb13487ed7a4e3cbef2da8dc523759576a8158994c7', 'd0fc462ca269da4269ac0473fd4314aa8899623207a7ade87e3643db669ae4df', '20931', 'Allograft, structural, for spine surgery only (List separately in addition to code for primary procedure)', '--', '1990-05-03 22:13:20', '1990-05-03 22:13:20', '', '']
+['20aa401bae400ab69b759d23fcbfba728e9291a53a24afdaf1d812d757bb9ea5', 'b19eccb2cf958bfa8a614901bb4c2d21981e176b369e70f44cdc74a847d6375f', '93306', 'Echocardiography, transthoracic, real-time with image documentation (2D), includes M-mode recording, when performed, complete, with spectral Doppler echocardiography, and with color flow Doppler echocardiography', '--', '1990-05-29 22:13:20', '1990-05-29 22:13:20', '', '']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_ICDPROCEDURES_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'icd9_procedure_code', 'icd10_procedure_code', 'procedure_desc', 'procedure_date']
+
+列名 → 示例值:
+  pat_id: 73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5
+  csn: 3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb
+  icd9_procedure_code: 36.13
+  icd10_procedure_code: 021209W
+  procedure_desc: Bypass Coronary Artery, Three Arteries from Aorta with Autologous Venous Tissue, Open Approach
+  procedure_date: 1990-04-26 22:13:20
+
+前10行数据:
+['73fca4470f59c6a96f7b68e04c5d1e08d8d1fe44db50f7fcd664223953620bd5', '3b6010b17fa23e26d4b0772e1277e5fdf147cd3680f5ed2b9287971b6771d0bb', '36.13', '021209W', 'Bypass Coronary Artery, Three Arteries from Aorta with Autologous Venous Tissue, Open Approach', '1990-04-26 22:13:20']
+['998899b182a0c4af757e6e021ecd82d29315e6c3721addef6796ed6f8a26afc8', 'c2fbe528e74465464408b23eeb56f18c96f51db0002657b98c2b1667c18e18d3', '99.15', '3E0436Z', 'Introduction of Nutritional Substance into Central Vein, Percutaneous Approach', '1990-04-27 22:13:20']
+['204a724d10d0da3d563c9210eebe962d4b38ecf2bdb55272d693edc0b3d63b8a', '22da68783771b952ad4e87e7a64989c9785b082715a8f27a1d9c754dcc671096', '35.32', '02U94JZ', 'Supplement Chordae Tendineae with Synthetic Substitute, Percutaneous Endoscopic Approach', '1990-05-24 22:13:20']
+['95deebf12bf26c75071448c104a72547b2215955f83c9667f1f5b711af61a8e5', '114d2041baaa01fec3e8ac793d4fdfd15403c8a17c10d973a0597aa273149fd1', '89.64', '4A1239Z', 'Monitoring of Cardiac Output, Percutaneous Approach', '1990-05-11 22:13:20']
+['546a190f52d84c7bc5a39bd3b27c93987b6dc359fca1b1530b11a18539f779b3', '6cec360444bf155272da8156f4098298d64039f1bbc084e1f7ff85a4868758aa', '83.65', '0KQM0ZZ', 'Repair Perineum Muscle, Open Approach', '1990-05-14 22:13:20']
+['2802aa9a77ec5cf5f831caaa0b0283a9e58d29ad3c7f3b2336a0c284305c73e5', '0115f559ce5ffdf3d9563b388cb68cbc43911f308455a82c292b33d6f0ec2eab', '43.0', '0DH67UZ', 'Insertion of Feeding Device into Stomach, Via Natural or Artificial Opening', '1990-05-29 22:13:20']
+['16513880308ab1ca571267be1478d4e1268fc5cc05255d4d9260f3c342a22524', '6fbda8c52176e3249ed63dd2a293cba7657f6309a6605594e5e19fb5391276d4', '88.41', 'B3181ZZ', 'Fluoroscopy of Bilateral Internal Carotid Arteries using Low Osmolar Contrast', '1990-06-19 22:13:20']
+['d0ab526db8ba58c3efdf29f00384e8d716c039adf547d9c6a4b58f55ac10153b', '6d57e684022a2826f15d3f3cf592910d63b18bb6a12f15c7d2d7d71f0b786c81', '39.79', '02VW3DZ', 'Restriction of Thoracic Aorta, Descending with Intraluminal Device, Percutaneous Approach', '1990-07-06 22:13:20']
+['522237d461277975cf30067880b93d130bfdcb16334aa8c45eee3764b5544f49', 'a2aaa1d61d50eeaa6ee4ed6015a6576def301e997fa545bbe7868972be6b506c', '60.73', '0VT34ZZ', 'Resection of Bilateral Seminal Vesicles, Percutaneous Endoscopic Approach', '1990-08-31 22:13:20']
+['ea015a76c55a0b6ed6d6a66dfbd7e888bb9d872c5cb4a3c39038a60424a20480', '1c2bdbc57bb0793c75919669430d79d11821960a5dad642ec5143a7774613780', '53.62', '0WUF47Z', 'Supplement Abdominal Wall with Autologous Tissue Substitute, Percutaneous Endoscopic Approach', '1990-09-07 22:13:20']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_VITALS_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'recorded_time', 'temperature', 'temproute', 'daily_weight_kg', 'height_cm', 'sbp_line', 'dbp_line', 'map_line', 'sbp_cuff', 'dbp_cuff', 'map_cuff', 'pulse', 'unassisted_resp_rate', 'spo2', 'o2_device', 'cvp', 'end_tidal_co2', 'o2_flow_rate']
+
+列名 → 示例值:
+  pat_id: 4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513
+  csn: 4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65
+  recorded_time: 1990-10-23 08:13:20
+  temperature: 36.9
+  temproute: Oral
+  daily_weight_kg: 
+  height_cm: 
+  sbp_line: 
+  dbp_line: 
+  map_line: 
+  sbp_cuff: 170
+  dbp_cuff: 92
+  map_cuff: 
+  pulse: 105
+  unassisted_resp_rate: 20
+  spo2: 100
+  o2_device: Room air
+  cvp: 
+  end_tidal_co2: 
+  o2_flow_rate: 
+
+前10行数据:
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-23 08:13:20', '36.9', 'Oral', '', '', '', '', '', '170', '92', '', '105', '20', '100', 'Room air', '', '', '']
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-23 08:31:20', '', '', '', '', '', '', '', '167', '89', '106', '100', '22', '', '', '', '', '']
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-23 11:30:20', '', '', '', '', '', '', '', '142', '78', '', '104', '15', '95', 'Room air', '', '', '']
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-23 15:37:20', '', '', '', '', '', '', '', '170', '82', '', '109', '22', '96', 'Room air', '', '', '']
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-23 16:09:20', '', 'Oral', '', '', '', '', '', '170', '82', '', '109', '22', '96', 'Room air', '', '', '']
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-23 16:10:20', '', 'Oral', '', '', '', '', '', '170', '82', '', '109', '22', '', '', '', '', '']
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-23 18:34:20', '37.4', 'Oral', '', '', '', '', '', '137', '67', '81', '92', '18', '98', 'Room air', '', '', '']
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-23 20:22:20', '', '', '49.4', '160.0', '', '', '', '', '', '', '', '', '', '', '', '', '']
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-23 22:19:20', '36.7', 'Oral', '', '', '', '', '', '139', '78', '91', '87', '18', '99', 'Room air', '', '', '']
+['4cbf0c4970481c2fd7ed937815699aadfe43d1ec6807d39184132b121f91c513', '4a2da3d16f6b67ca881bd9d6c4c0075aecf5eae346a5aee4c8f1a4478c895f65', '1990-10-24 03:15:20', '36.8', 'Oral', '', '', '', '', '', '126', '69', '81', '81', '18', '97', 'Room air', '', '', '']
+
+
+================================================================================
+📂 文件: /hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022/CJSEPSIS_GCS_2022.dsv
+================================================================================
+分隔符: '|'
+表头:
+['pat_id', 'csn', 'recorded_time', 'gcs_total_score', 'gcs_verbal_score', 'gcs_eye_score', 'gcs_motor_score']
+
+列名 → 示例值:
+  pat_id: ea90372d1cd9ae654d9c59aa69f5a2fb89fc250421318bcbd380b80d109c9c24
+  csn: ff9ebe7263811493e662b9a2db8a8a7adbfe71a25db5c154d2ed25034d6fb3c0
+  recorded_time: 1990-12-09 06:57:20
+  gcs_total_score: 15.0
+  gcs_verbal_score: 5.0
+  gcs_eye_score: 4.0
+  gcs_motor_score: 6.0
+
+前10行数据:
+['ea90372d1cd9ae654d9c59aa69f5a2fb89fc250421318bcbd380b80d109c9c24', 'ff9ebe7263811493e662b9a2db8a8a7adbfe71a25db5c154d2ed25034d6fb3c0', '1990-12-09 06:57:20', '15.0', '5.0', '4.0', '6.0']
+['ea90372d1cd9ae654d9c59aa69f5a2fb89fc250421318bcbd380b80d109c9c24', 'ff9ebe7263811493e662b9a2db8a8a7adbfe71a25db5c154d2ed25034d6fb3c0', '1990-12-09 13:53:20', '14.0', '5.0', '3.0', '6.0']
+['0cb689838f640f2f48e609bf788bae34b69330c7fbcf3c775d7b4d6028e21d54', '0f7f6dfdc5c7e8715040f3c63658ad002de145b236b8a54ff803f75d6023ea5c', '1990-10-02 01:34:20', '14.0', '4.0', '4.0', '6.0']
+['0cb689838f640f2f48e609bf788bae34b69330c7fbcf3c775d7b4d6028e21d54', '0f7f6dfdc5c7e8715040f3c63658ad002de145b236b8a54ff803f75d6023ea5c', '1990-10-02 07:13:20', '14.0', '4.0', '4.0', '6.0']
+['b008efbce4e60cf8e7fc2ced3fae15451c7e6950b23e7de2db76832943fac543', 'f9667b1f8a133993696fef340d39e0695c56624599b4eaf31097ef20d134e7bb', '1990-12-23 08:15:20', '15.0', '5.0', '4.0', '6.0']
+['b008efbce4e60cf8e7fc2ced3fae15451c7e6950b23e7de2db76832943fac543', 'f9667b1f8a133993696fef340d39e0695c56624599b4eaf31097ef20d134e7bb', '1990-12-23 16:13:20', '15.0', '5.0', '4.0', '6.0']
+['62936caab81605b1251061d57997788d6791cd65fada36322346b568080871ec', '811283323ec4b0b15842bb1de63865f283ffd5ecf895bcfad199e0d55438cc51', '1990-10-15 13:20:20', '14.0', '4.0', '4.0', '6.0']
+['b15e8940d00445df6c81382e1e4b00064a8d6d19e602d1a431f340ed9bd03509', 'be970c8b44e7a16c1f042426ad8da1fa6740dee994b5b9045e883e750b3b9314', '1990-05-05 18:14:20', '15.0', '5.0', '4.0', '6.0']
+['b15e8940d00445df6c81382e1e4b00064a8d6d19e602d1a431f340ed9bd03509', 'be970c8b44e7a16c1f042426ad8da1fa6740dee994b5b9045e883e750b3b9314', '1990-05-08 20:31:20', '15.0', '5.0', '4.0', '6.0']
+['b15e8940d00445df6c81382e1e4b00064a8d6d19e602d1a431f340ed9bd03509', 'be970c8b44e7a16c1f042426ad8da1fa6740dee994b5b9045e883e750b3b9314', '1990-05-09 06:28:20', '15.0', '5.0', '4.0', '6.0']
+
+
