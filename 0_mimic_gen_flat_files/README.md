@@ -5,7 +5,7 @@ This README provides documentation of specific mapping decisions and special han
  
 
 
-## Encounter Mapping Decisions
+## ENCOUNTER File
 
 1. **Encounter Type (`encounter_type`)**
    - In Emory, `encounter_type` distinguishes **ER / IN / OV**.
