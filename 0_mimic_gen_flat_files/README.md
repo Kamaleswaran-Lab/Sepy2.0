@@ -26,3 +26,89 @@ This README provides documentation of specific mapping decisions and special han
    - ✅ Example: If a patient has two ICU stays of 2.0 and 1.0 days → `total_icu_days = 3.0`.
 
 ---
+
+
+## DEMOGRAPHICS File
+
+### Source Tables
+- **MIMIC-IV `hosp_patients.csv`**  
+  Provides static demographic information for all patients (`subject_id`, gender, anchor_age, etc.).
+
+- **MIMIC-IV `hosp_admissions.csv`**  
+  Provides encounter-level information. We use this table to obtain each patient’s `race` field, because race is not available in `hosp_patients.csv`.
+
+---
+
+### Column Mapping
+
+| Required Column   | Source (MIMIC-IV)   | Notes |
+|-------------------|---------------------|-------|
+| `pat_id`          | `subject_id`        | Unique patient identifier |
+| `gender`          | `gender`            | Converted from `M/F` → `Male/Female` |
+| `race_code`       | `admissions.race`   | Mapped to anonymized numeric codes (see below) |
+| `ethnicity_code`  | Derived from `race` | Hispanic vs Non-Hispanic categorization |
+
+---
+
+### Gender Mapping
+
+- MIMIC-IV provides gender as single letters:  
+  - `M` → `Male`  
+  - `F` → `Female`  
+
+- All values are converted to the full words **Male** / **Female** to match Sepy2.0 requirements.
+
+---
+
+### Race Mapping
+
+MIMIC-IV `admissions.race` contains a wide range of values:  
+
+AMERICAN INDIAN/ALASKA NATIVE ASIAN ASIAN - ASIAN INDIAN ASIAN - CHINESE ASIAN - KOREAN ASIAN - SOUTH EAST ASIAN BLACK/AFRICAN BLACK/AFRICAN AMERICAN BLACK/CAPE VERDEAN BLACK/CARIBBEAN ISLAND HISPANIC OR LATINO HISPANIC/LATINO - CENTRAL AMERICAN HISPANIC/LATINO - COLUMBIAN HISPANIC/LATINO - CUBAN HISPANIC/LATINO - DOMINICAN HISPANIC/LATINO - GUATEMALAN HISPANIC/LATINO - HONDURAN HISPANIC/LATINO - MEXICAN HISPANIC/LATINO - PUERTO RICAN HISPANIC/LATINO - SALVADORAN MULTIPLE RACE/ETHNICITY NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER OTHER PATIENT DECLINED TO ANSWER PORTUGUESE SOUTH AMERICAN UNABLE TO OBTAIN UNKNOWN WHITE WHITE - BRAZILIAN WHITE - EASTERN EUROPEAN WHITE - OTHER EUROPEAN WHITE - RUSSIAN
+
+
+These values were **collapsed into major categories** and mapped to integer codes:
+
+| Race Category (MIMIC)                                    | Mapped `race_code` |
+|----------------------------------------------------------|--------------------|
+| WHITE, WHITE - * (subgroups)                             | 309315 |
+| BLACK/AFRICAN AMERICAN, BLACK - * (subgroups)            | 309316 |
+| ASIAN, ASIAN - * (subgroups)                             | 309317 |
+| HISPANIC OR LATINO, HISPANIC/LATINO - * (subgroups)      | 309318 |
+| AMERICAN INDIAN/ALASKA NATIVE                            | 309319 |
+| NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER                | 309320 |
+| MULTIPLE RACE/ETHNICITY                                  | 309321 |
+| OTHER, PORTUGUESE, SOUTH AMERICAN                        | 309321 |
+| PATIENT DECLINED TO ANSWER, UNABLE TO OBTAIN, UNKNOWN    | 309322 |
+
+---
+
+### Ethnicity Mapping
+
+Ethnicity is not explicitly provided in MIMIC-IV. We derived it from the `race` field:
+
+- If `race` contains `"HISPANIC"` → `ethnicity_code = 312507` (Hispanic)  
+- Otherwise → `ethnicity_code = 312508` (Non-Hispanic)
+
+---
+
+### Patients vs Admissions
+
+- `patients.csv` contains **all patients** in MIMIC-IV.  
+- `admissions.csv` contains **only those patients who had a hospital admission** (each row is a `hadm_id`).  
+- Therefore:  
+  - Some patients in `patients.csv` **do not appear in `admissions.csv`**.  
+  - This is expected, as these patients may never have been admitted.  
+  - When building DEMOGRAPHICS, we join `patients` with the first available `race` entry from `admissions`.  
+  - Patients without any admission will still appear in DEMOGRAPHICS but default to `race_code = 309322 (Unknown)` and `ethnicity_code = 312508 (Non-Hispanic)`.
+
+---
+
+### Example Output
+
+| pat_id | gender | race_code | ethnicity_code |
+|--------|--------|-----------|----------------|
+| 100001 | Male   | 309315    | 312508 |
+| 100002 | Female | 309316    | 312508 |
+| 100003 | Male   | 309318    | 312507 |
+| 100004 | Female | 309322    | 312508 |
