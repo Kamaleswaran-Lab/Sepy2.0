@@ -112,3 +112,35 @@ Ethnicity is not explicitly provided in MIMIC-IV. We derived it from the `race` 
 | 100002 | Female | 309316    | 312508 |
 | 100003 | Male   | 309318    | 312507 |
 | 100004 | Female | 309322    | 312508 |
+
+
+## INFUSIONMEDS File
+
+### Source
+- **MIMIC-IV `icu_inputevents.csv`** (order-level infusion events).  
+- ⚠️ Not using `icu_ingredientevents` (ingredient-level).  
+- It is unclear whether Emory expects order-level or ingredient-level; this is left for future work.
+
+---
+
+### Mapping
+
+| Required Column       | Source (MIMIC-IV) | Notes |
+|-----------------------|-------------------|-------|
+| `csn`                 | `hadm_id`         | Encounter ID |
+| `pat_id`              | `subject_id`      | Patient ID |
+| `medication_id`       | `itemid`          | Will later map to grouping file |
+| `med_order_time`      | `starttime`       | Used as order time |
+| `med_action_time`     | `endtime`         | Used as action/stop time |
+| `med_start`           | `starttime`       | Infusion start |
+| `med_stop`            | `endtime`         | Infusion end |
+| `med_order_route`     | `"IV"`            | All assumed IV |
+| `med_action_dose`     | `amount`          | Infused dose |
+| `med_action_dose_unit`| `amountuom`       | Units |
+
+---
+
+### Key Decisions
+1. All infusions treated as **IV**.  
+2. Use **order-level** (`inputevents`), not ingredient-level.  
+3. Future work: confirm Emory’s expected level.
