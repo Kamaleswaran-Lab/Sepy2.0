@@ -118,7 +118,7 @@ Ethnicity is not explicitly provided in MIMIC-IV. We derived it from the `race` 
 
 ### Source
 - **MIMIC-IV `icu_inputevents.csv`** (order-level infusion events).  
-- ⚠️ Not using `icu_ingredientevents` (ingredient-level).  
+- ⚠️ Not using `icu_ingredientevents` (ingredient-level, which may include more detailed ingredients, etc., Calories).
 - It is unclear whether Emory expects order-level or ingredient-level; this is left for future work.
 
 ---
