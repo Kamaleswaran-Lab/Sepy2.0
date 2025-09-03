@@ -55,21 +55,6 @@ import utils
 ###########################################################################
 ############################# Make Supertables ###########################
 ###########################################################################
-def make_sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir):
-    """
-    Creates a sepyMaster instance for a given year.
-    
-    Args:
-        yearly_data_instance (object): An instance of the `sepyIMPORT` class containing the yearly data.
-        sepyConfigs (dict): A dictionary containing the configuration settings for the sepyDICT class.  
-        bounds (dict): A dictionary containing the threshold values for the supertable.
-        save_dir (str): The directory where the supertable will be saved.
-    Returns:
-        sepyMaster: An instance of the `sepyMaster` class containing the processed encounter data.
-    """
-    sepyMaster_instance = sd.sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir)
-    return sepyMaster_instance
-
 
 def process_csn_instance(
     csn_instance,
@@ -433,7 +418,7 @@ if __name__ == "__main__":
 
         bounds = pd.read_csv(paths["variable_chart"])   
        
-        sepyMaster_instance = make_sepyMaster(import_instance, sepyConfigs, bounds, save_dir)
+        sepyMaster_instance = sd.sepyMaster(import_instance, sepyConfigs, bounds, save_dir)
         logging.info(f"Sepy- A sepyMaster instance was created for {year}")
 
         ###########################################################################
