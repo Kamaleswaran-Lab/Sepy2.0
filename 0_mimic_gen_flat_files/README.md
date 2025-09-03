@@ -1,4 +1,4 @@
-# MIMIC Preprocess Note
+# MIMIC Preprocess (Generate Flat Files) Doc
 
 This folder contains preprocessing scripts to convert raw MIMIC-IV data into the standardized flat files required by the **Sepy2.0 pipeline**. 
 This README provides documentation of specific mapping decisions and special handling notes.
@@ -144,3 +144,46 @@ Ethnicity is not explicitly provided in MIMIC-IV. We derived it from the `race` 
 1. All infusions treated as **IV**.  
 2. Use **order-level** (`inputevents`), not ingredient-level.  
 3. Future work: confirm Emory’s expected level.
+
+
+
+## LABS
+
+### Purpose
+The **LABS** file consolidates laboratory test results from MIMIC-IV and their metadata into the schema required by the Sepy 2.0 pipeline.
+
+### Source Tables
+- `hosp_labevents.csv` — raw laboratory test results  
+- `hosp_d_labitems.csv` — metadata defining lab test categories and labels  
+
+### Processing Logic
+- Data is read in chunks (1M rows at a time) for memory efficiency. (Unable to load if read all at once)
+- Each chunk is left-joined with `hosp_d_labitems.csv` on `itemid` to enrich results.  
+- `lab_result` prefers `valuenum` if available, else falls back to `value`. (**valueuom is not recorded!**)
+- `collection_time` is set to `charttime` (MIMIC-IV does not provide separately).  
+- `result_status` is hardcoded as `"Final"`.  
+- Rows missing `pat_id` or `component_id` are dropped. (**Some patients do not have the csn, which means they are not inpatients. If you are not interested in these patients' data, just drop them in the code.**) 
+- Output is appended incrementally to `LABS.csv`.  
+
+### Final Columns
+| Column Name       | Source / Logic                                                           |
+|-------------------|---------------------------------------------------------------------------|
+| `csn`             | Encounter identifier (`hadm_id`)                                          |
+| `pat_id`          | Patient identifier (`subject_id`)                                         |
+| `component_id`    | Lab test identifier (`itemid`)                                            |
+| `lab_result`      | Numeric value (`valuenum`), fallback to string result (`value`)           |
+| `lab_result_time` | Result timestamp (`charttime`)                                            |
+| `collection_time` | Same as `charttime`                                                       |
+| `result_status`   | `"Final"` (not tracked in MIMIC)                                          |
+| `proc_cat_id`     | Lab category (`category` from `hosp_d_labitems`)                          |
+| `proc_cat_name`   | Same as `proc_cat_id`                                                     |
+| `proc_code`       | Proxy code (`itemid`)                                                     |
+| `proc_desc`       | Lab test label (`label` from `hosp_d_labitems`)                           |
+| `component`       | Same as `proc_desc`                                                       |
+| `loinc_code`      | Not provided in MIMIC-IV; set to `None`                                   |
+
+### Notes
+- File size is large (~10GB uncompressed).  
+- Some labs lack `csn` (`hadm_id`); these are retained unless explicitly dropped.  
+- **LOINC codes are not available in MIMIC-IV; external mapping required if needed.**  
+
