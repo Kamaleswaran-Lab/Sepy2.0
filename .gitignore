@@ -1,3 +1,6 @@
+supertables/*
+yearly_pickles/*
+*/logs/*
 # Jupyter Notebook
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
