@@ -60,6 +60,7 @@ class SepyDictConfig:
     def __post_init__(self):
         """Calculate derived fields after initialization."""
         self.all_lab_col_names = self.numeric_lab_col_names + self.string_lab_col_names
+        self.all_vitals_col_names = self.numeric_vital_col_names + self.string_vital_col_names
         self.vasopressor_col_names = self.vasopressor_names + self.vasopressor_units + self.vasopressor_dose
     
     @classmethod
@@ -355,9 +356,12 @@ class ClinicalDataProcessor:
             return vitals_df    
 
         resampled_data: Dict[str, pd.Series] = {}
-        for key in self.config.numeric_vital_col_names:
+        df = df.loc[:, ~df.columns.duplicated()]
+        for key in self.config.all_vitals_col_names:
             if key in df.columns:
-                if len(self.bounds.loc[self.bounds["location in supertable"] == key]) > 0:
+                if key == 'o2_device':
+                    agg_fn = "last"
+                elif len(self.bounds.loc[self.bounds["location in supertable"] == key]) > 0:
                     agg_fn = utils.agg_fn_wrapper(key, self.bounds)
                 else:
                     agg_fn = "mean"
@@ -605,13 +609,23 @@ class ClinicalDataProcessor:
             return radiology_notes_df
 
         df['day_verified'] = pd.to_datetime(df['day_verified'])
-        df = df.set_index("day_verified")
-        notes_acc_nbr = df['acc_nbr'].groupby(
-            pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])
-        ).apply(lambda x: ','.join(x.astype(str)))
-
-        radiology_notes_df = notes_acc_nbr.reindex(time_index, fill_value=0)
-        radiology_notes_df = pd.DataFrame(radiology_notes_df, columns = ['radiology_acc_nbr'])
+        
+        # Handle dates before first time_index by moving them to first time_index
+        df.loc[df['day_verified'] < time_index[0], 'day_verified'] = time_index[0]
+        
+        # Create a series with time_index, filled with acc_nbr for matching dates
+        radiology_notes_series = pd.Series(index=time_index, dtype=object)
+        
+        for _, row in df.iterrows():
+            date_mask = time_index.date == row['day_verified'].date()
+            radiology_notes_series.loc[date_mask] = row['acc_nbr']
+        
+        # Group by date and join acc_nbr values for same dates
+        radiology_notes_series = radiology_notes_series.groupby(radiology_notes_series.index.date).transform(
+            lambda x: ','.join(x.dropna().astype(str)) if x.dropna().any() else 0
+        )
+        
+        radiology_notes_df = pd.DataFrame(radiology_notes_series, columns=['radiology_acc_nbr'])
         return radiology_notes_df
     
     def vasopressor_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
@@ -965,20 +979,20 @@ class ClinicalDataProcessor:
             logging.error(f"Error in Step 11 (Add history of dialysis): {str(e)}")
 
         #Step 12: Add fluids
-        try:
-            individual_fluids_columns = self.individual_fluids_staging(clinical_data.in_out_fluids, supertable_df.time_index)
-            supertable_df.supertable = pd.concat([supertable_df.supertable, individual_fluids_columns], axis=1)
-            logging.info(f"Individual fluids added to supertable.")
-        except Exception as e:
-            logging.error(f"Error in Step 12 (Add individual fluids): {str(e)}")
+        #try:
+        #    individual_fluids_columns = self.individual_fluids_staging(clinical_data.in_out_fluids, supertable_df.time_index)
+        #    supertable_df.supertable = pd.concat([supertable_df.supertable, individual_fluids_columns], axis=1)
+        #    logging.info(f"Individual fluids added to supertable.")
+        #except Exception as e:
+        #    logging.error(f"Error in Step 12 (Add individual fluids): {str(e)}")
 
         #Step 13: Add cumulative fluids
-        try:
-            cumulative_fluids_columns = self.cumulative_fluids_staging(clinical_data.in_out_fluids, clinical_data.infusion_meds, supertable_df.time_index)
-            supertable_df.supertable = pd.concat([supertable_df.supertable, cumulative_fluids_columns], axis=1)
-            logging.info(f"Cumulative fluids added to supertable.")
-        except Exception as e:
-            logging.error(f"Error in Step 13 (Add cumulative fluids): {str(e)}")
+        #try:
+        #    cumulative_fluids_columns = self.cumulative_fluids_staging(clinical_data.in_out_fluids, clinical_data.infusion_meds, supertable_df.time_index)
+        #    supertable_df.supertable = pd.concat([supertable_df.supertable, cumulative_fluids_columns], axis=1)
+        #    logging.info(f"Cumulative fluids added to supertable.")
+        #except Exception as e:
+        #    logging.error(f"Error in Step 13 (Add cumulative fluids): {str(e)}")
 
         #Step 14: radiology notes
         try:
