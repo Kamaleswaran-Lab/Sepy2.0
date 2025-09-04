@@ -21,6 +21,8 @@ import pandas as pd
 
 from typing import Dict, Any, Tuple
 
+import importlib 
+importlib.reload(clinicalFeatures)
 # Import from proper modules to avoid duplication
 from clinicalFeatures import ClinicalDataProcessor, DerivedFeatures, SepyDictConfig, ClinicalData, supertable
 
