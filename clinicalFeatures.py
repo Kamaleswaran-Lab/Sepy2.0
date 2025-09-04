@@ -892,6 +892,7 @@ class ClinicalDataProcessor:
             logging.info(f"Supertable data class object created with {len(supertable_df.supertable)} rows.")
         except Exception as e:
             logging.error(f"Error in Step 1 (Initialize supertable): {str(e)}")
+            raise RuntimeError(f"Step 1 (Initialize supertable) failed: {str(e)}")
         
         #Step 2: Add static features
         try:
@@ -905,7 +906,8 @@ class ClinicalDataProcessor:
             logging.info(f"Static features added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 2 (Add static features): {str(e)}")
-
+            raise RuntimeError(f"Step 2 (Add static features) failed: {str(e)}")
+        
         #Step 3: Add labs
         try:
             labs_columns = self.labs_staging(clinical_data.labs, supertable_df.time_index)
@@ -913,7 +915,8 @@ class ClinicalDataProcessor:
             logging.info(f"Labs added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 3 (Add labs): {str(e)}")
-
+            raise RuntimeError(f"Step 3 (Add labs) failed: {str(e)}")
+        
         #Step 4: Add vitals
         try:
             vitals_columns = self.vitals_staging(clinical_data.vitals, supertable_df.time_index)
@@ -921,6 +924,7 @@ class ClinicalDataProcessor:
             logging.info(f"Vitals added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 4 (Add vitals): {str(e)}")
+            raise RuntimeError(f"Step 4 (Add vitals) failed: {str(e)}")
         
         #Step 5: Add procedures
         try:
@@ -929,7 +933,8 @@ class ClinicalDataProcessor:
             logging.info(f"Procedures added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 5 (Add procedures): {str(e)}")
-
+            raise RuntimeError(f"Step 5 (Add procedures) failed: {str(e)}")
+        
         #Step 6: gcs staging
         try:
             gcs_columns = self.gcs_staging(clinical_data.gcs, supertable_df.time_index)
@@ -937,7 +942,8 @@ class ClinicalDataProcessor:
             logging.info(f"GCS added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 6 (Add GCS): {str(e)}")
-
+            raise RuntimeError(f"Step 6 (Add GCS) failed: {str(e)}")
+        
         #Step 7: Add vent status
         try:
             vent_columns = self.vent_staging(clinical_data.vent, supertable_df.time_index)
@@ -945,7 +951,8 @@ class ClinicalDataProcessor:
             logging.info(f"Vent status added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 7 (Add vent status): {str(e)}")
-
+            raise RuntimeError(f"Step 7 (Add vent status) failed: {str(e)}")
+        
         #Step 8: Add bed status
         try:
             bed_status_columns = self.assign_bed_status(clinical_data.beds, supertable_df.time_index)
@@ -953,7 +960,8 @@ class ClinicalDataProcessor:
             logging.info(f"Bed status added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 8 (Add bed status): {str(e)}")
-
+            raise RuntimeError(f"Step 8 (Add bed status) failed: {str(e)}")
+        
         #Step 9: Add bed unit
         try:
             bed_unit_columns = self.create_bed_unit(clinical_data.beds, supertable_df.time_index)
@@ -961,7 +969,8 @@ class ClinicalDataProcessor:
             logging.info(f"Bed unit added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 9 (Add bed unit): {str(e)}")
-
+            raise RuntimeError(f"Step 9 (Add bed unit) failed: {str(e)}")
+        
         #Step 10: Add dialysis status
         try:
             dialysis_columns = self.dialysis_staging(clinical_data.dialysis, supertable_df.time_index)
@@ -969,7 +978,8 @@ class ClinicalDataProcessor:
             logging.info(f"Dialysis status added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 10 (Add dialysis status): {str(e)}")
-
+            raise RuntimeError(f"Step 10 (Add dialysis status) failed: {str(e)}")
+        
         #Step 11: Add history of dialysis
         try:
             history_of_dialysis_columns = self.create_history_of_dialysis(clinical_data.diagnosis, supertable_df.time_index)
@@ -977,7 +987,8 @@ class ClinicalDataProcessor:
             logging.info(f"History of dialysis added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 11 (Add history of dialysis): {str(e)}")
-
+            raise RuntimeError(f"Step 11 (Add history of dialysis) failed: {str(e)}")
+        
         #Step 12: Add fluids
         #try:
         #    individual_fluids_columns = self.individual_fluids_staging(clinical_data.in_out_fluids, supertable_df.time_index)
@@ -985,7 +996,8 @@ class ClinicalDataProcessor:
         #    logging.info(f"Individual fluids added to supertable.")
         #except Exception as e:
         #    logging.error(f"Error in Step 12 (Add individual fluids): {str(e)}")
-
+        #    raise RuntimeError(f"Step 12 (Add individual fluids) failed: {str(e)}")
+        
         #Step 13: Add cumulative fluids
         #try:
         #    cumulative_fluids_columns = self.cumulative_fluids_staging(clinical_data.in_out_fluids, clinical_data.infusion_meds, supertable_df.time_index)
@@ -993,7 +1005,8 @@ class ClinicalDataProcessor:
         #    logging.info(f"Cumulative fluids added to supertable.")
         #except Exception as e:
         #    logging.error(f"Error in Step 13 (Add cumulative fluids): {str(e)}")
-
+        #    raise RuntimeError(f"Step 13 (Add cumulative fluids) failed: {str(e)}")
+        
         #Step 14: radiology notes
         try:
             radiology_notes_columns = self.radiology_notes_staging(clinical_data.radiology_notes, supertable_df.time_index)
@@ -1001,7 +1014,8 @@ class ClinicalDataProcessor:
             logging.info(f"Radiology notes added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 14 (Add radiology notes): {str(e)}")
-
+            raise RuntimeError(f"Step 14 (Add radiology notes) failed: {str(e)}")
+        
         #Step 15: clinical notes
         try:
             clinical_notes_columns = self.clinical_notes_staging(clinical_data.clinical_notes, supertable_df.time_index)
@@ -1009,6 +1023,7 @@ class ClinicalDataProcessor:
             logging.info(f"Clinical notes added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 15 (Add clinical notes): {str(e)}")
+            raise RuntimeError(f"Step 15 (Add clinical notes) failed: {str(e)}")
         
         #Step 16: Add vasopressor meds
         try:
@@ -1017,7 +1032,8 @@ class ClinicalDataProcessor:
             logging.info(f"Vasopressor meds added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 16 (Add vasopressor meds): {str(e)}")
-
+            raise RuntimeError(f"Step 16 (Add vasopressor meds) failed: {str(e)}")
+        
         #Step 18: Add icd procedures
         try:
             icd_procedures_columns = self.icd_staging(clinical_data.icd_procedures, supertable_df.time_index)
@@ -1025,7 +1041,8 @@ class ClinicalDataProcessor:
             logging.info(f"ICD procedures added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 18 (Add ICD procedures): {str(e)}")
-
+            raise RuntimeError(f"Step 18 (Add ICD procedures) failed: {str(e)}")
+        
         #Step 19: Add cpt procedures
         try:
             cpt_procedures_columns = self.cpt_staging(clinical_data.cpt_procedures, supertable_df.time_index)
@@ -1033,14 +1050,16 @@ class ClinicalDataProcessor:
             logging.info(f"CPT procedures added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 19 (Add CPT procedures): {str(e)}")
-
+            raise RuntimeError(f"Step 19 (Add CPT procedures) failed: {str(e)}")
+        
         # Step 20: Add gender code 
         try:
             supertable_df.supertable['gender_code'] = clinical_data.static_features.get("gender_code", 0)
             logging.info(f"Gender code added to supertable.")
         except Exception as e:
             logging.error(f"Error in Step 20 (Add gender code): {str(e)}")
-
+            raise RuntimeError(f"Step 20 (Add gender code) failed: {str(e)}")
+        
         #Step 21: Add comorbidity data
         try:
             quan_deyo_ICD10_columns, quan_elix_ICD10_columns = self.comorbidity_staging(clinical_data.quan_deyo_ICD10, clinical_data.quan_elix_ICD10)
@@ -1049,7 +1068,8 @@ class ClinicalDataProcessor:
             logging.info(f"Comorbidity data added to Clinical Data.")
         except Exception as e:
             logging.error(f"Error in Step 21 (Add comorbidity data): {str(e)}")
-
+            raise RuntimeError(f"Step 21 (Add comorbidity data) failed: {str(e)}")
+        
         logging.info(f"Supertable created with {len(supertable_df.supertable)} rows.")
         return supertable_df
 
