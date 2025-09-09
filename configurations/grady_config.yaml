@@ -1,61 +1,61 @@
 # SETUP INSTRUCTIONS
 ## assign unique-encounters_path to the path of the unique encounters file
 
-# SLURM CONFIGURATION
-num_processes: "7"
-processor_assignment: "1"
 # PIPELINE INSTRUCTIONS
-make_pickle: "yes" # yes: make pickle files, no: do not make pickle files
-make_dictionary: "yes" # yes: make dictionary files, no: do not make dictionary files
+make_yearly_pickle: "yes" # yes: make pickle files, no: do not make pickle files
+make_supertables: "no" # yes: make supertables, no: do not make supertables
 # FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/GradyDataset/EMR_RAW"
-groupings_path: "/work/rrz4/Sepy2.0/groupings"
-yearly_pickle_output_path: "/work/rrz4/Sepy2.0/pickle/"
-supertable_output_path: "/work/rrz4/Sepy2.0/supertables/gr_y/"
-bed_unit_csv_fname:  "/work/rrz4/Sepy2.0/AdditionalInformation/bed_units_to_icu_AH.csv"
-variable_bounds_csv_fname : "/work/rrz4/Sepy2.0/AdditionalInformation/Variable_Chart.csv"
-dialysis_info_csn_fname: "/work/rrz4/Sepy2.0/AdditionalInformation/PEACH_HD_CRRT.csv"
-unique_encounters_path: "/hpc/group/kamaleswaranlab/GradyDataset/EMR_RAW/2014/encounter_2014_decomp_03112020.dsv"
+groupings_path: "/hpc/dctrl/rrz4/Projects/Sepy2.0/groupings"
+yearly_pickle_output_path: "/work/rrz4/Sepy2.0/grady_pickle/"
+supertable_output_path: "/work/rrz4/Sepy2.0/grady_supertables/gr_y/"
+# bed_unit_csv_fname:  "/cwork/jfr29/Sepy/AdditionalInformation/bed_units_to_icu_AH.csv"
+# variable_bounds_csv_fname : "/cwork/jfr29/Sepy/AdditionalInformation/Variable_Chart.csv"
+# dialysis_info_csn_fname: "/cwork/jfr29/Sepy/AdditionalInformation/PEACH_HD_CRRT.csv"
+# unique_encounters_path: "/hpc/group/kamaleswaranlab/GradyDataset/EMR_RAW/2014/encounter_2014_decomp_03112020.dsv"
 dataset_identifier: "gr_y"
-years_to_scrape_data: ["2014", "2015", "2016", "2017", "2018", "2020", "2021", "2022"]
+# years_to_scrape_data: ["2014", "2015", "2016", "2017", "2018", "2020", "2021", "2022"]
 # CSN FILTERING
 encounter_type: "Inpatient" # "Inpatient", "Emergency", "all": all encounter types
 age: "adult" # "adult": age >= 18, "pediatric": age < 18, "all": all ages
-unique_enc_filter: "no" # "yes": only unique encounters, "no": all encounters
-unique_enc:
-  # - CSN1
-  # - CSN2
-  # - CSN3
+specific_enc_filter: "no" # "yes": only specific encounters, "no": all encounters
+# specific_enc_filter_list: []
+
 # DICTIONARY PATH KEWORDS
 dictionary_paths:
   comorbidity_types:
-    - "ICD9_ahrq"
-    - "ICD9_elix"
-    - "ICD9_quan_deyo"
-    - "ICD9_quan_elix"
-    - "ICD9_single_ccs"
-    - "ICD10_ahrq"
-    - "ICD10_elix"
-    - "ICD10_quan_deyo"
-    - "ICD10_quan_elix"
-    - "ICD10_single_ccs"
+    - ["ICD9_ahrq", "*ICD9_ahrq*"]
+    - ["ICD9_elix", "*ICD9_elix*"]
+    - ["ICD9_quan_deyo", "*ICD9_quan_deyo*"]
+    - ["ICD9_quan_elix", "*ICD9_quan_elix*"]
+    - ["ICD9_single_ccs", "*ICD9_single_ccs*"]
+    - ["ICD10_ahrq", "*ICD10_ahrq*"]
+    - ["ICD10_elix", "*ICD10_elix*"]
+    - ["ICD10_quan_deyo", "*ICD10_quan_deyo*"]
+    - ["ICD10_quan_elix", "*ICD10_quan_elix*"]
+    - ["ICD10_single_ccs", "*ICD10_single_ccs*"]
   grouping_types:
-    - "gr_all_infusion_meds"
-    - "gr_grouping_labs"
-    - "gr_bed_labels"
+    - ["infusion_meds", "*gr_all_infusion_meds*"]
+    - ["grouping_labs", "*gr_grouping_labs*"]
+    - ["bed_labels", "*gr_bed_labels*"]
+    - ["variable_chart", "*gr_variable_chart*"]
+    - ["grouping_vent", "*gr_vent_labels*"]
   # year_types:
   flatfile_types:
-    - ["INFUSIONMEDS", "infusion_meds"]
-    - ["LABS", "lab"]
-    - ["VITALS", "vitals"]
-    - ["VENT", vent]
-    - ["DEMOGRAPHICS", "demographics"]
-    - ["GCS", "gcs"]
-    - ["ENCOUNTER", "encounter"]
-    - ["CULTURES", "cultures"]
-    - ["BEDLOCATION", "bed_location"]
-    - ["ORPROCEDURES", "or_procedures"]
-    - ["DIAGNOSIS", "diagnoses"]
+    - ["INFUSIONMEDS", "*infusion_meds*"]
+    - ["LABS", "*lab*"]
+    - ["VITALS", "*vitals*"]
+    - ["VENT", "*vent*"]
+    - ["DEMOGRAPHICS", "*demographics*"]
+    - ["GCS", "*gcs*"]
+    - ["ENCOUNTER", "*encounter*"]
+    - ["CULTURES", "*cultures*"]
+    - ["BEDLOCATION", "*bed_location*"]
+    - ["ORPROCEDURES", "*or_procedures*"]
+    - ["DIAGNOSIS", "*diagnoses*"]
+    # - ["CPT_PROCEDURES", "*CPT*"]
+    - ["ICD_PROCEDURES", "*icd_procedures*"]
+    - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"]
 # YEARLY INSTANCE FUNCTIONS AND PARAMETERS
 yearly_instance:
   import_demographics:
@@ -196,6 +196,7 @@ sepsis_summary_types:
   - "error_summary"
   # - "ahrq_ICD10_summary"
   # - "elix_ICD10_summary"
-  - "quan_deyo_ICD10_summary"
-  - "quan_elix_ICD10_summary"
+  # - "quan_deyo_ICD10_summary"
+  # - "quan_elix_ICD10_summary" # comorbidity summary is outputted in the comorbidity_summary section
+  - "comorbidity_summary"
   # - "ccs_ICD10_summary"
