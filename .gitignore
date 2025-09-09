@@ -4,7 +4,6 @@ yearly_pickles/*
 # Jupyter Notebook
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
-*.ipynb
 
 # Jupyter Notebook autosave
 .~*.ipynb

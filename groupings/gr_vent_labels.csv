@@ -1,0 +1,13 @@
+vent_name,vent_cat
+AC,invasive ventilation
+BiLevel,invasive ventilation
+BiPAP,NIPPV
+CPAP,NIPPV
+HFOV,invasive ventilation
+NIPPV,NIPPV
+Other (Comment),
+SIMV,invasive ventilation
+SiPAP,invasive ventilation
+Spontaneous,
+Stand-by,
+Volume Guarantee,invasive ventilation
