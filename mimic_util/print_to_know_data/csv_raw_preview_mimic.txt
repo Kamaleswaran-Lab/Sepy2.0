@@ -1,11 +1,11 @@
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_chartevents.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_chartevents.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'stay_id', 'caregiver_id', 'charttime', 'storetime', 'itemid', 'value', 'valuenum', 'valueuom', 'warning']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 29079034
   stay_id: 39553978
@@ -18,7 +18,7 @@
   valueuom: kg
   warning: 0
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 12:36:00', '2180-07-23 14:45:00', '226512', '39.4', '39.4', 'kg', '0']
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 12:36:00', '2180-07-23 14:45:00', '226707', '60', '60', 'Inch', '0']
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 12:36:00', '2180-07-23 14:45:00', '226730', '152', '152', 'cm', '0']
@@ -32,19 +32,19 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_d_hcpcs.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_d_hcpcs.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['code', 'category', 'long_description', 'short_description']
 
-列名 → 示例值:
+Column → Sample value:
   code: 00000
   category: 
   long_description: 
   short_description: Invalid Code
 
-前10行数据:
+First 10 rows of data:
 ['00000', '', '', 'Invalid Code']
 ['0001F', '2', '', 'Composite measures']
 ['0002F', '2', '', 'Composite measures']
@@ -58,13 +58,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_d_items.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_d_items.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['itemid', 'label', 'abbreviation', 'linksto', 'category', 'unitname', 'param_type', 'lownormalvalue', 'highnormalvalue']
 
-列名 → 示例值:
+Column → Sample value:
   itemid: 220001
   label: Problem List
   abbreviation: Problem List
@@ -75,7 +75,7 @@
   lownormalvalue: 
   highnormalvalue: 
 
-前10行数据:
+First 10 rows of data:
 ['220001', 'Problem List', 'Problem List', 'chartevents', 'General', '', 'Text', '', '']
 ['220003', 'ICU Admission date', 'ICU Admission date', 'datetimeevents', 'ADT', '', 'Date and time', '', '']
 ['220045', 'Heart Rate', 'HR', 'chartevents', 'Routine Vital Signs', 'bpm', 'Numeric', '', '']
@@ -89,18 +89,18 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_d_icd_diagnoses.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_d_icd_diagnoses.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['icd_code', 'icd_version', 'long_title']
 
-列名 → 示例值:
+Column → Sample value:
   icd_code: 0010   
   icd_version: 9
   long_title: Cholera due to vibrio cholerae
 
-前10行数据:
+First 10 rows of data:
 ['0010   ', '9', 'Cholera due to vibrio cholerae']
 ['0011   ', '9', 'Cholera due to vibrio cholerae el tor']
 ['0019   ', '9', 'Cholera, unspecified']
@@ -114,13 +114,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_icustays.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_icustays.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'stay_id', 'first_careunit', 'last_careunit', 'intime', 'outtime', 'los']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 29079034
   stay_id: 39553978
@@ -130,7 +130,7 @@
   outtime: 2180-07-23 23:50:47
   los: 0.4102662037037037
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '29079034', '39553978', 'Medical Intensive Care Unit (MICU)', 'Medical Intensive Care Unit (MICU)', '2180-07-23 14:00:00', '2180-07-23 23:50:47', '0.4102662037037037']
 ['10000690', '25860671', '37081114', 'Medical Intensive Care Unit (MICU)', 'Medical Intensive Care Unit (MICU)', '2150-11-02 19:37:00', '2150-11-06 17:03:17', '3.8932523148148146']
 ['10000980', '26913865', '39765666', 'Medical Intensive Care Unit (MICU)', 'Medical Intensive Care Unit (MICU)', '2189-06-27 08:42:00', '2189-06-27 20:38:27', '0.4975347222222222']
@@ -144,16 +144,16 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_provider.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_provider.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['provider_id']
 
-列名 → 示例值:
+Column → Sample value:
   provider_id: P00019
 
-前10行数据:
+First 10 rows of data:
 ['P00019']
 ['P0001J']
 ['P0001P']
@@ -167,13 +167,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_procedures_icd.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_procedures_icd.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'seq_num', 'chartdate', 'icd_code', 'icd_version']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 22595853
   seq_num: 1
@@ -181,7 +181,7 @@
   icd_code: 5491
   icd_version: 9
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '22595853', '1', '2180-05-07', '5491', '9']
 ['10000032', '22841357', '1', '2180-06-27', '5491', '9']
 ['10000032', '25742920', '1', '2180-08-06', '5491', '9']
@@ -195,20 +195,20 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_poe_detail.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_poe_detail.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['poe_id', 'poe_seq', 'subject_id', 'field_name', 'field_value']
 
-列名 → 示例值:
+Column → Sample value:
   poe_id: 10000032-101
   poe_seq: 101
   subject_id: 10000032
   field_name: Code status
   field_value: Resuscitate (Full code)
 
-前10行数据:
+First 10 rows of data:
 ['10000032-101', '101', '10000032', 'Code status', 'Resuscitate (Full code)']
 ['10000032-109', '109', '10000032', 'Admit category', 'Admit to inpatient']
 ['10000032-109', '109', '10000032', 'Admit to', 'Medicine']
@@ -222,13 +222,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_drgcodes.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_drgcodes.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'drg_type', 'drg_code', 'description', 'drg_severity', 'drg_mortality']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 22595853
   drg_type: APR
@@ -237,7 +237,7 @@
   drg_severity: 2
   drg_mortality: 2
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '22595853', 'APR', '283', 'OTHER DISORDERS OF THE LIVER', '2', '2']
 ['10000032', '22595853', 'HCFA', '442', 'DISORDERS OF LIVER EXCEPT MALIG,CIRR,ALC HEPA W CC', '', '']
 ['10000032', '22841357', 'APR', '279', 'HEPATIC COMA AND OTHER MAJOR ACUTE LIVER DISORDERS', '3', '2']
@@ -251,13 +251,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_pharmacy.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_pharmacy.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'pharmacy_id', 'poe_id', 'starttime', 'stoptime', 'medication', 'proc_type', 'status', 'entertime', 'verifiedtime', 'route', 'frequency', 'disp_sched', 'infusion_type', 'sliding_scale', 'lockout_interval', 'basal_rate', 'one_hr_max', 'doses_per_24_hrs', 'duration', 'duration_interval', 'expiration_value', 'expiration_unit', 'expirationdate', 'dispensation', 'fill_quantity']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 19409106
   hadm_id: 23305389
   pharmacy_id: 59699927
@@ -286,7 +286,7 @@
   dispensation: Omnicell
   fill_quantity: 
 
-前10行数据:
+First 10 rows of data:
 ['19409106', '23305389', '59699927', '19409106-271', '2127-12-31 20:00:00', '2127-12-31 22:00:00', 'Atovaquone Suspension', 'Unit Dose', 'Discontinued via patient discharge', '2127-12-31 12:38:02', '2127-12-31 12:38:02', 'PO/NG', 'BID', '08, 20', '', '', '', '', '', '2', '', 'Ongoing', '36', 'Hours', '', 'Omnicell', '']
 ['19409106', '23305389', '61241253', '19409106-223', '2127-12-29 03:00:00', '2127-12-31 22:00:00', 'Sodium Chloride 0.9%  Flush', 'Unit Dose', 'Discontinued via patient discharge', '2127-12-29 03:03:05', '2127-12-29 03:03:05', 'IV', 'Q8H:PRN', '', '', '', '', '', '', '', '', 'Ongoing', '36', 'Hours', '', 'Floor Stock Item', '']
 ['19409106', '23305389', '73881731', '19409106-257', '2127-12-30 07:00:00', '2127-12-31 22:00:00', 'Lidocaine Viscous 2%', 'Unit Dose', 'Discontinued via patient discharge', '2127-12-30 06:25:06', '2127-12-30 06:25:06', 'PO', 'TID:PRN', '', '', '', '', '', '', '', '', 'Ongoing', '36', 'Hours', '', 'Omnicell', '']
@@ -300,13 +300,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_poe.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_poe.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['poe_id', 'poe_seq', 'subject_id', 'hadm_id', 'ordertime', 'order_type', 'order_subtype', 'transaction_type', 'discontinue_of_poe_id', 'discontinued_by_poe_id', 'order_provider_id', 'order_status']
 
-列名 → 示例值:
+Column → Sample value:
   poe_id: 19923916-885
   poe_seq: 885
   subject_id: 19923916
@@ -320,7 +320,7 @@
   order_provider_id: P19R3H
   order_status: Inactive
 
-前10行数据:
+First 10 rows of data:
 ['19923916-885', '885', '19923916', '21589326', '2133-06-26 10:48:39', 'Medications', '', 'New', '', '19923916-897', 'P19R3H', 'Inactive']
 ['19923916-886', '886', '19923916', '21589326', '2133-06-26 10:53:45', 'Blood Bank', 'Platelet Product Order', 'New', '', '', 'P19R3H', 'Inactive']
 ['19923916-887', '887', '19923916', '21589326', '2133-06-26 10:53:45', 'Lab', '', 'New', '', '', 'P19R3H', 'Inactive']
@@ -334,13 +334,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_labevents.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_labevents.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['labevent_id', 'subject_id', 'hadm_id', 'specimen_id', 'itemid', 'order_provider_id', 'charttime', 'storetime', 'value', 'valuenum', 'valueuom', 'ref_range_lower', 'ref_range_upper', 'flag', 'priority', 'comments']
 
-列名 → 示例值:
+Column → Sample value:
   labevent_id: 1
   subject_id: 10000032
   hadm_id: 
@@ -358,7 +358,7 @@
   priority: ROUTINE
   comments: IF FASTING, 70-100 NORMAL, >125 PROVISIONAL DIABETES.
 
-前10行数据:
+First 10 rows of data:
 ['1', '10000032', '', '2704548', '50931', 'P69FQC', '2180-03-23 11:51:00', '2180-03-23 15:56:00', '___', '95', 'mg/dL', '70', '100', '', 'ROUTINE', 'IF FASTING, 70-100 NORMAL, >125 PROVISIONAL DIABETES.']
 ['2', '10000032', '', '36092842', '51071', 'P69FQC', '2180-03-23 11:51:00', '2180-03-23 16:00:00', 'NEG', '', '', '', '', '', 'ROUTINE', '']
 ['3', '10000032', '', '36092842', '51074', 'P69FQC', '2180-03-23 11:51:00', '2180-03-23 16:00:00', 'NEG', '', '', '', '', '', 'ROUTINE', '']
@@ -372,20 +372,20 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_diagnoses_icd.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_diagnoses_icd.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'seq_num', 'icd_code', 'icd_version']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 22595853
   seq_num: 1
   icd_code: 5723   
   icd_version: 9
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '22595853', '1', '5723   ', '9']
 ['10000032', '22595853', '2', '78959  ', '9']
 ['10000032', '22595853', '3', '5715   ', '9']
@@ -399,13 +399,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_admissions.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_admissions.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'admittime', 'dischtime', 'deathtime', 'admission_type', 'admit_provider_id', 'admission_location', 'discharge_location', 'insurance', 'language', 'marital_status', 'race', 'edregtime', 'edouttime', 'hospital_expire_flag']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 22595853
   admittime: 2180-05-06 22:23:00
@@ -423,7 +423,7 @@
   edouttime: 2180-05-06 23:30:00
   hospital_expire_flag: 0
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '22595853', '2180-05-06 22:23:00', '2180-05-07 17:15:00', '', 'URGENT', 'P49AFC', 'TRANSFER FROM HOSPITAL', 'HOME', 'Medicaid', 'English', 'WIDOWED', 'WHITE', '2180-05-06 19:17:00', '2180-05-06 23:30:00', '0']
 ['10000032', '22841357', '2180-06-26 18:27:00', '2180-06-27 18:49:00', '', 'EW EMER.', 'P784FA', 'EMERGENCY ROOM', 'HOME', 'Medicaid', 'English', 'WIDOWED', 'WHITE', '2180-06-26 15:54:00', '2180-06-26 21:31:00', '0']
 ['10000032', '25742920', '2180-08-05 23:44:00', '2180-08-07 17:50:00', '', 'EW EMER.', 'P19UTS', 'EMERGENCY ROOM', 'HOSPICE', 'Medicaid', 'English', 'WIDOWED', 'WHITE', '2180-08-05 20:58:00', '2180-08-06 01:44:00', '0']
@@ -437,13 +437,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_outputevents.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_outputevents.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'stay_id', 'caregiver_id', 'charttime', 'storetime', 'itemid', 'value', 'valueuom']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 29079034
   stay_id: 39553978
@@ -454,7 +454,7 @@
   value: 175
   valueuom: mL
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 15:00:00', '2180-07-23 16:00:00', '226560', '175', 'mL']
 ['10000690', '25860671', '37081114', '8787', '2150-11-06 08:00:00', '2150-11-06 09:08:00', '226559', '15', 'mL']
 ['10000690', '25860671', '37081114', '8787', '2150-11-06 09:00:00', '2150-11-06 09:08:00', '226559', '15', 'mL']
@@ -468,13 +468,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_emar.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_emar.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'emar_id', 'emar_seq', 'poe_id', 'pharmacy_id', 'enter_provider_id', 'charttime', 'medication', 'event_txt', 'scheduletime', 'storetime']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 19639649
   hadm_id: 27357570
   emar_id: 19639649-314
@@ -488,7 +488,7 @@
   scheduletime: 2173-10-03 18:00:00
   storetime: 2173-10-03 17:22:00
 
-前10行数据:
+First 10 rows of data:
 ['19639649', '27357570', '19639649-314', '314', '19639649-484', '29179538', '', '2173-10-03 17:20:00', 'Docusate Sodium', 'Administered', '2173-10-03 18:00:00', '2173-10-03 17:22:00']
 ['19639649', '27357570', '19639649-315', '315', '19639649-501', '99577324', '', '2173-10-03 17:20:00', 'Metoprolol Tartrate', 'Administered', '2173-10-03 18:00:00', '2173-10-03 17:22:00']
 ['19639649', '27357570', '19639649-316', '316', '19639649-479', '34303658', '', '2173-10-03 17:20:00', 'Rivaroxaban', 'Administered', '2173-10-03 17:00:00', '2173-10-03 17:22:00']
@@ -502,13 +502,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_patients.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_patients.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'gender', 'anchor_age', 'anchor_year', 'anchor_year_group', 'dod']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   gender: F
   anchor_age: 52
@@ -516,7 +516,7 @@
   anchor_year_group: 2014 - 2016
   dod: 2180-09-09
 
-前10行数据:
+First 10 rows of data:
 ['10000032', 'F', '52', '2180', '2014 - 2016', '2180-09-09']
 ['10000048', 'F', '23', '2126', '2008 - 2010', '']
 ['10000058', 'F', '33', '2168', '2020 - 2022', '']
@@ -530,19 +530,19 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_d_labitems.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_d_labitems.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['itemid', 'label', 'fluid', 'category']
 
-列名 → 示例值:
+Column → Sample value:
   itemid: 50801
   label: Alveolar-arterial Gradient
   fluid: Blood
   category: Blood Gas
 
-前10行数据:
+First 10 rows of data:
 ['50801', 'Alveolar-arterial Gradient', 'Blood', 'Blood Gas']
 ['50802', 'Base Excess', 'Blood', 'Blood Gas']
 ['50803', 'Calculated Bicarbonate, Whole Blood', 'Blood', 'Blood Gas']
@@ -556,13 +556,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_emar_detail.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_emar_detail.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'emar_id', 'emar_seq', 'parent_field_ordinal', 'administration_type', 'pharmacy_id', 'barcode_type', 'reason_for_no_barcode', 'complete_dose_not_given', 'dose_due', 'dose_due_unit', 'dose_given', 'dose_given_unit', 'will_remainder_of_dose_be_given', 'product_amount_given', 'product_unit', 'product_code', 'product_description', 'product_description_other', 'prior_infusion_rate', 'infusion_rate', 'infusion_rate_adjustment', 'infusion_rate_adjustment_amount', 'infusion_rate_unit', 'route', 'infusion_complete', 'completion_interval', 'new_iv_bag_hung', 'continued_infusion_in_other_location', 'restart_interval', 'side', 'site', 'non_formulary_visual_verification']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 19970123
   emar_id: 19970123-23
   emar_seq: 23
@@ -597,7 +597,7 @@
   site: 
   non_formulary_visual_verification: 
 
-前10行数据:
+First 10 rows of data:
 ['19970123', '19970123-23', '23', '1.1', '', '', 'if', '', '', '', '', '20', 'mg', '', '1', 'CAP', 'OMEP20', 'Omeprazole 20mg DR Capsule', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
 ['19970123', '19970123-23', '23', '1.2', '', '', 'if', '', '', '', '', '20', 'mg', '', '1', 'CAP', 'OMEP20', 'Omeprazole 20mg DR Capsule', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
 ['19970123', '19970123-23', '23', '', 'Standard Maintenance Medication', '', '', '', '', '40', 'mg', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
@@ -611,20 +611,20 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_omr.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_omr.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'chartdate', 'seq_num', 'result_name', 'result_value']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   chartdate: 2180-04-27
   seq_num: 1
   result_name: Blood Pressure
   result_value: 110/65
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '2180-04-27', '1', 'Blood Pressure', '110/65']
 ['10000032', '2180-04-27', '1', 'Weight (Lbs)', '94']
 ['10000032', '2180-05-07', '1', 'BMI (kg/m2)', '18.0']
@@ -638,18 +638,18 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_d_icd_procedures.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_d_icd_procedures.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['icd_code', 'icd_version', 'long_title']
 
-列名 → 示例值:
+Column → Sample value:
   icd_code: 0001   
   icd_version: 9
   long_title: Therapeutic ultrasound of vessels of head and neck
 
-前10行数据:
+First 10 rows of data:
 ['0001   ', '9', 'Therapeutic ultrasound of vessels of head and neck']
 ['0002   ', '9', 'Therapeutic ultrasound of heart']
 ['0003   ', '9', 'Therapeutic ultrasound of peripheral vascular vessels']
@@ -663,13 +663,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_microbiologyevents.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_microbiologyevents.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['microevent_id', 'subject_id', 'hadm_id', 'micro_specimen_id', 'order_provider_id', 'chartdate', 'charttime', 'spec_itemid', 'spec_type_desc', 'test_seq', 'storedate', 'storetime', 'test_itemid', 'test_name', 'org_itemid', 'org_name', 'isolate_num', 'quantity', 'ab_itemid', 'ab_name', 'dilution_text', 'dilution_comparison', 'dilution_value', 'interpretation', 'comments']
 
-列名 → 示例值:
+Column → Sample value:
   microevent_id: 3853645
   subject_id: 19669037
   hadm_id: 
@@ -696,7 +696,7 @@
   interpretation: S
   comments: 
 
-前10行数据:
+First 10 rows of data:
 ['3853645', '19669037', '', '5428277', 'P31BOX', '2145-04-23 00:00:00', '2145-04-23 14:14:00', '70070', 'SWAB', '1', '2145-04-26 00:00:00', '2145-04-26 11:45:00', '90046', 'WOUND CULTURE', '80023', 'STAPH AUREUS COAG +', '1', '', '90015', 'VANCOMYCIN', '1', '=         ', '1', 'S', '']
 ['3853646', '19669037', '', '5428277', 'P31BOX', '2145-04-23 00:00:00', '2145-04-23 14:14:00', '70070', 'SWAB', '1', '2145-04-26 00:00:00', '2145-04-26 11:45:00', '90046', 'WOUND CULTURE', '80023', 'STAPH AUREUS COAG +', '1', '', '90016', 'OXACILLIN', '=>4', '=>        ', '4', 'R', '']
 ['3853647', '19669037', '', '5428277', 'P31BOX', '2145-04-23 00:00:00', '2145-04-23 14:14:00', '70070', 'SWAB', '1', '2145-04-26 00:00:00', '2145-04-26 11:45:00', '90046', 'WOUND CULTURE', '80023', 'STAPH AUREUS COAG +', '1', '', '90025', 'LEVOFLOXACIN', '0.25', '=         ', '0.25', 'S', '']
@@ -710,13 +710,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_transfers.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_transfers.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'transfer_id', 'eventtype', 'careunit', 'intime', 'outtime']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 22595853
   transfer_id: 33258284
@@ -725,7 +725,7 @@
   intime: 2180-05-06 19:17:00
   outtime: 2180-05-06 23:30:00
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '22595853', '33258284', 'ED', 'Emergency Department', '2180-05-06 19:17:00', '2180-05-06 23:30:00']
 ['10000032', '22595853', '35223874', 'admit', 'Transplant', '2180-05-06 23:30:00', '2180-05-07 17:21:27']
 ['10000032', '22595853', '36904543', 'discharge', 'UNKNOWN', '2180-05-07 17:21:27', '']
@@ -739,13 +739,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_ingredientevents.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_ingredientevents.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'stay_id', 'caregiver_id', 'starttime', 'endtime', 'storetime', 'itemid', 'amount', 'amountuom', 'rate', 'rateuom', 'orderid', 'linkorderid', 'statusdescription', 'originalamount', 'originalrate']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 29079034
   stay_id: 39553978
@@ -764,7 +764,7 @@
   originalamount: 0
   originalrate: 200
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 17:00:00', '2180-07-23 17:01:00', '2180-07-23 18:56:00', '220490', '200', 'mL', '', '', '3782233', '3782233', 'FinishedRunning', '0', '200']
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 17:00:00', '2180-07-23 17:01:00', '2180-07-23 18:56:00', '227075', '200', 'mL', '', '', '3782233', '3782233', 'FinishedRunning', '0', '200']
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 17:00:00', '2180-07-23 17:30:00', '2180-07-23 17:02:00', '220490', '49.999998807907104', 'mL', '100', 'mL/hour', '9796595', '9796595', 'FinishedRunning', '0', '50']
@@ -778,13 +778,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_prescriptions.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_prescriptions.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'pharmacy_id', 'poe_id', 'poe_seq', 'order_provider_id', 'starttime', 'stoptime', 'drug_type', 'drug', 'formulary_drug_cd', 'gsn', 'ndc', 'prod_strength', 'form_rx', 'dose_val_rx', 'dose_unit_rx', 'form_val_disp', 'form_unit_disp', 'doses_per_24_hrs', 'route']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 22595853
   pharmacy_id: 12775705
@@ -807,7 +807,7 @@
   doses_per_24_hrs: 1
   route: PO/NG
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '22595853', '12775705', '10000032-55', '55', 'P85UQ1', '2180-05-08 08:00:00', '2180-05-07 22:00:00', 'MAIN', 'Furosemide', 'FURO40', '008209', '51079007320', '40mg Tablet', '', '40', 'mg', '1', 'TAB', '1', 'PO/NG']
 ['10000032', '22595853', '18415984', '10000032-42', '42', 'P23SJA', '2180-05-07 02:00:00', '2180-05-07 22:00:00', 'MAIN', 'Ipratropium Bromide Neb', 'IPRA2H', '021700', '00487980125', '2.5mL Vial', '', '1', 'NEB', '1', 'VIAL', '4', 'IH']
 ['10000032', '22595853', '23637373', '10000032-35', '35', 'P23SJA', '2180-05-07 01:00:00', '2180-05-07 09:00:00', 'MAIN', 'Furosemide', 'FURO20', '008208', '51079007220', '20mg Tablet', '', '20', 'mg', '1', 'TAB', '1', 'PO/NG']
@@ -821,13 +821,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_procedureevents.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_procedureevents.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'stay_id', 'caregiver_id', 'starttime', 'endtime', 'storetime', 'itemid', 'value', 'valueuom', 'location', 'locationcategory', 'orderid', 'linkorderid', 'ordercategoryname', 'ordercategorydescription', 'patientweight', 'isopenbag', 'continueinnextdept', 'statusdescription', 'originalamount', 'originalrate']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 29079034
   stay_id: 39553978
@@ -851,7 +851,7 @@
   originalamount: 1
   originalrate: 0
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 14:43:00', '2180-07-23 14:44:00', '2180-07-23 14:43:00', '225966', '1', 'None', '', '', '3050203', '3050203', 'Procedures', 'Task', '39.4', '0', '0', 'FinishedRunning', '1', '0']
 ['10000032', '29079034', '39553978', '', '2180-07-23 14:24:00', '2180-07-23 23:50:00', '2180-07-23 23:50:49.983', '224275', '566', 'min', '', '', '769190', '769190', 'Peripheral Lines', 'ContinuousProcess', '39.4', '1', '0', 'FinishedRunning', '566', '1']
 ['10000032', '29079034', '39553978', '', '2180-07-23 14:24:00', '2180-07-23 23:50:00', '2180-07-23 23:50:49.983', '224277', '566', 'min', '', '', '2668055', '2668055', 'Peripheral Lines', 'ContinuousProcess', '39.4', '1', '0', 'FinishedRunning', '566', '1']
@@ -865,13 +865,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_inputevents.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_inputevents.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'stay_id', 'caregiver_id', 'starttime', 'endtime', 'storetime', 'itemid', 'amount', 'amountuom', 'rate', 'rateuom', 'orderid', 'linkorderid', 'ordercategoryname', 'secondaryordercategoryname', 'ordercomponenttypedescription', 'ordercategorydescription', 'patientweight', 'totalamount', 'totalamountuom', 'isopenbag', 'continueinnextdept', 'statusdescription', 'originalamount', 'originalrate']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 19836795
   hadm_id: 25062453
   stay_id: 33552034
@@ -899,7 +899,7 @@
   originalamount: 1
   originalrate: 1
 
-前10行数据:
+First 10 rows of data:
 ['19836795', '25062453', '33552034', '96039', '2141-04-28 16:08:00', '2141-04-28 16:09:00', '2141-04-28 16:09:00', '225851', '1', 'dose', '', '', '3358263', '3358263', '08-Antibiotics (IV)', '02-Fluids (Crystalloids)', 'Main order parameter', 'Drug Push', '65.1', '100', 'mL', '0', '0', 'FinishedRunning', '1', '1']
 ['19836795', '25062453', '33552034', '96039', '2141-04-28 16:50:00', '2141-04-29 00:01:00', '2141-04-28 16:50:00', '220949', '62.987275198102', 'mL', '8.768529891967773', 'mL/hour', '6092588', '4198110', '01-Drips', '02-Fluids (Crystalloids)', 'Mixed solution', 'Continuous Med', '65.1', '250', 'mL', '0', '0', 'ChangeDose/Rate', '247.85714721679688', '8.998824119567871']
 ['19836795', '25062453', '33552034', '96039', '2141-04-28 16:50:00', '2141-04-29 00:01:00', '2141-04-28 16:50:00', '225152', '6298.727031707764', 'units', '876.8529663085938', 'units/hour', '6092588', '4198110', '01-Drips', '02-Fluids (Crystalloids)', 'Main order parameter', 'Continuous Med', '65.1', '250', 'mL', '0', '0', 'ChangeDose/Rate', '24785.7109375', '900']
@@ -913,13 +913,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_datetimeevents.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_datetimeevents.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'stay_id', 'caregiver_id', 'charttime', 'storetime', 'itemid', 'value', 'valueuom', 'warning']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 29079034
   stay_id: 39553978
@@ -931,7 +931,7 @@
   valueuom: Date
   warning: 0
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 14:24:00', '2180-07-23 14:24:00', '225754', '2180-07-23 14:24:00', 'Date', '0']
 ['10000032', '29079034', '39553978', '18704', '2180-07-23 14:24:00', '2180-07-23 14:24:00', '225755', '2180-07-23 14:24:00', 'Date', '0']
 ['10000032', '29079034', '39553978', '20925', '2180-07-23 21:02:00', '2180-07-23 21:02:00', '225754', '2180-07-23 00:00:00', 'Date', '0']
@@ -945,13 +945,13 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_hcpcsevents.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_hcpcsevents.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'chartdate', 'hcpcs_cd', 'seq_num', 'short_description']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000068
   hadm_id: 25022803
   chartdate: 2160-03-04
@@ -959,7 +959,7 @@
   seq_num: 1
   short_description: Hospital observation services
 
-前10行数据:
+First 10 rows of data:
 ['10000068', '25022803', '2160-03-04', '99218', '1', 'Hospital observation services']
 ['10000084', '29888819', '2160-12-28', 'G0378', '1', 'Hospital observation per hr']
 ['10000108', '27250926', '2163-09-27', '99219', '1', 'Hospital observation services']
@@ -973,20 +973,20 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_services.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/hosp_services.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['subject_id', 'hadm_id', 'transfertime', 'prev_service', 'curr_service']
 
-列名 → 示例值:
+Column → Sample value:
   subject_id: 10000032
   hadm_id: 22595853
   transfertime: 2180-05-06 22:24:57
   prev_service: 
   curr_service: MED
 
-前10行数据:
+First 10 rows of data:
 ['10000032', '22595853', '2180-05-06 22:24:57', '', 'MED']
 ['10000032', '22841357', '2180-06-26 18:28:08', '', 'MED']
 ['10000032', '25742920', '2180-08-05 23:44:50', '', 'MED']
@@ -1000,16 +1000,16 @@
 
 
 ================================================================================
-📂 文件: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_caregiver.csv
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports/icu_caregiver.csv
 ================================================================================
-分隔符: ','
-表头:
+Delimiter: ','
+Header:
 ['caregiver_id']
 
-列名 → 示例值:
+Column → Sample value:
   caregiver_id: 3
 
-前10行数据:
+First 10 rows of data:
 ['3']
 ['4']
 ['6']
