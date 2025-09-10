@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#SBATCH --job-name=deid_csns
+#SBATCH --partition=batch,overflow
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --mem=16G
+#SBATCH --array=0-8
+
+#SBATCH --output=./output/deid_csns_%A_%a.out
+#SBATCH --error=./errors/deid_csns_%A_%a.err
+
+# Array of years to process
+YEARS=(2014 2015 2016 2017 2018 2019 2020 2021 2022)
+
+# Source and destination directories
+SOURCE_DIR="/labs/collab/K-lab-MODS/MODS-PHI/Encounter_Pickles/supertables2025/emory/supertables"
+DEST_DIR="/labs/collab/K-lab-MODS/MODS-PHI/Encounter_Pickles/supertables2025/emory/deid_supertables"
+
+
+# Print job information
+echo "========================================"
+echo "SLURM Job Array ID: $SLURM_ARRAY_JOB_ID"
+echo "SLURM Array Task ID: $SLURM_ARRAY_TASK_ID"
+echo "Year to process: ${YEARS[$SLURM_ARRAY_TASK_ID]}"
+echo "Source directory: $SOURCE_DIR"
+echo "Destination directory: $DEST_DIR"
+echo "========================================"
+
+# Change to the project directory
+cd /home/maror24/Sepy2.0
+
+# Run the deidentification script for the specific year
+python Deidentification/deidentifycsns.py \
+    --source "$SOURCE_DIR" \
+    --dest "$DEST_DIR" \
+    --year "${YEARS[$SLURM_ARRAY_TASK_ID]}"
+
+echo "========================================"
+echo "Completed processing year: ${YEARS[$SLURM_ARRAY_TASK_ID]}"
+echo "========================================"
