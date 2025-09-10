@@ -40,6 +40,7 @@ dictionary_paths:
     - ["bed_labels", "*gr_bed_labels*"]
     - ["variable_chart", "*gr_variable_chart*"]
     - ["grouping_vent", "*gr_vent_labels*"]
+    - ["infusion_meds_volume", "gr_infusion_meds_volume.csv"]
   # year_types:
   flatfile_types:
     - ["INFUSIONMEDS", "*infusion_meds*"]
