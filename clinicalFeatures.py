@@ -40,7 +40,8 @@ from comorbidipy import comorbidity
 @dataclass
 class SepyDictConfig:
     """Configuration class for sepyDICT with type safety and validation."""
-    vital_col_names: List[str]
+    numeric_vital_col_names: List[str]
+    string_vital_col_names: List[str]
     numeric_lab_col_names: List[str]
     string_lab_col_names: List[str]
     gcs_col_names: List[str]
@@ -59,6 +60,7 @@ class SepyDictConfig:
     def __post_init__(self):
         """Calculate derived fields after initialization."""
         self.all_lab_col_names = self.numeric_lab_col_names + self.string_lab_col_names
+        self.all_vitals_col_names = self.numeric_vital_col_names + self.string_vital_col_names
         self.vasopressor_col_names = self.vasopressor_names + self.vasopressor_units + self.vasopressor_dose
     
     @classmethod
@@ -354,9 +356,12 @@ class ClinicalDataProcessor:
             return vitals_df    
 
         resampled_data: Dict[str, pd.Series] = {}
-        for key in self.config.vital_col_names:
+        df = df.loc[:, ~df.columns.duplicated()]
+        for key in self.config.all_vitals_col_names:
             if key in df.columns:
-                if len(self.bounds.loc[self.bounds["location in supertable"] == key]) > 0:
+                if key == 'o2_device':
+                    agg_fn = "last"
+                elif len(self.bounds.loc[self.bounds["location in supertable"] == key]) > 0:
                     agg_fn = utils.agg_fn_wrapper(key, self.bounds)
                 else:
                     agg_fn = "mean"
@@ -604,13 +609,23 @@ class ClinicalDataProcessor:
             return radiology_notes_df
 
         df['day_verified'] = pd.to_datetime(df['day_verified'])
-        df = df.set_index("day_verified")
-        notes_acc_nbr = df['acc_nbr'].groupby(
-            pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])
-        ).apply(lambda x: ','.join(x.astype(str)))
-
-        radiology_notes_df = notes_acc_nbr.reindex(time_index, fill_value=0)
-        radiology_notes_df = pd.DataFrame(radiology_notes_df, columns = ['radiology_acc_nbr'])
+        
+        # Handle dates before first time_index by moving them to first time_index
+        df.loc[df['day_verified'] < time_index[0], 'day_verified'] = time_index[0]
+        
+        # Create a series with time_index, filled with acc_nbr for matching dates
+        radiology_notes_series = pd.Series(index=time_index, dtype=object)
+        
+        for _, row in df.iterrows():
+            date_mask = time_index.date == row['day_verified'].date()
+            radiology_notes_series.loc[date_mask] = row['acc_nbr']
+        
+        # Group by date and join acc_nbr values for same dates
+        radiology_notes_series = radiology_notes_series.groupby(radiology_notes_series.index.date).transform(
+            lambda x: ','.join(x.dropna().astype(str)) if x.dropna().any() else 0
+        )
+        
+        radiology_notes_df = pd.DataFrame(radiology_notes_series, columns=['radiology_acc_nbr'])
         return radiology_notes_df
     
     def vasopressor_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
@@ -872,109 +887,189 @@ class ClinicalDataProcessor:
         """Process clinical data and create supertable"""
         
         #Step 1: Initialize supertable
-        supertable_df = supertable(supertable=pd.DataFrame(index=clinical_data.super_table_time_index), time_index=clinical_data.super_table_time_index)
-        logging.info(f"Supertable data class object created with {len(supertable_df.supertable)} rows.")
+        try:
+            supertable_df = supertable(supertable=pd.DataFrame(index=clinical_data.super_table_time_index), time_index=clinical_data.super_table_time_index)
+            logging.info(f"Supertable data class object created with {len(supertable_df.supertable)} rows.")
+        except Exception as e:
+            logging.error(f"Error in Step 1 (Initialize supertable): {str(e)}")
+            raise RuntimeError(f"Step 1 (Initialize supertable) failed: {str(e)}")
         
         #Step 2: Add static features
-        static_features_columns = self.static_features_staging(clinical_data.static_features['age'],\
-                                                             clinical_data.static_features['gender'], \
-                                                             clinical_data.static_features['race'], \
-                                                             clinical_data.static_features['ethnicity'], \
-                                                             clinical_data.diagnosis,
-                                                             supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, static_features_columns], axis=1)
-        logging.info(f"Static features added to supertable.")
+        try:
+            static_features_columns = self.static_features_staging(clinical_data.static_features['age'],\
+                                                                 clinical_data.static_features['gender'], \
+                                                                 clinical_data.static_features['race'], \
+                                                                 clinical_data.static_features['ethnicity'], \
+                                                                 clinical_data.diagnosis,
+                                                                 supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, static_features_columns], axis=1)
+            logging.info(f"Static features added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 2 (Add static features): {str(e)}")
+            raise RuntimeError(f"Step 2 (Add static features) failed: {str(e)}")
         
         #Step 3: Add labs
-        labs_columns = self.labs_staging(clinical_data.labs, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, labs_columns], axis=1)
-        logging.info(f"Labs added to supertable.")
-
+        try:
+            labs_columns = self.labs_staging(clinical_data.labs, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, labs_columns], axis=1)
+            logging.info(f"Labs added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 3 (Add labs): {str(e)}")
+            raise RuntimeError(f"Step 3 (Add labs) failed: {str(e)}")
+        
         #Step 4: Add vitals
-        vitals_columns = self.vitals_staging(clinical_data.vitals, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, vitals_columns], axis=1)
-        logging.info(f"Vitals added to supertable.")
+        try:
+            vitals_columns = self.vitals_staging(clinical_data.vitals, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, vitals_columns], axis=1)
+            logging.info(f"Vitals added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 4 (Add vitals): {str(e)}")
+            raise RuntimeError(f"Step 4 (Add vitals) failed: {str(e)}")
         
         #Step 5: Add procedures
-        procedures_columns = self.procedures_staging(clinical_data.procedures, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, procedures_columns], axis=1)
-        logging.info(f"Procedures added to supertable.")
-
+        try:
+            procedures_columns = self.procedures_staging(clinical_data.procedures, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, procedures_columns], axis=1)
+            logging.info(f"Procedures added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 5 (Add procedures): {str(e)}")
+            raise RuntimeError(f"Step 5 (Add procedures) failed: {str(e)}")
+        
         #Step 6: gcs staging
-        gcs_columns = self.gcs_staging(clinical_data.gcs, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, gcs_columns], axis=1)
-        logging.info(f"GCS added to supertable.")
-
+        try:
+            gcs_columns = self.gcs_staging(clinical_data.gcs, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, gcs_columns], axis=1)
+            logging.info(f"GCS added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 6 (Add GCS): {str(e)}")
+            raise RuntimeError(f"Step 6 (Add GCS) failed: {str(e)}")
+        
         #Step 7: Add vent status
-        vent_columns = self.vent_staging(clinical_data.vent, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, vent_columns], axis=1)
-        logging.info(f"Vent status added to supertable.")
-
+        try:
+            vent_columns = self.vent_staging(clinical_data.vent, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, vent_columns], axis=1)
+            logging.info(f"Vent status added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 7 (Add vent status): {str(e)}")
+            raise RuntimeError(f"Step 7 (Add vent status) failed: {str(e)}")
+        
         #Step 8: Add bed status
-        bed_status_columns = self.assign_bed_status(clinical_data.beds, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, bed_status_columns], axis=1)
-        logging.info(f"Bed status added to supertable.")
-
+        try:
+            bed_status_columns = self.assign_bed_status(clinical_data.beds, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, bed_status_columns], axis=1)
+            logging.info(f"Bed status added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 8 (Add bed status): {str(e)}")
+            raise RuntimeError(f"Step 8 (Add bed status) failed: {str(e)}")
+        
         #Step 9: Add bed unit
-        bed_unit_columns = self.create_bed_unit(clinical_data.beds, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, bed_unit_columns], axis=1)
-        logging.info(f"Bed unit added to supertable.")
-
+        try:
+            bed_unit_columns = self.create_bed_unit(clinical_data.beds, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, bed_unit_columns], axis=1)
+            logging.info(f"Bed unit added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 9 (Add bed unit): {str(e)}")
+            raise RuntimeError(f"Step 9 (Add bed unit) failed: {str(e)}")
+        
         #Step 10: Add dialysis status
-        dialysis_columns = self.dialysis_staging(clinical_data.dialysis, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, dialysis_columns], axis=1)
-        logging.info(f"Dialysis status added to supertable.")
-
+        try:
+            dialysis_columns = self.dialysis_staging(clinical_data.dialysis, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, dialysis_columns], axis=1)
+            logging.info(f"Dialysis status added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 10 (Add dialysis status): {str(e)}")
+            raise RuntimeError(f"Step 10 (Add dialysis status) failed: {str(e)}")
+        
         #Step 11: Add history of dialysis
-        history_of_dialysis_columns = self.create_history_of_dialysis(clinical_data.diagnosis, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, history_of_dialysis_columns], axis=1)
-        logging.info(f"History of dialysis added to supertable.")
-
+        try:
+            history_of_dialysis_columns = self.create_history_of_dialysis(clinical_data.diagnosis, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, history_of_dialysis_columns], axis=1)
+            logging.info(f"History of dialysis added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 11 (Add history of dialysis): {str(e)}")
+            raise RuntimeError(f"Step 11 (Add history of dialysis) failed: {str(e)}")
+        
         #Step 12: Add fluids
-        individual_fluids_columns = self.individual_fluids_staging(clinical_data.in_out_fluids, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, individual_fluids_columns], axis=1)
-        logging.info(f"Individual fluids added to supertable.")
-
+        #try:
+        #    individual_fluids_columns = self.individual_fluids_staging(clinical_data.in_out_fluids, supertable_df.time_index)
+        #    supertable_df.supertable = pd.concat([supertable_df.supertable, individual_fluids_columns], axis=1)
+        #    logging.info(f"Individual fluids added to supertable.")
+        #except Exception as e:
+        #    logging.error(f"Error in Step 12 (Add individual fluids): {str(e)}")
+        #    raise RuntimeError(f"Step 12 (Add individual fluids) failed: {str(e)}")
+        
         #Step 13: Add cumulative fluids
-        cumulative_fluids_columns = self.cumulative_fluids_staging(clinical_data.in_out_fluids, clinical_data.infusion_meds, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, cumulative_fluids_columns], axis=1)
-        logging.info(f"Cumulative fluids added to supertable.")
-
+        #try:
+        #    cumulative_fluids_columns = self.cumulative_fluids_staging(clinical_data.in_out_fluids, clinical_data.infusion_meds, supertable_df.time_index)
+        #    supertable_df.supertable = pd.concat([supertable_df.supertable, cumulative_fluids_columns], axis=1)
+        #    logging.info(f"Cumulative fluids added to supertable.")
+        #except Exception as e:
+        #    logging.error(f"Error in Step 13 (Add cumulative fluids): {str(e)}")
+        #    raise RuntimeError(f"Step 13 (Add cumulative fluids) failed: {str(e)}")
+        
         #Step 14: radiology notes
-        radiology_notes_columns = self.radiology_notes_staging(clinical_data.radiology_notes, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, radiology_notes_columns], axis=1)
-        logging.info(f"Radiology notes added to supertable.")
-
+        try:
+            radiology_notes_columns = self.radiology_notes_staging(clinical_data.radiology_notes, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, radiology_notes_columns], axis=1)
+            logging.info(f"Radiology notes added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 14 (Add radiology notes): {str(e)}")
+            raise RuntimeError(f"Step 14 (Add radiology notes) failed: {str(e)}")
+        
         #Step 15: clinical notes
-        clinical_notes_columns = self.clinical_notes_staging(clinical_data.clinical_notes, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, clinical_notes_columns], axis=1)
-        logging.info(f"Clinical notes added to supertable.")
+        try:
+            clinical_notes_columns = self.clinical_notes_staging(clinical_data.clinical_notes, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, clinical_notes_columns], axis=1)
+            logging.info(f"Clinical notes added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 15 (Add clinical notes): {str(e)}")
+            raise RuntimeError(f"Step 15 (Add clinical notes) failed: {str(e)}")
         
         #Step 16: Add vasopressor meds
-        vasopressor_meds_columns = self.vasopressor_staging(clinical_data.vasopressor_meds, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, vasopressor_meds_columns], axis=1)
-        logging.info(f"Vasopressor meds added to supertable.")
-
+        try:
+            vasopressor_meds_columns = self.vasopressor_staging(clinical_data.vasopressor_meds, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, vasopressor_meds_columns], axis=1)
+            logging.info(f"Vasopressor meds added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 16 (Add vasopressor meds): {str(e)}")
+            raise RuntimeError(f"Step 16 (Add vasopressor meds) failed: {str(e)}")
+        
         #Step 18: Add icd procedures
-        icd_procedures_columns = self.icd_staging(clinical_data.icd_procedures, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, icd_procedures_columns], axis=1)
-        logging.info(f"ICD procedures added to supertable.")
-
+        try:
+            icd_procedures_columns = self.icd_staging(clinical_data.icd_procedures, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, icd_procedures_columns], axis=1)
+            logging.info(f"ICD procedures added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 18 (Add ICD procedures): {str(e)}")
+            raise RuntimeError(f"Step 18 (Add ICD procedures) failed: {str(e)}")
+        
         #Step 19: Add cpt procedures
-        cpt_procedures_columns = self.cpt_staging(clinical_data.cpt_procedures, supertable_df.time_index)
-        supertable_df.supertable = pd.concat([supertable_df.supertable, cpt_procedures_columns], axis=1)
-        logging.info(f"CPT procedures added to supertable.")
-
+        try:
+            cpt_procedures_columns = self.cpt_staging(clinical_data.cpt_procedures, supertable_df.time_index)
+            supertable_df.supertable = pd.concat([supertable_df.supertable, cpt_procedures_columns], axis=1)
+            logging.info(f"CPT procedures added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 19 (Add CPT procedures): {str(e)}")
+            raise RuntimeError(f"Step 19 (Add CPT procedures) failed: {str(e)}")
+        
         # Step 20: Add gender code 
-        supertable_df.supertable['gender_code'] = clinical_data.static_features.get("gender_code", 0)
-        logging.info(f"Gender code added to supertable.")
-
+        try:
+            supertable_df.supertable['gender_code'] = clinical_data.static_features.get("gender_code", 0)
+            logging.info(f"Gender code added to supertable.")
+        except Exception as e:
+            logging.error(f"Error in Step 20 (Add gender code): {str(e)}")
+            raise RuntimeError(f"Step 20 (Add gender code) failed: {str(e)}")
+        
         #Step 21: Add comorbidity data
-        quan_deyo_ICD10_columns, quan_elix_ICD10_columns = self.comorbidity_staging(clinical_data.quan_deyo_ICD10, clinical_data.quan_elix_ICD10)
-        clinical_data.quan_deyo_ICD10_staging = quan_deyo_ICD10_columns
-        clinical_data.quan_elix_ICD10_staging = quan_elix_ICD10_columns
-        logging.info(f"Comorbidity data added to Clinical Data.")
-
+        try:
+            quan_deyo_ICD10_columns, quan_elix_ICD10_columns = self.comorbidity_staging(clinical_data.quan_deyo_ICD10, clinical_data.quan_elix_ICD10)
+            clinical_data.quan_deyo_ICD10_staging = quan_deyo_ICD10_columns
+            clinical_data.quan_elix_ICD10_staging = quan_elix_ICD10_columns
+            logging.info(f"Comorbidity data added to Clinical Data.")
+        except Exception as e:
+            logging.error(f"Error in Step 21 (Add comorbidity data): {str(e)}")
+            raise RuntimeError(f"Step 21 (Add comorbidity data) failed: {str(e)}")
+        
         logging.info(f"Supertable created with {len(supertable_df.supertable)} rows.")
         return supertable_df
 

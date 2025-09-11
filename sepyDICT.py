@@ -21,6 +21,8 @@ import pandas as pd
 
 from typing import Dict, Any, Tuple
 
+import importlib 
+importlib.reload(clinicalFeatures)
 # Import from proper modules to avoid duplication
 from clinicalFeatures import ClinicalDataProcessor, DerivedFeatures, SepyDictConfig, ClinicalData, supertable
 
@@ -69,21 +71,30 @@ class sepyMaster:
                                       'dialysis': "csn"}
 
 
-    def slice_master_dataframes(self, identifier: Any, name: str) -> Tuple[pd.DataFrame, str]:
+    def slice_master_dataframes(self, identifier: Any, name: str, identifier_type: str) -> Tuple[pd.DataFrame, str]:
         """Safely slice yearly_data_instance by identifier."""
         filt_df_name = name + "_PerCSN"
         df_name = "df_" + name
 
         try:
             source_df = getattr(self.yearly_data_instance, df_name)
-            if source_df.index.dtype == "O":
-                return source_df.loc[[str(identifier)], :], filt_df_name
+            if isinstance(source_df.index, pd.MultiIndex) and identifier_type in source_df.index.names:
+                level_values = source_df.index.get_level_values(identifier_type)
+                if pd.api.types.is_object_dtype(level_values):
+                    result = source_df.xs(str(identifier), level=identifier_type)
+                    return result, filt_df_name
+                else:
+                    result = source_df.xs(int(identifier), level=identifier_type)
+                    return result, filt_df_name
             else:
-                return source_df.loc[[identifier], :], filt_df_name
-        except Exception: 
+                if pd.api.types.is_object_dtype(source_df.index):
+                    return source_df.loc[[str(identifier)], :], filt_df_name
+                else:
+                    return source_df.loc[[int(identifier)], :], filt_df_name
+        except KeyError:
+            logging.info("There were no %s data for identifier %s", name, identifier)
             empty_df = getattr(self.yearly_data_instance, df_name).iloc[0:0]
             empty_df.index.set_names(getattr(self.yearly_data_instance, df_name).index.names)
-            logging.info("There were no %s data for identifier %s", name, identifier)
             return empty_df, filt_df_name
     
     def get_identifier(self, csn: Any, identifier_type: str) -> Any:
@@ -91,7 +102,19 @@ class sepyMaster:
         if identifier_type == "csn":
             return csn
         elif (identifier_type == "pat_id") or (identifier_type == "patient_id"):
-            return self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
+            if self.yearly_data_instance.df_encounters.index.dtype == "O":
+                csn = str(csn)
+            else:
+                csn = int(csn)
+            pat_id = self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
+            # check if pat_id is a string
+            #print(type(pat_id))
+            if isinstance(pat_id, str):
+                return pat_id
+            else:
+                return str(pat_id)
+            #else:
+            #    raise ValueError(f"pat_id is not a string or int: {pat_id}")
         else:
             raise ValueError(f"Invalid identifier type: {identifier_type}")
 
@@ -101,7 +124,7 @@ class sepyMaster:
         sliced_data = {}
         for df_name, identifier_type in self.dataframes_id_mapping.items():
             identifier = self.get_identifier(csn, identifier_type)
-            df, df_name = self.slice_master_dataframes(identifier, df_name)
+            df, df_name = self.slice_master_dataframes(identifier, df_name, identifier_type)
             sliced_data[df_name] = df
         
         logging.info(f"Slicing done for these dataframes: {sliced_data.keys()}")

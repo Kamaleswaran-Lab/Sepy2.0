@@ -235,8 +235,8 @@ if __name__ == "__main__":
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Process EMR data for a specific year')
     parser.add_argument('--year', type=int, help='The year for which data is being processed')
-    parser.add_argument('--data_config', type=str, default='configurations/emory_config.yaml', help='Path to the data configuration file in YAML format')
-    parser.add_argument('--sepy_config', type=str, default='configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
+    parser.add_argument('--data_config', type=str, default='../configurations/emory_config_oddjobs.yaml', help='Path to the data configuration file in YAML format')
+    parser.add_argument('--sepy_config', type=str, default='../configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
     parser.add_argument('--num_processes', type=int, default=10, help='Number of processes to use')
     parser.add_argument('--processor_assignment', type=int, help='Processor assignment')
     args = parser.parse_args()
@@ -450,7 +450,15 @@ if __name__ == "__main__":
         supertable_write_path = save_dir / "Supertables"
         supertable_write_path.mkdir(exist_ok = True, parents = True)
         logging.info(f"Sepy-Directory for year {year} was set to {save_dir}")
+
+        # List supertables already in save path 
+        supertables_in_save_path = os.listdir(supertable_write_path)
+        logging.info(f"Sepy- The supertables already has {len(supertables_in_save_path)} supertables in the save path")
         
+        #Filter out supertables that are already in the save path
+        process_list = [csn for csn in process_list if f"{csn}.pkl" not in supertables_in_save_path]
+        logging.info(f"Sepy- The process_list has {len(process_list)} csns after filtering out supertables that are already in the save path")
+
         # make empty list to handle csn's with errors
         error_list = []
 
@@ -546,14 +554,6 @@ if __name__ == "__main__":
         else:
             logging.warning("Sepy- No encounter summaries were collected")
             
-        # Save comorbidity summary
-        if appended_comorbidity_summaries:
-            pd.concat(appended_comorbidity_summaries).to_csv(
-                base_path / "comorbidity_summary" / f"comorbidity_summary_{UNIQUE_FILE_ID}.csv",
-                index=False,
-            )
-        else:
-            logging.warning("Sepy- No comorbidity summaries were collected")
 
         # Save error summary
         pd.DataFrame(error_list, columns=["csn", "error"]).to_csv(
