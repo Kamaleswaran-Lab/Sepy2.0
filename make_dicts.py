@@ -450,7 +450,15 @@ if __name__ == "__main__":
         supertable_write_path = save_dir / "Supertables"
         supertable_write_path.mkdir(exist_ok = True, parents = True)
         logging.info(f"Sepy-Directory for year {year} was set to {save_dir}")
+
+        # List supertables already in save path 
+        supertables_in_save_path = os.listdir(supertable_write_path)
+        logging.info(f"Sepy- The supertables already has {len(supertables_in_save_path)} supertables in the save path")
         
+        #Filter out supertables that are already in the save path
+        process_list = [csn for csn in process_list if f"{csn}.pkl" not in supertables_in_save_path]
+        logging.info(f"Sepy- The process_list has {len(process_list)} csns after filtering out supertables that are already in the save path")
+
         # make empty list to handle csn's with errors
         error_list = []
 
