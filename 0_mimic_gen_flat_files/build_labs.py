@@ -12,7 +12,6 @@ out_path = os.path.join(output_dir, "LABS.csv")
 header_written = False
 
 chunksize = 1_000_000  # process 1M rows at a time
-
 total_written = 0
 
 for chunk in pd.read_csv(os.path.join(base_dir, "hosp_labevents.csv"), chunksize=chunksize):
@@ -22,23 +21,26 @@ for chunk in pd.read_csv(os.path.join(base_dir, "hosp_labevents.csv"), chunksize
         "csn": labs["hadm_id"],
         "pat_id": labs["subject_id"],
         "component_id": labs["itemid"],
+
+        # lab result: use valuenum if available, otherwise use value
         "lab_result": labs["valuenum"].combine_first(labs["value"]),
         "lab_result_time": labs["charttime"],
         "collection_time": labs["charttime"],
         "result_status": "Final",
-        "proc_cat_id": labs["category"],
-        "proc_cat_name": labs["category"],
+        "proc_cat_id": labs["itemid"],
+        "proc_cat_name": labs["fluid"],
         "proc_code": labs["itemid"],
-        "proc_desc": labs["label"],
+        "proc_desc": labs["category"],
+
         "component": labs["label"],
-        "loinc_code": None
+        "loinc_code": "" 
     })
 
-    # Some patients do not have a csn. If you want to drop those patients, then modify the following line as ["csn", "pat_id", "component_id"]
-    labs_final = labs_final.dropna(subset=["pat_id", "component_id"])
+    labs_final = labs_final.dropna(subset=["pat_id", "csn", "component_id"])
 
+    # Append to CSV
     labs_final.to_csv(out_path, mode="a", index=False, header=not header_written)
     header_written = True
-    
+
     total_written += len(labs_final)
     print(f"✅ Processed chunk, total rows written so far: {total_written}")
