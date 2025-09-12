@@ -122,47 +122,62 @@ SKIP FOR NOW
 
 ### LABS File
 
+#### Purpose
+The LABS file standardizes **laboratory test results** from MIMIC-IV to match the Emory pipeline specification.  
+It captures all laboratory events with identifiers, result values, specimen type, and associated metadata.
+
+#### Source Tables
+- 🟡 **`hosp_labevents.csv`** (individual lab results with subject, hadm, itemid, timestamps, values).  
+- 🟡 **`hosp_d_labitems.csv`** (lab item dictionary providing `label`, `fluid`, `category`, and metadata).  
+
+#### Processing Logic
+1. Load 🟡 `hosp_labevents.csv` in chunks for efficiency.  
+2. Merge with 🟡 `hosp_d_labitems.csv` on `itemid` to add lab metadata.  
+3. Construct final standardized columns:  
+   - `csn` = `hadm_id`  
+   - `pat_id` = `subject_id`  
+   - `component_id` = `itemid`  
+   - `lab_result` = `valuenum` if available, otherwise `value`  
+   - `lab_result_time` = `charttime`  
+   - `collection_time` = `charttime` (MIMIC does not distinguish collection vs. result time)  
+   - `result_status` = hard-coded `"Final"`  
+   - `proc_cat_id` = `itemid` (placeholder; pipeline will map with grouping files if needed)  
+   - `proc_cat_name` = `fluid` (specimen type: Blood, Urine, CSF, etc.)  
+   - `proc_code` = `itemid`  
+   - `proc_desc` = `category` (lab discipline: Chemistry, Hematology, Blood Gas, etc.)  
+   - `component` = `label` (lab test name)  
+   - `loinc_code` = left empty (MIMIC does not provide direct mapping in d_labitems)  
+
+4. Drop rows missing `pat_id`, `csn`, or `component_id`.  
+5. Write out results incrementally to **LABS.csv** in append mode.
+
+#### Final Columns
+| Column Name      | Source / Logic                                                                 |
+|------------------|--------------------------------------------------------------------------------|
+| `csn`            | `hadm_id`; 🟡 `hosp_labevents.csv`                                             |
+| `pat_id`         | `subject_id`; 🟡 `hosp_labevents.csv`                                          |
+| `component_id`   | `itemid`; 🟡 `hosp_labevents.csv`                                              |
+| `lab_result`     | `valuenum` if not null, else `value`; 🟡 `hosp_labevents.csv`                  |
+| `lab_result_time`| `charttime`; 🟡 `hosp_labevents.csv`                                           |
+| `collection_time`| `charttime`; 🟡 `hosp_labevents.csv`                                           |
+| `result_status`  | Hard-coded `"Final"`                                                          |
+| `proc_cat_id`    | `itemid`; 🟡 `hosp_labevents.csv`                                              |
+| `proc_cat_name`  | `fluid`; 🟡 `hosp_d_labitems.csv`                                              |
+| `proc_code`      | `itemid`; 🟡 `hosp_labevents.csv`                                              |
+| `proc_desc`      | `category`; 🟡 `hosp_d_labitems.csv`                                           |
+| `component`      | `label`; 🟡 `hosp_d_labitems.csv`                                              |
+| `loinc_code`     | Empty placeholder (not directly provided in MIMIC-IV)                         |
+
+#### Special Notes
+- `lab_result_time` and `collection_time` are both set to `charttime`, as MIMIC does not explicitly store collection timestamps separately.  
+- `result_status` is hard-coded to `"Final"` since MIMIC does not store result status metadata.
+- `proc_cat_id` and `proc_code` are both set as `itemid` because there is no specification in MIMIC. Please see [here](https://mimic.mit.edu/docs/iv/modules/hosp/d_labitems/#links-to:~:text=All%20data%20in%20labevents%20link%20to%20the%20d_labitems%20table.%20Each%20unique%20(fluid%2C%20category%2C%20label)%20tuple%20in%20the%20hospital%20database%20was%20assigned%20an%20itemid%20in%20this%20table%2C%20and%20the%20use%20of%20this%20itemid%20facilitates%20efficient%20storage%20and%20querying%20of%20the%20data) for what 'itemid' means in MIMIC.
+- `loinc_code` left blank unless a separate mapping file is introduced.  
+- File size is large; script processes data in 1M-row chunks to manage memory efficiently.
+  
 
 ---
 
+### VITALS File
 
-## LABS
-
-### Purpose
-The **LABS** file consolidates laboratory test results from MIMIC-IV and their metadata into the schema required by the Sepy 2.0 pipeline.
-
-### Source Tables
-- `hosp_labevents.csv` — raw laboratory test results  
-- `hosp_d_labitems.csv` — metadata defining lab test categories and labels  
-
-### Processing Logic
-- Data is read in chunks (1M rows at a time) for memory efficiency. (Unable to load if read all at once)
-- Each chunk is left-joined with `hosp_d_labitems.csv` on `itemid` to enrich results.  
-- `lab_result` prefers `valuenum` if available, else falls back to `value`. (**valueuom is not recorded!**)
-- `collection_time` is set to `charttime` (MIMIC-IV does not provide separately).  
-- `result_status` is hardcoded as `"Final"`.  
-- Rows missing `pat_id` or `component_id` are dropped. (**Some patients do not have the csn, which means they are not inpatients. If you are not interested in these patients' data, just drop them in the code.**) 
-- Output is appended incrementally to `LABS.csv`.  
-
-### Final Columns
-| Column Name       | Source / Logic                                                           |
-|-------------------|---------------------------------------------------------------------------|
-| `csn`             | Encounter identifier (`hadm_id`)                                          |
-| `pat_id`          | Patient identifier (`subject_id`)                                         |
-| `component_id`    | Lab test identifier (`itemid`)                                            |
-| `lab_result`      | Numeric value (`valuenum`), fallback to string result (`value`)           |
-| `lab_result_time` | Result timestamp (`charttime`)                                            |
-| `collection_time` | Same as `charttime`                                                       |
-| `result_status`   | `"Final"` (not tracked in MIMIC)                                          |
-| `proc_cat_id`     | Lab category (`category` from `hosp_d_labitems`)                          |
-| `proc_cat_name`   | Same as `proc_cat_id`                                                     |
-| `proc_code`       | Proxy code (`itemid`)                                                     |
-| `proc_desc`       | Lab test label (`label` from `hosp_d_labitems`)                           |
-| `component`       | Same as `proc_desc`                                                       |
-| `loinc_code`      | Not provided in MIMIC-IV; set to `None`                                   |
-
-### Notes
-- File size is large (~10GB uncompressed).  
-- Some labs lack `csn` (`hadm_id`); these are retained unless explicitly dropped.  
-- **LOINC codes are not available in MIMIC-IV; external mapping required if needed.**  
-
+---
