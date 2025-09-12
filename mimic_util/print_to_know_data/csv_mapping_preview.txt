@@ -1,0 +1,394 @@
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/proc_datetimeevents.csv
+================================================================================
+Delimiter: ','
+Header:
+['itemid (omop_source_code)', 'label', 'omop_concept_id', 'omop_concept_name', 'omop_domain_id', 'omop_vocabulary_id', 'omop_concept_class_id', 'omop_standard_concept', 'omop_concept_code', 'sssom_author_id', 'sssom_reviewer_id', 'sssom_subject_source_version', 'common_vocabulary_version', 'sssom_mapping_tool', 'sssom_mapping_date', 'sssom_confidence', 'sssom_comment']
+
+Column → Sample value:
+  itemid (omop_source_code): 224183
+  label: PICC Line Cap Change
+  omop_concept_id: 4194123
+  omop_concept_name: Peripherally inserted central catheter care
+  omop_domain_id: Procedure
+  omop_vocabulary_id: SNOMED
+  omop_concept_class_id: Procedure
+  omop_standard_concept: S
+  omop_concept_code: 392020005
+  sssom_author_id: 0000-0001-8822-1884
+  sssom_reviewer_id: 0000-0002-9348-9284
+  sssom_subject_source_version: MIMIC-IV v2.0
+  common_vocabulary_version: 
+  sssom_mapping_tool: https://athena.ohdsi.org/
+  sssom_mapping_date: 
+  sssom_confidence: 
+  sssom_comment: 
+
+First 10 rows of data:
+['224183', 'PICC Line Cap Change', '4194123', 'Peripherally inserted central catheter care', 'Procedure', 'SNOMED', 'Procedure', 'S', '392020005', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+['224184', 'PICC Line Insertion Date', '4322380', 'Insertion of peripherally inserted central catheter', 'Procedure', 'SNOMED', 'Procedure', 'S', '425196008', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+['224185', 'PICC Line Change over Wire Date', '4194123', 'Peripherally inserted central catheter care', 'Procedure', 'SNOMED', 'Procedure', 'S', '392020005', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+['224186', 'PICC Line Dressing Change', '4194123', 'Peripherally inserted central catheter care', 'Procedure', 'SNOMED', 'Procedure', 'S', '392020005', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+['224187', 'PICC Line Tubing Change', '4194123', 'Peripherally inserted central catheter care', 'Procedure', 'SNOMED', 'Procedure', 'S', '392020005', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+['224261', 'Multi Lumen Cap Change', '4078442', 'Catheter procedure', 'Procedure', 'SNOMED', 'Procedure', 'S', '276272002', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+['224262', 'Multi Lumen Change over Wire Date', '4078442', 'Catheter procedure', 'Procedure', 'SNOMED', 'Procedure', 'S', '276272002', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+['224279', 'Multi Lumen Dressing Change', '4078442', 'Catheter procedure', 'Procedure', 'SNOMED', 'Procedure', 'S', '276272002', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+['224280', 'Multi Lumen Insertion Date', '4141149', 'Open insertion of central venous catheter', 'Procedure', 'SNOMED', 'Procedure', 'S', '265546000', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+['224282', 'Multi Lumen Tubing Change', '4078442', 'Catheter procedure', 'Procedure', 'SNOMED', 'Procedure', 'S', '276272002', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '', 'https://athena.ohdsi.org/', '', '', '']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/inputevents_to_rxnorm.csv
+================================================================================
+Delimiter: ','
+Header:
+['itemid (omop_source_code)', 'label', 'ordercategorydescription', 'amountuom', 'omop_concept_id', 'omop_concept_name', 'omop_domain_id', 'omop_vocabulary_id', 'omop_concept_class_id', 'omop_standard_concept', 'omop_concept_code', 'sssom_author_id', 'sssom_reviewer_id', 'sssom_subject_source_version', 'sssom_mapping_tool', 'sssom_mapping_date', 'sssom_confidence', 'sssom_comment', 'inputevents_row_count']
+
+Column → Sample value:
+  itemid (omop_source_code): 221906
+  label: Norepinephrine
+  ordercategorydescription: Continuous Med
+  amountuom: mg
+  omop_concept_id: 35603731
+  omop_concept_name: norepinephrine Injection
+  omop_domain_id: Drug
+  omop_vocabulary_id: RxNorm
+  omop_concept_class_id: Clinical Drug Form
+  omop_standard_concept: S
+  omop_concept_code: 1745276
+  sssom_author_id: 0000-0001-8822-1884
+  sssom_reviewer_id: 0000-0002-9348-9284
+  sssom_subject_source_version: MIMIC-IV v2.0
+  sssom_mapping_tool: https://athena.ohdsi.org/
+  sssom_mapping_date: 11/30/2021
+  sssom_confidence: 
+  sssom_comment: 
+  inputevents_row_count: 353659
+
+First 10 rows of data:
+['221906', 'Norepinephrine', 'Continuous Med', 'mg', '35603731', 'norepinephrine Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '1745276', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '353659']
+['222168', 'Propofol', 'Continuous Med', 'mg', '40220385', 'propofol Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '1808216', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '339218']
+['221749', 'Phenylephrine', 'Continuous Med', 'mg', '46287544', 'phenylephrine Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '1666371', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '203138']
+['221744', 'Fentanyl', 'Drug Push', 'mcg', '35603427', 'fentanyl Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '1735002', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '201660']
+['225166', 'Potassium Chloride', 'Continuous IV', 'mEq', '1718692', 'potassium chloride Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '1860131', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '184507']
+['225975', 'Heparin Sodium (Prophylaxis)', 'Drug Push', 'dose', '1718457', 'heparin Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '1857598', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '159427']
+['223258', 'Insulin - Regular', 'Drug Push', 'units', '1361259', 'insulin, regular, human Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '2179743', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '154343']
+['223258', 'Insulin - Regular', 'Continuous Med', 'units', '1361259', 'insulin, regular, human Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '2179743', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '142747']
+['225942', 'Fentanyl (Concentrate)', 'Continuous Med', 'mg', '35603427', 'fentanyl Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '1735002', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '117284']
+['225798', 'Vancomycin', 'Drug Push', 'dose', '40221349', 'vancomycin Injection', 'Drug', 'RxNorm', 'Clinical Drug Form', 'S', '1807507', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '11/30/2021', '', '', '115630']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/waveforms-summary.csv
+================================================================================
+Delimiter: ','
+Header:
+['label', 'units', 'UCUM', 'description', 'omop_concept_id', 'omop_concept_name', 'omop_domain_id', 'omop_vocabulary_id', 'omop_concept_class_id', 'omop_standard_concept', 'omop_concept_code', 'sssom_author_id', 'sssom_reviewer_id', 'sssom_subject_source_version', 'common_vocabulary_version', 'sssom_mapping_tool', 'sssom_mapping_date', 'sssom_comment', '# records']
+
+Column → Sample value:
+  label: ABP
+  units: mmHg
+  UCUM: mm[Hg]
+  description: Arterial Blood Pressure 
+  omop_concept_id: 
+  omop_concept_name: 
+  omop_domain_id: 
+  omop_vocabulary_id: 
+  omop_concept_class_id: 
+  omop_standard_concept: 
+  omop_concept_code: 
+  sssom_author_id: 
+  sssom_reviewer_id: 
+  sssom_subject_source_version: 
+  common_vocabulary_version: 
+  sssom_mapping_tool: 
+  sssom_mapping_date: 
+  sssom_comment: 
+  # records: 8778
+
+First 10 rows of data:
+['ABP', 'mmHg', 'mm[Hg]', 'Arterial Blood Pressure ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8778']
+['AI', 'mV', 'mV', 'Wave l Label Frank Lead (EASI) ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '5']
+['ART', 'mmHg', 'mm[Hg]', 'Arterial Blood Pressure ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1811']
+['AS', 'mV', 'mV', 'Wave l Label Frank Lead (EASI) ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '5']
+['Ao', 'mmHg', 'mm[Hg]', 'Aortic Blood Pressure ', '21490671', 'Aorta blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '60981-8', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', '', '307']
+['BAP', 'mmHg', 'mm[Hg]', 'Brachial Arterial Pressure ', '42528518', 'Brachial artery Blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '83389-7', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', '', '23']
+['CO2', 'mmHg', 'mm[Hg]', 'Carbon Dioxide ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '400']
+['CVP', 'mmHg', 'mm[Hg]', 'Central Venous Pressure ', '21490675', 'Central venous pressure (CVP)', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '60985-9', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', '', '4935']
+['ECG #0', 'mV', 'mV', 'Electrocardiogram', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '3627']
+['ES', 'mV', 'mV', 'Wave l Label Frank Lead (EASI) ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '4']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/numerics-summary.csv
+================================================================================
+Delimiter: ','
+Header:
+['label', 'units', 'UCUM', 'description', 'omop_concept_id', 'omop_concept_name', 'omop_domain_id', 'omop_vocabulary_id', 'omop_concept_class_id', 'omop_standard_concept', 'omop_concept_code', 'sssom_author_id', 'sssom_reviewer_id', 'sssom_subject_source_version', 'common_vocabulary_version', 'sssom_mapping_tool', 'sssom_mapping_date', 'sssom_comment', '# observations']
+
+Column → Sample value:
+  label: ABPd
+  units: mmHg
+  UCUM: mm[Hg]
+  description: Arterial Blood Pressure (Diastolic)
+  omop_concept_id: 3012888
+  omop_concept_name: Diastolic blood pressure
+  omop_domain_id: Measurement
+  omop_vocabulary_id: LOINC
+  omop_concept_class_id: Clinical Observation
+  omop_standard_concept: S
+  omop_concept_code: 8462-4
+  sssom_author_id: 0000-0001-8822-1884
+  sssom_reviewer_id: 0000-0002-9348-9284
+  sssom_subject_source_version: MIMIC-IV v2.0
+  common_vocabulary_version: 2.72
+  sssom_mapping_tool: https://loinc.org/search/
+  sssom_mapping_date: 6/1/2022
+  sssom_comment: ART and ABP are both for "Arterial Blood Pressure" according to the "System Parameter" table
+  # observations: 1204510651
+
+First 10 rows of data:
+['ABPd', 'mmHg', 'mm[Hg]', 'Arterial Blood Pressure (Diastolic)', '3012888', 'Diastolic blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8462-4', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', 'ART and ABP are both for "Arterial Blood Pressure" according to the "System Parameter" table', '1204510651']
+['ABPm', 'mmHg', 'mm[Hg]', 'Arterial Blood Pressure (Mean)', '3027598', 'Mean blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8478-0', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', 'ART and ABP are both for "Arterial Blood Pressure" according to the "System Parameter" table', '1222923615']
+['ABPs', 'mmHg', 'mm[Hg]', 'Arterial Blood Pressure (Systolic)', '3004249', 'Systolic blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8480-6', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', 'ART and ABP are both for "Arterial Blood Pressure" according to the "System Parameter" table', '1204510526']
+['ARTd', 'mmHg', 'mm[Hg]', 'Arterial Blood Pressure (Diastolic)', '3012888', 'Diastolic blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8462-4', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', 'ART and ABP are both for "Arterial Blood Pressure" according to the "System Parameter" table', '139829887']
+['ARTm', 'mmHg', 'mm[Hg]', 'Arterial Blood Pressure (Mean)', '3027598', 'Mean blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8478-0', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', 'ART and ABP are both for "Arterial Blood Pressure" according to the "System Parameter" table', '143407032']
+['ARTs', 'mmHg', 'mm[Hg]', 'Arterial Blood Pressure (Systolic)', '3004249', 'Systolic blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8480-6', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', 'ART and ABP are both for "Arterial Blood Pressure" according to the "System Parameter" table', '139829887']
+['AoD', 'mmHg', 'mm[Hg]', 'Aortic Blood Pressure (Diastolic)', '21490672', 'Aorta Diastolic blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '60982-6', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', '', '2044436']
+['AoM', 'mmHg', 'mm[Hg]', 'Aortic Blood Pressure (Mean)', '21490673', 'Aorta Mean blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '60983-4', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', '', '2235811']
+['AoS', 'mmHg', 'mm[Hg]', 'Aortic Blood Pressure (Systolic)', '21490674', 'Aorta Systolic blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '60984-2', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', '', '2044436']
+['BAPd', 'mmHg', 'mm[Hg]', 'Brachial Arterial Pressure (Diastolic) ', '3010404', 'Brachial artery Diastolic blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8496-2', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '6/1/2022', '', '351']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/lab_itemid_to_loinc.csv
+================================================================================
+Delimiter: ','
+Header:
+['itemid', 'label', 'fluid', 'category', 'valueuom', 'loinc', 'loinc_version', 'notes']
+
+Column → Sample value:
+  itemid: 50856
+  label: Acetaminophen
+  fluid: Blood
+  category: Chemistry
+  valueuom: ug/mL
+  loinc: 
+  loinc_version: 2.71
+  notes: 
+
+First 10 rows of data:
+['50856', 'Acetaminophen', 'Blood', 'Chemistry', 'ug/mL', '', '2.71', '']
+['50867', 'Amylase', 'Blood', 'Chemistry', 'IU/L', '', '2.71', '']
+['50873', 'Anti-Nuclear Antibody', 'Blood', 'Chemistry', 'N/A', '', '2.71', '']
+['50874', 'Anti-Nuclear Antibody, Titer', 'Blood', 'Chemistry', 'N/A', '', '2.71', '']
+['50893', 'Calcium, Total', 'Blood', 'Chemistry', 'mg/dL', '', '2.71', '']
+['50903', 'Cholesterol Ratio (Total/HDL)', 'Blood', 'Chemistry', 'Ratio', '9830-1', '2.71', 'Mass ratio is more common than molar ratio in the US']
+['50911', 'Creatine Kinase, MB Isoenzyme', 'Blood', 'Chemistry', 'ng/mL', '13969-1', '2.71', 'This is the LOINC code US labs use']
+['50922', 'Ethanol', 'Blood', 'Chemistry', 'mg/dL', '', '2.71', '']
+['50937', 'Hepatitis A Virus Antibody', 'Blood', 'Chemistry', 'N/A|Pos/Neg', '13951-9', '2.71', 'More specific method']
+['50940', 'Hepatitis B Surface Antibody', 'Blood', 'Chemistry', 'N/A', '', '2.71', '']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/outputevents_to_loinc.csv
+================================================================================
+Delimiter: ','
+Header:
+['itemid (omop_source_code)', 'label', 'category', 'unitname', 'param_type', 'omop_concept_id', 'omop_concept_name', 'omop_domain_id', 'omop_vocabulary_id', 'omop_concept_class_id', 'omop_standard_concept', 'omop_concept_code', 'sssom_author_id', 'sssom_reviewer_id', 'sssom_subject_source_version', 'common_vocabulary_version', 'sssom_mapping_tool', 'sssom_mapping_date', 'sssom_confidence', 'sssom_comment']
+
+Column → Sample value:
+  itemid (omop_source_code): 226597
+  label: JP Medial
+  category: Drains
+  unitname: mL
+  param_type: Numeric
+  omop_concept_id: 3006376
+  omop_concept_name: Fluid output wound drain
+  omop_domain_id: Measurement
+  omop_vocabulary_id: LOINC
+  omop_concept_class_id: Clinical Observation
+  omop_standard_concept: S
+  omop_concept_code: 9203-1
+  sssom_author_id: 0000-0001-8822-1884
+  sssom_reviewer_id: 0000-0002-9348-9284
+  sssom_subject_source_version: MIMIC-IV v2.0
+  common_vocabulary_version: 2.72
+  sssom_mapping_tool: https://loinc.org/search/
+  sssom_mapping_date: 4/13/2022
+  sssom_confidence: 
+  sssom_comment: 
+
+First 10 rows of data:
+['226597', 'JP Medial', 'Drains', 'mL', 'Numeric', '3006376', 'Fluid output wound drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9203-1', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', '']
+['226598', 'JP Lateral', 'Drains', 'mL', 'Numeric', '3006376', 'Fluid output wound drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9203-1', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', '']
+['226599', 'Jackson Pratt #1', 'Drains', 'mL', 'Numeric', '3017152', 'Fluid output peritoneal drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9179-3', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', 'Device is a surgical drain mainly peritoneal drain']
+['226600', 'Jackson Pratt #2', 'Drains', 'mL', 'Numeric', '3017152', 'Fluid output peritoneal drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9179-3', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', 'Device is a surgical drain mainly peritoneal drain']
+['226601', 'Jackson Pratt #3', 'Drains', 'mL', 'Numeric', '3017152', 'Fluid output peritoneal drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9179-3', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', 'Device is a surgical drain mainly peritoneal drain']
+['226602', 'Jackson Pratt #4', 'Drains', 'mL', 'Numeric', '3017152', 'Fluid output peritoneal drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9179-3', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', 'Device is a surgical drain mainly peritoneal drain']
+['226603', 'T Tube', 'Drains', 'mL', 'Numeric', '3008793', 'Fluid output biliary drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9113-2', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', '']
+['226604', 'Hemovac #1', 'Drains', 'mL', 'Numeric', '3006376', 'Fluid output wound drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9203-1', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', '']
+['226605', 'Hemovac #2', 'Drains', 'mL', 'Numeric', '3006376', 'Fluid output wound drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9203-1', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', '']
+['226606', 'Cerebral Ventricular #1', 'Drains', 'mL', 'Numeric', '3018767', 'Fluid output cerebral ventricle drain', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9122-3', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '4/13/2022', '', '']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/d_labitems_to_loinc.csv
+================================================================================
+Delimiter: ','
+Header:
+['itemid (omop_source_code)', 'label', 'fluid', 'category', 'valueuom', 'omop_concept_id', 'omop_concept_name', 'omop_domain_id', 'omop_vocabulary_id', 'omop_concept_class_id', 'omop_standard_concept', 'omop_concept_code', 'sssom_author_id', 'sssom_reviewer_id', 'sssom_subject_source_version', 'common_vocabulary_version', 'sssom_mapping_tool', 'sssom_mapping_tool_version', 'sssom_mapping_date', 'sssom_confidence', 'sssom_comment', 'labevents_row_count']
+
+Column → Sample value:
+  itemid (omop_source_code): 50801
+  label: Alveolar-arterial Gradient
+  fluid: Blood
+  category: Blood Gas
+  valueuom: mm Hg
+  omop_concept_id: 3007913
+  omop_concept_name: Alveolar-arterial oxygen Partial pressure difference
+  omop_domain_id: Measurement
+  omop_vocabulary_id: LOINC
+  omop_concept_class_id: Lab Test
+  omop_standard_concept: S
+  omop_concept_code: 19991-9
+  sssom_author_id: 
+  sssom_reviewer_id: 0000-0002-9348-9284
+  sssom_subject_source_version: MIMIC-IV v2.0
+  common_vocabulary_version: 2.71
+  sssom_mapping_tool: https://loinc.org/relma/
+  sssom_mapping_tool_version: v4.7
+  sssom_mapping_date: 3/1/2022
+  sssom_confidence: 
+  sssom_comment: 
+  labevents_row_count: 14503
+
+First 10 rows of data:
+['50801', 'Alveolar-arterial Gradient', 'Blood', 'Blood Gas', 'mm Hg', '3007913', 'Alveolar-arterial oxygen Partial pressure difference', 'Measurement', 'LOINC', 'Lab Test', 'S', '19991-9', '', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.71', 'https://loinc.org/relma/', 'v4.7', '3/1/2022', '', '', '14503']
+['50802', 'Base Excess', 'Blood', 'Blood Gas', 'mEq/L', '3012501', 'Base excess in Blood by calculation', 'Measurement', 'LOINC', 'Lab Test', 'S', '11555-0', '', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.71', 'https://loinc.org/relma/', 'v4.7', '3/1/2022', '', '', '569287']
+['50803', 'Calculated Bicarbonate, Whole Blood', 'Blood', 'Blood Gas', 'mEq/L', '3006576', 'Bicarbonate [Moles/volume] in Blood', 'Measurement', 'LOINC', 'Lab Test', 'S', '1959-6', '', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.71', 'https://loinc.org/relma/', 'v4.7', '3/1/2022', '', '', '24309']
+['50804', 'Calculated Total CO2', 'Blood', 'Blood Gas', 'mEq/L', '3031147', 'Carbon dioxide, total [Moles/volume] in Blood by calculation', 'Measurement', 'LOINC', 'Lab Test', 'S', '34728-6', '', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.71', 'https://loinc.org/relma/', 'v4.7', '3/1/2022', '', '', '569282']
+['50805', 'Carboxyhemoglobin', 'Blood', 'Blood Gas', '%', '3023081', 'Carboxyhemoglobin/Hemoglobin.total in Blood', 'Measurement', 'LOINC', 'Lab Test', 'S', '20563-3', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.71', 'https://loinc.org/relma/', 'v4.7', '3/1/2022', '0.5', '', '5982']
+['50806', 'Chloride, Whole Blood', 'Blood', 'Blood Gas', 'mEq/L', '3018572', 'Chloride [Moles/volume] in Blood', 'Measurement', 'LOINC', 'Lab Test', 'S', '2069-3', '', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.71', 'https://loinc.org/relma/', 'v4.7', '3/1/2022', '', '', '88911']
+['50807', 'Comments', 'Blood', 'Blood Gas', '', '', '', 'Measurement', 'LOINC', 'Lab Test', 'S', '', '', '', 'MIMIC-IV v2.0', '', '', '', '', '', 'Not a lab test', '0']
+['50808', 'Free Calcium', 'Blood', 'Blood Gas', 'mmol/L', '3021119', 'Calcium.ionized [Moles/volume] in Blood', 'Measurement', 'LOINC', 'Lab Test', 'S', '1994-3', '', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.71', 'https://loinc.org/relma/', 'v4.7', '3/1/2022', '', '', '298634']
+['50809', 'Glucose', 'Blood', 'Blood Gas', 'mg/dL', '3000483', 'Glucose [Mass/volume] in Blood', 'Measurement', 'LOINC', 'Lab Test', 'S', '2339-0', '', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.71', 'https://loinc.org/relma/', 'v4.7', '3/1/2022', '', '', '222718']
+['50810', 'Hematocrit, Calculated', 'Blood', 'Blood Gas', '%', '3050746', 'Hematocrit [Volume Fraction] of Blood by Estimated', 'Measurement', 'LOINC', 'Lab Test', 'S', '48703-3', '', '0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.71', 'https://loinc.org/relma/', 'v4.7', '3/1/2022', '', '', '117423']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/proc_itemid.csv
+================================================================================
+Delimiter: ','
+Header:
+['itemid (omop_source_code)', 'label', 'omop_concept_id', 'omop_concept_name', 'omop_domain_id', 'omop_vocabulary_id', 'omop_concept_class_id', 'omop_standard_concept', 'omop_concept_code', 'sssom_author_id', 'sssom_reviewer_id', 'sssom_subject_source_version', 'sssom_mapping_tool', 'sssom_mapping_date', 'sssom_confidence', 'sssom_comment']
+
+Column → Sample value:
+  itemid (omop_source_code): 221214
+  label: CT scan
+  omop_concept_id: 4300757
+  omop_concept_name: Computerized axial tomography
+  omop_domain_id: Procedure
+  omop_vocabulary_id: SNOMED
+  omop_concept_class_id: Procedure
+  omop_standard_concept: S
+  omop_concept_code: 77477000
+  sssom_author_id: 0000-0001-8822-1884
+  sssom_reviewer_id: 0000-0002-9348-9284
+  sssom_subject_source_version: MIMIC-IV v2.0
+  sssom_mapping_tool: https://athena.ohdsi.org/
+  sssom_mapping_date: 
+  sssom_confidence: 
+  sssom_comment: 
+
+First 10 rows of data:
+['221214', 'CT scan', '4300757', 'Computerized axial tomography', 'Procedure', 'SNOMED', 'Procedure', 'S', '77477000', '0000-0001-8822-1884', '0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+['221216', 'X-ray', '4056681', 'Plain radiography', 'Procedure', 'SNOMED', 'Procedure', 'S', '168537006', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+['221217', 'Ultrasound', '4037672', 'Ultrasonography', 'Procedure', 'SNOMED', 'Procedure', 'S', '16310003', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+['221219', 'Venogram', '4175809', 'Venography', 'Procedure', 'SNOMED', 'Procedure', 'S', '4970003', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+['221223', 'EEG', '4181917', 'Electroencephalogram', 'Procedure', 'SNOMED', 'Procedure', 'S', '54550000', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+['221255', 'Trans Esophageal Echo', '4019824', 'Transesophageal echocardiography', 'Procedure', 'SNOMED', 'Procedure', 'S', '105376000', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+['223253', 'Magnetic Resonance Imaging', '4013636', 'Magnetic resonance imaging', 'Procedure', 'SNOMED', 'Procedure', 'S', '113091000', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+['224263', 'Multi Lumen', '4052413', 'Central venous cannula insertion', 'Procedure', 'SNOMED', 'Procedure', 'S', '233527006', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+['224264', 'PICC Line', '4322380', 'Insertion of peripherally inserted central catheter', 'Procedure', 'SNOMED', 'Procedure', 'S', '425196008', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+['224267', 'Cordis/Introducer', '4052413', 'Central venous cannula insertion', 'Procedure', 'SNOMED', 'Procedure', 'S', '233527006', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', 'https://athena.ohdsi.org/', '', '', '']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/meas_chartevents_main.csv
+================================================================================
+Delimiter: ','
+Header:
+['itemid (omop_source_code)', 'label', 'omop_concept_id', 'omop_concept_name', 'omop_domain_id', 'omop_vocabulary_id', 'omop_concept_class_id', 'omop_standard_concept', 'omop_concept_code', 'sssom_author_id', 'sssom_reviewer_id', 'sssom_subject_source_version', 'common_vocabulary_version', 'sssom_mapping_tool', 'sssom_mapping_date', 'sssom_confidence', 'sssom_comment']
+
+Column → Sample value:
+  itemid (omop_source_code): 220045
+  label: Heart Rate
+  omop_concept_id: 3027018
+  omop_concept_name: Heart rate
+  omop_domain_id: Measurement
+  omop_vocabulary_id: LOINC
+  omop_concept_class_id: Clinical Observation
+  omop_standard_concept: S
+  omop_concept_code: 8867-4
+  sssom_author_id: 
+  sssom_reviewer_id: 0000-0001-8822-1884,0000-0002-9348-9284
+  sssom_subject_source_version: MIMIC-IV v2.0
+  common_vocabulary_version: 2.72
+  sssom_mapping_tool: https://loinc.org/search/
+  sssom_mapping_date: 
+  sssom_confidence: 
+  sssom_comment: 
+
+First 10 rows of data:
+['220045', 'Heart Rate', '3027018', 'Heart rate', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8867-4', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['220210', 'Respiratory Rate', '3024171', 'Respiratory rate', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '9279-1', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['220277', 'O2 saturation pulseoxymetry', '40762499', 'Oxygen saturation in Arterial blood by Pulse oximetry', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '59408-5', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['220048', 'Heart Rhythm', '3022318', 'Heart rate rhythm', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8884-9', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['220179', 'Non Invasive Blood Pressure systolic', '21492239', 'Systolic blood pressure by Noninvasive', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '76534-7', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['220180', 'Non Invasive Blood Pressure diastolic', '21492240', 'Diastolic blood pressure by Noninvasive', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '76535-4', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['220181', 'Non Invasive Blood Pressure mean', '21492241', 'Mean blood pressure by Noninvasive', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '76536-2', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['220052', 'Arterial Blood Pressure mean', '3027598', 'Mean blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8478-0', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['220050', 'Arterial Blood Pressure systolic', '3004249', 'Systolic blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8480-6', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['220051', 'Arterial Blood Pressure diastolic', '3012888', 'Diastolic blood pressure', 'Measurement', 'LOINC', 'Clinical Observation', 'S', '8462-4', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping/meas_chartevents_value.csv
+================================================================================
+Delimiter: ','
+Header:
+['itemid (omop_source_code)', 'label', 'omop_concept_id', 'omop_concept_name', 'omop_domain_id', 'omop_vocabulary_id', 'omop_concept_class_id', 'omop_standard_concept', 'omop_concept_code', 'sssom_author_id', 'sssom_reviewer_id', 'sssom_subject_source_version', 'common_vocabulary_version', 'sssom_mapping_tool', 'sssom_mapping_date', 'sssom_confidence', 'sssom_comment']
+
+Column → Sample value:
+  itemid (omop_source_code): 
+  label: SR (Sinus Rhythm)
+  omop_concept_id: 45877096
+  omop_concept_name: Sinus rhythm
+  omop_domain_id: Meas Value
+  omop_vocabulary_id: LOINC
+  omop_concept_class_id: Answer
+  omop_standard_concept: S
+  omop_concept_code: LA17718-0
+  sssom_author_id: 
+  sssom_reviewer_id: 0000-0001-8822-1884,0000-0002-9348-9284
+  sssom_subject_source_version: MIMIC-IV v2.0
+  common_vocabulary_version: 2.72
+  sssom_mapping_tool: https://loinc.org/search/
+  sssom_mapping_date: 
+  sssom_confidence: 
+  sssom_comment: 
+
+First 10 rows of data:
+['', 'SR (Sinus Rhythm)', '45877096', 'Sinus rhythm', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17718-0', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['', 'ST (Sinus Tachycardia)', '45879290', 'Sinus tachycardia', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17099-5', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['', 'AF (Atrial Fibrillation)', '45883018', 'Atrial fibrillation', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17084-7', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['', 'SB (Sinus Bradycardia)', '21499419', 'Sinus bradycardia', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17098-7', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['', '1st AV (First degree AV Block)', '45884784', 'AV block-1st degree', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17086-2', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['', 'A Flut (Atrial Flutter)', '45883019', 'Atrial flutter', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17085-4', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['', 'RBBB (Right Bundle Branch Block)', '45883022', 'Right bundle branch block', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17096-1', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['', 'LBBB (Left Bundle Branch Block)', '45883893', 'Left bundle branch block', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17091-2', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['', 'SA (Sinus Arrhythmia)', '45884787', 'Sinus arrhythmia', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17097-9', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+['', 'JR (Junctional Rhythm)', '45881038', 'Junctional', 'Meas Value', 'LOINC', 'Answer', 'S', 'LA17090-4', '', '0000-0001-8822-1884,0000-0002-9348-9284', 'MIMIC-IV v2.0', '2.72', 'https://loinc.org/search/', '', '', '']
+
+
