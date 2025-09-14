@@ -171,7 +171,7 @@ It captures all laboratory events with identifiers, result values, specimen type
 #### Special Notes
 - `lab_result_time` and `collection_time` are both set to `charttime`, as MIMIC does not explicitly store collection timestamps separately.  
 - `result_status` is hard-coded to `"Final"` since MIMIC does not store result status metadata.
-- `proc_cat_id` and `proc_code` are both set as `itemid` because there is no specification in MIMIC. Please see [here](https://mimic.mit.edu/docs/iv/modules/hosp/d_labitems/#links-to:~:text=All%20data%20in%20labevents%20link%20to%20the%20d_labitems%20table.%20Each%20unique%20(fluid%2C%20category%2C%20label)%20tuple%20in%20the%20hospital%20database%20was%20assigned%20an%20itemid%20in%20this%20table%2C%20and%20the%20use%20of%20this%20itemid%20facilitates%20efficient%20storage%20and%20querying%20of%20the%20data) for what 'itemid' means in MIMIC.
+- `proc_cat_id` and `proc_code` are both set as `itemid` because there is no specification in MIMIC. Please see [here](https://mimic.mit.edu/docs/iv/modules/hosp/d_labitems/#links-to:~:text=All%20data%20in%20labevents%20link%20to%20the%20d_labitems%20table.%20Each%20unique%20(fluid%2C%20category%2C%20label)%20tuple%20in%20the%20hospital%20database%20was%20assigned%20an%20itemid%20in%20this%20table%2C%20and%20the%20use%20of%20this%20itemid%20facilitates%20efficient%20storage%20and%20querying%20of%20the%20data) for what `itemid` means in MIMIC.
 - `loinc_code` left blank unless a separate mapping file is introduced.  
 - File size is large; script processes data in 1M-row chunks to manage memory efficiently.
   
