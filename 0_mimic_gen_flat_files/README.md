@@ -180,4 +180,113 @@ It captures all laboratory events with identifiers, result values, specimen type
 
 ### VITALS File
 
+#### Purpose
+The VITALS file standardizes **physiological vital signs** from MIMIC-IV to match the Emory pipeline specification.  
+It integrates measurements from multiple sources (Concepts tables, ICU bedside charted values, and outpatient/ward OMR data) into a single flat file.  
+This file captures blood pressure, heart rate, respiratory rate, oxygenation parameters, body temperature, weight, and height — all aligned by patient encounter (`csn`) and timestamp (`recorded_time`).
+
+#### Source Tables
+- 🟢 **`csv_concepts_exports/vitalsign.csv`** (core vital signs including heart rate, blood pressure, temperature, SpO₂).  
+- 🟢 **`csv_concepts_exports/oxygen_delivery.csv`** (oxygen device and oxygen flow).  
+- 🟡 **`icu_chartevents.csv`** + **`icu_d_items.csv`** (bedside measurements: CVP, EtCO₂, weights, height).  
+- 🟡 **`hosp_omr.csv`** (outpatient/ward observations: blood pressure, weights, height).  
+- 🟡 **`icu_icustays.csv`** (mapping from `stay_id` to `hadm_id`, used to assign `csn`).  
+
+#### Processing Logic
+1. **Load concept-level vitalsign data** (`vitalsign.csv`).  
+   - Rename columns to standardized names:  
+     - `heart_rate` → `pulse`  
+     - `resp_rate` → `unassisted_resp_rate`  
+     - `spo2` → `spo2`  
+     - `temperature` → `temperature`  
+     - `temperature_site` → `temproute`  
+     - `sbp, dbp, mbp` → `sbp_line, dbp_line, map_line`  
+     - `sbp_ni, dbp_ni, mbp_ni` → `sbp_cuff, dbp_cuff, map_cuff`  
+   - Extract columns: `subject_id`, `stay_id`, `charttime`, and the mapped variables.  
+
+2. **Load oxygen delivery data** (`oxygen_delivery.csv`).  
+   - Map `o2_delivery_device_1` → `o2_device`  
+   - Map `o2_flow` → `o2_flow_rate`  
+   - Extract: `subject_id`, `stay_id`, `charttime`, `o2_device`, `o2_flow_rate`.  
+
+3. **Merge vitalsign + oxygen**.  
+   - Merge on (`subject_id`, `stay_id`, `charttime`) with `outer` join.  
+   - Ensures all measurement points are retained even if only one source has data.  
+
+4. **Extract ICU charted measurements** from `icu_chartevents`.  
+   - Filter for relevant `itemid` values (via `icu_d_items`):  
+     - `224639` Daily Weight  
+     - `226512` Admission Weight (Kg)  
+     - `226531` Admission Weight (lbs.)  
+     - `226730` Height (cm)  
+     - `220074` Central Venous Pressure (CVP)  
+     - `228640` End-tidal CO₂ (EtCO₂)  
+   - Pivot to wide format with index = (`subject_id`, `stay_id`, `charttime`), columns = measurement labels.  
+   - Convert Admission Weight (lbs.) to kg using factor 0.4536.  
+   - Merge the three weight-related columns into one unified `daily_weight_kg`:  
+     - Prefer `Daily Weight`, if missing then `Admission Weight (Kg)`, otherwise `Admission Weight (lbs.)` (after conversion).  
+   - Rename:  
+     - `"Central Venous Pressure"` → `cvp`  
+     - `"EtCO2"` → `end_tidal_co2`  
+     - `"Height (cm)"` → `height_cm`  
+   - Drop redundant intermediate weight columns.  
+   - Merge back into main vitals table.  
+
+5. **Process OMR data** (`hosp_omr.csv`).  
+   - **Blood pressure**: split `"110/70"` string into `sbp_cuff`, `dbp_cuff`, and compute `map_cuff = (sbp + 2*dbp)/3`.  
+   - **Weight**: convert weight in lbs to kg (`*0.453592`), store as `daily_weight_kg`.  
+   - **Height**: convert height in inches to cm (`*2.54`), store as `height_cm`.  
+   - Normalize OMR timestamps:  
+     - Convert `chartdate` (date-only) into `charttime` at midnight (`00:00:00`).  
+     - Ensures compatibility with the hourly-resolution vitals timeline.  
+
+6. **Merge OMR data into vitals**.  
+   - Merge OMR blood pressure, weight, and height separately using (`subject_id`, `charttime`).  
+   - For each measurement type, use `combine_first`:  
+     - Prefer ICU/Concepts values if present.  
+     - If ICU/Concepts is null, fill with OMR values.  
+   - Drop intermediate `_omr` columns after merging.  
+   - Result: one clean column per measurement, enriched by OMR where needed.  
+
+7. **Add hospital admission ID (`csn`)**.  
+   - Merge with `icu_icustays.csv` to map `stay_id` → `hadm_id`.  
+   - Rename `hadm_id` → `csn`, `subject_id` → `pat_id`, `charttime` → `recorded_time`.  
+
+8. **Finalize table**.  
+   - Drop `stay_id` (not needed in downstream pipeline).  
+   - Reorder columns to match Emory pipeline specification:  
+
+
+#### Final Columns
+| Column Name           | Source / Logic                                                                 |
+|------------------------|-----------------------------------------------------------------------------------------------------|
+| `pat_id`               | 🟢 `subject_id` from **`vitalsign.csv`**; also present in 🟡 `icu_chartevents.csv`, 🟡 `hosp_omr.csv` |
+| `csn`                  | 🟡 `hadm_id` from **`icu_icustays.csv`** (via `stay_id` mapping)                                    |
+| `recorded_time`        | 🟢 `charttime` from **`vitalsign.csv`**; aligned with 🟢 oxygen, 🟡 chartevents, 🟡 OMR (date floored to 00:00:00) |
+| `temperature`          | 🟢 `temperature` from **`vitalsign.csv`**                                                           |
+| `temproute`            | 🟢 `temperature_site` from **`vitalsign.csv`**                                                      |
+| `daily_weight_kg`      | 🟡 `icu_chartevents.csv` + **`icu_d_items.csv`**: itemid 224639 (`Daily Weight`), 226512 (`Admission Weight (Kg)`), 226531 (`Admission Weight (lbs.)`, converted to kg); fallback from 🟡 **`hosp_omr.csv`** weight entries (lbs converted to kg) |
+| `height_cm`            | 🟡 `icu_chartevents.csv` + **`icu_d_items.csv`**: itemid 226730 (`Height (cm)`); fallback from 🟡 **`hosp_omr.csv`** height entries (inches converted to cm) |
+| `sbp_line`             | 🟢 `sbp` (arterial line systolic BP) from **`vitalsign.csv`**                                       |
+| `dbp_line`             | 🟢 `dbp` (arterial line diastolic BP) from **`vitalsign.csv`**                                      |
+| `map_line`             | 🟢 `mbp` (arterial line mean BP) from **`vitalsign.csv`**                                           |
+| `sbp_cuff`             | 🟢 `sbp_ni` from **`vitalsign.csv`**; fallback from 🟡 **`hosp_omr.csv`** blood pressure string parsing (first value before “/”) |
+| `dbp_cuff`             | 🟢 `dbp_ni` from **`vitalsign.csv`**; fallback from 🟡 **`hosp_omr.csv`** blood pressure string parsing (second value after “/”) |
+| `map_cuff`             | 🟢 `mbp_ni` from **`vitalsign.csv`**; fallback computed from 🟡 **`hosp_omr.csv`** values: `(sbp_cuff + 2*dbp_cuff)/3` |
+| `pulse`                | 🟢 `heart_rate` from **`vitalsign.csv`**                                                            |
+| `unassisted_resp_rate` | 🟢 `resp_rate` from **`vitalsign.csv`**                                                             |
+| `spo2`                 | 🟢 `spo2` from **`vitalsign.csv`**                                                                  |
+| `o2_device`            | 🟢 `o2_delivery_device_1` from **`oxygen_delivery.csv`**                                            |
+| `cvp`                  | 🟡 `icu_chartevents.csv` + **`icu_d_items.csv`**: itemid 220074 (`Central Venous Pressure`)          |
+| `end_tidal_co2`        | 🟡 `icu_chartevents.csv` + **`icu_d_items.csv`**: itemid 228640 (`EtCO₂`)                            |
+| `o2_flow_rate`         | 🟢 `o2_flow` from **`oxygen_delivery.csv`**                                                         |
+
+
+#### Special Notes
+- Multiple input sources exist for weights, heights, and cuff blood pressures. The pipeline standardizes by merging into a single column per measurement using `combine_first`.  
+- OMR data is less frequent and often only recorded once per admission (admission weight, admission BP, admission height). By normalizing OMR chartdate to midnight and merging, these values backfill ICU timelines when ICU/Concepts data is absent.  
+- ICU `charttime` is more granular (hourly), while OMR is daily. This discrepancy means most OMR values will only align with midnight rows in the time index.  
+- File size is substantial due to the hourly time resolution across all admissions.  
+
+
 ---
