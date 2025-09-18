@@ -364,3 +364,56 @@ This file captures information on ventilator mode, device type, oxygenation, pre
 
 
 ---
+
+
+### DIALYSIS File
+
+#### Purpose
+The DIALYSIS file standardizes **renal replacement therapy (RRT) events** from MIMIC-IV to match the Emory pipeline specification.  
+It captures patient-level dialysis events aligned by encounter (`csn`) and patient (`pat_id`), with the corresponding timestamps and dialysis modality.
+
+#### Source Tables
+- 🟢 **`csv_concepts_exports/rrt.csv`** (concept table that aggregates dialysis-related events, marking presence, activity, and type).  
+- 🟡 **`icu_icustays.csv`** (mapping from `stay_id` → `hadm_id` and `subject_id`, required for `csn` and `pat_id`).  
+
+#### Processing Logic
+1. **Load RRT events** (`rrt.csv`).  
+   - Extract dialysis event records containing `stay_id`, `charttime`, `dialysis_present`, `dialysis_active`, and `dialysis_type`.  
+
+2. **Map ICU stay to admission and patient** (`icu_icustays.csv`).  
+   - Merge `rrt.csv` with `icu_icustays.csv` on `stay_id`.  
+   - This adds `subject_id` (patient identifier) and `hadm_id` (hospital admission identifier).  
+
+3. **Standardize field names**.  
+   - `subject_id` → `pat_id`  
+   - `hadm_id` → `csn`  
+   - `charttime` → `service_timestamp`  
+
+4. **Select final columns**.  
+   - Keep only standardized identifiers and dialysis event attributes:  
+     - `csn`, `pat_id`, `service_timestamp`, `dialysis_present`, `dialysis_active`, `dialysis_type`.  
+
+5. **Save output**.  
+   - Export to **DIALYSIS.csv** under the `mimic_flat_files` directory.  
+
+#### Final Columns
+| Column Name         | Source / Logic                                                                 |
+|----------------------|--------------------------------------------------------------------------------|
+| `csn`               | 🟡 `hadm_id` from **`icu_icustays.csv`** (via `stay_id`)                       |
+| `pat_id`            | 🟡 `subject_id` from **`icu_icustays.csv`** (via `stay_id`)                    |
+| `service_timestamp` | 🟢 `charttime` from **`rrt.csv`**, indicating when the dialysis event was charted |
+| `dialysis_present`  | 🟢 `dialysis_present` flag from **`rrt.csv`** (1 if dialysis present at this time) |
+| `dialysis_active`   | 🟢 `dialysis_active` flag from **`rrt.csv`** (1 if actively receiving dialysis) |
+| `dialysis_type`     | 🟢 `dialysis_type` from **`rrt.csv`** (e.g., IHD, CRRT, SLED)                  |
+
+#### Special Notes
+- Each row represents one dialysis-related event at a given timestamp (`service_timestamp`).  
+- A single patient (`pat_id`) and hospital admission (`csn`) may have multiple rows if multiple dialysis events occur.  
+- `dialysis_present` vs. `dialysis_active`:  
+  - `dialysis_present` indicates that dialysis was part of the clinical context.  
+  - `dialysis_active` indicates whether dialysis was actually being administered at that time.  
+- The `dialysis_type` field distinguishes between modalities such as **Intermittent Hemodialysis (IHD)**, **Continuous Renal Replacement Therapy (CRRT)**, and **Sustained Low-Efficiency Dialysis (SLED)**.  
+- Downstream analyses can aggregate these rows to admission-level summaries (e.g., "did patient receive dialysis", "time of first dialysis").  
+- **If you want to explore more on crrt, you can join with `csv_concepts_exports/crrt.csv` in the future.**
+
+---
