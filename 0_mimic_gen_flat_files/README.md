@@ -416,4 +416,69 @@ It captures patient-level dialysis events aligned by encounter (`csn`) and patie
 - Downstream analyses can aggregate these rows to admission-level summaries (e.g., "did patient receive dialysis", "time of first dialysis").  
 - **If you want to explore more on crrt, you can join with `csv_concepts_exports/crrt.csv` in the future.**
 
+
+---
+
+
+### IN_OUT File
+
+
+---
+
+
+### GCS File
+
+#### Purpose
+The GCS file standardizes **Glasgow Coma Scale (GCS) assessments** from MIMIC-IV to match the Emory pipeline specification.  
+It captures neurological status assessments — eye, verbal, and motor components — along with the total score, aligned by patient encounter (`csn`) and timestamp (`recorded_time`).  
+An additional column `gcs_unable` is retained from MIMIC to indicate cases where scoring could not be performed (e.g., intubated patients).
+
+#### Source Tables
+- 🟢 **`csv_concepts_exports/gcs.csv`** (concept table with pre-computed GCS component and total scores).  
+- 🟡 **`icu_icustays.csv`** (maps `stay_id` → `hadm_id` and `subject_id`, required for `csn` and `pat_id`).  
+
+#### Processing Logic
+1. **Load GCS concept table** (`gcs.csv`).  
+   - Includes `stay_id`, `subject_id`, `charttime`, and all GCS components (`gcs_eyes`, `gcs_verbal`, `gcs_motor`, `gcs`, `gcs_unable`).  
+
+2. **Join with ICU stays** (`icu_icustays.csv`).  
+   - Merge on (`stay_id`, `subject_id`) to bring in `hadm_id` (hospital admission ID).  
+   - Standardize identifiers:  
+     - `subject_id` → `pat_id`  
+     - `hadm_id` → `csn`  
+
+3. **Rename and align fields**.  
+   - `charttime` → `recorded_time`  
+   - `gcs_eyes` → `gcs_eye_score`  
+   - `gcs_verbal` → `gcs_verbal_score`  
+   - `gcs_motor` → `gcs_motor_score`  
+   - `gcs` → `gcs_total_score`  
+   - Keep `gcs_unable` as-is (not required in Emory schema but useful for context).  
+
+4. **Select final schema**.  
+   - Retain only the standardized columns:  
+     - `pat_id`, `csn`, `recorded_time`, `gcs_eye_score`, `gcs_verbal_score`, `gcs_motor_score`, `gcs_total_score`, `gcs_unable`.  
+
+5. **Export to flat file**.  
+   - Save output as **GCS.csv** under the `mimic_flat_files` directory.  
+
+#### Final Columns
+| Column Name        | Source / Logic                                                                 |
+|---------------------|--------------------------------------------------------------------------------|
+| `pat_id`           | 🟡 `subject_id` from **`icu_icustays.csv`**                                    |
+| `csn`              | 🟡 `hadm_id` from **`icu_icustays.csv`** (via `stay_id`)                       |
+| `recorded_time`    | 🟢 `charttime` from **`gcs.csv`**                                              |
+| `gcs_eye_score`    | 🟢 `gcs_eyes` from **`gcs.csv`**                                               |
+| `gcs_verbal_score` | 🟢 `gcs_verbal` from **`gcs.csv`**                                             |
+| `gcs_motor_score`  | 🟢 `gcs_motor` from **`gcs.csv`**                                              |
+| `gcs_total_score`  | 🟢 `gcs` (total GCS) from **`gcs.csv`**                                        |
+| `gcs_unable`       | 🟢 `gcs_unable` from **`gcs.csv`**, retained as a supplementary column         |
+
+#### Special Notes
+- The total score `gcs_total_score` should equal the sum of `gcs_eye_score + gcs_verbal_score + gcs_motor_score` when all components are available.  
+- Valid GCS totals range from **3 to 15**; any values outside this range should be investigated.  
+- The `gcs_unable` field is unique to MIMIC-IV and marks assessments that could not be performed (e.g., due to intubation). It is not part of the Emory schema but is retained here for completeness.  
+- Multiple rows may exist per patient per admission if repeated GCS assessments were charted.  
+
+
 ---
