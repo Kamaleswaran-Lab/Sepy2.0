@@ -653,3 +653,62 @@ This file captures the **unit-level location timeline** for each encounter (`csn
 
 
 ---
+
+
+
+### ORPROCEDURES File
+
+#### Purpose
+The ORPROCEDURES file standardizes **surgical procedure records** from MIMIC-IV to match the Emory pipeline specification.  
+It captures official ICD-coded surgical procedures performed during a hospital admission (`csn` = `hadm_id`) and provides a standardized procedure description.  
+**Since MIMIC-IV does not contain detailed OR timestamps or unique OR identifiers, those fields are filled with `"NOT AVAILABLE"`.**
+
+#### Source Tables
+- 🟡 **`hosp_procedures_icd.csv`** (ICD-coded surgical procedures with hospital admission identifiers and charted dates).  
+- 🟡 **`hosp_d_icd_procedures.csv`** (dictionary providing `long_title` descriptions for each ICD procedure code).  
+
+#### Processing Logic
+1. **Load procedure data** (`hosp_procedures_icd.csv`).  
+   - Key fields: `subject_id`, `hadm_id`, `icd_code`, `icd_version`, `chartdate`.  
+
+2. **Load ICD procedure dictionary** (`hosp_d_icd_procedures.csv`).  
+   - Key fields: `icd_code`, `icd_version`, `long_title`.  
+
+3. **Merge datasets**.  
+   - Join `hosp_procedures_icd` with `hosp_d_icd_procedures` on (`icd_code`, `icd_version`) to attach `long_title` (standardized procedure description).  
+
+4. **Construct standardized columns**.  
+   - `pat_id` = `subject_id`  
+   - `csn` = `hadm_id`  
+   - `procedure_start_dttm` = `chartdate` (date-only, no exact start time available)  
+   - `procedure_end_dttm` = `chartdate` (same as start date)  
+   - `primary_procedure_nm` = `long_title` from dictionary  
+   - **`in_or_dttm`, `out_or_dttm`, `or_procedure_id`, `service_nm` = `"NOT AVAILABLE"`**
+5. **Finalize schema**.  
+   - Keep only standardized columns required by the pipeline.  
+
+6. **Save output**.  
+   - Export as **ORPROCEDURES.csv** under the `mimic_flat_files` directory.  
+
+#### Final Columns
+| Column Name            | Source / Logic                                                                 |
+|-------------------------|--------------------------------------------------------------------------------|
+| `csn`                  | 🟡 `hadm_id` from **`hosp_procedures_icd.csv`**                                |
+| `pat_id`               | 🟡 `subject_id` from **`hosp_procedures_icd.csv`**                             |
+| `in_or_dttm`           | Hard-coded `"NOT AVAILABLE"` (MIMIC does not provide OR in-time)               |
+| `out_or_dttm`          | Hard-coded `"NOT AVAILABLE"` (MIMIC does not provide OR out-time)              |
+| `procedure_start_dttm` | 🟡 `chartdate` from **`hosp_procedures_icd.csv`**                              |
+| `procedure_end_dttm`   | 🟡 `chartdate` from **`hosp_procedures_icd.csv`**                              |
+| `or_procedure_id`      | Hard-coded `"NOT AVAILABLE"` (no unique OR identifier in MIMIC)                |
+| `primary_procedure_nm` | 🟡 `long_title` from **`hosp_d_icd_procedures.csv`** (mapped via ICD code)     |
+| `service_nm`           | Hard-coded `"NOT AVAILABLE"` (MIMIC does not include surgical service mapping) |
+
+#### Special Notes
+- The `chartdate` field in MIMIC-IV is **date-only** (no timestamp), so `procedure_start_dttm` and `procedure_end_dttm` cannot represent exact OR times.  
+- Each row corresponds to one ICD-coded procedure performed during a hospital admission.  
+- Multiple rows may exist per encounter (`csn`) if multiple procedures were performed.  
+- Unlike Emory, MIMIC-IV does not provide fields such as OR room, service department, or OR-level identifiers. These are marked `"NOT AVAILABLE"`.  
+
+
+
+---
