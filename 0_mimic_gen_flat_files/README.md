@@ -422,6 +422,64 @@ It captures patient-level dialysis events aligned by encounter (`csn`) and patie
 
 ### IN_OUT File
 
+#### Purpose
+The IN_OUT file standardizes **fluid input and output events** from MIMIC-IV to match the Emory pipeline specification.  
+It integrates ICU medication/infusion inputs (mapped to **RxNorm**) and fluid outputs (mapped to **LOINC**) into a unified schema.  
+This file provides encounter-level fluid balance context aligned by hospital admission (`csn` = `hadm_id`) and timestamps.  
+
+#### Source Tables
+- 🟡 **`icu_inputevents.csv`** (fluid and medication administration events in the ICU).  
+- 🟡 **`icu_outputevents.csv`** (fluid output events in the ICU, e.g., urine, drains).  
+- 🟡 **`inputevents_to_rxnorm.csv`** (mapping of `itemid` → RxNorm standardized drug/solution names).  
+- 🟡 **`outputevents_to_loinc.csv`** (mapping of `itemid` → LOINC standardized measurement concepts).  
+- 🟡 **`icu_icustays.csv`** (provides mapping from `stay_id` → `hadm_id`, used to assign `csn`).  
+
+#### Processing Logic
+1. **Process Inputevents** (`icu_inputevents.csv`).  
+   - Read in chunks (500k rows at a time) to handle memory.  
+   - Keep only relevant columns: `stay_id`, `starttime`, `itemid`, `ordercategoryname`.  
+   - Merge with 🟡 `inputevents_to_rxnorm.csv` on `itemid` to map to **RxNorm concept name**.  
+   - Create standardized fields:  
+     - `service_ts` = `starttime` (nursing charted time).  
+     - `order_ts` = `starttime` (proxy for fluid order timestamp).  
+     - `order_clinical_desc` = `omop_concept_name` (RxNorm mapped label).  
+     - `order_catalog_desc` = `ordercategoryname` (input event category).  
+   - Merge with 🟡 `icu_icustays.csv` on `stay_id` to retrieve `hadm_id` → stored as `csn`.  
+
+2. **Process Outputevents** (`icu_outputevents.csv`).  
+   - Read in chunks (500k rows at a time).  
+   - Keep only relevant columns: `stay_id`, `charttime`, `itemid`.  
+   - Merge with 🟡 `outputevents_to_loinc.csv` on `itemid` to map to **LOINC concept name**.  
+   - Create standardized fields:  
+     - `service_ts` = `charttime` (nursing charted time).  
+     - `order_ts` = `charttime` (proxy for fluid order timestamp).  
+     - `order_clinical_desc` = `omop_concept_name` (LOINC mapped label).  
+     - `order_catalog_desc` = `category` (output event category, e.g., urine, drains).  
+   - Merge with 🟡 `icu_icustays.csv` on `stay_id` to retrieve `hadm_id` → stored as `csn`.  
+
+3. **Combine Input + Output events**.  
+   - Concatenate processed inputevents and outputevents tables.  
+   - Drop `stay_id` (not needed after mapping).  
+   - Reorder columns so that `csn` is the first column.  
+   - Save as **IN_OUT.csv** under the flat files directory.  
+
+#### Final Columns
+| Column Name          | Source / Logic                                                                 |
+|-----------------------|--------------------------------------------------------------------------------|
+| `csn`                | 🟡 `hadm_id` from **`icu_icustays.csv`**, mapped via `stay_id`                 |
+| `service_ts`         | 🟡 `starttime` (inputs) or `charttime` (outputs), nursing charted timestamp    |
+| `order_ts`           | 🟡 Same as `service_ts`, proxy for order time (true order time not available)  |
+| `order_clinical_desc`| 🟡 RxNorm name from **`inputevents_to_rxnorm.csv`** (inputs), LOINC name from **`outputevents_to_loinc.csv`** (outputs) |
+| `order_catalog_desc` | 🟡 `ordercategoryname` (inputs), `category` (outputs), higher-level event category |
+
+#### Special Notes
+- **Inputs vs. Outputs**:  
+  - Inputs (medications/fluids) are standardized using **RxNorm**.  
+  - Outputs (urine, drains, fluid loss) are standardized using **LOINC**.  
+- **Order timestamps**: MIMIC does not provide true physician order times for fluids; `order_ts` is set equal to the recorded `starttime`/`charttime`.  
+- Both `service_ts` and `order_ts` are retained for compatibility with downstream pipelines, though they are identical in this schema.  
+- File size can be very large due to high-frequency charting; processed incrementally in chunks.  
+
 
 ---
 
@@ -482,71 +540,6 @@ An additional column `gcs_unable` is retained from MIMIC to indicate cases where
 
 
 ---
-
-
-### IN_OUT File
-
-#### Purpose
-The IN_OUT file standardizes **fluid input and output events** from MIMIC-IV to match the Emory pipeline specification.  
-It integrates ICU medication/infusion inputs (mapped to **RxNorm**) and fluid outputs (mapped to **LOINC**) into a unified schema.  
-This file provides encounter-level fluid balance context aligned by hospital admission (`csn` = `hadm_id`) and timestamps.  
-
-#### Source Tables
-- 🟡 **`icu_inputevents.csv`** (fluid and medication administration events in the ICU).  
-- 🟡 **`icu_outputevents.csv`** (fluid output events in the ICU, e.g., urine, drains).  
-- 🟡 **`inputevents_to_rxnorm.csv`** (mapping of `itemid` → RxNorm standardized drug/solution names).  
-- 🟡 **`outputevents_to_loinc.csv`** (mapping of `itemid` → LOINC standardized measurement concepts).  
-- 🟡 **`icu_icustays.csv`** (provides mapping from `stay_id` → `hadm_id`, used to assign `csn`).  
-
-#### Processing Logic
-1. **Process Inputevents** (`icu_inputevents.csv`).  
-   - Read in chunks (500k rows at a time) to handle memory.  
-   - Keep only relevant columns: `stay_id`, `starttime`, `itemid`, `ordercategoryname`.  
-   - Merge with 🟡 `inputevents_to_rxnorm.csv` on `itemid` to map to **RxNorm concept name**.  
-   - Create standardized fields:  
-     - `service_ts` = `starttime` (nursing charted time).  
-     - `order_ts` = `starttime` (proxy for fluid order timestamp).  
-     - `order_clinical_desc` = `omop_concept_name` (RxNorm mapped label).  
-     - `order_catalog_desc` = `ordercategoryname` (input event category).  
-   - Merge with 🟡 `icu_icustays.csv` on `stay_id` to retrieve `hadm_id` → stored as `csn`.  
-
-2. **Process Outputevents** (`icu_outputevents.csv`).  
-   - Read in chunks (500k rows at a time).  
-   - Keep only relevant columns: `stay_id`, `charttime`, `itemid`.  
-   - Merge with 🟡 `outputevents_to_loinc.csv` on `itemid` to map to **LOINC concept name**.  
-   - Create standardized fields:  
-     - `service_ts` = `charttime` (nursing charted time).  
-     - `order_ts` = `charttime` (proxy for fluid order timestamp).  
-     - `order_clinical_desc` = `omop_concept_name` (LOINC mapped label).  
-     - `order_catalog_desc` = `category` (output event category, e.g., urine, drains).  
-   - Merge with 🟡 `icu_icustays.csv` on `stay_id` to retrieve `hadm_id` → stored as `csn`.  
-
-3. **Combine Input + Output events**.  
-   - Concatenate processed inputevents and outputevents tables.  
-   - Drop `stay_id` (not needed after mapping).  
-   - Reorder columns so that `csn` is the first column.  
-   - Save as **IN_OUT.csv** under the flat files directory.  
-
-#### Final Columns
-| Column Name          | Source / Logic                                                                 |
-|-----------------------|--------------------------------------------------------------------------------|
-| `csn`                | 🟡 `hadm_id` from **`icu_icustays.csv`**, mapped via `stay_id`                 |
-| `service_ts`         | 🟡 `starttime` (inputs) or `charttime` (outputs), nursing charted timestamp    |
-| `order_ts`           | 🟡 Same as `service_ts`, proxy for order time (true order time not available)  |
-| `order_clinical_desc`| 🟡 RxNorm name from **`inputevents_to_rxnorm.csv`** (inputs), LOINC name from **`outputevents_to_loinc.csv`** (outputs) |
-| `order_catalog_desc` | 🟡 `ordercategoryname` (inputs), `category` (outputs), higher-level event category |
-
-#### Special Notes
-- **Inputs vs. Outputs**:  
-  - Inputs (medications/fluids) are standardized using **RxNorm**.  
-  - Outputs (urine, drains, fluid loss) are standardized using **LOINC**.  
-- **Order timestamps**: MIMIC does not provide true physician order times for fluids; `order_ts` is set equal to the recorded `starttime`/`charttime`.  
-- Both `service_ts` and `order_ts` are retained for compatibility with downstream pipelines, though they are identical in this schema.  
-- File size can be very large due to high-frequency charting; processed incrementally in chunks.  
-
-
-
---- 
 
 
 ### CULTURES File
