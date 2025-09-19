@@ -602,3 +602,54 @@ Since MIMIC-IV does not provide LOINC mappings for microbiology tests, the `loin
 
 ---
 
+
+### BEDLOCATION File
+
+#### Purpose
+The BEDLOCATION file standardizes **patient location movements** within the hospital from MIMIC-IV to match the Emory pipeline specification.  
+It records when a patient was admitted to, transferred between, or discharged from different hospital units (e.g., ED, ICU, surgical wards).  
+This file captures the **unit-level location timeline** for each encounter (`csn` = `hadm_id`).
+
+#### Source Tables
+- 🟡 **`hosp_transfers.csv`** (contains all intra-hospital transfers, with `intime` and `outtime` for each care unit).  
+
+#### Processing Logic
+1. **Load transfers** (`hosp_transfers.csv`).  
+   - Key fields: `subject_id`, `hadm_id`, `careunit`, `intime`, `outtime`.  
+
+2. **Subset and rename columns**.  
+   - `subject_id` → `pat_id`  
+   - `hadm_id` → `csn`  
+   - `careunit` → `bed_unit`  
+   - `intime` → `bed_location_start`  
+   - `outtime` → `bed_location_end`  
+
+3. **Handle missing values**.  
+   - If `careunit` is missing, fill with `"Not Recorded"`.  
+   - Convert `intime` and `outtime` to datetime format.  
+
+4. **Finalize schema**.  
+   - Keep only standardized columns required by the pipeline.  
+
+5. **Save output**.  
+   - Export as **BEDLOCATION.csv** under the `mimic_flat_files` directory.  
+
+#### Final Columns
+| Column Name         | Source / Logic                                                                 |
+|----------------------|--------------------------------------------------------------------------------|
+| `csn`               | 🟡 `hadm_id` from **`hosp_transfers.csv`**                                     |
+| `pat_id`            | 🟡 `subject_id` from **`hosp_transfers.csv`**                                  |
+| `bed_unit`          | 🟡 `careunit` from **`hosp_transfers.csv`**, unit where the patient stayed      |
+| `bed_location_start`| 🟡 `intime` from **`hosp_transfers.csv`**, when the patient entered the unit    |
+| `bed_location_end`  | 🟡 `outtime` from **`hosp_transfers.csv`**, when the patient left the unit      |
+
+#### Special Notes
+- Each row corresponds to a **single unit stay** within a hospital admission.  
+- A patient may have multiple rows per `csn` if transferred between units (e.g., ED → MICU → Surgery → Discharge).  
+- If `outtime` is missing (e.g., patient still admitted), it remains null.  
+- Some Emory-specific columns (`bed_room`, `bed_id`, `hospital_service`, `accomodation_code`) are **not available in MIMIC-IV** and are therefore omitted.  
+- This file can be used to reconstruct the **care pathway** of a patient across the hospital stay.  
+
+
+
+---
