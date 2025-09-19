@@ -548,3 +548,64 @@ This file provides encounter-level fluid balance context aligned by hospital adm
 
 --- 
 
+
+### CULTURES File
+
+#### Purpose
+The CULTURES file standardizes **microbiology culture events** from MIMIC-IV to match the Emory pipeline specification.  
+It captures specimen collection, culture test details, and result timing aligned by patient encounter (`csn`) and patient identifier (`pat_id`).  
+Since MIMIC-IV does not provide LOINC mappings for microbiology tests, the `loinc_code` field is filled with `"NOT AVAILABLE"`.
+
+#### Source Tables
+- 🟡 **`hosp_microbiologyevents.csv`** (records of microbiology tests, specimen type, test performed, organism/antibiotic results).  
+
+#### Processing Logic
+1. **Load microbiology events** (`hosp_microbiologyevents.csv`).  
+   - Key fields: `subject_id`, `hadm_id`, `charttime`, `chartdate`, `storetime`, `spec_itemid`, `spec_type_desc`, `test_itemid`, `test_name`.  
+
+2. **Rename and align columns**.  
+   - `subject_id` → `pat_id`  
+   - `hadm_id` → `csn`  
+   - `charttime` → `specimen_collect_time`  
+   - `chartdate` → `order_time`  
+   - `storetime` → `lab_result_time`  
+   - `test_itemid` → `proc_code`  
+   - `test_name` → `proc_desc`  
+   - `spec_itemid` → `component_id`  
+   - `spec_type_desc` → `component`  
+
+3. **Construct additional fields**.  
+   - `result_status` hard-coded as `"Not Recorded"` (MIMIC does not provide status directly).  
+   - `loinc_code` hard-coded as `"NOT AVAILABLE"` (no LOINC mapping available for microbiology tests in MIMIC-IV).  
+
+4. **Select standardized columns**.  
+   - Keep only the columns required by the pipeline.  
+
+5. **Save output**.  
+   - Export as **CULTURES.csv** under the `mimic_flat_files` directory.  
+
+#### Final Columns
+| Column Name            | Source / Logic                                                                 |
+|-------------------------|--------------------------------------------------------------------------------|
+| `csn`                  | 🟡 `hadm_id` from **`hosp_microbiologyevents.csv`**                            |
+| `pat_id`               | 🟡 `subject_id` from **`hosp_microbiologyevents.csv`**                         |
+| `specimen_collect_time`| 🟡 `charttime` from **`hosp_microbiologyevents.csv`**                          |
+| `order_time`           | 🟡 `chartdate` from **`hosp_microbiologyevents.csv`**                          |
+| `lab_result_time`      | 🟡 `storetime` from **`hosp_microbiologyevents.csv`**                          |
+| `result_status`        | Hard-coded `"Not Recorded"` (status not available in MIMIC-IV)                 |
+| `proc_code`            | 🟡 `test_itemid` from **`hosp_microbiologyevents.csv`**                        |
+| `proc_desc`            | 🟡 `test_name` from **`hosp_microbiologyevents.csv`**                          |
+| `component_id`         | 🟡 `spec_itemid` from **`hosp_microbiologyevents.csv`**                        |
+| `component`            | 🟡 `spec_type_desc` from **`hosp_microbiologyevents.csv`**                     |
+| `loinc_code`           | Hard-coded `"NOT AVAILABLE"` (MIMIC does not provide LOINC for microbiology)   |
+
+#### Special Notes
+- MIMIC-IV does not store `order_time` for microbiology tests; here `chartdate` is used as a proxy.  
+- `result_status` is not directly available; set as `"Not Recorded"` for consistency with the pipeline schema.  
+- `loinc_code` is not provided for microbiology tests in MIMIC-IV, unlike chemistry/hematology labs. It remains `"NOT AVAILABLE"`.  
+- Each row corresponds to a culture test on a specimen; multiple rows per encounter may exist if several cultures were ordered.  
+- **Do we need to keep the test result?**
+
+
+---
+
