@@ -776,3 +776,64 @@ Since MIMIC-IV does not contain timestamps for individual diagnosis entries, the
 
 
 ---
+
+
+### ICDPROCEDURES File
+
+#### Purpose
+The ICDPROCEDURES file standardizes **ICD-coded surgical and procedural records** from MIMIC-IV to match the Emory pipeline specification.  
+It captures all ICD-9 and ICD-10 coded procedures performed during a hospital admission (`csn` = `hadm_id`) and provides a standardized procedure description (`procedure_desc`).  
+Both ICD-9 and ICD-10 codes are retained in separate columns for clarity. Since MIMIC-IV does not contain detailed OR timestamps, the `procedure_date` field uses `chartdate` from the hospital ICD procedure records.
+
+#### Source Tables
+- 🟡 **`hosp_procedures_icd.csv`** (ICD-coded procedures with patient identifiers, hospital admission identifiers, ICD codes, versions, and charted dates).  
+- 🟡 **`hosp_d_icd_procedures.csv`** (dictionary providing `long_title` descriptions for each ICD procedure code).  
+
+#### Processing Logic
+1. **Load procedure records** (`hosp_procedures_icd.csv`).  
+   - Key fields: `subject_id`, `hadm_id`, `icd_code`, `icd_version`, `chartdate`.  
+
+2. **Load ICD dictionary** (`hosp_d_icd_procedures.csv`).  
+   - Key fields: `icd_code`, `icd_version`, `long_title`.  
+
+3. **Merge datasets**.  
+   - Join on (`icd_code`, `icd_version`) to add `long_title` (standardized procedure description).  
+
+4. **Split ICD versions**.  
+   - If `icd_version = 9`, store `icd_code` in `icd9_procedure_code` and mark `icd10_procedure_code = "NOT AVAILABLE"`.  
+   - If `icd_version = 10`, store `icd_code` in `icd10_procedure_code` and mark `icd9_procedure_code = "NOT AVAILABLE"`.  
+
+5. **Construct standardized columns**.  
+   - `pat_id` = `subject_id`  
+   - `csn` = `hadm_id`  
+   - `icd9_procedure_code` = ICD-9 procedure code if applicable, else `"NOT AVAILABLE"`  
+   - `icd10_procedure_code` = ICD-10 procedure code if applicable, else `"NOT AVAILABLE"`  
+   - `procedure_desc` = `long_title` from dictionary (fallback `"UNKNOWN"` if missing)  
+   - `procedure_date` = `chartdate` from `hosp_procedures_icd`  
+
+6. **Finalize schema**.  
+   - Keep only required columns.  
+   - Drop duplicate rows if they exist.  
+
+7. **Save output**.  
+   - Export as **ICD_PROCEDURES.csv** under the `mimic_flat_files` directory.  
+
+#### Final Columns
+| Column Name            | Source / Logic                                                                 |
+|-------------------------|--------------------------------------------------------------------------------|
+| `pat_id`               | 🟡 `subject_id` from **`hosp_procedures_icd.csv`**                             |
+| `csn`                  | 🟡 `hadm_id` from **`hosp_procedures_icd.csv`**                                |
+| `icd9_procedure_code`  | 🟡 `icd_code` if `icd_version = 9`, else `"NOT AVAILABLE"`                     |
+| `icd10_procedure_code` | 🟡 `icd_code` if `icd_version = 10`, else `"NOT AVAILABLE"`                    |
+| `procedure_desc`       | 🟡 `long_title` from **`hosp_d_icd_procedures.csv`** (mapped by code + version, fallback `"UNKNOWN"`) |
+| `procedure_date`       | 🟡 `chartdate` from **`hosp_procedures_icd.csv`**                              |
+
+#### Special Notes
+- Both ICD-9 and ICD-10 procedure codes are explicitly retained.  
+- The `procedure_desc` field provides a human-readable description of the ICD code.  
+- If the ICD code cannot be mapped to the dictionary, the description is set to `"UNKNOWN"`.  
+- Each hospital admission (`csn`) may contain multiple procedures, resulting in multiple rows.  
+- The `procedure_date` only has **date granularity** (no exact start/end time is available in MIMIC-IV).  
+
+
+---
