@@ -837,3 +837,58 @@ Both ICD-9 and ICD-10 codes are retained in separate columns for clarity. Since 
 
 
 ---
+
+
+
+### CPT_PROCEDURES File
+
+#### Purpose
+The CPT_PROCEDURES file standardizes **Current Procedural Terminology (CPT/HCPCS) procedure records** from MIMIC-IV to match the Emory pipeline specification.  
+It captures all CPT/HCPCS-coded procedures performed during a hospital admission (`csn` = `hadm_id`), aligned with the patient identifier (`pat_id`) and charted procedure date.  
+Each procedure row includes the official code and its description, taken from the MIMIC-IV dictionary.
+
+#### Source Tables
+- 🟡 **`hosp_hcpcsevents.csv`** (hospital events with HCPCS/CPT procedure codes, chartdates, and identifiers).  
+- 🟡 **`hosp_d_hcpcs.csv`** (dictionary mapping `hcpcs_cd` to official short and long descriptions).  
+
+#### Processing Logic
+1. **Load CPT/HCPCS events** (`hosp_hcpcsevents.csv`).  
+   - Key fields: `subject_id`, `hadm_id`, `hcpcs_cd`, `chartdate`.  
+
+2. **Load CPT/HCPCS dictionary** (`hosp_d_hcpcs.csv`).  
+   - Key fields: `hcpcs_cd`, `short_description`, `long_description`.  
+   - Renamed internally to avoid conflicts: `dict_short_description`, `dict_long_description`.  
+
+3. **Merge events with dictionary**.  
+   - Join on `hcpcs_cd` to attach human-readable descriptions.  
+   - Prefer `dict_long_description` if available; fallback to `dict_short_description` if long description is missing.  
+
+4. **Construct standardized columns**.  
+   - `pat_id` = `subject_id`  
+   - `csn` = `hadm_id`  
+   - `procedure_cpt_code` = `hcpcs_cd`  
+   - `procedure_cpt_desc` = merged description (long preferred, short as fallback)  
+   - `procedure_dttm` = `chartdate`  
+
+5. **Finalize schema**.  
+   - Keep only standardized columns.  
+   - Save output to **CPT_PROCEDURES.csv**.  
+
+#### Final Columns
+| Column Name            | Source / Logic                                                                 |
+|-------------------------|--------------------------------------------------------------------------------|
+| `pat_id`               | 🟡 `subject_id` from **`hosp_hcpcsevents.csv`**                                |
+| `csn`                  | 🟡 `hadm_id` from **`hosp_hcpcsevents.csv`**                                   |
+| `procedure_cpt_code`   | 🟡 `hcpcs_cd` from **`hosp_hcpcsevents.csv`**                                  |
+| `procedure_cpt_desc`   | 🟡 `dict_long_description` from **`hosp_d_hcpcs.csv`**, fallback = `dict_short_description` |
+| `procedure_dttm`       | 🟡 `chartdate` from **`hosp_hcpcsevents.csv`**                                 |
+
+#### Special Notes
+- CPT/HCPCS codes in MIMIC-IV cover **billing-related procedures** (e.g., imaging, endoscopy, outpatient services) and differ from ICD-coded surgical procedures.  
+- The `procedure_cpt_desc` field ensures each code has a human-readable description; if the dictionary lacks a long description, the short one is used.  
+- The `procedure_dttm` column only has **date granularity** (no timestamp), as MIMIC-IV records CPT procedures by date only.  
+- Multiple rows may exist per admission (`csn`) if multiple CPT/HCPCS codes were billed on the same day.  
+
+
+
+---
