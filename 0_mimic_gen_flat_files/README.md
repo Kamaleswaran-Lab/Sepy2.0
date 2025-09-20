@@ -656,7 +656,7 @@ This file captures the **unit-level location timeline** for each encounter (`csn
 
 
 
-### ORPROCEDURES File
+<!--### ORPROCEDURES File
 
 #### Purpose
 The ORPROCEDURES file standardizes **surgical procedure records** from MIMIC-IV to match the Emory pipeline specification.  
@@ -712,6 +712,8 @@ It captures official ICD-coded surgical procedures performed during a hospital a
 
 
 ---
+
+-->
 
 
 
