@@ -712,3 +712,65 @@ It captures official ICD-coded surgical procedures performed during a hospital a
 
 
 ---
+
+
+
+### DIAGNOSIS File
+
+#### Purpose
+The DIAGNOSIS file standardizes **diagnosis records** from MIMIC-IV to match the Emory pipeline specification.  
+It captures all ICD-coded diagnoses (both ICD-9 and ICD-10) assigned during a hospital admission (`csn` = `hadm_id`) and provides a standardized diagnosis description (`long_title`).  
+Since MIMIC-IV does not contain timestamps for individual diagnosis entries, the `dx_time_date` field is filled with `"NOT AVAILABLE"`.
+
+#### Source Tables
+- 🟡 **`hosp_diagnoses_icd.csv`** (hospital diagnoses with patient identifiers, hospital admission identifiers, ICD codes, and ICD version).  
+- 🟡 **`hosp_d_icd_diagnoses.csv`** (dictionary providing `long_title` descriptions for each ICD diagnosis code).  
+
+#### Processing Logic
+1. **Load diagnosis records** (`hosp_diagnoses_icd.csv`).  
+   - Key fields: `subject_id`, `hadm_id`, `icd_code`, `icd_version`.  
+
+2. **Load ICD dictionary** (`hosp_d_icd_diagnoses.csv`).  
+   - Key fields: `icd_code`, `icd_version`, `long_title`.  
+
+3. **Merge datasets**.  
+   - Join on (`icd_code`, `icd_version`) to add `long_title` (standardized diagnosis description).  
+
+4. **Split ICD versions**.  
+   - If `icd_version = 9`, store `icd_code` in `dx_code_icd9`.  
+   - If `icd_version = 10`, store `icd_code` in `dx_code_icd10`.  
+
+5. **Construct standardized columns**.  
+   - `pat_id` = `subject_id`  
+   - `csn` = `hadm_id`  
+   - `dx_code_icd9` = ICD-9 diagnosis code if applicable, else null  
+   - `dx_code_icd10` = ICD-10 diagnosis code if applicable, else null  
+   - `dx_time_date` = `"NOT AVAILABLE"` (MIMIC-IV does not provide diagnosis time)  
+   - `long_title` = official diagnosis description from dictionary  
+
+6. **Finalize schema**.  
+   - Keep only required columns.  
+   - Drop duplicate rows if they exist.  
+
+7. **Save output**.  
+   - Export as **DIAGNOSIS.csv** under the `mimic_flat_files` directory.  
+
+#### Final Columns
+| Column Name       | Source / Logic                                                                 |
+|-------------------|--------------------------------------------------------------------------------|
+| `pat_id`          | 🟡 `subject_id` from **`hosp_diagnoses_icd.csv`**                              |
+| `csn`             | 🟡 `hadm_id` from **`hosp_diagnoses_icd.csv`**                                 |
+| `dx_code_icd9`    | 🟡 `icd_code` from **`hosp_diagnoses_icd.csv`**, if `icd_version = 9`           |
+| `dx_code_icd10`   | 🟡 `icd_code` from **`hosp_diagnoses_icd.csv`**, if `icd_version = 10`          |
+| `dx_time_date`    | Hard-coded `"NOT AVAILABLE"` (no diagnosis timestamp in MIMIC-IV)              |
+| `long_title`      | 🟡 `long_title` from **`hosp_d_icd_diagnoses.csv`** (mapped by code + version) |
+
+#### Special Notes
+- Both ICD-9 and ICD-10 diagnoses are retained in the same table, separated into two fields.  
+- The `long_title` field ensures human-readable descriptions for each ICD code.  
+- If the ICD code cannot be mapped to a dictionary entry, `long_title` is set to `"UNKNOWN"`.  
+- Each hospital admission (`csn`) may have multiple diagnosis rows if multiple ICD codes are assigned.  
+
+
+
+---
