@@ -107,7 +107,11 @@ class sepyIMPORT:
         # creates df with all vent mappings
         self.df_vent_mappings = pd.read_csv(file_dictionary["grouping_vent"])
         # creates df with all fluid groupings
-        self.df_grouping_fluids = pd.read_csv(file_dictionary["grouping_fluids"])
+        try:
+            self.df_grouping_fluids = pd.read_csv(file_dictionary["grouping_fluids"])
+        except Exception as e:
+            logging.error(f"Failed to load grouping fluids from {file_dictionary.get('grouping_fluids', 'UNKNOWN')}: {e}")
+            self.df_grouping_fluids = pd.DataFrame()
 
         # creates df with all infusion meds volume
         self.df_infusion_meds_volume = pd.read_csv(file_dictionary["infusion_meds_volume"])
@@ -319,7 +323,7 @@ class sepyIMPORT:
                 else:
                     logging.warning(f"Processing for {data_type} may be incomplete")
             except Exception as e:
-                logging.error(f"Error in {data_type} processing: {str(e)}")
+                logging.error(f"Error in {data_type} processing: {str(e)}", exc_info=True)
             
     # Data-specific processors
     def _process_infusion_meds(self, df: pd.DataFrame, **kwargs) -> None:
