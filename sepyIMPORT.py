@@ -57,6 +57,158 @@ class ImportConfig:
         """Calculate derived fields after initialization."""
         self.all_lab_col_names = self.numeric_lab_col_names + self.string_lab_col_names
 
+@dataclass
+class ColumnMapper:
+    """
+    Handles column name mapping between dataset-specific names and standardized internal names.
+    
+    This class provides a flexible way to adapt different dataset schemas to the expected
+    column names used throughout the sepyIMPORT processing pipeline.
+    """
+    mappings: Dict[str, str]
+    
+    def __post_init__(self):
+        """Initialize reverse mapping for efficient lookups."""
+        self.reverse_mappings = {v: k for k, v in self.mappings.items()}
+    
+    @classmethod
+    def from_config(cls, column_mappings: Optional[Dict[str, str]] = None) -> 'ColumnMapper':
+        """
+        Create a ColumnMapper from configuration dictionary.
+        
+        Args:
+            column_mappings: Dictionary mapping standard names to dataset-specific names.
+                           If None or empty, creates an identity mapper.
+        
+        Returns:
+            ColumnMapper instance.
+        """
+        if not column_mappings:
+            return cls(mappings={})
+        return cls(mappings=column_mappings.copy())
+    
+    def map_columns(self, df: pd.DataFrame, direction: str = 'to_standard') -> pd.DataFrame:
+        """
+        Apply column mappings to a DataFrame.
+        
+        Args:
+            df: DataFrame to apply mappings to.
+            direction: 'to_standard' maps dataset names to standard names,
+                      'to_dataset' maps standard names to dataset names.
+        
+        Returns:
+            DataFrame with renamed columns.
+        """
+        if df.empty or not self.mappings:
+            return df
+        
+        df_copy = df.copy()
+        
+        if direction == 'to_standard':
+            # Map from dataset-specific names to standard names
+            # Only rename columns that exist in the DataFrame and have mappings
+            rename_dict = {}
+            for standard_name, dataset_name in self.mappings.items():
+                if dataset_name in df_copy.columns:
+                    rename_dict[dataset_name] = standard_name
+            
+            if rename_dict:
+                df_copy = df_copy.rename(columns=rename_dict)
+                logging.info(f"Mapped columns: {rename_dict}")
+        
+        elif direction == 'to_dataset':
+            # Map from standard names to dataset-specific names
+            rename_dict = {}
+            for standard_name, dataset_name in self.mappings.items():
+                if standard_name in df_copy.columns:
+                    rename_dict[standard_name] = dataset_name
+            
+            if rename_dict:
+                df_copy = df_copy.rename(columns=rename_dict)
+                logging.info(f"Reverse mapped columns: {rename_dict}")
+        
+        else:
+            raise ValueError("direction must be 'to_standard' or 'to_dataset'")
+        
+        return df_copy
+    
+    def map_column_list(self, column_list: List[str], direction: str = 'to_standard') -> List[str]:
+        """
+        Apply column mappings to a list of column names.
+        
+        Args:
+            column_list: List of column names to map.
+            direction: 'to_standard' maps dataset names to standard names,
+                      'to_dataset' maps standard names to dataset names.
+        
+        Returns:
+            List of mapped column names.
+        """
+        if not column_list or not self.mappings:
+            return column_list
+        
+        mapped_list = []
+        
+        if direction == 'to_standard':
+            for col in column_list:
+                # Find standard name for this dataset column
+                standard_name = None
+                for std_name, dataset_name in self.mappings.items():
+                    if dataset_name == col:
+                        standard_name = std_name
+                        break
+                mapped_list.append(standard_name if standard_name else col)
+        
+        elif direction == 'to_dataset':
+            for col in column_list:
+                # Map standard name to dataset name
+                mapped_list.append(self.mappings.get(col, col))
+        
+        else:
+            raise ValueError("direction must be 'to_standard' or 'to_dataset'")
+        
+        return mapped_list
+    
+    def validate_required_columns(self, df: pd.DataFrame, required_columns: List[str]) -> List[str]:
+        """
+        Validate that all required columns are present after mapping.
+        
+        Args:
+            df: DataFrame to validate.
+            required_columns: List of required standard column names.
+        
+        Returns:
+            List of missing column names.
+        """
+        available_columns = set(df.columns)
+        missing_columns = []
+        
+        for required_col in required_columns:
+            # Check if the required column exists directly
+            if required_col in available_columns:
+                continue
+            
+            # Check if there's a mapping that would provide this column
+            dataset_name = self.mappings.get(required_col)
+            if dataset_name and dataset_name in available_columns:
+                continue
+            
+            missing_columns.append(required_col)
+        
+        return missing_columns
+    
+    def get_effective_column_name(self, standard_name: str) -> str:
+        """
+        Get the effective column name (mapped or original) for a standard column name.
+        
+        Args:
+            standard_name: The standard column name.
+        
+        Returns:
+            The dataset-specific column name if mapped, otherwise the standard name.
+        """
+        return self.mappings.get(standard_name, standard_name)
+
 @contextmanager
 def timer(description: str) -> None:
     """
@@ -273,18 +425,42 @@ class sepyIMPORT:
                       - date_cols: Columns to parse as datetime objects
                       - drop_cols: Columns to drop from the DataFrame
                       - numeric_cols: Columns to convert to numeric values
+                      - column_mappings: Dictionary mapping standard names to dataset names
                       - Any other parameters needed for processing
         """
+        # Extract column mappings from kwargs
+        column_mappings = kwargs.pop('column_mappings', None)
+        
+        # Create column mapper for this data type
+        column_mapper = ColumnMapper.from_config(column_mappings)
+        
         # Default file_key is uppercase version of data_type
         file_key = kwargs.pop('file_key', data_type.upper())
+        
+        # Map column names in configuration lists to dataset-specific names
+        index_col = kwargs.pop('index_col', [])
+        date_cols = kwargs.pop('date_cols', None)
+        drop_cols = kwargs.pop('drop_cols', [])
+        numeric_cols = kwargs.pop('numeric_cols', [])
+        
+        # Apply column mappings to configuration parameters if mappings exist
+        if column_mappings:
+            if index_col:
+                index_col = column_mapper.map_column_list(index_col, direction='to_dataset')
+            if date_cols:
+                date_cols = column_mapper.map_column_list(date_cols, direction='to_dataset')
+            if drop_cols:
+                drop_cols = column_mapper.map_column_list(drop_cols, direction='to_dataset')
+            if numeric_cols:
+                numeric_cols = column_mapper.map_column_list(numeric_cols, direction='to_dataset')
         
         # Common parameters for all imports
         common_params = {
             'file_key': file_key,
-            'index_col': kwargs.pop('index_col', []),
-            'date_cols': kwargs.pop('date_cols', None),
-            'drop_cols': kwargs.pop('drop_cols', []),
-            'numeric_cols': kwargs.pop('numeric_cols', []),
+            'index_col': index_col,
+            'date_cols': date_cols,
+            'drop_cols': drop_cols,
+            'numeric_cols': numeric_cols,
             'date_parser': kwargs.pop('date_parser', utils.d_parser),
             'memory_map': kwargs.pop('memory_map', True),
         }
@@ -292,18 +468,28 @@ class sepyIMPORT:
         # Import the data using _common_import
         df = self._common_import(**common_params)
         
+        # Apply column mappings to standardize column names
+        if not df.empty and column_mappings:
+            df = column_mapper.map_columns(df, direction='to_standard')
         
         #Filter to all patids in the encounters file 
         if data_type != "encounters":
-            index_col = common_params.get("index_col", [])
-            if index_col in ["pat_id", "patient_id"]:
+            index_col_standard = common_params.get("index_col", [])
+            # Convert back to standard names for filtering logic
+            if column_mappings and index_col_standard:
+                index_col_standard = column_mapper.map_column_list(index_col_standard, direction='to_standard')
+            
+            if index_col_standard in ["pat_id", "patient_id"]:
                 df = df[df.index.isin(self.patids)]
 
             #Filter to all csns in the encounters file 
-            elif index_col == "csn":
+            elif index_col_standard == "csn":
                 df = df[df.index.isin(self.csns)]
-            elif index_col is None:
-                df = df.loc[df.csn.isin(self.csns)] 
+            elif index_col_standard is None:
+                # Use standard column name for filtering
+                csn_col = 'csn'
+                if csn_col in df.columns:
+                    df = df.loc[df[csn_col].isin(self.csns)]
         
 
         # Store the dataframe with a consistent naming pattern
@@ -316,6 +502,8 @@ class sepyIMPORT:
         if hasattr(self, processor_name) and callable(getattr(self, processor_name)):
             processor = getattr(self, processor_name)
             try:
+                # Pass the column_mapper to the processor
+                kwargs['column_mapper'] = column_mapper
                 return_state = processor(df, **kwargs)
                 if return_state == 1:
                     logging.info(f"{data_type.capitalize()} processing successful")

@@ -1,0 +1,501 @@
+# COMPREHENSIVE EXAMPLE CONFIGURATION WITH ALL POSSIBLE COLUMN MAPPINGS
+# This is a copy of emory_config.yaml with examples of ALL column mappings that could be needed
+# Most mappings shown here are identity mappings (same name) for Emory dataset
+# For datasets with different column names, modify the mappings accordingly
+
+# SETUP INSTRUCTIONS
+## assign unique_encounters_path to the path of the unique encounters file
+
+# PIPELINE INSTRUCTIONS
+make_yearly_pickle: "yes" # yes: make pickle files, no: do not make pickle files
+make_supertables: "no" # yes: make supertables, no: do not make supertables
+
+
+# FILE PATHS
+data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI"
+# groupings_path: "$HOME/Sepy/groupings"
+# yearly_pickle_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_YEARLY_PICKLES/"
+# supertable_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables_Fluids/"
+groupings_path: "/work/rrz4/Sepy2.0/groupings"
+yearly_pickle_output_path: "/work/rrz4/Sepy2.0/yearly_pickles"
+supertable_output_path: "/work/rrz4/Sepy2.0/supertables"
+encounters_path: "ENCOUNTER_FILE"
+dataset_identifier: "em_y"
+
+# CSN FILTERING
+encounter_type: "IN" # "EM" = Emergency, "IN" = Inpatient, "all" = all encounter types ????? 
+age: "adult" # "adult": age >= 18, "pediatric": age < 18, "all": all ages
+specific_enc_filter: "no" # "yes": only specific encounters, "no": all encounters
+# specific_enc_filter_list can be a list of csns to filter by, or a path to a csv file with a column called "csn"
+# specific_enc_filter_list: []
+
+
+dictionary_paths:
+  # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE groupings/comorbidities FOLDER
+  comorbidity_types:
+    - ["ICD9_ahrq", "*ICD9_ahrq*"]
+    - ["ICD9_elix", "*ICD9_elix*"]
+    - ["ICD9_quan_deyo", "*ICD9_quan_deyo*"]
+    - ["ICD9_quan_elix", "*ICD9_quan_elix*"]
+    - ["ICD9_single_ccs", "*ICD9_single_ccs*"]
+    - ["ICD10_ahrq", "*ICD10_ahrq*"]
+    - ["ICD10_elix", "*ICD10_elix*"]
+    - ["ICD10_quan_deyo", "*ICD10_quan_deyo*"]
+    - ["ICD10_quan_elix", "*ICD10_quan_elix*"]
+    - ["ICD10_single_ccs", "*ICD10_single_ccs*"]
+  # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE groupings/ FOLDER
+  grouping_types:
+    - ["infusion_meds", "em_all_infusion_meds.csv"]
+    - ["grouping_labs", "em_grouping_labs.csv"]
+    - ["bed_labels", "em_bed_labels.csv"]
+    - ["grouping_fluids", "em_fluids_labels.csv"]
+    - ["variable_chart", "em_variable_chart.csv"]
+    - ["grouping_vent", "em_vent_labels.csv"]
+    - ["infusion_meds_volume", "em_infusion_meds_volume.csv"]
+  flatfile_types: 
+    # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/year/ FOLDER
+    - ["INFUSIONMEDS", "*INFUSIONMEDS*"]
+    - ["LABS", "*LABS*"]
+    - ["VITALS", "*VITALS_O2_FLOW_RATE_*.csv"]
+    - ["VENT", "*VENT*"]
+    - ["DEMOGRAPHICS", "*DEMOGRAPHICS*"]
+    - ["GCS", "*GCS*"]
+    - ["ENCOUNTER", "*ENCOUNTER*"]
+    - ["CULTURES", "*CULTURES*"]
+    - ["BEDLOCATION", "*BEDLOCATION*"]
+    - ["ORPROCEDURES", "*ORPROCEDURES*"]
+    - ["DIAGNOSIS", "*DIAGNOSIS*"]
+    - ["CPT_PROCEDURES", "*CPT*"]
+    - ["ICD_PROCEDURES", "*ICDPROCEDURES*"]
+    - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"]
+  combined_files:
+    # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/ FOLDER
+    - ["DIALYSIS", "DIALYSIS_14_21.dsv"] 
+    - ["IN_OUT", "CJSEPSIS_IN_OUT_PROCESSED_combined.csv"]
+    - ["RADIOLOGY_NOTES", "all_radiology_notes.csv"]
+
+# YEARLY INSTANCE FUNCTIONS AND PARAMETERS
+yearly_instance:
+  import_demographics:
+    file_key: "DEMOGRAPHICS"
+    drop_cols: []
+    index_col: ["pat_id"]
+    date_cols: [] 
+    # COMPREHENSIVE COLUMN MAPPINGS FOR DEMOGRAPHICS
+    # For Emory dataset, these are identity mappings (no change needed)
+    # For other datasets, modify the right side to match your column names
+    column_mappings:
+      pat_id: "pat_id"                    # Patient identifier
+      gender: "gender"                    # Patient gender/sex
+      race_code: "race_code"              # Patient race code
+      ethnicity_code: "ethnicity_code"   # Patient ethnicity code
+      # Example for different dataset:
+      # pat_id: "patient_id"              # If your dataset uses 'patient_id'
+      # gender: "sex"                     # If your dataset uses 'sex'
+      # race_code: "race"                 # If your dataset uses 'race'
+      
+  import_encounters:
+    file_key: "ENCOUNTER"
+    drop_cols: 
+      - "insurance_status"
+      - "total_vent_days"
+      - "total_hosp_days"
+      - "discharge_status" # These fields were null in the data files. Insurance status was dropped because it wasn't needed for our analysis.
+    index_col: ["csn"]
+    date_cols:
+      - "ed_presentation_time"
+      - "hospital_admission_date_time"
+      - "hospital_discharge_date_time"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR ENCOUNTERS
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      hospital_admission_date_time: "hospital_admission_date_time"  # Admission datetime
+      hospital_discharge_date_time: "hospital_discharge_date_time"  # Discharge datetime
+      ed_presentation_time: "ed_presentation_time"      # ED presentation time
+      encounter_type: "encounter_type"                  # Type of encounter (IN/EM)
+      age: "age"                                        # Patient age
+      discharge_to: "discharge_to"                      # Discharge destination
+      pre_admit_location: "pre_admit_location"          # Pre-admission location
+      total_icu_days: "total_icu_days"                  # Total ICU days
+      admit_reason: "admit_reason"                      # Admission reason
+      # Example for different dataset:
+      # csn: "encounter_id"                             # If your dataset uses 'encounter_id'
+      # pat_id: "patient_id"                            # If your dataset uses 'patient_id'
+      # hospital_admission_date_time: "admit_datetime"  # If your dataset uses different name
+
+  import_infusion_meds:
+    file_key: "INFUSIONMEDS"
+    drop_cols: []
+    numeric_cols:
+      - "order_med_id"
+      - "medication_id"
+    anti_infective_group_name: "anti-infective"
+    vasopressor_group_name: "vasopressor"
+    index_col: ["csn"]
+    date_cols:
+      - "med_order_time"
+      - "med_action_time"
+      - "med_start"
+      - "med_stop"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR INFUSION MEDICATIONS
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      medication_id: "medication_id"                    # Medication identifier
+      order_med_id: "order_med_id"                      # Medication order ID
+      med_order_time: "med_order_time"                  # Medication order time
+      med_action_time: "med_action_time"                # Medication action time
+      med_start: "med_start"                            # Medication start time
+      med_stop: "med_stop"                              # Medication stop time
+      formulary_name: "formulary_name"                  # Medication formulary name
+      med_action_dose: "med_action_dose"                # Medication dose
+      med_action_dose_unit: "med_action_dose_unit"      # Medication dose unit
+      med_order_route: "med_order_route"                # Administration route
+      super_table_col_name: "super_table_col_name"      # Supertable column name
+      volume_numeric: "volume_numeric"                  # Volume numeric value
+      volume_unit: "volume_unit"                        # Volume unit
+      # Example for different dataset:
+      # medication_id: "drug_id"                        # If your dataset uses 'drug_id'
+      # med_order_time: "order_datetime"                # If your dataset uses 'order_datetime'
+      # formulary_name: "medication_name"               # If your dataset uses 'medication_name'
+
+  import_labs:
+    file_key: "LABS"
+    drop_cols: []
+    date_cols:
+      - "collection_time"
+      - "lab_result_time"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR LABS
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      collection_time: "collection_time"                # Specimen collection time
+      lab_result_time: "lab_result_time"                # Lab result time
+      component_id: "component_id"                      # Lab component identifier
+      lab_result: "lab_result"                          # Lab result value
+      result_status: "result_status"                    # Result status (Completed, etc.)
+      proc_cat_id: "proc_cat_id"                        # Procedure category ID
+      proc_cat_name: "proc_cat_name"                    # Procedure category name
+      proc_code: "proc_code"                            # Procedure code
+      proc_desc: "proc_desc"                            # Procedure description
+      component: "component"                            # Component name
+      loinc_code: "loinc_code"                          # LOINC code
+      super_table_col_name: "super_table_col_name"      # Supertable column name
+      # Example for different dataset:
+      # collection_time: "specimen_collection_datetime" # If your dataset uses different name
+      # lab_result_time: "result_available_datetime"    # If your dataset uses different name
+      # component_id: "test_id"                         # If your dataset uses 'test_id'
+
+  import_vitals:
+    file_key: "VITALS"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols: ["recorded_time"]
+    merge_cols: []
+    # COMPREHENSIVE COLUMN MAPPINGS FOR VITALS
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      recorded_time: "recorded_time"                    # Vital signs recording time
+      heart_rate: "heart_rate"                          # Heart rate
+      blood_pressure_systolic: "blood_pressure_systolic"  # Systolic blood pressure
+      blood_pressure_diastolic: "blood_pressure_diastolic"  # Diastolic blood pressure
+      respiratory_rate: "respiratory_rate"              # Respiratory rate
+      temperature: "temperature"                        # Temperature
+      oxygen_saturation: "oxygen_saturation"            # Oxygen saturation
+      weight: "weight"                                  # Patient weight
+      height: "height"                                  # Patient height
+      # Example for different dataset:
+      # recorded_time: "measurement_timestamp"          # If your dataset uses different name
+      # heart_rate: "hr"                                # If your dataset uses 'hr'
+      # blood_pressure_systolic: "sbp"                  # If your dataset uses 'sbp'
+      # blood_pressure_diastolic: "dbp"                 # If your dataset uses 'dbp'
+
+  import_vent:
+    file_key: "VENT"
+    drop_cols: []
+    index_col: ["csn"]
+    numeric_cols:
+      - "vent_rate_set"
+      - "vent_tidal_rate_set"
+      - "vent_tidal_rate_exhaled"
+      - "peep"
+      - "fio2"
+    date_cols:
+      - "recorded_time"
+      - "vent_start_time"
+      - "vent_stop_time"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR VENTILATOR
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      recorded_time: "recorded_time"                    # Measurement recording time
+      vent_start_time: "vent_start_time"                # Ventilation start time
+      vent_stop_time: "vent_stop_time"                  # Ventilation stop time
+      vent_mode: "vent_mode"                            # Ventilator mode
+      vent_rate_set: "vent_rate_set"                    # Set ventilation rate
+      vent_tidal_rate_set: "vent_tidal_rate_set"        # Set tidal volume
+      vent_tidal_rate_exhaled: "vent_tidal_rate_exhaled"  # Exhaled tidal volume
+      peep: "peep"                                      # PEEP (Positive End-Expiratory Pressure)
+      fio2: "fio2"                                      # Fraction of inspired oxygen
+      # Example for different dataset:
+      # recorded_time: "measurement_datetime"           # If your dataset uses different name
+      # vent_start_time: "ventilation_start"           # If your dataset uses different name
+      # peep: "positive_end_expiratory_pressure"       # If your dataset uses full name
+
+  import_dialysis:
+    file_key: "DIALYSIS"
+    drop_cols: 
+      - "empi"
+      - "encounter_id"
+    index_col: ["csn"]
+    date_cols:
+      - "service_timestamp"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR DIALYSIS
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      service_timestamp: "service_timestamp"            # Dialysis service timestamp
+      # Example for different dataset:
+      # service_timestamp: "dialysis_start_time"        # If your dataset uses different name
+
+  import_gcs:
+    file_key: "GCS"
+    drop_cols: []
+    index_col: ["csn"]
+    numeric_col:
+      - "gcs_eye_score"
+      - "gcs_verbal_score"
+      - "gcs_motor_score"
+      - "gcs_total_score"
+    date_cols: ["recorded_time"]
+    # COMPREHENSIVE COLUMN MAPPINGS FOR GCS
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      recorded_time: "recorded_time"                    # GCS assessment time
+      gcs_eye_score: "gcs_eye_score"                    # GCS eye opening score
+      gcs_verbal_score: "gcs_verbal_score"              # GCS verbal response score
+      gcs_motor_score: "gcs_motor_score"                # GCS motor response score
+      gcs_total_score: "gcs_total_score"                # GCS total score
+      # Example for different dataset:
+      # recorded_time: "assessment_datetime"            # If your dataset uses different name
+      # gcs_eye_score: "eye_opening_score"              # If your dataset uses descriptive name
+
+  import_cultures:
+    file_key: "CULTURES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "specimen_collect_time"
+      - "order_time"
+      - "lab_result_time"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR CULTURES
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      specimen_collect_time: "specimen_collect_time"    # Specimen collection time
+      order_time: "order_time"                          # Culture order time
+      lab_result_time: "lab_result_time"                # Culture result time
+      result_status: "result_status"                    # Result status
+      proc_code: "proc_code"                            # Procedure code
+      proc_desc: "proc_desc"                            # Procedure description
+      component_id: "component_id"                      # Component identifier
+      component: "component"                            # Component name
+      loinc_code: "loinc_code"                          # LOINC code
+      # Example for different dataset:
+      # specimen_collect_time: "collection_datetime"    # If your dataset uses different name
+      # order_time: "culture_order_time"                # If your dataset uses different name
+
+  import_bed_locations:
+    file_key: "BEDLOCATION"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "bed_location_start"
+      - "bed_location_end"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR BED LOCATIONS
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      bed_unit: "bed_unit"                              # Hospital unit/department
+      bed_location_start: "bed_location_start"          # Unit admission time
+      bed_location_end: "bed_location_end"              # Unit discharge time
+      # Example for different dataset:
+      # bed_unit: "unit_name"                           # If your dataset uses 'unit_name'
+      # bed_location_start: "unit_admit_datetime"       # If your dataset uses different name
+
+  import_procedures:
+    file_key: "ORPROCEDURES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "surgery_date"
+      - "in_or_dttm"
+      - "procedure_start_dttm"
+      - "procedure_comp_dttm"
+      - "out_or_dttm"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR OR PROCEDURES
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      in_or_dttm: "in_or_dttm"                          # Time patient entered OR
+      out_or_dttm: "out_or_dttm"                        # Time patient left OR
+      procedure_start_dttm: "procedure_start_dttm"      # Procedure start time
+      procedure_end_dttm: "procedure_end_dttm"          # Procedure end time
+      or_procedure_id: "or_procedure_id"                # Procedure identifier
+      primary_procedure_nm: "primary_procedure_nm"      # Primary procedure name
+      service_nm: "service_nm"                          # Service name
+      surgery_date: "surgery_date"                      # Surgery date
+      # Example for different dataset:
+      # in_or_dttm: "or_entry_time"                     # If your dataset uses different name
+      # procedure_start_dttm: "surgery_start_time"      # If your dataset uses different name
+
+  import_diagnosis:
+    file_key: "DIAGNOSIS"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols: ["dx_time_date"]
+    # COMPREHENSIVE COLUMN MAPPINGS FOR DIAGNOSIS
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      dx_code_icd10: "dx_code_icd10"                    # ICD-10 diagnosis code
+      dx_time_date: "dx_time_date"                      # Diagnosis date/time
+      # Example for different dataset:
+      # dx_code_icd10: "icd10_code"                     # If your dataset uses 'icd10_code'
+      # dx_time_date: "diagnosis_datetime"              # If your dataset uses different name
+
+  import_cpt_procedures:
+    file_key: "CPT_PROCEDURES"
+    drop_cols: 
+      - "group_modifier_cpt_desc"
+      - "modifier_cpt_seq_num"
+    index_col: ["csn"]
+    date_cols:
+      - "procedure_day"
+      - "procedure_dttm"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR CPT PROCEDURES
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      procedure_cpt_code: "procedure_cpt_code"          # CPT procedure code
+      procedure_cpt_desc: "procedure_cpt_desc"          # CPT procedure description
+      procedure_dttm: "procedure_dttm"                  # Procedure date/time
+      procedure_day: "procedure_day"                    # Procedure day
+      # Example for different dataset:
+      # procedure_cpt_code: "cpt_code"                  # If your dataset uses 'cpt_code'
+      # procedure_dttm: "cpt_procedure_datetime"        # If your dataset uses different name
+
+  import_icd_procedures:
+    file_key: "ICD_PROCEDURES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "procedure_date"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR ICD PROCEDURES
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      icd10_procedure_code: "icd10_procedure_code"      # ICD-10 procedure code
+      procedure_desc: "procedure_desc"                  # Procedure description
+      procedure_date: "procedure_date"                  # Procedure date
+      # Example for different dataset:
+      # icd10_procedure_code: "icd_proc_code"           # If your dataset uses different name
+      # procedure_date: "icd_procedure_datetime"        # If your dataset uses different name
+
+  import_in_out:
+    file_key: "IN_OUT"
+    drop_cols: []
+    numeric_cols: [] 
+    index_col: ["csn"]
+    date_cols:
+      - "service_date"
+      - "service_ts"
+      - "order_ts"
+    # COMPREHENSIVE COLUMN MAPPINGS FOR IN/OUT FLUIDS
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      service_ts: "service_ts"                          # Service timestamp
+      order_ts: "order_ts"                              # Order timestamp
+      order_clinical_desc: "order_clinical_desc"        # Clinical description
+      order_catalog_desc: "order_catalog_desc"          # Catalog description
+      volume: "volume"                                  # Volume amount
+      record_type: "record_type"                        # Record type
+      service_date: "service_date"                      # Service date
+      # Example for different dataset:
+      # service_ts: "fluid_service_time"                # If your dataset uses different name
+      # order_catalog_desc: "fluid_type"               # If your dataset uses different name
+
+  import_radiology_notes:
+    file_key: "RADIOLOGY_NOTES"
+    drop_cols: []
+    index_col: ["patient_id"]
+    date_cols:
+      - "day_verified"
+    text_col: "doc_text"
+    clean_text: true
+    max_length: null
+    # COMPREHENSIVE COLUMN MAPPINGS FOR RADIOLOGY NOTES
+    column_mappings:
+      patient_id: "patient_id"                          # Patient identifier (note: different from pat_id)
+      doc_text: "doc_text"                              # Document text
+      day_verified: "day_verified"                      # Verification date
+      # Example for different dataset:
+      # patient_id: "pat_id"                            # If your dataset uses 'pat_id'
+      # doc_text: "report_text"                         # If your dataset uses 'report_text'
+
+  import_clinical_notes:
+    file_key: "CLINICAL_NOTES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "note_date"
+      - "documented_date"
+    text_col: "note_text"
+    clean_text: true
+    extract_sections: true
+    max_length: null
+    # COMPREHENSIVE COLUMN MAPPINGS FOR CLINICAL NOTES
+    column_mappings:
+      csn: "csn"                                        # Encounter identifier
+      pat_id: "pat_id"                                  # Patient identifier
+      note_text: "note_text"                            # Note text content
+      note_date: "note_date"                            # Note date
+      documented_date: "documented_date"                # Documentation date
+      # Example for different dataset:
+      # note_text: "clinical_note_text"                 # If your dataset uses different name
+      # note_date: "note_creation_date"                 # If your dataset uses different name
+
+
+# COMORBIDITY SUMMARY KEYWORDS
+comorbidity_summary:
+  - "quan_deyo_ICD10"
+  - "quan_elix_ICD10"
+  # - "ICD9_ahrq"
+  # - "ICD9_elix"
+  # - "ICD9_quan_deyo"
+  # - "ICD9_quan_elix"
+  # - "ICD9_single_ccs"
+  # - "ICD10_ahrq"
+  # - "ICD10_elix"
+  # - "ICD10_single_ccs"
+
+
+# SEPSIS SUMMARY DIRECTORY PATHS
+sepsis_summary: "em_sepsis_summary"
+sepsis_summary_types:
+  - "sofa_summary"
+  - "sep3_summary"
+  - "sirs_summary"
+  - "sep2_summary"
+  - "encounter_summary"
+  - "error_summary"
+  # - "ahrq_ICD10_summary"
+  # - "elix_ICD10_summary"
+  # - "quan_deyo_ICD10_summary"
+  # - "quan_elix_ICD10_summary" # comorbidity summary is outputted in the comorbidity_summary section
+  - "comorbidity_summary"
+  # - "ccs_ICD10_summary"
