@@ -115,7 +115,11 @@ It captures static demographic features (sex, race, age) for each patient who ha
 
 
 ### INFUSIONMEDS File
-SKIP FOR NOW
+These are some related files in MIMIC Concetps Folder:
+- Vasopressors：dobutamine, dopamine, epinephrine, milrinone, norepinephrine, phenylephrine, vasopressin, vasoactive_agent, norepinephrine_equivalent_dose
+- Anti-infective：antibiotic
+
+It is unnecessary to build the flat files from scratch, hence we can build the supertables directly using these files.
 
 ---
 
