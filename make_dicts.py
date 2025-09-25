@@ -53,28 +53,6 @@ import utils
 
 
 ###########################################################################
-########## Import Data Frames and Create Yearly Pickle ####################
-###########################################################################
-def import_data_frames(yearly_instance, configs):
-    """
-    Imports data from a YAML structure and applies it to methods of a passed instance.
-    Args:
-        yearly_instance (sepyIMPORT): The instance whose methods will be called.
-    """
-    import_start_time = time.time()
-    logging.info(
-        "Sepy is currently reading flat files and importing them for analysis. Thank you for waiting."
-    )
-    for method_name, params in configs["yearly_instance"].items():
-        method = getattr(yearly_instance, method_name, None)
-        if callable(method):
-            # check if method requires numeric_cols parameter and access list in sepyIMPORT instnace
-            if "numeric_cols" in params and isinstance(params["numeric_cols"], str):
-                params["numeric_cols"] = getattr(yearly_instance, params["numeric_cols"], None)
-        method(**params)
-    logging.info(f"Sepy took {time.time() - import_start_time} (s) to create a yearly pickle.")
-
-###########################################################################
 ############################# Make Supertables ###########################
 ###########################################################################
 def make_sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir):
@@ -117,7 +95,7 @@ def process_csn_instance(
         'sep2_summary': None,
         'enc_summary': None,
         'comorbidity_summary': None,
-        'error': None
+        'error': []
     }
     
     try:
@@ -173,7 +151,7 @@ def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
         list: List of results for each CSN in the batch
     """
     results = []
-    num_local_workers = min(os.cpu_count() - 1, 4)
+    num_local_workers = min((os.cpu_count() or 1) - 1, 4)
     
     # Create CSN instances for just this batch
     csn_instances = []
@@ -234,14 +212,12 @@ def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
 if __name__ == "__main__":
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Process EMR data for a specific year')
-    parser.add_argument('--year', type=int, help='The year for which data is being processed')
     parser.add_argument('--data_config', type=str, default='../configurations/emory_config_oddjobs.yaml', help='Path to the data configuration file in YAML format')
     parser.add_argument('--sepy_config', type=str, default='../configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
-    parser.add_argument('--num_processes', type=int, default=10, help='Number of processes to use')
+    parser.add_argument('--num_processes', type=int, default=16, help='Number of processes to use')
     parser.add_argument('--processor_assignment', type=int, help='Processor assignment')
     args = parser.parse_args()
     
-    year = args.year
     dataConfig_path = args.data_config
     sepyConfigs_path = args.sepy_config
     num_processes = args.num_processes
@@ -249,7 +225,6 @@ if __name__ == "__main__":
     dataConfig = utils.load_yaml(dataConfig_path)
     sepyConfigs = utils.load_yaml(sepyConfigs_path)
     logging.info(f"Sepy- The total number of processes: {num_processes}")
-    logging.info(f"Sepy- The import year is: {year}")
     logging.info(f"Sepy- The processor assignment is: {processor_assignment}")
     
     #####################################################
@@ -262,15 +237,14 @@ if __name__ == "__main__":
     GROUPINGS_PATH = Path(os.path.expandvars(dataConfig["groupings_path"]))
     #path to the directory where the supertable pickles will be written
     SUPERTABLE_OUTPUT_PATH = Path(os.path.expandvars(dataConfig["supertable_output_path"]))
-    #path to the directory where the yearly dictionaries will be written
-    YEARLY_DICTIONARY_OUTPUT_PATH = Path(os.path.expandvars(dataConfig["yearly_pickle_output_path"]))
-    YEARLY_DICTIONARY_FILE_NAME = os.path.join(YEARLY_DICTIONARY_OUTPUT_PATH, dataConfig["dataset_identifier"] + str(year) + ".pickle")
+    #path to the directory where the temporary dictionaries will be written after preprocessing
+    TEMP_PICKLE_AFTER_PREPROCESSING_OUTPUT_PATH = Path(os.path.expandvars(dataConfig["temp_pickle_after_preprocessing_output_path"]))
+    TEMP_DICTIONARY_FILE_NAME = os.path.join(TEMP_PICKLE_AFTER_PREPROCESSING_OUTPUT_PATH, "temp.pickle")
 
     paths = {}
     comorbidity_types = dataConfig["dictionary_paths"]["comorbidity_types"]
     grouping_types = dataConfig["dictionary_paths"]["grouping_types"]
     flatfile_types = dataConfig["dictionary_paths"]["flatfile_types"]
-    combined_files = dataConfig["dictionary_paths"]["combined_files"]
 
     for comorbidity_type, comorbidity_file in comorbidity_types:
             try:
@@ -289,63 +263,56 @@ if __name__ == "__main__":
     for flatfile_type, flatfile_name in flatfile_types:
         try:
             paths[f"{flatfile_type}"] = glob.glob(
-                f"{DATA_PATH}/{year}/{flatfile_name}"
+                f"{DATA_PATH}/{flatfile_name}"
             )[0]
         except IndexError:
             logging.error(f"Sepy- could not find flatfile type for {flatfile_name}")
 
-    for combined_file in combined_files:
-        try:
-            paths[f"{combined_file[0]}"] = glob.glob(
-                f"{DATA_PATH}/*{combined_file[1]}*"
-            )[0]
-            
-        except IndexError:
-            logging.error(f"Sepy- could not find combined file for {combined_file[1]}")
     print(paths)
 
     file_dictionary = paths
 
-    #####################################################
-    ############ Create Pickle of Yearly Data ###########
-    #####################################################
-    if dataConfig["make_yearly_pickle"] == "yes":
+    ####################################################################
+    ############ Create Pickle after Preprocessing for check ###########
+    ####################################################################
+    if dataConfig["make_temp_pickle_after_preprocessing"] == "yes":
         try:
             start = time.perf_counter()
-            logging.info(f"Creating yearly pickle for {year}")
-            logging.info(f"Yearly pickle will be saved to {YEARLY_DICTIONARY_FILE_NAME}")
-
-            import_instance = si.sepyIMPORT(paths, sepyConfigs, dataConfig["yearly_instance"])
-            logging.info(f"An instance of the sepyIMPORT class was created for {year}")
+            logging.info(f"Creating temporary pickle after preprocessing to check data import")
+            logging.info(f"Pickle file will be saved to {TEMP_DICTIONARY_FILE_NAME}")
             
-            logging.info(f"Importing data frames for {year}")
+            logging.info(f"Importing data frames")
+            logging.info(f"Creating sepyIMPORT class instance")
             logging.info(f"This may take a while...")
-            import_data_frames(import_instance, dataConfig)
-            logging.info(f"Data frames imported for {year}")
-            logging.info(f"Dumping import instance to pickle for {year}")
+            
+            import_instance = si.sepyIMPORT(paths, sepyConfigs, dataConfig["instance"])
+            
+            logging.info(f"An instance of the sepyIMPORT class was created")
+            logging.info(f"Data frames imported")
+            logging.info(f"Dumping import instance to pickle")
 
-            with open(YEARLY_DICTIONARY_FILE_NAME, "wb") as handle:
+            with open(TEMP_DICTIONARY_FILE_NAME, "wb") as handle:
                 pickle.dump(import_instance, handle, protocol=pickle.HIGHEST_PROTOCOL)
-            logging.info(f"Yearly pickle for {year} created and saved")
+            logging.info(f"Temporary pickle created and saved")
             logging.info(
-                f"Time to create {year}s data and write to pickles was {time.perf_counter()-start} (s)"
+                f"Time to create temporary data and write to pickles was {time.perf_counter()-start} (s)"
             )
         except (FileNotFoundError, ValueError, KeyError) as e:
             logging.error(e)
-    else: #If the yearly pickle already exists, read it in
-        logging.info(f"Skipping creation of yearly pickle for {year} -  it should already exist")
-        if os.path.exists(YEARLY_DICTIONARY_FILE_NAME):
-            logging.info(f"Yearly pickle for {year} exists")
+    else: #If the pickle already exists, read it in
+        logging.info(f"Skipping creation of the pickle -  it should already exist")
+        if os.path.exists(TEMP_DICTIONARY_FILE_NAME):
+            logging.info(f"Temporary pickle exists")
         else:
-            logging.error(f"Yearly pickle for {year} does not exist. Please check the config file.")
+            logging.error(f"Temporary pickle does not exist. Please check the config file.")
             exit()
 
-        #Read the yearly pickle
+        #Read the temporary pickle
         try:
-            with open(YEARLY_DICTIONARY_FILE_NAME, "rb") as handle:
+            with open(TEMP_DICTIONARY_FILE_NAME, "rb") as handle:
                 import_instance = pickle.load(handle)
         except Exception as e:
-            logging.error(f"Error loading yearly pickle for {year}: {e}")
+            logging.error(f"Error loading temporary pickle: {e}")
             exit()
         
     ###########################################################################
@@ -368,9 +335,9 @@ if __name__ == "__main__":
             specific_enc_filter = dataConfig["specific_enc_filter"] #yes, no
 
             # reads the list of csns from the encounters path
-            csn_df = pd.read_csv(encounters_path, sep = "|")
+            csn_df = pd.read_csv(encounters_path)
             num_encounters = len(csn_df)
-            logging.info(f"Sepy- The year {year} has {num_encounters} encounters before filtering.")
+            logging.info(f"Sepy- It has {num_encounters} encounters before filtering.")
         except (IndexError, ValueError, TypeError) as e:
             logging.error(
                 f"Sepy- There was an error importing one of the arguments: {type(e).__name__}."

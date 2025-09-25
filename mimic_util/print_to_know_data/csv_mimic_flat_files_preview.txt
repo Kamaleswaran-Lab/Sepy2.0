@@ -1,0 +1,401 @@
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/CPT_PROCEDURES.csv
+================================================================================
+Delimiter: ','
+Header:
+['pat_id', 'csn', 'procedure_cpt_code', 'procedure_cpt_desc', 'procedure_dttm']
+
+Column → Sample value:
+  pat_id: 10000068
+  csn: 25022803
+  procedure_cpt_code: 99218
+  procedure_cpt_desc: Hospital observation services
+  procedure_dttm: 2160-03-04
+
+First 10 rows of data:
+['10000068', '25022803', '99218', 'Hospital observation services', '2160-03-04']
+['10000084', '29888819', 'G0378', 'Hospital observation service, per hour', '2160-12-28']
+['10000108', '27250926', '99219', 'Hospital observation services', '2163-09-27']
+['10000117', '22927623', '43239', 'Digestive system', '2181-11-15']
+['10000117', '22927623', 'G0378', 'Hospital observation service, per hour', '2181-11-15']
+['10000161', '22148160', '99219', 'Hospital observation services', '2163-08-20']
+['10000248', '20600184', '99219', 'Hospital observation services', '2192-11-30']
+['10000280', '25852320', '99219', 'Hospital observation services', '2151-03-18']
+['10000635', '20642640', 'G0378', 'Hospital observation service, per hour', '2143-12-23']
+['10000635', '26134563', 'G0378', 'Hospital observation service, per hour', '2136-06-19']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/ENCOUNTER.csv
+================================================================================
+Delimiter: ','
+Header:
+['csn', 'pat_id', 'hospital_admission_date_time', 'hospital_discharge_date_time', 'ed_presentation_time', 'encounter_type', 'age', 'discharge_to', 'pre_admit_location', 'total_icu_days', 'admit_reason']
+
+Column → Sample value:
+  csn: 22595853
+  pat_id: 10000032
+  hospital_admission_date_time: 2180-05-06 22:23:00
+  hospital_discharge_date_time: 2180-05-07 17:15:00
+  ed_presentation_time: 2180-05-06 19:17:00
+  encounter_type: IN
+  age: 52
+  discharge_to: HOME
+  pre_admit_location: TRANSFER FROM HOSPITAL
+  total_icu_days: 0.0
+  admit_reason: URGENT
+
+First 10 rows of data:
+['22595853', '10000032', '2180-05-06 22:23:00', '2180-05-07 17:15:00', '2180-05-06 19:17:00', 'IN', '52', 'HOME', 'TRANSFER FROM HOSPITAL', '0.0', 'URGENT']
+['22841357', '10000032', '2180-06-26 18:27:00', '2180-06-27 18:49:00', '2180-06-26 15:54:00', 'IN', '52', 'HOME', 'EMERGENCY ROOM', '0.0', 'EW EMER.']
+['25742920', '10000032', '2180-08-05 23:44:00', '2180-08-07 17:50:00', '2180-08-05 20:58:00', 'IN', '52', 'HOSPICE', 'EMERGENCY ROOM', '0.0', 'EW EMER.']
+['29079034', '10000032', '2180-07-23 12:35:00', '2180-07-25 17:55:00', '2180-07-23 05:54:00', 'IN', '52', 'HOME', 'EMERGENCY ROOM', '0.41', 'EW EMER.']
+['25022803', '10000068', '2160-03-03 23:16:00', '2160-03-04 06:26:00', '2160-03-03 21:55:00', 'IN', '19', '', 'EMERGENCY ROOM', '0.0', 'EU OBSERVATION']
+['23052089', '10000084', '2160-11-21 01:56:00', '2160-11-25 14:52:00', '2160-11-20 20:36:00', 'IN', '72', 'HOME HEALTH CARE', 'WALK-IN/SELF REFERRAL', '0.0', 'EW EMER.']
+['29888819', '10000084', '2160-12-28 05:11:00', '2160-12-28 16:07:00', '2160-12-27 18:32:00', 'IN', '72', '', 'PHYSICIAN REFERRAL', '0.0', 'EU OBSERVATION']
+['27250926', '10000108', '2163-09-27 23:17:00', '2163-09-28 09:04:00', '2163-09-27 16:18:00', 'IN', '25', '', 'EMERGENCY ROOM', '0.0', 'EU OBSERVATION']
+['22927623', '10000117', '2181-11-15 02:05:00', '2181-11-15 14:52:00', '2181-11-14 21:51:00', 'IN', '48', '', 'EMERGENCY ROOM', '0.0', 'EU OBSERVATION']
+['27988844', '10000117', '2183-09-18 18:10:00', '2183-09-21 16:30:00', '2183-09-18 08:41:00', 'IN', '48', 'HOME HEALTH CARE', 'WALK-IN/SELF REFERRAL', '0.0', 'OBSERVATION ADMIT']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/ICD_PROCEDURES.csv
+================================================================================
+Delimiter: ','
+Header:
+['pat_id', 'csn', 'icd9_procedure_code', 'icd10_procedure_code', 'procedure_desc', 'procedure_date']
+
+Column → Sample value:
+  pat_id: 10000032
+  csn: 22595853
+  icd9_procedure_code: 5491
+  icd10_procedure_code: NOT AVAILABLE
+  procedure_desc: UNKNOWN
+  procedure_date: 2180-05-07
+
+First 10 rows of data:
+['10000032', '22595853', '5491', 'NOT AVAILABLE', 'UNKNOWN', '2180-05-07']
+['10000032', '22841357', '5491', 'NOT AVAILABLE', 'UNKNOWN', '2180-06-27']
+['10000032', '25742920', '5491', 'NOT AVAILABLE', 'UNKNOWN', '2180-08-06']
+['10000068', '25022803', '8938', 'NOT AVAILABLE', 'UNKNOWN', '2160-03-03']
+['10000117', '27988844', 'NOT AVAILABLE', '0QS734Z', 'Reposition Left Upper Femur with Internal Fixation Device, Percutaneous Approach', '2183-09-19']
+['10000280', '25852320', '8938', 'NOT AVAILABLE', 'UNKNOWN', '2151-03-18']
+['10000560', '28979390', '5551', 'NOT AVAILABLE', 'UNKNOWN', '2189-10-16']
+['10000635', '26134563', '3734', 'NOT AVAILABLE', 'UNKNOWN', '2136-06-19']
+['10000635', '26134563', '3728', 'NOT AVAILABLE', 'UNKNOWN', '2136-06-19']
+['10000635', '26134563', '3727', 'NOT AVAILABLE', 'UNKNOWN', '2136-06-19']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/DIALYSIS.csv
+================================================================================
+Delimiter: ','
+Header:
+['csn', 'pat_id', 'service_timestamp', 'dialysis_present', 'dialysis_active', 'dialysis_type']
+
+Column → Sample value:
+  csn: 26043927
+  pat_id: 15855449
+  service_timestamp: 2155-01-31 18:43:00
+  dialysis_present: 1
+  dialysis_active: 0
+  dialysis_type: 
+
+First 10 rows of data:
+['26043927', '15855449', '2155-01-31 18:43:00', '1', '0', '']
+['26043927', '15855449', '2155-01-31 20:20:00', '1', '0', '']
+['26043927', '15855449', '2155-02-01 00:13:00', '1', '0', '']
+['26043927', '15855449', '2155-02-01 04:45:00', '1', '0', '']
+['26043927', '15855449', '2155-02-01 07:26:00', '1', '0', '']
+['26043927', '15855449', '2155-02-01 07:58:00', '1', '0', '']
+['26043927', '15855449', '2155-02-01 08:31:00', '1', '0', '']
+['26043927', '15855449', '2155-02-01 09:07:00', '1', '0', 'IHD']
+['26043927', '15855449', '2155-02-01 09:07:00', '1', '1', 'IHD']
+['26043927', '15855449', '2155-02-01 12:07:00', '1', '0', '']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/VENT.csv
+================================================================================
+Delimiter: ','
+Header:
+['csn', 'pat_id', 'vent_rate_set', 'vent_tidal_rate_set', 'tidal_volume_observed', 'tidal_volume_spontaneous', 'vent_tidal_rate_exhaled', 'peep', 'fio2', 'recorded_time', 'vent_start_time', 'vent_stop_time', 'vent_name', 'vent_mode', 'vent_cat']
+
+Column → Sample value:
+  csn: 25860671.0
+  pat_id: 10000690.0
+  vent_rate_set: 
+  vent_tidal_rate_set: 
+  tidal_volume_observed: 
+  tidal_volume_spontaneous: 
+  vent_tidal_rate_exhaled: Not Yet Decided
+  peep: 
+  fio2: 70.0
+  recorded_time: 2150-11-02 20:27:00
+  vent_start_time: 2150-11-02 19:40:00
+  vent_stop_time: 2150-11-05 16:00:00
+  vent_name: 
+  vent_mode: 
+  vent_cat: SupplementalOxygen
+
+First 10 rows of data:
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '70.0', '2150-11-02 20:27:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '50.0', '2150-11-03 00:50:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '100.0', '2150-11-03 04:38:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '100.0', '2150-11-03 08:00:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '70.0', '2150-11-03 09:00:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '70.0', '2150-11-03 22:15:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '70.0', '2150-11-04 00:00:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '70.0', '2150-11-04 02:00:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '50.0', '2150-11-04 08:00:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+['25860671.0', '10000690.0', '', '', '', '', 'Not Yet Decided', '', '50.0', '2150-11-04 12:00:00', '2150-11-02 19:40:00', '2150-11-05 16:00:00', '', '', 'SupplementalOxygen']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/DEMOGRAPHICS.csv
+================================================================================
+Delimiter: ','
+Header:
+['pat_id', 'gender', 'race_code', 'ethnicity_code']
+
+Column → Sample value:
+  pat_id: 10000032
+  gender: Female
+  race_code: WHITE
+  ethnicity_code: 
+
+First 10 rows of data:
+['10000032', 'Female', 'WHITE', '']
+['10000068', 'Female', 'WHITE', '']
+['10000084', 'Male', 'WHITE', '']
+['10000108', 'Male', 'WHITE', '']
+['10000117', 'Female', 'WHITE', '']
+['10000161', 'Male', 'WHITE', '']
+['10000248', 'Male', 'WHITE', '']
+['10000280', 'Male', 'OTHER', '']
+['10000560', 'Female', 'WHITE', '']
+['10000635', 'Female', 'BLACK/AFRICAN AMERICAN', '']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/BEDLOCATION.csv
+================================================================================
+Delimiter: ','
+Header:
+['pat_id', 'csn', 'bed_unit', 'bed_location_start', 'bed_location_end']
+
+Column → Sample value:
+  pat_id: 10000032
+  csn: 22595853.0
+  bed_unit: Emergency Department
+  bed_location_start: 2180-05-06 19:17:00
+  bed_location_end: 2180-05-06 23:30:00
+
+First 10 rows of data:
+['10000032', '22595853.0', 'Emergency Department', '2180-05-06 19:17:00', '2180-05-06 23:30:00']
+['10000032', '22595853.0', 'Transplant', '2180-05-06 23:30:00', '2180-05-07 17:21:27']
+['10000032', '22595853.0', 'UNKNOWN', '2180-05-07 17:21:27', '']
+['10000032', '22841357.0', 'UNKNOWN', '2180-06-27 18:49:12', '']
+['10000032', '22841357.0', 'Transplant', '2180-06-26 21:31:00', '2180-06-27 18:49:12']
+['10000032', '22841357.0', 'Emergency Department', '2180-06-26 15:54:00', '2180-06-26 21:31:00']
+['10000032', '25742920.0', 'Transplant', '2180-08-06 01:44:00', '2180-08-07 17:50:44']
+['10000032', '25742920.0', 'Emergency Department', '2180-08-05 20:58:00', '2180-08-06 01:44:00']
+['10000032', '25742920.0', 'UNKNOWN', '2180-08-07 17:50:44', '']
+['10000032', '29079034.0', 'Emergency Department', '2180-07-22 16:24:00', '2180-07-23 05:54:00']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/LABS.csv
+================================================================================
+Delimiter: ','
+Header:
+['csn', 'pat_id', 'component_id', 'lab_result', 'lab_result_time', 'collection_time', 'result_status', 'proc_cat_id', 'proc_cat_name', 'proc_code', 'proc_desc', 'component', 'loinc_code']
+
+Column → Sample value:
+  csn: 22595853.0
+  pat_id: 10000032
+  component_id: 51464
+  lab_result: 
+  lab_result_time: 2180-05-07 00:10:00
+  collection_time: 2180-05-07 00:10:00
+  result_status: Final
+  proc_cat_id: 51464
+  proc_cat_name: Urine
+  proc_code: 51464
+  proc_desc: Hematology
+  component: Bilirubin
+  loinc_code: 
+
+First 10 rows of data:
+['22595853.0', '10000032', '51464', '', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51464', 'Urine', '51464', 'Hematology', 'Bilirubin', '']
+['22595853.0', '10000032', '51466', '', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51466', 'Urine', '51466', 'Hematology', 'Blood', '']
+['22595853.0', '10000032', '51478', '', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51478', 'Urine', '51478', 'Hematology', 'Glucose', '']
+['22595853.0', '10000032', '51484', '', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51484', 'Urine', '51484', 'Hematology', 'Ketone', '']
+['22595853.0', '10000032', '51486', '', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51486', 'Urine', '51486', 'Hematology', 'Leukocytes', '']
+['22595853.0', '10000032', '51487', '', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51487', 'Urine', '51487', 'Hematology', 'Nitrite', '']
+['22595853.0', '10000032', '51491', '6.0', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51491', 'Urine', '51491', 'Hematology', 'pH', '']
+['22595853.0', '10000032', '51492', '30.0', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51492', 'Urine', '51492', 'Hematology', 'Protein', '']
+['22595853.0', '10000032', '51498', '1.033', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51498', 'Urine', '51498', 'Hematology', 'Specific Gravity', '']
+['22595853.0', '10000032', '51506', '', '2180-05-07 00:10:00', '2180-05-07 00:10:00', 'Final', '51506', 'Urine', '51506', 'Hematology', 'Urine Appearance', '']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/CULTURES.csv
+================================================================================
+Delimiter: ','
+Header:
+['csn', 'pat_id', 'specimen_collect_time', 'order_time', 'lab_result_time', 'result_status', 'proc_code', 'proc_desc', 'component_id', 'component', 'loinc_code']
+
+Column → Sample value:
+  csn: 
+  pat_id: 19669037
+  specimen_collect_time: 2145-04-23 14:14:00
+  order_time: 2145-04-23 00:00:00
+  lab_result_time: 2145-04-26 11:45:00
+  result_status: Not Recorded
+  proc_code: 90046
+  proc_desc: WOUND CULTURE
+  component_id: 70070
+  component: SWAB
+  loinc_code: NOT AVAILABLE
+
+First 10 rows of data:
+['', '19669037', '2145-04-23 14:14:00', '2145-04-23 00:00:00', '2145-04-26 11:45:00', 'Not Recorded', '90046', 'WOUND CULTURE', '70070', 'SWAB', 'NOT AVAILABLE']
+['', '19669037', '2145-04-23 14:14:00', '2145-04-23 00:00:00', '2145-04-26 11:45:00', 'Not Recorded', '90046', 'WOUND CULTURE', '70070', 'SWAB', 'NOT AVAILABLE']
+['', '19669037', '2145-04-23 14:14:00', '2145-04-23 00:00:00', '2145-04-26 11:45:00', 'Not Recorded', '90046', 'WOUND CULTURE', '70070', 'SWAB', 'NOT AVAILABLE']
+['', '19669037', '2145-04-23 14:14:00', '2145-04-23 00:00:00', '2145-04-26 11:45:00', 'Not Recorded', '90046', 'WOUND CULTURE', '70070', 'SWAB', 'NOT AVAILABLE']
+['', '19669037', '2150-04-06 23:40:00', '2150-04-06 00:00:00', '2150-04-08 08:24:00', 'Not Recorded', '90039', 'URINE CULTURE', '70079', 'URINE', 'NOT AVAILABLE']
+['', '19669067', '2112-12-10 16:55:00', '2112-12-10 00:00:00', '2112-12-16 08:58:00', 'Not Recorded', '90201', 'Blood Culture, Routine', '70012', 'BLOOD CULTURE', 'NOT AVAILABLE']
+['', '19669067', '2112-12-10 18:50:00', '2112-12-10 00:00:00', '2112-12-16 08:59:00', 'Not Recorded', '90201', 'Blood Culture, Routine', '70012', 'BLOOD CULTURE', 'NOT AVAILABLE']
+['', '19669098', '2139-04-30 02:00:00', '2139-04-30 00:00:00', '2139-04-30 09:13:00', 'Not Recorded', '90201', 'Blood Culture, Routine', '70012', 'BLOOD CULTURE', 'NOT AVAILABLE']
+['', '19669127', '2158-09-15 12:21:00', '2158-09-15 00:00:00', '2158-09-16 12:24:00', 'Not Recorded', '90133', 'MONOSPOT', '70017', 'SEROLOGY/BLOOD', 'NOT AVAILABLE']
+['', '19669165', '2167-05-30 17:11:00', '2167-05-30 00:00:00', '2167-06-05 07:40:00', 'Not Recorded', '90201', 'Blood Culture, Routine', '70012', 'BLOOD CULTURE', 'NOT AVAILABLE']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/VITALS.csv
+================================================================================
+Delimiter: ','
+Header:
+['pat_id', 'csn', 'recorded_time', 'temperature', 'temproute', 'daily_weight_kg', 'height_cm', 'sbp_line', 'dbp_line', 'map_line', 'sbp_cuff', 'dbp_cuff', 'map_cuff', 'pulse', 'unassisted_resp_rate', 'spo2', 'o2_device', 'cvp', 'end_tidal_co2', 'o2_flow_rate']
+
+Column → Sample value:
+  pat_id: 10000032
+  csn: 29079034
+  recorded_time: 2180-07-23 12:36:00
+  temperature: 
+  temproute: 
+  daily_weight_kg: 39.4
+  height_cm: 152.0
+  sbp_line: 
+  dbp_line: 
+  map_line: 
+  sbp_cuff: 
+  dbp_cuff: 
+  map_cuff: 
+  pulse: 
+  unassisted_resp_rate: 
+  spo2: 
+  o2_device: 
+  cvp: 
+  end_tidal_co2: 
+  o2_flow_rate: 
+
+First 10 rows of data:
+['10000032', '29079034', '2180-07-23 12:36:00', '', '', '39.4', '152.0', '', '', '', '', '', '', '', '', '', '', '', '', '']
+['10000032', '29079034', '2180-07-23 14:00:00', '37.06', 'Oral', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+['10000032', '29079034', '2180-07-23 14:11:00', '', '', '', '', '84.0', '48.0', '56.0', '84.0', '48.0', '56.0', '', '', '', '', '', '', '']
+['10000032', '29079034', '2180-07-23 14:12:00', '', '', '', '', '', '', '', '', '', '', '91.0', '24.0', '', '', '', '', '']
+['10000032', '29079034', '2180-07-23 14:13:00', '', '', '', '', '', '', '', '', '', '', '', '', '98.0', '', '', '', '']
+['10000032', '29079034', '2180-07-23 14:20:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Nasal cannula', '', '', '2.0']
+['10000032', '29079034', '2180-07-23 14:22:00', '', '', '39.32712', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+['10000032', '29079034', '2180-07-23 14:30:00', '', '', '', '', '95.0', '59.0', '67.0', '95.0', '59.0', '67.0', '93.0', '21.0', '97.0', '', '', '', '']
+['10000032', '29079034', '2180-07-23 14:44:00', '', '', '39.32712', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+['10000032', '29079034', '2180-07-23 15:00:00', '', '', '', '', '88.0', '56.0', '64.0', '88.0', '56.0', '64.0', '94.0', '23.0', '97.0', '', '', '', '']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/IN_OUT.csv
+================================================================================
+Delimiter: ','
+Header:
+['csn', 'service_ts', 'order_ts', 'order_clinical_desc', 'order_catalog_desc']
+
+Column → Sample value:
+  csn: 25062453
+  service_ts: 2141-04-28 16:08:00
+  order_ts: 2141-04-28 16:08:00
+  order_clinical_desc: cefepime Injection
+  order_catalog_desc: 08-Antibiotics (IV)
+
+First 10 rows of data:
+['25062453', '2141-04-28 16:08:00', '2141-04-28 16:08:00', 'cefepime Injection', '08-Antibiotics (IV)']
+['25062453', '2141-04-28 16:08:00', '2141-04-28 16:08:00', 'cefepime Injection', '08-Antibiotics (IV)']
+['25062453', '2141-04-28 16:08:00', '2141-04-28 16:08:00', 'cefepime Injection', '08-Antibiotics (IV)']
+['25062453', '2141-04-28 16:08:00', '2141-04-28 16:08:00', 'cefepime Injection', '08-Antibiotics (IV)']
+['25062453', '2141-04-28 16:50:00', '2141-04-28 16:50:00', '', '01-Drips']
+['25062453', '2141-04-28 16:50:00', '2141-04-28 16:50:00', 'heparin Injection', '01-Drips']
+['25062453', '2141-04-28 16:50:00', '2141-04-28 16:50:00', 'heparin Injection', '01-Drips']
+['25062453', '2141-04-28 16:50:00', '2141-04-28 16:50:00', 'heparin Injection', '01-Drips']
+['25062453', '2141-04-28 18:39:00', '2141-04-28 18:39:00', 'insulin lispro Injectable Solution [Humalog]', '06-Insulin (Non IV)']
+['25062453', '2141-05-08 20:23:00', '2141-05-08 20:23:00', '', '14-Oral/Gastric Intake']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/DIAGNOSIS.csv
+================================================================================
+Delimiter: ','
+Header:
+['pat_id', 'csn', 'dx_code_icd9', 'dx_code_icd10', 'dx_time_date', 'long_title']
+
+Column → Sample value:
+  pat_id: 10000032
+  csn: 22595853
+  dx_code_icd9: 5723   
+  dx_code_icd10: 
+  dx_time_date: NOT AVAILABLE
+  long_title: Portal hypertension
+
+First 10 rows of data:
+['10000032', '22595853', '5723   ', '', 'NOT AVAILABLE', 'Portal hypertension']
+['10000032', '22595853', '78959  ', '', 'NOT AVAILABLE', 'Other ascites']
+['10000032', '22595853', '5715   ', '', 'NOT AVAILABLE', 'Cirrhosis of liver without mention of alcohol']
+['10000032', '22595853', '07070  ', '', 'NOT AVAILABLE', 'Unspecified viral hepatitis C without hepatic coma']
+['10000032', '22595853', '496    ', '', 'NOT AVAILABLE', 'Chronic airway obstruction, not elsewhere classified']
+['10000032', '22595853', '29680  ', '', 'NOT AVAILABLE', 'Bipolar disorder, unspecified']
+['10000032', '22595853', '30981  ', '', 'NOT AVAILABLE', 'Posttraumatic stress disorder']
+['10000032', '22595853', 'V1582  ', '', 'NOT AVAILABLE', 'Personal history of tobacco use']
+['10000032', '22841357', '07071  ', '', 'NOT AVAILABLE', 'Unspecified viral hepatitis C with hepatic coma']
+['10000032', '22841357', '78959  ', '', 'NOT AVAILABLE', 'Other ascites']
+
+
+================================================================================
+📂 File: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files/GCS.csv
+================================================================================
+Delimiter: ','
+Header:
+['pat_id', 'csn', 'recorded_time', 'gcs_eye_score', 'gcs_verbal_score', 'gcs_motor_score', 'gcs_total_score', 'gcs_unable']
+
+Column → Sample value:
+  pat_id: 12466550
+  csn: 23998182
+  recorded_time: 2174-09-29 12:45:00
+  gcs_eye_score: 3.0
+  gcs_verbal_score: 0.0
+  gcs_motor_score: 5.0
+  gcs_total_score: 15
+  gcs_unable: 1
+
+First 10 rows of data:
+['12466550', '23998182', '2174-09-29 12:45:00', '3.0', '0.0', '5.0', '15', '1']
+['12466550', '23998182', '2174-09-29 16:26:00', '4.0', '0.0', '6.0', '15', '1']
+['12466550', '23998182', '2174-09-29 17:37:00', '4.0', '0.0', '6.0', '15', '1']
+['12466550', '23998182', '2174-09-29 18:00:00', '3.0', '1.0', '5.0', '9', '0']
+['12466550', '23998182', '2174-09-29 19:00:00', '3.0', '1.0', '5.0', '9', '0']
+['12466550', '23998182', '2174-09-29 20:00:00', '3.0', '3.0', '6.0', '12', '0']
+['12466550', '23998182', '2174-09-29 21:00:00', '3.0', '3.0', '6.0', '12', '0']
+['12466550', '23998182', '2174-09-29 22:04:00', '3.0', '3.0', '6.0', '12', '0']
+['12466550', '23998182', '2174-09-29 23:00:00', '3.0', '3.0', '6.0', '12', '0']
+['12466550', '23998182', '2174-09-30 00:00:00', '3.0', '5.0', '6.0', '14', '0']
+
+

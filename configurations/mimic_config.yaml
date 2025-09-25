@@ -2,17 +2,16 @@
 ## assign unique_encounters_path to the path of the unique encounters file
 
 # PIPELINE INSTRUCTIONS
-make_yearly_pickle: "no" # yes: make pickle files, no: do not make pickle files
-make_supertables: "yes" # yes: make supertables, no: do not make supertables
+make_temp_pickle_after_preprocessing: "yes" # yes: make pickle files, no: do not make pickle files
+make_supertables: "no" # yes: make supertables, no: do not make supertables
 
 
 # FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files"
 groupings_path: "$HOME/Sepy/groupings"
-yearly_pickle_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_YEARLY_PICKLES/"
+temp_pickle_after_preprocessing_output_path: "/hpc/group/kamaleswaranlab/mimic_iv/sepy_output/temp_pickles"
 supertable_output_path: "/hpc/group/kamaleswaranlab/mimic_iv/mimic-supertables"
 encounters_path: "ENCOUNTER_FILE"
-dataset_identifier: "em_y"
 
 # CSN FILTERING
 encounter_type: "IN" # "EM" = Emergency, "IN" = Inpatient, "all" = all encounter types ????? 
@@ -45,29 +44,26 @@ dictionary_paths:
     - ["grouping_vent", "em_vent_labels.csv"]
     - ["infusion_meds_volume", "em_infusion_meds_volume.csv"]
   flatfile_types: 
-    # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/year/ FOLDER
-    - ["INFUSIONMEDS", "*INFUSIONMEDS*"]
-    - ["LABS", "*LABS*"]
-    - ["VITALS", "*VITALS_O2_FLOW_RATE_*.csv"]
-    - ["VENT", "*VENT*"]
-    - ["DEMOGRAPHICS", "*DEMOGRAPHICS*"]
-    - ["GCS", "*GCS*"]
-    - ["ENCOUNTER", "*ENCOUNTER*"]
-    - ["CULTURES", "*CULTURES*"]
-    - ["BEDLOCATION", "*BEDLOCATION*"]
-    - ["ORPROCEDURES", "*ORPROCEDURES*"]
-    - ["DIAGNOSIS", "*DIAGNOSIS*"]
-    - ["CPT_PROCEDURES", "*CPT*"]
-    - ["ICD_PROCEDURES", "*ICDPROCEDURES*"]
-    - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"]
-  combined_files:
-    # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/ FOLDER
-    - ["DIALYSIS", "DIALYSIS_14_21.dsv"] 
-    - ["IN_OUT", "CJSEPSIS_IN_OUT_PROCESSED_combined.csv"]
-    - ["RADIOLOGY_NOTES", "all_radiology_notes.csv"]
+    # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/FOLDER
+    - ["ENCOUNTER", "ENCOUNTER.csv"]
+    - ["DEMOGRAPHICS", "DEMOGRAPHICS.csv"]
+    - ["INFUSIONMEDS", "INFUSIONMEDS.csv"]
+    - ["LABS", "LABS.csv"]
+    - ["VITALS", "VITALS.csv"]
+    - ["VENT", "VENT.csv"]
+    - ["DIALYSIS", "DIALYSIS.csv"]
+    - ["IN_OUT", "IN_OUT.csv"]
+    - ["GCS", "GCS.csv"]
+    - ["CULTURES", "CULTURES.csv"]
+    - ["BEDLOCATION", "BEDLOCATION.csv"]
+    - ["ORPROCEDURES", "ORPROCEDURES.csv"]
+    - ["DIAGNOSIS", "DIAGNOSIS.csv"]
+    - ["ICD_PROCEDURES", "ICD_PROCEDURES.csv"]
+    - ["CPT_PROCEDURES", "CPT_PROCEDURES.csv"]
+    # - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"] # Uncomment if clinical notes are available
 
-# YEARLY INSTANCE FUNCTIONS AND PARAMETERS
-yearly_instance:
+# INSTANCE FUNCTIONS AND PARAMETERS
+instance:
   import_demographics:
     file_key: "DEMOGRAPHICS"
     drop_cols: []
