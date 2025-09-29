@@ -159,7 +159,6 @@ class sepyIMPORT:
             self.csns = self.df_encounters.index.unique().tolist()
             self.patids = self.df_encounters['pat_id'].unique().tolist()
             logging.info(f"Number of encounters: {len(self.csns)}")
-        return 0 ############## FOR TESTING ##############
     
         for method_name, params in dataConfig.items():
             if method_name == "import_encounters":

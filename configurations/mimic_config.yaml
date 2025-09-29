@@ -77,138 +77,138 @@ instance:
     drop_cols: []
     index_col: ["pat_id"]
     date_cols: [] 
-  import_infusion_meds:
-    file_key: "INFUSIONMEDS"
-    drop_cols: []
-    numeric_cols:
-      - "order_med_id"
-      - "medication_id"
-    anti_infective_group_name: "anti-infective"
-    vasopressor_group_name: "vasopressor"
-    index_col: ["csn"]
-    date_cols:
-      - "med_order_time"
-      - "med_action_time"
-      - "med_start"
-      - "med_stop"
-  import_labs:
-    file_key: "LABS"
-    drop_cols: []
-    date_cols:
-      - "collection_time"
-      - "lab_result_time"
-  import_vitals:
-    file_key: "VITALS"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols: ["recorded_time"]
-    merge_cols: []
-  import_vent:
-    file_key: "VENT"
-    drop_cols: []
-    index_col: ["csn"]
-    numeric_cols:
-      - "vent_rate_set"
-      - "vent_tidal_rate_set"
-      - "vent_tidal_rate_exhaled"
-      - "peep"
-      - "fio2"
-    date_cols:
-      - "recorded_time"
-      - "vent_start_time"
-      - "vent_stop_time"
-  import_dialysis:
-    file_key: "DIALYSIS"
-    drop_cols: 
-      - "empi"
-      - "encounter_id"
-    index_col: ["csn"]
-    date_cols:
-      - "service_timestamp"
-  import_gcs:
-    file_key: "GCS"
-    drop_cols: []
-    index_col: ["csn"]
-    numeric_col:
-      - "gcs_eye_score"
-      - "gcs_verbal_score"
-      - "gcs_motor_score"
-      - "gcs_total_score"
-    date_cols: ["recorded_time"]
-  import_cultures:
-    file_key: "CULTURES"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "specimen_collect_time"
-      - "order_time"
-      - "lab_result_time"
-  import_bed_locations:
-    file_key: "BEDLOCATION"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "bed_location_start"
-      - "bed_location_end"
-  import_procedures:
-    file_key: "ORPROCEDURES"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "surgery_date"
-      - "in_or_dttm"
-      - "procedure_start_dttm"
-      - "procedure_comp_dttm"
-      - "out_or_dttm"
-  import_diagnosis:
-    file_key: "DIAGNOSIS"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols: ["dx_time_date"]
-  import_cpt_procedures:
-    file_key: "CPT_PROCEDURES"
-    drop_cols: 
-      - "group_modifier_cpt_desc"
-      - "modifier_cpt_seq_num"
-    index_col: ["csn"]
-    date_cols:
-      - "procedure_day"
-      - "procedure_dttm"
-  import_icd_procedures:
-    file_key: "ICD_PROCEDURES"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "procedure_date"
-  import_in_out:
-    file_key: "IN_OUT"
-    drop_cols: []
-    numeric_cols: [] 
-    index_col: ["csn"]
-    date_cols:
-      - "service_date"
-      - "service_ts"
-      - "order_ts"
-  import_radiology_notes:
-    file_key: "RADIOLOGY_NOTES"
-    drop_cols: []
-    index_col: ["patient_id"]
-    date_cols:
-      - "day_verified"
-    text_col: "doc_text"
-    clean_text: true
-    max_length: null
-  import_clinical_notes:
-    file_key: "CLINICAL_NOTES"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "note_date"
-      - "documented_date"
-    text_col: "note_text"
-    clean_text: true
-    extract_sections: true
-    max_length: null
+  # import_infusion_meds:
+  #   file_key: "INFUSIONMEDS"
+  #   drop_cols: []
+  #   numeric_cols:
+  #     - "order_med_id"
+  #     - "medication_id"
+  #   anti_infective_group_name: "anti-infective"
+  #   vasopressor_group_name: "vasopressor"
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "med_order_time"
+  #     - "med_action_time"
+  #     - "med_start"
+  #     - "med_stop"
+  # import_labs:
+  #   file_key: "LABS"
+  #   drop_cols: []
+  #   date_cols:
+  #     - "collection_time"
+  #     - "lab_result_time"
+  # import_vitals:
+  #   file_key: "VITALS"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols: ["recorded_time"]
+  #   merge_cols: []
+  # import_vent:
+  #   file_key: "VENT"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   numeric_cols:
+  #     - "vent_rate_set"
+  #     - "vent_tidal_rate_set"
+  #     - "vent_tidal_rate_exhaled"
+  #     - "peep"
+  #     - "fio2"
+  #   date_cols:
+  #     - "recorded_time"
+  #     - "vent_start_time"
+  #     - "vent_stop_time"
+  # import_dialysis:
+  #   file_key: "DIALYSIS"
+  #   drop_cols: 
+  #     - "empi"
+  #     - "encounter_id"
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "service_timestamp"
+  # import_gcs:
+  #   file_key: "GCS"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   numeric_col:
+  #     - "gcs_eye_score"
+  #     - "gcs_verbal_score"
+  #     - "gcs_motor_score"
+  #     - "gcs_total_score"
+  #   date_cols: ["recorded_time"]
+  # import_cultures:
+  #   file_key: "CULTURES"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "specimen_collect_time"
+  #     - "order_time"
+  #     - "lab_result_time"
+  # import_bed_locations:
+  #   file_key: "BEDLOCATION"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "bed_location_start"
+  #     - "bed_location_end"
+  # import_procedures:
+  #   file_key: "ORPROCEDURES"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "surgery_date"
+  #     - "in_or_dttm"
+  #     - "procedure_start_dttm"
+  #     - "procedure_comp_dttm"
+  #     - "out_or_dttm"
+  # import_diagnosis:
+  #   file_key: "DIAGNOSIS"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols: ["dx_time_date"]
+  # import_cpt_procedures:
+  #   file_key: "CPT_PROCEDURES"
+  #   drop_cols: 
+  #     - "group_modifier_cpt_desc"
+  #     - "modifier_cpt_seq_num"
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "procedure_day"
+  #     - "procedure_dttm"
+  # import_icd_procedures:
+  #   file_key: "ICD_PROCEDURES"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "procedure_date"
+  # import_in_out:
+  #   file_key: "IN_OUT"
+  #   drop_cols: []
+  #   numeric_cols: [] 
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "service_date"
+  #     - "service_ts"
+  #     - "order_ts"
+  # import_radiology_notes:
+  #   file_key: "RADIOLOGY_NOTES"
+  #   drop_cols: []
+  #   index_col: ["patient_id"]
+  #   date_cols:
+  #     - "day_verified"
+  #   text_col: "doc_text"
+  #   clean_text: true
+  #   max_length: null
+  # import_clinical_notes:
+  #   file_key: "CLINICAL_NOTES"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "note_date"
+  #     - "documented_date"
+  #   text_col: "note_text"
+  #   clean_text: true
+  #   extract_sections: true
+  #   max_length: null
 
 
 # COMORBIDITY SUMMARY KEYWORDS
