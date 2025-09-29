@@ -44,7 +44,7 @@ from functools import partial
 logging.basicConfig(level=logging.INFO)
 
 import sys
-sys.path.append("/hpc/home/ma618/Sepy/")
+# sys.path.append("/hpc/home/ma618/Sepy/")
 
 import sepyIMPORT as si
 import sepyDICT as sd
@@ -55,19 +55,19 @@ import utils
 ###########################################################################
 ############################# Make Supertables ###########################
 ###########################################################################
-def make_sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir):
+def make_sepyMaster(yearly_data_instance, dict_config, bounds, save_dir):
     """
     Creates a sepyMaster instance for a given year.
     
     Args:
         yearly_data_instance (object): An instance of the `sepyIMPORT` class containing the yearly data.
-        sepyConfigs (dict): A dictionary containing the configuration settings for the sepyDICT class.  
+        dict_config (dict): A dictionary containing the configuration settings for the sepyDICT class.  
         bounds (dict): A dictionary containing the threshold values for the supertable.
         save_dir (str): The directory where the supertable will be saved.
     Returns:
         sepyMaster: An instance of the `sepyMaster` class containing the processed encounter data.
     """
-    sepyMaster_instance = sd.sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir)
+    sepyMaster_instance = sd.sepyMaster(yearly_data_instance, dict_config, bounds, save_dir)
     return sepyMaster_instance
 
 
@@ -211,19 +211,19 @@ def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
 
 if __name__ == "__main__":
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description='Process EMR data for a specific year')
-    parser.add_argument('--data_config', type=str, default='../configurations/emory_config_oddjobs.yaml', help='Path to the data configuration file in YAML format')
-    parser.add_argument('--sepy_config', type=str, default='../configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
+    parser = argparse.ArgumentParser(description='Process EMR data to create supertables.')
+    parser.add_argument('--data_config', type=str, default='./configurations/mimic_config.yaml', help='Path to the data configuration file in YAML format')
+    parser.add_argument('--sepy_config', type=str, default='./configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
     parser.add_argument('--num_processes', type=int, default=16, help='Number of processes to use')
     parser.add_argument('--processor_assignment', type=int, help='Processor assignment')
     args = parser.parse_args()
     
     dataConfig_path = args.data_config
-    sepyConfigs_path = args.sepy_config
+    dict_config_path = args.sepy_config
     num_processes = args.num_processes
     processor_assignment = args.processor_assignment
     dataConfig = utils.load_yaml(dataConfig_path)
-    sepyConfigs = utils.load_yaml(sepyConfigs_path)
+    dict_config = utils.load_yaml(dict_config_path)
     logging.info(f"Sepy- The total number of processes: {num_processes}")
     logging.info(f"Sepy- The processor assignment is: {processor_assignment}")
     
@@ -271,7 +271,8 @@ if __name__ == "__main__":
     print(paths)
 
     file_dictionary = paths
-
+    
+    
     ####################################################################
     ############ Create Pickle after Preprocessing for check ###########
     ####################################################################
@@ -285,12 +286,16 @@ if __name__ == "__main__":
             logging.info(f"Creating sepyIMPORT class instance")
             logging.info(f"This may take a while...")
             
-            import_instance = si.sepyIMPORT(paths, sepyConfigs, dataConfig["instance"])
+            import_instance = si.sepyIMPORT(paths, dict_config, dataConfig["instance"])
             
             logging.info(f"An instance of the sepyIMPORT class was created")
             logging.info(f"Data frames imported")
             logging.info(f"Dumping import instance to pickle")
-
+            
+            
+            exit() ############## FOR TESTING ##############
+            
+            
             with open(TEMP_DICTIONARY_FILE_NAME, "wb") as handle:
                 pickle.dump(import_instance, handle, protocol=pickle.HIGHEST_PROTOCOL)
             logging.info(f"Temporary pickle created and saved")
@@ -314,7 +319,8 @@ if __name__ == "__main__":
         except Exception as e:
             logging.error(f"Error loading temporary pickle: {e}")
             exit()
-        
+    
+
     ###########################################################################
     ###################### Begin Dictionary Construction ######################
     ###########################################################################
@@ -436,7 +442,7 @@ if __name__ == "__main__":
 
         bounds = pd.read_csv(paths["variable_chart"])   
        
-        sepyMaster_instance = make_sepyMaster(import_instance, sepyConfigs, bounds, save_dir)
+        sepyMaster_instance = make_sepyMaster(import_instance, dict_config, bounds, save_dir)
         logging.info(f"Sepy- A sepyMaster instance was created for {year}")
 
         ###########################################################################

@@ -8,7 +8,7 @@ make_supertables: "no" # yes: make supertables, no: do not make supertables
 
 # FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files"
-groupings_path: "$HOME/Sepy/groupings"
+groupings_path: "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/groupings"
 temp_pickle_after_preprocessing_output_path: "/hpc/group/kamaleswaranlab/mimic_iv/sepy_output/temp_pickles"
 supertable_output_path: "/hpc/group/kamaleswaranlab/mimic_iv/mimic-supertables"
 encounters_path: "ENCOUNTER_FILE"
@@ -47,7 +47,7 @@ dictionary_paths:
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/FOLDER
     - ["ENCOUNTER", "ENCOUNTER.csv"]
     - ["DEMOGRAPHICS", "DEMOGRAPHICS.csv"]
-    - ["INFUSIONMEDS", "INFUSIONMEDS.csv"]
+    # - ["INFUSIONMEDS", "INFUSIONMEDS.csv"]
     - ["LABS", "LABS.csv"]
     - ["VITALS", "VITALS.csv"]
     - ["VENT", "VENT.csv"]
@@ -56,7 +56,7 @@ dictionary_paths:
     - ["GCS", "GCS.csv"]
     - ["CULTURES", "CULTURES.csv"]
     - ["BEDLOCATION", "BEDLOCATION.csv"]
-    - ["ORPROCEDURES", "ORPROCEDURES.csv"]
+    # - ["ORPROCEDURES", "ORPROCEDURES.csv"]
     - ["DIAGNOSIS", "DIAGNOSIS.csv"]
     - ["ICD_PROCEDURES", "ICD_PROCEDURES.csv"]
     - ["CPT_PROCEDURES", "CPT_PROCEDURES.csv"]
@@ -64,23 +64,19 @@ dictionary_paths:
 
 # INSTANCE FUNCTIONS AND PARAMETERS
 instance:
-  import_demographics:
-    file_key: "DEMOGRAPHICS"
-    drop_cols: []
-    index_col: ["pat_id"]
-    date_cols: [] 
   import_encounters:
     file_key: "ENCOUNTER"
-    drop_cols: 
-      - "insurance_status"
-      - "total_vent_days"
-      - "total_hosp_days"
-      - "discharge_status" # These fields were null in the data files. Insurance status was dropped because it wasn't needed for our analysis.
+    drop_cols: []
     index_col: ["csn"]
     date_cols:
       - "ed_presentation_time"
       - "hospital_admission_date_time"
       - "hospital_discharge_date_time"
+  import_demographics:
+    file_key: "DEMOGRAPHICS"
+    drop_cols: []
+    index_col: ["pat_id"]
+    date_cols: [] 
   import_infusion_meds:
     file_key: "INFUSIONMEDS"
     drop_cols: []

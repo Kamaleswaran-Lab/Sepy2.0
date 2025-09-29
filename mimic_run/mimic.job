@@ -1,0 +1,26 @@
+#!/bin/bash
+#SBATCH --job-name=make_dicts_test
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=32G
+#SBATCH --time=4:00:00
+#SBATCH --output=slurmjobs/logs/make_dicts_test_%j.out
+#SBATCH --error=slurmjobs/logs/make_dicts_test_%j.err
+
+echo "Job started at: $(date)"
+echo "Job ID: $SLURM_JOB_ID"
+echo "Node: $SLURM_NODELIST"
+
+source /hpc/dctrl/yy450/miniconda3/etc/profile.d/conda.sh
+conda activate sepy2
+
+cd ~/link_dctrl_yy450/Sepy2.0
+
+python make_dicts.py \
+    --year 2014 \
+    --num_processes 4 \
+    --data_config configurations/emory_config.yaml \
+    --sepy_config configurations/dict_config.yaml
+
+echo "Job finished at: $(date)"
