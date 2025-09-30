@@ -98,8 +98,6 @@ class sepyIMPORT:
         # dictionary has file locations for flat files
         self.file_dictionary = file_dictionary
 
-        # creates df with all medication groupings
-        self.df_grouping_all_meds = pd.read_csv(file_dictionary["infusion_meds"])
         # creates df with all lab groupings
         self.df_grouping_labs = pd.read_csv(file_dictionary["grouping_labs"])
         # creates df with all bed location labels
@@ -109,11 +107,6 @@ class sepyIMPORT:
         # creates df with all fluid groupings
         self.df_grouping_fluids = pd.read_csv(file_dictionary["grouping_fluids"])
 
-        # creates df with all infusion meds volume
-        self.df_infusion_meds_volume = pd.read_csv(file_dictionary["infusion_meds_volume"])
-        self.volume_mapping = dict(zip(self.df_infusion_meds_volume['formulary_name'], self.df_infusion_meds_volume['volume_numeric']))
-        self.volume_unit_mapping = dict(zip(self.df_infusion_meds_volume['formulary_name'], self.df_infusion_meds_volume['volume_unit']))
-    
         # Create configuration object
         self.config = ImportConfig(
             na_values=sepyIMPORTConfigs["na_values"],

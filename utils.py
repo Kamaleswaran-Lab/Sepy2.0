@@ -446,6 +446,12 @@ def read_data_file(file_path, index_col=None, date_cols=None, na_values=None,
     """
     logging.info(f"Reading file: {file_path}")
     
+    # Check if file is empty. Since INFUSIONMEDS is empty, return empty df
+    import os
+    if os.path.getsize(file_path) == 0:
+        logging.warning(f"{file_path} is empty, returning empty DataFrame")
+        return pd.DataFrame()
+    
     try:
         # Determine file type and read accordingly
         if file_path.endswith(".csv"):

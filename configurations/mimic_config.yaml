@@ -36,18 +36,16 @@ dictionary_paths:
     - ["ICD10_single_ccs", "*ICD10_single_ccs*"]
   # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE groupings/ FOLDER
   grouping_types:
-    - ["infusion_meds", "em_all_infusion_meds.csv"]
     - ["grouping_labs", "em_grouping_labs.csv"]
     - ["bed_labels", "em_bed_labels.csv"]
     - ["grouping_fluids", "em_fluids_labels.csv"]
     - ["variable_chart", "em_variable_chart.csv"]
     - ["grouping_vent", "em_vent_labels.csv"]
-    - ["infusion_meds_volume", "em_infusion_meds_volume.csv"]
   flatfile_types: 
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/FOLDER
     - ["ENCOUNTER", "ENCOUNTER.csv"]
     - ["DEMOGRAPHICS", "DEMOGRAPHICS.csv"]
-    # - ["INFUSIONMEDS", "INFUSIONMEDS.csv"]
+    - ["INFUSIONMEDS", "EMPTY_FILE.csv"]
     - ["LABS", "LABS.csv"]
     - ["VITALS", "VITALS.csv"]
     - ["VENT", "VENT.csv"]
@@ -64,7 +62,7 @@ dictionary_paths:
 
 # INSTANCE FUNCTIONS AND PARAMETERS
 instance:
-  import_encounters:
+  import_encounters: # Done
     file_key: "ENCOUNTER"
     drop_cols: []
     index_col: ["csn"]
@@ -72,25 +70,25 @@ instance:
       - "ed_presentation_time"
       - "hospital_admission_date_time"
       - "hospital_discharge_date_time"
-  import_demographics:
-    file_key: "DEMOGRAPHICS"
-    drop_cols: []
-    index_col: ["pat_id"]
-    date_cols: [] 
-  # import_infusion_meds:
-  #   file_key: "INFUSIONMEDS"
+  # import_demographics: # Done (No gender_code and ethnicity_code in MIMIC. There might be bugs in the future steps)
+  #   file_key: "DEMOGRAPHICS"
   #   drop_cols: []
-  #   numeric_cols:
-  #     - "order_med_id"
-  #     - "medication_id"
-  #   anti_infective_group_name: "anti-infective"
-  #   vasopressor_group_name: "vasopressor"
-  #   index_col: ["csn"]
-  #   date_cols:
-  #     - "med_order_time"
-  #     - "med_action_time"
-  #     - "med_start"
-  #     - "med_stop"
+  #   index_col: ["pat_id"]
+  #   date_cols: [] 
+  import_infusion_meds:
+    file_key: "INFUSIONMEDS"
+    drop_cols: []
+    numeric_cols:
+      - "order_med_id"
+      - "medication_id"
+    anti_infective_group_name: "anti-infective"
+    vasopressor_group_name: "vasopressor"
+    index_col: ["csn"]
+    date_cols:
+      - "med_order_time"
+      - "med_action_time"
+      - "med_start"
+      - "med_stop"
   # import_labs:
   #   file_key: "LABS"
   #   drop_cols: []
