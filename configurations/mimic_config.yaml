@@ -45,7 +45,11 @@ dictionary_paths:
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/FOLDER
     - ["ENCOUNTER", "ENCOUNTER.csv"]
     - ["DEMOGRAPHICS", "DEMOGRAPHICS.csv"]
+
     - ["INFUSIONMEDS", "EMPTY_FILE.csv"]
+    - ["VASOPRESSOR_MEDS", "INFUSIONMEDS/df_vasopressor_meds.csv"]
+    - ["ANTI_INFECTIVE_MEDS", "INFUSIONMEDS/df_anti_infective_meds.csv"]
+    
     - ["LABS", "LABS.csv"]
     - ["VITALS", "VITALS.csv"]
     - ["VENT", "VENT.csv"]
@@ -81,8 +85,6 @@ instance:
     numeric_cols:
       - "order_med_id"
       - "medication_id"
-    anti_infective_group_name: "anti-infective"
-    vasopressor_group_name: "vasopressor"
     index_col: ["csn"]
     date_cols:
       - "med_order_time"

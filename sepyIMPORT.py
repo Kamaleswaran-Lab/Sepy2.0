@@ -314,66 +314,68 @@ class sepyIMPORT:
             except Exception as e:
                 
                 logging.error(f"Error in {data_type} processing: {str(e)}")
-            
+    
     # Data-specific processors
     def _process_infusion_meds(self, df: pd.DataFrame, **kwargs) -> None:
-        """Process infusion medications after initial import."""
-        anti_infective_group_name = kwargs.get('anti_infective_group_name', 'anti_infective')
-        vasopressor_group_name = kwargs.get('vasopressor_group_name', 'vasopressor')
-        
-        # Drop index name if it exists in the columns
-        index_name = df.index.name 
-        if index_name in df.columns:
-            df = df.drop(columns=[index_name]) 
+        """
+        MIMIC version of processing infusion meds.
+        Directly import two preprocessed flat files:
+        - VASOPRESSOR_MEDS
+        - ANTI_INFECTIVE_MEDS
+        Apply the same patient/encounter filtering logic as other imports.
+        """
 
-        self.df_infusion_meds = df
-        self._handle_duplicate_med_ids()
-        
-        # Process specific medication groups
-        df_anti_infective_med_groups = self._filter_med_group(anti_infective_group_name)
-        self.df_anti_infective_meds = (
-            self.df_infusion_meds.reset_index()
-            .merge(df_anti_infective_med_groups, how="inner", on="medication_id")
-            .set_index("csn")
-        )
-        
-        df_vasopressor_med_groups = self._filter_med_group(vasopressor_group_name)
-        # Extract vasopressor medications and set multi-index
-        df_vasopressor_meds = (
-            self.df_infusion_meds.reset_index()
-            .merge(df_vasopressor_med_groups, how="inner", on="medication_id")
-            .reset_index()
-            .set_index(["csn", "med_order_time", "super_table_col_name"], append=True)[
-                ["med_action_dose", "med_action_dose_unit"]
-            ]
-        )
+        logging.info("Processing infusion meds (MIMIC version)")
 
-        # Process vasopressor data - unstack units and doses
-        units = df_vasopressor_meds["med_action_dose_unit"].unstack(level=3)
-        dose = df_vasopressor_meds["med_action_dose"].unstack(level=3)
-        
-        # Merge dose and units together
-        df_vasopressor_meds = dose.merge(
-            units, left_index=True, right_index=True, suffixes=["", "_dose_unit"]
-        )
+        def _post_filter(df, index_col):
+            """Filter df to only include patients/encounters from self.df_encounters."""
+            if df.empty:
+                return df
+            if index_col in ["pat_id", "patient_id"]:
+                return df[df.index.isin(self.patids)]
+            elif index_col == "csn":
+                return df[df.index.isin(self.csns)]
+            elif index_col is None and "csn" in df.columns:
+                return df.loc[df.csn.isin(self.csns)]
+            return df
 
-        # Clean up column naming and indexes
-        df_vasopressor_meds.columns.name = None
-        df_vasopressor_meds = df_vasopressor_meds.droplevel(0)
-        df_vasopressor_meds = df_vasopressor_meds.reset_index(1)
+        # --- vasopressors ---
+        try:
+            df_vaso = self._common_import(
+                file_key="VASOPRESSOR_MEDS",
+                index_col=kwargs.get("index_col", "csn"),
+                date_cols=kwargs.get("date_cols", ["med_order_time", "med_stop"]),
+                drop_cols=kwargs.get("drop_cols", []),
+                numeric_cols=kwargs.get("numeric_cols", []),
+                date_parser=kwargs.get("date_parser", utils.d_parser),
+            )
+            self.df_vasopressor_meds = _post_filter(df_vaso, kwargs.get("index_col", "csn"))
+            logging.info(f"Loaded vasopressor meds: {self.df_vasopressor_meds.shape}")
+        except Exception as e:
+            logging.error(f"Error loading vasopressor meds: {str(e)}")
+            self.df_vasopressor_meds = pd.DataFrame()
 
-        # Replace NaN values in unit columns
-        df_vasopressor_meds[self.config.vasopressor_units] = df_vasopressor_meds[
-            self.config.vasopressor_units
-        ].replace({np.nan: ""})
+        # --- anti-infectives ---
+        try:
+            df_abx = self._common_import(
+                file_key="ANTI_INFECTIVE_MEDS",
+                index_col=kwargs.get("index_col", "csn"),
+                date_cols=kwargs.get("date_cols", ["med_order_time", "med_stop"]),
+                drop_cols=kwargs.get("drop_cols", []),
+                numeric_cols=kwargs.get("numeric_cols", []),
+                date_parser=kwargs.get("date_parser", utils.d_parser),
+            )
+            self.df_anti_infective_meds = _post_filter(df_abx, kwargs.get("index_col", "csn"))
+            logging.info(f"Loaded anti-infective meds: {self.df_anti_infective_meds.shape}")
+        except Exception as e:
+            logging.error(f"Error loading anti-infective meds: {str(e)}")
+            self.df_anti_infective_meds = pd.DataFrame()
 
-        self.df_vasopressor_meds = df_vasopressor_meds
-        
-        # Volume mapping 
-        self.df_infusion_meds['volume'] = self.df_infusion_meds['formulary_name'].map(self.volume_mapping)
-        self.df_infusion_meds['volume_unit'] = self.df_infusion_meds['formulary_name'].map(self.volume_unit_mapping)
+        # pipeline compatible empty df for other infusion meds
+        self.df_infusion_meds = pd.DataFrame()
 
-        return 1 
+        return 1
+
     
     def _process_labs(self, df: pd.DataFrame, **kwargs) -> None:
         """Process labs after initial import."""
