@@ -570,15 +570,37 @@ class sepyIMPORT:
     
     def _process_labs(self, df: pd.DataFrame, **kwargs) -> None:
         """Process labs after initial import."""
+
         def tidy_index(df: pd.DataFrame) -> pd.DataFrame:
             """
             Reorganize the multi-index DataFrame to a more usable format.
+            Instead of unstacking CSN (which creates duplicates), we'll create a proper
+            pivot table with unique column names.
             """
-            df = df.unstack(level=1)
-            df.columns = df.columns.droplevel()
-            df.columns.name = None
-            df = df.droplevel(0)
-            return df
+            # Reset index to work with regular DataFrame operations
+            df_reset = df.reset_index()
+            
+            # Create a pivot table with super_table_col_name as columns
+            # Use first() to handle multiple values per group
+            df_pivot = df_reset.pivot_table(
+                index=['csn', 'component_id', 'result_status', 'lab_result_time', 
+                       'collection_time', 'pat_id', 'proc_cat_id', 'proc_cat_name', 
+                       'proc_code', 'proc_desc', 'component', 'loinc_code'],
+                columns='super_table_col_name',
+                values='lab_result',
+                aggfunc='first'  # Take first value if multiple exist
+            )
+            
+            # Flatten column names and reset index
+            df_pivot.columns.name = None
+            df_pivot = df_pivot.reset_index()
+            
+            # Set MultiIndex back for consistency with downstream code
+            df_pivot = df_pivot.set_index(['csn', 'component_id', 'result_status', 'lab_result_time', 
+                                         'collection_time', 'pat_id', 'proc_cat_id', 'proc_cat_name', 
+                                         'proc_code', 'proc_desc', 'component', 'loinc_code'])
+            
+            return df_pivot
 
         try:
             lab_groups = self.df_grouping_labs
@@ -588,7 +610,7 @@ class sepyIMPORT:
                 lab_groups["import"] == "Yes"
             ]
 
-            # Join Groups and Lab File
+            # Join Groups and Lab File - component_id should be standardized by now
             df_labs_filtered = df.merge(lab_groups, how="inner", on="component_id")
             
             # if there is no collection time, use result time - 1hr
@@ -659,9 +681,9 @@ class sepyIMPORT:
             self.df_labs = df_labs
             return 1
         except Exception as e:
-            logging.error(f"Error processing labs: {str(e)}")
+            logging.error(f"Error processing labs: {str(e)}", exc_info=True)
             # Create an empty DataFrame with the expected columns
-            self.df_labs = pd.DataFrame(columns=self.all_lab_col_names)
+            self.df_labs = pd.DataFrame(columns=self.config.all_lab_col_names)
             logging.warning("Using empty DataFrame for labs due to processing error")
             return 0
             
@@ -801,58 +823,110 @@ class sepyIMPORT:
         Process radiology notes after initial import.
         
         Handles text cleaning, tokenization, and any special processing needed for 
-        radiology report text data.
+        radiology report text data. Can process multiple text columns and create
+        a combined text column.
         
         Args:
             df: DataFrame containing the imported radiology notes
             **kwargs: Optional parameters including:
-                      - text_col: Name of the column containing the note text (default: 'report_text')
+                      - text_cols: List of column names containing note text (default: ['report_text'])
+                      - text_col: Single column name for backward compatibility (default: 'report_text')
                       - clean_text: Whether to clean the text (default: True)
-                      - max_length: Maximum text length to retain (default: None)
+                      - max_length: Maximum text length to retain for combined text (default: None)
+                      - combined_col_name: Name for the combined text column (default: 'combined_text')
+                      - separator: Separator between text columns when combining (default: ' | ')
         """
-        text_col = kwargs.get('text_col', 'report_text')
+        # Handle both new (text_cols) and old (text_col) parameter formats
+        text_cols = kwargs.get('text_cols', None)
+        if text_cols is None:
+            # Fallback to single text_col for backward compatibility
+            text_col = kwargs.get('text_col', 'report_text')
+            text_cols = [text_col]
+        
         clean_text = kwargs.get('clean_text', False)
         max_length = kwargs.get('max_length', None)
+        combined_col_name = kwargs.get('combined_col_name', 'combined_text')
+        separator = kwargs.get('separator', ' | ')
         
         try:
-            # Check if text column exists
-            if text_col not in df.columns:
-                logging.warning(f"Text column '{text_col}' not found in radiology notes data")
-                self.df_radiology_notes = df
-                return
-                
-            # Basic text cleaning if requested
-            if clean_text:
-                # Convert to lowercase
-                df[text_col] = df[text_col].str.lower()
-                
-                # Remove extra whitespace
-                df[text_col] = df[text_col].str.replace(r'\s+', ' ', regex=True).str.strip()
-                
-                # Replace common abbreviations if needed
-                # This can be expanded based on domain knowledge
-                abbreviations = {
-                    'w/': 'with ',
-                    'w/o': 'without ',
-                    'pt': 'patient ',
-                    'hx': 'history '
-                    # Add more abbreviations as needed
-                }
-                
-                for abbr, replacement in abbreviations.items():
-                    df[text_col] = df[text_col].str.replace(r'\b' + abbr + r'\b', replacement, regex=True)
+            # Check which text columns exist
+            existing_text_cols = [col for col in text_cols if col in df.columns]
+            missing_cols = [col for col in text_cols if col not in df.columns]
             
-            # Truncate long texts if max_length is specified
+            if missing_cols:
+                logging.warning(f"Text columns not found in radiology notes data: {missing_cols}")
+            
+            if not existing_text_cols:
+                logging.warning("No text columns found in radiology notes data")
+                # Add empty combined column
+                df[combined_col_name] = ''
+                self.df_radiology_notes = df
+                return 1
+            
+            # Process each existing text column individually
+            processed_cols = []
+            
+            for col in existing_text_cols:
+                # Create a copy of the column for processing
+                processed_col = df[col].copy()
+                
+                # Handle null values
+                processed_col = processed_col.fillna('')
+                
+                # Basic text cleaning if requested
+                if clean_text:
+                    # Convert to lowercase
+                    processed_col = processed_col.str.lower()
+                    
+                    # Remove extra whitespace
+                    processed_col = processed_col.str.replace(r'\s+', ' ', regex=True).str.strip()
+                    
+                    # Replace common abbreviations
+                    abbreviations = {
+                        'w/': 'with ',
+                        'w/o': 'without ',
+                        'pt': 'patient ',
+                        'hx': 'history ',
+                        # Add more abbreviations as needed
+                    }
+                    
+                    for abbr, replacement in abbreviations.items():
+                        processed_col = processed_col.str.replace(r'\b' + abbr + r'\b', replacement, regex=True)
+                
+                # Store the processed column
+                processed_cols.append(processed_col)
+                # Update the original column in the dataframe
+                df[col] = processed_col
+            
+            # Combine all processed text columns
+            if len(processed_cols) == 1:
+                combined_text = processed_cols[0]
+            else:
+                # Filter out empty strings before combining
+                def combine_texts(row):
+                    texts = [str(row[col]).strip() for col in existing_text_cols if str(row[col]).strip()]
+                    return separator.join(texts)
+                
+                combined_text = df[existing_text_cols].apply(combine_texts, axis=1)
+            
+            # Apply max_length to combined text if specified
             if max_length:
-                df[text_col] = df[text_col].str[:max_length]
+                combined_text = combined_text.str[:max_length]
+            
+            # Add the combined text column to the dataframe
+            df[combined_col_name] = combined_text
             
             # Store the processed DataFrame
             self.df_radiology_notes = df
+            
+            logging.info(f"Processed radiology notes: {len(existing_text_cols)} text columns combined into '{combined_col_name}'")
             return 1
+            
         except Exception as e:
             logging.error(f"Error processing radiology notes: {str(e)}")
             # Create an empty DataFrame with expected structure
-            self.df_radiology_notes = pd.DataFrame(columns=df.columns)
+            expected_columns = list(df.columns) + [combined_col_name] if combined_col_name not in df.columns else list(df.columns)
+            self.df_radiology_notes = pd.DataFrame(columns=expected_columns)
             logging.warning("Using empty DataFrame for radiology notes due to processing error")
             return 0
         

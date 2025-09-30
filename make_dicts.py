@@ -144,8 +144,12 @@ def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
     # Create CSN instances for just this batch
     csn_instances = []
     for i, csn in enumerate(process_list):
-        csn_instance = sepyMaster_instance.create_csn_instance(csn)
-        csn_instances.append(csn_instance)
+        try:
+            csn_instance = sepyMaster_instance.create_csn_instance(csn)
+            csn_instances.append(csn_instance)
+        except ValueError as e:
+            logging.error(f"Sepy- Error creating csn instance for csn {csn}: {e}")
+            continue
 
     # Process the batch in parallel
     with ProcessPoolExecutor(max_workers=num_local_workers) as executor:
@@ -224,7 +228,7 @@ if __name__ == "__main__":
     comorbidity_types = dataConfig["dictionary_paths"]["comorbidity_types"]
     grouping_types = dataConfig["dictionary_paths"]["grouping_types"]
     flatfile_types = dataConfig["dictionary_paths"]["flatfile_types"]
-    combined_files = dataConfig["dictionary_paths"]["combined_files"]
+    combined_files = dataConfig["dictionary_paths"]["combined_files"] if "combined_files" in dataConfig["dictionary_paths"] else []
 
     for comorbidity_type, comorbidity_file in comorbidity_types:
             try:
@@ -238,6 +242,7 @@ if __name__ == "__main__":
         try:
             paths[f"{type}"] = glob.glob(f"{GROUPINGS_PATH}/{grouping_path}")[0]
         except IndexError:
+            print(f"{GROUPINGS_PATH}/{grouping_path}")
             logging.error(f"Sepy- could not find grouping file for {type}")
 
     for flatfile_type, flatfile_name in flatfile_types:
@@ -267,7 +272,6 @@ if __name__ == "__main__":
             start = time.perf_counter()
             logging.info(f"Creating yearly pickle for {year}")
             logging.info(f"Yearly pickle will be saved to {YEARLY_DICTIONARY_FILE_NAME}")
-
             import_instance = si.sepyIMPORT(paths, sepyConfigs, dataConfig["yearly_instance"])
             logging.info(f"An instance of the sepyIMPORT class was created for {year}, data was automatically imported")
             logging.info(f"Dumping import instance to pickle for {year}")
