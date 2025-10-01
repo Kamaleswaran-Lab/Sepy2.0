@@ -125,24 +125,24 @@ instance:
   #   index_col: ["csn"]
   #   date_cols:
   #     - "service_timestamp"
-  import_gcs:
-    file_key: "GCS"
-    drop_cols: []
-    index_col: ["csn"]
-    numeric_col:
-      - "gcs_eye_score"
-      - "gcs_verbal_score"
-      - "gcs_motor_score"
-      - "gcs_total_score"
-    date_cols: ["recorded_time"]
-  # import_cultures:
-  #   file_key: "CULTURES"
+  # import_gcs:
+  #   file_key: "GCS"
   #   drop_cols: []
   #   index_col: ["csn"]
-  #   date_cols:
-  #     - "specimen_collect_time"
-  #     - "order_time"
-  #     - "lab_result_time"
+  #   numeric_col:
+  #     - "gcs_eye_score"
+  #     - "gcs_verbal_score"
+  #     - "gcs_motor_score"
+  #     - "gcs_total_score"
+  #   date_cols: ["recorded_time"]
+  import_cultures:
+    file_key: "CULTURES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "specimen_collect_time"
+      - "order_time"
+      - "lab_result_time"
   # import_bed_locations:
   #   file_key: "BEDLOCATION"
   #   drop_cols: []
