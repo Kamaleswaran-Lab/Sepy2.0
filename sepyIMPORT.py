@@ -490,6 +490,10 @@ class sepyIMPORT:
 
         df_string = df[self.config.string_vital_col_names]
         self.df_vitals = pd.concat([df_numeric, df_string], axis=1)
+        
+        print(self.df_vitals.head())
+        # self.df_vitals.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_vitals.csv")
+            
         return 1
 
     def _process_vent(self, df: pd.DataFrame, **kwargs) -> None:

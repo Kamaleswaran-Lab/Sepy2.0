@@ -66,7 +66,7 @@ dictionary_paths:
 
 # INSTANCE FUNCTIONS AND PARAMETERS
 instance:
-  import_encounters: # Done
+  import_encounters:  # Done
     file_key: "ENCOUNTER"
     drop_cols: []
     index_col: ["csn"]
@@ -74,12 +74,12 @@ instance:
       - "ed_presentation_time"
       - "hospital_admission_date_time"
       - "hospital_discharge_date_time"
-  # import_demographics: # Done (No gender_code and ethnicity_code in MIMIC. There might be bugs in the future steps)
+  # import_demographics:  # Done (No gender_code and ethnicity_code in MIMIC. There might be bugs in the future steps)
   #   file_key: "DEMOGRAPHICS"
   #   drop_cols: []
   #   index_col: ["pat_id"]
   #   date_cols: [] 
-  # import_infusion_meds: # Done
+  # import_infusion_meds:   # Done
   #   file_key: "INFUSIONMEDS"
   #   drop_cols: []
   #   numeric_cols:
@@ -91,7 +91,7 @@ instance:
   #     - "med_action_time"
   #     - "med_start"
   #     - "med_stop"
-  # import_labs:
+  # import_labs:    # Done (Need to check the lab mapping and plot the histograms)
   #   file_key: "LABS"
   #   drop_cols: []
   #   date_cols:
