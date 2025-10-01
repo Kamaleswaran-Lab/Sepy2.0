@@ -504,6 +504,10 @@ class sepyIMPORT:
         # Apply the mapping to the dataframe
         df['vent_category'] = df['vent_mode'].map(vent_grouping)
         self.df_vent = df
+        
+        print(self.df_vent.head())
+        # self.df_vent.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_vent.csv")
+        
         return 1
 
     def _process_bed_locations(self, df: pd.DataFrame, **kwargs) -> None:

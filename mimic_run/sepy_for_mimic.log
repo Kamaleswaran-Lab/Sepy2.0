@@ -1,5 +1,5 @@
-Running on host: dcc-core-02
-Job id: 37575289
+Running on host: dcc-core-04
+Job id: 37576467
 Allocated CPUs: 16
 Allocated memory: 131072
 INFO:root:Sepy- The total number of processes: 16
@@ -17,25 +17,25 @@ INFO:root:Successfully read file with 546028 rows and 10 columns
 INFO:root:Encounters import successful
 INFO:root:Encounters imported successfully
 INFO:root:Number of encounters: 546028
-INFO:root:Importing vitals data
-INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VITALS.csv
-INFO:root:Reading CSV file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VITALS.csv
-INFO:root:Successfully read file with 13986466 rows and 19 columns
-INFO:root:Vitals import successful
-INFO:root:Vitals processing successful
-INFO:root:df_vitals with (13986466, 20) shape
+INFO:root:Importing vent data
+INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VENT.csv
+INFO:root:Reading CSV file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VENT.csv
+INFO:root:Successfully read file with 1144856 rows and 14 columns
+INFO:root:Vent import successful
+INFO:root:Vent processing successful
+INFO:root:df_vent with (1144856, 15) shape
 INFO:root:Data import complete
 INFO:root:An instance of the sepyIMPORT class was created
 INFO:root:Data frames imported
 INFO:root:Dumping import instance to pickle
-{'ICD9_ahrq': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_ahrq.csv', 'ICD9_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_elix.csv', 'ICD9_quan_deyo': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_quan_deyo.csv', 'ICD9_quan_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_quan_elix.csv', 'ICD9_single_ccs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_single_ccs.csv', 'ICD10_ahrq': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_ahrq.csv', 'ICD10_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_elix.csv', 'ICD10_quan_deyo': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_quan_deyo.csv', 'ICD10_quan_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_quan_elix.csv', 'ICD10_single_ccs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_single_ccs.csv', 'grouping_labs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/mimic_mapping_labs_with_id.csv', 'bed_labels': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_bed_labels.csv', 'grouping_fluids': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_fluids_labels.csv', 'variable_chart': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_variable_chart.csv', 'grouping_vent': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_vent_labels.csv', 'ENCOUNTER': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ENCOUNTER.csv', 'DEMOGRAPHICS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DEMOGRAPHICS.csv', 'INFUSIONMEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/EMPTY_FILE.csv', 'VASOPRESSOR_MEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_vasopressor_meds.csv', 'ANTI_INFECTIVE_MEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_anti_infective_meds.csv', 'LABS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/LABS.csv', 'VITALS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VITALS.csv', 'VENT': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VENT.csv', 'DIALYSIS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIALYSIS.csv', 'IN_OUT': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/IN_OUT.csv', 'GCS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/GCS.csv', 'CULTURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CULTURES.csv', 'BEDLOCATION': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/BEDLOCATION.csv', 'DIAGNOSIS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIAGNOSIS.csv', 'ICD_PROCEDURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ICD_PROCEDURES.csv', 'CPT_PROCEDURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CPT_PROCEDURES.csv'}
-            pat_id       recorded_time  ...  o2_flow_rate o2_device
-csn                                     ...                        
-29079034  10000032 2180-07-23 12:36:00  ...           NaN       NaN
-29079034  10000032 2180-07-23 14:00:00  ...           NaN       NaN
-29079034  10000032 2180-07-23 14:11:00  ...           NaN       NaN
-29079034  10000032 2180-07-23 14:12:00  ...           NaN       NaN
-29079034  10000032 2180-07-23 14:13:00  ...           NaN       NaN
+{'ICD9_ahrq': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_ahrq.csv', 'ICD9_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_elix.csv', 'ICD9_quan_deyo': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_quan_deyo.csv', 'ICD9_quan_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_quan_elix.csv', 'ICD9_single_ccs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_single_ccs.csv', 'ICD10_ahrq': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_ahrq.csv', 'ICD10_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_elix.csv', 'ICD10_quan_deyo': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_quan_deyo.csv', 'ICD10_quan_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_quan_elix.csv', 'ICD10_single_ccs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_single_ccs.csv', 'grouping_labs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/mimic_mapping_labs_with_id.csv', 'grouping_vent': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/mimic_vent_mapping.csv', 'bed_labels': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_bed_labels.csv', 'grouping_fluids': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_fluids_labels.csv', 'variable_chart': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_variable_chart.csv', 'ENCOUNTER': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ENCOUNTER.csv', 'DEMOGRAPHICS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DEMOGRAPHICS.csv', 'INFUSIONMEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/EMPTY_FILE.csv', 'VASOPRESSOR_MEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_vasopressor_meds.csv', 'ANTI_INFECTIVE_MEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_anti_infective_meds.csv', 'LABS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/LABS.csv', 'VITALS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VITALS.csv', 'VENT': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VENT.csv', 'DIALYSIS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIALYSIS.csv', 'IN_OUT': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/IN_OUT.csv', 'GCS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/GCS.csv', 'CULTURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CULTURES.csv', 'BEDLOCATION': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/BEDLOCATION.csv', 'DIAGNOSIS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIAGNOSIS.csv', 'ICD_PROCEDURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ICD_PROCEDURES.csv', 'CPT_PROCEDURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CPT_PROCEDURES.csv'}
+                pat_id  vent_rate_set  ...            vent_cat  vent_category
+csn                                    ...                                   
+25860671.0  10000690.0            NaN  ...  SupplementalOxygen            NaN
+25860671.0  10000690.0            NaN  ...  SupplementalOxygen            NaN
+25860671.0  10000690.0            NaN  ...  SupplementalOxygen            NaN
+25860671.0  10000690.0            NaN  ...  SupplementalOxygen            NaN
+25860671.0  10000690.0            NaN  ...  SupplementalOxygen            NaN
 
-[5 rows x 20 columns]
-Finished at: Wed Oct  1 03:27:11 PM EDT 2025
+[5 rows x 15 columns]
+Finished at: Wed Oct  1 03:49:50 PM EDT 2025

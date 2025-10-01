@@ -37,10 +37,10 @@ dictionary_paths:
   # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE groupings/ FOLDER
   grouping_types:
     - ["grouping_labs", "mimic_mapping_labs_with_id.csv"]
+    - ["grouping_vent", "mimic_vent_mapping.csv"]
     - ["bed_labels", "em_bed_labels.csv"]
     - ["grouping_fluids", "em_fluids_labels.csv"]
     - ["variable_chart", "em_variable_chart.csv"]
-    - ["grouping_vent", "em_vent_labels.csv"]
   flatfile_types: 
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/FOLDER
     - ["ENCOUNTER", "ENCOUNTER.csv"]
@@ -97,26 +97,26 @@ instance:
   #   date_cols:
   #     - "collection_time"
   #     - "lab_result_time"
-  import_vitals:
-    file_key: "VITALS"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols: ["recorded_time"]
-    merge_cols: []
-  # import_vent:
-  #   file_key: "VENT"
+  # import_vitals:
+  #   file_key: "VITALS"
   #   drop_cols: []
   #   index_col: ["csn"]
-  #   numeric_cols:
-  #     - "vent_rate_set"
-  #     - "vent_tidal_rate_set"
-  #     - "vent_tidal_rate_exhaled"
-  #     - "peep"
-  #     - "fio2"
-  #   date_cols:
-  #     - "recorded_time"
-  #     - "vent_start_time"
-  #     - "vent_stop_time"
+  #   date_cols: ["recorded_time"]
+  #   merge_cols: []
+  import_vent:
+    file_key: "VENT"
+    drop_cols: []
+    index_col: ["csn"]
+    numeric_cols:
+      - "vent_rate_set"
+      - "vent_tidal_rate_set"
+      - "vent_tidal_rate_exhaled"
+      - "peep"
+      - "fio2"
+    date_cols:
+      - "recorded_time"
+      - "vent_start_time"
+      - "vent_stop_time"
   # import_dialysis:
   #   file_key: "DIALYSIS"
   #   drop_cols: 

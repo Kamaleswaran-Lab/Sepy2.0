@@ -1,0 +1,49 @@
+vent_name,vent_cat
+SIMV/PRES,invasive ventilation
+APV (cmv),invasive ventilation
+CPAP,NIPPV
+MMV/AutoFlow,invasive ventilation
+ASV,invasive ventilation
+CMV/ASSIST/AutoFlow,invasive ventilation
+SIMV/AutoFlow,invasive ventilation
+CMV/AutoFlow,invasive ventilation
+CMV,invasive ventilation
+MMV/PSV/AutoFlow,invasive ventilation
+CPAP/PPS,NIPPV
+PCV+/PSV,invasive ventilation
+(S) CMV,invasive ventilation
+PCV+,invasive ventilation
+Standby,other
+NIV,NIPPV
+SIMV,invasive ventilation
+CPAP/PSV,invasive ventilation; weaning mode
+VOL/AC,invasive ventilation
+APRV/Biphasic+ApnPress,invasive ventilation
+SPONT,invasive ventilation; weaning mode
+SYNCHRON SLAVE,invasive ventilation
+PSV/SBT,invasive ventilation; weaning mode
+VS,invasive ventilation
+SYNCHRON MASTER,invasive ventilation
+P-SIMV,invasive ventilation
+DuoPaP,NIPPV
+nCPAP-PS,NIPPV
+SIMV/PSV/AutoFlow,invasive ventilation
+SIMV/PSV,invasive ventilation; weaning mode
+CPAP/PSV+ApnVol,invasive ventilation; weaning mode
+PRVC/SIMV,invasive ventilation
+PCV+Assist,invasive ventilation
+CPAP/PSV+ApnPres,invasive ventilation; weaning mode
+APRV,invasive ventilation
+APV (simv),invasive ventilation
+CMV/ASSIST,invasive ventilation
+PRES/AC,invasive ventilation
+SIMV/VOL,invasive ventilation
+APRV/Biphasic+ApnVol,invasive ventilation
+MMV/PSV,invasive ventilation
+NIV-ST,NIPPV
+CPAP/PSV+Apn TCPL,invasive ventilation; weaning mode
+P-CMV,invasive ventilation
+MMV,invasive ventilation
+Ambient,other
+Apnea Ventilation,invasive ventilation
+PRVC/AC,invasive ventilation
