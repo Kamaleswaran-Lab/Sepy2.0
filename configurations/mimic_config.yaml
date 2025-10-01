@@ -119,22 +119,22 @@ instance:
   #     - "recorded_time"
   #     - "vent_start_time"
   #     - "vent_stop_time"
-  import_dialysis:
-    file_key: "DIALYSIS"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "service_timestamp"
-  # import_gcs:
-  #   file_key: "GCS"
+  # import_dialysis:
+  #   file_key: "DIALYSIS"
   #   drop_cols: []
   #   index_col: ["csn"]
-  #   numeric_col:
-  #     - "gcs_eye_score"
-  #     - "gcs_verbal_score"
-  #     - "gcs_motor_score"
-  #     - "gcs_total_score"
-  #   date_cols: ["recorded_time"]
+  #   date_cols:
+  #     - "service_timestamp"
+  import_gcs:
+    file_key: "GCS"
+    drop_cols: []
+    index_col: ["csn"]
+    numeric_col:
+      - "gcs_eye_score"
+      - "gcs_verbal_score"
+      - "gcs_motor_score"
+      - "gcs_total_score"
+    date_cols: ["recorded_time"]
   # import_cultures:
   #   file_key: "CULTURES"
   #   drop_cols: []

@@ -575,6 +575,12 @@ class sepyIMPORT:
             # also moves 'recorded time' out of index into a column
             df = df.droplevel(1, axis=1).reset_index(level="recorded_time")
             self.df_gcs = df
+            
+            
+            print(self.df_gcs.head())
+            # self.df_gcs.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_gcs.csv")
+           
+            
             return 1
         except Exception as e:
             logging.error(f"Error processing GCS data: {str(e)}")
