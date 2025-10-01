@@ -391,7 +391,6 @@ class sepyIMPORT:
 
         try:
             lab_groups = self.df_grouping_labs
-            
             # Select Relevant Lab Groups
             lab_groups = lab_groups[["super_table_col_name", "component_id"]][
                 lab_groups["import"] == "Yes"
@@ -466,11 +465,13 @@ class sepyIMPORT:
             )
             
             self.df_labs = df_labs
+            print(self.df_labs.head())
+            # self.df_labs.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_labs.csv")
             return 1
         except Exception as e:
             logging.error(f"Error processing labs: {str(e)}")
             # Create an empty DataFrame with the expected columns
-            self.df_labs = pd.DataFrame(columns=self.all_lab_col_names)
+            self.df_labs = pd.DataFrame(columns=self.config.all_lab_col_names)
             logging.warning("Using empty DataFrame for labs due to processing error")
             return 0
             

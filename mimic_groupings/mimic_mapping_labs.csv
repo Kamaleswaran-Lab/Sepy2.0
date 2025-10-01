@@ -1,0 +1,63 @@
+import,super_table_col_name,component
+Yes,anion_gap,Anion Gap
+Yes,base_excess,Base Excess
+Yes,bicarb_(hco3),Bicarbonate
+Yes,bicarb_(hco3),"Calculated Bicarbonate, Whole Blood"
+Yes,blood_urea_nitrogen_(bun),Urea Nitrogen
+Yes,calcium,"Calcium, Total"
+Yes,calcium_ionized,Free Calcium
+Yes,chloride,Chloride
+Yes,creatinine,Creatinine
+Yes,creatinine,"Creatinine, Serum"
+Yes,gfr,Estimated GFR (CKD- EPI 2021)
+Yes,glucose,Glucose
+Yes,magnesium,Magnesium
+Yes,osmolarity,"Osmolality, Measured"
+Yes,phosphorus,Phosphate
+Yes,potassium,Potassium
+Yes,sodium,Sodium
+Yes,haptoglobin,Haptoglobin
+Yes,hematocrit,Hematocrit
+Yes,hemoglobin,Hemoglobin
+Yes,met_hgb,Methemoglobin
+Yes,platelets,Platelet Count
+Yes,white_blood_cell_count,White Blood Cells
+Yes,carboxy_hgb,Carboxyhemoglobin
+Yes,alanine_aminotransferase_(alt),Alanine Aminotransferase (ALT)
+Yes,albumin,Albumin
+Yes,alkaline_phosphatase,Alkaline Phosphatase
+Yes,ammonia,Ammonia
+Yes,aspartate_aminotransferase_(ast),Asparate Aminotransferase (AST)
+Yes,bilirubin_direct,"Bilirubin, Direct"
+Yes,bilirubin_total,"Bilirubin, Total"
+Yes,fibrinogen,"Fibrinogen, Functional"
+Yes,inr,INR(PT)
+Yes,lactate_dehydrogenase,Lactate Dehydrogenase (LD)
+Yes,lactic_acid,Lactate
+Yes,partial_prothrombin_time_(ptt),PTT
+Yes,prealbumin,Prealbumin     # 🚫 None in MIMIC
+Yes,protein,"Protein, Total"
+Yes,prothrombin_time_(pt),PT
+Yes,thrombin_time,Thrombin
+Yes,transferrin,Transferrin
+Yes,amylase,Amylase
+Yes,lipase,Lipase
+Yes,b-type_natriuretic_peptide_(bnp),NTproBNP
+Yes,troponin,Troponin T
+Yes,fio2,fio2          # 🚫 None in MIMIC
+Yes,partial_pressure_of_carbon_dioxide_(paco2),pCO2
+Yes,partial_pressure_of_oxygen_(pao2),pO2
+Yes,ph,pH
+Yes,saturation_of_oxygen_(sao2),Oxygen Saturation
+Yes,d_dimer,D-Dimer
+Yes,hemoglobin_a1c,% Hemoglobin A1c
+Yes,parathyroid_level,Parathyroid Hormone
+Yes,thyroid_stimulating_hormone_(tsh),Thyroid Stimulating Hormone
+Yes,lymphocyte,Lymphocytes
+Yes,neutrophils,Neutrophils
+Yes,crp_high_sens,High-Sensitivity CRP
+Yes,procalcitonin,Procalcitonin   # 🚫 None in MIMIC
+Yes,erythrocyte_sedimentation_rate_(esr),Sedimentation Rate
+Yes,c_diff,C. diff PCR
+Yes,covid,COVID-19   # 🚫 None in MIMIC
+Yes,mtp,MTP          # 🚫 None in MIMIC

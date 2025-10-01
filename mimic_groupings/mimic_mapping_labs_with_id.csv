@@ -1,0 +1,113 @@
+import,super_table_col_name,component,component_id
+Yes,anion_gap,Anion Gap,50868
+Yes,anion_gap,Anion Gap,52500
+Yes,base_excess,Base Excess,50802
+Yes,base_excess,Base Excess,52038
+Yes,bicarb_(hco3),Bicarbonate,50882
+Yes,bicarb_(hco3),"Calculated Bicarbonate, Whole Blood",50803
+Yes,blood_urea_nitrogen_(bun),Urea Nitrogen,51006
+Yes,blood_urea_nitrogen_(bun),Urea Nitrogen,52647
+Yes,calcium,"Calcium, Total",50893
+Yes,calcium_ionized,Free Calcium,50808
+Yes,calcium_ionized,Free Calcium,51624
+Yes,chloride,Chloride,50902
+Yes,chloride,Chloride,52535
+Yes,creatinine,Creatinine,50912
+Yes,creatinine,Creatinine,52546
+Yes,creatinine,"Creatinine, Serum",51081
+Yes,gfr,Estimated GFR (CKD- EPI 2021),53180
+Yes,glucose,Glucose,50809
+Yes,glucose,Glucose,50931
+Yes,glucose,Glucose,51478
+Yes,glucose,Glucose,51981
+Yes,glucose,Glucose,52569
+Yes,magnesium,Magnesium,50960
+Yes,osmolarity,"Osmolality, Measured",50964
+Yes,phosphorus,Phosphate,50970
+Yes,potassium,Potassium,50833
+Yes,potassium,Potassium,50971
+Yes,potassium,Potassium,52610
+Yes,sodium,Sodium,50983
+Yes,sodium,Sodium,52623
+Yes,haptoglobin,Haptoglobin,50935
+Yes,hematocrit,Hematocrit,51221
+Yes,hematocrit,Hematocrit,51480
+Yes,hematocrit,Hematocrit,51638
+Yes,hematocrit,Hematocrit,51639
+Yes,hematocrit,Hematocrit,52028
+Yes,hemoglobin,Hemoglobin,50811
+Yes,hemoglobin,Hemoglobin,51222
+Yes,hemoglobin,Hemoglobin,51640
+Yes,met_hgb,Methemoglobin,50814
+Yes,met_hgb,Methemoglobin,52144
+Yes,platelets,Platelet Count,51265
+Yes,platelets,Platelet Count,53189
+Yes,white_blood_cell_count,White Blood Cells,51301
+Yes,white_blood_cell_count,White Blood Cells,51755
+Yes,white_blood_cell_count,White Blood Cells,51756
+Yes,carboxy_hgb,Carboxyhemoglobin,50805
+Yes,alanine_aminotransferase_(alt),Alanine Aminotransferase (ALT),50861
+Yes,albumin,Albumin,50862
+Yes,albumin,Albumin,53085
+Yes,alkaline_phosphatase,Alkaline Phosphatase,50863
+Yes,alkaline_phosphatase,Alkaline Phosphatase,53086
+Yes,ammonia,Ammonia,50866
+Yes,aspartate_aminotransferase_(ast),Asparate Aminotransferase (AST),50878
+Yes,bilirubin_direct,"Bilirubin, Direct",50883
+Yes,bilirubin_total,"Bilirubin, Total",50885
+Yes,bilirubin_total,"Bilirubin, Total",53089
+Yes,fibrinogen,"Fibrinogen, Functional",51214
+Yes,inr,INR(PT),51237
+Yes,inr,INR(PT),51675
+Yes,lactate_dehydrogenase,Lactate Dehydrogenase (LD),50954
+Yes,lactic_acid,Lactate,50813
+Yes,lactic_acid,Lactate,52442
+Yes,lactic_acid,Lactate,53154
+Yes,partial_prothrombin_time_(ptt),PTT,51275
+Yes,partial_prothrombin_time_(ptt),PTT,52923
+Yes,prealbumin,Prealbumin     # 🚫 None in MIMIC,
+Yes,protein,"Protein, Total",50976
+Yes,protein,"Protein, Total",53096
+Yes,prothrombin_time_(pt),PT,51274
+Yes,prothrombin_time_(pt),PT,52921
+Yes,thrombin_time,Thrombin,51297
+Yes,thrombin_time,Thrombin,52948
+Yes,transferrin,Transferrin,50998
+Yes,amylase,Amylase,50867
+Yes,amylase,Amylase,53087
+Yes,lipase,Lipase,50956
+Yes,b-type_natriuretic_peptide_(bnp),NTproBNP,50963
+Yes,troponin,Troponin T,51003
+Yes,fio2,fio2          # 🚫 None in MIMIC,
+Yes,partial_pressure_of_carbon_dioxide_(paco2),pCO2,50818
+Yes,partial_pressure_of_carbon_dioxide_(paco2),pCO2,52040
+Yes,partial_pressure_of_oxygen_(pao2),pO2,50821
+Yes,partial_pressure_of_oxygen_(pao2),pO2,52042
+Yes,ph,pH,50820
+Yes,ph,pH,50831
+Yes,ph,pH,51094
+Yes,ph,pH,51491
+Yes,ph,pH,52041
+Yes,ph,pH,52730
+Yes,saturation_of_oxygen_(sao2),Oxygen Saturation,50817
+Yes,d_dimer,D-Dimer,50915
+Yes,d_dimer,D-Dimer,51196
+Yes,d_dimer,D-Dimer,52551
+Yes,hemoglobin_a1c,% Hemoglobin A1c,50852
+Yes,parathyroid_level,Parathyroid Hormone,50965
+Yes,thyroid_stimulating_hormone_(tsh),Thyroid Stimulating Hormone,50993
+Yes,lymphocyte,Lymphocytes,51116
+Yes,lymphocyte,Lymphocytes,51244
+Yes,lymphocyte,Lymphocytes,51375
+Yes,lymphocyte,Lymphocytes,51427
+Yes,lymphocyte,Lymphocytes,51446
+Yes,lymphocyte,Lymphocytes,53188
+Yes,neutrophils,Neutrophils,51256
+Yes,neutrophils,Neutrophils,53164
+Yes,crp_high_sens,High-Sensitivity CRP,51652
+Yes,procalcitonin,Procalcitonin   # 🚫 None in MIMIC,
+Yes,erythrocyte_sedimentation_rate_(esr),Sedimentation Rate,51288
+Yes,c_diff,C. diff PCR,51843
+Yes,c_diff,C. diff PCR,51933
+Yes,covid,COVID-19   # 🚫 None in MIMIC,
+Yes,mtp,MTP          # 🚫 None in MIMIC,

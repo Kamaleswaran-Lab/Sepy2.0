@@ -1,0 +1,714 @@
+All possible values for column 'component':
+Immunofixation, Urine
+Creatinine Clearance
+Miscellaneous, Ascites
+Toxoplasma IgM Ab
+SCT - Screen
+HCG, Urine, Qualitative
+Elliptocytes
+Target Cells
+HIV 1 Ab Confirmation
+Factor IX Inhibitor
+Potassium
+UTX3
+Lactate Dehydrogenase (LD)
+dRVVT - Confirmation
+MacroOvalocytes
+Amylase, Pleural
+Bicarbonate
+Total Nucleated Cells, Joint
+C3
+CD71
+Cholesterol, LDL, Calculated
+Ethylene Glycol
+Cellular Cast
+Alanine Aminotransferase (ALT)
+N2 GENE ENDPT
+CD19 Absolute Count
+Sodium, Urine
+Absolute CD4 Count
+Intubated
+Urine Appearance
+White Blood Cells
+Lipase, Body Fluid
+HIV FINAL
+Acetone
+Amylase, Joint Fluid
+Amylase
+Hepatitis A Virus Antibody
+RBC, CSF
+Von Willebrand Factor Antigen
+Sex Hormone Binding Globulin
+LD, Body Fluid
+Hematocrit, Other Fluid
+Cyclosporin
+CD117
+Protein
+Hepatitis B Surface Antibody
+WBC Count
+HIT-Ab Interpreted Result
+Potassium, Stool
+Von Willebrand Factor Activity
+CD56 Absolute Count
+Chloride, Urine
+Granular Casts
+CD8
+Glucose, Body Fluid
+Bilirubin, Total, CSF
+Urine Comments
+INR(PT)
+pCO2
+RBC, Pleural
+RBC Morphology
+CD56
+MCV
+PAN
+CD15/56
+Mesothelial Cells
+Lymphocytes, Percent
+Waxy Casts
+Urine Casts, Other
+Total Nucleated Cells, Ascites
+Barbiturate Screen, Urine
+Assist/Control
+Creatinine
+MCHC
+CD16
+STX1
+Homocysteine
+Epithelial Casts
+Cytomegalovirus Viral Load
+Reticulocyte Count, Absolute
+Factor IX
+Collagen
+Cysteine Crystals
+Macrocytes
+Norovirus Genogroup I
+Bicarbonate, Urine
+Epstein-Barr Virus IgM Ab Value
+Factor VII
+Calculated Free Testosterone
+Urine Volume, Total
+Base Excess
+Tidal Volume
+Glucose, CSF
+Factor XI
+Potassium, Ascites
+Blue Top Hold
+Carboxyhemoglobin
+Tissue Transglutaminase Ab, IgA
+CD13
+Immunofixation
+CD55
+Urine Specimen Type
+UTX1
+Joint Crystals, Birefringence
+Total Collection Time
+Oval Fat Body
+Triiodothyronine (T3)
+Norovirus Genogroup II
+EE2
+Nucleated Red Cells
+Amphetamine Screen, Urine
+Albumin, Body Fluid
+CD14
+RSV1
+RdRP Ct
+VZV IgG Ab
+Calculated Thyroxine (T4) Index
+Large Platelets
+Fibrin Degradation Products
+Triglycer
+Inpatient Hematology/Oncology Smear
+Amikacin
+Methadone, Urine
+TCR Alpha-Beta
+Total Protein, Urine
+Young
+Urine Mucous
+Lactate
+HPE8
+Oxygen
+Creatinine, Ascites
+Factor VIII Inhibitor
+CD5
+CD5 Absolute Count
+Reticulocyte Count, Manual
+Epstein-Barr Virus EBNA IgG Ab
+Immunoglobulin G
+Epstein-Barr Virus IgG Ab Value
+CD4
+Albumin, Joint Fluid
+Joint Crystals, Number
+Hemoglobin
+Lupus Anticoagulant
+Thyroxine (T4)
+Bicarbonate, Ascites
+Ceph-IC
+Prot. Electrophoresis, Urine
+Phenytoin
+CD2
+Sodium, Stool
+Protein S, Antigen
+Lipase, Ascites
+Anti-Mitochondrial Antibody
+Fibrinogen, Functional
+Hemoglobin Other
+COV12MC
+Free Fat
+Pappenheimer Bodies
+Uptake Ratio
+Hepatitis B Core Antibody, IgM
+Treponema pallidum (Syphilis) Ab
+pH
+Estimated GFR (CKD- EPI Refit)
+HPE7
+Folate
+Magnesium, Urine
+Monocytes
+Immunophenotyping
+Barbiturate Screen
+EE1
+Gray Top Hold (plasma)
+Glucose, Urine
+Absolute Basophil Count
+CD38
+FLUB2
+Centromere
+Prolactin
+Red Blood Cells
+Spherocytes
+Toxoplasma IgG Ab Value
+Protein C, Antigen
+Calculated Total CO2
+Heparin, LMW
+Bilirubin Crystals
+Beta-2 Microglobulin
+COV11
+CD4 Cells, Percent
+Lambda
+Estimated GFR (MDRD equation)
+WBC Casts
+E GENE ENDPT
+% Hemoglobin A1c
+Total Protein, CSF
+Total Nucleated Cells, Pleural
+Tyrosine Crystals
+Bands
+Creatinine, Body Fluid
+CMV IgM Ab
+EE3
+CD19
+Amorphous Crystals
+CD45
+Serum Viscosity
+TCR Gamma-Delta
+Fentanyl
+Triglycerides, Pleural
+Theophylline
+Absolute CD8 Count
+Double Stranded DNA
+CephIC Endpt
+Hemogloblin S
+Basophils
+Oxycodone
+CD33
+ANCA Titer
+CA-125
+Phosphate, Body Fluid
+H/O Smear
+Bilirubin, Total
+Lithium
+Hypochromia
+Schistocytes
+CD19 %
+Anticardiolipin Antibody IgM
+Osmolality, Urine
+Helicobacter pylori Antigen
+Sedimentation Rate
+Macrophage
+Howell-Jolly Bodies
+Albumin, Urine
+Surfactant/Albumin
+Bicarbonate, Pleural
+Tricyclic Antidepressant Screen
+CD4/CD8 Ratio
+HPE6
+<Albumin>
+Hematocrit, Pleural
+Atypical Lymphocytes
+Albumin, Pleural
+Ethanol, Urine
+Acanthocytes
+FLUA2
+Procainamide
+Luteinizing Hormone
+Creatine Kinase (CK)
+Rapid Respiratory Syncytial Virus
+CD7
+Epinepherine
+Amylase/Creatinine Ratio, Urine
+Iron
+RBC
+D-Dimer
+Transferrin
+Ammonia
+Bilirubin, Indirect
+Lymphocytes
+Glyco A
+Anion Gap
+Specific Gravity
+Anticardiolipin Antibody IgG
+HIT-Ab Numerical Result
+Platelet Clumps
+Hepatitis C Viral Load
+Leucine Crystals
+Bacteria
+LUC
+Ventilator
+Salicylate
+Reptilase Time
+PTT
+C-Reactive Protein
+High-Sensitivity CRP
+Toxoplasma Interpretation
+Rouleaux
+Lymphs
+Amylase, Urine
+Eosinophils
+Sulfonamides
+Cholesterol, Ascites
+Creatinine, Serum
+UCU1
+Bicarbonate, Other Fluid
+Lyme G and M Value
+Trichomonas
+Hepatitis B Virus Core Antibody
+Ketone
+Required O2
+Protein/Creatinine Ratio
+CD57
+Calcium, Urine
+HPE1
+Toxoplasma IgM Ab Value
+CD138
+Mumps IgG Ab
+SCT - Normalized Ratio
+Immunoglobulin A
+24 hr Creatinine
+Specimen Type
+Glucose, Ascites
+Reticulocyte Count, Automated
+Calcium Oxalate Crystals
+CDT027
+Toxoplasma IgG Ab
+RDW-SD
+STX4
+Cholesterol, Total
+Voided Specimen
+TdT
+Light Green Top Hold
+Transitional Epithelial Cells
+Uric Acid Crystals
+Creatinine, Pleural
+Oxygen Saturation
+MCH
+24 hr Protein
+CD20 Absolute Count
+Uric Acid, Urine
+Alveolar-arterial Gradient
+Chloride, Pleural
+Epstein-Barr Virus  EBNA IgG Ab
+NTproBNP
+Ammonium Biurate
+Factor II
+Calcium Carbonate Crystals
+Broad Casts
+RSV2
+COV12IC
+Troponin T
+Creatine Kinase, MB Isoenzyme
+CD23
+Epithelial Cells
+Amylase, Ascites
+Lipase
+Polys
+Absolute Lymphocyte Count
+Thyroglobulin
+Rheumatoid Factor
+Plasma
+UTX2
+CMV Interpretation
+Blue Top Hold Frozen
+Hepatitis A Virus IgM Antibody
+Renal Epithelial Cells
+Anti-Smooth Muscle Antibody
+Total Nucleated Cells, Other
+UTX4
+Albumin, Stool
+Red Top Hold
+Green Top Hold (plasma)
+PAN1
+EE6
+Cholesterol, HDL
+Hemoglobin C
+Total Protein, Pleural
+Inhibitor Screen
+Glucose
+Benzodiazepine Screen, Urine
+Absolute Neutrophil Count
+Reflex HIV Confirmation
+CD5 %
+Iron Binding Capacity, Total
+Potassium, Pleural
+Cryoglobulin
+Anti-Neutrophil Cytoplasmic Antibody
+H. pylori IgG Ab Value
+Anti-Parietal Cell Antibody
+Thyroid Peroxidase Antibodies
+Absolute Monocyte Count
+Promyelocytes
+Fatty Casts
+Hepatitis B Surface Antigen
+Influenza A by PCR
+Ferritin
+Epstein-Barr Virus VCA IgG Ab
+Phosphate, Urine
+CD 1a
+Hepatitis C Virus Antibody
+Gamma Glutamyltransferase
+I
+RBC, Joint Fluid
+Ethanol
+Free Kappa
+24 hr Calcium
+Beta Hydroxybutyrate
+Urea Nitrogen, Urine
+Neisseria gonorrhoeae
+Urobilinogen
+proBNP, Pleural
+Length of Urine Collection
+EDTA Hold
+Free Lambda
+Phosphate
+C4
+Potassium, Whole Blood
+Sodium, Body Fluid
+Sickle Cells
+Cholesterol Crystals
+SCT - Confirmation
+STX3
+CD16/56%
+Hemosiderin
+Anat Path Hold
+RBC, Other Fluid
+CD64
+Albumin/Creatinine, Urine
+Calcium, Body Fluid
+Phenobarbital
+STX2
+Magnesium
+MRSA PCR
+Gentamicin
+Joint Crystals, Shape
+Blasts
+Cortisol
+Eosinophil Count
+Protein Electrophoresis
+H. pylori IgG Ab
+Hematocrit
+Vitamin B12
+Leukocyte Alkaline Phosphatase
+Hematocrit, Joint Fluid
+CD3 Absolute Count
+Epstein-Barr Virus VCA IgM Ab
+Thyroid Stimulating Hormone
+CD15
+CD103
+Rubeola IgG Ab
+Urea Nitrogen, Pleural
+Digoxin
+CD20 %
+Platelet Smear
+N2 GENE CT
+pO2
+Hyaline Casts
+Alpha-Fetoprotein
+Total Protein, Body Fluid
+Prostate Specific Antigen
+Heparin
+Bilirubin, Total, Body Fluid
+Fetal Hemoglobin
+Temperature
+Influenza B by PCR
+Joint Crystals, Comment
+Urine Crystals, Other
+Epstein-Barr Virus Interpretation
+Calcium, Total
+O2 Flow
+CD59
+RDW
+Hematocrit, Ascites
+Staph aureus PCR
+Urine Creatinine
+CD8 Cells, Percent
+Lyme VsIE/PepC10 Antibody
+PAN3
+Cocaine, Urine
+Absolute CD3 Count
+Vancomycin
+Anti-Nuclear Antibody
+Cholesterol Ratio (Total/HDL)
+Albumin, Ascites
+EE7
+Tobramycin
+Poikilocytosis
+Thrombin
+Chloride, Body Fluid
+Factor XII
+Creatinine, Urine
+Testosterone, Free
+Sodium
+Treponema pallidum (syphilis) value
+Myelocytes
+FLUB1
+HPE5
+HBV VL CT
+Trichomonas vaginalis
+Anisocytosis
+Urine Volume
+COV8IC
+Bilirubin, Total, Pleural
+Globulin
+RBC, Ascites
+Microcytes
+Ventilation Rate
+Creatinine, Whole Blood
+Urea Nitrogen, Ascites
+Magnesium, Body Fluid
+Protein C, Functional
+COV10
+STX5
+Anti-Gliadin Antibody, IgA
+XUCU
+Ristocetin
+Young Cells
+UCU2
+UTX10
+HIV Screen
+C. diff PCR
+HPE2
+Benzodiazepine Screen
+Triglycerides, Ascites
+Other Cells
+CD41
+Asparate Aminotransferase (AST)
+Parathyroid Hormone
+Hypersegmented Neutrophils
+Quantitative G6PD
+Human Chorionic Gonadotropin
+Non-squamous Epithelial Cells
+Protein, Total
+Problem Specimen
+Reducing Substances, Urine
+CD11c
+Mumps IgG Ab Value
+Teardrop Cells
+DHEA-Sulfate
+Calcium Phosphate Crystals
+Carcinoembyronic Antigen (CEA)
+NRBC
+Uhold
+Lactate Dehydrogenase, Pleural
+Polychromasia
+Pencil Cells
+CD3 %
+Yeast
+CD16/56
+Urine Fat Bodies
+Cholesterol, Body Fluid
+Hemogloblin A
+Anti-DGP (IgA/IgG)
+Sickle Cell Preparation
+Leukocytes
+Free Calcium
+Nucleated RBC
+Neutrophils
+HPE4
+Cholesterol, Pleural
+Hematocrit, CSF
+25-OH Vitamin D
+eAG
+Chloride
+Sodium, Ascites
+Hepatitis B Viral Load
+Arachadonic Acid
+RBC Casts
+Phenytoin, Percent Free
+G6PD, Qualitative
+PAN2
+Bleeding Time
+Hematocrit, Calculated
+C Diff Toxin Antigen Assay
+Potassium, Body Fluid
+Antithrombin
+CK-MB Index
+CD3
+RFXLDLM
+Methemoglobin
+Acetaminophen
+Sodium, Whole Blood
+Bicarbonate, Stool
+Estradiol
+HIV 2 Ab Confirmation
+Envelope Cells
+Urea Nitrogen, Body Fluid
+CD10
+Wright Giemsa
+Hemoglobin A2
+wbcp
+Basophilic Stippling
+Stomatocyte
+Methotrexate
+dRVVT - Screen
+Free Kappa/Free Lambda Ratio
+Reflex Confirmatory Hepatitis C Viral Load
+EE5
+Sperm
+HIV Viral Load Ct
+Absolute Eosinophil Count
+CD3 Cells, Percent
+CD25
+ARCH-1
+Osmolality, Ascites
+Cholesterol, LDL, Measured
+Rubella IgG Ab
+Haptoglobin
+Nitrite
+COV12
+Triglycerides
+COV8MC
+Factor X
+Urea Nitrogen
+Factor V
+FetalFN
+Sodium, Pleural
+Estimated GFR (CKD- EPI 2021)
+Porphobilinogen Screen
+CMV IgG Ab Value
+VZV IgG Ab Value
+RUBIgGV
+Immunoglobulin M
+CD20
+Lining Cell
+Albumin
+E GENE CT
+tacroFK
+Mesothelial cells
+UTX5
+Osmolality, Measured
+Metamyelocytes
+Myoglobin, Urine
+H
+CD16/56 Absolute Count
+CD22
+Glucose, Joint Fluid
+CD34
+Chloride, Ascites
+HPE3
+Lactate Dehydrogenase, Ascites
+Joint Crystals, Location
+Osmolality, Stool
+WBC
+Heinz Body Prep
+Reptilase Time Control
+Blood Parasite Smear
+Potassium, Urine
+Miscellaneous, Pleural
+FMC-7
+Miscellaneous, CSF
+Testosterone
+UTX6
+ADP
+Total Nucleated Cells, CSF
+LD, Joint Fluid
+HLA-DR
+Carbamazepine
+NonSquamous Epithelial Cell
+Uric Acid, Joint Fluid
+Lactate Dehydrogenase, CSF
+Hemoglobin F
+Iron Stain
+Amylase, Body Fluid
+Calculated TBG
+L
+Thyroxine (T4), Free
+Protein S, Functional
+Chloride, Stool
+CA 19-9
+Platelet Count
+Follicle Stimulating Hormone
+Mesothelial Cell
+Ovalocytes
+Macrophages
+Opiate Screen, Urine
+Glucose, Pleural
+Total Protein, Ascites
+Calculated Bicarbonate, Whole Blood
+RdRP Endpt
+Kappa
+UTX7
+Osmolality, Body Fluid
+dRVVT - Normalized Ratio
+Creatinine, Joint Fluid
+Chloride, Whole Blood
+Factor XIII
+Echinocytes
+Other Cell
+Chlamydia trachomatis
+COV13
+RBC Clumps
+Monos
+PEP, CSF
+Lipase, Pleural
+Lyme C6 Ab
+Fragmented Cells
+Granulocyte Count
+Anti-Thyroglobulin Antibodies
+Bite Cells
+Triple Phosphate Crystals
+Bilirubin, Direct
+Bilirubin
+Other
+Blood, Occult
+Valproic Acid
+Miscellaneous, Body Fluid
+Marijuana
+Blood
+Phenytoin, Free
+Rubeola IgG Ab Value
+Immature Granulocytes
+CD56 %
+Factor VIII
+PT
+STX6
+HIV 1 Viral Load
+Cancer Antigen 27.29
+N-Acetylprocainamide (NAPA)
+Anti-Nuclear Antibody, Titer
+HPE9
+Bilirubin, Total, Ascites
+Urine tube, held
+PEEP
+Total Protein, Joint Fluid
+UTX9
+RFXUCU
+K (GREEN)
+CMV IgG Ab
+WBC Clumps
+Alkaline Phosphatase
+Rapamycin
+FLUA1
+Plasma Cells
+Urine Color
+Uric Acid

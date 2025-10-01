@@ -1,0 +1,71 @@
+Running on host: dcc-core-09
+Job id: 37569044
+Allocated CPUs: 16
+Allocated memory: 131072
+INFO:root:Sepy- The total number of processes: 16
+INFO:root:Sepy- The processor assignment is: None
+INFO:root:Creating temporary pickle after preprocessing to check data import
+INFO:root:Pickle file will be saved to /hpc/group/kamaleswaranlab/mimic_iv/sepy_output/temp_pickles/temp.pickle
+INFO:root:Importing data frames
+INFO:root:Creating sepyIMPORT class instance
+INFO:root:This may take a while...
+INFO:root:sepyIMPORT initialized
+INFO:root:Creating dataframes
+INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ENCOUNTER.csv
+INFO:root:Reading CSV file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ENCOUNTER.csv
+INFO:root:Successfully read file with 546028 rows and 10 columns
+INFO:root:Encounters import successful
+INFO:root:Encounters imported successfully
+INFO:root:Number of encounters: 546028
+INFO:root:Importing demographics data
+INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DEMOGRAPHICS.csv
+INFO:root:Reading CSV file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DEMOGRAPHICS.csv
+INFO:root:Successfully read file with 223452 rows and 3 columns
+INFO:root:Demographics import successful
+INFO:root:Importing infusion_meds data
+INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/EMPTY_FILE.csv
+WARNING:root:/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/EMPTY_FILE.csv is empty, returning empty DataFrame
+INFO:root:Infusion_meds import successful
+INFO:root:Processing infusion meds (MIMIC version)
+INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_vasopressor_meds.csv
+INFO:root:Reading CSV file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_vasopressor_meds.csv
+INFO:root:Successfully read file with 766183 rows and 7 columns
+INFO:root:Loaded vasopressor meds: (766183, 7)
+INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_anti_infective_meds.csv
+INFO:root:Reading CSV file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_anti_infective_meds.csv
+INFO:root:Successfully read file with 949901 rows and 6 columns
+INFO:root:Loaded anti-infective meds: (949901, 6)
+INFO:root:Infusion_meds processing successful
+INFO:root:df_infusion_meds with (0, 0) shape
+INFO:root:Importing labs data
+INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/LABS.csv
+INFO:root:Reading CSV file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/LABS.csv
+INFO:root:Successfully read file with 84605867 rows and 13 columns
+INFO:root:Labs import successful
+/hpc/dctrl/yy450/Sepy2.0/sepyIMPORT.py:386: PerformanceWarning: The following operation may generate 2774532474 cells in the resulting pandas object.
+  df = df.unstack(level=1)
+INFO:root:Labs processing successful
+INFO:root:df_labs with (51389744, 61) shape
+INFO:root:Data import complete
+INFO:root:An instance of the sepyIMPORT class was created
+INFO:root:Data frames imported
+INFO:root:Dumping import instance to pickle
+{'ICD9_ahrq': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_ahrq.csv', 'ICD9_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_elix.csv', 'ICD9_quan_deyo': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_quan_deyo.csv', 'ICD9_quan_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_quan_elix.csv', 'ICD9_single_ccs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_single_ccs.csv', 'ICD10_ahrq': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_ahrq.csv', 'ICD10_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_elix.csv', 'ICD10_quan_deyo': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_quan_deyo.csv', 'ICD10_quan_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_quan_elix.csv', 'ICD10_single_ccs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_single_ccs.csv', 'grouping_labs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/mimic_mapping_labs_with_id.csv', 'bed_labels': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_bed_labels.csv', 'grouping_fluids': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_fluids_labels.csv', 'variable_chart': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_variable_chart.csv', 'grouping_vent': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_vent_labels.csv', 'ENCOUNTER': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ENCOUNTER.csv', 'DEMOGRAPHICS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DEMOGRAPHICS.csv', 'INFUSIONMEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/EMPTY_FILE.csv', 'VASOPRESSOR_MEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_vasopressor_meds.csv', 'ANTI_INFECTIVE_MEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_anti_infective_meds.csv', 'LABS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/LABS.csv', 'VITALS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VITALS.csv', 'VENT': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VENT.csv', 'DIALYSIS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIALYSIS.csv', 'IN_OUT': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/IN_OUT.csv', 'GCS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/GCS.csv', 'CULTURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CULTURES.csv', 'BEDLOCATION': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/BEDLOCATION.csv', 'DIAGNOSIS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIAGNOSIS.csv', 'ICD_PROCEDURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ICD_PROCEDURES.csv', 'CPT_PROCEDURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CPT_PROCEDURES.csv'}
+0.5
+1
+1.5
+2
+3
+4
+5
+6
+                                                                                                                                                                 alanine_aminotransferase_(alt)  ...  white_blood_cell_count
+csn        component_id result_status lab_result_time     collection_time     pat_id   proc_cat_id proc_cat_name proc_code proc_desc  component      loinc_code                                  ...                        
+22595853.0 51478        Final         2180-05-07 00:10:00 2180-05-07 00:10:00 10000032 51478       Urine         51478     Hematology Glucose        NaN                                    NaN  ...                     NaN
+           51491        Final         2180-05-07 00:10:00 2180-05-07 00:10:00 10000032 51491       Urine         51491     Hematology pH             NaN                                    NaN  ...                     NaN
+           51221        Final         2180-05-07 05:05:00 2180-05-07 05:05:00 10000032 51221       Blood         51221     Hematology Hematocrit     NaN                                    NaN  ...                     NaN
+           51222        Final         2180-05-07 05:05:00 2180-05-07 05:05:00 10000032 51222       Blood         51222     Hematology Hemoglobin     NaN                                    NaN  ...                     NaN
+           51265        Final         2180-05-07 05:05:00 2180-05-07 05:05:00 10000032 51265       Blood         51265     Hematology Platelet Count NaN                                    NaN  ...                     NaN
+
+[5 rows x 61 columns]
+Finished at: Wed Oct  1 02:13:39 PM EDT 2025

@@ -1,26 +1,35 @@
 #!/bin/bash
-#SBATCH --job-name=make_dicts_test
+#SBATCH --job-name=sepy_for_mimic
+#SBATCH --output=sepy_for_mimic.log
+#SBATCH --error=sepy_for_mimic.log
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=32G
-#SBATCH --time=4:00:00
-#SBATCH --output=slurmjobs/logs/make_dicts_test_%j.out
-#SBATCH --error=slurmjobs/logs/make_dicts_test_%j.err
+#SBATCH --cpus-per-task=16              # CPU 核数（并行处理时有帮助）
+#SBATCH --mem=128G                       # 请求 128 GB 内存（可改）
+#SBATCH --time=24:00:00                 # 最长运行时间，格式 HH:MM:SS
 
-echo "Job started at: $(date)"
-echo "Job ID: $SLURM_JOB_ID"
-echo "Node: $SLURM_NODELIST"
+# 如果需要 module 环境，放在这里。例如:
+# module purge
+# module load anaconda/2022.05
 
+# 激活 conda 环境（用你原来的）
 source /hpc/dctrl/yy450/miniconda3/etc/profile.d/conda.sh
 conda activate sepy2
 
+# 确保日志目录存在
+mkdir -p logs
+
+# 工作目录（改成你项目目录）
 cd ~/link_dctrl_yy450/Sepy2.0
 
-python make_dicts.py \
-    --year 2014 \
-    --num_processes 4 \
-    --data_config configurations/emory_config.yaml \
-    --sepy_config configurations/dict_config.yaml
+# 如果你想记录节点信息便于调试：
+echo "Running on host: $(hostname)"
+echo "Job id: $SLURM_JOB_ID"
+echo "Allocated CPUs: $SLURM_CPUS_ON_NODE"
+echo "Allocated memory: $SLURM_MEM_PER_NODE"
 
-echo "Job finished at: $(date)"
+# 运行脚本
+python make_dicts.py
+
+# 退出时可打印结束时间
+echo "Finished at: $(date)"
