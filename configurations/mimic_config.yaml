@@ -103,30 +103,28 @@ instance:
   #   index_col: ["csn"]
   #   date_cols: ["recorded_time"]
   #   merge_cols: []
-  import_vent:
-    file_key: "VENT"
+  # import_vent:
+  #   file_key: "VENT"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   numeric_cols:
+  #     - "vent_rate_set"
+  #     - "vent_tidal_rate_set"
+  #     - "tidal_volume_observed"
+  #     - "tidal_volume_spontaneous"
+  #     - "vent_tidal_rate_exhaled"
+  #     - "peep"
+  #     - "fio2"
+  #   date_cols:
+  #     - "recorded_time"
+  #     - "vent_start_time"
+  #     - "vent_stop_time"
+  import_dialysis:
+    file_key: "DIALYSIS"
     drop_cols: []
     index_col: ["csn"]
-    numeric_cols:
-      - "vent_rate_set"
-      - "vent_tidal_rate_set"
-      - "tidal_volume_observed"
-      - "tidal_volume_spontaneous"
-      - "vent_tidal_rate_exhaled"
-      - "peep"
-      - "fio2"
     date_cols:
-      - "recorded_time"
-      - "vent_start_time"
-      - "vent_stop_time"
-  # import_dialysis:
-  #   file_key: "DIALYSIS"
-  #   drop_cols: 
-  #     - "empi"
-  #     - "encounter_id"
-  #   index_col: ["csn"]
-  #   date_cols:
-  #     - "service_timestamp"
+      - "service_timestamp"
   # import_gcs:
   #   file_key: "GCS"
   #   drop_cols: []
