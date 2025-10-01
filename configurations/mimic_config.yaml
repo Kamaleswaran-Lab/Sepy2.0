@@ -110,6 +110,8 @@ instance:
     numeric_cols:
       - "vent_rate_set"
       - "vent_tidal_rate_set"
+      - "tidal_volume_observed"
+      - "tidal_volume_spontaneous"
       - "vent_tidal_rate_exhaled"
       - "peep"
       - "fio2"
