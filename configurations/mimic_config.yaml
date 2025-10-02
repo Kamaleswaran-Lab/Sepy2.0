@@ -155,18 +155,18 @@ instance:
   #   drop_cols: []
   #   index_col: ["csn"]
   #   date_cols: []
-  import_cpt_procedures: # Done
-    file_key: "CPT_PROCEDURES"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "procedure_dttm"
-  # import_icd_procedures:
-  #   file_key: "ICD_PROCEDURES"
+  # import_cpt_procedures: # Done
+  #   file_key: "CPT_PROCEDURES"
   #   drop_cols: []
   #   index_col: ["csn"]
   #   date_cols:
-  #     - "procedure_date"
+  #     - "procedure_dttm"
+  import_icd_procedures:
+    file_key: "ICD_PROCEDURES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "procedure_date"
   # import_in_out:
   #   file_key: "IN_OUT"
   #   drop_cols: []
