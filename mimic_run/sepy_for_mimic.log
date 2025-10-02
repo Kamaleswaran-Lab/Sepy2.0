@@ -1,5 +1,5 @@
-Running on host: dcc-core-44
-Job id: 37645800
+Running on host: dcc-core-08
+Job id: 37646961
 Allocated CPUs: 16
 Allocated memory: 131072
 INFO:root:Sepy- The total number of processes: 16
@@ -17,14 +17,14 @@ INFO:root:Successfully read file with 546028 rows and 10 columns
 INFO:root:Encounters import successful
 INFO:root:Encounters imported successfully
 INFO:root:Number of encounters: 546028
-INFO:root:Importing diagnosis data
-INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIAGNOSIS.csv
-INFO:root:Reading CSV file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIAGNOSIS.csv
-INFO:root:Successfully read file with 6364100 rows and 5 columns
-INFO:root:Diagnosis import successful
+INFO:root:Importing cpt_procedures data
+INFO:root:Reading file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CPT_PROCEDURES.csv
+INFO:root:Reading CSV file: /hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CPT_PROCEDURES.csv
+INFO:root:Successfully read file with 186074 rows and 4 columns
+INFO:root:Cpt_procedures import successful
 INFO:root:Data import complete
 INFO:root:An instance of the sepyIMPORT class was created
 INFO:root:Data frames imported
 INFO:root:Dumping import instance to pickle
 {'ICD9_ahrq': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_ahrq.csv', 'ICD9_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_elix.csv', 'ICD9_quan_deyo': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_quan_deyo.csv', 'ICD9_quan_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_quan_elix.csv', 'ICD9_single_ccs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD9_single_ccs.csv', 'ICD10_ahrq': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_ahrq.csv', 'ICD10_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_elix.csv', 'ICD10_quan_deyo': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_quan_deyo.csv', 'ICD10_quan_elix': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_quan_elix.csv', 'ICD10_single_ccs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/comorbidities/ICD10_single_ccs.csv', 'grouping_labs': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/mimic_mapping_labs_with_id.csv', 'grouping_vent': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/mimic_vent_mapping.csv', 'bed_labels': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/mimic_bed_labels.csv', 'grouping_fluids': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_fluids_labels.csv', 'variable_chart': '/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/em_variable_chart.csv', 'ENCOUNTER': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ENCOUNTER.csv', 'DEMOGRAPHICS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DEMOGRAPHICS.csv', 'INFUSIONMEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/EMPTY_FILE.csv', 'VASOPRESSOR_MEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_vasopressor_meds.csv', 'ANTI_INFECTIVE_MEDS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/INFUSIONMEDS/df_anti_infective_meds.csv', 'LABS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/LABS.csv', 'VITALS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VITALS.csv', 'VENT': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/VENT.csv', 'DIALYSIS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIALYSIS.csv', 'IN_OUT': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/IN_OUT.csv', 'GCS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/GCS.csv', 'CULTURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CULTURES.csv', 'BEDLOCATION': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/BEDLOCATION.csv', 'DIAGNOSIS': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/DIAGNOSIS.csv', 'ICD_PROCEDURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/ICD_PROCEDURES.csv', 'CPT_PROCEDURES': '/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files/CPT_PROCEDURES.csv'}
-Finished at: Thu Oct  2 04:09:04 PM EDT 2025
+Finished at: Thu Oct  2 04:23:18 PM EDT 2025

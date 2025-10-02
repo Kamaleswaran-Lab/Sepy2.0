@@ -150,20 +150,17 @@ instance:
   #   date_cols:
   #     - "bed_location_start"
   #     - "bed_location_end"
-  import_diagnosis: # Done (Mehak says that _process_diagnosis function might need be useful)
-    file_key: "DIAGNOSIS"
+  # import_diagnosis: # Done (Mehak says that _process_diagnosis function might need be useful)
+  #   file_key: "DIAGNOSIS"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols: []
+  import_cpt_procedures: # Done
+    file_key: "CPT_PROCEDURES"
     drop_cols: []
     index_col: ["csn"]
-    date_cols: []
-  # import_cpt_procedures:
-  #   file_key: "CPT_PROCEDURES"
-  #   drop_cols: 
-  #     - "group_modifier_cpt_desc"
-  #     - "modifier_cpt_seq_num"
-  #   index_col: ["csn"]
-  #   date_cols:
-  #     - "procedure_day"
-  #     - "procedure_dttm"
+    date_cols:
+      - "procedure_dttm"
   # import_icd_procedures:
   #   file_key: "ICD_PROCEDURES"
   #   drop_cols: []
