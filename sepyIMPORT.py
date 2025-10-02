@@ -595,42 +595,63 @@ class sepyIMPORT:
             logging.warning("Using empty DataFrame for GCS due to processing error")
             return 0
         
-    def _process_diagnosis(self, df: pd.DataFrame, **kwargs) -> None:
-        """Process diagnosis data after initial import."""
-        self.df_diagnosis = df
+    # def _process_diagnosis(self, df: pd.DataFrame, **kwargs) -> None:
+    #     """Process diagnosis data after initial import."""
+    #     self.df_diagnosis = df
         
-        logging.info("Begin comorbidity import.")
-        try:
-            self.df_quan_deyo_ICD10 = self._make_comorbid_df(
-                self.file_dictionary["ICD10_quan_deyo"],
-                "ICD10",
-                "quan_deyo",
-                "dx_code_icd10",
-                "v_quan_deyo_labels",
-            )
-            # makes df for Quan's Elix
-            self.df_quan_elix_ICD10 = self._make_comorbid_df(
-                self.file_dictionary["ICD10_quan_elix"],
-                "ICD10",
-                "quan_elix",
-                "dx_code_icd10",
-                "v_quan_elix_labels",
-            )
+    #     logging.info("Begin comorbidity import.")
+    #     try:
+    #         self.df_quan_deyo_ICD10 = self._make_comorbid_df(
+    #             self.file_dictionary["ICD10_quan_deyo"],
+    #             "ICD10",
+    #             "quan_deyo",
+    #             "dx_code_icd10",
+    #             "v_quan_deyo_labels",
+    #         )
+            
+    #         self.df_quan_deyo_ICD9 = self._make_comorbid_df(
+    #             self.file_dictionary["ICD9_quan_deyo"],
+    #             "ICD9",
+    #             "quan_deyo",
+    #             "dx_code_icd9",
+    #             "v_quan_deyo_labels",
+    #         )
+            
+    #         # makes df for Quan's Elix
+    #         self.df_quan_elix_ICD10 = self._make_comorbid_df(
+    #             self.file_dictionary["ICD10_quan_elix"],
+    #             "ICD10",
+    #             "quan_elix",
+    #             "dx_code_icd10",
+    #             "v_quan_elix_labels",
+    #         )
+            
+    #         self.df_quan_elix_ICD9 = self._make_comorbid_df(
+    #             self.file_dictionary["ICD9_quan_elix"],
+    #             "ICD9",
+    #             "quan_elix",
+    #             "dx_code_icd9",
+    #             "v_quan_elix_labels",
+    #         )
             
             
-            print(self.df_quan_deyo_ICD10.head())
-            print(self.df_quan_elix_ICD10.head())
-            self.df_quan_deyo_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_deyo.csv")
-            self.df_quan_elix_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_elix.csv")
-
-            return 1
-        except Exception as e:
-            logging.error(f"Error processing comorbidity data: {str(e)}")
-            # Create empty DataFrames with expected structure
-            self.df_quan_deyo_ICD10 = pd.DataFrame(columns=["pat_id", "dx_time_date", "ICD10", "quan_deyo"])
-            self.df_quan_elix_ICD10 = pd.DataFrame(columns=["pat_id", "dx_time_date", "ICD10", "quan_elix"])
-            logging.warning("Using empty DataFrames for comorbidity data due to processing error")
-            return 0
+    #         print(self.df_quan_deyo_ICD10.head())
+    #         print(self.df_quan_deyo_ICD9.head())
+    #         print(self.df_quan_elix_ICD10.head())
+    #         print(self.df_quan_elix_ICD9.head())
+    #         self.df_quan_deyo_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_deyo_ICD10.csv")
+    #         self.df_quan_deyo_ICD9.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_deyo_ICD9.csv")
+    #         self.df_quan_elix_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_elix_ICD10.csv")
+    #         self.df_quan_elix_ICD9.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_elix_ICD9.csv")
+            
+    #         return 1
+    #     except Exception as e:
+    #         logging.error(f"Error processing comorbidity data: {str(e)}")
+    #         # Create empty DataFrames with expected structure
+    #         self.df_quan_deyo_ICD10 = pd.DataFrame(columns=["pat_id", "dx_time_date", "ICD10", "quan_deyo"])
+    #         self.df_quan_elix_ICD10 = pd.DataFrame(columns=["pat_id", "dx_time_date", "ICD10", "quan_elix"])
+    #         logging.warning("Using empty DataFrames for comorbidity data due to processing error")
+    #         return 0
 
     def _process_radiology_notes(self, df: pd.DataFrame, **kwargs) -> None:
         """

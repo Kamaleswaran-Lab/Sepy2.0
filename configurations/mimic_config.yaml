@@ -150,7 +150,7 @@ instance:
   #   date_cols:
   #     - "bed_location_start"
   #     - "bed_location_end"
-  import_diagnosis: # Done (Need to map ICD 9 to ICD 10; Also check with Mehak about the diagnosis codes in _make_comorbid_df)
+  import_diagnosis: # Done (Mehak says that _process_diagnosis function might need be useful)
     file_key: "DIAGNOSIS"
     drop_cols: []
     index_col: ["csn"]
