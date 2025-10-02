@@ -126,4 +126,4 @@ This mapping requires clinical validation:
 - Decide ambiguous categories (PACU, stepdown units).
 
 # DIAGNOSIS
-**Need to map ICD 9 to ICD 10; Also check with Mehak about the diagnosis codes in _make_comorbid_df**
+Mehak says that _process_diagnosis function might need be useful
