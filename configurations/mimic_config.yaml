@@ -38,7 +38,7 @@ dictionary_paths:
   grouping_types:
     - ["grouping_labs", "mimic_mapping_labs_with_id.csv"]
     - ["grouping_vent", "mimic_vent_mapping.csv"]
-    - ["bed_labels", "em_bed_labels.csv"]
+    - ["bed_labels", "mimic_bed_labels.csv"]
     - ["grouping_fluids", "em_fluids_labels.csv"]
     - ["variable_chart", "em_variable_chart.csv"]
   flatfile_types: 
@@ -97,13 +97,13 @@ instance:
   #   date_cols:
   #     - "collection_time"
   #     - "lab_result_time"
-  # import_vitals:
+  # import_vitals:  # Done 
   #   file_key: "VITALS"
   #   drop_cols: []
   #   index_col: ["csn"]
   #   date_cols: ["recorded_time"]
   #   merge_cols: []
-  # import_vent:
+  # import_vent:  # Done 
   #   file_key: "VENT"
   #   drop_cols: []
   #   index_col: ["csn"]
@@ -119,13 +119,13 @@ instance:
   #     - "recorded_time"
   #     - "vent_start_time"
   #     - "vent_stop_time"
-  # import_dialysis:
+  # import_dialysis:  # Done (Mehak mentioned that the dialysis and in_out are not fully correct right now, and we can leave it out for now (until we figure out the fluids))
   #   file_key: "DIALYSIS"
   #   drop_cols: []
   #   index_col: ["csn"]
   #   date_cols:
   #     - "service_timestamp"
-  # import_gcs:
+  # import_gcs: # Done 
   #   file_key: "GCS"
   #   drop_cols: []
   #   index_col: ["csn"]
@@ -135,21 +135,21 @@ instance:
   #     - "gcs_motor_score"
   #     - "gcs_total_score"
   #   date_cols: ["recorded_time"]
-  import_cultures:
-    file_key: "CULTURES"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "specimen_collect_time"
-      - "order_time"
-      - "lab_result_time"
-  # import_bed_locations:
-  #   file_key: "BEDLOCATION"
+  # import_cultures:  # Done 
+  #   file_key: "CULTURES"
   #   drop_cols: []
   #   index_col: ["csn"]
   #   date_cols:
-  #     - "bed_location_start"
-  #     - "bed_location_end"
+  #     - "specimen_collect_time"
+  #     - "order_time"
+  #     - "lab_result_time"
+  import_bed_locations:
+    file_key: "BEDLOCATION"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "bed_location_start"
+      - "bed_location_end"
   # import_procedures:
   #   file_key: "ORPROCEDURES"
   #   drop_cols: []

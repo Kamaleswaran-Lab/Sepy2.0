@@ -4,32 +4,29 @@
 #SBATCH --error=sepy_for_mimic.log
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16              # CPU 核数（并行处理时有帮助）
-#SBATCH --mem=128G                       # 请求 128 GB 内存（可改）
-#SBATCH --time=24:00:00                 # 最长运行时间，格式 HH:MM:SS
+#SBATCH --cpus-per-task=16              # Number of CPU cores (helpful for parallel processing)
+#SBATCH --mem=128G                      # Request 128 GB memory (can be modified)
+#SBATCH --time=24:00:00                 # Maximum runtime, format HH:MM:SS
 
-# 如果需要 module 环境，放在这里。例如:
+# If you need a module environment, put it here. For example:
 # module purge
 # module load anaconda/2022.05
 
-# 激活 conda 环境（用你原来的）
+# Activate conda environment (use your own)
 source /hpc/dctrl/yy450/miniconda3/etc/profile.d/conda.sh
 conda activate sepy2
 
-# 确保日志目录存在
-mkdir -p logs
-
-# 工作目录（改成你项目目录）
+# Working directory (change to your project directory)
 cd ~/link_dctrl_yy450/Sepy2.0
 
-# 如果你想记录节点信息便于调试：
+# If you want to log node information for debugging:
 echo "Running on host: $(hostname)"
 echo "Job id: $SLURM_JOB_ID"
 echo "Allocated CPUs: $SLURM_CPUS_ON_NODE"
 echo "Allocated memory: $SLURM_MEM_PER_NODE"
 
-# 运行脚本
+# Run the script
 python make_dicts.py
 
-# 退出时可打印结束时间
+# Print finish time when exiting
 echo "Finished at: $(date)"

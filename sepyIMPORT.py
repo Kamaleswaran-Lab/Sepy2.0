@@ -549,6 +549,11 @@ class sepyIMPORT:
             )
 
             self.df_beds = df
+            
+            print(self.df_beds.head())
+            # self.df_beds.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_beds.csv")
+      
+            
             return 1
         except Exception as e:
             logging.error(f"Error processing bed locations: {str(e)}")
