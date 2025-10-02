@@ -110,7 +110,8 @@ In the original Sepy2.0 pipeline (`_process_bed_locations`):
 
 ## Adaptation for MIMIC
 MIMIC-IV `BEDLOCATION.csv` has `bed_unit` values like *MICU*, *SICU*, *ED*, *PACU*, etc.  
-To use them, we need a **MIMIC-specific label file** (`mimic_bed_labels.csv`) that maps each `bed_unit` to standardized fields. **I first printed all the possible bed_unit values. Then I fed those values and Emory's em_bed_labels.csv to ChatGPT to generate a reasonable MIMIC's mimic_bed_labels.csv for me to run the pipeline. We may need to recheck this in the future. **
+To use them, we need a **MIMIC-specific label file** (`mimic_bed_labels.csv`) that maps each `bed_unit` to standardized fields. 
+**I first printed all the possible bed_unit values. Then I fed those values and Emory's em_bed_labels.csv to ChatGPT to generate a reasonable MIMIC's mimic_bed_labels.csv for me to run the pipeline. We may need to recheck this in the future.**
 
 ### **Pipeline use**
 
@@ -123,3 +124,6 @@ To use them, we need a **MIMIC-specific label file** (`mimic_bed_labels.csv`) th
 This mapping requires clinical validation:
 - Confirm which units are truly ICU or ventilator-capable.
 - Decide ambiguous categories (PACU, stepdown units).
+
+# DIAGNOSIS
+**Need to map ICD 9 to ICD 10; Also check with Mehak about the diagnosis codes in _make_comorbid_df**
