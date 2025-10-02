@@ -99,3 +99,27 @@ MIMIC-IV stores lab definitions in `hosp_d_labitems.csv`, with:
       - **Index** = (csn × timestamps).  
       - **Columns** = standardized lab features (e.g., sodium, potassium, lactate).  
     - This standardized structure feeds directly into the **supertable construction** stage.
+
+
+# BEDLOCATION
+
+## Background
+In the original Sepy2.0 pipeline (`_process_bed_locations`):
+- A **label file** (`bed_labels.csv`) was used to normalize free-text unit names.
+- It added flags (`icu`, `imc`, `ed`, `procedure`, `vent_capable`) and categories (`icu_type`, `unit_type`) for downstream use.
+
+## Adaptation for MIMIC
+MIMIC-IV `BEDLOCATION.csv` has `bed_unit` values like *MICU*, *SICU*, *ED*, *PACU*, etc.  
+To use them, we need a **MIMIC-specific label file** (`mimic_bed_labels.csv`) that maps each `bed_unit` to standardized fields. **I first printed all the possible bed_unit values. Then I fed those values and Emory's em_bed_labels.csv to ChatGPT to generate a reasonable MIMIC's mimic_bed_labels.csv for me to run the pipeline. We may need to recheck this in the future. **
+
+### **Pipeline use**
+
+- Merge BEDLOCATION.csv with mimic_bed_labels.csv on bed_unit.
+- Produce standardized flags for ICU/ED/IMC/procedure exposure.
+- Feed into supertable for trajectory analysis.
+
+## Clinician review
+
+This mapping requires clinical validation:
+- Confirm which units are truly ICU or ventilator-capable.
+- Decide ambiguous categories (PACU, stepdown units).
