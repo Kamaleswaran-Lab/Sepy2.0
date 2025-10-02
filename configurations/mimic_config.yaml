@@ -143,28 +143,18 @@ instance:
   #     - "specimen_collect_time"
   #     - "order_time"
   #     - "lab_result_time"
-  import_bed_locations:
-    file_key: "BEDLOCATION"
-    drop_cols: []
-    index_col: ["csn"]
-    date_cols:
-      - "bed_location_start"
-      - "bed_location_end"
-  # import_procedures:
-  #   file_key: "ORPROCEDURES"
+  # import_bed_locations:   # Done (The bed_labels.csv file in the groupings folder might need to be updated after checking with clinicians)
+  #   file_key: "BEDLOCATION"
   #   drop_cols: []
   #   index_col: ["csn"]
   #   date_cols:
-  #     - "surgery_date"
-  #     - "in_or_dttm"
-  #     - "procedure_start_dttm"
-  #     - "procedure_comp_dttm"
-  #     - "out_or_dttm"
-  # import_diagnosis:
-  #   file_key: "DIAGNOSIS"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   date_cols: ["dx_time_date"]
+  #     - "bed_location_start"
+  #     - "bed_location_end"
+  import_diagnosis: # Done (Need to map ICD 9 to ICD 10; Also check with Mehak about the diagnosis codes in _make_comorbid_df)
+    file_key: "DIAGNOSIS"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols: []
   # import_cpt_procedures:
   #   file_key: "CPT_PROCEDURES"
   #   drop_cols: 
@@ -209,6 +199,16 @@ instance:
   #   clean_text: true
   #   extract_sections: true
   #   max_length: null
+  # import_procedures: # NO ORPROCEDURES FILE IN MIMIC
+  #   file_key: "ORPROCEDURES"
+  #   drop_cols: []
+  #   index_col: ["csn"]
+  #   date_cols:
+  #     - "surgery_date"
+  #     - "in_or_dttm"
+  #     - "procedure_start_dttm"
+  #     - "procedure_comp_dttm"
+  #     - "out_or_dttm"
 
 
 # COMORBIDITY SUMMARY KEYWORDS

@@ -616,6 +616,13 @@ class sepyIMPORT:
                 "dx_code_icd10",
                 "v_quan_elix_labels",
             )
+            
+            
+            print(self.df_quan_deyo_ICD10.head())
+            print(self.df_quan_elix_ICD10.head())
+            self.df_quan_deyo_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_deyo.csv")
+            self.df_quan_elix_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_elix.csv")
+
             return 1
         except Exception as e:
             logging.error(f"Error processing comorbidity data: {str(e)}")
@@ -878,11 +885,11 @@ class sepyIMPORT:
                 .astype(str)
                 .str.replace(".", "", regex=False)
             )
-            mapped = map_df.merge(
-                all_diagnoses.reset_index(),
+            mapped = all_diagnoses.reset_index().merge(
+                map_df,
                 how="left",
-                left_on=map_ICD_col,
-                right_on=df_diagnosis_ICD_col,
+                left_on=df_diagnosis_ICD_col,
+                right_on=map_ICD_col,
             ).set_index("csn")
             return mapped[["pat_id", "dx_time_date"] + map_df_col_names]
         except Exception as e:
