@@ -126,4 +126,4 @@ This mapping requires clinical validation:
 - Decide ambiguous categories (PACU, stepdown units).
 
 # DIAGNOSIS
-Mehak says that _process_diagnosis function might need be useful
+Mehak says that _process_diagnosis function might not be useful
