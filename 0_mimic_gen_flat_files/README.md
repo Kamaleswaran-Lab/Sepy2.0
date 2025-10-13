@@ -82,14 +82,89 @@ It captures static demographic features (sex, race, age) for each patient.
 
 ---
 
-
 ### INFUSIONMEDS File
-These are some related files in MIMIC Concetps Folder:
-- Vasopressors：`vasoactive_agent.csv`\
-  dobutamine (mcg/kg/min), dopamine (mcg/kg/min), epinephrine (mcg/kg/min), norepinephrine (mcg/kg/min), phenylephrine (mcg/kg/min), vasopressin (units/hour)
-- Anti-infective：`antibiotic.csv`
 
-It is unnecessary to build the flat files from scratch, hence we can build the supertables directly using these files.
+We directly use related files in the MIMIC Concetps Folder.
+
+#### Source Tables
+- 🟢 **`vasoactive_agent.csv`** (contains common ICU vasopressors).  
+- 🟢 **`antibiotic.csv`** (contains antibiotic administration times and metadata).  
+- 🟢 **`icu_icustays.csv`** (used to map `stay_id` → `pat_id`, `csn`).
+
+---
+
+#### ▶️ Vasopressor
+
+##### Processing Logic
+1. Load 🟢 `vasoactive_agent.csv`.  
+2. Add fixed dose units:
+   - `"mcg/kg/min"` for all drugs except vasopressin, which uses `"units/hour"`.
+3. Merge with 🟢 `icu_icustays.csv` to attach `pat_id`, `csn` via `stay_id`.  
+4. Rename time columns:  
+   - `starttime` → `med_start`  
+   - `endtime` → `med_stop`  
+5. Reorder and select columns as per downstream pipeline needs.  
+6. Output file:  
+   **`mimic_flat_files/INFUSIONMEDS/df_vasopressor_meds.csv`**
+
+##### Final Columns
+| Column Name              | Source / Logic                                                            |
+|--------------------------|---------------------------------------------------------------------------|
+| `pat_id`                 | `subject_id`; 🟢 `icu_icustays.csv`                                        |
+| `csn`                    | `hadm_id`; 🟢 `icu_icustays.csv`                                           |
+| `stay_id`                | ICU stay identifier; 🟢 `vasoactive_agent.csv`                             |
+| `med_start`              | `starttime`; 🟢 `vasoactive_agent.csv`                                     |
+| `med_stop`               | `endtime`; 🟢 `vasoactive_agent.csv`                                       |
+| `vasopressin`            | dose in `units/hour`; 🟢 `vasoactive_agent.csv`                            |
+| `dopamine`               | dose in `mcg/kg/min`; 🟢 `vasoactive_agent.csv`                            |
+| `epinephrine`            | dose in `mcg/kg/min`; 🟢 `vasoactive_agent.csv`                            |
+| `norepinephrine`         | dose in `mcg/kg/min`; 🟢 `vasoactive_agent.csv`                            |
+| `phenylephrine`          | dose in `mcg/kg/min`; 🟢 `vasoactive_agent.csv`                            |
+| `dobutamine`             | dose in `mcg/kg/min`; 🟢 `vasoactive_agent.csv`                            |
+| `milrinone`              | dose in `mcg/kg/min`; 🟢 `vasoactive_agent.csv`                            |
+| `vasopressin_dose_unit`  | fixed string `"units/hour"`                                               |
+| `dopamine_dose_unit`     | fixed string `"mcg/kg/min"`                                               |
+| `epinephrine_dose_unit`  | fixed string `"mcg/kg/min"`                                               |
+| `norepinephrine_dose_unit`| fixed string `"mcg/kg/min"`                                              |
+| `phenylephrine_dose_unit`| fixed string `"mcg/kg/min"`                                               |
+| `dobutamine_dose_unit`   | fixed string `"mcg/kg/min"`                                               |
+| `milrinone_dose_unit`    | fixed string `"mcg/kg/min"`                                               |
+
+##### Special Notes
+- This flatfile contains only **vasoactive agents**, not all infusion meds.  
+- The `dose_unit` columns are required by Sepy to compute weight-adjusted vasopressor dosing.
+- We don't have med_order_time and med_action_time in MIMIC.
+
+---
+
+#### ▶️ Anti-Infective
+
+##### Processing Logic
+1. Load 🟢 `antibiotic.csv` (from MIMIC concept exports).  
+2. Rename key columns:
+   - `subject_id` → `pat_id`  
+   - `hadm_id` → `csn`  
+   - `starttime` → `med_start`  
+   - `stoptime` → `med_stop`  
+   - `route` → `med_order_route`  
+3. Select relevant columns.  
+4. Output file:  
+   **`mimic_flat_files/INFUSIONMEDS/df_anti_infective_meds.csv`**
+
+##### Final Columns
+| Column Name         | Source / Logic                                                        |
+|---------------------|------------------------------------------------------------------------|
+| `csn`               | `hadm_id`; 🟢 `antibiotic.csv`                                          |
+| `pat_id`            | `subject_id`; 🟢 `antibiotic.csv`                                       |
+| `stay_id`           | ICU stay ID if available; 🟢 `antibiotic.csv`                           |
+| `antibiotic`        | drug name; 🟢 `antibiotic.csv`                                          |
+| `med_start`         | `starttime`; 🟢 `antibiotic.csv`                                        |
+| `med_stop`          | `stoptime`; 🟢 `antibiotic.csv`                                         |
+| `med_order_route`   | route of administration (e.g., IV, PO); 🟢 `antibiotic.csv`             |
+
+##### Special Notes
+- All antibiotic records are retained — no filtering is done by route or duration.  
+- This file supports **infection onset** and **t_suspicion** logic in Sepy 2.0.
 
 ---
 
