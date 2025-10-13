@@ -17,28 +17,15 @@ Path: `kamaleswaranlab/mimic_iv/mimic_flat_files`
 
 ### ENCOUNTER File
 
-#### Purpose
-The ENCOUNTER file standardizes **admission-level records** from MIMIC-IV to match the Emory pipeline specification.  
-It captures each inpatient admission (hospital encounter) with demographic, admission/discharge, and ICU stay summary information.
-
 #### Source Tables
 - 🟡 **`hosp_admissions.csv`** (admission-level metadata: admission type, admission/discharge times, locations).  
 - 🟡 **`hosp_patients.csv`** (static demographics: `anchor_age`).  
-- 🟢 **`icustay_detail.csv`** (derived ICU stay detail: length of stay, in/out times).  
 
 #### Processing Logic
-1. Load 🟡 `hosp_admissions.csv`, 🟡 `hosp_patients.csv`, and 🟢 `icustay_detail.csv`.  
-2. Parse datetime fields (`admittime`, `dischtime`, `edregtime`, `icu_intime`, `icu_outtime`).  
-3. Aggregate ICU stays per `hadm_id` to compute:  
-   - `total_icu_days` = sum of ICU LOS across all stays.  
-   - `first_icu_intime` = earliest ICU admission time.  
-   - `last_icu_outtime` = latest ICU discharge time.
-     
-   Example: If a patient has two ICU stays of 2.0 and 1.0 days → `total_icu_days = 3.0`.
-
-4. Merge **admissions** (main table) with **patients** (to get `anchor_age`).  
-5. Left join ICU summary onto admissions (ensures all inpatients are retained).  
-6. Construct final output with standardized column names.  
+1. Load 🟡 `hosp_admissions.csv`, 🟡 `hosp_patients.csv`.  
+2. Parse datetime fields (`admittime`, `dischtime`, `edregtime`, `deathtime`).  
+3. Merge **admissions** (main table) with **patients** (to get `anchor_age`).  
+4. Construct final output with standardized column names.  
 
 #### Final Columns
 | Column Name                   | Source / Logic                                                                 |
@@ -52,20 +39,15 @@ It captures each inpatient admission (hospital encounter) with demographic, admi
 | `age`                         | `anchor_age`; 🟡 `hosp_patients.csv`                                           |
 | `discharge_to`                | `discharge_location`; 🟡 `hosp_admissions.csv`                                 |
 | `pre_admit_location`          | `admission_location`; 🟡 `hosp_admissions.csv`                                 |
-| `total_icu_days`              | Aggregated `los_icu`; 🟢 `icustay_detail.csv`, 0 if never admitted to ICU      |
-| `admit_reason`                | `admission_type`; 🟡 `hosp_admissions.csv` (placeholder for Emory’s field)     |
+| `deathtime`                   | `deathtime`; 🟡 `hosp_admissions.csv`                                          |
+| `insurance`                   | `insurance`; 🟡 `hosp_admissions.csv`                                             |
+| `marital_status`              | `marital_status`; 🟡 `hosp_admissions.csv`                                           |
+| `admission_type`              | `admission_type`; 🟡 `hosp_admissions.csv`                                           |
+
 
 #### Special Notes
 - All **inpatients are retained** (including those without ICU stays).  
-- `total_icu_days` is 0 if no ICU stay exists for that admission.  
-- `admit_reason` is mapped to `admission_type` because MIMIC does not provide a direct field.  
-- File size can be large depending on cohort (hundreds of thousands of admissions).  
-
-#### Check (How I check if there is no issue in the generated flat file)
-- Compare the number of unique `csn` in **ENCOUNTER.csv** with the number of unique `hadm_id` in 🟡 `hosp_admissions.csv` — they should match.  
-- Verify that all `hadm_id` in admissions exist in ENCOUNTER (`no missing`).  
-- Verify that there are no extra `csn` in ENCOUNTER that do not exist in admissions.  
-
+- We don't have `total_icu_days` and `admit_reason` in MIMIC's flatfile (compared to Emory's). 
 
 ---
 
