@@ -56,7 +56,7 @@ Path: `kamaleswaranlab/mimic_iv/mimic_flat_files`
 
 #### Purpose
 The DEMOGRAPHICS file standardizes **patient-level records** from MIMIC-IV to match the Emory pipeline specification.  
-It captures static demographic features (sex, race, age) for each patient who has at least one hospital admission.
+It captures static demographic features (sex, race, age) for each patient.
 
 #### Source Tables
 - 🟡 **`hosp_patients.csv`** (patient-level demographics: `subject_id`, `gender`, `anchor_age`).  
@@ -64,34 +64,21 @@ It captures static demographic features (sex, race, age) for each patient who ha
 
 #### Processing Logic
 1. Load 🟡 `hosp_patients.csv` and 🟡 `hosp_admissions.csv`.  
-2. Restrict patients to those with at least one admission (intersection with `subject_id` in admissions).  
-3. Standardize `gender`:  
+2. Standardize `gender`:  
    - `"M"` → `"Male"`  
    - `"F"` → `"Female"`  
-4. For `race_code`, extract the first non-null `race` per patient from admissions.  
-5. For `ethnicity_code`, leave the column empty (MIMIC does not provide de-identified ethnicity codes).  
-6. Construct final output with standardized column names.  
+3. We do not have `ethnicity_code` in MIMIC.
 
 #### Final Columns
 | Column Name     | Source / Logic                                                                 |
 |-----------------|--------------------------------------------------------------------------------|
 | `pat_id`        | `subject_id`; 🟡 `hosp_patients.csv`                                           |
 | `gender`        | Standardized from `gender`; 🟡 `hosp_patients.csv` (`M/F` → `Male/Female`)     |
-| `race_code`     | `race`; 🟡 `hosp_admissions.csv` (first non-null race per patient)             |
-| `ethnicity_code`| Empty column (placeholder, not available in MIMIC-IV)                         |
+| `race`           | `race`; 🟡 `hosp_admissions.csv` (first non-null race per patient)             |
 
 #### Special Notes
-- Patients who exist in 🟡 `hosp_patients.csv` but never appear in 🟡 `hosp_admissions.csv` are excluded.  
 - If a patient has multiple admissions with different `race`, only the first non-null record is retained.  
-- `ethnicity_code` is intentionally left blank because MIMIC-IV does not provide de-identified ethnicity.  
 - This file is **patient-level**, while ENCOUNTER is **admission-level**; thus, one patient may map to multiple encounters.  
-
-#### Check (How I check if there is no issue in the generated flat file)
-- Verify that all `pat_id` in **DEMOGRAPHICS.csv** also exist in **ENCOUNTER.csv**.  
-- Check that the counts of unique patients match between DEMOGRAPHICS and ENCOUNTER.  
-- Save mismatch lists for patients found only in DEMOGRAPHICS or only in ENCOUNTER.  
-
-
 
 ---
 
