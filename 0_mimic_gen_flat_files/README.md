@@ -641,7 +641,9 @@ Since MIMIC-IV does not provide LOINC mappings for microbiology tests, the `loin
    - `test_itemid` → `proc_code`  
    - `test_name` → `proc_desc`  
    - `spec_itemid` → `component_id`  
-   - `spec_type_desc` → `component`  
+   - `spec_type_desc` → `component`
+   - `org_name` → `org_name`
+   - `ab_name` → `ab_name`
 
 3. **Construct additional fields**.  
    - `result_status` hard-coded as `"Not Recorded"` (MIMIC does not provide status directly).  
@@ -667,6 +669,9 @@ Since MIMIC-IV does not provide LOINC mappings for microbiology tests, the `loin
 | `component_id`         | 🟡 `spec_itemid` from **`hosp_microbiologyevents.csv`**                        |
 | `component`            | 🟡 `spec_type_desc` from **`hosp_microbiologyevents.csv`**                     |
 | `loinc_code`           | Hard-coded `"NOT AVAILABLE"` (MIMIC does not provide LOINC for microbiology)   |
+| `org_name`            | 🟡 `org_name` from **`hosp_microbiologyevents.csv`**                     |
+| `ab_name`            | 🟡 `ab_name` from **`hosp_microbiologyevents.csv`**                     |
+
 
 #### Special Notes
 - MIMIC-IV does not store `order_time` for microbiology tests; here `chartdate` is used as a proxy.  
