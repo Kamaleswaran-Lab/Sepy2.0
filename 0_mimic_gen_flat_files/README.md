@@ -277,11 +277,12 @@ This file captures blood pressure, heart rate, respiratory rate, oxygenation par
      - `temperature` → `temperature`  
      - `temperature_site` → `temproute`  
      - `sbp, dbp, mbp` → `sbp_line, dbp_line, map_line`  
-     - `sbp_ni, dbp_ni, mbp_ni` → `sbp_cuff, dbp_cuff, map_cuff`  
+     - `sbp_ni, dbp_ni, mbp_ni` → `sbp_cuff, dbp_cuff, map_cuff`
+     - `glucose` → `glucose`
    - Extract columns: `subject_id`, `stay_id`, `charttime`, and the mapped variables.  
 
 2. **Load oxygen delivery data** (`oxygen_delivery.csv`).  
-   - Map `o2_delivery_device_1` → `o2_device`  
+   - Keep all four `o2_delivery_device_1`, `o2_delivery_device_2`, `o2_delivery_device_3`, `o2_delivery_device_4`
    - Map `o2_flow` → `o2_flow_rate`  
    - Extract: `subject_id`, `stay_id`, `charttime`, `o2_device`, `o2_flow_rate`.  
 
@@ -352,7 +353,11 @@ This file captures blood pressure, heart rate, respiratory rate, oxygenation par
 | `pulse`                | 🟢 `heart_rate` from **`vitalsign.csv`**                                                            |
 | `unassisted_resp_rate` | 🟢 `resp_rate` from **`vitalsign.csv`**                                                             |
 | `spo2`                 | 🟢 `spo2` from **`vitalsign.csv`**                                                                  |
-| `o2_device`            | 🟢 `o2_delivery_device_1` from **`oxygen_delivery.csv`**                                            |
+| `glucose`              | 🟢 `glucose` from **`vitalsign.csv`**                                                               |
+| `o2_delivery_device_1` | 🟢 `o2_delivery_device_1` from **`oxygen_delivery.csv`**                                            |
+| `o2_delivery_device_2` | 🟢 `o2_delivery_device_2` from **`oxygen_delivery.csv`**                                            |
+| `o2_delivery_device_3` | 🟢 `o2_delivery_device_3` from **`oxygen_delivery.csv`**                                            |
+| `o2_delivery_device_4` | 🟢 `o2_delivery_device_4` from **`oxygen_delivery.csv`**                                            |
 | `cvp`                  | 🟡 `icu_chartevents.csv` + **`icu_d_items.csv`**: itemid 220074 (`Central Venous Pressure`)          |
 | `end_tidal_co2`        | 🟡 `icu_chartevents.csv` + **`icu_d_items.csv`**: itemid 228640 (`EtCO₂`)                            |
 | `o2_flow_rate`         | 🟢 `o2_flow` from **`oxygen_delivery.csv`**                                                         |
