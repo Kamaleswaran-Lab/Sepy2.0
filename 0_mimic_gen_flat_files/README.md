@@ -184,19 +184,16 @@ It captures all laboratory events with identifiers, result values, specimen type
 2. Merge with 🟡 `hosp_d_labitems.csv` on `itemid` to add lab metadata.  
 3. Construct final standardized columns:  
    - `csn` = `hadm_id`  
-   - `pat_id` = `subject_id`  
-   - `component_id` = `itemid`  
-   - `lab_result` = `valuenum` if available, otherwise `value`  
-   - `lab_result_time` = `charttime`  
-   - `collection_time` = `charttime` (MIMIC does not distinguish collection vs. result time)  
-   - `result_status` = hard-coded `"Final"`  
-   - `proc_cat_id` = `itemid` (placeholder; pipeline will map with grouping files if needed)  
-   - `proc_cat_name` = `fluid` (specimen type: Blood, Urine, CSF, etc.)  
-   - `proc_code` = `itemid`  
-   - `proc_desc` = `category` (lab discipline: Chemistry, Hematology, Blood Gas, etc.)  
+   - `pat_id` = `subject_id`
    - `component` = `label` (lab test name)  
-   - `loinc_code` = left empty (MIMIC does not provide direct mapping in d_labitems)  
-
+   - `component_id` = `itemid`  
+   - `lab_result` = `valuenum` if available, otherwise `value`
+   - `lab_result_unit` = `valueuom`
+   - `lab_result_time` = `storetime`  
+   - `collection_time` = `charttime`
+   - `result_status` = hard-coded `"Final"`  
+   - `proc_cat_name` = `fluid` (specimen type: Blood, Urine, CSF, etc.)  
+   - `proc_desc` = `category` (lab discipline: Chemistry, Hematology, Blood Gas, etc.)  
 4. Drop rows missing `pat_id`, `csn`, or `component_id`.  
 5. Write out results incrementally to **LABS.csv** in append mode.
 
@@ -205,25 +202,55 @@ It captures all laboratory events with identifiers, result values, specimen type
 |------------------|--------------------------------------------------------------------------------|
 | `csn`            | `hadm_id`; 🟡 `hosp_labevents.csv`                                             |
 | `pat_id`         | `subject_id`; 🟡 `hosp_labevents.csv`                                          |
+| `component`      | `label`; 🟡 `hosp_d_labitems.csv`                                              |
 | `component_id`   | `itemid`; 🟡 `hosp_labevents.csv`                                              |
 | `lab_result`     | `valuenum` if not null, else `value`; 🟡 `hosp_labevents.csv`                  |
-| `lab_result_time`| `charttime`; 🟡 `hosp_labevents.csv`                                           |
+| `lab_result_unit`| `valueuom`; 🟡 `hosp_labevents.csv`                  |
+| `lab_result_time`| `storetime`; 🟡 `hosp_labevents.csv`                                           |
 | `collection_time`| `charttime`; 🟡 `hosp_labevents.csv`                                           |
 | `result_status`  | Hard-coded `"Final"`                                                          |
-| `proc_cat_id`    | `itemid`; 🟡 `hosp_labevents.csv`                                              |
 | `proc_cat_name`  | `fluid`; 🟡 `hosp_d_labitems.csv`                                              |
-| `proc_code`      | `itemid`; 🟡 `hosp_labevents.csv`                                              |
 | `proc_desc`      | `category`; 🟡 `hosp_d_labitems.csv`                                           |
-| `component`      | `label`; 🟡 `hosp_d_labitems.csv`                                              |
-| `loinc_code`     | Empty placeholder (not directly provided in MIMIC-IV)                         |
 
 #### Special Notes
-- `lab_result_time` and `collection_time` are both set to `charttime`, as MIMIC does not explicitly store collection timestamps separately.  
 - `result_status` is hard-coded to `"Final"` since MIMIC does not store result status metadata.
-- `proc_cat_id` and `proc_code` are both set as `itemid` because there is no specification in MIMIC. Please see [here](https://mimic.mit.edu/docs/iv/modules/hosp/d_labitems/#links-to:~:text=All%20data%20in%20labevents%20link%20to%20the%20d_labitems%20table.%20Each%20unique%20(fluid%2C%20category%2C%20label)%20tuple%20in%20the%20hospital%20database%20was%20assigned%20an%20itemid%20in%20this%20table%2C%20and%20the%20use%20of%20this%20itemid%20facilitates%20efficient%20storage%20and%20querying%20of%20the%20data) for what `itemid` means in MIMIC.
-- `loinc_code` left blank unless a separate mapping file is introduced.  
 - File size is large; script processes data in 1M-row chunks to manage memory efficiently.
-  
+
+#### MIMIC Labs Grouping
+This file maps raw MIMIC-IV `itemid` lab measurements (from `hosp_d_labitems.csv`) to standardized `super_table_col_name` used in Sepy2.0's final `supertable`. The grouping ensures consistent variable naming across institutions.
+
+Each row includes:
+- `import`: Whether to include this row in the pipeline (`Yes` or `No`)
+- `super_table_col_name`: Standardized name if mapped, or `Not Import`
+- Sepy's Columns: `component_id`,`component`,`proc_cat_name`,`proc_desc` (Original MIMIC fields: `itemid`, `label`, `fluid`, `category`)
+
+The mapping was constructed semi-automatically using AI (ChatGPT), based on matching the `label`, `fluid`, and `category` fields against the Emory lab variable list. All mappings were verified to maintain schema compatibility.
+
+**Example Row Format**:
+
+```csv
+import,super_table_col_name,component_id,component,proc_cat_name,proc_desc
+Yes,bicarb_(hco3),50803,"Calculated Bicarbonate, Whole Blood",Blood,Blood Gas
+No,Not Import,50804,Calculated Total CO2,Blood,Blood Gas
+Yes,chloride,50806,"Chloride, Whole Blood",Blood,Blood Gas
+```
+
+**Field Descriptions**:
+
+| Column Name            | Description                                                                 |
+|------------------------|-----------------------------------------------------------------------------|
+| `import`               | `"Yes"` if this lab is used in supertable, otherwise `"No"`                 |
+| `super_table_col_name` | Standardized variable name used in Sepy2.0 (e.g., `creatinine`, `potassium`)|
+| `component_id (itemid)`               | MIMIC lab identifier (from `hosp_d_labitems.csv`)                           |
+| `component (label)`                | Lab test name / label                                                       |
+| `proc_cat_name (fluid)`                | Body fluid type (e.g., Blood, Urine, CSF)                                   |
+| `proc_desc (category)`             | Lab category (e.g., Chemistry, Hematology, Blood Gas)                       |
+
+**Special Notes**:\
+**There are four `super_table_col_name` which are missing in MIMIC's grouping file: `prealbumin`, `procalcitonin`, `fio2`, `mtp`. But they will still appear in the final supertables for consistency purposes. (Sepy2.0/configurations/dict_config.yaml decides which grouping columns will appear)**
+- Only rows marked with `import = Yes` are retained in the pipeline.
+- Lab names are grouped across MIMIC and Emory datasets via `super_table_col_name`.
+- You can customize this file further to add or remove lab variables based on your analysis needs.
 
 ---
 
