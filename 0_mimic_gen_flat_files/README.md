@@ -707,7 +707,8 @@ This file captures the **unit-level location timeline** for each encounter (`csn
 
 3. **Handle missing values**.  
    - If `careunit` is missing, fill with `"Not Recorded"`.  
-   - Convert `intime` and `outtime` to datetime format.  
+   - Convert `intime` and `outtime` to datetime format.
+   - **Drop rows with missing values on `bed_location_end`. (All `eventtype==transfer` rows have a complete record of the `outtime`. `eventtype==ed` has only 9 rows, which miss `outtime`, so I directly dropped them. We don't care `eventtype==admit` and `eventtype==discharge`.)**
 
 4. **Finalize schema**.  
    - Keep only standardized columns required by the pipeline.  
@@ -727,7 +728,6 @@ This file captures the **unit-level location timeline** for each encounter (`csn
 #### Special Notes
 - Each row corresponds to a **single unit stay** within a hospital admission.  
 - A patient may have multiple rows per `csn` if transferred between units (e.g., ED → MICU → Surgery → Discharge).  
-- If `outtime` is missing (e.g., patient still admitted), it remains null.  
 - Some Emory-specific columns (`bed_room`, `bed_id`, `hospital_service`, `accomodation_code`) are **not available in MIMIC-IV** and are therefore omitted.  
 - This file can be used to reconstruct the **care pathway** of a patient across the hospital stay.  
 
