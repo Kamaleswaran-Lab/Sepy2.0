@@ -251,7 +251,7 @@ Yes,chloride,50806,"Chloride, Whole Blood",Blood,Blood Gas
 - Only rows marked with `import = Yes` are retained in the pipeline.
 - Lab names are grouped across MIMIC and Emory datasets via `super_table_col_name`.
 - You can customize this file further to add or remove lab variables based on your analysis needs.
-
+- (We need to create histograms for all of this, but I haven't had the time to do this.)
 ---
 
 ### VITALS File
