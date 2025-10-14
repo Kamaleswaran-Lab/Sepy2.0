@@ -397,20 +397,16 @@ This file captures information on ventilator mode, device type, oxygenation, pre
      - `ventilator_type` → `vent_name`  
    - Extract columns:  
      - `vent_name`, `ventilator_mode`, `ventilator_mode_hamilton`  
-     - `respiratory_rate_set`, `tidal_volume_set`, `tidal_volume_observed`, `tidal_volume_spontaneous`  
-     - `peep`, `fio2`  
+     - `respiratory_rate_set`, `respiratory_rate_total`, `tidal_volume_set`, `tidal_volume_observed`, `tidal_volume_spontaneous`  
+     - `peep`, `fio2` (normalize to decimal)
    - Merge `ventilator_mode` and `ventilator_mode_hamilton` into unified `vent_mode`.  
 
 3. **Merge intervals with settings**.  
    - Join on `stay_id`.  
    - Keep only rows where `recorded_time` falls between `vent_start_time` and `vent_stop_time`.  (⚠️ **Do we want to do this?**)
-   - Assign the session-level `vent_cat` to each aligned row.  
-
-4. **Add placeholder for exhaled tidal volume**.  
-   - Since it is unclear whether `tidal_volume_observed` or `tidal_volume_spontaneous` should serve as the canonical value, retain both.  
-   - Add a new column `vent_tidal_rate_exhaled`, filled with `"Not Yet Decided"`.  
-
-5. **Finalize table**.  
+   - Assign the session-level `vent_cat` to each aligned row.
+     
+4. **Finalize table**.  
    - Rename fields:  
      - `respiratory_rate_set` → `vent_rate_set`  
      - `tidal_volume_set` → `vent_tidal_rate_set`  
@@ -423,12 +419,12 @@ This file captures information on ventilator mode, device type, oxygenation, pre
 | `csn`                      | 🟡 `hadm_id` from **`icu_icustays.csv`** (via `stay_id`)                       |
 | `pat_id`                   | 🟡 `subject_id` from **`icu_icustays.csv`** (via `stay_id`)                    |
 | `vent_rate_set`            | 🟢 `respiratory_rate_set` from **`ventilator_setting.csv`**                    |
+| `vent_rate_total`            | 🟢 `respiratory_rate_total` from **`ventilator_setting.csv`**                    |
 | `vent_tidal_rate_set`      | 🟢 `tidal_volume_set` from **`ventilator_setting.csv`**                        |
 | `tidal_volume_observed`    | 🟢 `tidal_volume_observed` from **`ventilator_setting.csv`**                    |
 | `tidal_volume_spontaneous` | 🟢 `tidal_volume_spontaneous` from **`ventilator_setting.csv`**                  |
-| `vent_tidal_rate_exhaled`  | Placeholder column, filled with `"Not Yet Decided"` (⚠️ **We need to know whether it is `tidal_volume_observed` or `tidal_volume_spontaneous`**)                            |
 | `peep`                     | 🟢 `peep` from **`ventilator_setting.csv`**                                    |
-| `fio2`                     | 🟢 `fio2` from **`ventilator_setting.csv`**                                    |
+| `fio2`                     | 🟢 `fio2` (normalize to decimal) from **`ventilator_setting.csv`**                                    |
 | `recorded_time`            | 🟢 `charttime` from **`ventilator_setting.csv`**, restricted to interval times |
 | `vent_start_time`          | 🟢 `starttime` from **`ventilation.csv`**                                      |
 | `vent_stop_time`           | 🟢 `endtime` from **`ventilation.csv`**                                        |
@@ -438,8 +434,7 @@ This file captures information on ventilator mode, device type, oxygenation, pre
 
 #### Special Notes
 - `vent_cat` provides a high-level category of ventilation status (e.g., invasive vs. non-invasive) sourced from `ventilation.csv`.  
-- Both `tidal_volume_observed` and `tidal_volume_spontaneous` are retained due to ambiguity.  
-- The derived column `vent_tidal_rate_exhaled` is deliberately left undecided, pending clinical consensus.  
+- Both `tidal_volume_observed` and `tidal_volume_spontaneous` are retained; **we will create two separate columns for these two values in the supertables**.  
 - Timestamps (`recorded_time`) are aligned with intervals (`vent_start_time`–`vent_stop_time`) to ensure rows only represent valid ventilator support periods. (⚠️ **Do we want to do this?**)
 - Data volume is large since ventilator settings are often recorded minute-to-minute or hourly.  
 
