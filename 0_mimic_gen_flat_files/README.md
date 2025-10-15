@@ -881,14 +881,14 @@ Both ICD-9 and ICD-10 codes are retained in separate columns for clarity. Since 
    - Join on (`icd_code`, `icd_version`) to add `long_title` (standardized procedure description).  
 
 4. **Split ICD versions**.  
-   - If `icd_version = 9`, store `icd_code` in `icd9_procedure_code` and mark `icd10_procedure_code = "NOT AVAILABLE"`.  
-   - If `icd_version = 10`, store `icd_code` in `icd10_procedure_code` and mark `icd9_procedure_code = "NOT AVAILABLE"`.  
+   - If `icd_version = 9`, store `icd_code` in `icd9_procedure_code` and mark `icd10_procedure_code = np.nan`.  
+   - If `icd_version = 10`, store `icd_code` in `icd10_procedure_code` and mark `icd9_procedure_code = np.nan`.  
 
 5. **Construct standardized columns**.  
    - `pat_id` = `subject_id`  
    - `csn` = `hadm_id`  
-   - `icd9_procedure_code` = ICD-9 procedure code if applicable, else `"NOT AVAILABLE"`  
-   - `icd10_procedure_code` = ICD-10 procedure code if applicable, else `"NOT AVAILABLE"`  
+   - `icd9_procedure_code` = ICD-9 procedure code if applicable, else `np.nan`  
+   - `icd10_procedure_code` = ICD-10 procedure code if applicable, else `np.nan`  
    - `procedure_desc` = `long_title` from dictionary (fallback `"UNKNOWN"` if missing)  
    - `procedure_date` = `chartdate` from `hosp_procedures_icd`  
 
@@ -904,8 +904,8 @@ Both ICD-9 and ICD-10 codes are retained in separate columns for clarity. Since 
 |-------------------------|--------------------------------------------------------------------------------|
 | `pat_id`               | 🟡 `subject_id` from **`hosp_procedures_icd.csv`**                             |
 | `csn`                  | 🟡 `hadm_id` from **`hosp_procedures_icd.csv`**                                |
-| `icd9_procedure_code`  | 🟡 `icd_code` if `icd_version = 9`, else `"NOT AVAILABLE"`                     |
-| `icd10_procedure_code` | 🟡 `icd_code` if `icd_version = 10`, else `"NOT AVAILABLE"`                    |
+| `icd9_procedure_code`  | 🟡 `icd_code` if `icd_version = 9`, else `np.nan`                     |
+| `icd10_procedure_code` | 🟡 `icd_code` if `icd_version = 10`, else `np.nan`                    |
 | `procedure_desc`       | 🟡 `long_title` from **`hosp_d_icd_procedures.csv`** (mapped by code + version, fallback `"UNKNOWN"`) |
 | `procedure_date`       | 🟡 `chartdate` from **`hosp_procedures_icd.csv`**                              |
 
