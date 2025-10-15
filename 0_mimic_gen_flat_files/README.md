@@ -437,7 +437,7 @@ This file captures information on ventilator mode, device type, oxygenation, pre
 - Both `tidal_volume_observed` and `tidal_volume_spontaneous` are retained; **we will create two separate columns for these two values in the supertables**.  
 - Timestamps (`recorded_time`) are aligned with intervals (`vent_start_time`–`vent_stop_time`) to ensure rows only represent valid ventilator support periods. (⚠️ **Do we want to do this?**)
 - Data volume is large since ventilator settings are often recorded minute-to-minute or hourly.  
-
+- **We don't need the Vent Mode Mapping Files for MIMIC because we already have `ventilation_status` from `ventilation.csv`, which could be used as `vent_cat`.**
 
 ---
 
