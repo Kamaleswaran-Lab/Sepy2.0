@@ -859,7 +859,7 @@ Since MIMIC-IV does not contain timestamps for individual diagnosis entries, the
 ---
 
 
-### ICDPROCEDURES File
+### ICD_PROCEDURES File
 
 #### Purpose
 The ICDPROCEDURES file standardizes **ICD-coded surgical and procedural records** from MIMIC-IV to match the Emory pipeline specification.  
