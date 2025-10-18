@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=sepy_for_mimic
-#SBATCH --output=sepy_for_mimic.log
-#SBATCH --error=sepy_for_mimic.log
+#SBATCH --job-name=make_dicts
+#SBATCH --output=logs/make_dicts_%A_%a.log
+#SBATCH --error=logs/make_dicts_%A_%a.log
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16              # Number of CPU cores (helpful for parallel processing)

@@ -96,6 +96,8 @@ class ClinicalData:
     infusion_meds: pd.DataFrame
     quan_deyo_ICD10: pd.DataFrame
     quan_elix_ICD10: pd.DataFrame
+    quan_deyo_ICD9: pd.DataFrame
+    quan_elix_ICD9: pd.DataFrame
     in_out_fluids: pd.DataFrame
     clinical_notes: pd.DataFrame
     radiology_notes: pd.DataFrame
@@ -130,6 +132,7 @@ class ClinicalData:
             self._build_super_table_index()
             self._initialize_static_features()
             self.quan_deyo_ICD10_staging, self.quan_elix_ICD10_staging = pd.DataFrame(), pd.DataFrame()
+            self.quan_deyo_ICD9_staging, self.quan_elix_ICD9_staging = pd.DataFrame(), pd.DataFrame()
 
     def _initialize_flags(self) -> None:
         """Initialize basic flags"""
@@ -153,7 +156,8 @@ class ClinicalData:
         self.event_times = {
             'ed_presentation_time': safe_extract(self.encounters, 'ed_presentation_time'),
             'hospital_admission_date_time': safe_extract(self.encounters, 'hospital_admission_date_time'),
-            'hospital_discharge_date_time': safe_extract(self.encounters, 'hospital_discharge_date_time')
+            'hospital_discharge_date_time': safe_extract(self.encounters, 'hospital_discharge_date_time'),
+            'deathtime': safe_extract(self.encounters, 'deathtime')
         }
         
         # Calculate start index
@@ -207,22 +211,30 @@ class ClinicalData:
             except (KeyError, IndexError):
                 return default
 
-        # Encounter features
-        self.static_features['ed_arrival_source'] = safe_extract(self.encounters, 'ed_arrival_source')
-        self.static_features['total_icu_days'] = safe_extract(self.encounters, 'total_icu_days', 0)
-        self.static_features['discharge_status'] = safe_extract(self.encounters, 'discharge_status')
-        self.static_features['discharge_to'] = safe_extract(self.encounters, 'discharge_to')
+        ''' Encounter features
+        MIMIC-IV notes:
+        1. Mehak says we don't need 'total_icu_days' in the supertables
+        2. We don't have 'admit_reason' in MIMIC-IV
+        3. We don't have 'ed_arrival_source' in MIMIC-IV
+        4. We don't have 'discharge_status' in MIMIC-IV
+        '''
         self.static_features['encounter_type'] = safe_extract(self.encounters, 'encounter_type')
         self.static_features['age'] = safe_extract(self.encounters, 'age')
-        self.static_features['admit_reason'] = safe_extract(self.encounters, 'admit_reason')
+        self.static_features['discharge_to'] = safe_extract(self.encounters, 'discharge_to')
+        self.static_features['pre_admit_location'] = safe_extract(self.encounters, 'pre_admit_location')  
+        self.static_features['insurance'] = safe_extract(self.encounters, 'insurance')
+        self.static_features['marital_status'] = safe_extract(self.encounters, 'marital_status')
+        self.static_features['admission_type'] = safe_extract(self.encounters, 'admission_type')
 
-        # Demographics features
+        ''' Demographics features
+        MIMIC-IV notes:
+        1. We don't have 'gender_code' in MIMIC-IV
+        2. We don't have 'ethnicity' in MIMIC-IV
+        3. We don't have 'ethnicity_code' in MIMIC-IV
+        4. We don't have 'race_code' in MIMIC-IV
+        '''
         self.static_features['gender'] = safe_extract(self.demographics, 'gender')
-        self.static_features['gender_code'] = safe_extract(self.demographics, 'gender_code')
         self.static_features['race'] = safe_extract(self.demographics, 'race')
-        self.static_features['race_code'] = safe_extract(self.demographics, 'race_code')
-        self.static_features['ethnicity'] = safe_extract(self.demographics, 'ethnicity')
-        self.static_features['ethnicity_code'] = safe_extract(self.demographics, 'ethnicity_code')
         
 
     @classmethod
@@ -233,6 +245,13 @@ class ClinicalData:
             k.replace('_PerCSN', ''): v 
             for k, v in sliced_data.items()
         }
+        
+        # Add empty DataFrames for missing dataframes to avoid KeyErrors later
+        for missing in ['procedures', 'in_out_fluids', 'clinical_notes', 'radiology_notes', 'infusion_meds']:
+            if missing not in cleaned_data:
+                cleaned_data[missing] = pd.DataFrame()
+
+        
         return cls(csn=csn, pat_id=pat_id, config=config, **cleaned_data)
 
 @dataclass
@@ -359,7 +378,9 @@ class ClinicalDataProcessor:
         df = df.loc[:, ~df.columns.duplicated()]
         for key in self.config.all_vitals_col_names:
             if key in df.columns:
-                if key == 'o2_device':
+                if key in ['o2_delivery_device_1', 'o2_delivery_device_2', 'o2_delivery_device_3', 'o2_delivery_device_4']:
+                    agg_fn = "last"
+                elif key == 'temproute':
                     agg_fn = "last"
                 elif len(self.bounds.loc[self.bounds["location in supertable"] == key]) > 0:
                     agg_fn = utils.agg_fn_wrapper(key, self.bounds)
@@ -405,12 +426,11 @@ class ClinicalDataProcessor:
         """Resamples and aligns patient ventilator data to a unified hourly time index."""
         check_mech_vent_vars = ['vent_tidal_rate_set', 'peep']
         if df.empty:
-            vent_df = pd.DataFrame(columns=['vent_status','vent_fio2', 'peep', 'vent_category', 'vent_tidal_rate_exhaled', 'vent_tidal_rate_set', 'vent_rate_set'], index=time_index)
+            vent_df = pd.DataFrame(columns=['vent_status','vent_fio2', 'peep', 'vent_category', 'tidal_volume_observed', 'tidal_volume_spontaneous', 'vent_tidal_rate_set', 'vent_rate_set'], index=time_index)
             return vent_df
         else:
             vent_start = df[df.vent_start_time.notna()].vent_start_time.values
             vent_stop = df[df.vent_stop_time.notna()].vent_stop_time.values
-            
             if len(vent_start) == 0: #CASE: Checking if there are valid mechanical ventilation rows that don't have a start time
                 df['vent_status'] = np.where(df[check_mech_vent_vars].notnull().any(axis=1), 1, 0)
                 
@@ -439,61 +459,60 @@ class ClinicalDataProcessor:
                         index = index.append( pd.date_range(pair[0], pair[1], freq=self.config.constants['resample_frequency']))
                     else: #In case of a mistake in start and stop recording
                         index = index.append( pd.date_range(pair[1], pair[0], freq=self.config.constants['resample_frequency']))  
-                
                 vent_status = pd.DataFrame(data=([1.0]*len(index)), columns =['vent_status'], index=index)
-                
                 #sets column to 1 if vent was on    
                 vent_status = vent_status.resample(self.config.constants['resample_frequency'],
                                                    origin = time_index[0]).mean() \
                                                    .reindex(time_index)
-        
         #Create vent_fio2
         agg_fn = utils.agg_fn_wrapper_max('fio2', self.bounds)
         vent_fio2 = df[['recorded_time','fio2']].resample(self.config.constants['resample_frequency'],
                                     on='recorded_time',
                                     origin=time_index[0]).apply(agg_fn) \
                                     .reindex(time_index)
-
         #Create peep
         agg_fn = utils.agg_fn_wrapper_max('peep', self.bounds)
         peep = df[['recorded_time','peep']].resample(self.config.constants['resample_frequency'],
                                     on='recorded_time',
                                     origin=time_index[0]).apply(agg_fn) \
                                     .reindex(time_index)
-
         #Create vent_category
         vent_category = df[['recorded_time','vent_category']].resample(self.config.constants['resample_frequency'],
                                     on='recorded_time',
                                     origin=time_index[0]).last() \
                                     .reindex(time_index)
-
-        #Create vent_tidal_rate_exhaled
-        agg_fn = utils.agg_fn_wrapper_max('vent_tidal_rate_exhaled', self.bounds)
-        vent_tidal_rate_exhaled = df[['recorded_time','vent_tidal_rate_exhaled']].resample(self.config.constants['resample_frequency'],
+        #NOTE!!! There is no vent_tidal_rate_exhaled in MIMIC-IV
+        #Create tidal_volume_observed
+        agg_fn = utils.agg_fn_wrapper_max('tidal_volume_observed', self.bounds)
+        tidal_volume_observed = df[['recorded_time','tidal_volume_observed']].resample(self.config.constants['resample_frequency'],
                                     on='recorded_time',
                                     origin=time_index[0]).apply(agg_fn) \
                                     .reindex(time_index)
-
+        #Create tidal_volume_spontaneous
+        agg_fn = utils.agg_fn_wrapper_max('tidal_volume_spontaneous', self.bounds)
+        tidal_volume_spontaneous = df[['recorded_time','tidal_volume_spontaneous']].resample(self.config.constants['resample_frequency'],
+                                    on='recorded_time',
+                                    origin=time_index[0]).apply(agg_fn) \
+                                    .reindex(time_index)
         #Create vent_tidal_rate_set
         agg_fn = utils.agg_fn_wrapper_max('vent_tidal_rate_set', self.bounds)
         vent_tidal_rate_set = df[['recorded_time','vent_tidal_rate_set']].resample(self.config.constants['resample_frequency'],
                                     on='recorded_time',
                                     origin=time_index[0]).apply(agg_fn) \
                                     .reindex(time_index)
-
         #Create vent_rate_set
         agg_fn = utils.agg_fn_wrapper_max('vent_rate_set', self.bounds)
         vent_rate_set = df[['recorded_time','vent_rate_set']].resample(self.config.constants['resample_frequency'],
                                     on='recorded_time',
                                     origin=time_index[0]).apply(agg_fn) \
                                     .reindex(time_index)
-
         vent_df = pd.DataFrame(index=time_index)
         vent_df['vent_status'] = vent_status
         vent_df['vent_fio2'] = vent_fio2
         vent_df['peep'] = peep
         vent_df['vent_category'] = vent_category
-        vent_df['vent_tidal_rate_exhaled'] = vent_tidal_rate_exhaled
+        vent_df['tidal_volume_observed'] = tidal_volume_observed
+        vent_df['tidal_volume_spontaneous'] = tidal_volume_spontaneous
         vent_df['vent_tidal_rate_set'] = vent_tidal_rate_set
         vent_df['vent_rate_set'] = vent_rate_set
         return vent_df
@@ -552,7 +571,7 @@ class ClinicalDataProcessor:
     
     def icd_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            icd_df = pd.DataFrame(columns=['icd_procedure_desc', 'icd10_procedure_code'], index=time_index)
+            icd_df = pd.DataFrame(columns=['icd_procedure_desc', 'icd9_procedure_code', 'icd10_procedure_code'], index=time_index)
             return icd_df
 
         df['procedure_date'] = pd.to_datetime(df['procedure_date'])
@@ -561,20 +580,25 @@ class ClinicalDataProcessor:
         desc_agg = df['procedure_desc'].groupby(
             pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])
         ).apply(lambda x: "\n".join(x.dropna().astype(str)) if not x.isna().all() else "")
+        
+        code_agg_9 = df['icd9_procedure_code'].groupby(
+            pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])
+        ).apply(lambda x: ";".join(x.dropna().astype(str)) if not x.isna().all() else "")
 
-        code_agg = df['icd10_procedure_code'].groupby(
+        code_agg_10 = df['icd10_procedure_code'].groupby(
             pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])
         ).apply(lambda x: ";".join(x.dropna().astype(str)) if not x.isna().all() else "")
         
         icd_df = pd.DataFrame({
             'icd_procedure_desc': desc_agg.reindex(time_index, fill_value=""),
-            'icd10_procedure_code': code_agg.reindex(time_index, fill_value="")
+            'icd9_procedure_code': code_agg_9.reindex(time_index, fill_value=""),
+            'icd10_procedure_code': code_agg_10.reindex(time_index, fill_value="")
         }, index=time_index)
         return icd_df
 
     def cpt_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         if df.empty:
-            cpt_df = pd.DataFrame(columns=['cpt_procedure_desc', 'cpt_procedure_cd'], index=time_index)
+            cpt_df = pd.DataFrame(columns=['procedure_cpt_desc', 'procedure_cpt_code'], index=time_index)
             return cpt_df
 
         df['procedure_dttm'] = pd.to_datetime(df['procedure_dttm'])
@@ -584,13 +608,13 @@ class ClinicalDataProcessor:
             pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])
         ).apply(lambda x: "\n".join(x.dropna().astype(str)) if not x.isna().all() else "")
 
-        code_agg = df['procedure_cpt_cd'].groupby(
+        code_agg = df['procedure_cpt_code'].groupby(
             pd.Grouper(freq=self.config.constants['resample_frequency'], origin=time_index[0])
         ).apply(lambda x: ";".join(x.dropna().astype(str)) if not x.isna().all() else "")
         
         cpt_df = pd.DataFrame({
-            'cpt_procedure_desc': desc_agg.reindex(time_index, fill_value=""),
-            'cpt_procedure_cd': code_agg.reindex(time_index, fill_value="")
+            'procedure_cpt_desc': desc_agg.reindex(time_index, fill_value=""),
+            'procedure_cpt_code': code_agg.reindex(time_index, fill_value="")
         }, index=time_index)
         return cpt_df
 
@@ -629,12 +653,12 @@ class ClinicalDataProcessor:
         return radiology_notes_df
     
     def vasopressor_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
-        vas_cols = self.config.vasopressor_names + self.config.vasopressor_units + ['med_order_time']
+        vas_cols = self.config.vasopressor_names + self.config.vasopressor_units + ['med_start']
         df =df[vas_cols]
         vas_keys = self.config.vasopressor_names + self.config.vasopressor_units
         
         if df.empty:
-            df = df.drop(columns=['med_order_time'])
+            df = df.drop(columns=['med_start'])
             vasopressor_meds_df = pd.DataFrame(columns = df.columns, index = time_index)
         else:
             new = pd.DataFrame([])
@@ -643,9 +667,9 @@ class ClinicalDataProcessor:
                     agg_fn = utils.agg_fn_wrapper_max(key, self.bounds)
                 else:
                     agg_fn = "max"
-                col1 = df[[key, 'med_order_time']].resample('60min', on = "med_order_time",  \
+                col1 = df[[key, 'med_start']].resample('60min', on = "med_start",  \
                                                            origin = time_index[0]).apply(agg_fn)
-                #col1 = col1.drop(columns=['med_order_time'])
+                #col1 = col1.drop(columns=['med_start'])
 
                 new = pd.concat((new, col1), axis = 1)
             vasopressor_meds_df = new.reindex(time_index)
@@ -731,7 +755,7 @@ class ClinicalDataProcessor:
         return cumulative_fluids_df
         
     
-    def static_features_staging(self, age: int, gender: Any, race: Any, ethnicity: Any, 
+    def static_features_staging(self, age: int, gender: Any, race: Any,
                                 diagnosis_PerCSN: pd.DataFrame, time_index: pd.DatetimeIndex) -> pd.DataFrame:
         """
         Creates columns for age, gender, and comorbidity scores
@@ -739,7 +763,6 @@ class ClinicalDataProcessor:
             age: int
             gender: Any
             race: Any
-            ethnicity: Any
             diagnosis_PerCSN: pd.DataFrame
             time_index: pd.DatetimeIndex
         Returns:
@@ -787,7 +810,6 @@ class ClinicalDataProcessor:
         static_features['age'] = [age]*len(static_features)
         static_features['gender'] = [gender]*len(static_features)
         static_features['race'] = [race]*len(static_features)
-        static_features['ethnicity'] = [ethnicity]*len(static_features)
         
         static_features['cci9'] = [cci9]*len(static_features)
         static_features['cci10'] = [cci10]*len(static_features)
@@ -795,8 +817,24 @@ class ClinicalDataProcessor:
         return static_features
 
     
-    def comorbidity_staging(self, df_quan_deyo: pd.DataFrame, df_quan_elix: pd.DataFrame) -> None:                        
-        quan_deyo_ICD10_staging = df_quan_deyo.reset_index().groupby(['ICD10']).first().\
+    def comorbidity_staging(self, df_quan_deyo_9: pd.DataFrame, df_quan_elix_9: pd.DataFrame, df_quan_deyo_10: pd.DataFrame, df_quan_elix_10: pd.DataFrame) -> None:  
+        quan_deyo_ICD9_staging = df_quan_deyo_9.reset_index().groupby(['ICD9']).first().\
+                                groupby(['quan_deyo']).agg(
+                                icd_count = pd.NamedAgg(column="csn", aggfunc="count"),
+                                date_time = pd.NamedAgg(column="dx_time_date", aggfunc="first"))\
+                                .reindex(self.config.quan_deyo_labels).rename_axis(None)
+                                #.agg({'csn':'count', 'dx_time_date':'first'})\
+                                    
+
+        quan_elix_ICD9_staging = df_quan_elix_9.reset_index().groupby(['ICD9']).first().\
+                                groupby(['quan_elix']).agg(
+                                icd_count = pd.NamedAgg(column="csn", aggfunc="count"),
+                                date_time = pd.NamedAgg(column="dx_time_date", aggfunc="first"))\
+                                .reindex(self.config.quan_elix_labels).rename_axis(None)
+                                #.agg({'csn':'count', 'dx_time_date':'first'})\
+                                    
+                                                          
+        quan_deyo_ICD10_staging = df_quan_deyo_10.reset_index().groupby(['ICD10']).first().\
                                 groupby(['quan_deyo']).agg(
                                 icd_count = pd.NamedAgg(column="csn", aggfunc="count"),
                                 date_time = pd.NamedAgg(column="dx_time_date", aggfunc="first"))\
@@ -804,13 +842,14 @@ class ClinicalDataProcessor:
                                 #.agg({'csn':'count', 'dx_time_date':'first'})\
 
                                 
-        quan_elix_ICD10_staging = df_quan_elix.reset_index().groupby(['ICD10']).first().\
+        quan_elix_ICD10_staging = df_quan_elix_10.reset_index().groupby(['ICD10']).first().\
                                 groupby(['quan_elix']).agg(
                                 icd_count = pd.NamedAgg(column="csn", aggfunc="count"),
                                 date_time = pd.NamedAgg(column="dx_time_date", aggfunc="first"))\
                                 .reindex(self.config.quan_elix_labels).rename_axis(None)
                                 #.agg({'csn':'count', 'dx_time_date':'first'})\
-        return quan_deyo_ICD10_staging, quan_elix_ICD10_staging
+                                    
+        return quan_deyo_ICD9_staging, quan_elix_ICD9_staging, quan_deyo_ICD10_staging, quan_elix_ICD10_staging
     
     def assign_bed_status(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
         #these columns have the flags for bed status
@@ -851,6 +890,11 @@ class ClinicalDataProcessor:
         for i in range(len(df)):
             start = bed_start[i]
             end = bed_end[i]
+            
+            if pd.isna(start) or pd.isna(end):
+                logging.warning(f"Skipping bad bed_unit row with NaT at row {i}")
+                continue
+        
             unit = bed_unit[i]
             idx = np.bitwise_and(time_index >= start ,  time_index <= end)
             bed_status.loc[idx, 'bed_unit'] = unit
@@ -899,7 +943,6 @@ class ClinicalDataProcessor:
             static_features_columns = self.static_features_staging(clinical_data.static_features['age'],\
                                                                  clinical_data.static_features['gender'], \
                                                                  clinical_data.static_features['race'], \
-                                                                 clinical_data.static_features['ethnicity'], \
                                                                  clinical_data.diagnosis,
                                                                  supertable_df.time_index)
             supertable_df.supertable = pd.concat([supertable_df.supertable, static_features_columns], axis=1)
@@ -1053,16 +1096,18 @@ class ClinicalDataProcessor:
             raise RuntimeError(f"Step 19 (Add CPT procedures) failed: {str(e)}")
         
         # Step 20: Add gender code 
-        try:
-            supertable_df.supertable['gender_code'] = clinical_data.static_features.get("gender_code", 0)
-            logging.info(f"Gender code added to supertable.")
-        except Exception as e:
-            logging.error(f"Error in Step 20 (Add gender code): {str(e)}")
-            raise RuntimeError(f"Step 20 (Add gender code) failed: {str(e)}")
+        # try:
+        #     supertable_df.supertable['gender_code'] = clinical_data.static_features.get("gender_code", 0)
+        #     logging.info(f"Gender code added to supertable.")
+        # except Exception as e:
+        #     logging.error(f"Error in Step 20 (Add gender code): {str(e)}")
+        #     raise RuntimeError(f"Step 20 (Add gender code) failed: {str(e)}")
         
         #Step 21: Add comorbidity data
         try:
-            quan_deyo_ICD10_columns, quan_elix_ICD10_columns = self.comorbidity_staging(clinical_data.quan_deyo_ICD10, clinical_data.quan_elix_ICD10)
+            quan_deyo_ICD9_columns, quan_elix_ICD9_columns, quan_deyo_ICD10_columns, quan_elix_ICD10_columns = self.comorbidity_staging(clinical_data.quan_deyo_ICD9, clinical_data.quan_elix_ICD9, clinical_data.quan_deyo_ICD10, clinical_data.quan_elix_ICD10)
+            clinical_data.quan_deyo_ICD9_staging = quan_deyo_ICD9_columns
+            clinical_data.quan_elix_ICD9_staging = quan_elix_ICD9_columns
             clinical_data.quan_deyo_ICD10_staging = quan_deyo_ICD10_columns
             clinical_data.quan_elix_ICD10_staging = quan_elix_ICD10_columns
             logging.info(f"Comorbidity data added to Clinical Data.")

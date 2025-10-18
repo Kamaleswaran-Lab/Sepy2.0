@@ -2,23 +2,23 @@
 ## assign unique_encounters_path to the path of the unique encounters file
 
 # PIPELINE INSTRUCTIONS
-make_temp_pickle_after_preprocessing: "yes" # yes: make pickle files, no: do not make pickle files
-make_supertables: "no" # yes: make supertables, no: do not make supertables
+make_temp_pickle_after_preprocessing: "no" # yes: make pickle files, no: do not make pickle files
+make_supertables: "yes" # yes: make supertables, no: do not make supertables
 
 
 # FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/mimic_iv/mimic_flat_files"
 groupings_path: "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings"
-temp_pickle_after_preprocessing_output_path: "/hpc/group/kamaleswaranlab/mimic_iv/sepy_output/temp_pickles"
-supertable_output_path: "/hpc/group/kamaleswaranlab/mimic_iv/mimic-supertables"
+temp_pickle_after_preprocessing_output_path: "/hpc/group/kamaleswaranlab/mimic_iv/sepy_output/sepy_IMPORT_pickle"
+supertable_output_path: "/hpc/group/kamaleswaranlab/mimic_iv/sepy_output/mimic-supertables"
 encounters_path: "ENCOUNTER_FILE"
 
 # CSN FILTERING
 encounter_type: "IN" # "EM" = Emergency, "IN" = Inpatient, "all" = all encounter types ????? 
-age: "adult" # "adult": age >= 18, "pediatric": age < 18, "all": all ages
+age: "all" # "adult": age >= 18, "pediatric": age < 18, "all": all ages
 specific_enc_filter: "no" # "yes": only specific encounters, "no": all encounters
 # specific_enc_filter_list can be a list of csns to filter by, or a path to a csv file with a column called "csn"
-# specific_enc_filter_list: []
+specific_enc_filter_list: "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/sample_csn/filter_test_csn.csv"
 
 
 dictionary_paths:
@@ -36,37 +36,35 @@ dictionary_paths:
     - ["ICD10_single_ccs", "*ICD10_single_ccs*"]
   # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE groupings/ FOLDER
   grouping_types:
-    - ["grouping_labs", "mimic_mapping_labs_with_id.csv"]
-    - ["grouping_vent", "mimic_vent_mapping.csv"]
+    # We don't need mapping/grouping files for infusion_meds, vent, etc. for MIMIC.
+    - ["grouping_labs", "mimic_mapping_labs.csv"]
     - ["bed_labels", "mimic_bed_labels.csv"]
-    - ["grouping_fluids", "em_fluids_labels.csv"]
-    - ["variable_chart", "em_variable_chart.csv"]
+    - ["variable_chart", "mimic_variable_chart.csv"]
   flatfile_types: 
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/FOLDER
     - ["ENCOUNTER", "ENCOUNTER.csv"]
     - ["DEMOGRAPHICS", "DEMOGRAPHICS.csv"]
 
-    - ["INFUSIONMEDS", "EMPTY_FILE.csv"]
-    - ["VASOPRESSOR_MEDS", "INFUSIONMEDS/df_vasopressor_meds.csv"]
-    - ["ANTI_INFECTIVE_MEDS", "INFUSIONMEDS/df_anti_infective_meds.csv"]
-    
+    # - ["INFUSIONMEDS", "EMPTY_FILE.csv"]
+    - ["VASOPRESSOR_MEDS", "df_vasopressor_meds.csv"]
+    - ["ANTI_INFECTIVE_MEDS", "df_anti_infective_meds.csv"]
     - ["LABS", "LABS.csv"]
     - ["VITALS", "VITALS.csv"]
     - ["VENT", "VENT.csv"]
     - ["DIALYSIS", "DIALYSIS.csv"]
-    - ["IN_OUT", "IN_OUT.csv"]
     - ["GCS", "GCS.csv"]
     - ["CULTURES", "CULTURES.csv"]
     - ["BEDLOCATION", "BEDLOCATION.csv"]
-    # - ["ORPROCEDURES", "ORPROCEDURES.csv"]
     - ["DIAGNOSIS", "DIAGNOSIS.csv"]
     - ["ICD_PROCEDURES", "ICD_PROCEDURES.csv"]
     - ["CPT_PROCEDURES", "CPT_PROCEDURES.csv"]
     # - ["CLINICAL_NOTES", "*CLINICAL_NOTES*"] # Uncomment if clinical notes are available
+    # - ["IN_OUT", "IN_OUT.csv"]
+    # - ["ORPROCEDURES", "ORPROCEDURES.csv"]
 
 # INSTANCE FUNCTIONS AND PARAMETERS
 instance:
-  import_encounters:  # Done
+  import_encounters:
     file_key: "ENCOUNTER"
     drop_cols: []
     index_col: ["csn"]
@@ -74,99 +72,115 @@ instance:
       - "ed_presentation_time"
       - "hospital_admission_date_time"
       - "hospital_discharge_date_time"
-  # import_demographics:  # Done (No gender_code and ethnicity_code in MIMIC. There might be bugs in the future steps)
-  #   file_key: "DEMOGRAPHICS"
-  #   drop_cols: []
-  #   index_col: ["pat_id"]
-  #   date_cols: [] 
-  # import_infusion_meds:   # Done
-  #   file_key: "INFUSIONMEDS"
-  #   drop_cols: []
-  #   numeric_cols:
-  #     - "order_med_id"
-  #     - "medication_id"
-  #   index_col: ["csn"]
-  #   date_cols:
-  #     - "med_order_time"
-  #     - "med_action_time"
-  #     - "med_start"
-  #     - "med_stop"
-  # import_labs:    # Done (Need to check the lab mapping and plot the histograms)
-  #   file_key: "LABS"
-  #   drop_cols: []
-  #   date_cols:
-  #     - "collection_time"
-  #     - "lab_result_time"
-  # import_vitals:  # Done 
-  #   file_key: "VITALS"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   date_cols: ["recorded_time"]
-  #   merge_cols: []
-  # import_vent:  # Done 
-  #   file_key: "VENT"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   numeric_cols:
-  #     - "vent_rate_set"
-  #     - "vent_tidal_rate_set"
-  #     - "tidal_volume_observed"
-  #     - "tidal_volume_spontaneous"
-  #     - "vent_tidal_rate_exhaled"
-  #     - "peep"
-  #     - "fio2"
-  #   date_cols:
-  #     - "recorded_time"
-  #     - "vent_start_time"
-  #     - "vent_stop_time"
-  # import_dialysis:  # Done (Mehak mentioned that the dialysis and in_out are not fully correct right now, and we can leave it out for now (until we figure out the fluids))
-  #   file_key: "DIALYSIS"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   date_cols:
-  #     - "service_timestamp"
-  # import_gcs: # Done 
-  #   file_key: "GCS"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   numeric_col:
-  #     - "gcs_eye_score"
-  #     - "gcs_verbal_score"
-  #     - "gcs_motor_score"
-  #     - "gcs_total_score"
-  #   date_cols: ["recorded_time"]
-  # import_cultures:  # Done 
-  #   file_key: "CULTURES"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   date_cols:
-  #     - "specimen_collect_time"
-  #     - "order_time"
-  #     - "lab_result_time"
-  # import_bed_locations:   # Done (The bed_labels.csv file in the groupings folder might need to be updated after checking with clinicians)
-  #   file_key: "BEDLOCATION"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   date_cols:
-  #     - "bed_location_start"
-  #     - "bed_location_end"
-  # import_diagnosis: # Done (Mehak says that _process_diagnosis function might need be useful)
-  #   file_key: "DIAGNOSIS"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   date_cols: []
-  # import_cpt_procedures: # Done
-  #   file_key: "CPT_PROCEDURES"
-  #   drop_cols: []
-  #   index_col: ["csn"]
-  #   date_cols:
-  #     - "procedure_dttm"
+      - "deathtime"
+  import_demographics:  
+    file_key: "DEMOGRAPHICS"
+    drop_cols: []
+    index_col: ["pat_id"]
+    date_cols: [] 
+  import_vasopressor_meds:
+    file_key: "VASOPRESSOR_MEDS"
+    drop_cols:
+    numeric_cols:
+      - "vasopressin"
+      - "dopamine"
+      - "epinephrine"
+      - "norepinephrine"
+      - "phenylephrine"
+      - "dobutamine"
+      - "milrinone"
+    index_col: ["csn"]
+    date_cols:
+      - "med_start"
+      - "med_stop"
+  import_anti_infective_meds:
+    file_key: "ANTI_INFECTIVE_MEDS"
+    drop_cols:
+    index_col: ["csn"]
+    date_cols:
+      - "med_start"
+      - "med_stop"
+  import_labs:
+    file_key: "LABS"
+    drop_cols: []
+    date_cols:
+      - "collection_time"
+      - "lab_result_time"
+  import_vitals:
+    file_key: "VITALS"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols: ["recorded_time"]
+    merge_cols: []
+  import_vent:
+    file_key: "VENT"
+    drop_cols: []
+    index_col: ["csn"]
+    numeric_cols:
+      - "vent_rate_set"
+      - "vent_rate_total"
+      - "vent_tidal_rate_set"
+      - "tidal_volume_observed"
+      - "tidal_volume_spontaneous"
+      - "peep"
+      - "fio2"
+    date_cols:
+      - "recorded_time"
+      - "vent_start_time"
+      - "vent_stop_time"
+  import_dialysis:
+    file_key: "DIALYSIS"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "service_timestamp"
+  import_gcs:
+    file_key: "GCS"
+    drop_cols: []
+    index_col: ["csn"]
+    numeric_col:
+      - "gcs_eye_score"
+      - "gcs_verbal_score"
+      - "gcs_motor_score"
+      - "gcs_total_score"
+    date_cols: ["recorded_time"]
+  import_cultures:
+    file_key: "CULTURES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "specimen_collect_time"
+      - "order_time"
+      - "lab_result_time"
+  import_bed_locations:
+    file_key: "BEDLOCATION"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "bed_location_start"
+      - "bed_location_end"
+  import_diagnosis: # Mehak says that _process_diagnosis function might not be useful?
+    file_key: "DIAGNOSIS"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols: ["dx_time_date"]
+  import_cpt_procedures:
+    file_key: "CPT_PROCEDURES"
+    drop_cols: []
+    index_col: ["csn"]
+    date_cols:
+      - "procedure_dttm"
   import_icd_procedures:
     file_key: "ICD_PROCEDURES"
     drop_cols: []
     index_col: ["csn"]
     date_cols:
       - "procedure_date"
+
+
+
+
+      
   # import_in_out:
   #   file_key: "IN_OUT"
   #   drop_cols: []
@@ -210,6 +224,8 @@ instance:
 
 # COMORBIDITY SUMMARY KEYWORDS
 comorbidity_summary:
+  - "quan_deyo_ICD9"
+  - "quan_elix_ICD9"
   - "quan_deyo_ICD10"
   - "quan_elix_ICD10"
   # - "ICD9_ahrq"

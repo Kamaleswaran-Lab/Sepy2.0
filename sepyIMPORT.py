@@ -102,10 +102,6 @@ class sepyIMPORT:
         self.df_grouping_labs = pd.read_csv(file_dictionary["grouping_labs"])
         # creates df with all bed location labels
         self.df_bed_labels = pd.read_csv(file_dictionary["bed_labels"])
-        # creates df with all vent mappings
-        self.df_vent_mappings = pd.read_csv(file_dictionary["grouping_vent"])
-        # creates df with all fluid groupings
-        self.df_grouping_fluids = pd.read_csv(file_dictionary["grouping_fluids"])
 
         # Create configuration object
         self.config = ImportConfig(
@@ -315,82 +311,89 @@ class sepyIMPORT:
                 
                 logging.error(f"Error in {data_type} processing: {str(e)}")
     
-    # Data-specific processors
-    def _process_infusion_meds(self, df: pd.DataFrame, **kwargs) -> None:
+    def _process_vasopressor_meds(self, df: pd.DataFrame, **kwargs) -> int:
         """
-        MIMIC version of processing infusion meds.
-        Directly import two preprocessed flat files:
-        - VASOPRESSOR_MEDS
-        - ANTI_INFECTIVE_MEDS
-        Apply the same patient/encounter filtering logic as other imports.
+        Simplified processing for pre-pivoted MIMIC vasopressor meds file.
+        Expected columns:
+            ['pat_id', 'csn', 'stay_id', 'med_start', 'med_stop',
+            'vasopressin', 'dopamine', 'epinephrine', 'norepinephrine',
+            'phenylephrine', 'dobutamine', 'milrinone',
+            'vasopressin_dose_unit', 'dopamine_dose_unit', ...]
         """
-
-        logging.info("Processing infusion meds (MIMIC version)")
-
-        def _post_filter(df, index_col):
-            """Filter df to only include patients/encounters from self.df_encounters."""
-            if df.empty:
-                return df
-            if index_col in ["pat_id", "patient_id"]:
-                return df[df.index.isin(self.patids)]
-            elif index_col == "csn":
-                return df[df.index.isin(self.csns)]
-            elif index_col is None and "csn" in df.columns:
-                return df.loc[df.csn.isin(self.csns)]
-            return df
-
-        # --- vasopressors ---
         try:
-            df_vaso = self._common_import(
-                file_key="VASOPRESSOR_MEDS",
-                index_col=kwargs.get("index_col", "csn"),
-                date_cols=kwargs.get("date_cols", ["med_order_time", "med_stop"]),
-                drop_cols=kwargs.get("drop_cols", []),
-                numeric_cols=kwargs.get("numeric_cols", []),
-                date_parser=kwargs.get("date_parser", utils.d_parser),
-            )
-            self.df_vasopressor_meds = _post_filter(df_vaso, kwargs.get("index_col", "csn"))
-            logging.info(f"Loaded vasopressor meds: {self.df_vasopressor_meds.shape}")
-        except Exception as e:
-            logging.error(f"Error loading vasopressor meds: {str(e)}")
-            self.df_vasopressor_meds = pd.DataFrame()
+            # Drop index name if it exists in the columns
+            index_name = df.index.name 
+            if index_name in df.columns:
+                df = df.drop(columns=[index_name]) 
 
-        # --- anti-infectives ---
+            self.df_vasopressor_meds = df
+
+            logging.info(f"Processed vasopressor meds: {df.shape[0]} rows, {df.shape[1]} columns.")
+            return 1
+
+        except Exception as e:
+            logging.error(f"Error processing vasopressor meds: {str(e)}")
+            return 0
+        
+        
+    def _process_anti_infective_meds(self, df: pd.DataFrame, **kwargs) -> int:
+        """
+        Simplified processing for pre-filtered MIMIC anti-infective (antibiotic) meds file.
+        Expected columns:
+            ['csn', 'pat_id', 'stay_id', 'antibiotic', 'med_start', 'med_stop', 'med_order_route']
+        """
         try:
-            df_abx = self._common_import(
-                file_key="ANTI_INFECTIVE_MEDS",
-                index_col=kwargs.get("index_col", "csn"),
-                date_cols=kwargs.get("date_cols", ["med_order_time", "med_stop"]),
-                drop_cols=kwargs.get("drop_cols", []),
-                numeric_cols=kwargs.get("numeric_cols", []),
-                date_parser=kwargs.get("date_parser", utils.d_parser),
-            )
-            self.df_anti_infective_meds = _post_filter(df_abx, kwargs.get("index_col", "csn"))
-            logging.info(f"Loaded anti-infective meds: {self.df_anti_infective_meds.shape}")
+            # Drop index name if it exists in the columns
+            index_name = df.index.name 
+            if index_name in df.columns:
+                df = df.drop(columns=[index_name]) 
+
+            self.df_anti_infective_meds = df
+
+            logging.info(f"Processed anti-infective meds: {df.shape[0]} rows, {df.shape[1]} columns.")
+            return 1
+
         except Exception as e:
-            logging.error(f"Error loading anti-infective meds: {str(e)}")
-            self.df_anti_infective_meds = pd.DataFrame()
-
-        # pipeline compatible empty df for other infusion meds
-        self.df_infusion_meds = pd.DataFrame()
-
-        return 1
+            logging.error(f"Error processing anti-infective meds: {str(e)}")
+            return 0
 
     
     def _process_labs(self, df: pd.DataFrame, **kwargs) -> None:
         """Process labs after initial import."""
+        # Ryan's function to tidy up the multi-index dataframe
         def tidy_index(df: pd.DataFrame) -> pd.DataFrame:
             """
             Reorganize the multi-index DataFrame to a more usable format.
+            Instead of unstacking CSN (which creates duplicates), we'll create a proper
+            pivot table with unique column names.
             """
-            df = df.unstack(level=1)
-            df.columns = df.columns.droplevel()
-            df.columns.name = None
-            df = df.droplevel(0)
-            return df
+            # Reset index to work with regular DataFrame operations
+            df_reset = df.reset_index()
+            
+            # Create a pivot table with super_table_col_name as columns
+            # Use first() to handle multiple values per group
+            df_pivot = df_reset.pivot_table(
+                index=['csn', 'component_id', 'result_status', 'lab_result_time', 
+                       'collection_time', 'pat_id', 'proc_cat_name', 
+                       'proc_desc', 'component'],
+                columns='super_table_col_name',
+                values='lab_result',
+                aggfunc='first'  # Take first value if multiple exist
+            )
+            
+            # Flatten column names and reset index
+            df_pivot.columns.name = None
+            df_pivot = df_pivot.reset_index()
+            
+            # Set MultiIndex back for consistency with downstream code
+            df_pivot = df_pivot.set_index(['csn', 'component_id', 'result_status', 'lab_result_time', 
+                                         'collection_time', 'pat_id', 'proc_cat_name', 
+                                         'proc_desc', 'component'])
+            return df_pivot
 
         try:
             lab_groups = self.df_grouping_labs
+            
             # Select Relevant Lab Groups
             lab_groups = lab_groups[["super_table_col_name", "component_id"]][
                 lab_groups["import"] == "Yes"
@@ -414,12 +417,9 @@ class sepyIMPORT:
                     "lab_result_time",
                     "collection_time",
                     "pat_id",
-                    "proc_cat_id",
                     "proc_cat_name",
-                    "proc_code",
                     "proc_desc",
                     "component",
-                    "loinc_code",
                 ],
                 append=True,
                 inplace=True,
@@ -465,7 +465,7 @@ class sepyIMPORT:
             )
             
             self.df_labs = df_labs
-            print(self.df_labs.head())
+            logging.info(self.df_labs.head())
             # self.df_labs.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_labs.csv")
             return 1
         except Exception as e:
@@ -491,21 +491,18 @@ class sepyIMPORT:
         df_string = df[self.config.string_vital_col_names]
         self.df_vitals = pd.concat([df_numeric, df_string], axis=1)
         
-        print(self.df_vitals.head())
+        logging.info(self.df_vitals.head())
         # self.df_vitals.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_vitals.csv")
             
         return 1
 
     def _process_vent(self, df: pd.DataFrame, **kwargs) -> None:
         """Process vent data after initial import."""
-        # Map to vent_category
-        vent_grouping = dict(zip(self.df_vent_mappings['vent_name'], self.df_vent_mappings['vent_cat']))
         
-        # Apply the mapping to the dataframe
-        df['vent_category'] = df['vent_mode'].map(vent_grouping)
+        df['vent_category'] = df['vent_cat']
         self.df_vent = df
         
-        print(self.df_vent.head())
+        logging.info(self.df_vent.head())
         # self.df_vent.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_vent.csv")
         
         return 1
@@ -550,7 +547,7 @@ class sepyIMPORT:
 
             self.df_beds = df
             
-            print(self.df_beds.head())
+            logging.info(self.df_beds.head())
             # self.df_beds.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_beds.csv")
       
             
@@ -582,7 +579,7 @@ class sepyIMPORT:
             self.df_gcs = df
             
             
-            print(self.df_gcs.head())
+            logging.info(self.df_gcs.head())
             # self.df_gcs.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_gcs.csv")
            
             
@@ -595,274 +592,236 @@ class sepyIMPORT:
             logging.warning("Using empty DataFrame for GCS due to processing error")
             return 0
         
-    # def _process_diagnosis(self, df: pd.DataFrame, **kwargs) -> None:
-    #     """Process diagnosis data after initial import."""
-    #     self.df_diagnosis = df
+    def _process_diagnosis(self, df: pd.DataFrame, **kwargs) -> None:
+        """Process diagnosis data after initial import."""
+        self.df_diagnosis = df
         
-    #     logging.info("Begin comorbidity import.")
+        logging.info("Begin comorbidity import.")
+        try:
+            self.df_quan_deyo_ICD10 = self._make_comorbid_df(
+                self.file_dictionary["ICD10_quan_deyo"],
+                "ICD10",
+                "quan_deyo",
+                "dx_code_icd10",
+                "v_quan_deyo_labels",
+            )
+            
+            self.df_quan_deyo_ICD9 = self._make_comorbid_df(
+                self.file_dictionary["ICD9_quan_deyo"],
+                "ICD9",
+                "quan_deyo",
+                "dx_code_icd9",
+                "v_quan_deyo_labels",
+            )
+            
+            # makes df for Quan's Elix
+            self.df_quan_elix_ICD10 = self._make_comorbid_df(
+                self.file_dictionary["ICD10_quan_elix"],
+                "ICD10",
+                "quan_elix",
+                "dx_code_icd10",
+                "v_quan_elix_labels",
+            )
+            
+            self.df_quan_elix_ICD9 = self._make_comorbid_df(
+                self.file_dictionary["ICD9_quan_elix"],
+                "ICD9",
+                "quan_elix",
+                "dx_code_icd9",
+                "v_quan_elix_labels",
+            )
+            
+            
+            logging.info(self.df_quan_deyo_ICD10.head())
+            logging.info(self.df_quan_deyo_ICD9.head())
+            logging.info(self.df_quan_elix_ICD10.head())
+            logging.info(self.df_quan_elix_ICD9.head())
+            # self.df_quan_deyo_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_deyo_ICD10.csv")
+            # self.df_quan_deyo_ICD9.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_deyo_ICD9.csv")
+            # self.df_quan_elix_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_elix_ICD10.csv")
+            # self.df_quan_elix_ICD9.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_elix_ICD9.csv")
+            
+            return 1
+        except Exception as e:
+            logging.error(f"Error processing comorbidity data: {str(e)}")
+            # Create empty DataFrames with expected structure
+            self.df_quan_deyo_ICD10 = pd.DataFrame(columns=["pat_id", "dx_time_date", "ICD10", "quan_deyo"])
+            self.df_quan_elix_ICD10 = pd.DataFrame(columns=["pat_id", "dx_time_date", "ICD10", "quan_elix"])
+            logging.warning("Using empty DataFrames for comorbidity data due to processing error")
+            return 0
+    # def _process_radiology_notes(self, df: pd.DataFrame, **kwargs) -> None:
+    #     """
+    #     Process radiology notes after initial import.
+        
+    #     Handles text cleaning, tokenization, and any special processing needed for 
+    #     radiology report text data.
+        
+    #     Args:
+    #         df: DataFrame containing the imported radiology notes
+    #         **kwargs: Optional parameters including:
+    #                   - text_col: Name of the column containing the note text (default: 'report_text')
+    #                   - clean_text: Whether to clean the text (default: True)
+    #                   - max_length: Maximum text length to retain (default: None)
+    #     """
+    #     text_col = kwargs.get('text_col', 'report_text')
+    #     clean_text = kwargs.get('clean_text', False)
+    #     max_length = kwargs.get('max_length', None)
+        
     #     try:
-    #         self.df_quan_deyo_ICD10 = self._make_comorbid_df(
-    #             self.file_dictionary["ICD10_quan_deyo"],
-    #             "ICD10",
-    #             "quan_deyo",
-    #             "dx_code_icd10",
-    #             "v_quan_deyo_labels",
-    #         )
+    #         # Check if text column exists
+    #         if text_col not in df.columns:
+    #             logging.warning(f"Text column '{text_col}' not found in radiology notes data")
+    #             self.df_radiology_notes = df
+    #             return
+                
+    #         # Basic text cleaning if requested
+    #         if clean_text:
+    #             # Convert to lowercase
+    #             df[text_col] = df[text_col].str.lower()
+                
+    #             # Remove extra whitespace
+    #             df[text_col] = df[text_col].str.replace(r'\s+', ' ', regex=True).str.strip()
+                
+    #             # Replace common abbreviations if needed
+    #             # This can be expanded based on domain knowledge
+    #             abbreviations = {
+    #                 'w/': 'with ',
+    #                 'w/o': 'without ',
+    #                 'pt': 'patient ',
+    #                 'hx': 'history '
+    #                 # Add more abbreviations as needed
+    #             }
+                
+    #             for abbr, replacement in abbreviations.items():
+    #                 df[text_col] = df[text_col].str.replace(r'\b' + abbr + r'\b', replacement, regex=True)
             
-    #         self.df_quan_deyo_ICD9 = self._make_comorbid_df(
-    #             self.file_dictionary["ICD9_quan_deyo"],
-    #             "ICD9",
-    #             "quan_deyo",
-    #             "dx_code_icd9",
-    #             "v_quan_deyo_labels",
-    #         )
+    #         # Truncate long texts if max_length is specified
+    #         if max_length:
+    #             df[text_col] = df[text_col].str[:max_length]
             
-    #         # makes df for Quan's Elix
-    #         self.df_quan_elix_ICD10 = self._make_comorbid_df(
-    #             self.file_dictionary["ICD10_quan_elix"],
-    #             "ICD10",
-    #             "quan_elix",
-    #             "dx_code_icd10",
-    #             "v_quan_elix_labels",
-    #         )
-            
-    #         self.df_quan_elix_ICD9 = self._make_comorbid_df(
-    #             self.file_dictionary["ICD9_quan_elix"],
-    #             "ICD9",
-    #             "quan_elix",
-    #             "dx_code_icd9",
-    #             "v_quan_elix_labels",
-    #         )
-            
-            
-    #         print(self.df_quan_deyo_ICD10.head())
-    #         print(self.df_quan_deyo_ICD9.head())
-    #         print(self.df_quan_elix_ICD10.head())
-    #         print(self.df_quan_elix_ICD9.head())
-    #         self.df_quan_deyo_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_deyo_ICD10.csv")
-    #         self.df_quan_deyo_ICD9.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_deyo_ICD9.csv")
-    #         self.df_quan_elix_ICD10.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_elix_ICD10.csv")
-    #         self.df_quan_elix_ICD9.head(100).to_csv("/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_run/test_quan_elix_ICD9.csv")
-            
+    #         # Store the processed DataFrame
+    #         self.df_radiology_notes = df
     #         return 1
     #     except Exception as e:
-    #         logging.error(f"Error processing comorbidity data: {str(e)}")
-    #         # Create empty DataFrames with expected structure
-    #         self.df_quan_deyo_ICD10 = pd.DataFrame(columns=["pat_id", "dx_time_date", "ICD10", "quan_deyo"])
-    #         self.df_quan_elix_ICD10 = pd.DataFrame(columns=["pat_id", "dx_time_date", "ICD10", "quan_elix"])
-    #         logging.warning("Using empty DataFrames for comorbidity data due to processing error")
+    #         logging.error(f"Error processing radiology notes: {str(e)}")
+    #         # Create an empty DataFrame with expected structure
+    #         self.df_radiology_notes = pd.DataFrame(columns=df.columns)
+    #         logging.warning("Using empty DataFrame for radiology notes due to processing error")
+    #         return 0
+        
+    # def _process_clinical_notes(self, df: pd.DataFrame, **kwargs) -> None:
+    #     """
+    #     Process clinical notes after initial import.
+        
+    #     Handles text cleaning, section identification, and any special processing
+    #     needed for clinical note text data.
+        
+    #     Args:
+    #         df: DataFrame containing the imported clinical notes
+    #         **kwargs: Optional parameters including:
+    #                   - text_col: Name of the column containing the note text (default: 'note_text')
+    #                   - clean_text: Whether to clean the text (default: True)
+    #                   - extract_sections: Whether to extract common clinical note sections (default: False)
+    #                   - max_length: Maximum text length to retain (default: None)
+    #     """
+    #     text_col = kwargs.get('text_col', 'note_text') 
+    #     clean_text = kwargs.get('clean_text', False)
+    #     extract_sections = kwargs.get('extract_sections', False)
+    #     max_length = kwargs.get('max_length', None)
+        
+    #     try:
+    #         # Check if text column exists
+    #         if text_col not in df.columns:
+    #             logging.warning(f"Text column '{text_col}' not found in clinical notes data")
+    #             self.df_clinical_notes = df
+    #             return
+                
+    #         # Basic text cleaning if requested
+    #         if clean_text:
+    #             # Convert to lowercase
+    #             df[text_col] = df[text_col].str.lower()
+                
+    #             # Remove extra whitespace
+    #             df[text_col] = df[text_col].str.replace(r'\s+', ' ', regex=True).str.strip()
+                
+    #             # Replace common abbreviations
+    #             abbreviations = {
+    #                 'w/': 'with ',
+    #                 'w/o': 'without ',
+    #                 'pt': 'patient ',
+    #                 'hx': 'history ',
+    #                 'dx': 'diagnosis ',
+    #                 'rx': 'prescription ',
+    #                 'tx': 'treatment '
+    #                 # Add more abbreviations as needed
+    #             }
+                
+    #             for abbr, replacement in abbreviations.items():
+    #                 df[text_col] = df[text_col].str.replace(r'\b' + abbr + r'\b', replacement, regex=True)
+            
+    #         # Truncate long texts if max_length is specified
+    #         if max_length:
+    #             df[text_col] = df[text_col].str[:max_length]
+            
+    #         # Extract common clinical note sections if requested
+    #         if extract_sections:
+    #             # Define regex patterns for common sections
+    #             section_patterns = {
+    #                 'history': r'(?:history\s+of\s+present\s+illness|history|hpi)[\s\:]+(.+?)(?=\b(?:physical examination|assessment|plan|impression|vital signs|medications)\b|$)',
+    #                 'physical_exam': r'(?:physical\s+examination|physical\s+exam)[\s\:]+(.+?)(?=\b(?:assessment|plan|impression|vital signs|medications)\b|$)',
+    #                 'assessment': r'(?:assessment|impression)[\s\:]+(.+?)(?=\b(?:plan|recommendations|physical examination|medications)\b|$)',
+    #                 'plan': r'(?:plan|recommendations)[\s\:]+(.+?)(?=\b(?:assessment|impression|physical examination|vital signs|medications)\b|$)'
+    #             }
+                
+    #             # Extract each section
+    #             for section_name, pattern in section_patterns.items():
+    #                 df[f'section_{section_name}'] = df[text_col].str.extract(pattern, flags=re.IGNORECASE, expand=False)
+            
+    #         # Store the processed DataFrame
+    #         self.df_clinical_notes = df
+    #         return 1
+    #     except Exception as e:
+    #         logging.error(f"Error processing clinical notes: {str(e)}")
+    #         # Create an empty DataFrame with expected structure
+    #         self.df_clinical_notes = pd.DataFrame(columns=df.columns)
+    #         logging.warning("Using empty DataFrame for clinical notes due to processing error")
     #         return 0
 
-    def _process_radiology_notes(self, df: pd.DataFrame, **kwargs) -> None:
-        """
-        Process radiology notes after initial import.
+    # def _process_in_out(self, df: pd.DataFrame, **kwargs) -> None:
+    #     """Process in/out data after initial import."""
         
-        Handles text cleaning, tokenization, and any special processing needed for 
-        radiology report text data.
-        
-        Args:
-            df: DataFrame containing the imported radiology notes
-            **kwargs: Optional parameters including:
-                      - text_col: Name of the column containing the note text (default: 'report_text')
-                      - clean_text: Whether to clean the text (default: True)
-                      - max_length: Maximum text length to retain (default: None)
-        """
-        text_col = kwargs.get('text_col', 'report_text')
-        clean_text = kwargs.get('clean_text', False)
-        max_length = kwargs.get('max_length', None)
-        
-        try:
-            # Check if text column exists
-            if text_col not in df.columns:
-                logging.warning(f"Text column '{text_col}' not found in radiology notes data")
-                self.df_radiology_notes = df
-                return
-                
-            # Basic text cleaning if requested
-            if clean_text:
-                # Convert to lowercase
-                df[text_col] = df[text_col].str.lower()
-                
-                # Remove extra whitespace
-                df[text_col] = df[text_col].str.replace(r'\s+', ' ', regex=True).str.strip()
-                
-                # Replace common abbreviations if needed
-                # This can be expanded based on domain knowledge
-                abbreviations = {
-                    'w/': 'with ',
-                    'w/o': 'without ',
-                    'pt': 'patient ',
-                    'hx': 'history '
-                    # Add more abbreviations as needed
-                }
-                
-                for abbr, replacement in abbreviations.items():
-                    df[text_col] = df[text_col].str.replace(r'\b' + abbr + r'\b', replacement, regex=True)
-            
-            # Truncate long texts if max_length is specified
-            if max_length:
-                df[text_col] = df[text_col].str[:max_length]
-            
-            # Store the processed DataFrame
-            self.df_radiology_notes = df
-            return 1
-        except Exception as e:
-            logging.error(f"Error processing radiology notes: {str(e)}")
-            # Create an empty DataFrame with expected structure
-            self.df_radiology_notes = pd.DataFrame(columns=df.columns)
-            logging.warning("Using empty DataFrame for radiology notes due to processing error")
-            return 0
-        
-    def _process_clinical_notes(self, df: pd.DataFrame, **kwargs) -> None:
-        """
-        Process clinical notes after initial import.
-        
-        Handles text cleaning, section identification, and any special processing
-        needed for clinical note text data.
-        
-        Args:
-            df: DataFrame containing the imported clinical notes
-            **kwargs: Optional parameters including:
-                      - text_col: Name of the column containing the note text (default: 'note_text')
-                      - clean_text: Whether to clean the text (default: True)
-                      - extract_sections: Whether to extract common clinical note sections (default: False)
-                      - max_length: Maximum text length to retain (default: None)
-        """
-        text_col = kwargs.get('text_col', 'note_text') 
-        clean_text = kwargs.get('clean_text', False)
-        extract_sections = kwargs.get('extract_sections', False)
-        max_length = kwargs.get('max_length', None)
-        
-        try:
-            # Check if text column exists
-            if text_col not in df.columns:
-                logging.warning(f"Text column '{text_col}' not found in clinical notes data")
-                self.df_clinical_notes = df
-                return
-                
-            # Basic text cleaning if requested
-            if clean_text:
-                # Convert to lowercase
-                df[text_col] = df[text_col].str.lower()
-                
-                # Remove extra whitespace
-                df[text_col] = df[text_col].str.replace(r'\s+', ' ', regex=True).str.strip()
-                
-                # Replace common abbreviations
-                abbreviations = {
-                    'w/': 'with ',
-                    'w/o': 'without ',
-                    'pt': 'patient ',
-                    'hx': 'history ',
-                    'dx': 'diagnosis ',
-                    'rx': 'prescription ',
-                    'tx': 'treatment '
-                    # Add more abbreviations as needed
-                }
-                
-                for abbr, replacement in abbreviations.items():
-                    df[text_col] = df[text_col].str.replace(r'\b' + abbr + r'\b', replacement, regex=True)
-            
-            # Truncate long texts if max_length is specified
-            if max_length:
-                df[text_col] = df[text_col].str[:max_length]
-            
-            # Extract common clinical note sections if requested
-            if extract_sections:
-                # Define regex patterns for common sections
-                section_patterns = {
-                    'history': r'(?:history\s+of\s+present\s+illness|history|hpi)[\s\:]+(.+?)(?=\b(?:physical examination|assessment|plan|impression|vital signs|medications)\b|$)',
-                    'physical_exam': r'(?:physical\s+examination|physical\s+exam)[\s\:]+(.+?)(?=\b(?:assessment|plan|impression|vital signs|medications)\b|$)',
-                    'assessment': r'(?:assessment|impression)[\s\:]+(.+?)(?=\b(?:plan|recommendations|physical examination|medications)\b|$)',
-                    'plan': r'(?:plan|recommendations)[\s\:]+(.+?)(?=\b(?:assessment|impression|physical examination|vital signs|medications)\b|$)'
-                }
-                
-                # Extract each section
-                for section_name, pattern in section_patterns.items():
-                    df[f'section_{section_name}'] = df[text_col].str.extract(pattern, flags=re.IGNORECASE, expand=False)
-            
-            # Store the processed DataFrame
-            self.df_clinical_notes = df
-            return 1
-        except Exception as e:
-            logging.error(f"Error processing clinical notes: {str(e)}")
-            # Create an empty DataFrame with expected structure
-            self.df_clinical_notes = pd.DataFrame(columns=df.columns)
-            logging.warning("Using empty DataFrame for clinical notes due to processing error")
-            return 0
+    #     try:
+    #         self.individual_fluid_columns = self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name'].tolist()
+    #         self.all_fluid_columns = self.df_grouping_fluids['fluid_name'].tolist()
 
-    def _process_in_out(self, df: pd.DataFrame, **kwargs) -> None:
-        """Process in/out data after initial import."""
-        
-        try:
-            self.individual_fluid_columns = self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name'].tolist()
-            self.all_fluid_columns = self.df_grouping_fluids['fluid_name'].tolist()
+    #         # Filter ORDER_CATALOG_DESC to include only those in the df_grouping_fluids file with individual_fluid_import = 1 
+    #         df_in_out_fluids = df[
+    #             df['order_catalog_desc'].isin(self.all_fluid_columns)
+    #         ]
 
-            # Filter ORDER_CATALOG_DESC to include only those in the df_grouping_fluids file with individual_fluid_import = 1 
-            df_in_out_fluids = df[
-                df['order_catalog_desc'].isin(self.all_fluid_columns)
-            ]
+    #         self.df_in_out_fluids = df_in_out_fluids.pivot_table(
+    #             index=['csn', 'service_ts'],
+    #             columns='order_catalog_desc', 
+    #             values=['volume', 'record_type'],
+    #             fill_value=np.nan,
+    #             aggfunc='sum'
+    #         )
 
-            self.df_in_out_fluids = df_in_out_fluids.pivot_table(
-                index=['csn', 'service_ts'],
-                columns='order_catalog_desc', 
-                values=['volume', 'record_type'],
-                fill_value=np.nan,
-                aggfunc='sum'
-            )
+    #         self.df_in_out_fluids.columns = [f"{col[1]}_{col[0]}" for col in self.df_in_out_fluids.columns]
 
-            self.df_in_out_fluids.columns = [f"{col[1]}_{col[0]}" for col in self.df_in_out_fluids.columns]
-
-            if [col.split("_")[0] for col in self.df_in_out_fluids.columns.tolist() if col.split("_")[0] not in self.individual_fluid_columns]:
-                #Add any missing columns to the df_in_out_fluids dataframe
-                missing_columns = set(self.individual_fluid_columns) - set([col.split("_")[0] for col in self.df_in_out_fluids.columns.tolist()])
-                for col in missing_columns:
-                    self.df_in_out_fluids[col + "_volume"] = np.nan
-                    self.df_in_out_fluids[col + "_record_type"] = np.nan      
-            return 1
-        except Exception as e:
-            logging.error(f"Error processing in/out data: {str(e)}")
-            # Create an empty DataFrame with the expected columns
-            self.df_in_out_fluids = pd.DataFrame(columns=df.columns.tolist())
-            logging.warning("Using empty DataFrame for all fluids due to processing error")
-            return 0
-
-    def _handle_duplicate_med_ids(self) -> None:
-        """
-        Check for and handle duplicate medication IDs in the medication groupings.
-        
-        This function checks if there are duplicate medication_id entries in the
-        df_grouping_all_meds DataFrame and removes them if found, keeping only the first
-        occurrence of each medication_id.
-        """
-        rows_dropped = (
-            self.df_grouping_all_meds.shape[0]
-            - self.df_grouping_all_meds.drop_duplicates("medication_id").shape[0]
-        )
-        
-        if rows_dropped > 0:
-            self.df_grouping_all_meds = self.df_grouping_all_meds.drop_duplicates(
-                subset="medication_id"
-            )
-            logging.info(
-                f"You have {rows_dropped} duplicates of medication ID that were dropped!"
-            )
-        else:
-            logging.info("Congrats, You have NO duplicates of medication ID!")
-
-    def _filter_med_group(self, med_class_name: str) -> pd.DataFrame:
-        """
-        Filter medication groups by class name.
-        
-        Args:
-            med_class_name: The medication class name to filter by.
-            
-        Returns:
-            DataFrame containing filtered medication data.
-        """
-        return self.df_grouping_all_meds[
-            self.df_grouping_all_meds["med_class"] == med_class_name
-        ][["super_table_col_name", "medication_id"]]
+    #         if [col.split("_")[0] for col in self.df_in_out_fluids.columns.tolist() if col.split("_")[0] not in self.individual_fluid_columns]:
+    #             #Add any missing columns to the df_in_out_fluids dataframe
+    #             missing_columns = set(self.individual_fluid_columns) - set([col.split("_")[0] for col in self.df_in_out_fluids.columns.tolist()])
+    #             for col in missing_columns:
+    #                 self.df_in_out_fluids[col + "_volume"] = np.nan
+    #                 self.df_in_out_fluids[col + "_record_type"] = np.nan      
+    #         return 1
+    #     except Exception as e:
+    #         logging.error(f"Error processing in/out data: {str(e)}")
+    #         # Create an empty DataFrame with the expected columns
+    #         self.df_in_out_fluids = pd.DataFrame(columns=df.columns.tolist())
+    #         logging.warning("Using empty DataFrame for all fluids due to processing error")
+    #         return 0
 
     def _make_comorbid_df(
         self,

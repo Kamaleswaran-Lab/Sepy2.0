@@ -86,4 +86,6 @@ diastolic blood pressure (DBP),15,140,65,75,65-75,SR,,Will need to cross-check a
 vent_rate_set,0,30,,,,,,,vent_rate_set,,,
 vent_tidal_rate_set,0,1000,,,,,,,vent_tidal_rate_set,,,
 vent_tidal_rate_exhaled,0,1000,,,,,,,vent_tidal_rate_exhaled,,,
+tidal_volume_observed,0,1000,,,,,,,tidal_volume_observed,,,
+tidal_volume_spontaneous,0,1000,,,,,,,tidal_volume_spontaneous,,,
 peep,5,25,,,,,,,peep,,,

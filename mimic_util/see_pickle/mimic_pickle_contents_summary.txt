@@ -1,0 +1,91 @@
+Contents of pickle file: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/sepy_output/mimic-supertables/ClinicalData/20093378.pkl
+
+==== static_features (<class 'dict'>) ====
+Number of Keys: 9
+encounter_type: IN
+age: 79
+discharge_to: SKILLED NURSING FACILITY
+pre_admit_location: EMERGENCY ROOM
+insurance: Medicare
+marital_status: WIDOWED
+admission_type: EW EMER.
+gender: Male
+race: WHITE
+
+==== event_times (<class 'dict'>) ====
+Number of Keys: 17
+ed_presentation_time: 2191-02-09 09:01:00
+hospital_admission_date_time: 2191-02-09 15:14:00
+hospital_discharge_date_time: 2191-02-21 17:59:00
+deathtime: NaT
+start_index: 2191-02-09 09:01:00
+worst_pf_pa: 265.0
+worst_pf_pa_time: 2191-02-14 17:01:00
+worst_pf_sp: 100.0
+worst_pf_sp_time: 2191-02-14 17:01:00
+first_icu_start: 2191-02-14 17:01:00
+... (truncated)
+
+==== flags (<class 'dict'>) ====
+Number of Keys: 7
+csn: 20093378
+pat_id: 15244290
+y_vent_rows: 0
+y_vent_start_time: 0
+y_vent_end_time: 0
+vent_start_time: NaT
+ed_wait_time: 373.0
+
+==== quan_deyo_ICD10 (<class 'pandas.core.frame.DataFrame'>) ====
+DataFrame Size: (21, 4)
+Column Names: ['pat_id', 'dx_time_date', 'quan_deyo', 'ICD10']
+Head (first 5 rows):
+            pat_id dx_time_date quan_deyo ICD10
+csn                                            
+20093378  15244290          NaT       NaN   NaN
+20093378  15244290          NaT       NaN   NaN
+20093378  15244290          NaT       NaN   NaN
+20093378  15244290          NaT       NaN   NaN
+20093378  15244290          NaT       NaN   NaN
+
+==== quan_elix_ICD10 (<class 'pandas.core.frame.DataFrame'>) ====
+DataFrame Size: (21, 4)
+Column Names: ['pat_id', 'dx_time_date', 'quan_elix', 'ICD10']
+Head (first 5 rows):
+            pat_id dx_time_date quan_elix ICD10
+csn                                            
+20093378  15244290          NaT       NaN   NaN
+20093378  15244290          NaT       NaN   NaN
+20093378  15244290          NaT       NaN   NaN
+20093378  15244290          NaT       NaN   NaN
+20093378  15244290          NaT       NaN   NaN
+
+==== quan_deyo_ICD9 (<class 'pandas.core.frame.DataFrame'>) ====
+DataFrame Size: (21, 4)
+Column Names: ['pat_id', 'dx_time_date', 'quan_deyo', 'ICD9']
+Head (first 5 rows):
+            pat_id dx_time_date quan_deyo ICD9
+csn                                           
+20093378  15244290          NaT       NaN  NaN
+20093378  15244290          NaT       NaN  NaN
+20093378  15244290          NaT       NaN  NaN
+20093378  15244290          NaT       NaN  NaN
+20093378  15244290          NaT       NaN  NaN
+
+==== quan_elix_ICD9 (<class 'pandas.core.frame.DataFrame'>) ====
+DataFrame Size: (21, 4)
+Column Names: ['pat_id', 'dx_time_date', 'quan_elix', 'ICD9']
+Head (first 5 rows):
+            pat_id dx_time_date quan_elix ICD9
+csn                                           
+20093378  15244290          NaT       NaN  NaN
+20093378  15244290          NaT       NaN  NaN
+20093378  15244290          NaT       NaN  NaN
+20093378  15244290          NaT       NaN  NaN
+20093378  15244290          NaT       NaN  NaN
+
+==== csn (<class 'int'>) ====
+20093378
+
+==== pat_id (<class 'str'>) ====
+15244290

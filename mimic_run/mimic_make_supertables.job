@@ -1,0 +1,42 @@
+#!/bin/bash
+#SBATCH --job-name=make_supertables
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=128G
+#SBATCH --time=24:00:00
+#SBATCH --output=logs/make_supertables_%A_%a.out
+#SBATCH --error=logs/make_supertables_%A_%a.out
+#SBATCH --array=0-15
+
+echo "Job started at: $(date)"
+echo "Job ID: $SLURM_JOB_ID"
+echo "Array ID: $SLURM_ARRAY_TASK_ID"
+echo "Array total: $SLURM_ARRAY_TASK_COUNT"
+
+# Number of chunks = size of array (16 in this example)
+NUM_OF_PROCESSES=${SLURM_ARRAY_TASK_COUNT}
+PROCESSOR_ASSIGNMENT=${SLURM_ARRAY_TASK_ID}
+
+# Activate conda
+source /hpc/dctrl/yy450/miniconda3/etc/profile.d/conda.sh
+conda activate sepy2
+
+cd ~/link_dctrl_yy450/Sepy2.0
+
+# Limit threaded libraries to avoid oversubscription
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+
+echo "Running with NUM_OF_PROCESSES=$NUM_OF_PROCESSES, PROCESSOR_ASSIGNMENT=$PROCESSOR_ASSIGNMENT"
+python make_dicts.py \
+    --num_processes $NUM_OF_PROCESSES \
+    --processor_assignment $PROCESSOR_ASSIGNMENT
+
+if [ $? -eq 0 ]; then
+    echo "Job completed successfully at: $(date)"
+else
+    echo "ERROR: Job failed with exit code $?"
+    exit 1
+fi

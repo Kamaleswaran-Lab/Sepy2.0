@@ -35,49 +35,51 @@ from scoreCalculators import (
 
 class sepyMaster:
     """
-    Main class that manages the yearly data and configuration.
+    Main class that manages the data and configuration.
     Serves as a factory for creating sepyCSN instances.
     """
-    def __init__(self, yearly_data_instance: Any, sepyDICTConfigs: Dict[str, Any], 
+    def __init__(self, data_instance: Any, sepyDICTConfigs: Dict[str, Any], 
                  bounds: pd.DataFrame, save_dir: str):
         # Create configuration object
-        self.config = SepyDictConfig.initialize_config(yearly_data_instance.v_quan_deyo_labels, 
-                                                       yearly_data_instance.v_quan_elix_labels, 
+        self.config = SepyDictConfig.initialize_config(data_instance.v_quan_deyo_labels, 
+                                                       data_instance.v_quan_elix_labels, 
                                                        bounds,
                                                        sepyDICTConfigs)
         self.bounds = bounds
-        self.yearly_data_instance = yearly_data_instance
+        self.data_instance = data_instance
         self.save_dir = save_dir
         self.dataframes_id_mapping = {'beds': "csn",
                                       'demographics': "pat_id",
                                       'encounters': "csn",
                                       'gcs': "csn",
                                       'cultures': "csn",
-                                      'procedures': "csn",
                                       'vent': "csn",
                                       'diagnosis': "csn",
                                       'labs': "csn",
                                       'vasopressor_meds': "csn",
                                       'anti_infective_meds': "csn",
                                       'vitals': "csn",
-                                      'infusion_meds': "csn",
                                       'quan_deyo_ICD10': "csn",
                                       'quan_elix_ICD10': "csn",
-                                      'in_out_fluids': "csn", #TODO Change this name later 
-                                      'clinical_notes': "csn",
-                                      'radiology_notes': "csn",
+                                      'quan_deyo_ICD9': "csn",
+                                      'quan_elix_ICD9': "csn",
                                       'icd_procedures': "csn",
                                       'cpt_procedures': "csn",
-                                      'dialysis': "csn"}
+                                      'dialysis': "csn",
+                                    #   'infusion_meds': "csn"
+                                    #   'clinical_notes': "csn",
+                                    #   'radiology_notes': "csn",
+                                    #   'in_out_fluids': "csn", #TODO Change this name later 
+}
 
 
     def slice_master_dataframes(self, identifier: Any, name: str, identifier_type: str) -> Tuple[pd.DataFrame, str]:
-        """Safely slice yearly_data_instance by identifier."""
+        """Safely slice data_instance by identifier."""
         filt_df_name = name + "_PerCSN"
         df_name = "df_" + name
 
         try:
-            source_df = getattr(self.yearly_data_instance, df_name)
+            source_df = getattr(self.data_instance, df_name)
             if isinstance(source_df.index, pd.MultiIndex) and identifier_type in source_df.index.names:
                 level_values = source_df.index.get_level_values(identifier_type)
                 if pd.api.types.is_object_dtype(level_values):
@@ -93,8 +95,8 @@ class sepyMaster:
                     return source_df.loc[[int(identifier)], :], filt_df_name
         except KeyError:
             logging.info("There were no %s data for identifier %s", name, identifier)
-            empty_df = getattr(self.yearly_data_instance, df_name).iloc[0:0]
-            empty_df.index.set_names(getattr(self.yearly_data_instance, df_name).index.names)
+            empty_df = getattr(self.data_instance, df_name).iloc[0:0]
+            empty_df.index.set_names(getattr(self.data_instance, df_name).index.names)
             return empty_df, filt_df_name
     
     def get_identifier(self, csn: Any, identifier_type: str) -> Any:
@@ -102,11 +104,11 @@ class sepyMaster:
         if identifier_type == "csn":
             return csn
         elif (identifier_type == "pat_id") or (identifier_type == "patient_id"):
-            if self.yearly_data_instance.df_encounters.index.dtype == "O":
+            if self.data_instance.df_encounters.index.dtype == "O":
                 csn = str(csn)
             else:
                 csn = int(csn)
-            pat_id = self.yearly_data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
+            pat_id = self.data_instance.df_encounters.loc[csn,['pat_id']].iloc[0]
             # check if pat_id is a string
             #print(type(pat_id))
             if isinstance(pat_id, str):
@@ -240,6 +242,8 @@ class sepyCSN:
             'flags': self.clinical_data.flags,
             'quan_deyo_ICD10': self.clinical_data.quan_deyo_ICD10,
             'quan_elix_ICD10': self.clinical_data.quan_elix_ICD10,
+            'quan_deyo_ICD9': self.clinical_data.quan_deyo_ICD9,
+            'quan_elix_ICD9': self.clinical_data.quan_elix_ICD9,
             'csn': self.clinical_data.csn,
             'pat_id': self.clinical_data.pat_id
         }
@@ -286,7 +290,7 @@ class sepyCSN:
 
     def calculate_t_susp(self) -> None:
         """Calculate suspicion time"""
-        abx_order_times = self.clinical_data.anti_infective_meds.med_order_time.unique()
+        abx_order_times = self.clinical_data.anti_infective_meds.med_start.unique()
         culture_times = self.clinical_data.cultures.order_time.unique()
         
         hours72 = pd.Timedelta(hours = 72)

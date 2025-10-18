@@ -55,27 +55,26 @@ import utils
 ###########################################################################
 ############################# Make Supertables ###########################
 ###########################################################################
-def make_sepyMaster(yearly_data_instance, dict_config, bounds, save_dir):
+def make_sepyMaster(data_instance, dict_config, bounds, save_dir):
     """
-    Creates a sepyMaster instance for a given year.
+    Creates a sepyMaster instance.
     
     Args:
-        yearly_data_instance (object): An instance of the `sepyIMPORT` class containing the yearly data.
+        data_instance (object): An instance of the `sepyIMPORT` class containing the data.
         dict_config (dict): A dictionary containing the configuration settings for the sepyDICT class.  
         bounds (dict): A dictionary containing the threshold values for the supertable.
         save_dir (str): The directory where the supertable will be saved.
     Returns:
         sepyMaster: An instance of the `sepyMaster` class containing the processed encounter data.
     """
-    sepyMaster_instance = sd.sepyMaster(yearly_data_instance, dict_config, bounds, save_dir)
+    sepyMaster_instance = sd.sepyMaster(data_instance, dict_config, bounds, save_dir)
     return sepyMaster_instance
 
 
 def process_csn_instance(
     csn_instance,
     count,
-    chunk_size,
-    year
+    chunk_size
 ):
     """
     Process a pre-created sepyCSN instance.
@@ -84,7 +83,6 @@ def process_csn_instance(
         csn_instance: Pre-created sepyCSN instance
         count: Current count in processing
         chunk_size: Total number of CSNs to process
-        year: Year being processed
     Returns:
         dict: Dictionary containing all summary dataframes or None values if errors occurred
     """
@@ -99,7 +97,7 @@ def process_csn_instance(
     }
     
     try:
-        logging.info(f"Sepy- Processing patient csn: {csn_instance.clinical_data.csn}, {count} of {chunk_size} for year {year}")
+        logging.info(f"Sepy- Processing patient csn: {csn_instance.clinical_data.csn}, {count} of {chunk_size}")
         csn_instance.process()
         logging.info(f"Sepy- Instance processed for csn: {csn_instance.clinical_data.csn}")
     except Exception as e:
@@ -138,19 +136,19 @@ def process_csn_instance(
     logging.info(f"Sepy- Encounter {count} of {chunk_size} is complete!")
     return result
 
-def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
+def process_batch_of_csns(process_list, sepyMaster_instance, start_count):
     """
     Process a batch of CSNs and return their results
     
     Args:
         process_list: List of CSNs to process
         sepyMaster_instance: Instance of sepyMaster
-        year: Year being processed
         start_count: Starting count for this batch
     Returns:
         list: List of results for each CSN in the batch
     """
     results = []
+    # num_local_workers = min(os.cpu_count() - 1, 4)
     num_local_workers = min((os.cpu_count() or 1) - 1, 4)
     
     # Create CSN instances for just this batch
@@ -178,8 +176,7 @@ def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
                 process_csn_instance,
                 csn_instance=csn_instance,
                 count=start_count+i,
-                chunk_size=len(process_list),
-                year=year
+                chunk_size=len(process_list)
             ): (csn_instance.clinical_data.csn, start_count+i) 
             for i, csn_instance in enumerate(csn_instances)
         }
@@ -268,7 +265,7 @@ if __name__ == "__main__":
         except IndexError:
             logging.error(f"Sepy- could not find flatfile type for {flatfile_name}")
 
-    print(paths)
+    logging.info(f"Sepy- All the paths dictionary: {paths}")
 
     file_dictionary = paths
     
@@ -293,8 +290,6 @@ if __name__ == "__main__":
             logging.info(f"Dumping import instance to pickle")
             
             
-            exit() ############## FOR TESTING ##############
-            
             
             with open(TEMP_DICTIONARY_FILE_NAME, "wb") as handle:
                 pickle.dump(import_instance, handle, protocol=pickle.HIGHEST_PROTOCOL)
@@ -316,11 +311,13 @@ if __name__ == "__main__":
         try:
             with open(TEMP_DICTIONARY_FILE_NAME, "rb") as handle:
                 import_instance = pickle.load(handle)
+                logging.info(f"Pickle imported successfully!")
         except Exception as e:
             logging.error(f"Error loading temporary pickle: {e}")
             exit()
     
-
+    # exit() ############## FOR TESTING ##############
+    
     ###########################################################################
     ###################### Begin Dictionary Construction ######################
     ###########################################################################
@@ -367,7 +364,7 @@ if __name__ == "__main__":
                     logging.error(f"Sepy- Error in filtering encounters. Please check the config file. {e}")
                 
                 num_encounters = len(csn_df)
-                logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
+                logging.info(f"Sepy- we have {num_encounters} encounters after filtering.")
             else:
                 logging.info(f"Sepy- Error in the specified encounter filter list. Please check the config file.")
         else:
@@ -375,10 +372,9 @@ if __name__ == "__main__":
             
         # If encounter type filter is applied, filter the encounters based on the encounter type in the config file (EM, IN, all)
         if encounter_type != "all":
-            print(csn_df.head())
             csn_df = csn_df[csn_df["encounter_type"] == encounter_type]
             num_encounters = len(csn_df)
-            logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
+            logging.info(f"Sepy- we have {num_encounters} encounters after filtering.")
         else:
             logging.info(f"Sepy- No specific encounter type filter was applied")
         
@@ -386,20 +382,21 @@ if __name__ == "__main__":
         if age == "adult":
             csn_df = csn_df[csn_df.age >= 18]
             num_encounters = len(csn_df)
-            logging.info(f"Sepy- The year {year} has {num_encounters} encounters after age filtering.")
+            logging.info(f"Sepy- we have {num_encounters} encounters after age filtering.")
         elif age == "pediatric":
             csn_df = csn_df[csn_df.age < 18]
             num_encounters = len(csn_df)
-            logging.info(f"Sepy- The year {year} has {num_encounters} encounters after age filtering.")
+            logging.info(f"Sepy- we have {num_encounters} encounters after age filtering.")
         else:
             logging.info(f"Sepy- No specific age filter was applied")
         
         # drop duplicates
         csn_df = csn_df.drop_duplicates()
         total_num_enc = len(csn_df)
-        logging.info(f"Sepy- The year {year} has {total_num_enc} encounters after filtering and dropping duplicates.")
+        logging.info(f"Sepy- we have {total_num_enc} encounters after filtering and dropping duplicates.")
 
-        
+        # exit() ############## FOR TESTING ##############
+
         ################################################
         ############ Create Chunks of Encounters #######
         ################################################
@@ -416,13 +413,13 @@ if __name__ == "__main__":
         logging.info(f"Sepy- The process_list head:\n {process_list.head()}")
         
         # create the directory for the supertables
-        save_dir = SUPERTABLE_OUTPUT_PATH / str(year)
+        save_dir = SUPERTABLE_OUTPUT_PATH
         save_dir.mkdir(exist_ok = True, parents = True)
         clinical_data_write_path = save_dir / "ClinicalData"
         clinical_data_write_path.mkdir(exist_ok = True, parents = True)
         supertable_write_path = save_dir / "Supertables"
         supertable_write_path.mkdir(exist_ok = True, parents = True)
-        logging.info(f"Sepy-Directory for year {year} was set to {save_dir}")
+        logging.info(f"Sepy-Directory was set to {save_dir}")
 
         # List supertables already in save path 
         supertables_in_save_path = os.listdir(supertable_write_path)
@@ -443,7 +440,7 @@ if __name__ == "__main__":
         bounds = pd.read_csv(paths["variable_chart"])   
        
         sepyMaster_instance = make_sepyMaster(import_instance, dict_config, bounds, save_dir)
-        logging.info(f"Sepy- A sepyMaster instance was created for {year}")
+        logging.info(f"Sepy- A sepyMaster instance was created")
 
         ###########################################################################
         ######################### Make Dicts by CSN ###############################
@@ -476,7 +473,6 @@ if __name__ == "__main__":
             batch_results = process_batch_of_csns(
                 process_list=current_batch,
                 sepyMaster_instance=sepyMaster_instance,
-                year=year,
                 start_count=batch_start
             )
             
@@ -509,14 +505,14 @@ if __name__ == "__main__":
         ########################## Export Sepsis Summary ##########################
         ###########################################################################
         # create sepsis_summary directory
-        base_sepsis_path = SUPERTABLE_OUTPUT_PATH / dataConfig["sepsis_summary"] / str(year)
+        base_sepsis_path = SUPERTABLE_OUTPUT_PATH / dataConfig["sepsis_summary"]
         Path.mkdir(base_sepsis_path, exist_ok=True, parents=True)
         for subdir in dataConfig["sepsis_summary_types"]:
             Path.mkdir(base_sepsis_path / subdir, exist_ok=True, parents=True)
 
         # Save encounter summary
-        UNIQUE_FILE_ID = f"{processor_assignment}_{year}"
-        base_path = SUPERTABLE_OUTPUT_PATH / dataConfig["sepsis_summary"] / str(year)
+        UNIQUE_FILE_ID = f"{processor_assignment}"
+        base_path = SUPERTABLE_OUTPUT_PATH / dataConfig["sepsis_summary"]
         
         # Check if any results were collected before trying to concatenate
         if appended_enc_summaries:
@@ -568,5 +564,5 @@ if __name__ == "__main__":
             logging.warning("Sepy- No Sepsis-2 summaries were collected")
         
         logging.info(
-            f"Sepy- Time to create write encounter pickles for {year} was {time.perf_counter()-start_csn_creation}s"
+            f"Sepy- Time to create write encounter pickles was {time.perf_counter()-start_csn_creation}s"
         )

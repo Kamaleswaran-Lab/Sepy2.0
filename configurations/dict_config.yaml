@@ -1,6 +1,11 @@
 na_values: #Entries in the data that should be converted to NA
-  - "NULL"
   - "Date\\Time Correction"
+  - "NULL"
+  - "null"
+  - ""
+  - " "
+  - NaN
+  - "N/A"
   - "(null)"
   - "NOTRECORDED"
 numeric_vital_col_names: #Vital names that should be converted to numeric
@@ -20,7 +25,11 @@ numeric_vital_col_names: #Vital names that should be converted to numeric
 - o2_flow_rate 
 - cvp 
 string_vital_col_names:
-- o2_device
+- temproute
+- o2_delivery_device_1
+- o2_delivery_device_2
+- o2_delivery_device_3
+- o2_delivery_device_4
 numeric_lab_col_names: #Lab names that should be converted to numeric
 - anion_gap
 - base_excess
