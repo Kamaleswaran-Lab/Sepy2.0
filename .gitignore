@@ -41,4 +41,4 @@ configurations/*oddjobs*
 slurmjobs/*oddjobs*
 
 # scratch files
-scratch_files/*
+scratch_files/*mimic_run/logs/*.out
