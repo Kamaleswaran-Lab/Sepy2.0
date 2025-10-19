@@ -137,8 +137,9 @@ def prepare_df_for_csv(supertable: pd.DataFrame, features_map: dict) -> pd.DataF
     """
     Prepare a supertable for csv export.
     """
-    supertable_ = supertable[SUPERTABLE_FEATURES_MAP.keys()]
+    supertable_ = supertable.loc[:, SUPERTABLE_FEATURES_MAP.keys()]
     supertable_.rename(columns = SUPERTABLE_FEATURES_MAP, inplace = True)
+    supertable_.index.name = "timestamp"
     
     return supertable_
 
@@ -152,3 +153,45 @@ def safe_read_pickle(path: str) -> pd.DataFrame:
         print(f"Error reading pickle file {path}: {e}")
         return None
     return df
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description='Process EMR data for a specific year')
+    parser.add_argument('--year', type=int, help='The year for which data is being processed')
+    parser.add_argument('--num_processes', type = int, default = 1, help = 'Total Number of Slurm Array processes')
+    parser.add_argument('--processor_assignment', type = int, default = 0, help = 'Slurm Array number of this process')
+    args = parser.parse_args()
+
+    year = args.year
+    num_processes = args.num_processes
+    processor_assignment = args.processor_assignment
+
+    supertable_root = Path("/labs/collab/K-lab-MODS/MODS-PHI/Encounter_Pickles/supertables2025/emory/supertables")
+    supertable_path = supertable_root / str(year) / "Supertables"
+    supertable_csv_path = supertable_root / str(year) / "CSVs"
+    print(supertable_csv_path)
+    supertable_csv_path.mkdir(exist_ok = True)
+
+    files = list(supertable_path.glob("*.pkl"))
+    print(f"Number of supertables found = {len(files)}")
+    files = np.array(files)
+    chunk_size = int( len(files) / num_processes)  
+    print(f"The chunk size is {chunk_size}")
+    
+    # split the encounters into chunks
+    list_of_chunks = np.array_split(files, num_processes)
+    print(f"The list of chunks has {len(list_of_chunks)} unique dataframes.")
+    
+    # uses processor assignment number to select correct chunk
+    process_list = list_of_chunks[processor_assignment]
+    print(f"This process list has {len(process_list)} files")
+
+    for i in range(len(process_list)):
+        supertable = safe_read_pickle(process_list[i])
+        supertable_csv = prepare_df_for_csv(supertable, SUPERTABLE_FEATURES_MAP)
+        csn = process_list[i].stem 
+        supertable_csv.to_csv(supertable_csv_path/ (csn + '.csv'))
+        print("Saved csv to : ", supertable_csv_path / (csn + '.csv'))
+
+if __name__ == "__main__":
+    main()

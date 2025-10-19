@@ -54,7 +54,7 @@ def main():
     args = parser.parse_args()
     year = args.year
 
-    dataConfig_path = '../configurations/emory_config.yaml'
+    dataConfig_path = '../configurations/emory_config_oddjobs.yaml'
     sepyIMPORTConfigs_path = '../configurations/dict_config.yaml'
     sepyDICTConfigs_path = '../configurations/dict_config.yaml'
     num_processes = 8
@@ -104,35 +104,13 @@ def main():
         try:
             paths[f"{combined_file[0]}"] = glob.glob(
                 f"{DATA_PATH}/*{combined_file[1]}*"
-            )[0]
             
+            )[0]
         except IndexError:
             logging.error(f"Sepy- could not find combined file for {combined_file[1]}")
     print(paths)
-
     file_dictionary = paths
 
-    # creates df with all medication groupings
-    df_grouping_all_meds = pd.read_csv(file_dictionary["infusion_meds"])
-    # creates df with all lab groupings
-    df_grouping_labs = pd.read_csv(file_dictionary["grouping_labs"])
-    # creates df with all bed location labels
-    df_bed_labels = pd.read_csv(file_dictionary["bed_labels"])
-    # creates df with all fluid groupings
-    df_grouping_fluids = pd.read_csv(file_dictionary["grouping_fluids"])
-
-    # Values to be converted to NA
-    na_values = sepyIMPORTConfigs["na_values"]
-    # Vital names that should be converted to numeric
-    vital_col_names = sepyIMPORTConfigs["vital_col_names"]
-    # Vasopressor units
-    vasopressor_units = sepyIMPORTConfigs["vasopressor_units"]
-    # List of all lab names that should be converted to numeric
-    numeric_lab_col_names = sepyIMPORTConfigs["numeric_lab_col_names"]
-    # List of all lab names that should be converted to string
-    string_lab_col_names = sepyIMPORTConfigs["string_lab_col_names"]
-    # List of all lab names
-    all_lab_col_names = numeric_lab_col_names + string_lab_col_names
 
     import_instance = si.sepyIMPORT(paths, sepyIMPORTConfigs, dataConfig["yearly_instance"], create_dataframes = True, save_dataframes = True, save_path = YEARLY_DICTIONARY_FILE_NAME)
 

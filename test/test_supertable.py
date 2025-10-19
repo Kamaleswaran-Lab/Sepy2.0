@@ -8,7 +8,7 @@ from pathlib import Path
 import pandas as pd
 
 # Ensure local modules are importable
-sys.path.append("/hpc/home/ma618/Sepy/")
+sys.path.append("/home/maror24/Sepy2.0/")
 
 import utils 
 import sepyDICT as sd  
@@ -19,9 +19,9 @@ import sepyDICT as sd
 # =====================
 YEAR = 2019  # <-- set the year you want to test
 
-# Optional: set custom config paths if different from defaults
-DATA_CONFIG_PATH = "/hpc/home/ma618/Sepy/configurations/emory_config.yaml"
-SEPY_CONFIG_PATH = "/hpc/home/ma618/Sepy/configurations/dict_config.yaml"
+# Optional: set custom config paths if different from defaultsp
+DATA_CONFIG_PATH = "/home/maror24/Sepy2.0/configurations/emory_config_oddjobs.yaml"
+SEPY_CONFIG_PATH = "/home/maror24/Sepy2.0/configurations/dict_config.yaml"
 
 
 def _get_variable_chart_path(data_config: dict) -> str:
@@ -82,10 +82,10 @@ def main() -> None:
     # Pick a random CSN from the imported encounters
     if not getattr(import_instance, "csns", None):
         raise ValueError("No CSNs found in the yearly import instance.")
-
+    
+    import pdb; pdb.set_trace()
     csn = random.choice(import_instance.csns)
     print(f"Selected CSN: {csn}")
-    import pdb; pdb.set_trace()
 
     # Create a CSN instance and generate the supertable WITHOUT saving
     csn_instance = sepy_master.create_csn_instance(csn)
