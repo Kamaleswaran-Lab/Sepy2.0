@@ -1,7 +1,7 @@
 MAIN FUNCTION: process_encounter_new(medications_data, patient_data)
-    1. Filter to infusion medications only
+    1. Filter to infusion medications only (inj, synringe filtered) 
     2. Remove premix diluents 
-    3. Group by order_id
+    3. Group by order_id 
     
     FOR each order_id:
         4. Initialize medication dictionary structure

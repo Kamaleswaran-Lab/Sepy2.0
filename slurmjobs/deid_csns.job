@@ -8,8 +8,8 @@
 #SBATCH --mem=16G
 #SBATCH --array=0-8
 
-#SBATCH --output=./output/deid_csns_%A_%a.out
-#SBATCH --error=./errors/deid_csns_%A_%a.err
+#SBATCH --output=./output/deid_csnsSept10_%A_%a.out
+#SBATCH --error=./errors/deid_csnsSept10_%A_%a.err
 
 # Array of years to process
 YEARS=(2014 2015 2016 2017 2018 2019 2020 2021 2022)
