@@ -41,4 +41,11 @@ configurations/*oddjobs*
 slurmjobs/*oddjobs*
 
 # scratch files
-scratch_files/*mimic_run/logs/*.out
+*mimic_run/logs/*.out
+
+# labs histograms
+0_mimic_gen_flat_files/flatfiles-review/labs
+
+0_mimic_gen_flat_files/flatfiles-review/combine-labs/emory-labs-grouping-joined.csv
+0_mimic_gen_flat_files/flatfiles-review/combine-labs/emory-labs-joined.csv
+0_mimic_gen_flat_files/flatfiles-review/combine-labs/mimic-labs-joined.csv
