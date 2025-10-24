@@ -41,7 +41,7 @@ configurations/*oddjobs*
 slurmjobs/*oddjobs*
 
 # scratch files
-*mimic_run/logs/*.out
+*.out
 
 # labs histograms
 0_mimic_gen_flat_files/flatfiles-review/labs

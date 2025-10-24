@@ -37,7 +37,7 @@ dictionary_paths:
   # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE groupings/ FOLDER
   grouping_types:
     # We don't need mapping/grouping files for infusion_meds, vent, etc. for MIMIC.
-    - ["grouping_labs", "mimic_mapping_labs.csv"]
+    - ["grouping_labs", "mimic_grouping_labs_new.csv"]
     - ["bed_labels", "mimic_bed_labels.csv"]
     - ["variable_chart", "mimic_variable_chart.csv"]
   flatfile_types: 

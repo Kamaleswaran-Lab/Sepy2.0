@@ -9,12 +9,12 @@ emory_file = "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/0_mimic_gen_flat_files/fl
 mimic_file = "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/0_mimic_gen_flat_files/flatfiles-review/combine-labs/mimic-labs-joined.csv"
 
 emory_grouping_file = "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/0_mimic_gen_flat_files/flatfiles-review/combine-labs/emory-labs-grouping-joined.csv"
-mimic_grouping_file = "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/mimic_mapping_labs.csv"
+mimic_grouping_file = "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/mimic_grouping_labs_new.csv"
 
 output_root = "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/0_mimic_gen_flat_files/flatfiles-review/labs"
 # ----------------------------
 
-# 需要自动运行的 super_table_col_name 列表（48个）
+# 需要自动运行的 super_table_col_name 列表
 columns_to_analyze = [
     "glucose", "hemoglobin", "potassium", "chloride", "sodium", "met_hgb", "carboxy_hgb",
     "partial_pressure_of_oxygen_(pao2)", "partial_pressure_of_carbon_dioxide_(paco2)",
@@ -27,7 +27,7 @@ columns_to_analyze = [
     "lactate_dehydrogenase", "fibrinogen", "b-type_natriuretic_peptide_(bnp)",
     "partial_prothrombin_time_(ptt)", "bilirubin_direct", "ammonia",
     "erythrocyte_sedimentation_rate_(esr)", "c_diff", "amylase", "crp_high_sens",
-    "parathyroid_level"
+    "parathyroid_level", "cortisol", "bilirubin_indirect", "lipase"
 ]
 
 # -------- Load Data --------
@@ -67,16 +67,30 @@ for idx, colname in enumerate(columns_to_analyze, start=1):
         emory_col = "lab_result"
         mimic_col = "lab_result"
 
-        df_emory_grouping_filtered = df_emory_grouping[df_emory_grouping["super_table_col_name"].isin(filter_column)]
-        df_mimic_grouping_filtered = df_mimic_grouping[df_mimic_grouping["super_table_col_name"].isin(filter_column)]
+        df_emory_grouping_filtered = df_emory_grouping[
+            (df_emory_grouping["super_table_col_name"].isin(filter_column)) &
+            (df_emory_grouping["import"] == "Yes")
+        ]
+        df_mimic_grouping_filtered = df_mimic_grouping[
+            (df_mimic_grouping["super_table_col_name"].isin(filter_column)) &
+            (df_mimic_grouping["import"] == "Yes")
+        ]
 
-        print(f"🔍 Emory: super_table_col_name {filter_column} comes from the following [component, proc_cat_name, proc_desc]: \n {df_emory_grouping_filtered[['component', 'proc_cat_name', 'proc_desc']]}")
-        print(f"🔍 MIMIC: super_table_col_name {filter_column} comes from the following [component, fluid, category]: \n {df_mimic_grouping_filtered[['component', 'proc_cat_name', 'proc_desc']]}")
+        print(f"🔍 Emory: super_table_col_name {filter_column} comes from the following [component, component_id, proc_cat_name, proc_desc]: \n {df_emory_grouping_filtered[['component', 'component_id', 'proc_cat_name', 'proc_desc']]}")
+        print(f"🔍 MIMIC: super_table_col_name {filter_column} comes from the following [component, component_id, proc_cat_name, proc_desc]: \n {df_mimic_grouping_filtered[['component', 'component_id', 'proc_cat_name', 'proc_desc']]}")
 
-        df_emory_filtered = df_emory[df_emory["super_table_col_name"].isin(filter_column)]
+        print()
+        
+        df_emory_filtered = df_emory[
+            (df_emory["super_table_col_name"].isin(filter_column)) &
+            (df_emory["import"] == "Yes")
+        ]
         print(f"🔍 Emory rows after filtering by super_table_col_name {filter_column}: {df_emory_filtered.shape[0]} rows")
-
-        df_mimic_filtered = df_mimic[df_mimic["super_table_col_name"].isin(filter_column)]
+        
+        df_mimic_filtered = df_mimic[
+            (df_mimic["super_table_col_name"].isin(filter_column)) &
+            (df_mimic["import"] == "Yes")
+        ]
         print(f"🔍 MIMIC rows after filtering by super_table_col_name {filter_column}: {df_mimic_filtered.shape[0]} rows")
 
         if emory_col not in df_emory.columns:

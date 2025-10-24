@@ -1,0 +1,6 @@
+# How to analyze the LABS files from both Emory and MIMIC.
+
+1. Run `emory-grouping.ipynb`. This is to add proc_cat_name and proc_desc back to the grouping file for plotting the histograms in order to compare with MIMIC. (This could be only executed once if there is no change in emory's grouping file)
+2. Run `emory.ipynb` and `mimic.ipynb`. This is to join LABS and grouping file together to add `super_table_col_name` and `import` to the LABS file so that we can analyze with respect to each super_table_col_name later in `review-labs-new-auto.py`. `Please run these two scripts every time if the grouping file or the LABS file changes.`
+3. Run either `review-labs-new-auto.py` (by running `sbatch run-labs.job`) or `review-labs-new.ipynb` to get the result statistics and histograms, which are stored in `labs` folder.
+`review-labs-new-auto.ipynb` can automatically generate results for all desired super_table_col_name. If you want to run each super_table_col_name one by one, run `review-labs-new.ipynb`.

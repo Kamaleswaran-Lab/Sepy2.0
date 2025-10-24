@@ -32,23 +32,23 @@ No,Not Import,50831,pH,Other Body Fluid,Blood Gas
 No,Not Import,50832,"pO2, Body Fluid",Other Body Fluid,Blood Gas
 No,Not Import,50833,Potassium,Other Body Fluid,Blood Gas
 No,Not Import,50834,"Sodium, Body Fluid",Other Body Fluid,Blood Gas
-Yes,albumin,50835,"Albumin, Ascites",Ascites,Chemistry
-Yes,amylase,50836,"Amylase, Ascites",Ascites,Chemistry
-Yes,bicarb_(hco3),50837,"Bicarbonate, Ascites",Ascites,Chemistry
-Yes,bilirubin_total,50838,"Bilirubin, Total, Ascites",Ascites,Chemistry
-Yes,chloride,50839,"Chloride, Ascites",Ascites,Chemistry
+No,albumin,50835,"Albumin, Ascites",Ascites,Chemistry
+No,amylase,50836,"Amylase, Ascites",Ascites,Chemistry
+No,bicarb_(hco3),50837,"Bicarbonate, Ascites",Ascites,Chemistry
+No,bilirubin_total,50838,"Bilirubin, Total, Ascites",Ascites,Chemistry
+No,chloride,50839,"Chloride, Ascites",Ascites,Chemistry
 No,Not Import,50840,"Cholesterol, Ascites",Ascites,Chemistry
-Yes,creatinine,50841,"Creatinine, Ascites",Ascites,Chemistry
-Yes,glucose,50842,"Glucose, Ascites",Ascites,Chemistry
-Yes,lactate_dehydrogenase,50843,"Lactate Dehydrogenase, Ascites",Ascites,Chemistry
-Yes,lipase,50844,"Lipase, Ascites",Ascites,Chemistry
+No,creatinine,50841,"Creatinine, Ascites",Ascites,Chemistry
+No,glucose,50842,"Glucose, Ascites",Ascites,Chemistry
+No,lactate_dehydrogenase,50843,"Lactate Dehydrogenase, Ascites",Ascites,Chemistry
+No,lipase,50844,"Lipase, Ascites",Ascites,Chemistry
 No,Not Import,50845,"Miscellaneous, Ascites",Ascites,Chemistry
-Yes,osmolarity,50846,"Osmolality, Ascites",Ascites,Chemistry
-Yes,potassium,50847,"Potassium, Ascites",Ascites,Chemistry
-Yes,sodium,50848,"Sodium, Ascites",Ascites,Chemistry
-Yes,protein,50849,"Total Protein, Ascites",Ascites,Chemistry
+No,osmolarity,50846,"Osmolality, Ascites",Ascites,Chemistry
+No,potassium,50847,"Potassium, Ascites",Ascites,Chemistry
+No,sodium,50848,"Sodium, Ascites",Ascites,Chemistry
+No,protein,50849,"Total Protein, Ascites",Ascites,Chemistry
 No,Not Import,50850,"Triglycerides, Ascites",Ascites,Chemistry
-Yes,blood_urea_nitrogen_(bun),50851,"Urea Nitrogen, Ascites",Ascites,Chemistry
+No,blood_urea_nitrogen_(bun),50851,"Urea Nitrogen, Ascites",Ascites,Chemistry
 Yes,hemoglobin_a1c,50852,% Hemoglobin A1c,Blood,Chemistry
 No,Not Import,50853,25-OH Vitamin D,Blood,Chemistry
 No,Not Import,50854,Absolute A1c,Blood,Chemistry
@@ -81,7 +81,7 @@ No,Not Import,50880,Benzodiazepine Screen,Blood,Chemistry
 No,Not Import,50881,Beta-2 Microglobulin,Blood,Chemistry
 Yes,bicarb_(hco3),50882,Bicarbonate,Blood,Chemistry
 Yes,bilirubin_direct,50883,"Bilirubin, Direct",Blood,Chemistry
-No,Not Import,50884,"Bilirubin, Indirect",Blood,Chemistry
+Yes,bilirubin_indirect,50884,"Bilirubin, Indirect",Blood,Chemistry
 Yes,bilirubin_total,50885,"Bilirubin, Total",Blood,Chemistry
 No,Not Import,50886,Blood Culture Hold,Blood,Chemistry
 No,Not Import,50887,Blue Top Hold,Blood,Chemistry
@@ -106,7 +106,7 @@ No,Not Import,50905,"Cholesterol, LDL, Calculated",Blood,Chemistry
 No,Not Import,50906,"Cholesterol, LDL, Measured",Blood,Chemistry
 No,Not Import,50907,"Cholesterol, Total",Blood,Chemistry
 No,Not Import,50908,CK-MB Index,Blood,Chemistry
-No,Not Import,50909,Cortisol,Blood,Chemistry
+Yes,cortisol,50909,Cortisol,Blood,Chemistry
 No,Not Import,50910,Creatine Kinase (CK),Blood,Chemistry
 No,Not Import,50911,"Creatine Kinase, MB Isoenzyme",Blood,Chemistry
 Yes,creatinine,50912,Creatinine,Blood,Chemistry
@@ -206,94 +206,94 @@ No,Not Import,51007,Uric Acid,Blood,Chemistry
 No,Not Import,51008,Valproic Acid,Blood,Chemistry
 No,Not Import,51009,Vancomycin,Blood,Chemistry
 No,Not Import,51010,Vitamin B12,Blood,Chemistry
-Yes,albumin,51019,"Albumin, Joint Fluid",Joint Fluid,Chemistry
-Yes,amylase,51020,"Amylase, Joint Fluid",Joint Fluid,Chemistry
-Yes,creatinine,51021,"Creatinine, Joint Fluid",Joint Fluid,Chemistry
-Yes,glucose,51022,"Glucose, Joint Fluid",Joint Fluid,Chemistry
-Yes,lactate_dehydrogenase,51023,"LD, Joint Fluid",Joint Fluid,Chemistry
-Yes,protein,51024,"Total Protein, Joint Fluid",Joint Fluid,Chemistry
-Yes,albumin,51025,"Albumin, Body Fluid",Other Body Fluid,Chemistry
-Yes,amylase,51026,"Amylase, Body Fluid",Other Body Fluid,Chemistry
-Yes,bicarb_(hco3),51027,"Bicarbonate, Other Fluid",Other Body Fluid,Chemistry
-Yes,bilirubin_total,51028,"Bilirubin, Total, Body Fluid",Other Body Fluid,Chemistry
-Yes,calcium,51029,"Calcium, Body Fluid",Other Body Fluid,Chemistry
-Yes,chloride,51030,"Chloride, Body Fluid",Other Body Fluid,Chemistry
+No,albumin,51019,"Albumin, Joint Fluid",Joint Fluid,Chemistry
+No,amylase,51020,"Amylase, Joint Fluid",Joint Fluid,Chemistry
+No,creatinine,51021,"Creatinine, Joint Fluid",Joint Fluid,Chemistry
+No,glucose,51022,"Glucose, Joint Fluid",Joint Fluid,Chemistry
+No,lactate_dehydrogenase,51023,"LD, Joint Fluid",Joint Fluid,Chemistry
+No,protein,51024,"Total Protein, Joint Fluid",Joint Fluid,Chemistry
+No,albumin,51025,"Albumin, Body Fluid",Other Body Fluid,Chemistry
+No,amylase,51026,"Amylase, Body Fluid",Other Body Fluid,Chemistry
+No,bicarb_(hco3),51027,"Bicarbonate, Other Fluid",Other Body Fluid,Chemistry
+No,bilirubin_total,51028,"Bilirubin, Total, Body Fluid",Other Body Fluid,Chemistry
+No,calcium,51029,"Calcium, Body Fluid",Other Body Fluid,Chemistry
+No,chloride,51030,"Chloride, Body Fluid",Other Body Fluid,Chemistry
 No,Not Import,51031,"Cholesterol, Body Fluid",Other Body Fluid,Chemistry
-Yes,creatinine,51032,"Creatinine, Body Fluid",Other Body Fluid,Chemistry
+No,creatinine,51032,"Creatinine, Body Fluid",Other Body Fluid,Chemistry
 No,Not Import,51033,FetalFN,Other Body Fluid,Chemistry
-Yes,glucose,51034,"Glucose, Body Fluid",Other Body Fluid,Chemistry
-Yes,lactate_dehydrogenase,51035,"LD, Body Fluid",Other Body Fluid,Chemistry
-Yes,lipase,51036,"Lipase, Body Fluid",Other Body Fluid,Chemistry
-Yes,magnesium,51037,"Magnesium, Body Fluid",Other Body Fluid,Chemistry
+No,glucose,51034,"Glucose, Body Fluid",Other Body Fluid,Chemistry
+No,lactate_dehydrogenase,51035,"LD, Body Fluid",Other Body Fluid,Chemistry
+No,lipase,51036,"Lipase, Body Fluid",Other Body Fluid,Chemistry
+No,magnesium,51037,"Magnesium, Body Fluid",Other Body Fluid,Chemistry
 No,Not Import,51038,"Miscellaneous, Body Fluid",Other Body Fluid,Chemistry
-Yes,osmolarity,51039,"Osmolality, Body Fluid",Other Body Fluid,Chemistry
-Yes,phosphorus,51040,"Phosphate, Body Fluid",Other Body Fluid,Chemistry
-Yes,potassium,51041,"Potassium, Body Fluid",Other Body Fluid,Chemistry
-Yes,sodium,51042,"Sodium, Body Fluid",Other Body Fluid,Chemistry
-Yes,protein,51043,"Total Protein, Body Fluid",Other Body Fluid,Chemistry
+No,osmolarity,51039,"Osmolality, Body Fluid",Other Body Fluid,Chemistry
+No,phosphorus,51040,"Phosphate, Body Fluid",Other Body Fluid,Chemistry
+No,potassium,51041,"Potassium, Body Fluid",Other Body Fluid,Chemistry
+No,sodium,51042,"Sodium, Body Fluid",Other Body Fluid,Chemistry
+No,protein,51043,"Total Protein, Body Fluid",Other Body Fluid,Chemistry
 No,Not Import,51044,Triglycer,Other Body Fluid,Chemistry
-Yes,blood_urea_nitrogen_(bun),51045,"Urea Nitrogen, Body Fluid",Other Body Fluid,Chemistry
-Yes,albumin,51046,"Albumin, Pleural",Pleural,Chemistry
-Yes,amylase,51047,"Amylase, Pleural",Pleural,Chemistry
-Yes,bicarb_(hco3),51048,"Bicarbonate, Pleural",Pleural,Chemistry
-Yes,bilirubin_total,51049,"Bilirubin, Total, Pleural",Pleural,Chemistry
-Yes,chloride,51050,"Chloride, Pleural",Pleural,Chemistry
+No,blood_urea_nitrogen_(bun),51045,"Urea Nitrogen, Body Fluid",Other Body Fluid,Chemistry
+No,albumin,51046,"Albumin, Pleural",Pleural,Chemistry
+No,amylase,51047,"Amylase, Pleural",Pleural,Chemistry
+No,bicarb_(hco3),51048,"Bicarbonate, Pleural",Pleural,Chemistry
+No,bilirubin_total,51049,"Bilirubin, Total, Pleural",Pleural,Chemistry
+No,chloride,51050,"Chloride, Pleural",Pleural,Chemistry
 No,Not Import,51051,"Cholesterol, Pleural",Pleural,Chemistry
-Yes,creatinine,51052,"Creatinine, Pleural",Pleural,Chemistry
-Yes,glucose,51053,"Glucose, Pleural",Pleural,Chemistry
-Yes,lactate_dehydrogenase,51054,"Lactate Dehydrogenase, Pleural",Pleural,Chemistry
-Yes,lipase,51055,"Lipase, Pleural",Pleural,Chemistry
+No,creatinine,51052,"Creatinine, Pleural",Pleural,Chemistry
+No,glucose,51053,"Glucose, Pleural",Pleural,Chemistry
+No,lactate_dehydrogenase,51054,"Lactate Dehydrogenase, Pleural",Pleural,Chemistry
+No,lipase,51055,"Lipase, Pleural",Pleural,Chemistry
 No,Not Import,51056,"Miscellaneous, Pleural",Pleural,Chemistry
-Yes,potassium,51057,"Potassium, Pleural",Pleural,Chemistry
-Yes,sodium,51058,"Sodium, Pleural",Pleural,Chemistry
-Yes,protein,51059,"Total Protein, Pleural",Pleural,Chemistry
+No,potassium,51057,"Potassium, Pleural",Pleural,Chemistry
+No,sodium,51058,"Sodium, Pleural",Pleural,Chemistry
+No,protein,51059,"Total Protein, Pleural",Pleural,Chemistry
 No,Not Import,51060,"Triglycerides, Pleural",Pleural,Chemistry
-Yes,bicarb_(hco3),51061,"Bicarbonate, Stool",Stool,Chemistry
-Yes,chloride,51062,"Chloride, Stool",Stool,Chemistry
-Yes,osmolarity,51063,"Osmolality, Stool",Stool,Chemistry
-Yes,potassium,51064,"Potassium, Stool",Stool,Chemistry
-Yes,sodium,51065,"Sodium, Stool",Stool,Chemistry
-Yes,calcium,51066,24 hr Calcium,Urine,Chemistry
-Yes,creatinine,51067,24 hr Creatinine,Urine,Chemistry
-Yes,protein,51068,24 hr Protein,Urine,Chemistry
-Yes,albumin,51069,"Albumin, Urine",Urine,Chemistry
+No,bicarb_(hco3),51061,"Bicarbonate, Stool",Stool,Chemistry
+No,chloride,51062,"Chloride, Stool",Stool,Chemistry
+No,osmolarity,51063,"Osmolality, Stool",Stool,Chemistry
+No,potassium,51064,"Potassium, Stool",Stool,Chemistry
+No,sodium,51065,"Sodium, Stool",Stool,Chemistry
+No,calcium,51066,24 hr Calcium,Urine,Chemistry
+No,creatinine,51067,24 hr Creatinine,Urine,Chemistry
+No,protein,51068,24 hr Protein,Urine,Chemistry
+No,albumin,51069,"Albumin, Urine",Urine,Chemistry
 No,Not Import,51070,"Albumin/Creatinine, Urine",Urine,Chemistry
 No,Not Import,51071,"Amphetamine Screen, Urine",Urine,Chemistry
-Yes,amylase,51072,"Amylase, Urine",Urine,Chemistry
+No,amylase,51072,"Amylase, Urine",Urine,Chemistry
 No,Not Import,51073,"Amylase/Creatinine Ratio, Urine",Urine,Chemistry
 No,Not Import,51074,"Barbiturate Screen, Urine",Urine,Chemistry
 No,Not Import,51075,"Benzodiazepine Screen, Urine",Urine,Chemistry
-Yes,bicarb_(hco3),51076,"Bicarbonate, Urine",Urine,Chemistry
-Yes,calcium,51077,"Calcium, Urine",Urine,Chemistry
-Yes,chloride,51078,"Chloride, Urine",Urine,Chemistry
+No,bicarb_(hco3),51076,"Bicarbonate, Urine",Urine,Chemistry
+No,calcium,51077,"Calcium, Urine",Urine,Chemistry
+No,chloride,51078,"Chloride, Urine",Urine,Chemistry
 No,Not Import,51079,"Cocaine, Urine",Urine,Chemistry
 No,Not Import,51080,Creatinine Clearance,Urine,Chemistry
-Yes,creatinine,51081,"Creatinine, Serum",Urine,Chemistry
-Yes,creatinine,51082,"Creatinine, Urine",Urine,Chemistry
+No,creatinine,51081,"Creatinine, Serum",Urine,Chemistry
+No,creatinine,51082,"Creatinine, Urine",Urine,Chemistry
 No,Not Import,51083,"Ethanol, Urine",Urine,Chemistry
-Yes,glucose,51084,"Glucose, Urine",Urine,Chemistry
+No,glucose,51084,"Glucose, Urine",Urine,Chemistry
 No,Not Import,51085,"HCG, Urine, Qualitative",Urine,Chemistry
 No,Not Import,51086,"Immunofixation, Urine",Urine,Chemistry
 No,Not Import,51087,Length of Urine Collection,Urine,Chemistry
-Yes,magnesium,51088,"Magnesium, Urine",Urine,Chemistry
+No,magnesium,51088,"Magnesium, Urine",Urine,Chemistry
 No,Not Import,51089,Marijuana,Urine,Chemistry
 No,Not Import,51090,"Methadone, Urine",Urine,Chemistry
 No,Not Import,51091,"Myoglobin, Urine",Urine,Chemistry
 No,Not Import,51092,"Opiate Screen, Urine",Urine,Chemistry
-Yes,osmolarity,51093,"Osmolality, Urine",Urine,Chemistry
-Yes,ph,51094,pH,Urine,Chemistry
-Yes,phosphorus,51095,"Phosphate, Urine",Urine,Chemistry
+No,osmolarity,51093,"Osmolality, Urine",Urine,Chemistry
+No,ph,51094,pH,Urine,Chemistry
+No,phosphorus,51095,"Phosphate, Urine",Urine,Chemistry
 No,Not Import,51096,Porphobilinogen Screen,Urine,Chemistry
-Yes,potassium,51097,"Potassium, Urine",Urine,Chemistry
+No,potassium,51097,"Potassium, Urine",Urine,Chemistry
 No,Not Import,51098,"Prot. Electrophoresis, Urine",Urine,Chemistry
 No,Not Import,51099,Protein/Creatinine Ratio,Urine,Chemistry
-Yes,sodium,51100,"Sodium, Urine",Urine,Chemistry
+No,sodium,51100,"Sodium, Urine",Urine,Chemistry
 No,Not Import,51101,Total Collection Time,Urine,Chemistry
-Yes,protein,51102,"Total Protein, Urine",Urine,Chemistry
+No,protein,51102,"Total Protein, Urine",Urine,Chemistry
 No,Not Import,51103,Uhold,Urine,Chemistry
-Yes,blood_urea_nitrogen_(bun),51104,"Urea Nitrogen, Urine",Urine,Chemistry
+No,blood_urea_nitrogen_(bun),51104,"Urea Nitrogen, Urine",Urine,Chemistry
 No,Not Import,51105,"Uric Acid, Urine",Urine,Chemistry
-Yes,creatinine,51106,Urine Creatinine,Urine,Chemistry
+No,creatinine,51106,Urine Creatinine,Urine,Chemistry
 No,Not Import,51107,"Urine tube, held",Urine,Chemistry
 No,Not Import,51108,Urine Volume,Urine,Chemistry
 No,Not Import,51109,"Urine Volume, Total",Urine,Chemistry
@@ -383,8 +383,8 @@ No,Not Import,51195,Collagen,Blood,Hematology
 Yes,d_dimer,51196,D-Dimer,Blood,Hematology
 No,Not Import,51197,Elliptocytes,Blood,Hematology
 No,Not Import,51198,Envelope Cells,Blood,Hematology
-Yes,neutrophils,51199,Eosinophil Count,Blood,Hematology
-Yes,neutrophils,51200,Eosinophils,Blood,Hematology
+No,neutrophils,51199,Eosinophil Count,Blood,Hematology
+No,neutrophils,51200,Eosinophils,Blood,Hematology
 No,Not Import,51201,Epinepherine,Blood,Hematology
 No,Not Import,51202,Factor II,Blood,Hematology
 No,Not Import,51203,Factor IX,Blood,Hematology
@@ -429,7 +429,7 @@ No,Not Import,51241,Leukocyte Alkaline Phosphatase,Blood,Hematology
 No,Not Import,51242,LUC,Blood,Hematology
 No,Not Import,51243,Lupus Anticoagulant,Blood,Hematology
 Yes,lymphocyte,51244,Lymphocytes,Blood,Hematology
-Yes,lymphocyte,51245,"Lymphocytes, Percent",Blood,Hematology
+No,lymphocyte,51245,"Lymphocytes, Percent",Blood,Hematology
 No,Not Import,51246,Macrocytes,Blood,Hematology
 No,Not Import,51247,MacroOvalocytes,Blood,Hematology
 No,Not Import,51248,MCH,Blood,Hematology
@@ -464,7 +464,7 @@ No,Not Import,51276,Quantitative G6PD,Blood,Hematology
 No,Not Import,51277,RDW,Blood,Hematology
 No,Not Import,51278,Red Blood Cell Fragments,Blood,Hematology
 No,Not Import,51279,Red Blood Cells,Blood,Hematology
-Yes,thrombin_time,51280,Reptilase Time,Blood,Hematology
+No,thrombin_time,51280,Reptilase Time,Blood,Hematology
 No,Not Import,51281,Reptilase Time Control,Blood,Hematology
 No,Not Import,51282,"Reticulocyte Count, Absolute",Blood,Hematology
 No,Not Import,51283,"Reticulocyte Count, Automated",Blood,Hematology
@@ -481,7 +481,7 @@ No,Not Import,51293,Sugar Water Test,Blood,Hematology
 No,Not Import,51294,Target Cells,Blood,Hematology
 No,Not Import,51295,TdT,Blood,Hematology
 No,Not Import,51296,Teardrop Cells,Blood,Hematology
-Yes,thrombin_time,51297,Thrombin,Blood,Hematology
+No,thrombin_time,51297,Thrombin,Blood,Hematology
 No,Not Import,51298,Von Willebrand Factor Activity,Blood,Hematology
 No,Not Import,51299,Von Willebrand Factor Antigen,Blood,Hematology
 Yes,white_blood_cell_count,51300,WBC Count,Blood,Hematology
@@ -531,13 +531,13 @@ No,Not Import,51365,Atypical Lymphocytes,Joint Fluid,Hematology
 No,Not Import,51366,Bands,Joint Fluid,Hematology
 No,Not Import,51367,Basophils,Joint Fluid,Hematology
 No,Not Import,51368,Eosinophils,Joint Fluid,Hematology
-Yes,hematocrit,51369,"Hematocrit, Joint Fluid",Joint Fluid,Hematology
+No,hematocrit,51369,"Hematocrit, Joint Fluid",Joint Fluid,Hematology
 No,Not Import,51370,"Joint Crystals, Birefringence",Joint Fluid,Hematology
 No,Not Import,51371,"Joint Crystals, Comment",Joint Fluid,Hematology
 No,Not Import,51372,"Joint Crystals, Location",Joint Fluid,Hematology
 No,Not Import,51373,"Joint Crystals, Number",Joint Fluid,Hematology
 No,Not Import,51374,"Joint Crystals, Shape",Joint Fluid,Hematology
-Yes,lymphocyte,51375,Lymphocytes,Joint Fluid,Hematology
+No,lymphocyte,51375,Lymphocytes,Joint Fluid,Hematology
 No,Not Import,51376,Macrophage,Joint Fluid,Hematology
 No,Not Import,51377,Mesothelial Cells,Joint Fluid,Hematology
 No,Not Import,51378,Metamyelocytes,Joint Fluid,Hematology
@@ -580,15 +580,15 @@ No,Not Import,51415,CD64,Other Body Fluid,Hematology
 No,Not Import,51416,CD7,Other Body Fluid,Hematology
 No,Not Import,51417,CD71,Other Body Fluid,Hematology
 No,Not Import,51418,CD8,Other Body Fluid,Hematology
-Yes,lymphocyte,51419,Eosinophils,Other Body Fluid,Hematology
+No,lymphocyte,51419,Eosinophils,Other Body Fluid,Hematology
 No,Not Import,51420,FMC-7,Other Body Fluid,Hematology
 No,Not Import,51421,Glyco A,Other Body Fluid,Hematology
-Yes,hematocrit,51422,"Hematocrit, Other Fluid",Other Body Fluid,Hematology
+No,hematocrit,51422,"Hematocrit, Other Fluid",Other Body Fluid,Hematology
 No,Not Import,51423,HLA-DR,Other Body Fluid,Hematology
 No,Not Import,51424,Immunophenotyping,Other Body Fluid,Hematology
 No,Not Import,51425,Kappa,Other Body Fluid,Hematology
 No,Not Import,51426,Lambda,Other Body Fluid,Hematology
-Yes,lymphocyte,51427,Lymphocytes,Other Body Fluid,Hematology
+No,lymphocyte,51427,Lymphocytes,Other Body Fluid,Hematology
 No,Not Import,51428,Macrophage,Other Body Fluid,Hematology
 No,Not Import,51429,Mesothelial cells,Other Body Fluid,Hematology
 No,Not Import,51430,Metamyelocytes,Other Body Fluid,Hematology
@@ -605,8 +605,8 @@ No,Not Import,51441,Bands,Pleural,Hematology
 No,Not Import,51442,Basophils,Pleural,Hematology
 No,Not Import,51443,Blasts,Pleural,Hematology
 No,Not Import,51444,Eosinophils,Pleural,Hematology
-Yes,hematocrit,51445,"Hematocrit, Pleural",Pleural,Hematology
-Yes,lymphocyte,51446,Lymphocytes,Pleural,Hematology
+No,hematocrit,51445,"Hematocrit, Pleural",Pleural,Hematology
+No,lymphocyte,51446,Lymphocytes,Pleural,Hematology
 No,Not Import,51447,Macrophages,Pleural,Hematology
 No,Not Import,51448,Mesothelial Cells,Pleural,Hematology
 No,Not Import,51449,Metamyelocytes,Pleural,Hematology
@@ -623,7 +623,7 @@ No,Not Import,51460,"Blood, Occult",Stool,Hematology
 No,Not Import,51461,Ammonium Biurate,Urine,Hematology
 No,Not Import,51462,Amorphous Crystals,Urine,Hematology
 No,Not Import,51463,Bacteria,Urine,Hematology
-Yes,bilirubin_total,51464,Bilirubin,Urine,Hematology
+No,bilirubin_total,51464,Bilirubin,Urine,Hematology
 No,Not Import,51465,Bilirubin Crystals,Urine,Hematology
 No,Not Import,51466,Blood,Urine,Hematology
 No,Not Import,51467,Broad Casts,Urine,Hematology
@@ -637,21 +637,21 @@ No,Not Import,51474,Eosinophils,Urine,Hematology
 No,Not Import,51475,Epithelial Casts,Urine,Hematology
 No,Not Import,51476,Epithelial Cells,Urine,Hematology
 No,Not Import,51477,Free Fat,Urine,Hematology
-Yes,glucose,51478,Glucose,Urine,Hematology
+No,glucose,51478,Glucose,Urine,Hematology
 No,Not Import,51479,Granular Casts,Urine,Hematology
-Yes,hematocrit,51480,Hematocrit,Urine,Hematology
+No,hematocrit,51480,Hematocrit,Urine,Hematology
 No,Not Import,51481,Hemosiderin,Urine,Hematology
 No,Not Import,51482,Hyaline Casts,Urine,Hematology
 No,Not Import,51483,Hyphenated Yeast,Urine,Hematology
 No,Not Import,51484,Ketone,Urine,Hematology
 No,Not Import,51485,Leucine Crystals,Urine,Hematology
-Yes,white_blood_cell_count,51486,Leukocytes,Urine,Hematology
+No,white_blood_cell_count,51486,Leukocytes,Urine,Hematology
 No,Not Import,51487,Nitrite,Urine,Hematology
 No,Not Import,51488,Non-squamous Epithelial Cells,Urine,Hematology
 No,Not Import,51489,NonSquamous Epithelial Cell,Urine,Hematology
 No,Not Import,51490,Oval Fat Body,Urine,Hematology
-Yes,ph,51491,pH,Urine,Hematology
-Yes,protein,51492,Protein,Urine,Hematology
+No,ph,51491,pH,Urine,Hematology
+No,protein,51492,Protein,Urine,Hematology
 No,Not Import,51493,RBC,Urine,Hematology
 No,Not Import,51494,RBC Casts,Urine,Hematology
 No,Not Import,51495,RBC Clumps,Urine,Hematology
@@ -675,7 +675,7 @@ No,Not Import,51512,Urine Mucous,Urine,Hematology
 No,Not Import,51513,Urine Specimen Type,Urine,Hematology
 No,Not Import,51514,Urobilinogen,Urine,Hematology
 No,Not Import,51515,Waxy Casts,Urine,Hematology
-Yes,white_blood_cell_count,51516,WBC,Urine,Hematology
+No,white_blood_cell_count,51516,WBC,Urine,Hematology
 No,Not Import,51517,WBC Casts,Urine,Hematology
 No,Not Import,51518,WBC Clumps,Urine,Hematology
 No,Not Import,51519,Yeast,Urine,Hematology
@@ -690,9 +690,9 @@ No,Not Import,51564,ARCH-1,Blood,Chemistry
 No,Not Import,51565,Argon,Blood,Chemistry
 No,Not Import,51566,Beta,Blood,Chemistry
 No,Not Import,51567,Beta Hydroxybutyrate,Blood,Chemistry
-Yes,bilirubin_total,51568,"Bilirubin, Neonatal",Blood,Chemistry
+No,bilirubin_total,51568,"Bilirubin, Neonatal",Blood,Chemistry
 Yes,bilirubin_direct,51569,"Bilirubin, Neonatal, Direct",Blood,Chemistry
-No,Not Import,51570,"Bilirubin, Neonatal, Indirect",Blood,Chemistry
+Yes,bilirubin_indirect,51570,"Bilirubin, Neonatal, Indirect",Blood,Chemistry
 No,Not Import,51571,Billed,Blood,Chemistry
 No,Not Import,51572,Bioavailable Testosterone,Blood,Chemistry
 No,Not Import,51573,Bromide,Blood,Chemistry
@@ -707,7 +707,7 @@ No,Not Import,51581,Carotene,Blood,Chemistry
 No,Not Import,51582,CH50,Blood,Chemistry
 No,Not Import,51583,Chol Estr,Blood,Chemistry
 No,Not Import,51584,Chylomicrons,Blood,Chemistry
-Yes,c_diff,51585,Clostrid,Blood,Chemistry
+No,c_diff,51585,Clostrid,Blood,Chemistry
 No,Not Import,51586,CMV IgG Ab,Blood,Chemistry
 No,Not Import,51587,CMV IgG Ab Value,Blood,Chemistry
 No,Not Import,51588,CMV IgM Ab,Blood,Chemistry
@@ -732,7 +732,7 @@ No,Not Import,51606,Digitoxin,Blood,Chemistry
 No,Not Import,51607,"Dimeric Inhibin A, Maternal Screen",Blood,Chemistry
 No,Not Import,51608,DirLst,Blood,Chemistry
 No,Not Import,51609,Disopyramide,Blood,Chemistry
-Yes,bilirubin_total,51610,Dlta Bili,Blood,Chemistry
+No,bilirubin_total,51610,Dlta Bili,Blood,Chemistry
 No,Not Import,51611,Down Syndrome Risk,Blood,Chemistry
 No,Not Import,51612,Dr. X,Blood,Chemistry
 No,Not Import,51613,eAG,Blood,Chemistry
@@ -815,7 +815,7 @@ No,Not Import,51691,MCV,Blood,Chemistry
 No,Not Import,51692,"Monospot, Rapid Antigen",Blood,Chemistry
 No,Not Import,51693,Mumps IgG Ab,Blood,Chemistry
 No,Not Import,51694,Mumps IgG Ab Value,Blood,Chemistry
-Yes,troponin,51695,Myoglobin,Blood,Chemistry
+No,troponin,51695,Myoglobin,Blood,Chemistry
 No,Not Import,51696,Neural Tube Defect Risk,Blood,Chemistry
 No,Not Import,51698,No MD,Blood,Chemistry
 No,Not Import,51699,Not Done,Blood,Chemistry
@@ -890,15 +890,15 @@ No,Not Import,51771,,Blood,Chemistry
 No,Not Import,51772,PAN3,Blood,Chemistry
 No,Not Import,51773,RFXFRKL,Blood,Chemistry
 No,Not Import,51774,RFXHCV,Blood,Chemistry
-Yes,albumin,51775,(Albumin),Cerebrospinal Fluid,Chemistry
-Yes,albumin,51776,<Albumin>,Cerebrospinal Fluid,Chemistry
-Yes,albumin,51777,"Albumin, CSF",Cerebrospinal Fluid,Chemistry
+No,albumin,51775,(Albumin),Cerebrospinal Fluid,Chemistry
+No,albumin,51776,<Albumin>,Cerebrospinal Fluid,Chemistry
+No,albumin,51777,"Albumin, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51778,Alpha-1,Cerebrospinal Fluid,Chemistry
 No,Not Import,51779,Alpha-2,Cerebrospinal Fluid,Chemistry
-Yes,amylase,51780,"Amylase, CSF",Cerebrospinal Fluid,Chemistry
+No,amylase,51780,"Amylase, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51781,Beta,Cerebrospinal Fluid,Chemistry
-Yes,bicarb_(hco3),51782,"Bicarbonate, CSF",Cerebrospinal Fluid,Chemistry
-Yes,bilirubin_total,51783,"Bilirubin, Total, CSF",Cerebrospinal Fluid,Chemistry
+No,bicarb_(hco3),51782,"Bicarbonate, CSF",Cerebrospinal Fluid,Chemistry
+No,bilirubin_total,51783,"Bilirubin, Total, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51784,"Chloride, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51785,"Cholesterol, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51786,Clostrid,Cerebrospinal Fluid,Chemistry
@@ -910,37 +910,37 @@ No,Not Import,51791,HIV 1 Viral Load,Cerebrospinal Fluid,Chemistry
 No,Not Import,51792,"Immunoelectrophoresis, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51793,"Immunoglobulin G, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51794,"Immunoglobulin G, CSF",Cerebrospinal Fluid,Chemistry
-Yes,lactate_dehydrogenase,51795,"Lactate Dehydrogenase, CSF",Cerebrospinal Fluid,Chemistry
+No,lactate_dehydrogenase,51795,"Lactate Dehydrogenase, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51796,"Miscellaneous, CSF",Cerebrospinal Fluid,Chemistry
-Yes,osmolarity,51797,"Osmolality, CSF",Cerebrospinal Fluid,Chemistry
+No,osmolarity,51797,"Osmolality, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51798,"PEP, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51799,"PEP, CSF, Gamma Region",Cerebrospinal Fluid,Chemistry
-Yes,potassium,51800,"Potassium, CSF",Cerebrospinal Fluid,Chemistry
-Yes,sodium,51801,"Sodium, CSF",Cerebrospinal Fluid,Chemistry
-Yes,protein,51802,"Total Protein, CSF",Cerebrospinal Fluid,Chemistry
+No,potassium,51800,"Potassium, CSF",Cerebrospinal Fluid,Chemistry
+No,sodium,51801,"Sodium, CSF",Cerebrospinal Fluid,Chemistry
+No,protein,51802,"Total Protein, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51803,"Triglycerides, CSF",Cerebrospinal Fluid,Chemistry
-Yes,blood_urea_nitrogen_(bun),51804,"Urea Nitrogen, CSF",Cerebrospinal Fluid,Chemistry
+No,blood_urea_nitrogen_(bun),51804,"Urea Nitrogen, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51805,"Uric Acid, CSF",Cerebrospinal Fluid,Chemistry
 No,Not Import,51806,Voided Specimen,Cerebrospinal Fluid,Chemistry
-Yes,albumin,51807,(Albumin),Joint Fluid,Chemistry
+No,albumin,51807,(Albumin),Joint Fluid,Chemistry
 No,Not Import,51808,Alpha-1,Joint Fluid,Chemistry
 No,Not Import,51809,Alpha-2,Joint Fluid,Chemistry
 No,Not Import,51810,Beta,Joint Fluid,Chemistry
-Yes,bicarb_(hco3),51811,"Bicarbonate,Joint Fluid",Joint Fluid,Chemistry
-Yes,bilirubin_total,51812,"Bilirubin, Total, Joint Fluid",Joint Fluid,Chemistry
-Yes,chloride,51813,"Chloride, Joint Fluid",Joint Fluid,Chemistry
+No,bicarb_(hco3),51811,"Bicarbonate,Joint Fluid",Joint Fluid,Chemistry
+No,bilirubin_total,51812,"Bilirubin, Total, Joint Fluid",Joint Fluid,Chemistry
+No,chloride,51813,"Chloride, Joint Fluid",Joint Fluid,Chemistry
 No,Not Import,51814,"Cholesterol, Joint Fluid",Joint Fluid,Chemistry
 No,Not Import,51815,Clostrid,Joint Fluid,Chemistry
 No,Not Import,51816,Cryptococ,Joint Fluid,Chemistry
 No,Not Import,51817,Fl Scan,Joint Fluid,Chemistry
 No,Not Import,51818,"IgG, Joint Fluid",Joint Fluid,Chemistry
 No,Not Import,51819,"Immunoelectrophoresis, Joint Fluid",Joint Fluid,Chemistry
-Yes,osmolarity,51820,"Osmolality, Joint Fluid",Joint Fluid,Chemistry
+No,osmolarity,51820,"Osmolality, Joint Fluid",Joint Fluid,Chemistry
 No,Not Import,51821,"PEP, Joint Fluid, Gamma Region",Joint Fluid,Chemistry
-Yes,potassium,51822,"Potassium, Joint Fluid",Joint Fluid,Chemistry
-Yes,sodium,51823,"Sodium, Joint Fluid",Joint Fluid,Chemistry
+No,potassium,51822,"Potassium, Joint Fluid",Joint Fluid,Chemistry
+No,sodium,51823,"Sodium, Joint Fluid",Joint Fluid,Chemistry
 No,Not Import,51824,"Triglycerides, Joint Fluid",Joint Fluid,Chemistry
-Yes,blood_urea_nitrogen_(bun),51825,"Urea Nitrogen, Joint Fluid",Joint Fluid,Chemistry
+No,blood_urea_nitrogen_(bun),51825,"Urea Nitrogen, Joint Fluid",Joint Fluid,Chemistry
 No,Not Import,51826,"Uric Acid, Joint Fluid",Joint Fluid,Chemistry
 No,Not Import,51827,Voided Specimen,Joint Fluid,Chemistry
 No,Not Import,51828,Voided Specimen,Bone Marrow,Chemistry
@@ -956,9 +956,9 @@ No,Not Import,51838,Alpha-2,Other Body Fluid,Chemistry
 No,Not Import,51839,Anat Path Hold,Other Body Fluid,Chemistry
 No,Not Import,51840,Beta,Other Body Fluid,Chemistry
 No,Not Import,51841,"Blood, Occult",Other Body Fluid,Chemistry
-Yes,blood_urea_nitrogen_(bun),51842,Bun,Other Body Fluid,Chemistry
-Yes,c_diff,51843,C. diff PCR,Other Body Fluid,Chemistry
-Yes,c_diff,51844,C diff Toxin Antigen Assay,Other Body Fluid,Chemistry
+No,blood_urea_nitrogen_(bun),51842,Bun,Other Body Fluid,Chemistry
+No,c_diff,51843,C. diff PCR,Other Body Fluid,Chemistry
+No,c_diff,51844,C diff Toxin Antigen Assay,Other Body Fluid,Chemistry
 No,Not Import,51846,Chlamydia trachomatis,Other Body Fluid,Chemistry
 No,Not Import,51847,Clostrid,Other Body Fluid,Chemistry
 No,Not Import,51854,Cryptococ,Other Body Fluid,Chemistry
@@ -1000,48 +1000,48 @@ No,Not Import,51904,PAN2,Other Body Fluid,Chemistry
 No,Not Import,51905, ,Other Body Fluid,Chemistry
 No,Not Import,51906,reuse,Other Body Fluid,Chemistry
 No,Not Import,51907,reuse1,Other Body Fluid,Chemistry
-Yes,albumin,51910,(Albumin),Pleural,Chemistry
+No,albumin,51910,(Albumin),Pleural,Chemistry
 No,Not Import,51911,Alpha-1,Pleural,Chemistry
 No,Not Import,51912,Alpha-2,Pleural,Chemistry
 No,Not Import,51913,Beta,Pleural,Chemistry
-Yes,c_diff,51914,Clostrid,Pleural,Chemistry
+No,c_diff,51914,Clostrid,Pleural,Chemistry
 No,Not Import,51915,Cryptococ,Pleural,Chemistry
 No,Not Import,51916,Fl Scan,Pleural,Chemistry
 No,Not Import,51917,"Immunoelectrophoresis, Pleural",Pleural,Chemistry
 No,Not Import,51918,"Immunoglobulin G, Pleural",Pleural,Chemistry
-Yes,osmolarity,51919,"Osmolality, Pleural",Pleural,Chemistry
+No,osmolarity,51919,"Osmolality, Pleural",Pleural,Chemistry
 No,Not Import,51920,"PEP, Pleural, Gamma Region",Pleural,Chemistry
-Yes,b-type_natriuretic_peptide_(bnp),51921,"proBNP, Pleural",Pleural,Chemistry
-Yes,blood_urea_nitrogen_(bun),51922,"Urea Nitrogen, Pleural",Pleural,Chemistry
+No,b-type_natriuretic_peptide_(bnp),51921,"proBNP, Pleural",Pleural,Chemistry
+No,blood_urea_nitrogen_(bun),51922,"Urea Nitrogen, Pleural",Pleural,Chemistry
 No,Not Import,51923,"Uric Acid, Pleural",Pleural,Chemistry
 No,Not Import,51924,Voided Specimen,Pleural,Chemistry
 No,Not Import,51925,72 Hr Fat,Stool,Chemistry
-Yes,albumin,51926,(Albumin),Stool,Chemistry
-Yes,albumin,51927,"Albumin, Stool",Stool,Chemistry
+No,albumin,51926,(Albumin),Stool,Chemistry
+No,albumin,51927,"Albumin, Stool",Stool,Chemistry
 No,Not Import,51928,Alpha-1,Stool,Chemistry
 No,Not Import,51929,Alpha-2,Stool,Chemistry
-Yes,amylase,51930,"Amylase, Stool",Stool,Chemistry
+No,amylase,51930,"Amylase, Stool",Stool,Chemistry
 No,Not Import,51931,Beta,Stool,Chemistry
-Yes,bilirubin_total,51932,"Bilirubin, Total, Stool",Stool,Chemistry
+No,bilirubin_total,51932,"Bilirubin, Total, Stool",Stool,Chemistry
 Yes,c_diff,51933,C. diff PCR,Stool,Chemistry
 Yes,c_diff,51934,C Diff Toxin Antigen Assay,Stool,Chemistry
 No,Not Import,51935,"Cholesterol, Stool",Stool,Chemistry
-Yes,c_diff,51936,Clostrid,Stool,Chemistry
-Yes,creatinine,51937,"Creatinine, Stool",Stool,Chemistry
+No,c_diff,51936,Clostrid,Stool,Chemistry
+No,creatinine,51937,"Creatinine, Stool",Stool,Chemistry
 No,Not Import,51938,Cryptococ,Stool,Chemistry
 No,Not Import,51939,Fl Scan,Stool,Chemistry
 No,Not Import,51940,Gamma,Stool,Chemistry
-Yes,glucose,51941,"Glucose, Stool",Stool,Chemistry
+No,glucose,51941,"Glucose, Stool",Stool,Chemistry
 No,Not Import,51942,"IgG, Stool",Stool,Chemistry
 No,Not Import,51943,"Immunoelectrophoresis, Stool",Stool,Chemistry
-Yes,lactate_dehydrogenase,51944,"Lactate Dehydrogenase, Stool",Stool,Chemistry
+No,lactate_dehydrogenase,51944,"Lactate Dehydrogenase, Stool",Stool,Chemistry
 No,Not Import,51945,Norovirus Genogroup I,Stool,Chemistry
 No,Not Import,51946,Norovirus Genogroup II,Stool,Chemistry
 No,Not Import,51947,O & P,Stool,Chemistry
 No,Not Import,51948,Sudan Stain,Stool,Chemistry
-Yes,protein,51949,"Total Protein, Stool",Stool,Chemistry
+No,protein,51949,"Total Protein, Stool",Stool,Chemistry
 No,Not Import,51950,"Triglycerides, Stool",Stool,Chemistry
-Yes,blood_urea_nitrogen_(bun),51951,"Urea Nitrogen, Stool",Stool,Chemistry
+No,blood_urea_nitrogen_(bun),51951,"Urea Nitrogen, Stool",Stool,Chemistry
 No,Not Import,51952,"Uric Acid, Stool",Stool,Chemistry
 No,Not Import,51953,Voided Specimen,Stool,Chemistry
 No,Not Import,51955,,Stool,Chemistry
@@ -1053,9 +1053,9 @@ No,Not Import,51960,Aldolase,Urine,Chemistry
 No,Not Import,51961,Alpha-1,Urine,Chemistry
 No,Not Import,51962,Alpha-2,Urine,Chemistry
 No,Not Import,51963,Amylase/Creatinine Clearance,Urine,Chemistry
-Yes,amylase,51964,"Amylase, Serum",Urine,Chemistry
+No,amylase,51964,"Amylase, Serum",Urine,Chemistry
 No,Not Import,51965,Beta,Urine,Chemistry
-Yes,bilirubin_total,51966,Bilirubin,Urine,Chemistry
+No,bilirubin_total,51966,Bilirubin,Urine,Chemistry
 No,Not Import,51967,Blood,Urine,Chemistry
 No,Not Import,51968,Camp,Urine,Chemistry
 No,Not Import,51969,"Catecholamines, Urine",Urine,Chemistry
@@ -1066,11 +1066,11 @@ No,Not Import,51973,Copi,Urine,Chemistry
 No,Not Import,51974,"Copper, Urine",Urine,Chemistry
 No,Not Import,51975,Coproporphyrins,Urine,Chemistry
 No,Not Import,51976,"Cortisol, Urine",Urine,Chemistry
-Yes,creatinine,51977,"Creatinine, Blood",Urine,Chemistry
+No,creatinine,51977,"Creatinine, Blood",Urine,Chemistry
 No,Not Import,51978,DirList,Urine,Chemistry
 No,Not Import,51979,"Estriol, Urine",Urine,Chemistry
 No,Not Import,51980,Fentanyl,Urine,Chemistry
-Yes,glucose,51981,Glucose,Urine,Chemistry
+No,glucose,51981,Glucose,Urine,Chemistry
 No,Not Import,51982,"Immunoelectrophoresis, Urine",Urine,Chemistry
 No,Not Import,51983,"Iron, Urine",Urine,Chemistry
 No,Not Import,51984,Ketone,Urine,Chemistry
@@ -1081,15 +1081,15 @@ No,Not Import,51988,O & P,Urine,Chemistry
 No,Not Import,51989,Oxycodone,Urine,Chemistry
 No,Not Import,51990,"Phenothiazine Screen, Urine",Urine,Chemistry
 No,Not Import,51991,"Propoxyphene, Urine",Urine,Chemistry
-Yes,protein,51992,Protein,Urine,Chemistry
+No,protein,51992,Protein,Urine,Chemistry
 No,Not Import,51993,Referred,Urine,Chemistry
 No,Not Import,51994,Specific Gravity,Urine,Chemistry
 No,Not Import,51995,Study Urine,Urine,Chemistry
 No,Not Import,51996,Trichomonas vaginalis,Urine,Chemistry
 No,Not Import,51997,UIFEgel,Urine,Chemistry
 No,Not Import,51998,UPEPgel,Urine,Chemistry
-Yes,amylase,51999,Urine Amylase,Urine,Chemistry
-Yes,creatinine,52000,Urine  Creatinine,Urine,Chemistry
+No,amylase,51999,Urine Amylase,Urine,Chemistry
+No,creatinine,52000,Urine  Creatinine,Urine,Chemistry
 No,Not Import,52001,"Urine PEP, Gamma region",Urine,Chemistry
 No,Not Import,52002,Urobilinogen,Urine,Chemistry
 No,Not Import,52003,Uroporphyrins,Urine,Chemistry
@@ -1127,16 +1127,16 @@ Yes,calcium,52034,Total Calcium,Blood,Blood Gas
 Yes,calcium,52035,Total Calcium,Blood,Blood Gas
 No,Not Import,52036,Voided Specimen,Blood,Blood Gas
 No,Not Import,52037,WB tCO2,Blood,Blood Gas
-Yes,base_excess,52038,Base Excess,Fluid,Blood Gas
-Yes,bicarb_(hco3),52039,Calculated Bicarbonate,Fluid,Blood Gas
-Yes,partial_pressure_of_carbon_dioxide_(paco2),52040,pCO2,Fluid,Blood Gas
-Yes,ph,52041,pH,Fluid,Blood Gas
-Yes,partial_pressure_of_oxygen_(pao2),52042,pO2,Fluid,Blood Gas
+No,base_excess,52038,Base Excess,Fluid,Blood Gas
+No,bicarb_(hco3),52039,Calculated Bicarbonate,Fluid,Blood Gas
+No,partial_pressure_of_carbon_dioxide_(paco2),52040,pCO2,Fluid,Blood Gas
+No,ph,52041,pH,Fluid,Blood Gas
+No,partial_pressure_of_oxygen_(pao2),52042,pO2,Fluid,Blood Gas
 No,Not Import,52043,Voided Specimen,Other Body Fluid,Blood Gas
-Yes,osmolarity,52044,"Osmolality, Urine",Urine,Blood Gas
-Yes,ph,52045,"pH, Urine",Urine,Blood Gas
-Yes,potassium,52046,"Potassium, Urine",Urine,Blood Gas
-Yes,sodium,52047,"Sodium, Urine",Urine,Blood Gas
+No,osmolarity,52044,"Osmolality, Urine",Urine,Blood Gas
+No,ph,52045,"pH, Urine",Urine,Blood Gas
+No,potassium,52046,"Potassium, Urine",Urine,Blood Gas
+No,sodium,52047,"Sodium, Urine",Urine,Blood Gas
 No,Not Import,52048,Atyps#,Ascites,Hematology
 No,Not Import,52049,Bands#,Ascites,Hematology
 No,Not Import,52050,Basos#,Ascites,Hematology
@@ -1146,7 +1146,7 @@ No,Not Import,52053,Histio#,Ascites,Hematology
 No,Not Import,52054,Histiocyte,Ascites,Hematology
 No,Not Import,52055,Hyperseg,Ascites,Hematology
 No,Not Import,52056,Hyperseg#,Ascites,Hematology
-Yes,lymphocyte,52057,Lymphs#,Ascites,Hematology
+No,lymphocyte,52057,Lymphs#,Ascites,Hematology
 No,Not Import,52058,Metas#,Ascites,Hematology
 No,Not Import,52059,Monos#,Ascites,Hematology
 No,Not Import,52060,Myelos#,Ascites,Hematology
@@ -1230,7 +1230,7 @@ No,Not Import,52138,Kct,Blood,Hematology
 No,Not Import,52139,LE Prep,Blood,Hematology
 No,Not Import,52140,LS,Blood,Hematology
 No,Not Import,52141,Malaria Smear,Blood,Hematology
-Yes,platelets,52142,Mean Platelet Volume,Blood,Hematology
+No,platelets,52142,Mean Platelet Volume,Blood,Hematology
 No,Not Import,52143,Methemalb,Blood,Hematology
 Yes,met_hgb,52144,Methemoglobin,Blood,Hematology
 No,Not Import,52145,Mono Spot Test,Blood,Hematology
@@ -1345,14 +1345,14 @@ No,Not Import,52253,Delete,Cerebrospinal Fluid,Hematology
 No,Not Import,52254,Delete,Cerebrospinal Fluid,Hematology
 No,Not Import,52255,Eos#,Cerebrospinal Fluid,Hematology
 No,Not Import,52256,Eosinophils,Cerebrospinal Fluid,Hematology
-Yes,hematocrit,52257,"Hematocrit, CSF",Cerebrospinal Fluid,Hematology
+No,hematocrit,52257,"Hematocrit, CSF",Cerebrospinal Fluid,Hematology
 No,Not Import,52258,Histiocyte,Cerebrospinal Fluid,Hematology
 No,Not Import,52260,Hypersegmented Neutrophils,Cerebrospinal Fluid,Hematology
 No,Not Import,52261,Hypersegmented Neutrophils #,Cerebrospinal Fluid,Hematology
 No,Not Import,52262,Immunophenotyping,Cerebrospinal Fluid,Hematology
 No,Not Import,52263,Lining Cell,Cerebrospinal Fluid,Hematology
-Yes,lymphocyte,52264,Lymphs,Cerebrospinal Fluid,Hematology
-Yes,lymphocyte,52265,Lymphs#,Cerebrospinal Fluid,Hematology
+No,lymphocyte,52264,Lymphs,Cerebrospinal Fluid,Hematology
+No,lymphocyte,52265,Lymphs#,Cerebrospinal Fluid,Hematology
 No,Not Import,52266,Macrophage,Cerebrospinal Fluid,Hematology
 No,Not Import,52267,Macrophage#,Cerebrospinal Fluid,Hematology
 No,Not Import,52268,Mesothelial cells,Cerebrospinal Fluid,Hematology
@@ -1445,7 +1445,7 @@ No,Not Import,52355,Hypersegmented Neutrophils,Other Body Fluid,Hematology
 No,Not Import,52356,Hypersegmented Neutrophils#,Other Body Fluid,Hematology
 No,Not Import,52357,Iron,Other Body Fluid,Hematology
 No,Not Import,52358,Lining Cell,Other Body Fluid,Hematology
-Yes,lymphocyte,52359,Lymphs#,Other Body Fluid,Hematology
+No,lymphocyte,52359,Lymphs#,Other Body Fluid,Hematology
 No,Not Import,52360,Metamyelocytes#,Other Body Fluid,Hematology
 No,Not Import,52361,Monos#,Other Body Fluid,Hematology
 No,Not Import,52362,Myelos#,Other Body Fluid,Hematology
@@ -1470,7 +1470,7 @@ No,Not Import,52380,Histiocyte#,Pleural,Hematology
 No,Not Import,52381,Histiocytes,Pleural,Hematology
 No,Not Import,52382,Hypersegmented  Neutrophils#,Pleural,Hematology
 No,Not Import,52383,Hypersegmented Neutrophils,Pleural,Hematology
-Yes,lymphocyte,52384,Lymphs#,Pleural,Hematology
+No,lymphocyte,52384,Lymphs#,Pleural,Hematology
 No,Not Import,52385,Metas#,Pleural,Hematology
 No,Not Import,52386,Monos#,Pleural,Hematology
 No,Not Import,52387,Myelos#,Pleural,Hematology
@@ -1493,11 +1493,11 @@ No,Not Import,52403,Bile,Stool,Hematology
 No,Not Import,52404,Fat,Stool,Hematology
 No,Not Import,52405,Prblm,Stool,Hematology
 No,Not Import,52406,Voided Specimen,Stool,Hematology
-Yes,white_blood_cell_count,52407,WBC,Stool,Hematology
+No,white_blood_cell_count,52407,WBC,Stool,Hematology
 No,Not Import,52408,Bacturia,Urine,Hematology
 No,Not Import,52409,Budding Yeast,Urine,Hematology
 No,Not Import,52410,Fatty Casts,Urine,Hematology
-Yes,hemoglobin,52411,Hgb,Urine,Hematology
+No,hemoglobin,52411,Hgb,Urine,Hematology
 No,Not Import,52412,HPF,Urine,Hematology
 No,Not Import,52413,Leuks,Urine,Hematology
 No,Not Import,52414,LEUKS,Urine,Hematology
@@ -1531,7 +1531,7 @@ Yes,troponin,52642,Troponin I,Blood,Chemistry
 Yes,blood_urea_nitrogen_(bun),52647,Urea Nitrogen,Blood,Chemistry
 No,Not Import,52703,"Albumin, Urine",Urine,Chemistry
 No,Not Import,52720,"HCG, Urine, Qualitative",Urine,Chemistry
-Yes,ph,52730,pH,Urine,Chemistry
+No,ph,52730,pH,Urine,Chemistry
 Yes,lymphocyte,52769,Absolute Lymphocyte Count,Blood,Hematology
 No,Not Import,52786,Bleeding Time,Blood,Hematology
 No,Not Import,52838,Factor II,Blood,Hematology
@@ -1583,7 +1583,7 @@ No,Not Import,53116,(Albumin),Ascites,Chemistry
 No,Not Import,53117,Alpha-1,Ascites,Chemistry
 No,Not Import,53118,Alpha-2,Ascites,Chemistry
 No,Not Import,53119,Beta,Ascites,Chemistry
-Yes,c_diff,53120,Clostrid,Ascites,Chemistry
+No,c_diff,53120,Clostrid,Ascites,Chemistry
 No,Not Import,53121,Cryptococ,Ascites,Chemistry
 No,Not Import,53122,Fl Scan,Ascites,Chemistry
 No,Not Import,53123,"Immunoelectrophoresis, Ascites",Ascites,Chemistry
@@ -1626,7 +1626,7 @@ Yes,neutrophils,53164,Neutrophils,Blood,Chemistry
 No,Not Import,53165,RDW-CV,Blood,Chemistry
 No,Not Import,53166,RDW-SD,Blood,Chemistry
 No,Not Import,53167,Reflex RPR,Blood,Chemistry
-No,Not Import,53168,"",Other Body Fluid,Chemistry
+No,Not Import,53168,,Other Body Fluid,Chemistry
 No,Not Import,53169,Ceph-IC,Other Body Fluid,Chemistry
 No,Not Import,53170,CephIC Endpt,Other Body Fluid,Chemistry
 Yes,covid,53171,COV12IC,Other Body Fluid,Chemistry

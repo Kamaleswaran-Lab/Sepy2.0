@@ -1,242 +1,1611 @@
-Contents of pickle file: /hpc/home/yy450/link_kamaleswaranlab/GradyDataset/EMR_Supertables/2022/0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4.pickle
+Contents of pickle file: /hpc/home/yy450/link_kamaleswaranlab/GradyDataset/sepy_processed/grady_supertables/2022/Supertables/0a2e118cd98a4899369b9fe6dd468dd4b83bc99de52a7ee3da2580584de2d810.pkl
 
-==== csn (<class 'str'>) ====
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4
-
-==== pat_id (<class 'str'>) ====
-d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3
-
-==== cultures_PerCSN (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (12, 21)
-Column Names: ['pat_id', 'proc_cat_id', 'proc_cat_name', 'proc_code', 'proc_desc', 'component_id', 'component', 'loinc_code', 'specimen_collect_time', 'order_time', 'lab_result_time', 'result_status', 'lab_result', 'culture_genus_c', 'culture_genus_description', 'culture_species_c', 'culture_species_description', 'culture_quantity_c', 'culture_quantity_description', 'organism_id', 'organism_description']
+==== age (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                                                                                                                            pat_id  proc_cat_id                      proc_cat_name proc_code                  proc_desc  component_id       component loinc_code specimen_collect_time          order_time     lab_result_time result_status lab_result  culture_genus_c culture_genus_description  culture_species_c culture_species_description  culture_quantity_c culture_quantity_description  organism_id organism_description
-csn                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3            4  MICROBIOLOGY - GENERAL ORDERABLES   LAB3900  SARS-COV-2 PCR (COVID-19)     123040570  SARS-CoV-2 PCR        NaN   1990-09-10 01:48:20 1990-09-10 01:21:20 1990-09-10 06:03:20      Verified   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3         3041           BLOOD CULTURE ORDERABLES    LAB462              BLOOD CULTURE     123040764         Culture    11475-1   1990-09-10 02:13:20 1990-09-10 01:51:20 1990-09-11 04:16:20   Preliminary   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3         3041           BLOOD CULTURE ORDERABLES    LAB462              BLOOD CULTURE     123040764         Culture    11475-1   1990-09-10 02:13:20 1990-09-10 01:51:20 1990-09-12 04:14:20   Preliminary   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3         3041           BLOOD CULTURE ORDERABLES    LAB462              BLOOD CULTURE     123040764         Culture    11475-1   1990-09-10 02:13:20 1990-09-10 01:51:20 1990-09-13 04:15:20   Preliminary   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3         3041           BLOOD CULTURE ORDERABLES    LAB462              BLOOD CULTURE     123040764         Culture    11475-1   1990-09-10 02:13:20 1990-09-10 01:51:20 1990-09-14 04:16:20   Preliminary   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
+1990-12-15 02:23:20    61.0
+1990-12-15 03:23:20    61.0
+1990-12-15 04:23:20    61.0
+1990-12-15 05:23:20    61.0
+1990-12-15 06:23:20    61.0
+Freq: 60min
 
-==== beds_PerCSN (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (8, 14)
-Column Names: ['pat_id', 'bed_location_start', 'bed_location_end', 'bed_unit', 'bed_room', 'bed_id', 'bed_label', 'hospital_service', 'accomodation_code', 'accomodation_description', 'icu', 'imc', 'ed', 'procedure']
+==== gender (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                                                                                                                            pat_id  bed_location_start    bed_location_end       bed_unit   bed_room  bed_id  bed_label        hospital_service  accomodation_code accomodation_description  icu  imc  ed  procedure
-csn                                                                                                                                                                                                                                                                                                                 
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3 1990-09-09 23:41:20 1990-09-09 23:46:20  GHS EMERGENCY      TR-01    2154      TR-01  Medical Intensive Care            10003.0           Intensive Care    0    0   1          0
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3 1990-09-09 23:46:20 1990-09-09 23:51:20  GHS EMERGENCY      TR-01     856      TR-01  Medical Intensive Care            10003.0           Intensive Care    0    0   1          0
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3 1990-09-09 23:51:20 1990-09-10 00:21:20  GHS EMERGENCY  TR-Cubby2    9249  TR-Cubby2  Medical Intensive Care            10003.0           Intensive Care    0    0   1          0
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3 1990-09-10 00:21:20 1990-09-10 01:38:20  GHS EMERGENCY   TRTDC-01    9250   TRTDC-01  Medical Intensive Care            10003.0           Intensive Care    0    0   1          0
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3 1990-09-10 01:38:20 1990-09-10 02:49:20  GHS EMERGENCY      Z3-41    6969      Z3-41  Medical Intensive Care            10003.0           Intensive Care    0    0   1          0
+1990-12-15 02:23:20    Female
+1990-12-15 03:23:20    Female
+1990-12-15 04:23:20    Female
+1990-12-15 05:23:20    Female
+1990-12-15 06:23:20    Female
+Freq: 60min
 
-==== procedures_PerCSN (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (0, 14)
-Column Names: ['pat_id', 'surgery_date', 'in_or_dttm', 'procedure_start_dttm', 'procedure_comp_dttm', 'out_or_dttm', 'or_proc_id', 'cpt_code', 'primary_procedure_nm', 'service_nm', 'asa_rating_cd', 'asa_rating', 'wound_class_c', 'surgical_wound_class']
+==== race (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-Empty DataFrame
-Columns: [pat_id, surgery_date, in_or_dttm, procedure_start_dttm, procedure_comp_dttm, out_or_dttm, or_proc_id, cpt_code, primary_procedure_nm, service_nm, asa_rating_cd, asa_rating, wound_class_c, surgical_wound_class]
-Index: []
+1990-12-15 02:23:20    None
+1990-12-15 03:23:20    None
+1990-12-15 04:23:20    None
+1990-12-15 05:23:20    None
+1990-12-15 06:23:20    None
+Freq: 60min
 
-==== diagnosis_PerCSN (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (16, 9)
-Column Names: ['pat_id', 'dx_line', 'dx_icd_scope', 'dx_code_icd9', 'dx_code_icd10', 'dx_source', 'dx_time_date', 'dx_code', 'dx_name']
+==== ethnicity (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                                                                                                                            pat_id  dx_line dx_icd_scope  dx_code_icd9 dx_code_icd10             dx_source        dx_time_date dx_code                           dx_name
-csn                                                                                                                                                                                                                                                                     
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3        1          NaN           NaN          E871  ADMISSION DX (CODED) 1990-09-14 23:10:43   E87.1  Hypo-osmolality and hyponatremia
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3        1          Yes           NaN          E871       FINAL DIAGNOSES 1990-09-15 17:53:20   E87.1  Hypo-osmolality and hyponatremia
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3        2          Yes           NaN         G9341       FINAL DIAGNOSES 1990-09-15 17:53:20  G93.41          Metabolic encephalopathy
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3        3          Yes           NaN         J9811       FINAL DIAGNOSES 1990-09-15 17:53:20  J98.11                       Atelectasis
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3        4          Yes           NaN          E861       FINAL DIAGNOSES 1990-09-15 17:53:20   E86.1                       Hypovolemia
+1990-12-15 02:23:20    None
+1990-12-15 03:23:20    None
+1990-12-15 04:23:20    None
+1990-12-15 05:23:20    None
+1990-12-15 06:23:20    None
+Freq: 60min
 
-==== flags (<class 'dict'>) ====
-Number of Keys: 20
-csn: 0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4
-pt_id: d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3
-y_vent_rows: 0
-y_vent_start_time: 0
-y_vent_end_time: 0
-vent_start_time: NaT
-ed_wait_time: -7.0
-worst_pf_pa: nan
-worst_pf_pa_time: NaT
-worst_pf_sp: nan
-... (truncated)
-
-==== static_features (<class 'dict'>) ====
-Number of Keys: 13
-admit_reason: FALL
-ed_arrival_source: Self Referral
-total_icu_days: 3.0
-total_vent_days: nan
-total_hosp_days: 3.0
-discharge_status: Home or Self Care
-discharge_to: nan
-encounter_type: Inpatient
-age: 69.0
-gender: Male
-... (truncated)
-
-==== event_times (<class 'dict'>) ====
-Number of Keys: 6
-ed_presentation_time: 1990-09-09 23:48:20
-hospital_admission_date_time: 1990-09-09 23:41:20
-hospital_discharge_date_time: 1990-09-13 13:18:20
-start_index: 1990-09-09 23:41:20
-first_icu_start: 1990-09-10 16:41:20
-first_icu_end: 1990-09-12 21:41:20
-
-==== cultures_staging (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (12, 21)
-Column Names: ['pat_id', 'proc_cat_id', 'proc_cat_name', 'proc_code', 'proc_desc', 'component_id', 'component', 'loinc_code', 'specimen_collect_time', 'order_time', 'lab_result_time', 'result_status', 'lab_result', 'culture_genus_c', 'culture_genus_description', 'culture_species_c', 'culture_species_description', 'culture_quantity_c', 'culture_quantity_description', 'organism_id', 'organism_description']
+==== cci9 (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                                                                                                                            pat_id  proc_cat_id                      proc_cat_name proc_code                  proc_desc  component_id       component loinc_code specimen_collect_time          order_time     lab_result_time result_status lab_result  culture_genus_c culture_genus_description  culture_species_c culture_species_description  culture_quantity_c culture_quantity_description  organism_id organism_description
-csn                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3            4  MICROBIOLOGY - GENERAL ORDERABLES   LAB3900  SARS-COV-2 PCR (COVID-19)     123040570  SARS-CoV-2 PCR        NaN   1990-09-10 01:48:20 1990-09-10 01:21:20 1990-09-10 06:03:20      Verified   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3         3041           BLOOD CULTURE ORDERABLES    LAB462              BLOOD CULTURE     123040764         Culture    11475-1   1990-09-10 02:13:20 1990-09-10 01:51:20 1990-09-11 04:16:20   Preliminary   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3         3041           BLOOD CULTURE ORDERABLES    LAB462              BLOOD CULTURE     123040764         Culture    11475-1   1990-09-10 02:13:20 1990-09-10 01:51:20 1990-09-12 04:14:20   Preliminary   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3         3041           BLOOD CULTURE ORDERABLES    LAB462              BLOOD CULTURE     123040764         Culture    11475-1   1990-09-10 02:13:20 1990-09-10 01:51:20 1990-09-13 04:15:20   Preliminary   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
-0a3b20c3280d3cdc21a2ba964089865ef99a7869bd13c8c1e2e02a2ff3130ab4  d91c419092b58458accd5f6b4a4a839e63ee67c46987cbbdd7a4170d12fabed3         3041           BLOOD CULTURE ORDERABLES    LAB462              BLOOD CULTURE     123040764         Culture    11475-1   1990-09-10 02:13:20 1990-09-10 01:51:20 1990-09-14 04:16:20   Preliminary   Negative              NaN                       NaN                NaN                         NaN                 NaN                          NaN          NaN                  NaN
+1990-12-15 02:23:20    None
+1990-12-15 03:23:20    None
+1990-12-15 04:23:20    None
+1990-12-15 05:23:20    None
+1990-12-15 06:23:20    None
+Freq: 60min
 
-==== abx_staging (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (0, 29)
-Column Names: ['pat_id', 'har', 'mrn', 'study_id', 'medication_id', 'med_name', 'med_name_generic', 'med_order_status', 'med_order_time', 'med_action_time', 'med_start', 'med_stop', 'med_order_dose', 'med_order_route_c', 'med_order_route', 'med_order_dose_unit', 'med_frequency', 'med_action_code', 'med_action', 'med_action_dose', 'med_action_dose_unit', 'med_action_route_c', 'med_action_route', 'infusion_rate', 'infusion_rate_unit', 'therapeutic_class', 'pharmacy_class', 'pharmacy_subclass', 'super_table_col_name']
+==== cci10 (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-Empty DataFrame
-Columns: [pat_id, har, mrn, study_id, medication_id, med_name, med_name_generic, med_order_status, med_order_time, med_action_time, med_start, med_stop, med_order_dose, med_order_route_c, med_order_route, med_order_dose_unit, med_frequency, med_action_code, med_action, med_action_dose, med_action_dose_unit, med_action_route_c, med_action_route, infusion_rate, infusion_rate_unit, therapeutic_class, pharmacy_class, pharmacy_subclass, super_table_col_name]
-Index: []
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
 
-==== labs_staging (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (86, 60)
-Column Names: ['anion_gap', 'base_excess', 'bicarb_(hco3)', 'blood_urea_nitrogen_(bun)', 'calcium', 'calcium_ionized', 'chloride', 'creatinine', 'gfr', 'glucose', 'magnesium', 'osmolarity', 'phosphorus', 'potassium', 'sodium', 'haptoglobin', 'hematocrit', 'hemoglobin', 'met_hgb', 'platelets', 'white_blood_cell_count', 'carboxy_hgb', 'alanine_aminotransferase_(alt)', 'albumin', 'alkaline_phosphatase', 'ammonia', 'aspartate_aminotransferase_(ast)', 'bilirubin_direct', 'bilirubin_total', 'fibrinogen', 'inr', 'lactate_dehydrogenase', 'lactic_acid', 'partial_prothrombin_time_(ptt)', 'prealbumin', 'protein', 'prothrombin_time_(pt)', 'thrombin_time', 'transferrin', 'amylase', 'lipase', 'b-type_natriuretic_peptide_(bnp)', 'troponin', 'fio2', 'partial_pressure_of_carbon_dioxide_(paco2)', 'partial_pressure_of_oxygen_(pao2)', 'ph', 'saturation_of_oxygen_(sao2)', 'd_dimer', 'hemoglobin_a1c', 'parathyroid_level', 'thyroid_stimulating_hormone_(tsh)', 'lymphocyte', 'neutrophils', 'crp_high_sens', 'procalcitonin', 'erythrocyte_sedimentation_rate_(esr)', 'c_diff', 'covid', 'mtp']
+==== anion_gap (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                     anion_gap  base_excess  bicarb_(hco3)  blood_urea_nitrogen_(bun)  calcium  calcium_ionized  chloride  creatinine   gfr  glucose  magnesium  osmolarity  phosphorus  potassium  sodium  haptoglobin  hematocrit  hemoglobin  met_hgb  platelets  white_blood_cell_count  carboxy_hgb  alanine_aminotransferase_(alt)  albumin  alkaline_phosphatase  ammonia  aspartate_aminotransferase_(ast)  bilirubin_direct  bilirubin_total  fibrinogen  inr  lactate_dehydrogenase  lactic_acid  partial_prothrombin_time_(ptt)  prealbumin  protein  prothrombin_time_(pt)  thrombin_time  transferrin  amylase  lipase  b-type_natriuretic_peptide_(bnp)  troponin  fio2  partial_pressure_of_carbon_dioxide_(paco2)  partial_pressure_of_oxygen_(pao2)  ph  saturation_of_oxygen_(sao2)  d_dimer  hemoglobin_a1c  parathyroid_level  thyroid_stimulating_hormone_(tsh)  lymphocyte  neutrophils  crp_high_sens  procalcitonin  erythrocyte_sedimentation_rate_(esr) c_diff     covid  mtp
-1990-09-09 23:41:20       17.0          NaN           22.0                       13.0      8.6              NaN      68.0         0.9  60.0    129.0        NaN  219.000000         NaN        3.0   107.0          NaN        44.6        15.4      NaN      260.0                    14.2          NaN                            30.0      3.9                  61.0      NaN                              39.0               0.6              1.9       227.0  1.1                    NaN          NaN                            27.2         NaN      5.9                  13.35           11.9          NaN      NaN     NaN                               NaN       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None      None  NaN
-1990-09-10 00:41:20        NaN          NaN            NaN                        NaN      NaN              NaN       NaN         NaN   NaN      NaN        NaN         NaN         NaN        NaN     NaN          NaN         NaN         NaN      NaN        NaN                     NaN          NaN                             NaN      NaN                   NaN      NaN                               NaN               NaN              NaN         NaN  NaN                    NaN          NaN                             NaN         NaN      NaN                    NaN            NaN          NaN      NaN     NaN                               NaN       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None      None  NaN
-1990-09-10 01:41:20       13.0          NaN           28.0                       14.0      9.3              NaN      65.0         0.8  60.0     90.0        1.7  221.333333         NaN        3.1   106.0          NaN         NaN         NaN      NaN        NaN                     NaN          NaN                             NaN      4.1                   NaN      NaN                               NaN               NaN              NaN         NaN  NaN                    NaN          NaN                             NaN         NaN      NaN                    NaN            NaN          NaN      NaN     NaN                             228.0       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None  Negative  NaN
-1990-09-10 02:41:20        NaN          NaN            NaN                        NaN      NaN              NaN       NaN         NaN  60.0      NaN        NaN         NaN         NaN        NaN     NaN          NaN         NaN         NaN      NaN        NaN                     NaN          NaN                             NaN      NaN                   NaN      NaN                               NaN               NaN              NaN         NaN  NaN                    NaN          NaN                             NaN         NaN      NaN                    NaN            NaN          NaN      NaN     NaN                               NaN       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None      None  NaN
-1990-09-10 03:41:20        NaN          NaN            NaN                        NaN      NaN              NaN       NaN         NaN   NaN      NaN        NaN         NaN         NaN        NaN     NaN          NaN         NaN         NaN      NaN        NaN                     NaN          NaN                             NaN      NaN                   NaN      NaN                               NaN               NaN              NaN         NaN  NaN                    NaN          NaN                             NaN         NaN      NaN                    NaN            NaN          NaN      NaN     NaN                               NaN       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None      None  NaN
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20    14.0
+1990-12-15 06:23:20     NaN
+Freq: 60min
 
-==== vitals_staging (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (86, 14)
-Column Names: ['temperature', 'daily_weight_kg', 'height_cm', 'sbp_line', 'dbp_line', 'map_line', 'sbp_cuff', 'dbp_cuff', 'map_cuff', 'pulse', 'unassisted_resp_rate', 'spo2', 'end_tidal_co2', 'o2_flow_rate']
+==== base_excess (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                     temperature  daily_weight_kg  height_cm  sbp_line  dbp_line  map_line  sbp_cuff  dbp_cuff  map_cuff  pulse  unassisted_resp_rate  spo2  end_tidal_co2  o2_flow_rate
-1990-09-09 23:41:20          NaN             90.7      182.9       NaN       NaN       NaN     146.0      92.0       NaN  120.0                  20.0  99.0            NaN           NaN
-1990-09-10 00:41:20          NaN              NaN        NaN       NaN       NaN       NaN     134.0      82.0      95.0   89.0                  23.0  93.0            NaN           NaN
-1990-09-10 01:41:20          NaN              NaN        NaN       NaN       NaN       NaN       NaN       NaN       NaN    NaN                   NaN   NaN            NaN           NaN
-1990-09-10 02:41:20          NaN              NaN        NaN       NaN       NaN       NaN       NaN       NaN       NaN    NaN                   NaN   NaN            NaN           NaN
-1990-09-10 03:41:20          NaN              NaN        NaN       NaN       NaN       NaN       NaN       NaN       NaN    NaN                   NaN   NaN            NaN           NaN
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
 
-==== gcs_staging (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (86, 4)
-Column Names: ['gcs_total_score', 'gcs_verbal_score', 'gcs_eye_score', 'gcs_motor_score']
+==== bicarb_(hco3) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                     gcs_total_score  gcs_verbal_score  gcs_eye_score  gcs_motor_score
-1990-09-09 23:41:20             15.0               5.0            4.0              6.0
-1990-09-10 00:41:20             14.5               4.5            4.0              6.0
-1990-09-10 01:41:20              NaN               NaN            NaN              NaN
-1990-09-10 02:41:20              NaN               NaN            NaN              NaN
-1990-09-10 03:41:20             15.0               5.0            4.0              6.0
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20    23.0
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== blood_urea_nitrogen_(bun) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20    13.0
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== calcium (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20    10.6
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== calcium_ionized (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== chloride (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20      NaN
+1990-12-15 03:23:20      NaN
+1990-12-15 04:23:20      NaN
+1990-12-15 05:23:20    105.0
+1990-12-15 06:23:20      NaN
+Freq: 60min
+
+==== creatinine (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    0.7
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== gfr (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20    60.0
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== glucose (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20      NaN
+1990-12-15 03:23:20      NaN
+1990-12-15 04:23:20      NaN
+1990-12-15 05:23:20    129.0
+1990-12-15 06:23:20      NaN
+Freq: 60min
+
+==== magnesium (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== osmolarity (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20      NaN
+1990-12-15 03:23:20      NaN
+1990-12-15 04:23:20      NaN
+1990-12-15 05:23:20    285.0
+1990-12-15 06:23:20      NaN
+Freq: 60min
+
+==== phosphorus (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== potassium (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    4.6
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== sodium (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20      NaN
+1990-12-15 03:23:20      NaN
+1990-12-15 04:23:20      NaN
+1990-12-15 05:23:20    142.0
+1990-12-15 06:23:20      NaN
+Freq: 60min
+
+==== haptoglobin (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== hematocrit (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== hemoglobin (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== met_hgb (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== platelets (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== white_blood_cell_count (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== carboxy_hgb (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== alanine_aminotransferase_(alt) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20    12.0
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== albumin (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    4.8
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== alkaline_phosphatase (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20    58.0
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== ammonia (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== aspartate_aminotransferase_(ast) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20    19.0
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== bilirubin_direct (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    0.1
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== bilirubin_total (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    0.7
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== fibrinogen (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== inr (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== lactate_dehydrogenase (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== lactic_acid (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== partial_prothrombin_time_(ptt) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== prealbumin (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== protein (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    7.8
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== prothrombin_time_(pt) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== thrombin_time (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== transferrin (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== amylase (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== lipase (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== b-type_natriuretic_peptide_(bnp) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== troponin (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== fio2 (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== partial_pressure_of_carbon_dioxide_(paco2) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== partial_pressure_of_oxygen_(pao2) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== ph (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== saturation_of_oxygen_(sao2) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== d_dimer (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== hemoglobin_a1c (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== parathyroid_level (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== thyroid_stimulating_hormone_(tsh) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== lymphocyte (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== neutrophils (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== crp_high_sens (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== procalcitonin (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== erythrocyte_sedimentation_rate_(esr) (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== c_diff (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== covid (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== mtp (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== temperature (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    98.599998
+1990-12-15 03:23:20          NaN
+1990-12-15 04:23:20          NaN
+1990-12-15 05:23:20          NaN
+1990-12-15 06:23:20          NaN
+Freq: 60min
+
+==== daily_weight_kg (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    85.300003
+1990-12-15 03:23:20    85.300003
+1990-12-15 04:23:20    85.300003
+1990-12-15 05:23:20    85.300003
+1990-12-15 06:23:20    85.300003
+Freq: 60min
+
+==== height_cm (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    160.0
+1990-12-15 03:23:20    160.0
+1990-12-15 04:23:20    160.0
+1990-12-15 05:23:20    160.0
+1990-12-15 06:23:20    160.0
+Freq: 60min
+
+==== sbp_line (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== dbp_line (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== map_line (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== sbp_cuff (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    142.0
+1990-12-15 03:23:20    139.0
+1990-12-15 04:23:20      NaN
+1990-12-15 05:23:20      NaN
+1990-12-15 06:23:20      NaN
+Freq: 60min
+
+==== dbp_cuff (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    82.0
+1990-12-15 03:23:20    99.0
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20     NaN
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== map_cuff (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20     93.0
+1990-12-15 03:23:20    104.0
+1990-12-15 04:23:20      NaN
+1990-12-15 05:23:20      NaN
+1990-12-15 06:23:20      NaN
+Freq: 60min
+
+==== pulse (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    135.0
+1990-12-15 03:23:20    132.0
+1990-12-15 04:23:20      NaN
+1990-12-15 05:23:20      NaN
+1990-12-15 06:23:20      NaN
+Freq: 60min
+
+==== unassisted_resp_rate (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    18.0
+1990-12-15 03:23:20    23.0
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20     NaN
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== spo2 (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    99.0
+1990-12-15 03:23:20    96.0
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20     NaN
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== end_tidal_co2 (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== oxygen_flow_rate (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== cvp (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== in_or (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== proc_start (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== gcs_total_score (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20    15.0
+1990-12-15 05:23:20     NaN
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== gcs_verbal_score (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    5.0
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== gcs_eye_score (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    4.0
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== gcs_motor_score (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    6.0
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
 
 ==== vent_status (<class 'pandas.core.series.Series'>) ====
-Series Length: 86
+Series Length: 294
 Head (first 5 rows):
-1990-09-09 23:41:20    NaN
-1990-09-10 00:41:20    NaN
-1990-09-10 01:41:20    NaN
-1990-09-10 02:41:20    NaN
-1990-09-10 03:41:20    NaN
-Freq: h
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
 
 ==== vent_fio2 (<class 'pandas.core.series.Series'>) ====
-Series Length: 86
+Series Length: 294
 Head (first 5 rows):
-1990-09-09 23:41:20    NaN
-1990-09-10 00:41:20    NaN
-1990-09-10 01:41:20    NaN
-1990-09-10 02:41:20    NaN
-1990-09-10 03:41:20    NaN
-Freq: h
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
 
-==== vasopressor_meds_staging (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (86, 13)
-Column Names: ['norepinephrine', 'epinephrine', 'dobutamine', 'dopamine', 'phenylephrine', 'vasopressin', 'norepinephrine_dose_unit', 'epinephrine_dose_unit', 'dobutamine_dose_unit', 'dopamine_dose_unit', 'phenylephrine_dose_unit', 'vasopressin_dose_unit', 'med_order_time']
+==== peep (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                    norepinephrine epinephrine dobutamine dopamine phenylephrine vasopressin norepinephrine_dose_unit epinephrine_dose_unit dobutamine_dose_unit dopamine_dose_unit phenylephrine_dose_unit vasopressin_dose_unit med_order_time
-1990-09-09 23:41:20            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN
-1990-09-10 00:41:20            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN
-1990-09-10 01:41:20            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN
-1990-09-10 02:41:20            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN
-1990-09-10 03:41:20            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
 
-==== super_table (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (86, 151)
-Column Names: ['temperature', 'daily_weight_kg', 'height_cm', 'sbp_line', 'dbp_line', 'map_line', 'sbp_cuff', 'dbp_cuff', 'map_cuff', 'pulse', 'unassisted_resp_rate', 'spo2', 'end_tidal_co2', 'o2_flow_rate', 'anion_gap', 'base_excess', 'bicarb_(hco3)', 'blood_urea_nitrogen_(bun)', 'calcium', 'calcium_ionized', 'chloride', 'creatinine', 'gfr', 'glucose', 'magnesium', 'osmolarity', 'phosphorus', 'potassium', 'sodium', 'haptoglobin', 'hematocrit', 'hemoglobin', 'met_hgb', 'platelets', 'white_blood_cell_count', 'carboxy_hgb', 'alanine_aminotransferase_(alt)', 'albumin', 'alkaline_phosphatase', 'ammonia', 'aspartate_aminotransferase_(ast)', 'bilirubin_direct', 'bilirubin_total', 'fibrinogen', 'inr', 'lactate_dehydrogenase', 'lactic_acid', 'partial_prothrombin_time_(ptt)', 'prealbumin', 'protein', 'prothrombin_time_(pt)', 'thrombin_time', 'transferrin', 'amylase', 'lipase', 'b-type_natriuretic_peptide_(bnp)', 'troponin', 'fio2', 'partial_pressure_of_carbon_dioxide_(paco2)', 'partial_pressure_of_oxygen_(pao2)', 'ph', 'saturation_of_oxygen_(sao2)', 'd_dimer', 'hemoglobin_a1c', 'parathyroid_level', 'thyroid_stimulating_hormone_(tsh)', 'lymphocyte', 'neutrophils', 'crp_high_sens', 'procalcitonin', 'erythrocyte_sedimentation_rate_(esr)', 'c_diff', 'covid', 'mtp', 'gcs_total_score', 'gcs_verbal_score', 'gcs_eye_score', 'gcs_motor_score', 'vent_status', 'norepinephrine', 'epinephrine', 'dobutamine', 'dopamine', 'phenylephrine', 'vasopressin', 'norepinephrine_dose_unit', 'epinephrine_dose_unit', 'dobutamine_dose_unit', 'dopamine_dose_unit', 'phenylephrine_dose_unit', 'vasopressin_dose_unit', 'med_order_time', 'icu', 'imc', 'ed', 'procedure', 'best_map', 'pulse_pressure', 'norepinephrine_dose_weight', 'epinephrine_dose_weight', 'dobutamine_dose_weight', 'dopamine_dose_weight', 'phenylephrine_dose_weight', 'vasopressin_dose_weight', 'pf_sp', 'pf_pa', 'n_to_l', 'on_pressors', 'on_dobutamine', 'elapsed_icu', 'elapsed_hosp', 'on_vent_old', 'vent_fio2_old', 'on_vent', 'vent_fio2', 'age', 'gender', 'cci9', 'cci10', 'bed_unit', 'bed_type', 'icu_type', 'Sodium Chloride 0.9% intravenous solution', 'Sodium Chloride 0.9% intravenous solution_dose', 'Lactated Ringers Injection intravenous solution', 'Lactated Ringers Injection intravenous solution_dose', 'Sodium Chloride 0.45% intravenous solution', 'Sodium Chloride 0.45% intravenous solution_dose', 'Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution', 'Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution_dose', 'potassium chloride-sodium chloride', 'potassium chloride-sodium chloride_dose', 'Dextrose 5% in Lactated Ringers intravenous solution', 'Dextrose 5% in Lactated Ringers intravenous solution_dose', 'Dextrose 20% in Water intravenous solution', 'Dextrose 20% in Water intravenous solution_dose', 'Dextrose 5% in Water with KCl 20 mEq/l intravenous solution', 'Dextrose 5% in Water with KCl 20 mEq/l intravenous solution_dose', 'Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution', 'Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution_dose', 'dextran, low molecular weight', 'dextran, low molecular weight_dose', 'sodium chloride, hypertonic, ophthalmic', 'sodium chloride, hypertonic, ophthalmic_dose', 'Electrolyte (Plasma-Lyte) intravenous solution', 'Electrolyte (Plasma-Lyte) intravenous solution_dose', 'Albumin 5%', 'Albumin 5%_dose', 'history_of_dialysis', 'infection', 'sepsis']
+==== vent_category (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                     temperature  daily_weight_kg  height_cm  sbp_line  dbp_line  map_line  sbp_cuff  dbp_cuff  map_cuff  pulse  unassisted_resp_rate  spo2  end_tidal_co2  o2_flow_rate  anion_gap  base_excess  bicarb_(hco3)  blood_urea_nitrogen_(bun)  calcium  calcium_ionized  chloride  creatinine   gfr  glucose  magnesium  osmolarity  phosphorus  potassium  sodium  haptoglobin  hematocrit  hemoglobin  met_hgb  platelets  white_blood_cell_count  carboxy_hgb  alanine_aminotransferase_(alt)  albumin  alkaline_phosphatase  ammonia  aspartate_aminotransferase_(ast)  bilirubin_direct  bilirubin_total  fibrinogen  inr  lactate_dehydrogenase  lactic_acid  partial_prothrombin_time_(ptt)  prealbumin  protein  prothrombin_time_(pt)  thrombin_time  transferrin  amylase  lipase  b-type_natriuretic_peptide_(bnp)  troponin  fio2  partial_pressure_of_carbon_dioxide_(paco2)  partial_pressure_of_oxygen_(pao2)  ph  saturation_of_oxygen_(sao2)  d_dimer  hemoglobin_a1c  parathyroid_level  thyroid_stimulating_hormone_(tsh)  lymphocyte  neutrophils  crp_high_sens  procalcitonin  erythrocyte_sedimentation_rate_(esr) c_diff     covid  mtp  gcs_total_score  gcs_verbal_score  gcs_eye_score  gcs_motor_score vent_status norepinephrine epinephrine dobutamine dopamine phenylephrine vasopressin norepinephrine_dose_unit epinephrine_dose_unit dobutamine_dose_unit dopamine_dose_unit phenylephrine_dose_unit vasopressin_dose_unit med_order_time icu imc ed procedure    best_map  pulse_pressure  norepinephrine_dose_weight  epinephrine_dose_weight  dobutamine_dose_weight  dopamine_dose_weight  phenylephrine_dose_weight  vasopressin_dose_weight  pf_sp  pf_pa  n_to_l  on_pressors  on_dobutamine  elapsed_icu  elapsed_hosp on_vent_old vent_fio2_old on_vent vent_fio2   age gender  cci9  cci10       bed_unit  bed_type  icu_type  Sodium Chloride 0.9% intravenous solution  Sodium Chloride 0.9% intravenous solution_dose  Lactated Ringers Injection intravenous solution  Lactated Ringers Injection intravenous solution_dose  Sodium Chloride 0.45% intravenous solution  Sodium Chloride 0.45% intravenous solution_dose  Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution  Dextrose 5% with 0.2% NaCl and KCl 20 mEq/L intravenous solution_dose  potassium chloride-sodium chloride  potassium chloride-sodium chloride_dose  Dextrose 5% in Lactated Ringers intravenous solution  Dextrose 5% in Lactated Ringers intravenous solution_dose  Dextrose 20% in Water intravenous solution  Dextrose 20% in Water intravenous solution_dose  Dextrose 5% in Water with KCl 20 mEq/l intravenous solution  Dextrose 5% in Water with KCl 20 mEq/l intravenous solution_dose  Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution  Dextrose 5% in Lactated Ringers with KCl 20 mEq/l intravenous solution_dose  dextran, low molecular weight  dextran, low molecular weight_dose  sodium chloride, hypertonic, ophthalmic  sodium chloride, hypertonic, ophthalmic_dose  Electrolyte (Plasma-Lyte) intravenous solution  Electrolyte (Plasma-Lyte) intravenous solution_dose  Albumin 5%  Albumin 5%_dose  history_of_dialysis  infection  sepsis
-1990-09-09 23:41:20          NaN             90.7      182.9       NaN       NaN       NaN     146.0      92.0       NaN  120.0                  20.0  99.0            NaN           NaN       17.0          NaN           22.0                       13.0      8.6              NaN      68.0         0.9  60.0    129.0        NaN  219.000000         NaN        3.0   107.0          NaN        44.6        15.4      NaN      260.0                    14.2          NaN                            30.0      3.9                  61.0      NaN                              39.0               0.6              1.9       227.0  1.1                    NaN          NaN                            27.2         NaN      5.9                  13.35           11.9          NaN      NaN     NaN                               NaN       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None      None  NaN             15.0               5.0            4.0              6.0         NaN            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN   0   0  1         0  110.000000            54.0                         NaN                      NaN                     NaN                   NaN                        NaN                      NaN    NaN    NaN     NaN        False          False          0.0           0.0         NaN           NaN     NaN       NaN  69.0   Male  None      8  GHS EMERGENCY       NaN       NaN                                          0                                             NaN                                                0                                                   NaN                                           0                                              NaN                                                                 0                                                                    NaN                                   0                                      NaN                                                     0                                                        NaN                                           0                                              NaN                                                            0                                                               NaN                                                                       0                                                                          NaN                              0                                 NaN                                        0                                           NaN                                               0                                                  NaN           0              NaN                    0          0       0
-1990-09-10 00:41:20          NaN             90.7      182.9       NaN       NaN       NaN     134.0      82.0      95.0   89.0                  23.0  93.0            NaN           NaN        NaN          NaN            NaN                        NaN      NaN              NaN       NaN         NaN   NaN      NaN        NaN         NaN         NaN        NaN     NaN          NaN         NaN         NaN      NaN        NaN                     NaN          NaN                             NaN      NaN                   NaN      NaN                               NaN               NaN              NaN         NaN  NaN                    NaN          NaN                             NaN         NaN      NaN                    NaN            NaN          NaN      NaN     NaN                               NaN       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None      None  NaN             14.5               4.5            4.0              6.0         NaN            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN   0   0  1         0   99.333333            52.0                         NaN                      NaN                     NaN                   NaN                        NaN                      NaN    NaN    NaN     NaN        False          False          0.0           1.0         NaN           NaN     NaN       NaN  69.0   Male  None      8  GHS EMERGENCY       NaN       NaN                                          0                                             NaN                                                0                                                   NaN                                           0                                              NaN                                                                 0                                                                    NaN                                   0                                      NaN                                                     0                                                        NaN                                           0                                              NaN                                                            0                                                               NaN                                                                       0                                                                          NaN                              0                                 NaN                                        0                                           NaN                                               0                                                  NaN           0              NaN                    0          0       0
-1990-09-10 01:41:20          NaN             90.7      182.9       NaN       NaN       NaN       NaN       NaN       NaN    NaN                   NaN   NaN            NaN           NaN       13.0          NaN           28.0                       14.0      9.3              NaN      65.0         0.8  60.0     90.0        1.7  221.333333         NaN        3.1   106.0          NaN         NaN         NaN      NaN        NaN                     NaN          NaN                             NaN      4.1                   NaN      NaN                               NaN               NaN              NaN         NaN  NaN                    NaN          NaN                             NaN         NaN      NaN                    NaN            NaN          NaN      NaN     NaN                             228.0       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None  Negative  NaN              NaN               NaN            NaN              NaN         NaN            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN   0   0  1         0         NaN             NaN                         NaN                      NaN                     NaN                   NaN                        NaN                      NaN    NaN    NaN     NaN        False          False          0.0           2.0         NaN           NaN     NaN       NaN  69.0   Male  None      8  GHS EMERGENCY       NaN       NaN                                          0                                             NaN                                                0                                                   NaN                                           0                                              NaN                                                                 0                                                                    NaN                                   0                                      NaN                                                     0                                                        NaN                                           0                                              NaN                                                            0                                                               NaN                                                                       0                                                                          NaN                              0                                 NaN                                        0                                           NaN                                               0                                                  NaN           0              NaN                    0          0       0
-1990-09-10 02:41:20          NaN             90.7      182.9       NaN       NaN       NaN       NaN       NaN       NaN    NaN                   NaN   NaN            NaN           NaN        NaN          NaN            NaN                        NaN      NaN              NaN       NaN         NaN  60.0      NaN        NaN         NaN         NaN        NaN     NaN          NaN         NaN         NaN      NaN        NaN                     NaN          NaN                             NaN      NaN                   NaN      NaN                               NaN               NaN              NaN         NaN  NaN                    NaN          NaN                             NaN         NaN      NaN                    NaN            NaN          NaN      NaN     NaN                               NaN       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None      None  NaN              NaN               NaN            NaN              NaN         NaN            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN   0   0  1         0         NaN             NaN                         NaN                      NaN                     NaN                   NaN                        NaN                      NaN    NaN    NaN     NaN        False          False          0.0           3.0         NaN           NaN     NaN       NaN  69.0   Male  None      8  GHS EMERGENCY       NaN       NaN                                          0                                             NaN                                                0                                                   NaN                                           0                                              NaN                                                                 0                                                                    NaN                                   0                                      NaN                                                     0                                                        NaN                                           0                                              NaN                                                            0                                                               NaN                                                                       0                                                                          NaN                              0                                 NaN                                        0                                           NaN                                               0                                                  NaN           0              NaN                    0          0       0
-1990-09-10 03:41:20          NaN             90.7      182.9       NaN       NaN       NaN       NaN       NaN       NaN    NaN                   NaN   NaN            NaN           NaN        NaN          NaN            NaN                        NaN      NaN              NaN       NaN         NaN   NaN      NaN        NaN         NaN         NaN        NaN     NaN          NaN         NaN         NaN      NaN        NaN                     NaN          NaN                             NaN      NaN                   NaN      NaN                               NaN               NaN              NaN         NaN  NaN                    NaN          NaN                             NaN         NaN      NaN                    NaN            NaN          NaN      NaN     NaN                               NaN       NaN   NaN                                         NaN                                NaN NaN                          NaN      NaN             NaN                NaN                                NaN         NaN          NaN            NaN            NaN                                   NaN   None      None  NaN             15.0               5.0            4.0              6.0         NaN            NaN         NaN        NaN      NaN           NaN         NaN                      NaN                   NaN                  NaN                NaN                     NaN                   NaN            NaN   0   0  1         0         NaN             NaN                         NaN                      NaN                     NaN                   NaN                        NaN                      NaN    NaN    NaN     NaN        False          False          0.0           4.0         NaN           NaN     NaN       NaN  69.0   Male  None      8  GHS EMERGENCY       NaN       NaN                                          0                                             NaN                                                0                                                   NaN                                           0                                              NaN                                                                 0                                                                    NaN                                   0                                      NaN                                                     0                                                        NaN                                           0                                              NaN                                                            0                                                               NaN                                                                       0                                                                          NaN                              0                                 NaN                                        0                                           NaN                                               0                                                  NaN           0              NaN                    0          0       0
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
 
-==== abx_order_time (<class 'pandas.core.arrays.datetimes.DatetimeArray'>) ====
-<DatetimeArray>
-[]
-Length: 0, dtype: datetime64[ns]
-
-==== culture_times (<class 'pandas.core.arrays.datetimes.DatetimeArray'>) ====
-<DatetimeArray>
-['1990-09-10 01:21:20', '1990-09-10 01:51:20', '1990-09-11 07:17:20']
-Length: 3, dtype: datetime64[ns]
-
-==== t_suspicion (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (0, 3)
-Column Names: ['t_abx', 't_clt', 't_suspicion']
+==== vent_tidal_rate_exhaled (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-Empty DataFrame
-Columns: [t_abx, t_clt, t_suspicion]
-Index: []
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
 
-==== sofa_scores (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (86, 12)
-Column Names: ['SOFA_coag', 'SOFA_renal', 'SOFA_hep', 'SOFA_neuro', 'SOFA_cardio', 'SOFA_cardio_mod', 'SOFA_resp', 'SOFA_resp_sa', 'hourly_total', 'delta_24h', 'hourly_total_mod', 'delta_24h_mod']
+==== vent_tidal_rate_set (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                     SOFA_coag  SOFA_renal  SOFA_hep  SOFA_neuro  SOFA_cardio  SOFA_cardio_mod  SOFA_resp  SOFA_resp_sa  hourly_total  delta_24h  hourly_total_mod  delta_24h_mod
-1990-09-09 23:41:20        0.0         0.0       1.0         0.0          0.0              0.0        NaN           NaN           1.0        1.0               1.0            1.0
-1990-09-10 00:41:20        NaN         NaN       NaN         NaN          0.0              0.0        NaN           NaN           0.0        1.0               0.0            1.0
-1990-09-10 01:41:20        NaN         0.0       NaN         NaN          NaN              NaN        NaN           NaN           0.0        1.0               0.0            1.0
-1990-09-10 02:41:20        NaN         NaN       NaN         NaN          NaN              NaN        NaN           NaN           0.0        1.0               0.0            1.0
-1990-09-10 03:41:20        NaN         NaN       NaN         0.0          NaN              NaN        NaN           NaN           0.0        1.0               0.0            1.0
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
 
-==== sep3_time (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (0, 3)
-Column Names: ['t_suspicion', 't_SOFA', 't_sepsis3']
+==== vent_rate_set (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-Empty DataFrame
-Columns: [t_suspicion, t_SOFA, t_sepsis3]
-Index: []
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
 
-==== sirs_scores (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (86, 6)
-Column Names: ['SIRS_resp', 'SIRS_cardio', 'SIRS_temp', 'SIRS_wbc', 'hourly_total', 'delta_24h']
+==== icu (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-                     SIRS_resp  SIRS_cardio  SIRS_temp  SIRS_wbc  hourly_total  delta_24h
-1990-09-09 23:41:20          0            1          0         1             2        2.0
-1990-09-10 00:41:20          1            0          0         0             1        2.0
-1990-09-10 01:41:20          0            0          0         0             0        2.0
-1990-09-10 02:41:20          0            0          0         0             0        2.0
-1990-09-10 03:41:20          0            0          0         0             0        2.0
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
 
-==== sep2_time (<class 'pandas.core.frame.DataFrame'>) ====
-DataFrame Size: (70, 3)
-Column Names: ['t_SIRS', 't_suspicion', 't_sepsis2']
+==== imc (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
 Head (first 5 rows):
-               t_SIRS t_suspicion           t_sepsis2
-0 1990-09-09 23:41:20         NaT 1990-09-09 23:41:20
-1 1990-09-10 00:41:20         NaT 1990-09-10 00:41:20
-2 1990-09-10 01:41:20         NaT 1990-09-10 01:41:20
-3 1990-09-10 02:41:20         NaT 1990-09-10 02:41:20
-4 1990-09-10 03:41:20         NaT 1990-09-10 03:41:20
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== ed (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    1
+1990-12-15 03:23:20    1
+1990-12-15 04:23:20    1
+1990-12-15 05:23:20    1
+1990-12-15 06:23:20    1
+Freq: 60min
+
+==== procedure (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== bed_unit (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20                0
+1990-12-15 03:23:20    GHS EMERGENCY
+1990-12-15 04:23:20    GHS EMERGENCY
+1990-12-15 05:23:20    GHS EMERGENCY
+1990-12-15 06:23:20    GHS EMERGENCY
+Freq: 60min
+
+==== bed_type (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20        0
+1990-12-15 03:23:20    other
+1990-12-15 04:23:20    other
+1990-12-15 05:23:20    other
+1990-12-15 06:23:20    other
+Freq: 60min
+
+==== icu_type (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0.0
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== on_dialysis (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== history_of_dialysis (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== Sodium Chloride 0.9% intravenous solution (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== Lactated Ringers Injection intravenous solution (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== Electrolyte (Plasma-Lyte) intravenous solution (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== albumin human (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== clinical_notes (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== norepinephrine (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== epinephrine (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== dobutamine (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== dopamine (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== phenylephrine (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== vasopressin (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== norepinephrine_dose_unit (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== epinephrine_dose_unit (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== dobutamine_dose_unit (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== dopamine_dose_unit (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== phenylephrine_dose_unit (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== vasopressin_dose_unit (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== cpt_procedure_desc (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== cpt_procedure_cd (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== gender_code (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    1
+1990-12-15 03:23:20    1
+1990-12-15 04:23:20    1
+1990-12-15 05:23:20    1
+1990-12-15 06:23:20    1
+Freq: 60min
+
+==== best_map (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    102.000000
+1990-12-15 03:23:20    112.333336
+1990-12-15 04:23:20           NaN
+1990-12-15 05:23:20           NaN
+1990-12-15 06:23:20           NaN
+Freq: 60min
+
+==== pulse_pressure (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    60.0
+1990-12-15 03:23:20    40.0
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20     NaN
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== n_to_l (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== s2f_vent_fio2 (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== p2f_vent_fio2 (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== norepinephrine_dose_weight (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== epinephrine_dose_weight (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== dobutamine_dose_weight (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== dopamine_dose_weight (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== phenylephrine_dose_weight (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== vasopressin_dose_weight (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== anion_gap (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20     NaN
+1990-12-15 03:23:20     NaN
+1990-12-15 04:23:20     NaN
+1990-12-15 05:23:20    14.0
+1990-12-15 06:23:20     NaN
+Freq: 60min
+
+==== on_pressors (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    False
+1990-12-15 03:23:20    False
+1990-12-15 04:23:20    False
+1990-12-15 05:23:20    False
+1990-12-15 06:23:20    False
+Freq: 60min
+
+==== on_dobutamine (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    False
+1990-12-15 03:23:20    False
+1990-12-15 04:23:20    False
+1990-12-15 05:23:20    False
+1990-12-15 06:23:20    False
+Freq: 60min
+
+==== SIRS_resp (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    1
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== SIRS_cardio (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    1
+1990-12-15 03:23:20    1
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== SIRS_temp (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    1
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== SIRS_wbc (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== sirs_total (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    2
+1990-12-15 03:23:20    2
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== sirs_delta_24h (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    2.0
+1990-12-15 03:23:20    2.0
+1990-12-15 04:23:20    2.0
+1990-12-15 05:23:20    2.0
+1990-12-15 06:23:20    2.0
+Freq: 60min
+
+==== SOFA_coag (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== SOFA_renal (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    0.0
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== SOFA_hep (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    0.0
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== SOFA_neuro (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    NaN
+1990-12-15 03:23:20    NaN
+1990-12-15 04:23:20    0.0
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== SOFA_cardio (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0.0
+1990-12-15 03:23:20    0.0
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== SOFA_cardio_mod (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0.0
+1990-12-15 03:23:20    0.0
+1990-12-15 04:23:20    NaN
+1990-12-15 05:23:20    NaN
+1990-12-15 06:23:20    NaN
+Freq: 60min
+
+==== SOFA_resp (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== SOFA_resp_sa (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20   NaN
+1990-12-15 03:23:20   NaN
+1990-12-15 04:23:20   NaN
+1990-12-15 05:23:20   NaN
+1990-12-15 06:23:20   NaN
+Freq: 60min
+
+==== sofa_total (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0.0
+1990-12-15 03:23:20    0.0
+1990-12-15 04:23:20    0.0
+1990-12-15 05:23:20    0.0
+1990-12-15 06:23:20    0.0
+Freq: 60min
+
+==== sofa_delta_24h (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0.0
+1990-12-15 03:23:20    0.0
+1990-12-15 04:23:20    0.0
+1990-12-15 05:23:20    0.0
+1990-12-15 06:23:20    0.0
+Freq: 60min
+
+==== sofa_total_mod (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0.0
+1990-12-15 03:23:20    0.0
+1990-12-15 04:23:20    0.0
+1990-12-15 05:23:20    0.0
+1990-12-15 06:23:20    0.0
+Freq: 60min
+
+==== sofa_delta_24h_mod (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0.0
+1990-12-15 03:23:20    0.0
+1990-12-15 04:23:20    0.0
+1990-12-15 05:23:20    0.0
+1990-12-15 06:23:20    0.0
+Freq: 60min
+
+==== meld_score (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    6.43
+1990-12-15 03:23:20    6.43
+1990-12-15 04:23:20    6.43
+1990-12-15 05:23:20    6.43
+1990-12-15 06:23:20    6.43
+Freq: 60min
+
+==== aki_score (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== infection (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== sepsis (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0
+1990-12-15 03:23:20    0
+1990-12-15 04:23:20    0
+1990-12-15 05:23:20    0
+1990-12-15 06:23:20    0
+Freq: 60min
+
+==== elapsed_icu (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0.0
+1990-12-15 03:23:20    0.0
+1990-12-15 04:23:20    0.0
+1990-12-15 05:23:20    0.0
+1990-12-15 06:23:20    0.0
+Freq: 60min
+
+==== elapsed_hosp (<class 'pandas.core.series.Series'>) ====
+Series Length: 294
+Head (first 5 rows):
+1990-12-15 02:23:20    0.0
+1990-12-15 03:23:20    1.0
+1990-12-15 04:23:20    2.0
+1990-12-15 05:23:20    3.0
+1990-12-15 06:23:20    4.0
+Freq: 60min
