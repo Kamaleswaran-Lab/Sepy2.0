@@ -2,6 +2,8 @@
 #SBATCH --job-name=review-labs
 #SBATCH --time=24:00:00
 #SBATCH --mem=64G
+#SBATCH --output=run-labs.out
+#SBATCH --error=run-labs.out
 
 source /hpc/dctrl/yy450/miniconda3/etc/profile.d/conda.sh
 conda activate sepy2
