@@ -14,21 +14,7 @@ mimic_grouping_file = "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/mimic_groupings/
 output_root = "/hpc/home/yy450/link_dctrl_yy450/Sepy2.0/0_mimic_gen_flat_files/flatfiles-review/labs"
 # ----------------------------
 
-# 需要自动运行的 super_table_col_name 列表
-columns_to_analyze = [
-    "glucose", "hemoglobin", "potassium", "chloride", "sodium", "met_hgb", "carboxy_hgb",
-    "partial_pressure_of_oxygen_(pao2)", "partial_pressure_of_carbon_dioxide_(paco2)",
-    "lactic_acid", "saturation_of_oxygen_(sao2)", "bicarb_(hco3)", "calcium_ionized",
-    "hematocrit", "ph", "inr", "creatinine", "calcium", "d_dimer", "base_excess",
-    "hemoglobin_a1c", "osmolarity", "protein", "alkaline_phosphatase",
-    "alanine_aminotransferase_(alt)", "phosphorus", "aspartate_aminotransferase_(ast)",
-    "albumin", "magnesium", "platelets", "white_blood_cell_count", "gfr",
-    "blood_urea_nitrogen_(bun)", "bilirubin_total", "troponin", "neutrophils", "lymphocyte",
-    "lactate_dehydrogenase", "fibrinogen", "b-type_natriuretic_peptide_(bnp)",
-    "partial_prothrombin_time_(ptt)", "bilirubin_direct", "ammonia",
-    "erythrocyte_sedimentation_rate_(esr)", "c_diff", "amylase", "crp_high_sens",
-    "parathyroid_level", "cortisol", "bilirubin_indirect", "lipase"
-]
+columns_to_analyze = ['alanine_aminotransferase_(alt)', 'albumin', 'alkaline_phosphatase', 'ammonia', 'amylase', 'anion_gap', 'aspartate_aminotransferase_(ast)', 'b-type_natriuretic_peptide_(bnp)', 'base_excess', 'bicarb_(hco3)', 'bilirubin_direct', 'bilirubin_indirect', 'bilirubin_total', 'blood_urea_nitrogen_(bun)', 'c_diff', 'calcium', 'calcium_ionized', 'carboxy_hgb', 'chloride', 'cortisol', 'covid', 'creatinine', 'crp_high_sens', 'd_dimer', 'erythrocyte_sedimentation_rate_(esr)', 'fibrinogen', 'gfr', 'glucose', 'haptoglobin', 'hematocrit', 'hemoglobin', 'hemoglobin_a1c', 'inr', 'lactate_dehydrogenase', 'lactic_acid', 'lipase', 'lymphocyte', 'magnesium', 'met_hgb', 'neutrophils', 'osmolarity', 'parathyroid_level', 'partial_pressure_of_carbon_dioxide_(paco2)', 'partial_pressure_of_oxygen_(pao2)', 'partial_prothrombin_time_(ptt)', 'ph', 'phosphorus', 'platelets', 'potassium', 'progesterone', 'protein', 'prothrombin_time_(pt)', 'saturation_of_oxygen_(sao2)', 'sodium', 'thrombin_time', 'thyroid_stimulating_hormone_(tsh)', 'transferrin', 'troponin', 'white_blood_cell_count']
 
 # -------- Load Data --------
 df_emory = pd.read_csv(emory_file)
