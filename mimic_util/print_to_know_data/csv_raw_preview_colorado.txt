@@ -1,0 +1,558 @@
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_Flowsheet_Category_Rates_20251113.csv
+================================================================================
+Delimiter: ','
+Header:
+['Category', 'TotalEncounters', 'EncountersWithData']
+
+Column → Sample value:
+  Category: DBP
+  TotalEncounters: 728
+  EncountersWithData: 728
+
+First 10 rows of data:
+['DBP', '728', '728']
+['GCS', '728', '726']
+['Vent', '728', '715']
+['RR', '728', '728']
+['Height', '728', '692']
+['map', '728', '728']
+['temp', '728', '728']
+['tidal volume', '728', '246']
+['PEEP', '728', '174']
+['ECLS', '728', '315']
+['SBP', '728', '728']
+['Daily Weight', '728', '723']
+['HR', '728', '728']
+['CAM', '728', '720']
+['RASS', '728', '727']
+['ECMO', '728', '686']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_Lab_Category_Rates_20251113.csv
+================================================================================
+Delimiter: ','
+Header:
+['Category', 'TotalEncounters', 'EncountersWithData']
+
+Column → Sample value:
+  Category: alanine_aminotransferase_(alt)
+  TotalEncounters: 728
+  EncountersWithData: 721
+
+First 10 rows of data:
+['alanine_aminotransferase_(alt)', '728', '721']
+['anion_gap', '728', '728']
+['bilirubin_direct', '728', '708']
+['chloride', '728', '728']
+['inr', '728', '726']
+['neutrophils', '728', '688']
+['phosphorus', '728', '718']
+['potassium', '728', '728']
+['blood_urea_nitrogen_(bun)', '728', '728']
+['partial_prothrombin_time_(ptt)', '728', '706']
+['esr', '728', '83']
+['haptoglobin', '728', '181']
+['ammonia', '728', '156']
+['lactic_acid', '728', '30']
+['alkaline_phosphatase', '728', '721']
+['aspartate_aminotransferase_(ast)', '728', '721']
+['base_excess', '728', '310']
+['bicarb_(hco3)', '728', '728']
+['bilirubin_total', '728', '721']
+['temperature', '728', '727']
+['crp_high_sens', '728', '205']
+['partial_pressure_of_carbon_dioxide_(paco2)', '728', '728']
+['fibrinogen', '728', '634']
+['hematocrit', '728', '728']
+['spo2', '728', '728']
+['platelets', '728', '728']
+['prothrombin_time(pt)', '728', '726']
+['ph', '728', '728']
+['thrombin_time', '728', '129']
+['troponin', '728', '258']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_Medication_Category_Rates_20251113.csv
+================================================================================
+Delimiter: ','
+Header:
+['Category', 'TotalEncounters', 'EncountersWithData']
+
+Column → Sample value:
+  Category: epinephrine
+  TotalEncounters: 728
+  EncountersWithData: 524
+
+First 10 rows of data:
+['epinephrine', '728', '524']
+['dopamine', '728', '25']
+['phenylephrine', '728', '260']
+['dobutamine', '728', '495']
+['vasopressin', '728', '645']
+['norepinephrine', '728', '655']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_QC_SC_20251113.csv
+================================================================================
+Delimiter: ','
+Header:
+['ProjectName', 'DatasetName', 'TableName', 'column_name', 'Total_Record_Number', 'Distinct_Value_Number', 'Null_Number', 'NullPercentage', 'Not_Null_Number', 'NotNullPercentage', 'Min_value_string', 'Max_value_string', 'Min_value_number', 'Max_value_number', 'Value_Deleted', 'Value_NotApplicable', 'Value_Unspecified', 'Value_Unknown', 'Sum']
+
+Column → Sample value:
+  ProjectName: hdcdrq
+  DatasetName: datarequests
+  TableName: C4049_Cohort_20251113
+  column_name: ENCOUNTEREPICCSN
+  Total_Record_Number: 728
+  Distinct_Value_Number: 728
+  Null_Number: 0
+  NullPercentage: 0
+  Not_Null_Number: 728
+  NotNullPercentage: 100
+  Min_value_string: 101059024
+  Max_value_string: 99617620
+  Min_value_number: 69570012
+  Max_value_number: 446854116
+  Value_Deleted: 0
+  Value_NotApplicable: 0
+  Value_Unspecified: 0
+  Value_Unknown: 0
+  Sum: 1.79629E+11
+
+First 10 rows of data:
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'ENCOUNTEREPICCSN', '728', '728', '0', '0', '728', '100', '101059024', '99617620', '69570012', '446854116', '0', '0', '0', '0', '1.79629E+11']
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'Observation_datetime', '728', '726', '0', '0', '728', '100', '"2015-01-20T18', '"2025-11-05T16', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'arb_encounter_id', '728', '728', '0', '0', '728', '100', '1.00203E+11', '99916435483', '17501602083', '6.77391E+11', '0', '0', '0', '0', '1.70194E+14']
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'arb_person_id', '728', '723', '0', '0', '728', '100', '10397737601', '9798483752', '34336836', '43848303925', '0', '0', '0', '0', '1.2563E+13']
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'birthdate', '728', '711', '0', '0', '728', '100', '"1934-02-26"', '"2007-06-19"', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'encounterkey', '728', '728', '0', '0', '728', '100', '1003322361', '990914191', '28596035', '1106846589', '0', '0', '0', '0', '2.78094E+11']
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'next_observation_datetime', '728', '726', '0', '0', '728', '100', '"2015-01-20T20', '"2025-11-05T16', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'patientdurablekey', '728', '723', '0', '0', '728', '100', '10007449', '9996203', '54752', '71646201', '0', '0', '0', '0', '20526785541']
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'primarymrn', '728', '723', '0', '0', '728', '100', '"1002575"', '"998174"', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_Cohort_20251113', 'deathdate', '728', '359', '353', '48.48901099', '375', '51.51098901', '"2015-03-01"', '"2025-11-07"', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T1_Demographics_20251113', 'arb_person_id', '723', '723', '0', '0', '723', '100', '10397737601', '9798483752', '34336836', '43848303925', '0', '0', '0', '0', '1.24715E+13']
+['hdcdrq', 'datarequests', 'C4049_T1_Demographics_20251113', 'ethnicity', '723', '5', '0', '0', '723', '100', '"*Unspecified"', '"Unknown"', '', '', '0', '0', '3', '16', '']
+['hdcdrq', 'datarequests', 'C4049_T1_Demographics_20251113', 'firstrace', '723', '14', '0', '0', '723', '100', '""', '"White or Caucasian"', '', '', '0', '0', '0', '22', '']
+['hdcdrq', 'datarequests', 'C4049_T1_Demographics_20251113', 'secondrace', '723', '11', '0', '0', '723', '100', '""', '"White or Caucasian"', '', '', '0', '0', '0', '14', '']
+['hdcdrq', 'datarequests', 'C4049_T1_Demographics_20251113', 'sex', '723', '4', '0', '0', '723', '100', '"*Unspecified"', '"Male"', '', '', '0', '0', '439', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T7_Flowsheets_20251113', 'Displayname', '5560571', '45', '0', '0', '5560571', '100', '"A-line 2 MAP "', '"ecVO2"', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T7_Flowsheets_20251113', 'FLOWSHEETROWEPICID', '5560571', '45', '0', '0', '5560571', '100', '"1078111299"', '"9"', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T7_Flowsheets_20251113', 'arb_encounter_id', '5560571', '728', '0', '0', '5560571', '100', '1.00203E+11', '99916435483', '17501602083', '6.77391E+11', '0', '0', '0', '0', '1.53E+18']
+['hdcdrq', 'datarequests', 'C4049_T7_Flowsheets_20251113', 'arb_person_id', '5560571', '723', '0', '0', '5560571', '100', '10397737601', '9798483752', '34336836', '43848303925', '0', '0', '0', '0', '1.03E+17']
+['hdcdrq', 'datarequests', 'C4049_T7_Flowsheets_20251113', 'category', '5560571', '16', '0', '0', '5560571', '100', '"CAM"', '"tidal volume"', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T7_Flowsheets_20251113', 'name', '5560571', '45', '0', '0', '5560571', '100', '"BLOOD PRESSURE"', '"WEIGHT/SCALE"', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T7_Flowsheets_20251113', 'value', '5560571', '7346', '0', '0', '5560571', '100', '""', '"Yes"', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T7_Flowsheets_20251113', 'taken_days_from_birth', '5560571', '13377', '514', '0.009243655', '5560057', '99.99075634', '10000', '9999', '6633', '30350', '0', '0', '0', '0', '1.01997E+11']
+['hdcdrq', 'datarequests', 'C4049_T7_Flowsheets_20251113', 'taken_time', '5560571', '24', '514', '0.009243655', '5560057', '99.99075634', '"00', '"23', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T2_InpatientVisits_20251113', 'admissiondate_days_from_birth', '728', '715', '0', '0', '728', '100', '10058', '9993', '6633', '30350', '0', '0', '0', '0', '13759039']
+['hdcdrq', 'datarequests', 'C4049_T2_InpatientVisits_20251113', 'admissiontime', '728', '24', '0', '0', '728', '100', '"00', '"23', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T2_InpatientVisits_20251113', 'admissiontype', '728', '4', '0', '0', '728', '100', '"Elective"', '"Urgent"', '', '', '0', '0', '0', '0', '']
+['hdcdrq', 'datarequests', 'C4049_T2_InpatientVisits_20251113', 'age_at_encounter', '728', '65', '0', '0', '728', '100', '18', '83', '18', '83', '0', '0', '0', '0', '37306']
+['hdcdrq', 'datarequests', 'C4049_T2_InpatientVisits_20251113', 'arb_encounter_id', '728', '728', '0', '0', '728', '100', '1.00203E+11', '99916435483', '17501602083', '6.77391E+11', '0', '0', '0', '0', '1.70194E+14']
+['hdcdrq', 'datarequests', 'C4049_T2_InpatientVisits_20251113', 'arb_person_id', '728', '723', '0', '0', '728', '100', '10397737601', '9798483752', '34336836', '43848303925', '0', '0', '0', '0', '1.2563E+13']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_T1_Demographics_20251114.csv
+================================================================================
+Delimiter: ','
+Header:
+['arb_person_id', 'firstrace', 'secondrace', 'ethnicity', 'sex']
+
+Column → Sample value:
+  arb_person_id: 3421639825
+  firstrace: White or Caucasian
+  secondrace: 
+  ethnicity: Non-Hispanic, Latino/a, or Spanish Origin
+  sex: Choose not to disclose
+
+First 10 rows of data:
+['3421639825', 'White or Caucasian', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Choose not to disclose']
+['36431501495', 'American Indian or Alaska Native', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['33823227345', 'American Indian or Alaska Native', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['21968416892', 'American Indian or Alaska Native', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['39648822808', 'American Indian or Alaska Native', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['41248656547', 'Asian Indian', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['3723237243', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['6278138566', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['2617121152', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['17102996543', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['42159505258', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['6332128072', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['38881499235', 'Black or African American', 'More Than One Race', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['11907585152', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['33270236730', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['32048539180', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['1537022076', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['25718765809', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['6265515636', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['6290364271', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['6451525466', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['3748706235', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['12204211127', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['5993005146', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['42537312266', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['9153224743', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['3516837753', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['2181073471', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['32911510624', 'Black or African American', 'White or Caucasian', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+['21296029496', 'Black or African American', '', 'Non-Hispanic, Latino/a, or Spanish Origin', 'Female']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_T2_InpatientVisits_20251114.csv
+================================================================================
+Delimiter: ','
+Header:
+['arb_person_id', 'arb_encounter_id', 'admissiondate_days_from_birth', 'admissiontime', 'dischargedate_days_from_birth', 'dischargetime', 'age_at_encounter', 'admissiontype', 'dischargedisposition']
+
+Column → Sample value:
+  arb_person_id: 41703312505
+  arb_encounter_id: 667792044934
+  admissiondate_days_from_birth: 16458
+  admissiontime: 11:09:00
+  dischargedate_days_from_birth: 
+  dischargetime: 
+  age_at_encounter: 45
+  admissiontype: Elective
+  dischargedisposition: Home or Self Care
+
+First 10 rows of data:
+['41703312505', '667792044934', '16458', '11:09:00', '', '', '45', 'Elective', 'Home or Self Care']
+['9305372363', '42056032421', '9184', '13:01:00', '9289', '15:45:00', '25', 'Elective', 'Inpatient Rehab Facility']
+['6363366636', '42886516004', '9993', '18:35:00', '10001', '13:28:00', '27', 'Elective', 'Home or Self Care']
+['416534774', '523531405915', '10571', '17:19:00', '10623', '14:50:00', '28', 'Elective', 'Home or Self Care']
+['6399789354', '128475303917', '12163', '10:08:00', '12184', '12:22:00', '33', 'Elective', 'Home or Self Care']
+['4196792041', '433289987073', '12398', '16:38:00', '12446', '11:30:00', '33', 'Elective', 'Long Term Care Hospital']
+['33382218030', '286686428214', '12594', '16:17:00', '12607', '17:12:00', '34', 'Elective', 'Home or Self Care']
+['18918166110', '638880781475', '12681', '06:57:00', '12686', '17:52:00', '34', 'Elective', 'Home or Self Care']
+['6429695252', '543671167042', '13433', '16:26:00', '13467', '16:50:00', '36', 'Elective', 'Long Term Care Hospital']
+['6444276109', '86506793580', '14334', '17:37:00', '14392', '13:24:00', '39', 'Elective', 'Long Term Care Hospital']
+['6265515636', '365539036157', '15218', '14:20:00', '15233', '16:46:00', '41', 'Elective', 'Expired']
+['6231885754', '21943346964', '15516', '00:28:00', '15536', '18:25:00', '42', 'Elective', 'Expired']
+['2681966304', '411259798168', '15770', '18:54:00', '15785', '20:14:00', '43', 'Elective', 'Inpatient Rehab Facility']
+['5034525595', '115553491168', '15759', '14:38:00', '15796', '14:32:00', '43', 'Elective', 'Long Term Care Hospital']
+['6470523613', '24709125141', '15939', '00:23:00', '15971', '04:07:00', '43', 'Elective', 'Expired']
+['24054085691', '258536315402', '17232', '19:31:00', '17239', '18:39:00', '47', 'Elective', 'Expired']
+['25711917355', '622292034620', '17355', '13:32:00', '17390', '10:18:00', '47', 'Elective', 'Long Term Care Hospital']
+['6365134532', '121901485399', '17614', '12:09:00', '17671', '12:42:00', '48', 'Elective', 'Long Term Care Hospital']
+['20645553230', '481108796839', '17791', '23:50:00', '17805', '13:51:00', '48', 'Elective', 'Home or Self Care']
+['11488695388', '42345322605', '18298', '17:50:00', '18373', '04:00:00', '50', 'Elective', 'Expired']
+['3907544154', '522154455280', '18591', '20:48:00', '18639', '14:52:00', '50', 'Elective', 'Inpatient Rehab Facility']
+['2175479831', '368808965883', '18710', '00:29:00', '18726', '17:04:00', '51', 'Elective', 'Expired']
+['34908153', '55863259217', '19870', '13:06:00', '19905', '15:59:00', '54', 'Elective', 'Home or Self Care']
+['12840681532', '144753382769', '19966', '17:38:00', '19975', '08:58:00', '54', 'Elective', 'Expired']
+['16955183458', '58296140113', '19967', '16:31:00', '19989', '15:57:00', '54', 'Elective', 'Home-Health Care Svc']
+['11441640769', '40976781739', '19998', '13:30:00', '20047', '04:37:00', '54', 'Elective', 'Expired']
+['22039119275', '90867511904', '20301', '15:50:00', '20348', '17:44:00', '55', 'Elective', 'Inpatient Rehab Facility']
+['6008102763', '157936439039', '20635', '21:38:00', '20637', '09:23:00', '56', 'Elective', 'Expired']
+['5442297348', '532421688349', '20608', '11:48:00', '20647', '13:38:00', '56', 'Elective', 'Long Term Care Hospital']
+['30568445502', '134947265470', '21369', '16:03:00', '21377', '12:21:00', '58', 'Elective', 'Home or Self Care']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_T3_EDVisits_20251114.csv
+================================================================================
+Delimiter: ','
+Header:
+['arb_person_id', 'arb_encounter_id', 'arrivaldate_days_from_birth', 'arrivaltime', 'departuredate_days_from_birth', 'departuretime']
+
+Column → Sample value:
+  arb_person_id: 4137420381
+  arb_encounter_id: 445759397258
+  arrivaldate_days_from_birth: 26519
+  arrivaltime: 18:29:00
+  departuredate_days_from_birth: 26520
+  departuretime: 00:02:00
+
+First 10 rows of data:
+['4137420381', '445759397258', '26519', '18:29:00', '26520', '00:02:00']
+['38684783332', '307313556292', '19891', '21:23:00', '19892', '00:10:00']
+['6497799121', '25023771525', '23044', '19:31:00', '23045', '00:40:00']
+['3748706235', '99916435483', '20509', '18:54:00', '20510', '00:40:00']
+['10817392392', '34903414693', '22218', '19:10:00', '22219', '00:44:00']
+['23296125719', '99437197547', '21279', '22:43:00', '21280', '01:16:00']
+['41238392448', '460169853219', '22555', '22:35:00', '22556', '01:16:00']
+['5148955223', '83721117982', '11817', '21:12:00', '11818', '01:23:00']
+['38895614211', '369852853113', '19393', '22:19:00', '19394', '01:31:00']
+['5077140856', '97210623578', '13851', '21:36:00', '13852', '01:40:00']
+['24990934254', '50131822032', '17583', '18:04:00', '17584', '02:00:00']
+['43198069795', '633213544564', '15337', '00:25:00', '15337', '02:02:00']
+['6401246459', '59974097233', '15310', '22:27:00', '15311', '02:04:00']
+['5110076207', '626539371549', '25846', '21:18:00', '25847', '02:12:00']
+['3486907335', '540324438631', '6838', '22:18:00', '6839', '02:20:00']
+['6278138566', '92057208317', '14048', '19:08:00', '14049', '02:22:00']
+['20529348349', '60062031704', '24099', '00:45:00', '24099', '02:22:00']
+['30846612159', '138095589157', '12551', '22:25:00', '12552', '02:23:00']
+['5144891022', '52929161824', '25563', '23:16:00', '25564', '02:31:00']
+['9647173493', '668447709645', '8646', '23:15:00', '8647', '02:44:00']
+['22932268789', '101335189765', '18246', '22:08:00', '18247', '02:55:00']
+['30824175073', '137746319828', '21651', '23:46:00', '21652', '03:00:00']
+['33270236730', '269792220191', '30350', '00:36:00', '30350', '03:39:00']
+['6278358021', '601994914747', '25563', '22:03:00', '25564', '03:42:00']
+['38881499235', '445300813186', '6815', '00:21:00', '6815', '03:44:00']
+['23246343856', '677389596396', '17021', '02:39:00', '17021', '03:55:00']
+['31156954045', '182315469380', '10100', '21:48:00', '10101', '03:57:00']
+['5430168498', '112277764898', '29146', '21:56:00', '29147', '04:32:00']
+['2381733427', '457138121216', '8824', '03:09:00', '8824', '04:47:00']
+['5835614524', '304098765449', '9178', '02:46:00', '9178', '04:53:00']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_T4_ADT_20251114.csv
+================================================================================
+Delimiter: ','
+Header:
+['arb_person_id', 'arb_encounter_id', 'startdate_days_from_birth', 'starttime', 'endate_days_from_birth', 'endtime', 'levelofcare']
+
+Column → Sample value:
+  arb_person_id: 34336836
+  arb_encounter_id: 334954147661
+  startdate_days_from_birth: 24148
+  starttime: 19:36:00
+  endate_days_from_birth: 24149
+  endtime: 08:19:00
+  levelofcare: ICU
+
+First 10 rows of data:
+['34336836', '334954147661', '24148', '19:36:00', '24149', '08:19:00', 'ICU']
+['34336836', '334954147661', '24148', '19:15:00', '24148', '19:36:00', 'ICU']
+['34336836', '334954147661', '24149', '08:19:00', '24149', '10:36:00', 'ICU']
+['34336836', '334954147661', '24149', '13:04:00', '24150', '16:00:00', 'ICU']
+['34336836', '334954147661', '24149', '10:36:00', '24149', '13:04:00', 'ICU']
+['34336836', '334954147661', '24150', '16:00:00', '', '', 'ICU']
+['34908153', '55863259217', '19871', '17:49:00', '19871', '17:59:00', 'ICU']
+['34908153', '55863259217', '19871', '17:59:00', '19876', '11:52:00', 'ICU']
+['34908153', '55863259217', '19876', '16:34:00', '19877', '10:34:00', 'ICU']
+['34908153', '55863259217', '19876', '12:48:00', '19876', '16:34:00', 'ICU']
+['34908153', '55863259217', '19876', '11:52:00', '19876', '12:48:00', 'ICU']
+['34908153', '55863259217', '19877', '10:52:00', '19877', '11:29:00', 'ICU']
+['34908153', '55863259217', '19877', '21:04:00', '19878', '04:21:00', 'ICU']
+['34908153', '55863259217', '19877', '10:34:00', '19877', '10:52:00', 'ICU']
+['34908153', '55863259217', '19877', '18:46:00', '19877', '21:04:00', 'ICU']
+['34908153', '55863259217', '19877', '11:29:00', '19877', '14:12:00', 'ICU']
+['34908153', '55863259217', '19877', '14:12:00', '19877', '18:46:00', 'ICU']
+['34908153', '55863259217', '19878', '04:21:00', '19880', '05:45:00', 'ICU']
+['34908153', '55863259217', '19880', '10:51:00', '19885', '14:20:00', 'ICU']
+['34908153', '55863259217', '19880', '05:45:00', '19880', '10:51:00', 'ICU']
+['34908153', '55863259217', '19885', '14:22:00', '19885', '15:21:00', 'ICU']
+['34908153', '55863259217', '19885', '15:21:00', '19887', '21:55:00', 'ICU']
+['34908153', '55863259217', '19885', '14:20:00', '19885', '14:22:00', 'ICU']
+['34908153', '55863259217', '19887', '21:55:00', '19889', '10:23:00', 'ICU']
+['53360115', '58265805727', '19311', '11:15:00', '19311', '11:37:00', 'ICU']
+['53360115', '58265805727', '19311', '11:37:00', '19311', '19:00:00', 'ICU']
+['53360115', '58265805727', '19311', '08:53:00', '19311', '11:15:00', 'ICU']
+['53360115', '58265805727', '19311', '19:00:00', '19316', '12:59:00', 'ICU']
+['53360115', '58265805727', '19316', '19:00:00', '19317', '19:49:00', 'ICU']
+['53360115', '58265805727', '19316', '12:59:00', '19316', '19:00:00', 'ICU']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_T5_LabResults_20251114.csv
+================================================================================
+Delimiter: ','
+Header:
+['arb_person_id', 'arb_encounter_id', 'category', 'LabComponentCode', 'LabComponentName', 'NUMERICVALUE', 'UNIT', 'labdate_days_from_birth', 'labtime']
+
+Column → Sample value:
+  arb_person_id: 34336836
+  arb_encounter_id: 334954147661
+  category: alanine_aminotransferase_(alt)
+  LabComponentCode: 1742-6
+  LabComponentName: Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma
+  NUMERICVALUE: 185
+  UNIT: U/L
+  labdate_days_from_birth: 24149
+  labtime: 04:05:00
+
+First 10 rows of data:
+['34336836', '334954147661', 'alanine_aminotransferase_(alt)', '1742-6', 'Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma', '185', 'U/L', '24149', '04:05:00']
+['34336836', '334954147661', 'albumin ', '1751-7', 'Albumin [Mass/volume] in Serum or Plasma', '2.5', 'g/dL', '24150', '04:15:00']
+['34336836', '334954147661', 'albumin ', '1751-7', 'Albumin [Mass/volume] in Serum or Plasma', '2.8', 'g/dL', '24149', '04:05:00']
+['34336836', '334954147661', 'alkaline_phosphatase', '6768-6', 'Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma', '131', 'U/L', '24150', '11:56:00']
+['34336836', '334954147661', 'anion_gap', '10466-1', 'Anion gap 3 in Serum or Plasma', '15', 'mmol/L', '24150', '10:02:00']
+['34336836', '334954147661', 'bicarb_(hco3)', '1960-4', 'Bicarbonate [Moles/volume] in Arterial blood', '18', 'mmol/L', '24150', '07:57:00']
+['34336836', '334954147661', 'bicarb_(hco3)', '1960-4', 'Bicarbonate [Moles/volume] in Arterial blood', '17.3', 'mmol/L', '24150', '08:42:00']
+['34336836', '334954147661', 'bicarb_(hco3)', '1960-4', 'Bicarbonate [Moles/volume] in Arterial blood', '15.8', 'mmol/L', '24150', '10:01:00']
+['34336836', '334954147661', 'bicarb_(hco3)', '1960-4', 'Bicarbonate [Moles/volume] in Arterial blood', '19.8', 'mmol/L', '24148', '23:32:00']
+['34336836', '334954147661', 'bicarb_(hco3)', '1960-4', 'Bicarbonate [Moles/volume] in Arterial blood', '21', 'mmol/L', '24149', '10:04:00']
+['34336836', '334954147661', 'bilirubin_total', '1975-2', 'Bilirubin.total [Mass/volume] in Serum or Plasma', '7.5', 'mg/dL', '24149', '13:19:00']
+['34336836', '334954147661', 'bilirubin_total', '1975-2', 'Bilirubin.total [Mass/volume] in Serum or Plasma', '12', 'mg/dL', '24149', '04:05:00']
+['34336836', '334954147661', 'bilirubin_total', '1975-2', 'Bilirubin.total [Mass/volume] in Serum or Plasma', '6.6', 'mg/dL', '24150', '11:56:00']
+['34336836', '334954147661', 'temperature', '8310-5', 'Body temperature', '36.8', 'C', '24149', '15:29:00']
+['34336836', '334954147661', 'temperature', '8310-5', 'Body temperature', '36', 'Deg C', '24150', '01:16:00']
+['34336836', '334954147661', 'temperature', '8310-5', 'Body temperature', '36.6', 'C', '24149', '14:29:00']
+['34336836', '334954147661', 'calcium', '17861-6', 'Calcium [Mass/volume] in Serum or Plasma', '7.3', 'mg/dL', '24150', '04:15:00']
+['34336836', '334954147661', 'calcium_ionized', '1994-3', 'Calcium.ionized [Moles/volume] in Blood', '1.31', 'mmol/L', '24149', '10:28:00']
+['34336836', '334954147661', 'calcium_ionized', '1994-3', 'Calcium.ionized [Moles/volume] in Blood', '1.15', 'mmol/L', '24149', '21:52:00']
+['34336836', '334954147661', 'calcium_ionized', '1994-3', 'Calcium.ionized [Moles/volume] in Blood', '1.13', 'mmol/L', '24150', '08:42:00']
+['34336836', '334954147661', 'partial_pressure_of_carbon_dioxide_(paco2)', '2019-8', 'Carbon dioxide [Partial pressure] in Arterial blood', '37.6', 'mmHg', '24149', '09:09:00']
+['34336836', '334954147661', 'partial_pressure_of_carbon_dioxide_(paco2)', '2019-8', 'Carbon dioxide [Partial pressure] in Arterial blood', '30', 'mmHg', '24150', '11:57:00']
+['34336836', '334954147661', 'partial_pressure_of_carbon_dioxide_(paco2)', '2019-8', 'Carbon dioxide [Partial pressure] in Arterial blood', '51', 'mmHg', '24150', '07:53:00']
+['34336836', '334954147661', 'partial_pressure_of_carbon_dioxide_(paco2)', '2019-8', 'Carbon dioxide [Partial pressure] in Arterial blood', '38.7', 'mmHg', '24149', '10:28:00']
+['34336836', '334954147661', 'bicarb_(hco3)', '2028-9', 'Carbon dioxide, total [Moles/volume] in Serum or Plasma', '19', 'mmol/L', '24149', '13:19:00']
+['34336836', '334954147661', 'bicarb_(hco3)', '2028-9', 'Carbon dioxide, total [Moles/volume] in Serum or Plasma', '13', 'mmol/L', '24150', '11:56:00']
+['34336836', '334954147661', 'bicarb_(hco3)', '2028-9', 'Carbon dioxide, total [Moles/volume] in Serum or Plasma', '23', 'mmol/L', '24149', '21:52:00']
+['34336836', '334954147661', 'chloride', '2075-0', 'Chloride [Moles/volume] in Serum or Plasma', '106', 'mmol/L', '24149', '21:52:00']
+['34336836', '334954147661', 'chloride', '2075-0', 'Chloride [Moles/volume] in Serum or Plasma', '110', 'mmol/L', '24150', '10:02:00']
+['34336836', '334954147661', 'fibrinogen', '3255-7', 'Fibrinogen [Mass/volume] in Platelet poor plasma by Coagulation assay', '340', 'mg/dL', '24149', '10:25:00']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_T6_Medications_20251114.csv
+================================================================================
+Delimiter: ','
+Header:
+['arb_person_id', 'arb_encounter_id', 'category', 'medication_name', 'code_type', 'code', 'code_description', 'form', 'route', 'ordered_dose', 'dose_unit', 'medstart_days_from_birth', 'medend_days_from_birth']
+
+Column → Sample value:
+  arb_person_id: 32048539180
+  arb_encounter_id: 444774081721
+  category: epinephrine
+  medication_name: ADRENALIN 1 MG/ML INJECTION SOLUTION
+  code_type: RxNorm
+  code: 1490057
+  code_description: epinephrine 1 MG/ML Injectable Solution [Adrenalin]
+  form: Solution
+  route: Intravenous
+  ordered_dose: 3
+  dose_unit: mcg/kg/min
+  medstart_days_from_birth: 7768
+  medend_days_from_birth: 7768
+
+First 10 rows of data:
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '3', 'mcg/kg/min', '7768', '7768']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '3', 'mcg/kg/min', '7768', '7768']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '3', 'mcg/kg/min', '7768', '7768']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '3', 'mcg/kg/min', '7768', '7768']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '2.4', 'mcg/kg/min', '7768', '7768']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '3', 'mcg/kg/min', '7768', '7768']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '1.7', 'mcg/kg/min', '7768', '7768']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '3', 'mcg/kg/min', '7768', '7768']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '1', 'mcg/kg/min', '7769', '7769']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.6', 'mcg/kg/min', '7769', '7769']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '1', 'mcg/kg/min', '7769', '7769']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.4', 'mcg/kg/min', '7769', '7769']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.27', 'mcg/kg/min', '7770', '7770']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.46', 'mcg/kg/min', '7770', '7770']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.46', 'mcg/kg/min', '7770', '7770']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.46', 'mcg/kg/min', '7771', '7771']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.46', 'mcg/kg/min', '7771', '7771']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.1', 'mcg/kg/min', '7772', '7772']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.16', 'mcg/kg/min', '7772', '7772']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.08', 'mcg/kg/min', '7773', '7773']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.1', 'mcg/kg/min', '7773', '7773']
+['32048539180', '444774081721', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Intravenous', '0.05', 'mcg/kg/min', '7774', '7774']
+['31142345603', '418083504964', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Topical', '4000', 'mL', '13287', '13287']
+['31142345603', '418083504964', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Topical', '', '*Unspecified', '13288', '13288']
+['31142345603', '418083504964', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Topical', '2000', 'mL', '13294', '13294']
+['31142345603', '418083504964', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Topical', '', '*Unspecified', '13301', '13301']
+['31142345603', '418083504964', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Topical', '', '*Unspecified', '13301', '13301']
+['31142345603', '418083504964', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Infiltration', '2', 'mg', '13301', '13301']
+['31142345603', '418083504964', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Infiltration', '2', 'mg', '13308', '13308']
+['31142345603', '418083504964', 'epinephrine', 'ADRENALIN 1 MG/ML INJECTION SOLUTION', 'RxNorm', '1490057', 'epinephrine 1 MG/ML Injectable Solution [Adrenalin]', 'Solution', 'Topical', '15', 'mg', '13308', '13308']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_T7_Flowsheets_20251114.csv
+================================================================================
+Delimiter: ','
+Header:
+['arb_person_id', 'arb_encounter_id', 'category', 'name', 'Displayname', 'FLOWSHEETROWEPICID', 'value', 'taken_days_from_birth', 'taken_time']
+
+Column → Sample value:
+  arb_person_id: 6185083692
+  arb_encounter_id: 17501602083
+  category: DBP
+  name: BLOOD PRESSURE
+  Displayname: BP
+  FLOWSHEETROWEPICID: 5
+  value: 75
+  taken_days_from_birth: 23484
+  taken_time: 12:00:00
+
+First 10 rows of data:
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '75', '23484', '12:00:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '', '23516', '18:15:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '62', '23484', '17:00:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '61', '23482', '20:00:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '84', '23500', '10:30:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '', '23503', '11:31:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '47', '23487', '20:00:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '', '23516', '18:30:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '60', '23482', '23:00:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '', '23517', '13:25:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '', '23528', '19:30:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '63', '23483', '20:00:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '107', '23483', '10:00:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '', '23531', '15:10:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '', '23528', '20:15:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '66', '23510', '14:44:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '', '23531', '18:15:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '', '23528', '21:45:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '69', '23489', '15:40:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '', '23528', '18:48:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '63', '23492', '09:57:00']
+['6185083692', '17501602083', 'SBP', 'BLOOD PRESSURE', 'BP', '5', '', '23528', '23:00:00']
+['6185083692', '17501602083', 'DBP', 'BLOOD PRESSURE', 'BP', '5', '', '23534', '14:30:00']
+['6185083692', '17501602083', 'HR', 'PULSE', 'Pulse', '8', '108', '23486', '12:00:00']
+['6185083692', '17501602083', 'HR', 'PULSE', 'Pulse', '8', '95', '23509', '08:00:00']
+['6185083692', '17501602083', 'HR', 'PULSE', 'Pulse', '8', '106', '23497', '05:00:00']
+['6185083692', '17501602083', 'HR', 'PULSE', 'Pulse', '8', '98', '23509', '13:07:00']
+['6185083692', '17501602083', 'HR', 'PULSE', 'Pulse', '8', '110', '23487', '07:00:00']
+['6185083692', '17501602083', 'HR', 'PULSE', 'Pulse', '8', '104', '23526', '20:00:00']
+['6185083692', '17501602083', 'HR', 'PULSE', 'Pulse', '8', '116', '23510', '17:00:00']
+
+
+================================================================================
+📂 File: /hpc/dctrl/yy450/link_work/colorado-sample/C4049_T8_Vent_20251114.csv
+================================================================================
+Delimiter: ','
+Header:
+['arb_person_id', 'arb_encounter_id', 'vent_start_days_from_birth', 'vent_start_time', 'vent_end_days_from_birth', 'vent_end_time']
+
+Column → Sample value:
+  arb_person_id: 34336836
+  arb_encounter_id: 334954147661
+  vent_start_days_from_birth: 24149
+  vent_start_time: 13:13:00
+  vent_end_days_from_birth: 24150
+  vent_end_time: 15:45:00
+
+First 10 rows of data:
+['34336836', '334954147661', '24149', '13:13:00', '24150', '15:45:00']
+['34908153', '55863259217', '19880', '11:00:00', '19881', '08:04:00']
+['34908153', '55863259217', '19877', '14:15:00', '19878', '12:38:00']
+['53360115', '58265805727', '19311', '10:14:00', '19320', '16:00:00']
+['53360115', '58265805727', '19321', '15:32:54', '19323', '09:59:00']
+['110192723', '307314360550', '24548', '22:26:00', '24549', '04:05:00']
+['110192723', '307314360550', '24541', '14:50:00', '24547', '08:00:00']
+['110192723', '307314360550', '24535', '14:02:00', '24538', '11:12:00']
+['110192723', '307314360550', '24551', '09:38:00', '24573', '11:28:00']
+['154857248', '86804919570', '23719', '16:11:00', '23724', '12:15:00']
+['154959007', '528788338763', '20571', '20:05:00', '20579', '12:51:00']
+['154959007', '528788338763', '20585', '00:21:00', '20585', '16:26:00']
+['157149262', '521583873970', '21119', '10:54:00', '21124', '17:43:00']
+['195599176', '509499040782', '19237', '00:00:00', '19240', '04:06:00']
+['195599176', '509499040782', '19210', '20:55:00', '19218', '16:50:00']
+['195599176', '509499040782', '19220', '08:00:00', '19220', '08:38:00']
+['195599176', '509499040782', '19224', '15:16:00', '19236', '08:00:00']
+['195599176', '509499040782', '19241', '00:51:00', '19241', '08:00:00']
+['198886704', '165024319503', '10058', '13:59:00', '10083', '14:18:00']
+['206611751', '53279167369', '24932', '16:17:00', '24941', '08:23:00']
+['227398023', '113628943718', '16526', '16:23:00', '16534', '09:25:00']
+['228595215', '145846542458', '15713', '05:25:00', '15714', '19:34:00']
+['229588891', '40120229036', '21530', '06:59:00', '21530', '16:37:00']
+['280900193', '51628234426', '24050', '22:25:00', '24052', '13:12:00']
+['280900193', '51628234426', '24034', '08:00:00', '24038', '08:00:00']
+['280900193', '51628234426', '24044', '18:16:22', '24049', '17:00:00']
+['280900193', '51628234426', '24029', '09:43:00', '24033', '00:00:00']
+['288396590', '50027023885', '23215', '09:15:00', '23221', '11:15:00']
+['292825527', '183421313298', '27314', '09:26:58', '27317', '11:17:00']
+['292825527', '183421313298', '27326', '21:24:20', '27333', '12:46:00']
+
+

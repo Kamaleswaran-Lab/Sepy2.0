@@ -3,16 +3,17 @@ import csv
 
 # folder_path = "/hpc/home/yy450/link_kamaleswaranlab/EmoryDataset/EMR_RAW/2022"   # Change to your directory
 # folder_path = "/hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_exports"   # Change to your directory
-folder_path = "/hpc/dctrl/yy450/link_mimic_iv/mimic-iv-3.1-decompress/note"   # Change to your directory
+# folder_path = "/hpc/dctrl/yy450/link_mimic_iv/mimic-iv-3.1-decompress/note"   # Change to your directory
 # folder_path = "/hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_concepts_exports"   # Change to your directory
 # folder_path = "/hpc/home/yy450/link_kamaleswaranlab/mimic_iv/builtdata/csv_mapping"   # Change to your directory
 # folder_path = "/hpc/home/yy450/link_kamaleswaranlab/mimic_iv/mimic_flat_files"   # Change to your directory
+folder_path = "/hpc/dctrl/yy450/link_work/colorado-sample"   # Change to your directory
 
 
-output_file = "/hpc/dctrl/yy450/Sepy2.0/mimic_util/print_to_know_data/csv_raw_notes_preview_mimic.txt"  # Output file name
+output_file = "/hpc/dctrl/yy450/Sepy2.0/mimic_util/print_to_know_data/csv_raw_preview_colorado.txt"  # Output file name
 CANDIDATE_DELIMITERS = [",", "\t", "|", ";", "^", "~"]
 
-def read_head(file_path, n=10):
+def read_head(file_path, n=30):
     try:
         with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             sample = f.read(4096)
