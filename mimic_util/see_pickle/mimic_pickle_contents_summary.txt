@@ -1,1651 +1,1651 @@
-Contents of pickle file: /hpc/home/yy450/link_kamaleswaranlab/mimic_iv/sepy_output/mimic-supertables/Supertables/29079034.pkl
+Contents of pickle file: /hpc/group/kamaleswaranlab/mimic_iv/sepy_output/mimic-supertables/Supertables/20000094.pkl
 
 ==== age (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    52
-2180-07-23 06:54:00    52
-2180-07-23 07:54:00    52
-2180-07-23 08:54:00    52
-2180-07-23 09:54:00    52
+2150-03-02 00:00:00    79
+2150-03-02 01:00:00    79
+2150-03-02 02:00:00    79
+2150-03-02 03:00:00    79
+2150-03-02 04:00:00    79
 Freq: 60min
 
 ==== gender (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    Female
-2180-07-23 06:54:00    Female
-2180-07-23 07:54:00    Female
-2180-07-23 08:54:00    Female
-2180-07-23 09:54:00    Female
+2150-03-02 00:00:00    Male
+2150-03-02 01:00:00    Male
+2150-03-02 02:00:00    Male
+2150-03-02 03:00:00    Male
+2150-03-02 04:00:00    Male
 Freq: 60min
 
 ==== race (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    WHITE
-2180-07-23 06:54:00    WHITE
-2180-07-23 07:54:00    WHITE
-2180-07-23 08:54:00    WHITE
-2180-07-23 09:54:00    WHITE
+2150-03-02 00:00:00    WHITE
+2150-03-02 01:00:00    WHITE
+2150-03-02 02:00:00    WHITE
+2150-03-02 03:00:00    WHITE
+2150-03-02 04:00:00    WHITE
 Freq: 60min
 
 ==== cci9 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    3
-2180-07-23 06:54:00    3
-2180-07-23 07:54:00    3
-2180-07-23 08:54:00    3
-2180-07-23 09:54:00    3
+2150-03-02 00:00:00    0.0
+2150-03-02 01:00:00    0.0
+2150-03-02 02:00:00    0.0
+2150-03-02 03:00:00    0.0
+2150-03-02 04:00:00    0.0
 Freq: 60min
 
 ==== cci10 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0.0
-2180-07-23 06:54:00    0.0
-2180-07-23 07:54:00    0.0
-2180-07-23 08:54:00    0.0
-2180-07-23 09:54:00    0.0
+2150-03-02 00:00:00    30
+2150-03-02 01:00:00    30
+2150-03-02 02:00:00    30
+2150-03-02 03:00:00    30
+2150-03-02 04:00:00    30
 Freq: 60min
 
 ==== anion_gap (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== base_excess (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== bicarb_(hco3) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== blood_urea_nitrogen_(bun) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== calcium (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== calcium_ionized (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== chloride (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== creatinine (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== gfr (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== glucose (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== magnesium (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== osmolarity (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== phosphorus (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== potassium (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== sodium (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== haptoglobin (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== hematocrit (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== hemoglobin (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== met_hgb (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== platelets (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== white_blood_cell_count (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== carboxy_hgb (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== alanine_aminotransferase_(alt) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== albumin (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== alkaline_phosphatase (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== ammonia (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== aspartate_aminotransferase_(ast) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== bilirubin_direct (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== bilirubin_total (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== fibrinogen (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== inr (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== lactate_dehydrogenase (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== lactic_acid (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== partial_prothrombin_time_(ptt) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== prealbumin (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== protein (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== prothrombin_time_(pt) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== thrombin_time (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== transferrin (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== amylase (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== lipase (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== b-type_natriuretic_peptide_(bnp) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== troponin (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== fio2 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== partial_pressure_of_carbon_dioxide_(paco2) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== partial_pressure_of_oxygen_(pao2) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== ph (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== saturation_of_oxygen_(sao2) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== d_dimer (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== hemoglobin_a1c (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== parathyroid_level (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== thyroid_stimulating_hormone_(tsh) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== lymphocyte (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== neutrophils (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== crp_high_sens (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== procalcitonin (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== erythrocyte_sedimentation_rate_(esr) (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== c_diff (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== covid (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== mtp (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== temperature (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== daily_weight_kg (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    39.400002
-2180-07-23 06:54:00    39.400002
-2180-07-23 07:54:00    39.400002
-2180-07-23 08:54:00    39.400002
-2180-07-23 09:54:00    39.400002
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== height_cm (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    152.0
-2180-07-23 06:54:00    152.0
-2180-07-23 07:54:00    152.0
-2180-07-23 08:54:00    152.0
-2180-07-23 09:54:00    152.0
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== sbp_line (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== dbp_line (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== map_line (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== sbp_cuff (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== dbp_cuff (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== map_cuff (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== pulse (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== unassisted_resp_rate (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== spo2 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== end_tidal_co2 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== o2_flow_rate (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== cvp (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== temproute (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== o2_delivery_device_1 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== o2_delivery_device_2 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== o2_delivery_device_3 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== o2_delivery_device_4 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== in_or (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== proc_start (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== gcs_total_score (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== gcs_verbal_score (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== gcs_eye_score (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== gcs_motor_score (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== vent_status (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== vent_fio2 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== peep (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== vent_category (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== tidal_volume_observed (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== tidal_volume_spontaneous (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== vent_tidal_rate_set (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== vent_rate_set (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== icu (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    1
+2150-03-02 01:00:00    1
+2150-03-02 02:00:00    1
+2150-03-02 03:00:00    1
+2150-03-02 04:00:00    1
 Freq: 60min
 
 ==== imc (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== ed (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    1
-2180-07-23 06:54:00    1
-2180-07-23 07:54:00    1
-2180-07-23 08:54:00    1
-2180-07-23 09:54:00    1
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== procedure (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== bed_unit (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    Emergency Department
-2180-07-23 06:54:00    Emergency Department
-2180-07-23 07:54:00    Emergency Department
-2180-07-23 08:54:00    Emergency Department
-2180-07-23 09:54:00    Emergency Department
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== bed_type (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    ed
-2180-07-23 06:54:00    ed
-2180-07-23 07:54:00    ed
-2180-07-23 08:54:00    ed
-2180-07-23 09:54:00    ed
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== icu_type (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    Not Recorded
-2180-07-23 06:54:00    Not Recorded
-2180-07-23 07:54:00    Not Recorded
-2180-07-23 08:54:00    Not Recorded
-2180-07-23 09:54:00    Not Recorded
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== on_dialysis (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== history_of_dialysis (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== radiology_notes (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== clinical_notes (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== norepinephrine (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== epinephrine (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== dobutamine (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== dopamine (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== phenylephrine (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== vasopressin (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== norepinephrine_dose_unit (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== epinephrine_dose_unit (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== dobutamine_dose_unit (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== dopamine_dose_unit (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== phenylephrine_dose_unit (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== vasopressin_dose_unit (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== icd_procedure_desc (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== icd9_procedure_code (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== icd10_procedure_code (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== procedure_cpt_desc (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== procedure_cpt_code (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    NaN
-2180-07-23 06:54:00    NaN
-2180-07-23 07:54:00    NaN
-2180-07-23 08:54:00    NaN
-2180-07-23 09:54:00    NaN
+2150-03-02 00:00:00    NaN
+2150-03-02 01:00:00    NaN
+2150-03-02 02:00:00    NaN
+2150-03-02 03:00:00    NaN
+2150-03-02 04:00:00    NaN
 Freq: 60min
 
 ==== best_map (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== pulse_pressure (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== n_to_l (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== s2f_vent_fio2 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== p2f_vent_fio2 (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== norepinephrine_dose_weight (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== epinephrine_dose_weight (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== dobutamine_dose_weight (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== dopamine_dose_weight (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== phenylephrine_dose_weight (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== vasopressin_dose_weight (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== anion_gap (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== on_pressors (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    False
-2180-07-23 06:54:00    False
-2180-07-23 07:54:00    False
-2180-07-23 08:54:00    False
-2180-07-23 09:54:00    False
+2150-03-02 00:00:00    False
+2150-03-02 01:00:00    False
+2150-03-02 02:00:00    False
+2150-03-02 03:00:00    False
+2150-03-02 04:00:00    False
 Freq: 60min
 
 ==== on_dobutamine (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    False
-2180-07-23 06:54:00    False
-2180-07-23 07:54:00    False
-2180-07-23 08:54:00    False
-2180-07-23 09:54:00    False
+2150-03-02 00:00:00    False
+2150-03-02 01:00:00    False
+2150-03-02 02:00:00    False
+2150-03-02 03:00:00    False
+2150-03-02 04:00:00    False
 Freq: 60min
 
 ==== SIRS_resp (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== SIRS_cardio (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== SIRS_temp (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== SIRS_wbc (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== sirs_total (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== sirs_delta_24h (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0.0
-2180-07-23 06:54:00    0.0
-2180-07-23 07:54:00    0.0
-2180-07-23 08:54:00    0.0
-2180-07-23 09:54:00    0.0
+2150-03-02 00:00:00    0.0
+2150-03-02 01:00:00    0.0
+2150-03-02 02:00:00    0.0
+2150-03-02 03:00:00    0.0
+2150-03-02 04:00:00    0.0
 Freq: 60min
 
 ==== SOFA_coag (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== SOFA_renal (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== SOFA_hep (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== SOFA_neuro (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== SOFA_cardio (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== SOFA_cardio_mod (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== SOFA_resp (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== SOFA_resp_sa (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00   NaN
-2180-07-23 06:54:00   NaN
-2180-07-23 07:54:00   NaN
-2180-07-23 08:54:00   NaN
-2180-07-23 09:54:00   NaN
+2150-03-02 00:00:00   NaN
+2150-03-02 01:00:00   NaN
+2150-03-02 02:00:00   NaN
+2150-03-02 03:00:00   NaN
+2150-03-02 04:00:00   NaN
 Freq: 60min
 
 ==== sofa_total (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0.0
-2180-07-23 06:54:00    0.0
-2180-07-23 07:54:00    0.0
-2180-07-23 08:54:00    0.0
-2180-07-23 09:54:00    0.0
+2150-03-02 00:00:00    0.0
+2150-03-02 01:00:00    0.0
+2150-03-02 02:00:00    0.0
+2150-03-02 03:00:00    0.0
+2150-03-02 04:00:00    0.0
 Freq: 60min
 
 ==== sofa_delta_24h (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0.0
-2180-07-23 06:54:00    0.0
-2180-07-23 07:54:00    0.0
-2180-07-23 08:54:00    0.0
-2180-07-23 09:54:00    0.0
+2150-03-02 00:00:00    0.0
+2150-03-02 01:00:00    0.0
+2150-03-02 02:00:00    0.0
+2150-03-02 03:00:00    0.0
+2150-03-02 04:00:00    0.0
 Freq: 60min
 
 ==== sofa_total_mod (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0.0
-2180-07-23 06:54:00    0.0
-2180-07-23 07:54:00    0.0
-2180-07-23 08:54:00    0.0
-2180-07-23 09:54:00    0.0
+2150-03-02 00:00:00    0.0
+2150-03-02 01:00:00    0.0
+2150-03-02 02:00:00    0.0
+2150-03-02 03:00:00    0.0
+2150-03-02 04:00:00    0.0
 Freq: 60min
 
 ==== sofa_delta_24h_mod (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0.0
-2180-07-23 06:54:00    0.0
-2180-07-23 07:54:00    0.0
-2180-07-23 08:54:00    0.0
-2180-07-23 09:54:00    0.0
+2150-03-02 00:00:00    0.0
+2150-03-02 01:00:00    0.0
+2150-03-02 02:00:00    0.0
+2150-03-02 03:00:00    0.0
+2150-03-02 04:00:00    0.0
 Freq: 60min
 
 ==== meld_score (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    6.43
-2180-07-23 06:54:00    6.43
-2180-07-23 07:54:00    6.43
-2180-07-23 08:54:00    6.43
-2180-07-23 09:54:00    6.43
+2150-03-02 00:00:00    6.43
+2150-03-02 01:00:00    6.43
+2150-03-02 02:00:00    6.43
+2150-03-02 03:00:00    6.43
+2150-03-02 04:00:00    6.43
 Freq: 60min
 
 ==== aki_score (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== infection (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== sepsis (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0
-2180-07-23 06:54:00    0
-2180-07-23 07:54:00    0
-2180-07-23 08:54:00    0
-2180-07-23 09:54:00    0
+2150-03-02 00:00:00    0
+2150-03-02 01:00:00    0
+2150-03-02 02:00:00    0
+2150-03-02 03:00:00    0
+2150-03-02 04:00:00    0
 Freq: 60min
 
 ==== elapsed_icu (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0.0
-2180-07-23 06:54:00    0.0
-2180-07-23 07:54:00    0.0
-2180-07-23 08:54:00    0.0
-2180-07-23 09:54:00    0.0
+2150-03-02 00:00:00    0.0
+2150-03-02 01:00:00    1.0
+2150-03-02 02:00:00    2.0
+2150-03-02 03:00:00    3.0
+2150-03-02 04:00:00    4.0
 Freq: 60min
 
 ==== elapsed_hosp (<class 'pandas.core.series.Series'>) ====
-Series Length: 61
+Series Length: 34
 Head (first 5 rows):
-2180-07-23 05:54:00    0.0
-2180-07-23 06:54:00    0.0
-2180-07-23 07:54:00    0.0
-2180-07-23 08:54:00    0.0
-2180-07-23 09:54:00    0.0
+2150-03-02 00:00:00    0.0
+2150-03-02 01:00:00    1.0
+2150-03-02 02:00:00    2.0
+2150-03-02 03:00:00    3.0
+2150-03-02 04:00:00    4.0
 Freq: 60min
