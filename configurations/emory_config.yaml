@@ -8,7 +8,7 @@ make_supertables: "yes" # yes: make supertables, no: do not make supertables
 
 # FILE PATHS
 data_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI"
-groupings_path: "$HOME/Sepy/groupings"
+groupings_path: "$HOME/Sepy2.0/groupings"
 yearly_pickle_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_YEARLY_PICKLES/"
 supertable_output_path: "/hpc/group/kamaleswaranlab/EmoryDataset/EMR_SuperTables_Fluids/"
 encounters_path: "ENCOUNTER_FILE"
@@ -63,8 +63,8 @@ dictionary_paths:
   combined_files:
     # DICTIONARY PATH KEYWORDS AND STRING FOR THE GLOB FUNCTION TO MATCH IN THE data_path/ FOLDER
     - ["DIALYSIS", "DIALYSIS_14_21.dsv"] 
-    - ["IN_OUT", "CJSEPSIS_IN_OUT_PROCESSED_combined.csv"]
-    - ["RADIOLOGY_NOTES", "all_radiology_notes.csv"]
+    #- ["IN_OUT", "CJSEPSIS_IN_OUT_PROCESSED_combined.csv"]
+    - ["RADIOLOGY_NOTES", "Combined_Radiology_Notes_with_EncounterNumber_batch_deid.csv"]
 
 # YEARLY INSTANCE FUNCTIONS AND PARAMETERS
 yearly_instance:

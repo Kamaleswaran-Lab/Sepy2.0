@@ -16,6 +16,56 @@ def load_yaml(filename):
     with open(filename, "r", encoding="utf-8") as file:
         return yaml.safe_load(file)
 
+def prepare_df_for_csv(supertable: pd.DataFrame, features_map: dict) -> pd.DataFrame:
+    """
+    Prepare a supertable for csv export.
+    """
+    supertable_ = supertable[SUPERTABLE_FEATURES_MAP.keys()]
+    supertable_.rename(columns = SUPERTABLE_FEATURES_MAP, inplace = True)
+    
+    return supertable_
+
+def safe_read_pickle(path: str) -> pd.DataFrame:
+    """
+    Read a pickle file and return a dataframe.
+    """
+    try:
+        df = pd.read_pickle(path)
+    except Exception as e:
+        print(f"Error reading pickle file {path}: {e}")
+        return None
+    return df
+
+def convert_dtypes_supertable(supertable: pd.DataFrame, config_path) -> pd.DataFrame:
+    """
+    Convert the dtypes of the supertable to the correct dtypes.
+    """
+    supertable_column_config_path = Path(os.path.expandvars(config_path))
+    supertable_config = pd.read_csv(supertable_column_config_path)
+    convert_to_float = supertable_config.loc[supertable_config.convert_to_float == True]['Features'].values
+    convert_to_int = supertable_config.loc[supertable_config.convert_to_int == True]['Features'].values
+    
+    #Drop columns with identical names
+    supertable = supertable.loc[:, ~supertable.columns.duplicated()]
+
+    # Convert to float
+    for col in convert_to_float:
+        if col in supertable.columns:
+            try:
+                supertable[col] = pd.to_numeric(supertable[col], errors='coerce').astype('float64')
+            except Exception as e:
+                print(f"Could not convert {col} to float: {e}")
+
+    # Convert to int (note: int conversion fails with NaN values)
+    for col in convert_to_int:
+        if col in supertable.columns:
+            try:
+                # Convert to float first, then to nullable int to handle NaN
+                supertable[col] = pd.to_numeric(supertable[col], errors='coerce').astype('Int64')
+            except Exception as e:
+                print(f"Could not convert {col} to int: {e}")
+
+    return supertable
 
 ##########################################################3
 ############# Fluids Parsing Functions ####################

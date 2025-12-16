@@ -6,26 +6,32 @@ import os
 sys.path.append("../")
 
 
-emory_data = Path("/labs/collab/K-lab-MODS/MODS-PHI/Emory_Data/")
-fluid_path = Path("/labs/collab/K-lab-MODS/MODS-PHI/Fluids")
+emory_data = Path("/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI")
+fluid_path = Path("/hpc/group/kamaleswaranlab/EmoryDataset/EMR_RAW/noPHI")
 
-cjout = pd.read_csv(fluid_path / "CJSEPSIS_OUT_EO3.txt", sep = "|")
-cjmeds = pd.read_csv(fluid_path / "CJSEPSIS_ORDEREDMEDS.csv")
+cjout = pd.read_csv(fluid_path / "CJSEPSIS_OUT_EO3.csv")
+cjmeds = pd.read_csv(fluid_path / "CJSEPSIS_ORDEREDMEDS.dsv", sep = "|")
+
+print(cjout.columns)
+print(cjmeds.columns)
 cjmeds["ORDER_PARENT_ID"] = cjmeds["ORDER_PARENT_ID"].astype(str)
 cjmeds["ORDER_DT"] = pd.to_datetime(cjmeds["ORDER_DT"])
-cjmeds["ENCOUNTER_NBR"] = cjmeds["ENCOUNTER_NBR"].astype(int)
+cjmeds["ENCOUNTER_NBR"] = cjmeds["ENCOUNTER_NBR"].astype(str)
 
-cjout["ORDER_TS"] = pd.to_datetime(cjout["ORDER_TS"])
-cjout["SERVICE_TS"] = pd.to_datetime(cjout["SERVICE_TS"])
-cjout["CSN"] = cjout["CSN"].astype(int)
+cjout["order_ts"] = pd.to_datetime(cjout["order_ts"])
+cjout["service_ts"] = pd.to_datetime(cjout["service_ts"])
+cjout["csn"] = cjout["csn"].astype(str)
 
 for year in range(2015, 2022):
     print("Processing year: ", year)
-    infusion_meds = pd.read_csv(emory_data / str(year) / f"CJSEPSIS_INFUSIONMEDS_{year}.dsv", sep = "|")
+    if year == 2015:
+        infusion_meds = pd.read_csv(emory_data / str(year) / f"CJSEPSIS_INFUSIONMEDS_{year}.dsv")
+    else:
+        infusion_meds = pd.read_csv(emory_data / str(year) / f"CJSEPSIS_INFUSIONMEDS_{year}.dsv", sep = "|")
 
     infusion_meds["order_med_id"] = infusion_meds["order_med_id"].astype(str)
     infusion_meds["med_order_time"] = pd.to_datetime(infusion_meds["med_order_time"])
-    infusion_meds["csn"] = infusion_meds["csn"].astype(int)
+    infusion_meds["csn"] = infusion_meds["csn"].astype(str)
     infusion_meds["med_action_time"] = pd.to_datetime(infusion_meds["med_action_time"])
     print(infusion_meds.shape)
 
@@ -42,7 +48,7 @@ for year in range(2015, 2022):
             allmeds, 
             cjout, 
             left_on=["csn", "med_name", "med_order_time", "med_action_time"], 
-            right_on=["CSN", "ORDER_CATALOG_DESC", "ORDER_TS", "SERVICE_TS"], 
+            right_on=["csn", "order_catalog_desc", "order_ts", "service_ts"], 
             how="left",
             suffixes = ["", "_fluids"]
         )

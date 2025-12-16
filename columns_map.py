@@ -133,22 +133,3 @@ SUPERTABLE_FEATURES_MAP = {
     'vasopressin_dose_weight': 'vasopressin_dose_weight',
 }
 
-def prepare_df_for_csv(supertable: pd.DataFrame, features_map: dict) -> pd.DataFrame:
-    """
-    Prepare a supertable for csv export.
-    """
-    supertable_ = supertable[SUPERTABLE_FEATURES_MAP.keys()]
-    supertable_.rename(columns = SUPERTABLE_FEATURES_MAP, inplace = True)
-    
-    return supertable_
-
-def safe_read_pickle(path: str) -> pd.DataFrame:
-    """
-    Read a pickle file and return a dataframe.
-    """
-    try:
-        df = pd.read_pickle(path)
-    except Exception as e:
-        print(f"Error reading pickle file {path}: {e}")
-        return None
-    return df
