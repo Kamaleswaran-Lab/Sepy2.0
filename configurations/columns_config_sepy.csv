@@ -166,6 +166,6 @@ infection,int,TRUE,
 sepsis,int,TRUE,
 elapsed_icu,int,TRUE,
 elapsed_hosp,int,TRUE,
-o2_flow_rate,float,TRUE,onlymimic
-tidal_volume_observed,float,TRUE,
-tidal_volume_spontaneous,float,TRUE,
+o2_flow_rate,float,FALSE,onlymimic
+tidal_volume_observed,float,FALSE,
+tidal_volume_spontaneous,float,FALSE,

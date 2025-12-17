@@ -9,7 +9,7 @@
 #SBATCH --array=0-8
 
 ROOT="/hpc/group/kamaleswaranlab/GradyDataset/sepy_processed/grady_supertables"
-STATS_DF_OUTPUT_PATH="/hpc/group/kamaleswaranlab/GradyDataset/sepy_processed/grady_supertables"
+STATS_DF_OUTPUT_PATH="/hpc/group/kamaleswaranlab/GradyDataset/stats/"
 
 mkdir -p $STATS_DF_OUTPUT_PATH
 mkdir -p ./output
