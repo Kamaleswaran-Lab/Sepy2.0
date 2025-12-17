@@ -36,12 +36,17 @@ slurmjobs/errors
 slurmjobs/output
 out_em/
 
-#pycache
-__pycache__/*
+#pycache (already covered by line 10, but keeping for clarity)
+__pycache__/
 
 #Oddjob specific files
 configurations/*oddjobs*
 slurmjobs/*oddjobs*
 
 # scratch files
-scratch_files/*
+scratch_files/
+scratch/ 
+
+# data quality check
+data_quality_check/output/
+data_quality_check/errors/

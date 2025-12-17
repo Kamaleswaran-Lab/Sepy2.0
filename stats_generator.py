@@ -688,10 +688,16 @@ def calculate_cohort_statistics_duckdb(
                         print(f"Skipping '{col}': all values are identical ({min_val})")
                         continue
                     
-                    # Use WIDTH_BUCKET to create histogram bins
+                    # Calculate bin width
+                    bin_width = (max_val - min_val) / num_bins
+                    
+                    # Calculate histogram bins manually (WIDTH_BUCKET not available in all DuckDB versions)
                     hist_query = f"""
                     SELECT 
-                        WIDTH_BUCKET(\"{col}\", {min_val}, {max_val}, {num_bins}) as bin,
+                        LEAST(
+                            CAST(FLOOR((\"{col}\" - {min_val}) / {bin_width}) AS INTEGER) + 1,
+                            {num_bins}
+                        ) as bin,
                         COUNT(*) as count
                     FROM cohort_data
                     WHERE \"{col}\" IS NOT NULL
@@ -699,9 +705,6 @@ def calculate_cohort_statistics_duckdb(
                     ORDER BY bin
                     """
                     hist_data = conn.execute(hist_query).df()
-                    
-                    # Calculate bin edges for plotting
-                    bin_width = (max_val - min_val) / num_bins
                     bins = hist_data['bin'].values
                     counts = hist_data['count'].values
                     bin_centers = min_val + (bins - 0.5) * bin_width
