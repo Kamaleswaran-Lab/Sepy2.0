@@ -430,7 +430,7 @@ def comorbidity_summary(encounter_instance, config_data):
             logging.error(f"Key error for {summary_name}_dict: {e}")
         except Exception as e:
             logging.error(f"Error processing comorbidity {summary_name} for csn {encounter_csn}: {e}")
-    return comorbidity_summary_dicts
+    return pd.DataFrame(comorbidity_summary_dicts)
 
 ###########################################################################
 ############################## Data Cleaning ##############################

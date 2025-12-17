@@ -53,6 +53,28 @@ import utils
 
 
 ###########################################################################
+########## Import Data Frames and Create Yearly Pickle ####################
+###########################################################################
+def import_data_frames(yearly_instance, configs):
+    """
+    Imports data from a YAML structure and applies it to methods of a passed instance.
+    Args:
+        yearly_instance (sepyIMPORT): The instance whose methods will be called.
+    """
+    import_start_time = time.time()
+    logging.info(
+        "Sepy is currently reading flat files and importing them for analysis. Thank you for waiting."
+    )
+    for method_name, params in configs["yearly_instance"].items():
+        method = getattr(yearly_instance, method_name, None)
+        if callable(method):
+            # check if method requires numeric_cols parameter and access list in sepyIMPORT instnace
+            if "numeric_cols" in params and isinstance(params["numeric_cols"], str):
+                params["numeric_cols"] = getattr(yearly_instance, params["numeric_cols"], None)
+        method(**params)
+    logging.info(f"Sepy took {time.time() - import_start_time} (s) to create a yearly pickle.")
+
+###########################################################################
 ############################# Make Supertables ###########################
 ###########################################################################
 def make_sepyMaster(yearly_data_instance, sepyConfigs, bounds, save_dir):
@@ -131,10 +153,7 @@ def process_csn_instance(
         logging.error(f"Sepy- Error in Encounter Summary for csn {csn_instance.clinical_data.csn}: {e}")
     
     try:
-        series_dict = {k.replace('_dict', ''): pd.Series(v) for k, v in utils.comorbidity_summary(csn_instance, dataConfig).items()}
-        df = pd.DataFrame(series_dict).reset_index()
-        df.rename(columns={'index': 'csn'}, inplace=True)
-        result['comorbidity_summary'] = df
+        result['comorbidity_summary'] = utils.comorbidity_summary(csn_instance, dataConfig)
     except Exception as e:
         logging.error(f"Sepy- Error in Comorbidity Summary for csn {csn_instance.clinical_data.csn}: {e}")
     
@@ -159,8 +178,20 @@ def process_batch_of_csns(process_list, sepyMaster_instance, year, start_count):
     # Create CSN instances for just this batch
     csn_instances = []
     for i, csn in enumerate(process_list):
-        csn_instance = sepyMaster_instance.create_csn_instance(csn)
-        csn_instances.append(csn_instance)
+        try:
+            csn_instance = sepyMaster_instance.create_csn_instance(csn)
+            csn_instances.append(csn_instance)
+        except Exception as e:
+            logging.error(f"Sepy- Error creating instance for csn {csn}: {e}")
+            results.append({
+                'error': [csn, str(e)],
+                'sofa_summary': None,
+                'sep3_summary': None,
+                'sirs_summary': None,
+                'sep2_summary': None,
+                'enc_summary': None,
+                'comorbidity_summary': None
+            })
 
     # Process the batch in parallel
     with ProcessPoolExecutor(max_workers=num_local_workers) as executor:
@@ -204,10 +235,10 @@ if __name__ == "__main__":
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Process EMR data for a specific year')
     parser.add_argument('--year', type=int, help='The year for which data is being processed')
-    parser.add_argument('--data_config', type=str, default='configurations/emory_config.yaml', help='Path to the data configuration file in YAML format')
-    parser.add_argument('--sepy_config', type=str, default='configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
+    parser.add_argument('--data_config', type=str, default='../configurations/emory_config_oddjobs.yaml', help='Path to the data configuration file in YAML format')
+    parser.add_argument('--sepy_config', type=str, default='../configurations/dict_config.yaml', help='Path to the sepyIMPORT configuration file in YAML format')
     parser.add_argument('--num_processes', type=int, default=10, help='Number of processes to use')
-    parser.add_argument('--processor_assignment', default=0, type=int, help='Processor assignment')
+    parser.add_argument('--processor_assignment', type=int, help='Processor assignment')
     args = parser.parse_args()
     
     year = args.year
@@ -271,6 +302,7 @@ if __name__ == "__main__":
             
         except IndexError:
             logging.error(f"Sepy- could not find combined file for {combined_file[1]}")
+    print(paths)
 
     file_dictionary = paths
 
@@ -284,7 +316,12 @@ if __name__ == "__main__":
             logging.info(f"Yearly pickle will be saved to {YEARLY_DICTIONARY_FILE_NAME}")
 
             import_instance = si.sepyIMPORT(paths, sepyConfigs, dataConfig["yearly_instance"])
-            logging.info(f"An instance of the sepyIMPORT class was created for {year}, data was automatically imported")
+            logging.info(f"An instance of the sepyIMPORT class was created for {year}")
+            
+            logging.info(f"Importing data frames for {year}")
+            logging.info(f"This may take a while...")
+            import_data_frames(import_instance, dataConfig)
+            logging.info(f"Data frames imported for {year}")
             logging.info(f"Dumping import instance to pickle for {year}")
 
             with open(YEARLY_DICTIONARY_FILE_NAME, "wb") as handle:
@@ -331,8 +368,7 @@ if __name__ == "__main__":
             specific_enc_filter = dataConfig["specific_enc_filter"] #yes, no
 
             # reads the list of csns from the encounters path
-            # csn_df = pd.read_csv(encounters_path, sep = "|")
-            csn_df = import_instance.df_encounters
+            csn_df = pd.read_csv(encounters_path, sep = "|")
             num_encounters = len(csn_df)
             logging.info(f"Sepy- The year {year} has {num_encounters} encounters before filtering.")
         except (IndexError, ValueError, TypeError) as e:
@@ -347,34 +383,26 @@ if __name__ == "__main__":
         
         # If specific encounter filter is applied, filter the encounters based on the list of specific encounters in the config file
         if specific_enc_filter == "yes":
-            if "specific_enc_filter_list" in dataConfig and dataConfig["specific_enc_filter_list"]:
-                
+            if "specific_enc_filter_list" in dataConfig and dataConfig["specific_enc_filter_list"] and os.path.exists(dataConfig["specific_enc_filter_list"]) and dataConfig["specific_enc_filter_list"].endswith('.csv'):
                 try:
-                    if os.path.exists(dataConfig["specific_enc_filter_list"]) and dataConfig["specific_enc_filter_list"].endswith('.csv'):
-                        specific_enc_filter_list = pd.read_csv(dataConfig["specific_enc_filter_list"])
-                        try:
-                            csn_df = csn_df[csn_df.index.isin(specific_enc_filter_list["csn"])]
-                        except Exception as e:
-                            logging.error(f"Sepy- Error in filtering encounters. Please check the config file. {e}")
+                    specific_enc_filter_list = pd.read_csv(dataConfig["specific_enc_filter_list"])
                 except Exception as e:
-                    logging.error(f"Sepy- Error in the specified encounter filter list. List is not a csv file. {e}")
-                # if the list is a list in the config file, convert it to a dataframe
-                    if isinstance(dataConfig["specific_enc_filter_list"], list):
-                        specific_enc_filter_list = pd.DataFrame(dataConfig["specific_enc_filter_list"], columns=["csn"])
-                        try:
-                            csn_df = csn_df[csn_df.index.isin(specific_enc_filter_list["csn"])]
-                        except Exception as e:
-                            logging.error(f"Sepy- Error in filtering encounters. Please check the config file. {e}")
+                    logging.error(f"Sepy- Error in the specified encounter filter list. Please check the config file. {e}")
+                try:
+                    csn_df = csn_df[csn_df.csn.isin(specific_enc_filter_list["csn"])]
+                except Exception as e:
+                    logging.error(f"Sepy- Error in filtering encounters. Please check the config file. {e}")
+                
+                num_encounters = len(csn_df)
+                logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
             else:
                 logging.info(f"Sepy- Error in the specified encounter filter list. Please check the config file.")
         else:
             logging.info(f"Sepy- No specific encounter filter was applied")
-
-        num_encounters = len(csn_df)
-        logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
             
         # If encounter type filter is applied, filter the encounters based on the encounter type in the config file (EM, IN, all)
         if encounter_type != "all":
+            print(csn_df.head())
             csn_df = csn_df[csn_df["encounter_type"] == encounter_type]
             num_encounters = len(csn_df)
             logging.info(f"Sepy- The year {year} has {num_encounters} encounters after filtering.")
@@ -411,8 +439,8 @@ if __name__ == "__main__":
         logging.info(f"Sepy- The list of chunks has {len(list_of_chunks)} unique dataframes.")
         
         # uses processor assignment number to select correct chunk
-        process_list = list_of_chunks[processor_assignment].index.to_list()
-        logging.info(f"Sepy- The process_list head:\n {process_list[:5]}")
+        process_list = list_of_chunks[processor_assignment]["csn"]
+        logging.info(f"Sepy- The process_list head:\n {process_list.head()}")
         
         # create the directory for the supertables
         save_dir = SUPERTABLE_OUTPUT_PATH / str(year)
@@ -422,7 +450,15 @@ if __name__ == "__main__":
         supertable_write_path = save_dir / "Supertables"
         supertable_write_path.mkdir(exist_ok = True, parents = True)
         logging.info(f"Sepy-Directory for year {year} was set to {save_dir}")
+
+        # List supertables already in save path 
+        supertables_in_save_path = os.listdir(supertable_write_path)
+        logging.info(f"Sepy- The supertables already has {len(supertables_in_save_path)} supertables in the save path")
         
+        #Filter out supertables that are already in the save path
+        process_list = [csn for csn in process_list if f"{csn}.pkl" not in supertables_in_save_path]
+        logging.info(f"Sepy- The process_list has {len(process_list)} csns after filtering out supertables that are already in the save path")
+
         # make empty list to handle csn's with errors
         error_list = []
 
@@ -460,7 +496,7 @@ if __name__ == "__main__":
         for batch_start in range(0, total_csns, batch_size):
             batch_end = min(batch_start + batch_size, total_csns)
             current_batch = process_list[batch_start:batch_end]
-
+            
             logging.info(f"Sepy- Processing batch {batch_start//batch_size + 1} of {(total_csns + batch_size - 1)//batch_size}")
             
             # Process the batch
@@ -518,15 +554,6 @@ if __name__ == "__main__":
         else:
             logging.warning("Sepy- No encounter summaries were collected")
             
-        # Save comorbidity summary
-        if appended_comorbidity_summaries:
-            logging.debug(appended_comorbidity_summaries)
-            pd.concat(appended_comorbidity_summaries).to_csv(
-                base_path / "comorbidity_summary" / f"comorbidity_summary_{UNIQUE_FILE_ID}.csv",
-                index=False,
-            )
-        else:
-            logging.warning("Sepy- No comorbidity summaries were collected")
 
         # Save error summary
         pd.DataFrame(error_list, columns=["csn", "error"]).to_csv(

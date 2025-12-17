@@ -2,14 +2,14 @@
 #SBATCH --job-name=tomato
 #SBATCH --nodes=1 
 #SBATCH --ntasks=1 
-#SBATCH --mem=64G
+#SBATCH --mem=96G
 #SBATCH --time=36:00:00
-#SBATCH --output=./output/2019/em_encounter_%A_%a.out
-#SBATCH --error=./errors/2019/em_encounter_%A_%a.err
+#SBATCH --output=./output/2016/em_encounter_%A_%a.out
+#SBATCH --error=./errors/2016/em_encounter_%A_%a.err
 #SBATCH --array=0-15
 
 # This is the list of years to process; each core will take a fraction of each year
-YEAR=2019
+YEAR=2016
 
 ### These are variables passed into the Python Script ###
 # Total num of cores assigned to job (i.e. 16)

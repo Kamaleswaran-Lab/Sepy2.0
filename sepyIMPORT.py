@@ -350,7 +350,7 @@ class sepyIMPORT:
             self.df_infusion_meds.reset_index()
             .merge(df_vasopressor_med_groups, how="inner", on="medication_id")
             .reset_index()
-            .set_index(["csn", "med_order_time", "super_table_col_name"], append=True)[
+            .set_index(["csn", "med_start", "super_table_col_name"], append=True)[
                 ["med_action_dose", "med_action_dose_unit"]
             ]
         )

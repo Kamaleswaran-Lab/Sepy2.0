@@ -76,7 +76,7 @@ Vasopressors: We create separate columns in the supertables as indicator variabl
 - M: `lab_result_time`: Time the result was reported
 - M: `collection_time`: Time the specimen was collected
 - M: `result_status`: Status of the result (final, preliminary, etc.)
-- M: `proc_cat_id`: Procedure category (Blood, CSF etc.) number
+- M: `proc_cat_id`: Procedure category (Blood, CSF etc.) number (Actually these proc_ columns might not be required - this needs to be tested though)
 - M: `proc_cat_name`: Procedure category name
 - M: `proc_code`: Procedure code
 - M: `proc_desc`: Procedure description (text)

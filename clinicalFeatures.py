@@ -629,12 +629,12 @@ class ClinicalDataProcessor:
         return radiology_notes_df
     
     def vasopressor_staging(self, df: pd.DataFrame, time_index: pd.DatetimeIndex) -> None:
-        vas_cols = self.config.vasopressor_names + self.config.vasopressor_units + ['med_order_time']
+        vas_cols = self.config.vasopressor_names + self.config.vasopressor_units + ['med_start']
         df =df[vas_cols]
         vas_keys = self.config.vasopressor_names + self.config.vasopressor_units
         
         if df.empty:
-            df = df.drop(columns=['med_order_time'])
+            df = df.drop(columns=['med_start'])
             vasopressor_meds_df = pd.DataFrame(columns = df.columns, index = time_index)
         else:
             new = pd.DataFrame([])
@@ -643,7 +643,7 @@ class ClinicalDataProcessor:
                     agg_fn = utils.agg_fn_wrapper_max(key, self.bounds)
                 else:
                     agg_fn = "max"
-                col1 = df[[key, 'med_order_time']].resample('60min', on = "med_order_time",  \
+                col1 = df[[key, 'med_start']].resample('60min', on = "med_start",  \
                                                            origin = time_index[0]).apply(agg_fn)
                 #col1 = col1.drop(columns=['med_order_time'])
 
