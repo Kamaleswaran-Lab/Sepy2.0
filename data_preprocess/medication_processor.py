@@ -4,9 +4,50 @@ import numpy as np
 import sys
 sys.path.append("../")
 import utils
+import tqdm
 
 ### NOT RECORDED are the ones with med stop!!!!
 ## Should impute total volume in the first hour if meds are recorded before supertable time index 
+def impute_by_closest_location_vectorized(df):
+    """
+    Impute 'Not Recorded' values with the closest non-'Not Recorded' value
+    within the same order_med_id and med_name group
+    """
+    df = df.copy()
+    
+    # Store imputation values to apply all at once
+    imputation_dict = {}
+    
+    # Group by order_med_id and med_name
+    for (order_id, med_name), group in tqdm.tqdm(df.groupby(['order_med_id', 'med_name'])):
+        # Split into recorded and not recorded
+        not_recorded_mask = group['formulary_name'] == 'Not Recorded'
+        not_recorded_indices = group.index[not_recorded_mask].values
+        recorded_indices = group.index[~not_recorded_mask].values
+        
+        if len(recorded_indices) == 0 or len(not_recorded_indices) == 0:
+            continue
+        
+        # Vectorized distance calculation using broadcasting
+        # Shape: (len(not_recorded), len(recorded))
+        distances = np.abs(not_recorded_indices[:, None] - recorded_indices[None, :])
+        
+        # Find closest recorded entry for each not recorded entry
+        closest_recorded_positions = np.argmin(distances, axis=1)
+        closest_recorded_indices = recorded_indices[closest_recorded_positions]
+        
+        # Get the values from the closest recorded entries
+        closest_values = df.loc[closest_recorded_indices, 'formulary_name'].values
+        
+        # Store imputation mappings
+        for not_rec_idx, value in zip(not_recorded_indices, closest_values):
+            imputation_dict[not_rec_idx] = value
+    
+    # Apply all imputations at once (much faster than individual .loc assignments)
+    if imputation_dict:
+        df.loc[list(imputation_dict.keys()), 'formulary_name'] = list(imputation_dict.values())
+    
+    return df
 
 def impute_by_closest_location(df):
     """
@@ -19,7 +60,7 @@ def impute_by_closest_location(df):
     not_recorded_mask = df['formulary_name'] == 'Not Recorded'
     
     # Group by order_med_id and med_name
-    for (order_id, med_name), group in df.groupby(['order_med_id', 'med_name']):
+    for (order_id, med_name), group in tqdm.tqdm(df.groupby(['order_med_id', 'med_name'])):
         # Get indices of this group
         group_indices = group.index
         
@@ -74,7 +115,7 @@ def check_duration_in_desc(row):
     
     if hour_pattern in desc:
         return {"found": True, "unit": "hours"}
-    F
+    
     # Check for minutes - handle both integer and decimal
     if duration == int(duration):
         minute_pattern = f"{int(duration)} minute"
@@ -1881,7 +1922,7 @@ def process_medication_timeline_new(order_id, med_name, all_order_rows, supertab
         tuple: (updated_medsdict, processed_row_indices)
     """
     # Get rows for this specific medication
-    med_rows = all_order_rows[all_order_rows['formulary_name'] == med_name].sort_values('med_action_time')
+    med_rows = all_order_rows[all_order_rows['med_name'] == med_name].sort_values('med_action_time')
     processed_indices = set()
     orphaned_infuse_rows = []
     
@@ -2119,12 +2160,13 @@ def process_medication_timeline_new(order_id, med_name, all_order_rows, supertab
                 )
             
         elif med_action == "Infuse":
+            #import pdb; pdb.set_trace()
             # Check if this is the first action and no medication is set up yet
             if not medsdict[order_id][med_name]["set"] and row.name not in processed_indices:
                 # Check if there's a "Begin Bag" within one hour after this Infuse
                 upcoming_begin_bag = None
                 for _, future_row in med_rows.iterrows():
-                    if future_row["med_action_time"] <= row["med_action_time"]:
+                    if future_row["med_action_time"] < row["med_action_time"]: #TODO: check others - removed equal to 
                         continue
                     future_time = future_row["med_action_time"]
                     time_diff = (future_time - med_action_time).total_seconds() / 3600.0

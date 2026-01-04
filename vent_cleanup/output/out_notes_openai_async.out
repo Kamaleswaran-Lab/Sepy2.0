@@ -1,0 +1,12 @@
+Found existing checkpoint: /data/irb/surgery/pro00114885/EmoryDataset/notes_checkpoints/checkpoint_async_20260104_070954_n164000.pickle
+Loading checkpoint to resume processing...
+Already processed: 152699/286400 reports
+
+Total reports: 286400
+Already processed: 152699
+Remaining to process: 133701
+Batch size: 10 reports per API call
+Max concurrent batches: 3
+Expected number of API calls: 13371
+
+Processing 13371 batches concurrently...

@@ -1,0 +1,4 @@
+/home/ma618/Sepy2.0/data_preprocess/merge_fluids_files.py:18: DtypeWarning: Columns (0) have mixed types. Specify dtype option on import or set low_memory=False.
+  cjmeds = pd.read_csv(fluid_path / "CJSEPSIS_ORDEREDMEDS.dsv", sep = "|")
+/home/ma618/Sepy2.0/data_preprocess/merge_fluids_files.py:35: DtypeWarning: Columns (3) have mixed types. Specify dtype option on import or set low_memory=False.
+  infusion_meds = pd.read_csv(emory_data / str(year) / f"CJSEPSIS_INFUSIONMEDS_{year}.dsv", sep = "|")

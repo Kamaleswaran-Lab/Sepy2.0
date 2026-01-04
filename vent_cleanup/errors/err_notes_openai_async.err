@@ -1,0 +1,12 @@
+Creating batches:   0%|          | 0/133701 [00:00<?, ?it/s]Creating batches:  11%|█         | 14363/133701 [00:00<00:00, 143618.84it/s]Creating batches:  23%|██▎       | 30297/133701 [00:00<00:00, 152859.72it/s]Creating batches:  35%|███▍      | 46249/133701 [00:00<00:00, 155897.84it/s]Creating batches:  46%|████▋     | 62126/133701 [00:00<00:00, 157026.87it/s]Creating batches:  58%|█████▊    | 77829/133701 [00:00<00:00, 135637.67it/s]Creating batches:  70%|██████▉   | 93198/133701 [00:00<00:00, 141195.07it/s]Creating batches:  81%|████████  | 108577/133701 [00:00<00:00, 145039.21it/s]Creating batches:  93%|█████████▎| 124011/133701 [00:00<00:00, 147862.44it/s]Creating batches: 100%|██████████| 133701/133701 [00:00<00:00, 147452.11it/s]
+Processing batches:   0%|          | 0/13371 [00:00<?, ?it/s]Processing batches:   0%|          | 0/13371 [00:04<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/ma618/Sepy2.0/vent_cleanup/cxr_notes_intubation_async.py", line 325, in <module>
+    asyncio.run(main())
+  File "/data/irb/surgery/pro00114885/miniconda/clic/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/data/irb/surgery/pro00114885/miniconda/clic/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/ma618/Sepy2.0/vent_cleanup/cxr_notes_intubation_async.py", line 290, in main
+    if batches_completed % CHECKPOINT_EVERY_N_BATCHES == 0 or batches_completed == len(batches):
+NameError: name 'CHECKPOINT_EVERY_N_BATCHES' is not defined

@@ -1,0 +1,47 @@
+Index(['csn', 'service_date', 'service_ts', 'unit_desc', 'order_catalog_id',
+       'order_catalog_desc', 'order_clinical_desc', 'order_ts'],
+      dtype='object')
+Index(['EMPI_NBR', 'ENCOUNTER_ID', 'ENCOUNTER_NBR', 'HNAM_ACTION_ORDER_ID',
+       'HNAM_ACTION_ORDER_DESC', 'DOSAGE_ORDERED_QTY',
+       'HNAM_FREQUENCY_MEDICATION_CD', 'DURATION_INFUSION_ORDERED_QTY',
+       'ORDER_MEDICATION_DESC', 'ORDER_PARENT_ID', 'ORDER_CLINICAL_DESC',
+       'MNEMONIC_ORDER_DESC', 'MEDICATION_CONTEXT', 'INFUSION_ORDER_RT',
+       'ORDER_CATALOG_DESC', 'ROUTE_DESC', 'DOSAGE_UNIT_MEASURE',
+       'RATE_UNIT_MEASURE', 'STRENGTH_ORDERED_QTY', 'STRENGTH_UNIT_MEASURE',
+       'VOLUME_ORDERED_QTY', 'VOLUME_UNIT_MEASURE', 'ORDER_DT', 'Order_TS'],
+      dtype='object')
+Processing year:  2015
+(7282700, 19)
+(7386371, 43)
+(7386426, 50)
+file saved to:  /data/irb/surgery/pro00114885/EmoryDataset/noPHI/2015/FLUIDS_MATCHED_2015.dsv
+Processing year:  2016
+(8905975, 19)
+(8986728, 43)
+(8986937, 50)
+file saved to:  /data/irb/surgery/pro00114885/EmoryDataset/noPHI/2016/FLUIDS_MATCHED_2016.dsv
+Processing year:  2017
+(8653359, 19)
+(8716603, 43)
+(8716800, 50)
+file saved to:  /data/irb/surgery/pro00114885/EmoryDataset/noPHI/2017/FLUIDS_MATCHED_2017.dsv
+Processing year:  2018
+(8633895, 19)
+(8705892, 43)
+(8706055, 50)
+file saved to:  /data/irb/surgery/pro00114885/EmoryDataset/noPHI/2018/FLUIDS_MATCHED_2018.dsv
+Processing year:  2019
+(9502697, 19)
+(9566113, 43)
+(9566256, 50)
+file saved to:  /data/irb/surgery/pro00114885/EmoryDataset/noPHI/2019/FLUIDS_MATCHED_2019.dsv
+Processing year:  2020
+(11197603, 19)
+(11268076, 43)
+(11268303, 50)
+file saved to:  /data/irb/surgery/pro00114885/EmoryDataset/noPHI/2020/FLUIDS_MATCHED_2020.dsv
+Processing year:  2021
+(10157996, 19)
+(10223877, 43)
+(10224191, 50)
+file saved to:  /data/irb/surgery/pro00114885/EmoryDataset/noPHI/2021/FLUIDS_MATCHED_2021.dsv
