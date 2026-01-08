@@ -25,7 +25,7 @@ deployment = "gpt-4"
 BATCH_SIZE = 10  # Number of reports to process in a single API call
 MAX_CONCURRENT_BATCHES = 3  # Number of batches to process concurrently
 MAX_RETRIES = 3
-CHECKPOINT_INTERVAL = 2000  # Save checkpoint every N processed reports
+CHECKPOINT_EVERY_N_BATCHES = 50  # Save checkpoint after every N batches
 
 
 BATCH_PROMPT_TEMPLATE = """You are a medical AI assistant specialized in analyzing radiology reports. Your task is to extract what the report indicates as the status of an endotracheal tube.
