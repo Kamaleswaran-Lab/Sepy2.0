@@ -1,9 +1,9 @@
 Emory:
 
 1. matched infusion_meds flatfile with CJSEPSIS_OUT3 and ORDERED_MEDS as in merge_fluids_files.py 
-    1. OUT contains some weird pull of only a specific set of fluids but has "order clinical desc" which can sometimes be useful to see what rate/volume of fluids were ORDERED. You have to parse this clinical desc. Right now I am doing this using a piece of logic that some unknown person had come up with that was handed to me as a "solution to emory fluids" lololol. A slightly improved version of the code is in process_fluids.py. The result of running this code (fluid parameters) is already saved as columns in the CJSEPSIS_OUT3.dsv file that exists on the RCC and DCC, so no one really has to run it again. I have tested enough to know that it works okay enough (i.e., parses the clinical description accurately) for 80% of the cases but fails in many important cases. It uses a rule based NLP approach - maybe can be improved. But the bigger problem is not that the algorithm is rudimentary, it is that this file a) contains only specific fluids, b) does not even match the infusion_meds flatfile on most instances that this fluid was given -- the infusion meds file has many recordings of these fluids that are not recorded in this file. Idk if that's because this file was pulled for just a specific cohort or bed location, and c)Even for csns for whcih this file has recordings, the information derived from it is sometimes different from what was actually infused (given that my way of figuring out what was actually infused is correct). I have not yet calculated how many cases there is a descrepency for.
+    1. OUT contains some weird pull of only a specific set of fluids but has "order clinical desc" which can sometimes be useful to see what rate/volume of fluids were ORDERED. You have to parse this free text clinical desc. Right now I am doing this using a piece of logic that some unknown person had come up with that was handed to me as a "solution to emory fluids" lololol. A slightly improved version of the code is in process_fluids.py. The result of running this code (fluid parameters) is already saved as columns in the CJSEPSIS_OUT3.dsv file that exists on the RCC and DCC, so no one really has to run it again. I have tested enough to know that it works okay enough (i.e., parses the clinical description accurately) for 80% of the cases but fails in many important cases. It uses a rule based NLP approach - maybe can be improved. But the bigger problem is not that the algorithm is rudimentary, it is that this file a) contains only specific fluids, b) does not even match the infusion_meds flatfile on most instances that this fluid was given -- the infusion meds file has many recordings of these fluids that are not recorded in this file. Idk if that's because this file was pulled for just a specific cohort or bed location, and c)Even for csns for whcih this file has recordings, the information derived from it is sometimes different from what was actually infused (given that my way of figuring out what was actually infused is correct). I have not yet calculated how many cases there is a descrepency for.
     2. ORDERED_MEDS is more useful. It contains the exact rate, duration, and volume that meds were ordered for without having to parse a clinical desc. These parameters usually match what was infused so it is a good way to verify that the infusion_meds information-derivation algorithm is correct. Again, these orders exists for just a subset. I have no idea about the origin of this file either so can't tell if it was only for a specific cohort.
-2. The "formulary name" of the medication is important in our pipeline to extract reliable information (step 3 onwards). Some rows have formulary name as "Not Recorded" even though they record a valid med action. But they can have thier formulary name recorded in subsequent (or earlier rows). I've written this gnarly function called impute_by_closest_location() in medication_processor.py, which is what it says it is, that is, imputed formulary name by closest row (according to med_action_time) that shares the same order_med_id and med_name. Maybe this can be optimized because it takes a long while to run (4 hours for 10 ish million rows hehe) but I can't spend time and brain cells on that right now.  UPDATE: I remembered that I can & have already spent $20 on cursor so now we have impute_by_closest_location_vectorized() is faster (5 mins for 10 ish million rows).
+2. The "formulary name" of the medication is important in our pipeline to extract reliable information (step 3 onwards). Some rows have formulary name as "Not Recorded" even though they record a valid med action. But they can have their formulary name recorded in subsequent (or earlier rows). I've written this gnarly function called impute_by_closest_location() in medication_processor.py, which is what it says it is, that is, imputes formulary name by closest row (according to med_action_time) that shares the same order_med_id and med_name. Maybe this can be optimized because it takes a long while to run (4 hours for 10 ish million rows hehe) but I can't spend time and brain cells on that right now.  UPDATE: I remembered that I can & have already spent $20 on cursor so now we have impute_by_closest_location_vectorized() that is is faster (5 mins for 10 ish million rows).
 3. I parse the "formulary_name" of the merged file to do the following:
     1. figure out if the formulary name is for ANY kind of fluid (classify_fluids.py --> is_fluids column in em_infusion_meds_classification_final.csv) [Reason: some meds are diluted in fluids, and the way to determine the concentration of the medicine is to find the rate at which the fluid was given and use that to find the concentration]
     2. flag anesthaesia meds --> is_anes column in em_infusion_meds_classification_final.csv [Reason: anesthaesia meds dont have trustworthy volume or rate recordings]
@@ -194,7 +194,7 @@ was filtered out because they had unreliable data and very few csns
 --order id: 9630480923 : should the previous params be carried forward? 
 
 3. check:
-001bb660d966139adfd5afc734339902631e73ddaf4f552271e12147aa45ac08
+001bb660d966139adfd5afc734339902631e73ddaf4f552271e12147aa45ac08  - heparin
 
 ## todo
 
@@ -204,8 +204,17 @@ was filtered out because they had unreliable data and very few csns
 3. You need to handle non is_infusion meds also as dilution pairs because some pairs have rate!!
 csn:
 0013d826efd44adcdc4ca4b021c335169d7f34f196d7d63d275784bed7c0c17c
-4. Okay if the med action is "Not Recorded" then the non _infusion med can be considered as not having rte information (need not be handled like a dilution pair)
+4. Okay if the med action is "Not Recorded" then the non _infusion med can be considered as not having rte information (need not be handled like a dilution pair) 
+but volume needs to be added? check : 02412076954e45eef9a01604d08752ca2b4634bd29c23e83a6a4e2b3d0ad5d63
+
 5. If formulary_name is not recorded - ignore the fluid in the pair
+
+6. WHAT HAPPENS WHEN RATE IS NONE BUT VOLUME IS PRESENT AND IS INFUSION - FIXED 
+
+7. Need to fix: med rate but calcualted using med volume - should use fluid volume for diuent pair
+
+8. If infusion period code fails, at least add the med to the all_meds_dict
+
 
 Dilution pairs:
 
@@ -216,3 +225,4 @@ Dilution pairs:
 0013d826efd44adcdc4ca4b021c335169d7f34f196d7d63d275784bed7c0c17c
 (but get volume from fluid)
 4. Central hyparel csn: 026030c3ce36817d1ae017799be0cf2cf374b64e1bdde50a764aeb7d83dac84b
+hyperal peripheral : 026030c3ce36817d1ae017799be0cf2cf374b64e1bdde50a764aeb7d83dac84b

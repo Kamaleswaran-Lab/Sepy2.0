@@ -9,11 +9,11 @@ import re
 from typing import Optional, Dict
 import med_processing_utils as mpu
 
-def get_order_params_for_dilution_pairs(fluid_row, med_row, verbose = False):
+def get_order_params_for_dilution_pairs(fluid_row, med_row, supertable, verbose = False):
     # will return parent_order_check False if the FLUID doesnt have a parent order 
     # will return final_check False if the med and fluid rate dont match (if fluid has a parent order ) or cant find rate at all anywhere
-
     med_action = fluid_row['med_action']
+    action_time = fluid_row['med_action_time']
     print(f"\nProcessing common timestamp {action_time} - Action: {med_action}")
     
     # Get parameters from both sources
@@ -34,7 +34,19 @@ def get_order_params_for_dilution_pairs(fluid_row, med_row, verbose = False):
     elif pd.notna(med_row.get("volume_from_concentration")):
         volume = med_row["volume_from_concentration"]
         print(f"Using med volume_from_concentration: {volume}mL")
-    
+    else:
+        print("ERROR: Cannot get volume from fluid row")
+        return {
+                "volume": None,
+                "rate": None,
+                "duration": None,
+                "final_check": False,
+                'parent_order_check': False,
+                "med_start": None,
+                "med_stop": None,
+                'dilution_pair': True
+        }
+
     # Extract rate (preference: fluid parent order -> med params -> defaults)
     rate = None
     rate_source = None
@@ -49,60 +61,84 @@ def get_order_params_for_dilution_pairs(fluid_row, med_row, verbose = False):
         print(f"Using fluid parent order rate: {rate}mL/h")
     
     # Check med params
-    elif med_params["final_check"] and pd.notna(med_params.get("rate")):
+    if med_params["final_check"] and pd.notna(med_params.get("rate")):
         med_rate = med_params["rate"]
-        # If we had a fluid rate, check for exact match
-        if rate_source == "fluid_parent_order":
-            if med_rate == rate:
-                rate_source = "med_params"
-                print(f"Med rate matches fluid rate: {rate}mL/h")
-            else:
-                # Check if we have previous infusion with original params
-                if medsdict[order_id][pair_key]["set"]:
-                    original_rate = medsdict[order_id][pair_key]["original_rate"]
-                    rate = original_rate
-                    rate_source = "original_params"
-                    print(f"Med rate {med_rate} ≠ fluid rate {fluid_params['rate']}, using original rate: {rate}mL/h")
+
+        if pd.notna(med_params.get("duration")):
+            duration = med_params["duration"]
+            volume_rate_from_med = volume / duration
+
+            # If we had a fluid rate, check for exact match
+            if rate_source == "fluid_parent_order":
+                if volume_rate_from_med == rate:
+                    rate_source = "med_params"
+                    print(f"Med rate matches fluid rate: {rate}mL/h")
                 else:
                     final_check = False
-                    print(f"Med rate {med_rate} ≠ fluid rate {rate}, no previous infusion to reference")
+                    print(f"Volume rate from med {volume_rate_from_med} ≠ fluid rate {rate}")
+            else:
+                rate_source = "med_params"
+                rate = volume_rate_from_med
+                print(f"Using med rate: {rate}mL/h")
         else:
+            print("Med has rate but no duration - cant reconcile it with fluid- CHECK!")
             rate = med_rate
-            rate_source = "med_params"
-            print(f"Using med rate: {rate}mL/h")
-    
-    # Fallback to defaults if no rate found
-    if rate is None:
-        if medsdict[order_id][pair_key]["set"]:
-            rate = medsdict[order_id][pair_key]["original_rate"]
-            rate_source = "original_params"
-            print(f"Using original rate: {rate}mL/h")
-        elif pd.notna(med_row.get("rate_default_numeric")):
-            rate = med_row["rate_default_numeric"]
-            rate_source = "med_default"
-            print(f"Using med rate_default_numeric: {rate}mL/h")
-        else:
-            final_check = False
-            print(f"ERROR: No rate found for dilution pair at {action_time}")
-    
-    # Extract duration based on rate source
+            
+        
+    # Extract duration based on rate source (needed for fallback calculation)
     duration = None
     if rate_source == "fluid_parent_order":
         duration = fluid_params.get("duration") if pd.notna(fluid_params.get("duration")) else None 
     elif rate_source == "med_params": 
         duration = med_params.get("duration") if pd.notna(med_params.get("duration")) else None
-    elif rate_source == "original_params":
-        duration = medsdict[order_id][pair_key]["original_duration"]
-
-    if rate_source == "med_default" or pd.isna(duration):
-        duration = 1.0  # Default
-        print(f"No duration from params, defaulting to 1 hour")
-    else:
-        print(f"Using duration: {duration}h")
+    
+    # Fallback: if no rate found but have volume, try to calculate from duration
+    if rate is None:
+        if pd.notna(volume):
+            print(f"No param rate found but have volume: {volume}mL")
+            
+            # Try to get duration if we don't have it yet
+            if duration is None or pd.isna(duration) or duration == 0.0:
+                # Try fluid duration
+                if pd.notna(fluid_params.get("duration")):
+                    duration = fluid_params["duration"]
+                    print(f"Using fluid duration: {duration}h")
+                # Try med duration
+                elif pd.notna(med_params.get("duration")):
+                    duration = med_params["duration"]
+                    print(f"Using med duration: {duration}h")
+            
+            # If we have duration now, calculate rate
+            if pd.notna(duration) and duration > 0:
+                rate = volume / duration
+                rate_source = "calculated_from_volume_duration"
+                final_check = True
+                print(f"Calculated rate from volume and duration: {rate:.2f}mL/h")
+            else:
+                # No duration - check if small fluid for 1-hour assumption
+                # Note: fluid_row is always a fluid in dilution pairs
+                if volume <= 1000:
+                    duration = 1.0
+                    rate = volume
+                    rate_source = "small_fluid_1hr_assumption"
+                    final_check = True
+                    print(f"Small fluid ({volume}mL) - applying 1-hour assumption: rate={rate:.2f}mL/h")
+                else:
+                    final_check = False
+                    print(f"Cannot calculate rate: no duration, large volume ({volume}mL)")
+        else:
+            final_check = False
+            print(f"No param rate or volume found for dilution pair at {action_time}")
+    
+    # Set default duration if still None
+    if duration is None or pd.isna(duration):
+        duration = 1.0
+        print(f"No duration available, defaulting to 1 hour")
     
     med_start = med_params.get("med_start")
-    med_stop_meds = med_params.get("med_stop")
-    med_stop_duration = med_start + pd.TimeDelta(hours = duration)
+    med_stop = med_params.get("med_stop")
+    if med_stop is None:
+        med_stop_duration = med_start + pd.TimeDelta(hours = duration)
     
     if verbose:
         print(f"\n[FINAL RESULT]")
@@ -120,7 +156,8 @@ def get_order_params_for_dilution_pairs(fluid_row, med_row, verbose = False):
         "final_check": final_check,
         'parent_order_check': parent_order_check,
         "med_start": med_start,
-        "med_stop": med_stop
+        "med_stop": med_stop,
+        'dilution_pair': True
     }
 
 
@@ -462,7 +499,8 @@ def get_order_params_for_row(row, supertable, verbose=False):
         "final_check": final_check,
         'parent_order_check': parent_order_check,
         "med_start": med_start,
-        "med_stop": med_stop
+        "med_stop": med_stop,
+        "dilution_pair": False
     }
 
 
@@ -501,7 +539,7 @@ def extract_infusion_params(row, weight):
             med_stop = pd.to_datetime(row["med_stop"])
             duration = (med_stop - med_start).total_seconds() / 3600.0
     
-    if row["is_infusion"]:
+    if row["is_infusion"] or (row["med_action"] in ["Infuse", "Begin Bag", "Rate Change"]):
         if row["volume_inf"] is not None:
             volume = row["volume_inf"]*1000 if row["volume_inf_unit"] == "L" else row["volume_inf"]
             volume_unit = row["volume_inf_unit"]

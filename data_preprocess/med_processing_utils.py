@@ -498,6 +498,10 @@ def parse_clinical_description(description: str):
     return params
     
        
+def create_combined_med_name(med_name, fluid_name):
+    return f"{med_name}_{fluid_name}"
+
+
 def extract_volume_detailed(formulary_name):
     """
     Extract volume with more detailed parsing, including multiple volume mentions.

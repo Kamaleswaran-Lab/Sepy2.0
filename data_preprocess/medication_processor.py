@@ -116,17 +116,18 @@ def _recalculate_rate_if_1hr_assumption(params, volume, rate, final_duration, ro
     
     Returns:
         float: Recalculated rate or original rate
+        
     """
+    #TODO: Check if removing is_fluid check is correct
     if pd.notna(volume) and final_duration > 0:
         # Get infusion params to check if it's a fluid
         nearest_idx = supertable.index.get_indexer([row["med_action_time"]], method='nearest')[0]
         weight = supertable['daily_weight_kg'].values[nearest_idx]
-        infusion_params = pe.extract_infusion_params(row, weight)
+        #infusion_params = pe.extract_infusion_params(row, weight)
         
         # If we have volume and either no rate or the rate was calculated from 1-hour assumption
         if (pd.isna(rate) or 
-            (pd.notna(params.get("duration")) and params["duration"] == 1.0 and 
-             infusion_params["is_fluid"] and volume <= 1000)):
+            (pd.notna(params.get("duration")) and params["duration"] == 1.0 and volume <= 1000)):
             
             new_rate = volume / final_duration
             print(f"Recalculated rate using actual duration: {new_rate:.1f}mL/h (was {rate}mL/h from 1-hour assumption)")
@@ -155,7 +156,7 @@ def _determine_duration_and_stop_time(actual_duration, last_infuse_time, params,
 
 
 def handle_begin_bag(row, med_rows, processed_indices, order_id, med_name, medsdict, supertable, 
-                     is_explicit=False, action_label="BEGIN BAG"):
+                     is_explicit=False, action_label="BEGIN BAG", params=None):
     """
     Unified function to handle all Begin Bag scenarios (explicit and implicit).
     
@@ -169,6 +170,7 @@ def handle_begin_bag(row, med_rows, processed_indices, order_id, med_name, medsd
         supertable: Patient data table for weight lookups
         is_explicit: True for explicit "Begin Bag" actions, False for implicit (Rate Change, Infuse, etc.)
         action_label: Label for logging (e.g., "BEGIN BAG", "IMPLICIT BEGIN BAG", "RATE CHANGE")
+        params: Optional pre-extracted parameters (for dilution pairs); if None, will extract from row
     
     Returns:
         tuple: (updated_medsdict, updated_processed_indices)
@@ -181,8 +183,9 @@ def handle_begin_bag(row, med_rows, processed_indices, order_id, med_name, medsd
         print(f"Processing subsequent bag for {action_label}")
     
     # Get theoretical parameters for this action
-    params = pe.get_order_params_for_row(row, supertable)
-    
+    if params is None:
+        params = pe.get_order_params_for_row(row, supertable)
+        
     # Calculate actual duration from Infuse actions
     actual_duration, last_infuse_time, processed_indices = _calculate_actual_duration_and_update(
         row, med_rows, processed_indices
@@ -261,7 +264,7 @@ def handle_begin_bag(row, med_rows, processed_indices, order_id, med_name, medsd
     return medsdict, processed_indices
 
 
-def handle_implicit_begin_bag(row, med_rows, processed_indices, order_id, med_name, medsdict, supertable):
+def handle_implicit_begin_bag(row, med_rows, processed_indices, order_id, med_name, medsdict, supertable, params=None):
     """
     Handle case where first action is not Begin Bag or orphaned rate change - create implicit infusion period.
     This is a wrapper that calls the unified handle_begin_bag function.
@@ -274,15 +277,290 @@ def handle_implicit_begin_bag(row, med_rows, processed_indices, order_id, med_na
         med_name: Medication name
         medsdict: Medication dictionary
         supertable: Patient data table
+        params: Optional pre-extracted parameters (for dilution pairs); if None, will extract from row
     
     Returns:
         tuple: (updated_medsdict, updated_processed_indices)
     """
     return handle_begin_bag(row, med_rows, processed_indices, order_id, med_name, medsdict, supertable,
-                           is_explicit=False, action_label="IMPLICIT BEGIN BAG")
+                           is_explicit=False, action_label="IMPLICIT BEGIN BAG", params=params)
 
 
+def handle_rate_change(row, med_rows, processed_indices, order_id, med_name, medsdict, supertable, params=None):
+    # Get theoretical parameters for this rate change
+    if params is None:
+        params = pe.get_order_params_for_row(row, supertable)
+        
+    # Get previous infusion details
+    prev_start = medsdict[order_id][med_name]["med_start"][-1]
+    prev_stop = medsdict[order_id][med_name]["med_stop"][-1]
+    prev_rate = medsdict[order_id][med_name]["rate"][-1]
+    prev_volume = medsdict[order_id][med_name]["volume"][-1]
+    prev_duration = medsdict[order_id][med_name]["duration"][-1]
     
+    # Get original parameters for fallback
+    original_rate = medsdict[order_id][med_name]["original_rate"]
+    original_volume = medsdict[order_id][med_name]["original_volume"]
+    original_duration = medsdict[order_id][med_name]["original_duration"]
+    
+    # Determine new parameters (use original as fallback)
+    if params["final_check"]:
+        new_rate = params["rate"]
+        new_volume = params["volume"]
+        new_duration = params["duration"]
+    elif (params["rate"] == 0) & (params["volume"] == 0) & (params["duration"] == 0):
+        new_rate = 0
+        new_volume = 0
+        new_duration = 0
+    else:
+        new_rate = original_rate
+        new_volume = original_volume  
+        new_duration = original_duration
+        print("Rate change params failed validation - using original parameters")
+    
+    # Check if rate actually changed
+    if pd.notna(new_rate) and pd.notna(prev_rate) and new_rate == prev_rate:
+        print("Rate change but no actual rate difference - ignoring")
+        return medsdict, processed_indices
+        
+    # Check if rate change is valid (allow 0 for medication stop, reject negative)
+    if pd.isna(new_rate) or new_rate < 0:
+        print("Invalid new rate - ignoring rate change")
+        return medsdict, processed_indices
+        
+        
+    # Check timing relative to previous infusion
+    med_action_time = row["med_action_time"]
+    print(f"The current med action time is : {med_action_time}")
+    if med_action_time < prev_stop:
+        # Rate change during active infusion - split the period
+        print(f"Rate change during active infusion (was due to end at {prev_stop})")
+        
+        # Calculate what was already delivered
+        time_elapsed = (med_action_time - prev_start).total_seconds() / 3600.0
+        volume_delivered = prev_rate * time_elapsed
+        remaining_volume = prev_volume - volume_delivered
+        
+        print(f"Time elapsed: {time_elapsed:.2f}h, Volume delivered: {volume_delivered:.1f}mL, Remaining: {remaining_volume:.1f}mL")
+        
+        # Update previous period to end at rate change time
+        medsdict[order_id][med_name]["med_stop"][-1] = med_action_time
+        medsdict[order_id][med_name]["duration"][-1] = time_elapsed
+        
+        # Calculate actual duration for new period using Infuse actions
+        actual_duration, used_infuse_indices, last_infuse_time = calculate_actual_infusion_duration(
+            row, med_rows, processed_indices
+        )
+        processed_indices.update(used_infuse_indices)
+        
+        # Determine final duration for new period
+        if new_rate == 0:
+            # Medication stopped - use actual duration from infuses, volume is remaining volume
+            if actual_duration > 0:
+                final_duration = actual_duration
+                new_stop_time = last_infuse_time
+                print(f"Medication stopped - using actual duration from Infuse actions: {final_duration:.2f}h")
+            else:
+                # No infuse actions found - medication stopped immediately
+                final_duration = 0
+                new_stop_time = med_action_time
+                print(f"Medication stopped immediately at time {med_action_time}")
+        elif actual_duration > 0:
+            final_duration = actual_duration
+            new_stop_time = last_infuse_time
+            print(f"Using actual duration from Infuse actions: {final_duration:.2f}h")
+        else:
+            # No infuse actions found - calculate theoretical duration with remaining volume
+            if remaining_volume > 0 and new_rate > 0:
+                final_duration = remaining_volume / new_rate
+                new_stop_time = med_action_time + pd.Timedelta(hours=final_duration)
+                print(f"No Infuse actions found - using theoretical duration: {final_duration:.2f}h")
+            else:
+                print("Cannot calculate duration - skipping rate change")
+                return medsdict, processed_indices
+        
+        # Add new period with remaining volume and new rate
+        _append_medication_params(medsdict, order_id, med_name, remaining_volume, new_rate, final_duration, med_action_time, new_stop_time)
+        print(f"RATE CHANGE (DURING INFUSION) - Final params: Start={med_action_time}, Stop={new_stop_time}, Rate={new_rate:.1f}mL/h, Volume={remaining_volume:.1f}mL, Duration={final_duration:.2f}h")
+    else:
+        # Rate change after previous infusion ended - treat as orphaned rate change (implicit begin bag)
+        print(f"Orphaned rate change after infusion ended (ended at {prev_stop}) - treating as implicit Begin Bag")
+        
+        # Use the enhanced handle_implicit_begin_bag function
+        medsdict, processed_indices = handle_implicit_begin_bag(
+            row, med_rows, processed_indices, order_id, med_name, medsdict, supertable
+        )
+
+    return medsdict, processed_indices
+
+def handle_not_recorded(row, processed_indices, order_id, med_name, medsdict, supertable, params=None):
+    # Check if med_stop is available (it should be for "Not Recorded" actions)
+    if pd.isna(row["med_stop"]):
+        print("Not Recorded action missing med_stop - this is unexpected, ignoring")
+        return medsdict, processed_indices
+    
+    med_start_time = row["med_action_time"]
+    med_stop_time = pd.to_datetime(row["med_stop"])
+    duration = (med_stop_time - med_start_time).total_seconds() / 3600.0
+    
+    print(f"Not Recorded with med_start: {med_start_time}, med_stop: {med_stop_time}, duration: {duration:.2f}h")
+    
+    # Get order parameters for this row
+    if params is None:
+        params = pe.get_order_params_for_row(row, supertable)
+    
+    if params["final_check"]:
+        print("Valid params found for Not Recorded action - using calculated parameters")
+        
+        # Use calculated parameters with actual med_stop time
+        volume = params["volume"]
+        rate = params["rate"]
+        
+        # Calculate volume if missing using actual duration
+        if pd.isna(volume) and pd.notna(rate):
+            volume = rate * duration
+            print(f"Calculated volume from rate and actual duration: {volume:.1f}mL")
+        
+        if not medsdict[order_id][med_name]["set"]:
+            _initialize_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
+            print(f"NOT RECORDED (INITIAL) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
+        else:
+            _append_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
+            print(f"NOT RECORDED (SUBSEQUENT) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
+            
+    else:
+        print("Invalid params for Not Recorded action - checking if medication already set")
+        
+        if medsdict[order_id][med_name]["set"]:
+            # Use existing parameters with this row's times
+            original_rate = medsdict[order_id][med_name]["original_rate"]
+            original_volume = medsdict[order_id][med_name]["original_volume"]
+            
+            # Calculate volume using actual duration and original rate
+            if pd.notna(original_rate):
+                volume = original_rate * duration
+                print(f"Using original rate {original_rate:.1f}mL/h with actual duration {duration:.2f}h -> volume {volume:.1f}mL")
+            else:
+                volume = original_volume if pd.notna(original_volume) else None
+                print(f"Using original volume: {volume}")
+            
+            # Add new period with original parameters and actual times
+            _append_medication_params(medsdict, order_id, med_name, volume, original_rate, duration, med_start_time, med_stop_time)
+            print(f"NOT RECORDED (FALLBACK) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={original_rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
+        else:
+            # No existing parameters - try using concentration_default or rate_default as last resort
+            print("No existing parameters - checking for concentration_default or rate_default")
+            
+            volume = None
+            rate = None
+            
+            # Try volume_from_concentration first
+            if 'volume_from_concentration' in row and pd.notna(row['volume_from_concentration']):
+                volume = row['volume_from_concentration']
+                rate = volume / duration if duration > 0 else None
+                print(f"Using volume_from_concentration: {volume:.1f}mL, calculated rate: {rate:.1f}mL/h")
+            
+            # Try rate_default_numeric if volume not found
+            elif 'rate_default_numeric' in row and pd.notna(row['rate_default_numeric']):
+                rate = row['rate_default_numeric']
+                volume = rate * duration
+                print(f"Using rate_default_numeric: {rate:.1f}mL/h, calculated volume: {volume:.1f}mL")
+            
+            # If we got either volume or rate, proceed
+            if volume is not None and rate is not None and pd.notna(volume) and pd.notna(rate):
+                _initialize_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
+                print(f"NOT RECORDED (DEFAULT) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
+            else:
+                print("No existing parameters, invalid params, and no defaults available - ignoring")
+
+    return medsdict, processed_indices
+
+
+def handle_bolus(row, processed_indices, order_id, med_name, medsdict, supertable, params=None):
+    # Get order parameters for this bolus
+    if params is None:
+        params = pe.get_order_params_for_row(row, supertable)
+    med_start_time = row["med_action_time"]
+    
+    if params["final_check"]:
+        print("Valid params found for Bolus - using calculated parameters")
+        
+        # Use calculated parameters
+        volume = params["volume"]
+        rate = params["rate"]
+        duration = params["duration"]
+        
+        # Calculate volume if missing
+        if pd.isna(volume) and pd.notna(rate) and pd.notna(duration):
+            volume = rate * duration
+            
+        med_stop_time = med_start_time + pd.Timedelta(hours=duration)
+        
+    else:
+        print("Invalid params for Bolus - using fallback logic")
+        
+        # Fallback logic: assume 1 hour duration, use volume if available
+        duration = 1.0  # 1 hour default for bolus
+        
+        # Check if volume is available from params (even though final_check failed)
+        if pd.notna(params["volume"]):
+            volume = params["volume"]
+            rate = volume / duration  # Calculate rate from volume and 1-hour duration
+            print(f"Using available volume {volume:.1f}mL with 1-hour duration -> rate {rate:.1f}mL/h")
+        else:
+            # Check if medication already set up to use original volume
+            if medsdict[order_id][med_name]["set"]:
+                original_volume = medsdict[order_id][med_name]["original_volume"]
+                original_rate = medsdict[order_id][med_name]["original_rate"]
+                
+                if pd.notna(original_volume):
+                    volume = original_volume
+                    rate = volume / duration
+                    print(f"Using original volume {volume:.1f}mL with 1-hour duration -> rate {rate:.1f}mL/h")
+                elif pd.notna(original_rate):
+                    rate = original_rate
+                    volume = rate * duration
+                    print(f"Using original rate {rate:.1f}mL/h with 1-hour duration -> volume {volume:.1f}mL")
+                else:
+                    print("No original parameters available for Bolus fallback - checking defaults")
+                    # Try defaults as last resort
+                    if 'volume_from_concentration' in row and pd.notna(row['volume_from_concentration']):
+                        volume = row['volume_from_concentration']
+                        rate = volume / duration
+                        print(f"Using volume_from_concentration: {volume:.1f}mL -> rate {rate:.1f}mL/h")
+                    elif 'rate_default_numeric' in row and pd.notna(row['rate_default_numeric']):
+                        rate = row['rate_default_numeric']
+                        volume = rate * duration
+                        print(f"Using rate_default_numeric: {rate:.1f}mL/h -> volume {volume:.1f}mL")
+                    else:
+                        print("No defaults available - ignoring")
+                        return medsdict, processed_indices
+            else:
+                # No existing parameters - try defaults
+                print("No existing parameters for Bolus - checking defaults")
+                if 'volume_from_concentration' in row and pd.notna(row['volume_from_concentration']):
+                    volume = row['volume_from_concentration']
+                    rate = volume / duration
+                    print(f"Using volume_from_concentration: {volume:.1f}mL -> rate {rate:.1f}mL/h")
+                elif 'rate_default_numeric' in row and pd.notna(row['rate_default_numeric']):
+                    rate = row['rate_default_numeric']
+                    volume = rate * duration
+                    print(f"Using rate_default_numeric: {rate:.1f}mL/h -> volume {volume:.1f}mL")
+                else:
+                    print("No defaults available - ignoring Bolus")
+                    return medsdict, processed_indices
+                
+        med_stop_time = med_start_time + pd.Timedelta(hours=duration)
+    
+    # Add bolus to medsdict
+    if not medsdict[order_id][med_name]["set"]:
+        _initialize_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
+        print(f"BOLUS (INITIAL) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
+    else:
+        _append_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
+        print(f"BOLUS (SUBSEQUENT) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
+    
+    return medsdict, processed_indices
 
 def process_medication_timeline_new(order_id, med_name, all_order_rows, supertable, medsdict):
     """
@@ -334,109 +612,11 @@ def process_medication_timeline_new(order_id, med_name, all_order_rows, supertab
                 )
                 continue
             
-            # Get theoretical parameters for this rate change
-            params = pe.get_order_params_for_row(row, supertable)
+            medsdict, processed_indices = handle_rate_change(
+                row, med_rows, processed_indices, order_id, med_name, medsdict, supertable
+            )
                 
-            # Get previous infusion details
-            prev_start = medsdict[order_id][med_name]["med_start"][-1]
-            prev_stop = medsdict[order_id][med_name]["med_stop"][-1]
-            prev_rate = medsdict[order_id][med_name]["rate"][-1]
-            prev_volume = medsdict[order_id][med_name]["volume"][-1]
-            prev_duration = medsdict[order_id][med_name]["duration"][-1]
-            
-            # Get original parameters for fallback
-            original_rate = medsdict[order_id][med_name]["original_rate"]
-            original_volume = medsdict[order_id][med_name]["original_volume"]
-            original_duration = medsdict[order_id][med_name]["original_duration"]
-            
-            # Determine new parameters (use original as fallback)
-            if params["final_check"]:
-                new_rate = params["rate"]
-                new_volume = params["volume"]
-                new_duration = params["duration"]
-            elif (params["rate"] == 0) & (params["volume"] == 0) & (params["duration"] == 0):
-                new_rate = 0
-                new_volume = 0
-                new_duration = 0
-            else:
-                new_rate = original_rate
-                new_volume = original_volume  
-                new_duration = original_duration
-                print("Rate change params failed validation - using original parameters")
-            
-            # Check if rate actually changed
-            if pd.notna(new_rate) and pd.notna(prev_rate) and new_rate == prev_rate:
-                print("Rate change but no actual rate difference - ignoring")
-                continue
-                
-            # Check if rate change is valid (allow 0 for medication stop, reject negative)
-            if pd.isna(new_rate) or new_rate < 0:
-                print("Invalid new rate - ignoring rate change")
-                continue
-                
-            # Check timing relative to previous infusion
-            if med_action_time < prev_stop:
-                # Rate change during active infusion - split the period
-                print(f"Rate change during active infusion (was due to end at {prev_stop})")
-                
-                # Calculate what was already delivered
-                time_elapsed = (med_action_time - prev_start).total_seconds() / 3600.0
-                volume_delivered = prev_rate * time_elapsed
-                remaining_volume = prev_volume - volume_delivered
-                
-                print(f"Time elapsed: {time_elapsed:.2f}h, Volume delivered: {volume_delivered:.1f}mL, Remaining: {remaining_volume:.1f}mL")
-                
-                # Update previous period to end at rate change time
-                medsdict[order_id][med_name]["med_stop"][-1] = med_action_time
-                medsdict[order_id][med_name]["duration"][-1] = time_elapsed
-                
-                # Calculate actual duration for new period using Infuse actions
-                actual_duration, used_infuse_indices, last_infuse_time = calculate_actual_infusion_duration(
-                    row, med_rows, processed_indices
-                )
-                processed_indices.update(used_infuse_indices)
-                
-                # Determine final duration for new period
-                if new_rate == 0:
-                    # Medication stopped - use actual duration from infuses, volume is remaining volume
-                    if actual_duration > 0:
-                        final_duration = actual_duration
-                        new_stop_time = last_infuse_time
-                        print(f"Medication stopped - using actual duration from Infuse actions: {final_duration:.2f}h")
-                    else:
-                        # No infuse actions found - medication stopped immediately
-                        final_duration = 0
-                        new_stop_time = med_action_time
-                        print(f"Medication stopped immediately at time {med_action_time}")
-                elif actual_duration > 0:
-                    final_duration = actual_duration
-                    new_stop_time = last_infuse_time
-                    print(f"Using actual duration from Infuse actions: {final_duration:.2f}h")
-                else:
-                    # No infuse actions found - calculate theoretical duration with remaining volume
-                    if remaining_volume > 0 and new_rate > 0:
-                        final_duration = remaining_volume / new_rate
-                        new_stop_time = med_action_time + pd.Timedelta(hours=final_duration)
-                        print(f"No Infuse actions found - using theoretical duration: {final_duration:.2f}h")
-                    else:
-                        print("Cannot calculate duration - skipping rate change")
-                        continue
-                
-                # Add new period with remaining volume and new rate
-                _append_medication_params(medsdict, order_id, med_name, remaining_volume, new_rate, final_duration, med_action_time, new_stop_time)
-                print(f"RATE CHANGE (DURING INFUSION) - Final params: Start={med_action_time}, Stop={new_stop_time}, Rate={new_rate:.1f}mL/h, Volume={remaining_volume:.1f}mL, Duration={final_duration:.2f}h")
-                
-            else:
-                # Rate change after previous infusion ended - treat as orphaned rate change (implicit begin bag)
-                print(f"Orphaned rate change after infusion ended (ended at {prev_stop}) - treating as implicit Begin Bag")
-                
-                # Use the enhanced handle_implicit_begin_bag function
-                medsdict, processed_indices = handle_implicit_begin_bag(
-                    row, med_rows, processed_indices, order_id, med_name, medsdict, supertable
-                )
-            
         elif med_action == "Infuse":
-            #import pdb; pdb.set_trace()
             # Check if this is the first action and no medication is set up yet
             if not medsdict[order_id][med_name]["set"] and row.name not in processed_indices:
                 # Check if there's a "Begin Bag" within one hour after this Infuse
@@ -496,170 +676,17 @@ def process_medication_timeline_new(order_id, med_name, all_order_rows, supertab
             processed_indices.add(row.name)
             print("Processing Not Recorded action")
             
-            # Check if med_stop is available (it should be for "Not Recorded" actions)
-            if pd.isna(row["med_stop"]):
-                print("Not Recorded action missing med_stop - this is unexpected, ignoring")
-                continue
-            
-            med_start_time = row["med_action_time"]
-            med_stop_time = pd.to_datetime(row["med_stop"])
-            duration = (med_stop_time - med_start_time).total_seconds() / 3600.0
-            
-            print(f"Not Recorded with med_start: {med_start_time}, med_stop: {med_stop_time}, duration: {duration:.2f}h")
-            
-            # Get order parameters for this row
-            params = pe.get_order_params_for_row(row, supertable)
-            
-            if params["final_check"]:
-                print("Valid params found for Not Recorded action - using calculated parameters")
-                
-                # Use calculated parameters with actual med_stop time
-                volume = params["volume"]
-                rate = params["rate"]
-                
-                # Calculate volume if missing using actual duration
-                if pd.isna(volume) and pd.notna(rate):
-                    volume = rate * duration
-                    print(f"Calculated volume from rate and actual duration: {volume:.1f}mL")
-                
-                if not medsdict[order_id][med_name]["set"]:
-                    _initialize_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
-                    print(f"NOT RECORDED (INITIAL) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
-                else:
-                    _append_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
-                    print(f"NOT RECORDED (SUBSEQUENT) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
-                    
-            else:
-                print("Invalid params for Not Recorded action - checking if medication already set")
-                
-                if medsdict[order_id][med_name]["set"]:
-                    # Use existing parameters with this row's times
-                    original_rate = medsdict[order_id][med_name]["original_rate"]
-                    original_volume = medsdict[order_id][med_name]["original_volume"]
-                    
-                    # Calculate volume using actual duration and original rate
-                    if pd.notna(original_rate):
-                        volume = original_rate * duration
-                        print(f"Using original rate {original_rate:.1f}mL/h with actual duration {duration:.2f}h -> volume {volume:.1f}mL")
-                    else:
-                        volume = original_volume if pd.notna(original_volume) else None
-                        print(f"Using original volume: {volume}")
-                    
-                    # Add new period with original parameters and actual times
-                    _append_medication_params(medsdict, order_id, med_name, volume, original_rate, duration, med_start_time, med_stop_time)
-                    print(f"NOT RECORDED (FALLBACK) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={original_rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
-                else:
-                    # No existing parameters - try using concentration_default or rate_default as last resort
-                    print("No existing parameters - checking for concentration_default or rate_default")
-                    
-                    volume = None
-                    rate = None
-                    
-                    # Try volume_from_concentration first
-                    if 'volume_from_concentration' in row and pd.notna(row['volume_from_concentration']):
-                        volume = row['volume_from_concentration']
-                        rate = volume / duration if duration > 0 else None
-                        print(f"Using volume_from_concentration: {volume:.1f}mL, calculated rate: {rate:.1f}mL/h")
-                    
-                    # Try rate_default_numeric if volume not found
-                    elif 'rate_default_numeric' in row and pd.notna(row['rate_default_numeric']):
-                        rate = row['rate_default_numeric']
-                        volume = rate * duration
-                        print(f"Using rate_default_numeric: {rate:.1f}mL/h, calculated volume: {volume:.1f}mL")
-                    
-                    # If we got either volume or rate, proceed
-                    if volume is not None and rate is not None and pd.notna(volume) and pd.notna(rate):
-                        _initialize_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
-                        print(f"NOT RECORDED (DEFAULT) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
-                    else:
-                        print("No existing parameters, invalid params, and no defaults available - ignoring")
-                    
+            medsdict, processed_indices = handle_not_recorded(
+                row, processed_indices, order_id, med_name, medsdict, supertable
+            )
+
         elif med_action == "Bolus":
             processed_indices.add(row.name)
             print("Processing Bolus action")
             
-            # Get order parameters for this bolus
-            params = pe.get_order_params_for_row(row, supertable)
-            med_start_time = row["med_action_time"]
-            
-            if params["final_check"]:
-                print("Valid params found for Bolus - using calculated parameters")
-                
-                # Use calculated parameters
-                volume = params["volume"]
-                rate = params["rate"]
-                duration = params["duration"]
-                
-                # Calculate volume if missing
-                if pd.isna(volume) and pd.notna(rate) and pd.notna(duration):
-                    volume = rate * duration
-                    
-                med_stop_time = med_start_time + pd.Timedelta(hours=duration)
-                
-            else:
-                print("Invalid params for Bolus - using fallback logic")
-                
-                # Fallback logic: assume 1 hour duration, use volume if available
-                duration = 1.0  # 1 hour default for bolus
-                
-                # Check if volume is available from params (even though final_check failed)
-                if pd.notna(params["volume"]):
-                    volume = params["volume"]
-                    rate = volume / duration  # Calculate rate from volume and 1-hour duration
-                    print(f"Using available volume {volume:.1f}mL with 1-hour duration -> rate {rate:.1f}mL/h")
-                else:
-                    # Check if medication already set up to use original volume
-                    if medsdict[order_id][med_name]["set"]:
-                        original_volume = medsdict[order_id][med_name]["original_volume"]
-                        original_rate = medsdict[order_id][med_name]["original_rate"]
-                        
-                        if pd.notna(original_volume):
-                            volume = original_volume
-                            rate = volume / duration
-                            print(f"Using original volume {volume:.1f}mL with 1-hour duration -> rate {rate:.1f}mL/h")
-                        elif pd.notna(original_rate):
-                            rate = original_rate
-                            volume = rate * duration
-                            print(f"Using original rate {rate:.1f}mL/h with 1-hour duration -> volume {volume:.1f}mL")
-                        else:
-                            print("No original parameters available for Bolus fallback - checking defaults")
-                            # Try defaults as last resort
-                            if 'volume_from_concentration' in row and pd.notna(row['volume_from_concentration']):
-                                volume = row['volume_from_concentration']
-                                rate = volume / duration
-                                print(f"Using volume_from_concentration: {volume:.1f}mL -> rate {rate:.1f}mL/h")
-                            elif 'rate_default_numeric' in row and pd.notna(row['rate_default_numeric']):
-                                rate = row['rate_default_numeric']
-                                volume = rate * duration
-                                print(f"Using rate_default_numeric: {rate:.1f}mL/h -> volume {volume:.1f}mL")
-                            else:
-                                print("No defaults available - ignoring")
-                                continue
-                    else:
-                        # No existing parameters - try defaults
-                        print("No existing parameters for Bolus - checking defaults")
-                        if 'volume_from_concentration' in row and pd.notna(row['volume_from_concentration']):
-                            volume = row['volume_from_concentration']
-                            rate = volume / duration
-                            print(f"Using volume_from_concentration: {volume:.1f}mL -> rate {rate:.1f}mL/h")
-                        elif 'rate_default_numeric' in row and pd.notna(row['rate_default_numeric']):
-                            rate = row['rate_default_numeric']
-                            volume = rate * duration
-                            print(f"Using rate_default_numeric: {rate:.1f}mL/h -> volume {volume:.1f}mL")
-                        else:
-                            print("No defaults available - ignoring Bolus")
-                            continue
-                        
-                med_stop_time = med_start_time + pd.Timedelta(hours=duration)
-            
-            # Add bolus to medsdict
-            if not medsdict[order_id][med_name]["set"]:
-                _initialize_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
-                print(f"BOLUS (INITIAL) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
-            else:
-                _append_medication_params(medsdict, order_id, med_name, volume, rate, duration, med_start_time, med_stop_time)
-                print(f"BOLUS (SUBSEQUENT) - Final params: Start={med_start_time}, Stop={med_stop_time}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
-                
+            medsdict, processed_indices = handle_bolus(
+                row, processed_indices, order_id, med_name, medsdict, supertable
+            )
         else:
             # Handle other unrecorded med actions (not "Begin Bag", "Rate Change", "Infuse", "Not Recorded", or "Bolus")
             if not medsdict[order_id][med_name]["set"] and row.name not in processed_indices:

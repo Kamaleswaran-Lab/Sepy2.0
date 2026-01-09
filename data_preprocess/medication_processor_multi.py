@@ -4,6 +4,9 @@ import numpy as np
 import sys
 sys.path.append("../")
 import data_preprocess.medication_processor as mp
+import data_preprocess.parameter_extractor as pe
+    
+import data_preprocess.med_processing_utils as mpu
 
 
 def identify_med_formulary_pairs(order_rows):
@@ -117,351 +120,199 @@ def get_common_and_noncommon_timestamps(fluid_rows, med_rows):
     
     return sorted(common_times), sorted(fluid_only_times), sorted(med_only_times)
 
-
-def process_dilution_pair_common_timestamp(
-    action_time,
-    fluid_row,
-    med_row,
+def process_dilution_pair_with_common_timestamps(
+    fluid_rows,
+    med_rows,
     order_id,
-    pair_key,
+    combined_med_name,
     medsdict,
-    supertable,
-    all_med_rows,
-    processed_indices
+    supertable
 ):
     """
-    Process a single common timestamp for a dilution pair.
+    Process a dilution pair with common timestamps.
     
     Args:
-        action_time: The common timestamp
-        fluid_row: Row from fluid medication
-        med_row: Row from non-fluid medication
+        fluid_rows: DataFrame for fluid medication
+        med_rows: DataFrame for non-fluid medication
         order_id: Order ID
-        pair_key: Tuple key for this dilution pair in medsdict
+        combined_med_name: for indexing the medsdict
         medsdict: Medication dictionary
         supertable: Patient data table
-        all_med_rows: All rows for the medication (for calculating actual duration)
-        processed_indices: Set of processed row indices
-        
+
     Returns:
         tuple: (updated_medsdict, updated_processed_indices)
     """
-    med_action = fluid_row['med_action']
-    print(f"\nProcessing common timestamp {action_time} - Action: {med_action}")
+    fluid_rows = fluid_rows.sort_values("med_action_time")
+    med_rows = med_rows.sort_values("med_action_time")
     
-    # Get parameters from both sources
-    fluid_params = mp.get_order_params_for_row(fluid_row, supertable)
-    med_params = mp.get_order_params_for_row(med_row, supertable)
-    
-    # Extract volume (prioritize fluid)
-    volume = None
-    if pd.notna(fluid_params.get("volume")):
-        volume = fluid_params["volume"]
-        print(f"Using fluid volume: {volume}mL")
-    elif pd.notna(fluid_row.get("volume_inf")):
-        volume = fluid_row["volume_inf"]
-        print(f"Using fluid volume_inf: {volume}mL")
-    elif pd.notna(med_row.get("volume_inf")):
-        volume = med_row["volume_inf"]
-        print(f"Using med volume_inf: {volume}mL")
-    elif pd.notna(med_row.get("volume_from_concentration")):
-        volume = med_row["volume_from_concentration"]
-        print(f"Using med volume_from_concentration: {volume}mL")
-    
-    # Extract rate (preference: fluid parent order -> med params -> defaults)
-    rate = None
-    rate_source = None
-    
-    # Check fluid parent order first
-    if fluid_params["parent_order_check"] and pd.notna(fluid_params.get("rate")) and fluid_params["rate"] != 0:
-        rate = fluid_params["rate"]
-        rate_source = "fluid_parent_order"
-        print(f"Using fluid parent order rate: {rate}mL/h")
-    
-    # Check med params
-    elif med_params["final_check"] and pd.notna(med_params.get("rate")):
-        med_rate = med_params["rate"]
-        
-        # If we had a fluid rate, check for exact match
-        if rate_source == "fluid_parent_order":
-            if med_rate == rate:
-                rate_source = "med_params"
-                print(f"Med rate matches fluid rate: {rate}mL/h")
-            else:
-                # Check if we have previous infusion with original params
-                if medsdict[order_id][pair_key]["set"]:
-                    original_rate = medsdict[order_id][pair_key]["original_rate"]
-                    rate = original_rate
-                    rate_source = "original_params"
-                    print(f"Med rate {med_rate} ≠ fluid rate {fluid_params['rate']}, using original rate: {rate}mL/h")
-                else:
-                    raise ValueError(f"Med rate {med_rate} ≠ fluid rate {rate}, no previous infusion to reference")
-        else:
-            rate = med_rate
-            rate_source = "med_params"
-            print(f"Using med rate: {rate}mL/h")
-    
-    # Fallback to defaults if no rate found
-    if rate is None:
-        if medsdict[order_id][pair_key]["set"]:
-            rate = medsdict[order_id][pair_key]["original_rate"]
-            rate_source = "original_params"
-            print(f"Using original rate: {rate}mL/h")
-        elif pd.notna(med_row.get("rate_default_numeric")):
-            rate = med_row["rate_default_numeric"]
-            rate_source = "med_default"
-            print(f"Using med rate_default_numeric: {rate}mL/h")
-        else:
-            raise ValueError(f"No rate found for dilution pair at {action_time}")
-    
-    # Extract duration based on rate source
-    duration = None
-    if rate_source == "fluid_parent_order":
-        duration = fluid_params.get("duration") if pd.notna(fluid_params.get("duration")) else None 
-    elif rate_source == "med_params": 
-        duration = med_params.get("duration") if pd.notna(med_params.get("duration")) else None
-    elif rate_source == "original_params":
-        duration = medsdict[order_id][pair_key]["original_duration"]
+    processed_indices = set()
+    orphaned_infuse_rows = []
 
-    if rate_source == "med_default" or pd.isna(duration):
-        duration = 1.0  # Default
-        print(f"No duration from params, defaulting to 1 hour")
-    else:
-        print(f"Using duration: {duration}h")
-    
-    med_start = pd.to_datetime(action_time)
-    
-    # Handle different medication actions
-    if med_action == "Begin Bag":
-        # Calculate actual duration from Infuse actions
-        actual_duration, used_infuse_indices, last_infuse_time = mp.calculate_actual_infusion_duration(
-            med_row, all_med_rows, processed_indices
-        )
-        processed_indices.update(used_infuse_indices)
+    print(f"Processing dilution pair {combined_med_name}")
+    med_rows['med_action_time'] = pd.to_datetime(med_rows['med_action_time'])
+    fluid_rows['med_action_time'] = pd.to_datetime(fluid_rows['med_action_time'])
+
+    for idx, row in med_rows.iterrows():
+        if row.name in processed_indices:
+            continue
+            
+        med_action = row["med_action"]
+        med_action_time = row["med_action_time"]
+        fluid_row = fluid_rows.loc[fluid_rows["med_action_time"] == med_action_time].iloc[0]
+        print(f"Processing {med_action} at {med_action_time}")
         
-        if actual_duration > 0:
-            duration = actual_duration
-            med_stop = last_infuse_time
-            print(f"Using actual duration from med Infuse actions: {duration:.2f}h")
-        else:
-            med_stop = med_start + pd.Timedelta(hours=duration)
-            print(f"Using theoretical duration: {duration}h")
-        
-        # Recalculate rate if needed
-        if pd.notna(volume) and duration > 0:
-            rate = volume / duration
-            print(f"Recalculated rate from volume and duration: {rate:.2f}mL/h")
-        
-        if not medsdict[order_id][pair_key]["set"]:
-            # First infusion
-            mp._initialize_medication_params(medsdict, order_id, pair_key, volume, rate, duration, med_start, med_stop)
-            print(f"DILUTION PAIR BEGIN BAG (INITIAL) - Start={med_start}, Stop={med_stop}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL")
-        else:
-            # Subsequent bag
-            mp._append_medication_params(medsdict, order_id, pair_key, volume, rate, duration, med_start, med_stop)
-            print(f"DILUTION PAIR BEGIN BAG (SUBSEQUENT) - Start={med_start}, Stop={med_stop}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL")
-    
-    elif med_action == "Rate Change":
-        if not medsdict[order_id][pair_key]["set"]:
-            # First action is rate change - treat as initial bag
-            # Calculate actual duration
-            actual_duration, used_infuse_indices, last_infuse_time = mp.calculate_actual_infusion_duration(
-                med_row, all_med_rows, processed_indices
+        if med_action == "Begin Bag":
+            processed_indices.add(row.name)
+
+            params = pe.get_order_params_for_dilution_pairs(fluid_row, row, supertable)
+            print("FINAL PARAMS")
+            print(params)
+            # Use unified Begin Bag handler
+            medsdict, processed_indices = mp.handle_begin_bag(
+                row, med_rows, processed_indices, order_id, combined_med_name, medsdict, supertable,
+                is_explicit=True, action_label="BEGIN BAG", params = params
             )
-            processed_indices.update(used_infuse_indices)
-            
-            if actual_duration > 0:
-                duration = actual_duration
-                med_stop = last_infuse_time
-                print(f"Using actual duration from med Infuse actions: {duration:.2f}h")
-            else:
-                med_stop = med_start + pd.Timedelta(hours=duration)
-                print(f"Using theoretical duration: {duration}h")
-            
-            # Recalculate rate if needed
-            if pd.notna(volume) and duration > 0:
-                rate = volume / duration
-            
-            mp._initialize_medication_params(medsdict, order_id, pair_key, volume, rate, duration, med_start, med_stop)
-            print(f"DILUTION PAIR RATE CHANGE (INITIAL) - Start={med_start}, Stop={med_stop}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL")
-        else:
-            # Subsequent rate change - check if during active infusion or after
-            prev_start = medsdict[order_id][pair_key]["med_start"][-1]
-            prev_stop = medsdict[order_id][pair_key]["med_stop"][-1]
-            prev_rate = medsdict[order_id][pair_key]["rate"][-1]
-            prev_volume = medsdict[order_id][pair_key]["volume"][-1]
-            
-            # Check if rate actually changed
-            if pd.notna(rate) and pd.notna(prev_rate) and rate == prev_rate:
-                print(f"Rate change but no actual rate difference ({rate}mL/h) - ignoring")
-                # Still mark rows as processed
-                processed_indices.add(fluid_row.name)
-                processed_indices.add(med_row.name)
-                return medsdict, processed_indices
-            
-            # Validate new rate
-            if pd.isna(rate) or rate < 0:
-                print(f"Invalid new rate ({rate}) - ignoring rate change")
-                processed_indices.add(fluid_row.name)
-                processed_indices.add(med_row.name)
-                return medsdict, processed_indices
-            
-            if med_start < prev_stop:
-                # Rate change during active infusion - split the period
-                print(f"Rate change during active infusion (was due to end at {prev_stop})")
-                
-                # Calculate what was already delivered
-                time_elapsed = (med_start - prev_start).total_seconds() / 3600.0
-                volume_delivered = prev_rate * time_elapsed
-                remaining_volume = prev_volume - volume_delivered
-                
-                print(f"Time elapsed: {time_elapsed:.2f}h, Volume delivered: {volume_delivered:.1f}mL, Remaining: {remaining_volume:.1f}mL")
-                
-                # Update previous period to end at rate change time
-                medsdict[order_id][pair_key]["med_stop"][-1] = med_start
-                medsdict[order_id][pair_key]["duration"][-1] = time_elapsed
-                
-                # Calculate actual duration for new period
-                actual_duration, used_infuse_indices, last_infuse_time = mp.calculate_actual_infusion_duration(
-                    med_row, all_med_rows, processed_indices
+                    
+        elif med_action == "Rate Change":
+            processed_indices.add(row.name)
+            print("Processing Rate Change")
+            params = pe.get_order_params_for_dilution_pairs(fluid_row, row, supertable)
+            # Get current medication state
+            if not medsdict[order_id][combined_med_name]["set"]:
+                print("First action is Rate Change - treating as implicit Begin Bag")
+                medsdict, processed_indices = mp.handle_implicit_begin_bag(
+                    row, med_rows, processed_indices, order_id, combined_med_name, medsdict, supertable, params = params
                 )
-                processed_indices.update(used_infuse_indices)
-                
-                # Determine final duration for new period
-                if rate == 0:
-                    # Medication stopped
-                    if actual_duration > 0:
-                        final_duration = actual_duration
-                        new_stop_time = last_infuse_time
-                        print(f"Medication stopped - using actual duration: {final_duration:.2f}h")
-                    else:
-                        final_duration = 0
-                        new_stop_time = med_start
-                        print(f"Medication stopped immediately at {med_start}")
-                elif actual_duration > 0:
-                    final_duration = actual_duration
-                    new_stop_time = last_infuse_time
-                    print(f"Using actual duration from Infuse actions: {final_duration:.2f}h")
-                else:
-                    # No infuse actions - calculate from remaining volume and new rate
-                    if remaining_volume > 0 and rate > 0:
-                        final_duration = remaining_volume / rate
-                        new_stop_time = med_start + pd.Timedelta(hours=final_duration)
-                        print(f"No Infuse actions - using theoretical duration: {final_duration:.2f}h")
-                    else:
-                        print(f"Cannot calculate duration - skipping rate change")
-                        processed_indices.add(fluid_row.name)
-                        processed_indices.add(med_row.name)
-                        return medsdict, processed_indices
-                
-                # Add new period with remaining volume and new rate
-                mp._append_medication_params(medsdict, order_id, pair_key, remaining_volume, rate, final_duration, med_start, new_stop_time)
-                print(f"DILUTION PAIR RATE CHANGE (DURING) - Split at {med_start}, Rate={rate:.1f}mL/h, Volume={remaining_volume:.1f}mL, Duration={final_duration:.2f}h")
+                continue
             
+            medsdict, processed_indices = mp.handle_rate_change(
+                row, med_rows, processed_indices, order_id, combined_med_name, medsdict, supertable, params = params
+            )
+                
+        elif med_action == "Infuse":
+            # Check if this is the first action and no medication is set up yet
+            if not medsdict[order_id][combined_med_name]["set"] and row.name not in processed_indices:
+                # Check if there's a "Begin Bag" within one hour after this Infuse
+                upcoming_begin_bag = None
+                for _, future_row in med_rows.iterrows():
+                    if future_row["med_action_time"] < row["med_action_time"]: #TODO: check others - removed equal to 
+                        continue
+                    future_time = future_row["med_action_time"]
+                    time_diff = (future_time - med_action_time).total_seconds() / 3600.0
+                    
+                    if future_row["med_action"] == "Begin Bag" and time_diff <= 1.0:
+                        upcoming_begin_bag = future_row
+                        break
+                    elif time_diff > 1.0:
+                        break  # No point checking further
+                
+                if upcoming_begin_bag is not None:
+                    print(f"Infuse at {med_action_time} has Begin Bag within 1 hour at {upcoming_begin_bag['med_action_time']} - ignoring this Infuse")
+                    processed_indices.add(row.name)
+                    continue
+                else:
+                    print("First action is Infuse with no upcoming Begin Bag - treating as implicit Begin Bag")
+                    params = pe.get_order_params_for_dilution_pairs(fluid_row, row, supertable)
+                    medsdict, processed_indices = mp.handle_implicit_begin_bag(
+                        row, med_rows, processed_indices, order_id, combined_med_name, medsdict, supertable, params = params
+                    )
+                    continue
+                
+            # Check if this is an orphaned infuse action
+            if row.name not in processed_indices:
+                # This infuse wasn't consumed by any Begin Bag
+                current_time = med_action_time
+                
+                # Check if there's an active infusion that should cover this time
+                active_infusion_found = False
+                if medsdict[order_id][combined_med_name]["set"]:
+                    for i, (start, stop) in enumerate(zip(
+                        medsdict[order_id][combined_med_name]["med_start"],
+                        medsdict[order_id][combined_med_name]["med_stop"]
+                    )):
+                        if pd.notna(start) and pd.notna(stop):
+                            if start <= current_time <= stop:
+                                active_infusion_found = True
+                                break
+                
+                if not active_infusion_found:
+                    # This is an orphaned infuse - treat as implicit begin bag
+                    print(f"ORPHANED INFUSE: {combined_med_name} at {current_time} - treating as implicit Begin Bag")
+                    params = pe.get_order_params_for_dilution_pairs(fluid_row, row, supertable)
+                    medsdict, processed_indices = mp.handle_implicit_begin_bag(
+                        row, med_rows, processed_indices, order_id, combined_med_name, medsdict, supertable, params = params
+                    )
+                    continue
+                else:
+                    # This infuse is within an active period, mark as processed
+                    processed_indices.add(row.name)
+        
+        elif med_action == "Not Recorded":
+            processed_indices.add(row.name)
+            print("Processing Not Recorded action")
+            params = pe.get_order_params_for_dilution_pairs(fluid_row, row, supertable)
+            medsdict, processed_indices = mp.handle_not_recorded(
+                row, processed_indices, order_id, combined_med_name, medsdict, supertable, params = params
+            )
+
+        elif med_action == "Bolus":
+            processed_indices.add(row.name)
+            print("Processing Bolus action")
+            params = pe.get_order_params_for_dilution_pairs(fluid_row, row, supertable)
+            medsdict, processed_indices = mp.handle_bolus(
+                row, processed_indices, order_id, combined_med_name, medsdict, supertable, params = params
+            )
+        else:
+            # Handle other unrecorded med actions (not "Begin Bag", "Rate Change", "Infuse", "Not Recorded", or "Bolus")
+            if not medsdict[order_id][med_name]["set"] and row.name not in processed_indices:
+                print(f"Other unrecorded med action: {med_action} - checking if params are valid")
+                params = pe.get_order_params_for_dilution_pairs(fluid_row, row, supertable)
+                
+                if params["final_check"]:
+                    print(f"Valid params found for unrecorded action {med_action} - treating as implicit Begin Bag")
+                    medsdict, processed_indices = mp.handle_implicit_begin_bag(
+                        row, med_rows, processed_indices, order_id, combined_med_name, medsdict, supertable, params = params
+                    )
+                    continue
+                else:
+                    print(f"Invalid params for unrecorded action {med_action} - ignoring")
+                    processed_indices.add(row.name)
             else:
-                # Rate change after previous infusion ended - new bag
-                print(f"Rate change after infusion ended (ended at {prev_stop}) - starting new period")
-                
-                # Calculate actual duration
-                actual_duration, used_infuse_indices, last_infuse_time = mp.calculate_actual_infusion_duration(
-                    med_row, all_med_rows, processed_indices
-                )
-                processed_indices.update(used_infuse_indices)
-                
-                if actual_duration > 0:
-                    duration = actual_duration
-                    med_stop = last_infuse_time
-                    print(f"Using actual duration from med Infuse actions: {duration:.2f}h")
-                else:
-                    med_stop = med_start + pd.Timedelta(hours=duration)
-                    print(f"Using theoretical duration: {duration}h")
-                
-                # Recalculate rate if needed
-                if pd.notna(volume) and duration > 0:
-                    rate = volume / duration
-                
-                mp._append_medication_params(medsdict, order_id, pair_key, volume, rate, duration, med_start, med_stop)
-                print(f"DILUTION PAIR RATE CHANGE (AFTER) - New period: Rate={rate:.1f}mL/h, Volume={volume:.1f}mL, Duration={duration:.2f}h")
+                print(f"Unrecorded med action {med_action} after medication already set - ignoring")
+                processed_indices.add(row.name)
     
-    elif med_action == "Infuse":
-        # Infuse action - similar to Begin Bag
-        # Calculate actual duration
-        actual_duration, used_infuse_indices, last_infuse_time = mp.calculate_actual_infusion_duration(
-            med_row, all_med_rows, processed_indices
-        )
-        processed_indices.update(used_infuse_indices)
-        
-        if actual_duration > 0:
-            duration = actual_duration
-            med_stop = last_infuse_time
-            print(f"Using actual duration from med Infuse actions: {duration:.2f}h")
-        else:
-            med_stop = med_start + pd.Timedelta(hours=duration)
-            print(f"Using theoretical duration: {duration}h")
-        
-        # Recalculate rate if needed
-        if pd.notna(volume) and duration > 0:
-            rate = volume / duration
-        
-        if not medsdict[order_id][pair_key]["set"]:
-            mp._initialize_medication_params(medsdict, order_id, pair_key, volume, rate, duration, med_start, med_stop)
-            print(f"DILUTION PAIR INFUSE (INITIAL) - Start={med_start}, Stop={med_stop}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL")
-        else:
-            mp._append_medication_params(medsdict, order_id, pair_key, volume, rate, duration, med_start, med_stop)
-            print(f"DILUTION PAIR INFUSE (SUBSEQUENT) - Start={med_start}, Stop={med_stop}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL")
+    if orphaned_infuse_rows:
+        print(f"Found {len(orphaned_infuse_rows)} orphaned infuse rows for {med_name}")
+        for orphan in orphaned_infuse_rows:
+            print(f"  - Orphaned at {orphan['time']}")
     
-    elif med_action == "Not Recorded":
-        # Not Recorded should have explicit med_stop in the data
-        if pd.notna(med_row.get("med_stop")):
-            med_stop = pd.to_datetime(med_row["med_stop"])
-            duration = (med_stop - med_start).total_seconds() / 3600.0
-            print(f"Not Recorded with explicit times: start={med_start}, stop={med_stop}, duration={duration:.2f}h")
-            
-            # Recalculate rate or volume if needed
-            if pd.notna(volume) and pd.notna(rate):
-                # Both exist, recalculate rate from actual duration
-                rate = volume / duration if duration > 0 else rate
-            elif pd.notna(volume):
-                # Have volume, calculate rate
-                rate = volume / duration if duration > 0 else None
-            elif pd.notna(rate):
-                # Have rate, calculate volume
-                volume = rate * duration
-        else:
-            # No explicit stop time, use theoretical duration
-            print(f"Not Recorded without explicit stop time, using theoretical duration: {duration}h")
-            med_stop = med_start + pd.Timedelta(hours=duration)
-        
-        # Recalculate rate if we have volume and duration
-        if pd.notna(volume) and duration > 0:
-            rate = volume / duration
-        
-        if not medsdict[order_id][pair_key]["set"]:
-            mp._initialize_medication_params(medsdict, order_id, pair_key, volume, rate, duration, med_start, med_stop)
-            print(f"DILUTION PAIR NOT RECORDED (INITIAL) - Start={med_start}, Stop={med_stop}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL")
-        else:
-            mp._append_medication_params(medsdict, order_id, pair_key, volume, rate, duration, med_start, med_stop)
-            print(f"DILUTION PAIR NOT RECORDED (SUBSEQUENT) - Start={med_start}, Stop={med_stop}, Rate={rate:.1f}mL/h, Volume={volume:.1f}mL")
-    
+    # Summary logging for this medication
+    if medsdict[order_id][combined_med_name]["set"]:
+        num_periods = len(medsdict[order_id][combined_med_name]["med_start"])
+        print(f"\n=== MEDICATION SUMMARY: {combined_med_name} ===")
+        print(f"Total infusion periods: {num_periods}")
+        for i in range(num_periods):
+            start = medsdict[order_id][combined_med_name]["med_start"][i]
+            stop = medsdict[order_id][combined_med_name]["med_stop"][i]
+            rate = medsdict[order_id][combined_med_name]["rate"][i]
+            volume = medsdict[order_id][combined_med_name]["volume"][i]
+            duration = medsdict[order_id][combined_med_name]["duration"][i]
+            print(f"  Period {i+1}: {start} to {stop} | Rate: {rate:.1f}mL/h | Volume: {volume:.1f}mL | Duration: {duration:.2f}h")
+        print("=====================================\n")
     else:
-        # Unknown action type
-        print(f"WARNING: Unknown action type '{med_action}' - skipping")
-        processed_indices.add(fluid_row.name)
-        processed_indices.add(med_row.name)
-        return medsdict, processed_indices
-    
-    # Mark both rows as processed
-    processed_indices.add(fluid_row.name)
-    processed_indices.add(med_row.name)
+        print(f"\n=== MEDICATION SUMMARY: {combined_med_name} ===")
+        print("No valid infusion periods established")
+        print("=====================================\n")
     
     return medsdict, processed_indices
 
 
-def process_dilution_pair_extended(
+def process_dilution_pairs(
     order_id,
     fluid_pair_key,
     med_pair_key,
     order_rows,
+    medsdict,
     supertable
 ):
     """
@@ -472,6 +323,7 @@ def process_dilution_pair_extended(
         fluid_pair_key: (med_name, formulary_name) for fluid
         med_pair_key: (med_name, formulary_name) for medication
         order_rows: All rows for this order_id
+        medsdict: previous meds
         supertable: Patient data table
         
     Returns:
@@ -489,20 +341,7 @@ def process_dilution_pair_extended(
         (order_rows['med_name'] == med_pair_key[0]) & 
         (order_rows['formulary_name'] == med_pair_key[1])
     ].sort_values('med_action_time')
-    
-    # Create combined pair key for storage
-    combined_key = (med_pair_key[0], med_pair_key[1], fluid_pair_key[0], fluid_pair_key[1])
-    
-    # Initialize medsdict
-    medsdict = {
-        order_id: {
-            combined_key: {
-                'rate': [], 'duration': [], 'med_start': [], 'med_stop': [], 'volume': [], 'set': False,
-                'original_rate': None, 'original_volume': None, 'original_duration': None
-            }
-        }
-    }
-    
+            
     processed_indices = set()
     
     # Get common and non-common timestamps
@@ -510,110 +349,136 @@ def process_dilution_pair_extended(
     
     print(f"Found {len(common_times)} common timestamps, {len(fluid_only_times)} fluid-only, {len(med_only_times)} med-only")
     
-    # Process common timestamps
-    for action_time in common_times:
-        fluid_time_rows = fluid_rows[pd.to_datetime(fluid_rows['med_action_time']) == action_time]
-        med_time_rows = med_rows[pd.to_datetime(med_rows['med_action_time']) == action_time]
-        
-        for _, fluid_row in fluid_time_rows.iterrows():
-            for _, med_row in med_time_rows.iterrows():
-                if fluid_row.name in processed_indices or med_row.name in processed_indices:
-                    continue
-                
-                try:
-                    medsdict, processed_indices = process_dilution_pair_common_timestamp(
-                        action_time, fluid_row, med_row, order_id, combined_key,
-                        medsdict, supertable, med_rows, processed_indices
-                    )
-                except Exception as e:
-                    print(f"ERROR processing common timestamp {action_time}: {e}")
-                    raise
+    # Create combined medication name for dilution pairs
+    combined_med_name = mpu.create_combined_med_name(med_pair_key[0], fluid_pair_key[0])
     
-    # Process non-common timestamps - try as single infusions
-    errors = []
+    # Process common timestamps - filter to only common timestamp rows
+    if common_times:
+        fluid_common_rows = fluid_rows[pd.to_datetime(fluid_rows['med_action_time']).isin(common_times)]
+        med_common_rows = med_rows[pd.to_datetime(med_rows['med_action_time']).isin(common_times)]
+        
+        print(f"Processing {len(fluid_common_rows)} fluid rows and {len(med_common_rows)} med rows at common timestamps")
+        
+        
+        medsdict[order_id][combined_med_name] = {
+                    'rate': [], 'duration': [], 'med_start': [], 'med_stop': [], 'volume': [], 'set': False,
+                    'original_rate': None, 'original_volume': None, 'original_duration': None
+                }
+
+        medsdict, processed_indices = process_dilution_pair_with_common_timestamps(
+            fluid_common_rows, med_common_rows, order_id, combined_med_name,
+            medsdict, supertable
+        )
+    
+    # Process non-common timestamps as single infusions
     
     # Process fluid-only timestamps
     if fluid_only_times:
         print(f"\nProcessing {len(fluid_only_times)} fluid-only timestamps")
-        for action_time in fluid_only_times:
-            fluid_time_rows = fluid_rows[pd.to_datetime(fluid_rows['med_action_time']) == action_time]
-            for _, fluid_row in fluid_time_rows.iterrows():
-                if fluid_row.name in processed_indices:
-                    continue
-                
-                try:
-                    # Try to process as single infusion
-                    # Create temporary medsdict entry for this fluid
-                    temp_key = fluid_pair_key
-                    if temp_key not in medsdict[order_id]:
-                        medsdict[order_id][temp_key] = {
-                            'rate': [], 'duration': [], 'med_start': [], 'med_stop': [], 'volume': [], 'set': False,
-                            'original_rate': None, 'original_volume': None, 'original_duration': None
-                        }
-                    
-                    # Process using single medication logic
-                    print(f"Attempting to process fluid-only timestamp {action_time} as single infusion")
-                    # This would require adapting process_medication_timeline_new for single rows
-                    # For now, raise error as specified
-                    raise NotImplementedError(f"Cannot process fluid-only timestamp {action_time} - not yet implemented")
-                    
-                except Exception as e:
-                    error_msg = f"ERROR processing fluid-only timestamp {action_time}: {e}"
-                    print(error_msg)
-                    errors.append(error_msg)
+        
+        # Filter to only non-common timestamp rows
+        fluid_only_rows = fluid_rows[pd.to_datetime(fluid_rows['med_action_time']).isin(fluid_only_times)]
+        
+        if len(fluid_only_rows) > 0:
+            # Initialize medsdict entry for this fluid
+            if fluid_pair_key[0] not in medsdict[order_id]:
+                medsdict[order_id][fluid_pair_key[0]] = {
+                    'rate': [], 'duration': [], 'med_start': [], 'med_stop': [], 'volume': [], 'set': False,
+                    'original_rate': None, 'original_volume': None, 'original_duration': None
+                }
+            
+            # Process as normal medication timeline
+            print(f"Processing {len(fluid_only_rows)} fluid-only rows as single medication")
+            medsdict, fluid_processed = mp.process_medication_timeline_new(
+                order_id, 
+                fluid_pair_key[0],  # med_name
+                fluid_only_rows,
+                supertable, 
+                medsdict
+            )
+            processed_indices.update(fluid_processed)
+            print(f"Successfully processed fluid-only timestamps")
     
     # Process med-only timestamps
     if med_only_times:
         print(f"\nProcessing {len(med_only_times)} med-only timestamps")
-        for action_time in med_only_times:
-            med_time_rows = med_rows[pd.to_datetime(med_rows['med_action_time']) == action_time]
-            for _, med_row in med_time_rows.iterrows():
-                if med_row.name in processed_indices:
-                    continue
-                
-                try:
-                    # Try to process as single infusion
-                    temp_key = med_pair_key
-                    if temp_key not in medsdict[order_id]:
-                        medsdict[order_id][temp_key] = {
-                            'rate': [], 'duration': [], 'med_start': [], 'med_stop': [], 'volume': [], 'set': False,
-                            'original_rate': None, 'original_volume': None, 'original_duration': None
-                        }
-                    
-                    print(f"Attempting to process med-only timestamp {action_time} as single infusion")
-                    raise NotImplementedError(f"Cannot process med-only timestamp {action_time} - not yet implemented")
-                    
-                except Exception as e:
-                    error_msg = f"ERROR processing med-only timestamp {action_time}: {e}"
-                    print(error_msg)
-                    errors.append(error_msg)
+        
+        # Filter to only non-common timestamp rows
+        med_only_rows = med_rows[pd.to_datetime(med_rows['med_action_time']).isin(med_only_times)]
+        
+        if len(med_only_rows) > 0:
+            # Initialize medsdict entry for this medication
+            if med_pair_key[0] not in medsdict[order_id]:
+                medsdict[order_id][med_pair_key[0]] = {
+                    'rate': [], 'duration': [], 'med_start': [], 'med_stop': [], 'volume': [], 'set': False,
+                    'original_rate': None, 'original_volume': None, 'original_duration': None
+                }
+            
+            # Process as normal medication timeline
+            print(f"Processing {len(med_only_rows)} med-only rows as single medication")
+            medsdict, med_processed = mp.process_medication_timeline_new(
+                order_id, 
+                med_pair_key[0],  # med_name
+                med_only_rows,
+                supertable, 
+                medsdict
+            )
+            processed_indices.update(med_processed)
+            print(f"Successfully processed med-only timestamps")
     
-    if errors:
-        print(f"\n=== ERRORS in non-common timestamp processing ===")
-        for error in errors:
-            print(f"  {error}")
+    # Summary - print for all processed medications
+    print(f"\n{'='*80}")
+    print(f"DILUTION PAIR PROCESSING SUMMARY")
+    print(f"{'='*80}")
     
-    # Summary
-    if medsdict[order_id][combined_key]["set"]:
-        num_periods = len(medsdict[order_id][combined_key]["med_start"])
-        print(f"\n=== DILUTION PAIR SUMMARY: {combined_key} ===")
+    # Summary for combined dilution pair (common timestamps)
+    if combined_med_name in medsdict[order_id] and medsdict[order_id][combined_med_name]["set"]:
+        num_periods = len(medsdict[order_id][combined_med_name]["med_start"])
+        print(f"\n=== COMBINED DILUTION PAIR: {combined_med_name} ===")
         print(f"Total infusion periods: {num_periods}")
         for i in range(num_periods):
-            start = medsdict[order_id][combined_key]["med_start"][i]
-            stop = medsdict[order_id][combined_key]["med_stop"][i]
-            rate = medsdict[order_id][combined_key]["rate"][i]
-            volume = medsdict[order_id][combined_key]["volume"][i]
-            duration = medsdict[order_id][combined_key]["duration"][i]
+            start = medsdict[order_id][combined_med_name]["med_start"][i]
+            stop = medsdict[order_id][combined_med_name]["med_stop"][i]
+            rate = medsdict[order_id][combined_med_name]["rate"][i]
+            volume = medsdict[order_id][combined_med_name]["volume"][i]
+            duration = medsdict[order_id][combined_med_name]["duration"][i]
             print(f"  Period {i+1}: {start} to {stop} | Rate: {rate:.1f}mL/h | Volume: {volume:.1f}mL | Duration: {duration:.2f}h")
-        print("=" * 80)
-        
-        return medsdict
     else:
-        print(f"ERROR: No valid infusion periods established for dilution pair")
-        return None
+        print(f"\n=== COMBINED DILUTION PAIR: {combined_med_name} ===")
+        print("No common timestamp infusions")
+    
+    # Summary for fluid-only timestamps
+    if fluid_pair_key[0] in medsdict[order_id] and medsdict[order_id][fluid_pair_key[0]]["set"]:
+        num_periods = len(medsdict[order_id][fluid_pair_key[0]]["med_start"])
+        print(f"\n=== FLUID ONLY ({fluid_pair_key[0]}) ===")
+        print(f"Total infusion periods: {num_periods}")
+        for i in range(num_periods):
+            start = medsdict[order_id][fluid_pair_key[0]]["med_start"][i]
+            stop = medsdict[order_id][fluid_pair_key[0]]["med_stop"][i]
+            rate = medsdict[order_id][fluid_pair_key[0]]["rate"][i]
+            volume = medsdict[order_id][fluid_pair_key[0]]["volume"][i]
+            duration = medsdict[order_id][fluid_pair_key[0]]["duration"][i]
+            print(f"  Period {i+1}: {start} to {stop} | Rate: {rate:.1f}mL/h | Volume: {volume:.1f}mL | Duration: {duration:.2f}h")
+    
+    # Summary for med-only timestamps
+    if med_pair_key[0] in medsdict[order_id] and medsdict[order_id][med_pair_key[0]]["set"]:
+        num_periods = len(medsdict[order_id][med_pair_key[0]]["med_start"])
+        print(f"\n=== MEDICATION ONLY ({med_pair_key[0]}) ===")
+        print(f"Total infusion periods: {num_periods}")
+        for i in range(num_periods):
+            start = medsdict[order_id][med_pair_key[0]]["med_start"][i]
+            stop = medsdict[order_id][med_pair_key[0]]["med_stop"][i]
+            rate = medsdict[order_id][med_pair_key[0]]["rate"][i]
+            volume = medsdict[order_id][med_pair_key[0]]["volume"][i]
+            duration = medsdict[order_id][med_pair_key[0]]["duration"][i]
+            print(f"  Period {i+1}: {start} to {stop} | Rate: {rate:.1f}mL/h | Volume: {volume:.1f}mL | Duration: {duration:.2f}h")
+    
+    print(f"{'='*80}\n")
+    
+    return medsdict
 
 
-def process_order_multi_med(order_id, order_rows, supertable, all_meds_dict):
+def process_order_multi_med(order_id, order_rows, supertable, medsdict, all_meds_dict):
     """
     Process an order with multiple medications, tracking by (med_name, formulary_name) pairs.
     
@@ -621,6 +486,7 @@ def process_order_multi_med(order_id, order_rows, supertable, all_meds_dict):
         order_id: Order ID to process
         order_rows: All rows for this order_id
         supertable: Patient data table
+        medsdict: Dictionary for all infusions
         all_meds_dict: Dictionary for non-infusion medications
         
     Returns:
@@ -635,7 +501,7 @@ def process_order_multi_med(order_id, order_rows, supertable, all_meds_dict):
     
     if len(filtered_rows) == 0:
         print("All meds removed due to 'Not Recorded' - skipping order")
-        return {}, all_meds_dict
+        return medsdict, all_meds_dict
     
     # Step 2: Identify (med_name, formulary_name) pairs
     pairs = identify_med_formulary_pairs(filtered_rows)
@@ -664,24 +530,23 @@ def process_order_multi_med(order_id, order_rows, supertable, all_meds_dict):
     
     if len(remaining_pairs) == 0:
         print("\nNo infusion pairs to process")
-        return {}, all_meds_dict
+        return medsdict, all_meds_dict
     
     # Check if all remaining rows are "Not Recorded"
     all_remaining_rows = pd.concat([df for df in remaining_pairs.values()])
     if (all_remaining_rows['formulary_name'] == 'Not Recorded').all():
         print("\nAll remaining infusion rows are 'Not Recorded' - skipping (likely small diluents)")
-        return {}, all_meds_dict
+        return medsdict, all_meds_dict
     
     # Process based on number of infusion pairs
-    print(f"\n{len(remaining_pairs)} infusion pairs to process")
+    print(f"\n{len(remaining_pairs)} unique (med_name, formulary_name) combination(s) to process")
     
     if len(remaining_pairs) == 1:
         # Single infusion pair - process normally
         pair_key = list(remaining_pairs.keys())[0]
         print(f"\nProcessing single infusion pair: {pair_key[0]} || {pair_key[1]}")
         
-        medsdict = {order_id: {}}
-        medsdict[order_id][pair_key] = {
+        medsdict[order_id][pair_key[0]] = {
             'rate': [], 'duration': [], 'med_start': [], 'med_stop': [], 'volume': [], 'set': False,
             'original_rate': None, 'original_volume': None, 'original_duration': None
         }
@@ -716,13 +581,9 @@ def process_order_multi_med(order_id, order_rows, supertable, all_meds_dict):
         print(f"  Fluid: {fluid_pair[0]} || {fluid_pair[1]}")
         
         # Process dilution pair with extended logic
-        medsdict = process_dilution_pair_extended(
-            order_id, fluid_pair, med_pair, all_remaining_rows, supertable
+        medsdict = process_dilution_pairs(
+            order_id, fluid_pair, med_pair, all_remaining_rows, medsdict, supertable
         )
-        
-        if medsdict is None:
-            print(f"ERROR: Failed to process dilution pair")
-            return {}, all_meds_dict
         
         return medsdict, all_meds_dict
     
@@ -773,31 +634,39 @@ def process_encounter_multi_med(meds, supertable):
         unique_meds = order_rows['med_name'].unique()
         
         if len(unique_meds) == 1:
-            # Single medication - use original logic
+            # Single medication - check if it's truly an infusion
             print(f"Single medication: {unique_meds[0]}")
             
-            medsdict[order_id] = {}
-            med_name = unique_meds[0]
-            medsdict[order_id][med_name] = {
-                'rate': [], 'duration': [], 'med_start': [], 'med_stop': [], 'volume': [], 'set': False,
-                'original_rate': None, 'original_volume': None, 'original_duration': None
-            }
+            # Check if all rows are "Not Recorded" and not is_infusion
+            all_not_recorded = (order_rows['med_action'] == 'Not Recorded').all()
+            not_is_infusion = not order_rows['is_infusion'].iloc[0]  # Check first row
             
-            medsdict, _ = mp.process_medication_timeline_new(
-                order_id, med_name, order_rows, supertable, medsdict
-            )
+            if all_not_recorded and not_is_infusion:
+                # Not truly an infusion - add to all_meds_dict
+                print(f"  All rows are 'Not Recorded' and not is_infusion - adding to all_meds_dict")
+                for idx, row in order_rows.iterrows():
+                    all_meds_dict = mp.add_to_all_meds_dict(row, all_meds_dict)
+            else:
+                # Process as normal infusion
+                medsdict[order_id] = {}
+                med_name = unique_meds[0]
+                medsdict[order_id][med_name] = {
+                    'rate': [], 'duration': [], 'med_start': [], 'med_stop': [], 'volume': [], 'set': False,
+                    'original_rate': None, 'original_volume': None, 'original_duration': None
+                }
+                
+                medsdict, _ = mp.process_medication_timeline_new(
+                    order_id, med_name, order_rows, supertable, medsdict
+                )
         
         else:
             # Multiple medications - use new logic
             print(f"Multiple medications ({len(unique_meds)}): {list(unique_meds)}")
-            
-            order_medsdict, all_meds_dict = process_order_multi_med(
-                order_id, order_rows, supertable, all_meds_dict
+            medsdict[order_id] = {}
+            medsdict, all_meds_dict = process_order_multi_med(
+                order_id, order_rows, supertable, medsdict, all_meds_dict
             )
             
-            if order_medsdict:
-                medsdict.update(order_medsdict)
-    
     return medsdict, all_meds_dict
 
 
