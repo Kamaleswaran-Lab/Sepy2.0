@@ -9,6 +9,31 @@ import data_preprocess.parameter_extractor as pe
 import data_preprocess.med_processing_utils as mpu
 
 
+def add_to_all_meds_dict(row, all_meds_dict):
+    """
+    Add meds by med_name to a dictionary that tracks whether a particular med was given or not and when
+
+    Args:
+        row: row from the infusion meds (merged with all fluids info dataframe). Should have med_name, med_start
+        med_stop, med_class, med_subclass
+        all_meds_dict: Dictionary that tracks all meds given for this particular csn
+    
+    Returns:
+        all_meds_dict: With the med from the row added 
+    """
+    med_name = row['med_name']
+    if med_name in all_meds_dict:
+        all_meds_dict[med_name]["med_start"].append(row["med_start"])
+        all_meds_dict[med_name]["med_stop"].append(row["med_stop"])    
+    else:
+        all_meds_dict[med_name] = {
+            "med_class" : row["med_class"],
+            "med_subclass" : row["med_subclass"],
+            "med_start" : [row["med_start"]],
+            "med_stop" : [row["med_stop"]]
+        }
+    return all_meds_dict
+
 def identify_med_formulary_pairs(order_rows):
     """
     Identify unique (med_name, formulary_name) pairs from order rows.
@@ -522,7 +547,7 @@ def process_order_multi_med(order_id, order_rows, supertable, medsdict, all_meds
         print(f"\nProcessing non-infusion pair: {pair_key[0]} || {pair_key[1]}")
         pair_rows = pairs[pair_key]
         for idx, row in pair_rows.iterrows():
-            all_meds_dict = mp.add_to_all_meds_dict(row, all_meds_dict)
+            all_meds_dict = add_to_all_meds_dict(row, all_meds_dict)
         print(f"Added to all_meds_dict")
     
     # Filter to infusion pairs only
@@ -645,7 +670,7 @@ def process_encounter_multi_med(meds, supertable):
                 # Not truly an infusion - add to all_meds_dict
                 print(f"  All rows are 'Not Recorded' and not is_infusion - adding to all_meds_dict")
                 for idx, row in order_rows.iterrows():
-                    all_meds_dict = mp.add_to_all_meds_dict(row, all_meds_dict)
+                    all_meds_dict = add_to_all_meds_dict(row, all_meds_dict)
             else:
                 # Process as normal infusion
                 medsdict[order_id] = {}

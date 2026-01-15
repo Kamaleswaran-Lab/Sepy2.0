@@ -1102,30 +1102,7 @@ def add_med_volumes_to_final_df(medsdf, formulary_name, med_start, med_stop, rat
     
     return medsdf
 
-def add_to_all_meds_dict(row, all_meds_dict):
-    """
-    Add meds by med_name to a dictionary that tracks whether a particular med was given or not and when
 
-    Args:
-        row: row from the infusion meds (merged with all fluids info dataframe). Should have med_name, med_start
-        med_stop, med_class, med_subclass
-        all_meds_dict: Dictionary that tracks all meds given for this particular csn
-    
-    Returns:
-        all_meds_dict: With the med from the row added 
-    """
-    med_name = row['med_name']
-    if med_name in all_meds_dict:
-        all_meds_dict[med_name]["med_start"].append(row["med_start"])
-        all_meds_dict[med_name]["med_stop"].append(row["med_stop"])    
-    else:
-        all_meds_dict[med_name] = {
-            "med_class" : row["med_class"],
-            "med_subclass" : row["med_subclass"],
-            "med_start" : [row["med_start"]],
-            "med_stop" : [row["med_stop"]]
-        }
-    return all_meds_dict
 
 
 

@@ -20,6 +20,7 @@ Changes Made by Mehak Arora:
     - Created a utils function to read data files
     - Created init args for both sets of configs (import and data)
     - Removed delim as a function to SepyImport - was legacy, now makes zero sense to pass that as an argument
+
 """
 
 import pickle
@@ -78,8 +79,7 @@ def timer(description: str) -> None:
 ###########################################################################
 class sepyIMPORT:
     """
-    A class for importing and processing clinical data from CSV files, specifically designed
-    to handle electronic medical records (EMR) datasets with various preprocessing steps.
+    A class for importing and processing clinical data from EMR flatfiles.
 
     Args:
         file_dictionary: A dictionary containing file paths for various data files.
@@ -108,11 +108,6 @@ class sepyIMPORT:
         self.df_vent_mappings = pd.read_csv(file_dictionary["grouping_vent"])
         # creates df with all fluid groupings
         self.df_grouping_fluids = pd.read_csv(file_dictionary["grouping_fluids"])
-
-        # creates df with all infusion meds volume
-        self.df_infusion_meds_volume = pd.read_csv(file_dictionary["infusion_meds_volume"])
-        self.volume_mapping = dict(zip(self.df_infusion_meds_volume['formulary_name'], self.df_infusion_meds_volume['volume_numeric']))
-        self.volume_unit_mapping = dict(zip(self.df_infusion_meds_volume['formulary_name'], self.df_infusion_meds_volume['volume_unit']))
     
         # Create configuration object
         self.config = ImportConfig(
@@ -613,53 +608,11 @@ class sepyIMPORT:
     def _process_radiology_notes(self, df: pd.DataFrame, **kwargs) -> None:
         """
         Process radiology notes after initial import.
-        
-        Handles text cleaning, tokenization, and any special processing needed for 
-        radiology report text data.
-        
         Args:
             df: DataFrame containing the imported radiology notes
-            **kwargs: Optional parameters including:
-                      - text_col: Name of the column containing the note text (default: 'report_text')
-                      - clean_text: Whether to clean the text (default: True)
-                      - max_length: Maximum text length to retain (default: None)
         """
-        text_col = kwargs.get('text_col', 'report_text')
-        clean_text = kwargs.get('clean_text', False)
-        max_length = kwargs.get('max_length', None)
         
         try:
-            # Check if text column exists
-            if text_col not in df.columns:
-                logging.warning(f"Text column '{text_col}' not found in radiology notes data")
-                self.df_radiology_notes = df
-                return
-                
-            # Basic text cleaning if requested
-            if clean_text:
-                # Convert to lowercase
-                df[text_col] = df[text_col].str.lower()
-                
-                # Remove extra whitespace
-                df[text_col] = df[text_col].str.replace(r'\s+', ' ', regex=True).str.strip()
-                
-                # Replace common abbreviations if needed
-                # This can be expanded based on domain knowledge
-                abbreviations = {
-                    'w/': 'with ',
-                    'w/o': 'without ',
-                    'pt': 'patient ',
-                    'hx': 'history '
-                    # Add more abbreviations as needed
-                }
-                
-                for abbr, replacement in abbreviations.items():
-                    df[text_col] = df[text_col].str.replace(r'\b' + abbr + r'\b', replacement, regex=True)
-            
-            # Truncate long texts if max_length is specified
-            if max_length:
-                df[text_col] = df[text_col].str[:max_length]
-            
             # Store the processed DataFrame
             self.df_radiology_notes = df
             return 1
@@ -668,120 +621,6 @@ class sepyIMPORT:
             # Create an empty DataFrame with expected structure
             self.df_radiology_notes = pd.DataFrame(columns=df.columns)
             logging.warning("Using empty DataFrame for radiology notes due to processing error")
-            return 0
-        
-    def _process_clinical_notes(self, df: pd.DataFrame, **kwargs) -> None:
-        """
-        Process clinical notes after initial import.
-        
-        Handles text cleaning, section identification, and any special processing
-        needed for clinical note text data.
-        
-        Args:
-            df: DataFrame containing the imported clinical notes
-            **kwargs: Optional parameters including:
-                      - text_col: Name of the column containing the note text (default: 'note_text')
-                      - clean_text: Whether to clean the text (default: True)
-                      - extract_sections: Whether to extract common clinical note sections (default: False)
-                      - max_length: Maximum text length to retain (default: None)
-        """
-        text_col = kwargs.get('text_col', 'note_text') 
-        clean_text = kwargs.get('clean_text', False)
-        extract_sections = kwargs.get('extract_sections', False)
-        max_length = kwargs.get('max_length', None)
-        
-        try:
-            # Check if text column exists
-            if text_col not in df.columns:
-                logging.warning(f"Text column '{text_col}' not found in clinical notes data")
-                self.df_clinical_notes = df
-                return
-                
-            # Basic text cleaning if requested
-            if clean_text:
-                # Convert to lowercase
-                df[text_col] = df[text_col].str.lower()
-                
-                # Remove extra whitespace
-                df[text_col] = df[text_col].str.replace(r'\s+', ' ', regex=True).str.strip()
-                
-                # Replace common abbreviations
-                abbreviations = {
-                    'w/': 'with ',
-                    'w/o': 'without ',
-                    'pt': 'patient ',
-                    'hx': 'history ',
-                    'dx': 'diagnosis ',
-                    'rx': 'prescription ',
-                    'tx': 'treatment '
-                    # Add more abbreviations as needed
-                }
-                
-                for abbr, replacement in abbreviations.items():
-                    df[text_col] = df[text_col].str.replace(r'\b' + abbr + r'\b', replacement, regex=True)
-            
-            # Truncate long texts if max_length is specified
-            if max_length:
-                df[text_col] = df[text_col].str[:max_length]
-            
-            # Extract common clinical note sections if requested
-            if extract_sections:
-                # Define regex patterns for common sections
-                section_patterns = {
-                    'history': r'(?:history\s+of\s+present\s+illness|history|hpi)[\s\:]+(.+?)(?=\b(?:physical examination|assessment|plan|impression|vital signs|medications)\b|$)',
-                    'physical_exam': r'(?:physical\s+examination|physical\s+exam)[\s\:]+(.+?)(?=\b(?:assessment|plan|impression|vital signs|medications)\b|$)',
-                    'assessment': r'(?:assessment|impression)[\s\:]+(.+?)(?=\b(?:plan|recommendations|physical examination|medications)\b|$)',
-                    'plan': r'(?:plan|recommendations)[\s\:]+(.+?)(?=\b(?:assessment|impression|physical examination|vital signs|medications)\b|$)'
-                }
-                
-                # Extract each section
-                for section_name, pattern in section_patterns.items():
-                    df[f'section_{section_name}'] = df[text_col].str.extract(pattern, flags=re.IGNORECASE, expand=False)
-            
-            # Store the processed DataFrame
-            self.df_clinical_notes = df
-            return 1
-        except Exception as e:
-            logging.error(f"Error processing clinical notes: {str(e)}")
-            # Create an empty DataFrame with expected structure
-            self.df_clinical_notes = pd.DataFrame(columns=df.columns)
-            logging.warning("Using empty DataFrame for clinical notes due to processing error")
-            return 0
-
-    def _process_in_out(self, df: pd.DataFrame, **kwargs) -> None:
-        """Process in/out data after initial import."""
-        
-        try:
-            self.individual_fluid_columns = self.df_grouping_fluids[self.df_grouping_fluids['individual_fluid_import'] == 1]['fluid_name'].tolist()
-            self.all_fluid_columns = self.df_grouping_fluids['fluid_name'].tolist()
-
-            # Filter ORDER_CATALOG_DESC to include only those in the df_grouping_fluids file with individual_fluid_import = 1 
-            df_in_out_fluids = df[
-                df['order_catalog_desc'].isin(self.all_fluid_columns)
-            ]
-
-            self.df_in_out_fluids = df_in_out_fluids.pivot_table(
-                index=['csn', 'service_ts'],
-                columns='order_catalog_desc', 
-                values=['volume', 'record_type'],
-                fill_value=np.nan,
-                aggfunc='sum'
-            )
-
-            self.df_in_out_fluids.columns = [f"{col[1]}_{col[0]}" for col in self.df_in_out_fluids.columns]
-
-            if [col.split("_")[0] for col in self.df_in_out_fluids.columns.tolist() if col.split("_")[0] not in self.individual_fluid_columns]:
-                #Add any missing columns to the df_in_out_fluids dataframe
-                missing_columns = set(self.individual_fluid_columns) - set([col.split("_")[0] for col in self.df_in_out_fluids.columns.tolist()])
-                for col in missing_columns:
-                    self.df_in_out_fluids[col + "_volume"] = np.nan
-                    self.df_in_out_fluids[col + "_record_type"] = np.nan      
-            return 1
-        except Exception as e:
-            logging.error(f"Error processing in/out data: {str(e)}")
-            # Create an empty DataFrame with the expected columns
-            self.df_in_out_fluids = pd.DataFrame(columns=df.columns.tolist())
-            logging.warning("Using empty DataFrame for all fluids due to processing error")
             return 0
 
     def _handle_duplicate_med_ids(self) -> None:
