@@ -1,7 +1,7 @@
 vent_name,vent_cat
 AC Pressure,invasive ventilation
 "AC Pressure, APV CMV",invasive ventilation
-"AC Pressure, CPAP+PS",??
+"AC Pressure, CPAP+PS",invasive ventilation
 "AC Pressure, Other:",invasive ventilation
 "AC Pressure, Other: In back up mode, apnea ventilation.",invasive ventilation
 "AC Pressure, Other: P-CMV",invasive ventilation
@@ -17,9 +17,9 @@ AC/CMV Volume,invasive ventilation
 "AC/CMV Volume, APV CMV",invasive ventilation
 "AC/CMV Volume, APV SIMV",invasive ventilation
 "AC/CMV Volume, Bi-Level/DuoPAP/APRV",invasive ventilation
-"AC/CMV Volume, CPAP",??
-"AC/CMV Volume, CPAP+PS",??
-"AC/CMV Volume, CPAP, CPAP+PS",??
+"AC/CMV Volume, CPAP",invasive ventilation
+"AC/CMV Volume, CPAP+PS",invasive ventilation
+"AC/CMV Volume, CPAP, CPAP+PS",invasive ventilation
 "AC/CMV Volume, NIPPV",??
 "AC/CMV Volume, Other:",invasive ventilation
 "AC/CMV Volume, Other: ETT 8.0/ 23 at teeth",invasive ventilation
@@ -38,9 +38,9 @@ AC/CMV Volume,invasive ventilation
 "AC/CMV Volume, SIMV Volume, Other:",invasive ventilation
 APV CMV,invasive ventilation
 "APV CMV, APV SIMV",invasive ventilation
-"APV CMV, CPAP+PS",??
+"APV CMV, CPAP+PS",invasive ventilation
 "APV CMV, CPAP+PS, HFOV",invasive ventilation
-"APV CMV, NIPPV, SIMV Volume, Volume Support",??
+"APV CMV, NIPPV, SIMV Volume, Volume Support",invasive ventilation
 "APV CMV, Other:",invasive ventilation
 "APV CMV, Other: SCMV+",invasive ventilation
 "APV CMV, PAV+, SIMV Pressure",invasive ventilation
@@ -53,13 +53,13 @@ ASV,invasive ventilation
 "ASV, AC/CMV Volume, AC Pressure",invasive ventilation
 "ASV, AC/CMV Volume, APV CMV",invasive ventilation
 "ASV, APV CMV",invasive ventilation
-"ASV, CPAP",??
-"ASV, CPAP+PS",??
+"ASV, CPAP",?? 
+"ASV, CPAP+PS",invasive ventilation
 "ASV, NIPPV",??
 "ASV, Other:",invasive ventilation
 "ASV, Other: Attempted to pl;ace patient on Pressure support but exhibited signs of apneic events during this time and returne to ASV",invasive ventilation
 "ASV, Other: Patient placed back on ventilator at prior settings.",invasive ventilation
-"ASV, Other: T/C",??
+"ASV, Other: T/C",invasive ventilation
 "ASV, SIMV Volume",invasive ventilation
 Bi-Level/DuoPAP/APRV,invasive ventilation
 "Bi-Level/DuoPAP/APRV, NIPPV",??
@@ -67,18 +67,18 @@ Bi-Level/DuoPAP/APRV,invasive ventilation
 "Bi-Level/DuoPAP/APRV, Other: APRV   PH 35,  PL 0,  TH 3.4,  TL 0.4",invasive ventilation
 "Bi-Level/DuoPAP/APRV, Other: APRV  PH 33, PL 0, TH 3.6m  TL 0.6",invasive ventilation
 CPAP,NIPPV
-CPAP+PS,NIPPV
-"CPAP+PS, NIPPV",NIPPV
-"CPAP+PS, Other:",NIPPV
+CPAP+PS,invasive ventilation
+"CPAP+PS, NIPPV",invasive ventilation
+"CPAP+PS, Other:",invasive ventilation
 "CPAP+PS, Other: Mode change at 0755 to spontaneous by Gabe Najarro, PA",invasive ventilation; weaning mode
 "CPAP+PS, Other: PT ON PS 8/6",invasive ventilation; weaning mode
 "CPAP+PS, Other: Pt placed on Spontanoeous Breathing Trial per Dr. Aristizabal order.",invasive ventilation; weaning mode
 "CPAP+PS, Other: found on PSV",invasive ventilation; weaning mode
 "CPAP+PS, Other: found on Pressure Support",invasive ventilation; weaning mode
 "CPAP+PS, Other: pt uses home vent @ night, pressure support mode, pt has trach 4 uncuff",invasive ventilation
-"CPAP+PS, Other: spont",NIPPV
+"CPAP+PS, Other: spont",invasive ventilation
 "CPAP+PS, SIMV Volume",invasive ventilation
-"CPAP, CPAP+PS",NIPPV
+"CPAP, CPAP+PS",??
 "CPAP, CPAP, non-invasive",NIPPV
 "CPAP, NIPPV",NIPPV
 "CPAP, NIPPV, Other: Autoset mode",NIPPV
@@ -92,7 +92,7 @@ CPAP+PS,NIPPV
 "CPAP, Other: cpap 10",NIPPV
 "CPAP, Other: cpap hs",NIPPV
 "CPAP, Other: home unit",home
-"CPAP, PS",NIPPV
+"CPAP, PS",invasive ventilation; weaning mode
 "CPAP, PSV",invasive ventilation; weaning mode
 "CPAP, bubble",??
 "CPAP, bubble, CPAP, non-invasive",NIPPV
